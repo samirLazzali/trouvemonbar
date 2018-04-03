@@ -2,6 +2,7 @@
 
 require_once("db.php");
 require_once("User.php");
+require_once("Appreciation.php");
 
 class Post
 {
@@ -18,6 +19,8 @@ class Post
 
     private $author;
     private $authorCache = null;
+
+    private $appreciations = null;
 
     /**
      * ID l'identifiant (UUID) du post
@@ -181,5 +184,23 @@ class Post
 
         $this->repostOfCache = Post::fromID($this->repostOf);
         return $this->repostOfCache;
+    }
+
+    function getAppreciations()
+    {
+        if ($this->appreciations != null)
+            return $this->appreciations;
+
+        $SQL = "SELECT * FROM Appreciation WHERE Post = $this->ID";
+        $statement = $db->prepare($SQL);
+        $statement->execute();
+        $rows = $statement->fetchall();
+
+        $appreciations = array();
+        foreach($rows as $row)
+            array_push($appreciations, Appreciation::fromRow($row));
+
+        $this->appreciations = $appreciations;
+        return $appreciations;
     }
 }

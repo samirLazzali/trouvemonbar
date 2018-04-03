@@ -17,10 +17,16 @@ CREATE TABLE IF NOT EXISTS Post (
 	PRIMARY KEY(ID)
 );
 
-CREATE TABLE IF NOT EXISTS Appreciations (
+CREATE TABLE IF NOT EXISTS Appreciation (
 	ID TEXT,
+	Post TEXT,
     Author TEXT,
     Timestamp INT,
     Type TEXT,
 	PRIMARY KEY(ID)
 );
+
+INSERT INTO User VALUES("a", "Oxymore", "thomas.kowalski@ensiie.fr", "HASH", 1);
+INSERT INTO User VALUES("b", "Yéti", "thibaut.milhaud@ensiie.fr", "HASH", 1);
+INSERT INTO User VALUES("c", "Iko", "pierrick.barbarroux@ensiie.fr", "HASH", 1);
+INSERT INTO User VALUES("d", "Drascma", "florient.barre@ensiie.fr", "HASH", 1);
