@@ -114,6 +114,20 @@ L'annonce d'offre doit comporter:
 *Remuneration (a remettre en personne propre) - A ce moment-la, preciser la somme en euros
 *Pro-Bono - vous etes le Christ incarné et ne demandez rien en retour
 
+4 - ANNONCE DEMANDE
+
+IDEM.
+
+L'annonce d'offre doit comporter:
+-Un input du titre 
+-Un choix de Semestre
+-Un radio de Module lorsque le semestre a été choisi
+-Une courte description de l'offre
+-Un radio sur le choix d'echange:
+*troc (demande de service a discuter avec l'échangeur) - A ce moment-la, avoir une option pour preciser en 80 caracteres max
+*Remuneration (a remettre en personne propre) - A ce moment-la, preciser la somme en euros
+*Rien <- vous n'offrez rien et etes Satan incarné, vous etes un enculé
+
  
 LES OBJECTIFS SONT DONC:
 
@@ -131,6 +145,27 @@ addr email
 Table Annonce
 int id
 int id_user
+int semestre
+varchar module
+varchar type
+varchar description
+int paiement
+varchar service
+int answered <-- 0 ou 1
+
+Table Offre inherits Annonce
+
+Table Demande inherits Annonce
+
+Table tags <- clefs etrangeres
+
+int annonce_ou_offre <- 1 si offre, 0 si demande
+int semestre 
+varchat module
+int payant <-- 0 ou 1 a chaque fois
+int gratuit
+int service
+varchar type
 
 3.Design
 
