@@ -1,6 +1,7 @@
 <?php
 
-require "User.php";
+require_once("db.php");
+require_once("User.php");
 
 class Post
 {
@@ -41,6 +42,17 @@ class Post
         return $p;
     }
 
+    static function fromID($ID)
+    {
+        $db = connect();
+        $SQL = "SELECT * FROM Post WHERE $ID = :id";
+        $statement = $db->prepare($SQL);
+        $statement->execute();
+
+        $row = $statement->fetch();
+        return Post::fromRow($row);
+    }
+
     /* Création d'un repost (et renvoi de l'objet Post associé) */
     static function repost($post, $author)
     {
@@ -49,6 +61,7 @@ class Post
         $originalPostID = $post->getID();
         $timestamp = time();
 
+        $db = connect();
         $SQL = "INSERT INTO $TABLE_Posts VALUES (ID, Author, Content, Timestamp, Repost, ResponseTo) VALUES (:id, :authorId, NULL, :timestamp, :originalPost, NULL)";
 
         $statement = $db->prepare($SQL);
@@ -70,6 +83,7 @@ class Post
         $originalPostID = $post->getID();
         $timestamp = time();
 
+        $db = connect();
         $SQL = "INSERT INTO $TABLE_Posts VALUES (ID, Author, Content, Timestamp, Repost, ResponseTo) VALUES (:id, :authorId, :content, :timestamp, NULL, :originalPost)";
 
         $statement = $db->prepare($SQL);
@@ -91,6 +105,7 @@ class Post
         $id = uniqid();
         $timestamp = time();
 
+        $db = connect();
         $SQL = "INSERT INTO $TABLE_Posts VALUES (ID, Author, Content, Timestamp, Repost, ResponseTo) VALUES (:id, :authorId, :content, :timestamp, NULL, NULL)";
 
         $statement = $db->prepare($SQL);
@@ -105,6 +120,7 @@ class Post
     /* CRUD ? */
     static function delete($ID)
     {
+        $db = connect();
         $SQL = "DELETE FROM Post WHERE ID = :id";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $ID);
@@ -118,13 +134,22 @@ class Post
         return $this->ID;
     }
 
-    /* Acesseurs pour l'auteur (objet et identifiant) */
+    function getRepostID()
+    {
+        return $this->repostOf;
+    }
+
+    function getResponseToID()
+    {
+        return $this->responseTo;
+    }
 
     function getAuthorID()
     {
         return $this->author;
     }
 
+    /* Acesseurs renvoyant les objets associés aux identifiants */
     function getAuthor()
     {
         if ($this->authorCache != null)
@@ -132,5 +157,29 @@ class Post
 
         $this->authorCache = User::fromID($this->author);
         return $this->authorCache;
+    }
+
+    function getResponse()
+    {
+        if ($this->responseTo == null)
+            return null;
+
+        if ($this->responseToCache == null)
+            return null;
+
+        $this->responseToCache = Post::fromID($this->responseTo);
+        return $this->responseToCache;
+    }
+
+    function getRepost()
+    {
+        if ($this->repostOf == null)
+            return null;
+
+        if ($this->repostOfCache == null)
+            return null;
+
+        $this->repostOfCache = Post::fromID($this->repostOf);
+        return $this->repostOfCache;
     }
 }
