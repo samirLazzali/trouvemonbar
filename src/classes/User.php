@@ -1,6 +1,6 @@
 <?php
 
-require_once("db.php");
+require_once("../db.php");
 require_once("Post.php");
 
 class User
@@ -54,10 +54,48 @@ class User
 
         return fromRow($row);
     }
-    
+
+    static function fromUsername($username)
+    {
+        $db = connect();
+        $SQL = "SELECT * FROM $TABLE_User WHERE Username = ':username'";
+        $statement = $db->prepare($SQL);
+        $statement->bindParam(":username", $username);
+        $statement->execute();
+        $row = $statement->fetch();
+
+        return fromRow($row);
+    }
+        
+    /* Insertion d'un utilisateur dans la base de données */
+    static function create($username, $email, $password)
+    {
+        $hash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
+        $id = uniqid();
+
+        $db = connect();
+        $SQL = "INSERT INTO User (ID, Username, Email, Password, Moderator) VALUES (:id, :username, :email, :password, 0)";
+        $statement = $db->prepare($SQL);
+        $statement->bindParam(":id", $id);
+        $statement->bindParam(":username", $username);
+        $statement->bindParam(":email", $email);
+        $statement->bindParam(":password", $hash);
+
+        return new User($id, $username, $email);
+    }
+
     static function testPassword($ID, $attempt)
     {
-        die("TODO: User::testPassword");
+        $db = connect();
+        $SQL = "SELECT Password FROM User WHERE ID = :id";
+        $statement = $db->prepare($SQL);
+        $statement->bindParam(":id", $ID);
+        $statement->execute();
+
+        $row = $statement->fetch();
+        $hash = $row["Password"];
+
+        return password_verify($attempt, $hash);
     }
 
     function findPosts($limit = 50)
