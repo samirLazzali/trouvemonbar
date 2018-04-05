@@ -2,3 +2,6 @@ postgres-data
 .idea/
 vendor
 composer.lock
+src/.vs/VSWorkspaceState.json
+src/.vs/src/v15/.suo
+src/.vs/slnx.sqlite

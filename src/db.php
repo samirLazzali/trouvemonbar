@@ -6,8 +6,8 @@ $TABLE_Posts = "Post";
 
 function connect()
 {
-    $user = "ensiie";
-    $password = "ensiie";
+    $user = "vitz";
+    $password = "assassindelapolice";
     $dbname = "Vitz";
     $db = new PDO("pgsql:user=$user dbname=$dbname password=$password");
 

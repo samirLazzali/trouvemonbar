@@ -1,6 +1,6 @@
 <?php
 
-require_once("db.php");
+require_once("../db.php");
 require_once("User.php");
 require_once("Appreciation.php");
 
@@ -213,3 +213,4 @@ class Post
         return $appreciations;
     }
 }
+?>
