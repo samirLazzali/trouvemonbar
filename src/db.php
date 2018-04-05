@@ -1,5 +1,9 @@
 <?php
 
+$TABLE_User = "User";
+$TABLE_Appreciation = "Appreciation";
+$TABLE_Posts = "Post";
+
 function connect()
 {
     $user = "ensiie";

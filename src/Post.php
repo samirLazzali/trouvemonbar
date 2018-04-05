@@ -121,13 +121,21 @@ class Post
     }
 
     /* CRUD ? */
-    static function delete($ID)
+    function delete()
     {
         $db = connect();
-        $SQL = "DELETE FROM Post WHERE ID = :id";
+        $SQL = "DELETE FROM $TABLE_Posts WHERE ID = :id";
         $statement = $db->prepare($SQL);
-        $statement->bindParam(":id", $ID);
+        $statement->bindParam(":id", $this->ID);
         $statement->execute();
+    }
+
+    function deleteAll($arr)
+    {
+        die("TODO: Post::deleteAll");
+
+        $db = connect();
+        $SQL = "DELETE FROM $TABLE_Posts WHERE ID";
     }
 
     /* Acesseurs classiques */
@@ -191,6 +199,7 @@ class Post
         if ($this->appreciations != null)
             return $this->appreciations;
 
+        $db = connect();
         $SQL = "SELECT * FROM Appreciation WHERE Post = $this->ID";
         $statement = $db->prepare($SQL);
         $statement->execute();

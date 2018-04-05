@@ -1,10 +1,18 @@
 <?php
 namespace User;
+namespace Post;
 
 use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
 {
+    /**
+     * @test
+     */
+    public function createUser()
+    {
+
+    }
     /**
      * @test
      */
