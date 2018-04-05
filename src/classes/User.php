@@ -67,9 +67,32 @@ class User
         return fromRow($row);
     }
         
+    static function emailExists($email)
+    {
+        $SQL = "SELECT ID FROM User WHERE Email = :email";
+        die("TODO: User::emailExists");
+    }
+
+    static function usernameExists($username)
+    {
+        $SQL = "SELECT ID FROM User WHERE Username = :username";
+        die("TODO: User::usernameExists");
+    }
+
+    static function idExists($id)
+    {
+        $SQL = "SELECT ID FROM USER WHERE ID = :id";
+        die("TODO: User::idExists");
+    }
+    
     /* Insertion d'un utilisateur dans la base de données */
     static function create($username, $email, $password)
     {
+        if (User::emailExists($email))
+            return null;
+        else if (User::usernameExists($username))
+            return null;
+
         $hash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
         $id = uniqid();
 
@@ -132,3 +155,4 @@ class User
         die("TODO: User::delete");
     }
 }
+?>

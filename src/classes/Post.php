@@ -204,3 +204,4 @@ class Post
         return $appreciations;
     }
 }
+?>
