@@ -52,6 +52,9 @@ class User
         $statement->execute();
         $row = $statement->fetch();
 
+        if (!$row)
+            return null;
+
         return fromRow($row);
     }
 
@@ -64,34 +67,65 @@ class User
         $statement->execute();
         $row = $statement->fetch();
 
+        if (!$row)
+            return null;
+
         return fromRow($row);
     }
         
     static function emailExists($email)
     {
         $SQL = "SELECT ID FROM User WHERE Email = :email";
-        die("TODO: User::emailExists");
+        $statement = $db->prepare($SQL);
+        $statement->bindParam(":email", $email);
+        $statement->execute();
+        $row = $statement->fetch();
+
+        if (!$row)
+            return false;
+        else
+            return true;
     }
 
     static function usernameExists($username)
     {
         $SQL = "SELECT ID FROM User WHERE Username = :username";
-        die("TODO: User::usernameExists");
+        $statement = $db->prepare($SQL);
+        $statement->bindParam(":username", $username);
+        $statement->execute();
+        $row = $statement->fetch();
+
+        if (!$row)
+            return false;
+        else
+            return true;
     }
 
     static function idExists($id)
     {
         $SQL = "SELECT ID FROM USER WHERE ID = :id";
-        die("TODO: User::idExists");
+        $statement = $db->prepare($SQL);
+        $statement->bindParam(":id", $id);
+        $statement->execute();
+        $row = $statement->fetch();
+
+        if (!$row)
+            return false;
+        else
+            return true;
+
     }
     
+    const Error_EmailExists = "Email already in database.";
+    const Error_UsernameExists = "Username already in database.";
+
     /* Insertion d'un utilisateur dans la base de données */
     static function create($username, $email, $password)
     {
         if (User::emailExists($email))
-            return null;
+            return Error_EmailExists;
         else if (User::usernameExists($username))
-            return null;
+            return Error_UsernameExists;
 
         $hash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
         $id = uniqid();
@@ -132,9 +166,8 @@ class User
 
         $posts = array();
         foreach($rows as $row)
-        {
             array_push($posts, Post::fromRow($row));
-        }
+ 
         return $posts;
     }
     
@@ -146,13 +179,31 @@ class User
         $this->email = $newEmail;
         $this->username = $newUsername;
 
-        die("TODO: User::update");
+        $SQL = "UPDATE User SET Email = :email, Username = :username";
+        $statement = $db->prepare($SQL);
+        $statement->bindParam(":email", $email);
+        $statement->bindParam(":username", $username);
+        $statement->execute();
+
+        if ($statement->rowCount() == 1)
+            return true;
+        else
+            return false;
     }
 
     function delete()
     {
         $db = connect();
-        die("TODO: User::delete");
+        
+        $SQL = "DELETE FROM User WHERE ID = :id";
+        $statement = $db->prepare($SQL);
+        $statement->bindParam(":id", $this->id);
+        $statement->execute();
+
+        if ($statement->rowCount() == 1)
+            return true;
+        else
+            return false;
     }
 }
 ?>

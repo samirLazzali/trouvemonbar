@@ -2,6 +2,7 @@
 
 require_once("User.php");
 require_once("Post.php");
+require_once("../db.php");
 
 class Appreciation
 {
@@ -15,6 +16,7 @@ class Appreciation
 
     function __construct($post, $author, $type, $timestamp)
     {
+        /* Check instanceof */
         $this->post = $post;
         $this->author = $author;
         $this->type = $type;
@@ -30,9 +32,17 @@ class Appreciation
     {
         /* instanceof */
 
+        $db = connect();
         $timestamp = time();
         $SQL = "INSERT INTO Appreciation (Post, Author, Type, Timestamp) VALUES (:post, :author, :type, :timestamp)";
-        
+        $statement = $db->prepare($SQL);
+        $statement->bindParam(":post", $postId);
+        $statement->bindParam(":author", $authorId);
+        $statement->bindParam(":type", $type);
+        $statement->bindParam(":timestamp", $timestamp);
+        $statement->execute();
+
+        return new Appreciation($post, $autor, $type, $timstamp);
     }
 
     static function createLike($post, $author)
