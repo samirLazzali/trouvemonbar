@@ -5,6 +5,8 @@ define('TABLE_Appreciation', "Appreciation");
 define('TABLE_Posts', "Post");
 
 define("SITE_ROOT", "C:\\WAMP\\www\\Vitz\\src");
+define("CLASSES_ROOT", SITE_ROOT . "/classes/");
+define("API_ROOT", SITE_ROOT . "/api/");
 
 function connect()
 {

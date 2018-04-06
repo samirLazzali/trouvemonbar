@@ -54,7 +54,7 @@ class User
     static function fromID($ID)
     {
         $db = connect();
-        $SQL = "SELECT * FROM TABLE_User WHERE ID = ':id'";
+        $SQL = "SELECT * FROM " . TABLE_User . " WHERE ID = ':id'";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $ID);
         $statement->execute();
@@ -79,6 +79,15 @@ class User
             return null;
 
         return User::fromRow($row);
+    }
+
+    static function findWithIDorUsername($data)
+    {
+        $u = User::fromID($data);
+        if ($u != null)
+            return $u;
+
+        return User::fromUsername($data);
     }
         
     static function emailExists($email)

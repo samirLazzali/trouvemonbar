@@ -1,5 +1,6 @@
 <?php
-    require "../../User.php";
+    require_once("../../config.php");
+    require_once(CLASSES_ROOT . "user.php");
 
     $requestedId = null;
     $requestedUsername = null;
@@ -11,7 +12,7 @@
 
         if ($u == null)
         {
-            $response = array("status" => "error", "result" => null, "description" => "User not found with username.");
+            $response = array("status" => "error", "result" => null, "description" => "User not found with ID.");
             echo json_encode($response);
         }
         else
@@ -39,6 +40,6 @@
     else
     {
         $response = array("status" => "error", "description" => "Missing parameter 'id' AND 'username'");
-        echo json_decode($response);
+        echo json_encode($response);
     }
 ?>
