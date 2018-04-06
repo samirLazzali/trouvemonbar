@@ -1,9 +1,9 @@
 <?php
 
 require_once("../../config.php");
-require_once(CLASSES_ROOT . "/User.php");
+require_once("User.php");
 
-define(DEFAULT_LIMIT, 50);
+define('DEFAULT_LIMIT', 50);
 
 if (isset($_GET['count']))
     $limit  = $_GET['count'];
@@ -11,22 +11,19 @@ else
     $limit = DEFAULT_LIMIT;
 
 if (isset($_GET['id']))
-    $id = $_GET['id'];
+    $identifier = $_GET['id'];
+elseif (isset($_GET['username']))
+    $identifier = $_GET['username'];
 else
-{
-    // TODO
-}
+    error_die("Missing parameter 'Username' or 'ID'");
 
-$user = User::findWithIDorUsername($id);
+$user = User::findWithIDorUsername($identifier);
 
 if ($user == null)
-{
-    // TODO
-}
+    error_die("No such user.");
 else
 {
-    // TODO
     $posts = $user->findPosts($limit);
-    $returned = array("status" => "success", "result" => $posts);
+    success_die($posts);
 }
 ?>

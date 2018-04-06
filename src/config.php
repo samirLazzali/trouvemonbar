@@ -4,9 +4,14 @@ define('TABLE_User', "Users");
 define('TABLE_Appreciation', "Appreciation");
 define('TABLE_Posts', "Post");
 
-define("SITE_ROOT", "C:\\WAMP\\www\\Vitz\\src");
-define("CLASSES_ROOT", SITE_ROOT . "/classes/");
-define("API_ROOT", SITE_ROOT . "/api/");
+define("SITE_ROOT", realpath($_SERVER["DOCUMENT_ROOT"]) . "\\Vitz\\src");
+define("CLASSES_ROOT", SITE_ROOT . "\\classes\\");
+define("API_ROOT", SITE_ROOT . "\\api\\");
+define("HELPERS_ROOT", SITE_ROOT . "\\helpers\\");
+
+set_include_path(get_include_path() . ";" . CLASSES_ROOT);
+
+require_once(HELPERS_ROOT . "api.php");
 
 function connect()
 {

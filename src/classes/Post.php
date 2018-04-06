@@ -5,7 +5,7 @@ require_once(__ROOT__ . '/config.php');
 require_once(__ROOT__ . '/classes/User.php');
 require_once(__ROOT__ . '/classes/Appreciation.php');
 
-class Post
+class Post implements JsonSerializable
 {
     /* L'identifiant du post */
     private $ID;
@@ -49,8 +49,9 @@ class Post
     static function fromID($ID)
     {
         $db = connect();
-        $SQL = "SELECT * FROM Post WHERE $ID = :id";
+        $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE ID = :id";
         $statement = $db->prepare($SQL);
+        $statement->bindValue(":id", $ID);
         $statement->execute();
 
         $row = $statement->fetch();
@@ -205,17 +206,29 @@ class Post
             return $this->appreciations;
 
         $db = connect();
-        $SQL = "SELECT * FROM Appreciation WHERE Post = $this->ID";
+        $SQL = "SELECT * FROM Appreciation WHERE Post = :id";
         $statement = $db->prepare($SQL);
+        $statement->bindValue(":id", $this->ID);
         $statement->execute();
         $rows = $statement->fetchall();
 
         $appreciations = array();
-        foreach($rows as $row)
+        foreach ($rows as $row)
             array_push($appreciations, Appreciation::fromRow($row));
 
         $this->appreciations = $appreciations;
         return $appreciations;
+    }
+
+    public function jsonSerialize() {
+        $arr = array("content" => $this->content,
+            "authorId" => $this->author,
+            "timestamp" => $this->timestamp,
+            "repostOf" => $this->repostOf,
+            "responseTo" => $this->responseTo,
+            "appreciations" => $this->getAppreciations());
+
+        return $arr;
     }
 }
 ?>

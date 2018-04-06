@@ -1,11 +1,10 @@
 <?php
 
-if (!defined('__ROOT__')) define('__ROOT__', dirname(dirname(__FILE__)));
-require_once(__ROOT__ . '/config.php');
-require_once(__ROOT__ . '/classes/User.php');
-require_once(__ROOT__ . '/classes/Post.php');
+require_once("../../config.php");
+require_once("User.php");
+require_once("Post.php");
 
-class Appreciation
+class Appreciation implements JsonSerializable
 {
     const LIKE = 'Like';
     const DISLIKE = 'Dislike';
@@ -17,9 +16,26 @@ class Appreciation
 
     function __construct($post, $author, $type, $timestamp)
     {
-        /* Check instanceof */
-        $this->post = $post;
-        $this->author = $author;
+        if ($author instanceof User) {
+            $this->authorCache = $author;
+            $this->author = $author->getID();
+        }
+        else
+        {
+            $this->author = $author;
+        }
+
+        if ($post instanceof Post)
+        {
+            $this->postCache = $post;
+            $this->post = $post->getID();
+        }
+        else
+            $this->post = $post;
+
+        if ($type != Appreciation::LIKE && $type != Appreciation::DISLIKE)
+            throw new Exception("Unknown appreciation: '$type'.");
+
         $this->type = $type;
         $this->timestamp = $timestamp;
     }
@@ -31,7 +47,11 @@ class Appreciation
 
     static function create($post, $author, $type)
     {
-        /* instanceof */
+        if ($author instanceof User)
+            $author = $author->getID();
+
+        if ($post instanceof Post)
+            $post = $post->getID();
 
         $db = connect();
         $timestamp = time();
@@ -56,6 +76,13 @@ class Appreciation
     static function createDislike($post, $author)
     {
         return Appreciation::create($post, $author, Appreciation::DISLIKE);
+    }
+
+    function jsonSerialize()
+    {
+        return array("type" => $this->type,
+            "author" => $this->author,
+            "post" => $this->post);
     }
 }
 ?>

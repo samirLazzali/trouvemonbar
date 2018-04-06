@@ -4,7 +4,7 @@ if (!defined('__ROOT__')) define('__ROOT__', dirname(dirname(__FILE__)));
 require_once(__ROOT__ . '/config.php');
 require_once(__ROOT__ . '/classes/Post.php');
 
-class User
+class User implements JsonSerializable
 {
     private $ID;
     private $username;
@@ -107,6 +107,7 @@ class User
 
     static function usernameExists($username)
     {
+        $db = connect();
         $SQL = "SELECT ID FROM Users WHERE Username = :username";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":username", $username);
@@ -150,12 +151,13 @@ class User
         $id = uniqid();
 
         $db = connect();
-        $SQL = "INSERT INTO User (ID, Username, Email, Password, Moderator) VALUES (:id, :username, :email, :password, 0)";
+        $SQL = "INSERT INTO " . TABLE_User . " (ID, Username, Email, Password, Moderator) VALUES (:id, :username, :email, :password, 0)";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $id);
         $statement->bindParam(":username", $username);
         $statement->bindParam(":email", $email);
         $statement->bindParam(":password", $hash);
+        $statement->execute();
 
         return new User($id, $username, $email);
     }
@@ -179,8 +181,7 @@ class User
         $db = connect();
         $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE Author = :id ORDER BY Timestamp DESC LIMIT $limit";
         $statement = $db->prepare($SQL);
-        $statement->bindValue(":id", $this->getID());
-        $statement->debugDumpParams();
+        $statement->bindValue(":id", $this->ID);
         $statement->execute();
         $rows = $statement->fetchall();
 
@@ -224,6 +225,15 @@ class User
             return true;
         else
             return false;
+    }
+
+    function jsonSerialize()
+    {
+        $arr = array("username" => $this->username,
+            "id" => $this->ID,
+            "isModerator" => $this->isModerator);
+
+        return $arr;
     }
 }
 ?>
