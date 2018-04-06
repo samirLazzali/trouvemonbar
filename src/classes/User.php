@@ -1,7 +1,8 @@
 <?php
 
-require_once("../db.php");
-require_once("Post.php");
+if (!defined('__ROOT__')) define('__ROOT__', dirname(dirname(__FILE__)));
+require_once(__ROOT__ . '/config.php');
+require_once(__ROOT__ . '/classes/Post.php');
 
 class User
 {
@@ -30,6 +31,11 @@ class User
         return $this->isModerator;
     }
 
+    public function setModerator($newModerator)
+    {
+        $this->isModerator = $newModerator;
+    }
+
     function __construct($ID, $username, $email)
     {
         $this->ID = $ID;
@@ -40,13 +46,15 @@ class User
     static function fromRow($row)
     {
         $u = new User($row["ID"], $row["Username"], $row["Email"]);
-        $u->setModerator($row["IsModerator"]);
+        $u->setModerator($row["Moderator"]);
+
+        return $u;
     }
 
     static function fromID($ID)
     {
         $db = connect();
-        $SQL = "SELECT * FROM $TABLE_User WHERE ID = ':id'";
+        $SQL = "SELECT * FROM TABLE_User WHERE ID = ':id'";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $ID);
         $statement->execute();
@@ -55,13 +63,13 @@ class User
         if (!$row)
             return null;
 
-        return fromRow($row);
+        return User::fromRow($row);
     }
 
     static function fromUsername($username)
     {
         $db = connect();
-        $SQL = "SELECT * FROM $TABLE_User WHERE Username = ':username'";
+        $SQL = "SELECT * FROM " . TABLE_User . " WHERE Username = :username";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":username", $username);
         $statement->execute();
@@ -70,12 +78,13 @@ class User
         if (!$row)
             return null;
 
-        return fromRow($row);
+        return User::fromRow($row);
     }
         
     static function emailExists($email)
     {
-        $SQL = "SELECT ID FROM User WHERE Email = :email";
+        $db = connect();
+        $SQL = "SELECT ID FROM Users WHERE Email = :email";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":email", $email);
         $statement->execute();
@@ -89,7 +98,7 @@ class User
 
     static function usernameExists($username)
     {
-        $SQL = "SELECT ID FROM User WHERE Username = :username";
+        $SQL = "SELECT ID FROM Users WHERE Username = :username";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":username", $username);
         $statement->execute();
@@ -103,7 +112,8 @@ class User
 
     static function idExists($id)
     {
-        $SQL = "SELECT ID FROM USER WHERE ID = :id";
+        $db = connect();
+        $SQL = "SELECT ID FROM Users WHERE ID = :id";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $id);
         $statement->execute();
@@ -123,9 +133,9 @@ class User
     static function create($username, $email, $password)
     {
         if (User::emailExists($email))
-            return Error_EmailExists;
+            return User::Error_EmailExists;
         else if (User::usernameExists($username))
-            return Error_UsernameExists;
+            return User::Error_UsernameExists;
 
         $hash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
         $id = uniqid();
@@ -144,7 +154,7 @@ class User
     static function testPassword($ID, $attempt)
     {
         $db = connect();
-        $SQL = "SELECT Password FROM User WHERE ID = :id";
+        $SQL = "SELECT Password FROM Users WHERE ID = :id";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $ID);
         $statement->execute();
@@ -158,9 +168,10 @@ class User
     function findPosts($limit = 50)
     {
         $db = connect();
-        $SQL = "SELECT * FROM Posts WHERE Author = :id LIMIT $limit ORDER BY Timestamp DESC";
+        $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE Author = :id ORDER BY Timestamp DESC LIMIT $limit";
         $statement = $db->prepare($SQL);
-        $statement->bindParam(":id", $this->getID());
+        $statement->bindValue(":id", $this->getID());
+        $statement->debugDumpParams();
         $statement->execute();
         $rows = $statement->fetchall();
 
@@ -195,7 +206,7 @@ class User
     {
         $db = connect();
         
-        $SQL = "DELETE FROM User WHERE ID = :id";
+        $SQL = "DELETE FROM Users WHERE ID = :id";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $this->id);
         $statement->execute();

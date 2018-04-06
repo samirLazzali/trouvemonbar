@@ -1,8 +1,9 @@
 <?php
 
-require_once("../db.php");
-require_once("User.php");
-require_once("Appreciation.php");
+if (!defined('__ROOT__')) define('__ROOT__', dirname(dirname(__FILE__)));
+require_once(__ROOT__ . '/config.php');
+require_once(__ROOT__ . '/classes/User.php');
+require_once(__ROOT__ . '/classes/Appreciation.php');
 
 class Post
 {
@@ -65,7 +66,7 @@ class Post
         $timestamp = time();
 
         $db = connect();
-        $SQL = "INSERT INTO $TABLE_Posts VALUES (ID, Author, Content, Timestamp, Repost, ResponseTo) VALUES (:id, :authorId, NULL, :timestamp, :originalPost, NULL)";
+        $SQL = "INSERT INTO " . TABLE_Posts . " VALUES (ID, Author, Content, Timestamp, Repost, ResponseTo) VALUES (:id, :authorId, NULL, :timestamp, :originalPost, NULL)";
 
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $id);
@@ -87,7 +88,7 @@ class Post
         $timestamp = time();
 
         $db = connect();
-        $SQL = "INSERT INTO $TABLE_Posts VALUES (ID, Author, Content, Timestamp, Repost, ResponseTo) VALUES (:id, :authorId, :content, :timestamp, NULL, :originalPost)";
+        $SQL = "INSERT INTO " . TABLE_Posts . " VALUES (ID, Author, Content, Timestamp, Repost, ResponseTo) VALUES (:id, :authorId, :content, :timestamp, NULL, :originalPost)";
 
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $id);
@@ -104,18 +105,22 @@ class Post
 
     static function post($author, $content)
     {
-        $authorID = $author->getID();
+        if ($author instanceof User)
+            $authorID = $author->getID();
+        else
+            $authorID = $author;
+
         $id = uniqid();
         $timestamp = time();
 
         $db = connect();
-        $SQL = "INSERT INTO $TABLE_Posts VALUES (ID, Author, Content, Timestamp, Repost, ResponseTo) VALUES (:id, :authorId, :content, :timestamp, NULL, NULL)";
-
+        $SQL = "INSERT INTO " . TABLE_Posts . " (ID, Author, Content, Timestamp, Repost, ResponseTo) VALUES (:id, :authorId, :content, :timestamp, NULL, NULL)";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $id);
         $statement->bindParam(":authorId", $authorID);
         $statement->bindParam(":content", $content);
         $statement->bindParam(":timestamp", $timestamp);
+        $statement->execute();
 
         $p = new Post($id, $author, $content, $timestamp);
     }
@@ -124,7 +129,7 @@ class Post
     function delete()
     {
         $db = connect();
-        $SQL = "DELETE FROM $TABLE_Posts WHERE ID = :id";
+        $SQL = "DELETE FROM " . TABLE_Posts . " WHERE ID = :id";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $this->ID);
         $statement->execute();
@@ -135,7 +140,7 @@ class Post
         die("TODO: Post::deleteAll");
 
         $db = connect();
-        $SQL = "DELETE FROM $TABLE_Posts WHERE ID";
+        $SQL = "DELETE FROM " . TABLE_Posts . " WHERE ID";
     }
 
     /* Acesseurs classiques */
