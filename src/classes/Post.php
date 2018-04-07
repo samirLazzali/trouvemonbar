@@ -12,7 +12,7 @@ class Post implements JsonSerializable
     /* Le contenu du post */
     private $content;
 
-    private $postCache = null;
+    private $responseToCache = null;
     private $responseTo = null;
 
     private $repostOfCache = null;
@@ -53,8 +53,11 @@ class Post implements JsonSerializable
         $statement = $db->prepare($SQL);
         $statement->bindValue(":id", $ID);
         $statement->execute();
-
         $row = $statement->fetch();
+
+        if (!$row)
+            throw new PostNotFoundException($ID);
+
         return Post::fromRow($row);
     }
 
@@ -73,7 +76,7 @@ class Post implements JsonSerializable
         $statement->bindParam(":id", $id);
         $statement->bindParam(":authorId", $authorID);
         $statement->bindParam(":timestamp", $timestamp);
-        $statement->bindParam(":originalPost", $post->getID());
+        $statement->bindParam(":originalPost", $originalPostID);
         $statement->execute();
 
         $p = new Post($id, $author, NULL, $timestamp);
@@ -229,6 +232,19 @@ class Post implements JsonSerializable
             "appreciations" => $this->getAppreciations());
 
         return $arr;
+    }
+}
+
+class PostNotFoundException extends Exception
+{
+    protected $givenId;
+
+    public function __construct($givenId, $code = 0, Exception $previous = null)
+    {
+        $message = "No post could be found with ID '$givenId'.";
+        $this->$givenId = $givenId;
+
+        parent::__construct($message, $code, $previous);
     }
 }
 ?>

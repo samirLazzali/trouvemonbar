@@ -17,13 +17,13 @@ elseif (isset($_GET['username']))
 else
     error_die("Missing parameter 'Username' or 'ID'");
 
-$user = User::findWithIDorUsername($identifier);
-
-if ($user == null)
-    error_die("No such user.");
-else
+try
 {
+    $user = User::findWithIDorUsername($identifier);
     $posts = $user->findPosts($limit);
     success_die($posts);
 }
-?>
+catch (UserNotFoundException $e)
+{
+    error_die("No such user.");
+}

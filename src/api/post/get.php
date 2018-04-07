@@ -7,9 +7,11 @@ if (isset($_GET['id']))
 else
     error_die("Missing parameter 'id'.");
 
-$p = Post::fromID($id);
-
-if ($p == null)
-    error_die("No such post.");
-else
+try {
+    $p = Post::fromID($id);
     success_die($p);
+}
+catch (PostNotFoundException $e)
+{
+    error_die($e->getMessage());
+}

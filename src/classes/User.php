@@ -61,7 +61,7 @@ class User implements JsonSerializable
         $row = $statement->fetch();
 
         if (!$row)
-            return null;
+            throw new UserNotFoundException(UserNotFoundException::Given_ID, $ID);
 
         return User::fromRow($row);
     }
@@ -76,18 +76,32 @@ class User implements JsonSerializable
         $row = $statement->fetch();
 
         if (!$row)
-            return null;
+            throw new UserNotFoundException(UserNotFoundException::Given_Username, $username);
 
         return User::fromRow($row);
     }
 
     static function findWithIDorUsername($data)
     {
-        $u = User::fromID($data);
-        if ($u != null)
+        try
+        {
+            $u = User::fromID($data);
             return $u;
+        }
+        catch (UserNotFoundException $e)
+        {
+            // On va essayer avec le nom d'utilisateur
+        }
 
-        return User::fromUsername($data);
+        try
+        {
+            $u = User::fromUsername($data);
+            return $u;
+        }
+        catch (UserNotFoundException $e)
+        {
+            throw $e;
+        }
     }
         
     static function emailExists($email)
@@ -136,16 +150,13 @@ class User implements JsonSerializable
 
     }
     
-    const Error_EmailExists = "Email already in database.";
-    const Error_UsernameExists = "Username already in database.";
-
     /* Insertion d'un utilisateur dans la base de données */
     static function create($username, $email, $password)
     {
         if (User::emailExists($email))
-            return User::Error_EmailExists;
+            throw new UserExistsException(UserExistsException::Duplicate_Email, $email);
         else if (User::usernameExists($username))
-            return User::Error_UsernameExists;
+            throw new UserExistsException(UserExistsException::Duplicate_Username, $username);
 
         $hash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
         $id = uniqid();
@@ -234,6 +245,45 @@ class User implements JsonSerializable
             "isModerator" => $this->isModerator);
 
         return $arr;
+    }
+}
+
+/**
+ * Exception
+ */
+class UserNotFoundException extends Exception
+{
+    const Given_ID = 'ID';
+    const Given_Username = 'Username';
+    const Given_Email = 'Email';
+
+    protected $given;
+    protected $givenValue;
+
+    public function __construct($given, $givenValue, $code = 0, Exception $previous = null) {
+        $message = "Can't find user with $given = $givenValue";
+        $this->given = $given;
+        $this->givenValue = $givenValue;
+
+        parent::__construct($message, $code, $previous);
+    }
+}
+
+class UserExistsException extends Exception
+{
+    const Duplicate_Email = 'Email';
+    const Duplicate_Username = 'Username';
+
+    protected $duplicate;
+    protected $duplicateValue;
+
+    public function __construct($duplicate, $duplicateValue, $code = 0, Exception $previous = null)
+    {
+        $message = "The $duplicate '$duplicateValue' is already registered.";
+        $this->duplicate = $duplicate;
+        $this->duplicateValue = $duplicateValue;
+
+        parent::__construct($message, $code, $previous);
     }
 }
 ?>

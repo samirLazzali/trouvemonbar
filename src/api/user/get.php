@@ -8,22 +8,28 @@
     if (isset($_GET['id']))
     {
         $requestedId = $_GET['id'];
-        $u = User::fromId($requestedId);
 
-        if ($u == null)
-            error_die("No such user.");
-        else
+        try {
+            $u = User::fromId($requestedId);
             success_die($u);
+        }
+        catch (UserNotFoundException $e) {
+            error_die($e->getMessage());
+        }
     }
     elseif (isset($_GET['username']))
     {
         $requestedUsername = $_GET['username'];
         $u = User::fromUsername($requestedUsername);
 
-        if ($u == null)
-            error_die("No such user.");
-        else
+        try
+        {
+            $u = User::fromUsername($requestedUsername);
             success_die($u);
+        }
+        catch (UserNotFoundException $e) {
+            error_die($e->getMessage());
+        }
     }
     else
         error_die("One parameter among 'ID' and 'Username' has to be given.");
