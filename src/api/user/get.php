@@ -32,4 +32,4 @@
         }
     }
     else
-        error_die("One parameter among 'ID' and 'Username' has to be given.");
+        error_die("One GET parameter among 'ID' and 'Username' has to be given.");

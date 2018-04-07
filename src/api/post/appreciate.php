@@ -10,14 +10,13 @@ if (isset($_GET['type']))
         error_die("Unknown appreciation: '$type'.");
 }
 else
-    error_die("Missing parameter 'type'.");
+    error_die("Missing GET argument 'type'.");
 
 if (isset($_GET['post']))
     $postId = $_GET['post'];
 else
-    error_die("Missing parameter 'post'.");
+    error_die("Missing GET argument 'post'.");
 
-// TODO: get real $author
 $a = Appreciation::create($postId, $author, $type);
 success_die($a);
 

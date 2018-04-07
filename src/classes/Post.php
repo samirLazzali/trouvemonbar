@@ -127,9 +127,9 @@ class Post implements JsonSerializable
         $statement->execute();
 
         $p = new Post($id, $author, $content, $timestamp);
+        return $p;
     }
 
-    /* CRUD ? */
     function delete()
     {
         $db = connect();
@@ -221,6 +221,40 @@ class Post implements JsonSerializable
 
         $this->appreciations = $appreciations;
         return $appreciations;
+    }
+
+    static function findPosts($people, $limit = 50)
+    {
+        if (count($people) == 0)
+            $SQL = "SELECT * FROM " . TABLE_Posts . " ORDER BY Timestamp DESC LIMIT $limit";
+        else
+        {
+            $IDs = array();
+            foreach ($people as $user) {
+                $p = User::fromUsername($user);
+                array_push($IDs, $p->getID());
+            }
+
+            $SQL = "SELECT * FROM Post WHERE Author IN (";
+
+            foreach ($IDs as $ID) {
+                $SQL .= "'" . $ID . "', ";
+            }
+            $SQL = trim($SQL, " ,");
+            $SQL .= ") ORDER BY Timestamp DESC LIMIT $limit";
+        }
+
+        $db = connect();
+        $statement = $db->prepare($SQL);
+        $statement->execute();
+        $rows = $statement->fetchAll();
+
+        $posts = array();
+        foreach($rows as $row)
+        {
+            array_push($posts, Post::fromRow($row));
+        }
+        return $posts;
     }
 
     public function jsonSerialize() {

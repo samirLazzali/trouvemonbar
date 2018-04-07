@@ -7,7 +7,7 @@ require_once("Post.php");
 if (isset($_POST['content']))
     $content = $_POST['content'];
 else
-    error_die("Missing field 'content'.");
+    error_die("Missing POST field 'content'.");
 
 $author = getUserFromCookie();
 

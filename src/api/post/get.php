@@ -5,7 +5,7 @@ require_once("Post.php");
 if (isset($_GET['id']))
     $id = $_GET['id'];
 else
-    error_die("Missing parameter 'id'.");
+    error_die("Missing GET argument 'id'.");
 
 try {
     $p = Post::fromID($id);
