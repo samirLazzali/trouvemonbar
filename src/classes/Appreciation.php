@@ -52,15 +52,27 @@ class Appreciation implements JsonSerializable
 
         if ($post instanceof Post)
             $post = $post->getID();
-
-        $db = connect();
+        else
+        {
+            // Check if the post exists, otherwise throw a PostNotFoundException
+            $testPost = Post::fromID($post);
+            $post = $testPost->getID();
+        }
         $timestamp = time();
         $id = uniqid();
-        $SQL = "INSERT INTO Appreciation (ID, Post, Author, Type, Timestamp) VALUES (:id, :post, :author, :type, :timestamp)";
+
+        $db = connect();
+        $SQL = "DELETE FROM " . TABLE_Appreciation . " WHERE Post = :post AND Author = :user";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":post", $post);
+        $statement->bindValue(":user", $author);
+        $statement->execute();
+
+        $SQL = "INSERT INTO " . TABLE_Appreciation . " (ID, Post, Author, Type, Timestamp) VALUES (:id, :post, :author, :type, :timestamp)";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $id);
-        $statement->bindParam(":post", $postId);
-        $statement->bindParam(":author", $authorId);
+        $statement->bindParam(":post", $post);
+        $statement->bindParam(":author", $author);
         $statement->bindParam(":type", $type);
         $statement->bindParam(":timestamp", $timestamp);
         $statement->execute();
@@ -85,4 +97,18 @@ class Appreciation implements JsonSerializable
             "post" => $this->post);
     }
 }
-?>
+
+class AppreciationExistsException extends Exception
+{
+    protected $author;
+    protected $post;
+
+    public function __construct($author, $post, $code = 0, Exception $previous = null)
+    {
+        $message = "An appreciation on $post by $author already exists.";
+        $this->author = $author;
+        $this->post = $post;
+
+        parent::__construct($message, $code, $previous);
+    }
+}

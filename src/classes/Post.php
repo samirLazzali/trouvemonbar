@@ -305,12 +305,13 @@ class Post implements JsonSerializable
         $posts = array();
         foreach($rows as $row)
             array_push($posts, Post::fromRow($row));
-        
+
         return $posts;
     }
 
     public function jsonSerialize() {
-        $arr = array("content" => $this->content,
+        $arr = array("id" => $this->ID,
+            "content" => $this->content,
             "authorId" => $this->author,
             "timestamp" => $this->timestamp,
             "repostOf" => $this->repostOf,
@@ -333,4 +334,3 @@ class PostNotFoundException extends Exception
         parent::__construct($message, $code, $previous);
     }
 }
-?>

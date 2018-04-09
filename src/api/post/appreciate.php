@@ -19,5 +19,11 @@ else
 
 $user = verify_logged_in();
 
-$a = Appreciation::create($postId, $user, $type);
+try {
+    $a = Appreciation::create($postId, $user, $type);
+}
+catch (PostNotFoundException $e)
+{
+    error_die($e->getMessage());
+}
 success_die($a);
