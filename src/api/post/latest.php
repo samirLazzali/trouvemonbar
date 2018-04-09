@@ -20,7 +20,8 @@ if (isset($_POST['filter'])) {
     $filter = $_POST['filter'];
     $people = explode(";", $filter);
 }
-else {
+else
+{
     $filter = "";
     $people = array();
 }

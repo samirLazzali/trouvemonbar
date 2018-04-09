@@ -13,12 +13,20 @@ if (isset($_GET['id']))
 else
     error_die("Missing GET argument 'id'.");
 
+$u = verify_logged_in();
+
 try {
     $p = Post::fromID($id);
-    $p->delete();
-    success_die($p);
 }
 catch (PostNotFoundException $e)
 {
     error_die($e->getMessage());
 }
+
+if ($p->getAuthorID() == $u->getID() || $u->getModerator())
+{
+    $p->delete();
+    success_die($p);
+}
+else
+    error_die("User doesn't have sufficient rights to delete post '$id'.");

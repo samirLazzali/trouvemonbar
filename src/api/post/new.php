@@ -9,7 +9,7 @@ if (isset($_POST['content']))
 else
     error_die("Missing POST field 'content'.");
 
-$author = getUserFromCookie();
+$author = verify_logged_in();
 
 $p = Post::post($author, $content);
 success_die($p);

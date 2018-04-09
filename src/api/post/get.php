@@ -7,6 +7,8 @@ if (isset($_GET['id']))
 else
     error_die("Missing GET argument 'id'.");
 
+$u = verify_logged_in();
+
 try {
     $p = Post::fromID($id);
     success_die($p);

@@ -36,6 +36,18 @@ class User implements JsonSerializable
         $this->isModerator = $newModerator;
     }
 
+    public function getHash()
+    {
+        $db = connect();
+        $SQL = "SELECT Password FROM " . TABLE_User . " WHERE ID = :id";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":id", $this->getID());
+        $statement->execute();
+        $row = $statement->fetch();
+
+        return $row["Password"];
+    }
+
     function __construct($ID, $username, $email)
     {
         $this->ID = $ID;
@@ -54,7 +66,7 @@ class User implements JsonSerializable
     static function fromID($ID)
     {
         $db = connect();
-        $SQL = "SELECT * FROM " . TABLE_User . " WHERE ID = ':id'";
+        $SQL = "SELECT * FROM " . TABLE_User . " WHERE ID = :id";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $ID);
         $statement->execute();
@@ -79,6 +91,16 @@ class User implements JsonSerializable
             throw new UserNotFoundException(UserNotFoundException::Given_Username, $username);
 
         return User::fromRow($row);
+    }
+
+    static function findWithUsernameOrEmail($identifier)
+    {
+        if (User::usernameExists($identifier))
+            return User::fromUsername($identifier);
+        elseif (User::emailExists($identifier))
+            return User::fromEmail($identifier);
+
+        throw new UserNotFoundException(UserNotFoundException::UsernameOrEmail, $identifier);
     }
 
     static function findWithIDorUsername($data)
@@ -256,6 +278,7 @@ class UserNotFoundException extends Exception
     const Given_ID = 'ID';
     const Given_Username = 'Username';
     const Given_Email = 'Email';
+    const Given_UsernameOrEmail = 'Username or Email';
 
     protected $given;
     protected $givenValue;

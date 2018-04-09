@@ -17,7 +17,7 @@ if (isset($_GET['post']))
 else
     error_die("Missing GET argument 'post'.");
 
-$a = Appreciation::create($postId, $author, $type);
-success_die($a);
+$user = verify_logged_in();
 
-?>
+$a = Appreciation::create($postId, $user, $type);
+success_die($a);
