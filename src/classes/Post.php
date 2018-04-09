@@ -23,6 +23,8 @@ class Post implements JsonSerializable
 
     private $appreciations = null;
 
+    private $timestamp;
+
     /**
      * ID l'identifiant (UUID) du post
      * author : l'auteur (User) du post
@@ -31,9 +33,9 @@ class Post implements JsonSerializable
     function __construct($ID, $author, $content, $timestamp)
     {
         $this->ID = $ID;
-        $this->author = $author;
         $this->content = $content;
         $this->timestamp = $timestamp;
+        $this->setAuthor($author);
     }
 
     /* Factory Method pour l'initialisation depuis une ligne de BDD */
@@ -65,9 +67,18 @@ class Post implements JsonSerializable
     static function repost($post, $author)
     {
         $id = uniqid();
-        $authorID = $author->getID();
-        $originalPostID = $post->getID();
         $timestamp = time();
+
+        if ($post instanceof Post)
+            $originalPostID = $post->getID();
+        else
+            $originalPostID = $post;
+
+        if ($author instanceof User)
+            $authorID = $author->getID();
+        else
+            $authorID = $author;
+
 
         $db = connect();
         $SQL = "INSERT INTO " . TABLE_Posts . " VALUES (ID, Author, Content, Timestamp, Repost, ResponseTo) VALUES (:id, :authorId, NULL, :timestamp, :originalPost, NULL)";
@@ -80,29 +91,38 @@ class Post implements JsonSerializable
         $statement->execute();
 
         $p = new Post($id, $author, NULL, $timestamp);
-        $p->repostOf = $post;
+        $p->setRepostOf($post);
 
         return $p;
     }
 
     static function respondTo($post, $author, $content)
     {
-        $authorID = $author->getID();
-        $originalPostID = $post->getID();
+        $id = uniqid();
         $timestamp = time();
 
-        $db = connect();
-        $SQL = "INSERT INTO " . TABLE_Posts . " VALUES (ID, Author, Content, Timestamp, Repost, ResponseTo) VALUES (:id, :authorId, :content, :timestamp, NULL, :originalPost)";
+        if ($post instanceof Post)
+            $originalPostID = $post->getID();
+        else
+            $originalPostID = $post;
 
+        if ($author instanceof User)
+            $authorID = $author->getID();
+        else
+            $authorID = $author;
+
+        $db = connect();
+        $SQL = "INSERT INTO " . TABLE_Posts . " (ID, Author, Content, Timestamp, Repost, ResponseTo) VALUES (:id, :authorId, :content, :timestamp, NULL, :originalPost)";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $id);
         $statement->bindParam(":authorId", $authorID);
         $statement->bindParam(":content", $content);
         $statement->bindParam(":timestamp", $timestamp);
-        $statement->bindParam(":originalPost", $post->getID());
+        $statement->bindParam(":originalPost", $originalPostID);
+        $statement->execute();
         
-        $p =  new Post($id, $authorID, $content, $timestamp);
-        $p->responseTo = $post;
+        $p = new Post($id, $authorID, $content, $timestamp);
+        $p->setResponseTo($post);
 
         return $p;
     }
@@ -179,7 +199,29 @@ class Post implements JsonSerializable
         return $this->authorCache;
     }
 
-    function getResponse()
+    function setAuthor($author)
+    {
+        if ($author instanceof User)
+        {
+            $this->authorCache = $author;
+            $this->author = $author->getID();
+        }
+        else
+            $this->author = $author;
+    }
+
+    function setResponseTo($resp)
+    {
+        if($resp instanceof Post)
+        {
+            $this->responseTo = $resp->getID();
+            $this->responseToCache = $resp;
+        }
+        else
+            $this->responseTo = $resp;
+    }
+
+    function getResponseTo()
     {
         if ($this->responseTo == null)
             return null;
@@ -191,7 +233,7 @@ class Post implements JsonSerializable
         return $this->responseToCache;
     }
 
-    function getRepost()
+    function getRepostOf()
     {
         if ($this->repostOf == null)
             return null;
@@ -201,6 +243,17 @@ class Post implements JsonSerializable
 
         $this->repostOfCache = Post::fromID($this->repostOf);
         return $this->repostOfCache;
+    }
+
+    function setRepostOf($post)
+    {
+        if ($post instanceof Post)
+        {
+            $this->repostOfCache = $post;
+            $this->repostOf = $post->getID();
+        }
+        else
+            $this->repostOf = $post;
     }
 
     function getAppreciations()
@@ -251,9 +304,8 @@ class Post implements JsonSerializable
 
         $posts = array();
         foreach($rows as $row)
-        {
             array_push($posts, Post::fromRow($row));
-        }
+        
         return $posts;
     }
 
