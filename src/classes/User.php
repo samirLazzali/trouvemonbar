@@ -58,7 +58,7 @@ class User implements JsonSerializable
     static function fromRow($row)
     {
         $u = new User($row["ID"], $row["Username"], $row["Email"]);
-        $u->setModerator($row["Moderator"]);
+        $u->setModerator($row["Moderator"] == "0" ? false : true);
 
         return $u;
     }
@@ -192,7 +192,10 @@ class User implements JsonSerializable
         $statement->bindParam(":password", $hash);
         $statement->execute();
 
-        return new User($id, $username, $email);
+        $u = new User($id, $username, $email);
+        $u->setModerator(false);
+
+        return $u;
     }
 
     static function testPassword($ID, $attempt)
