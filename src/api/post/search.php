@@ -13,5 +13,5 @@ if (isset($_GET['limit']))
 else
     $limit = 50;
 
-$results = Search::User($term, $limit);
+$results = Search::post($term, $limit);
 success_die($results);

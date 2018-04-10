@@ -22,10 +22,10 @@ abstract class Search implements JsonSerializable
 //        }
 //    }
 
-    public static function User($term)
+    public static function User($term, $limit = 50)
     {
         $db = connect();
-        $SQL = "SELECT * FROM " . TABLE_User . " WHERE Username LIKE :term";
+        $SQL = "SELECT * FROM " . TABLE_User . " WHERE Username LIKE :term LIMIT $limit";
         $statement = $db->prepare($SQL);
         $statement->bindValue(":term", "%" . $term . "%");
         $statement->execute();
@@ -34,6 +34,21 @@ abstract class Search implements JsonSerializable
         $results = array();
         foreach($rows as $row)
             array_push($results, User::fromRow($row));
+        return $results;
+    }
+
+    public static function post($term, $limit = 50)
+    {
+        $db = connect();
+        $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE Content LIKE :term LIMIT $limit";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":term", "%" . $term . "%");
+        $statement->execute();
+        $rows = $statement->fetchall();
+
+        $results = array();
+        foreach($rows as $row)
+            array_push($results, Post::fromRow($row));
         return $results;
     }
 
