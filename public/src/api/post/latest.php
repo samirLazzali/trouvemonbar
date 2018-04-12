@@ -26,5 +26,12 @@ else
     $people = array();
 }
 
-$p = Post::findPosts($people, $limit);
-success_die($p);
+try
+{
+    $p = Post::findPosts($people, $limit);
+    success_die($p);
+}
+catch (UserNotFoundException $e)
+{
+    error_die($e->getMessage());
+}

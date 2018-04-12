@@ -46,6 +46,9 @@ reinstall: install
 db.connect:
 	docker-compose exec postgres /bin/bash -c 'psql -U $$POSTGRES_USER'
 
+db.db:
+	docker-compose exec postgres /bin/bash -c 'psql -U $$POSTGRES_USER -u vitz'
+	
 db.install:
 	docker-compose exec postgres /bin/bash -c 'psql -U $$POSTGRES_USER -h localhost -f data/db.sql'
 

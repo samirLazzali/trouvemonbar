@@ -20,7 +20,6 @@
     elseif (isset($_GET['username']))
     {
         $requestedUsername = $_GET['username'];
-        $u = User::fromUsername($requestedUsername);
 
         try
         {
