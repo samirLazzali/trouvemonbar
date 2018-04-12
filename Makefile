@@ -3,7 +3,7 @@ normal=$(shell (tput sgr0))
 .DEFAULT_GOAL=help
 DISTRIB:=$(shell lsb_release -is | tr '[:upper:]' '[:lower:]')
 VERSION:=$(shell lsb_release -cs)
-ARCHITECTURE:=$(shell dpkg --print-architecture)
+#ARCHITECTURE:=$(shell dpkg --print-architecture)
 
 help:
 	@echo -e "${bold}install${normal}\n\t Installs the whole appplication. To use at the first installation.\n"
@@ -43,6 +43,9 @@ uninstall: stop
 reinstall: install
 
 #Connects to the databatase
+db.save:
+	docker-compose exec postgres /bin/bash -c 'pg_dump -U $$POSTGRES_USER ensiie > data/db.sql; chmod 666 data/db.sql'
+
 db.connect:
 	docker-compose exec postgres /bin/bash -c 'psql -U $$POSTGRES_USER'
 
