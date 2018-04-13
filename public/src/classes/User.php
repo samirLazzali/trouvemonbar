@@ -11,11 +11,17 @@ class User implements JsonSerializable
     private $email;
     private $isModerator;
 
+    /**
+     * Renvoie l'ID de l'utilisateur.
+     */
     public function getID()
     {
         return $this->ID;
     }
 
+    /**
+     * Renvoie le nom d'utilisateur d'un utilisateur.
+     */
     public function getUsername()
     {
         return $this->username;
@@ -31,11 +37,17 @@ class User implements JsonSerializable
         return $this->isModerator;
     }
 
+    /**
+     * Définit la propriété isModerator d'un utilisateur.
+     */
     public function setModerator($newModerator)
     {
         $this->isModerator = $newModerator;
     }
 
+    /**
+     * Obtient le hash du mot de passe de l'utilisateur (stocké en BDD).
+     */
     public function getHash()
     {
         $db = connect();
@@ -55,6 +67,9 @@ class User implements JsonSerializable
         $this->email = $email;
     }
 
+    /**
+     * Initialisation d'un utilisateur à partir d'une ligne de BDD.
+     */
     static function fromRow($row)
     {
         $u = new User($row["id"], $row["username"], $row["email"]);
@@ -63,6 +78,12 @@ class User implements JsonSerializable
         return $u;
     }
 
+    /**
+     * Initialisation d'un utilisateur à partir d'un ID fourni.
+     * @throws UserNotFoundException, si l'ID n'existe pas.
+     * @param string $ID à partir duquel trouver l'utilisateur
+     * @return User L'instance de User correspondant à $ID fourni.
+     */
     static function fromID($ID)
     {
         $db = connect();
@@ -78,6 +99,11 @@ class User implements JsonSerializable
         return User::fromRow($row);
     }
 
+    /**
+     * @param $username
+     * @return User
+     * @throws UserNotFoundException
+     */
     static function fromUsername($username)
     {
         $db = connect();
@@ -93,6 +119,12 @@ class User implements JsonSerializable
         return User::fromRow($row);
     }
 
+    /**
+     * @param $identifier
+     * @return User
+     * @throws UserNotFoundException
+     * Trouve un utilisateur dont l'email ou le nom d'utilisateur est $identifier
+     */
     static function findWithUsernameOrEmail($identifier)
     {
         if (User::usernameExists($identifier))
@@ -103,6 +135,12 @@ class User implements JsonSerializable
         throw new UserNotFoundException(UserNotFoundException::Given_UsernameOrEmail, $identifier);
     }
 
+    /**
+     * @param $data
+     * @return User
+     * @throws UserNotFoundException
+     * Trouve un utilisateur dont l'ID ou le nom d'utilisateur est $data
+     */
     static function findWithIDorUsername($data)
     {
         try
@@ -125,7 +163,12 @@ class User implements JsonSerializable
             throw $e;
         }
     }
-        
+
+    /**
+     * @param $email
+     * @return bool
+     * Vérifie si un email est présent dans la base de données.
+     */
     static function emailExists($email)
     {
         $db = connect();
@@ -141,6 +184,11 @@ class User implements JsonSerializable
             return true;
     }
 
+    /**
+     * @param $username
+     * @return bool
+     * Vérifie si un nom d'utilisateur est présent dans la base de données.
+     */
     static function usernameExists($username)
     {
         $db = connect();
@@ -156,6 +204,11 @@ class User implements JsonSerializable
             return true;
     }
 
+    /**
+     * @param $id
+     * @return bool
+     * Vérifie si un ID est présent dans la base de données.
+     */
     static function idExists($id)
     {
         $db = connect();
@@ -171,8 +224,15 @@ class User implements JsonSerializable
             return true;
 
     }
-    
-    /* Insertion d'un utilisateur dans la base de données */
+
+    /**
+     * Création d'un utilisateur à partir des paramètres qu'il fournit : nom d'utilisateur, e-mail et mot de passe.
+     * @param $username
+     * @param $email
+     * @param $password
+     * @return User
+     * @throws UserExistsException si l'utilisateur existe déjà (email ou nom d'utilisateur).
+     */
     static function create($username, $email, $password)
     {
         if (User::emailExists($email))
@@ -198,8 +258,18 @@ class User implements JsonSerializable
         return $u;
     }
 
+    /**
+     * Détermine si le mot de passe fourni pour l'utilisateur d'ID $ID est correct.
+     * @param $ID
+     * @param $attempt
+     * @return bool
+     * @throws UserNotFoundException si l'ID n'existe pas
+     */
     static function testPassword($ID, $attempt)
     {
+        if (!self::idExists($ID))
+            throw new UserNotFoundException(UserNotFoundException::Given_ID, $ID);
+
         $db = connect();
         $SQL = "SELECT Password FROM Users WHERE ID = :id";
         $statement = $db->prepare($SQL);
@@ -212,6 +282,11 @@ class User implements JsonSerializable
         return password_verify($attempt, $hash);
     }
 
+    /**
+     * Renvoie les publications de l'utilisateur.
+     * @param int $limit le nombre maximum de publications à renvoyer
+     * @return array un tableau de Post
+     */
     function findPosts($limit = 50)
     {
         $db = connect();
@@ -227,9 +302,17 @@ class User implements JsonSerializable
  
         return $posts;
     }
-    
+
+    /**
+     * Met à jour le profil de l'utilisateur.
+     * @param $newId
+     * @param $newEmail
+     * @param $newUsername
+     * @return bool
+     */
     function update($newId, $newEmail, $newUsername)
     {
+        throw new Exception("CETTE IMPLEMENTATION EST INCORRECTE.");
         $db = connect();
         
         $this->ID = $newId;
@@ -248,6 +331,10 @@ class User implements JsonSerializable
             return false;
     }
 
+    /**
+     * Supprime l'utilisateur.
+     * @return bool
+     */
     function delete()
     {
         $db = connect();
@@ -263,6 +350,10 @@ class User implements JsonSerializable
             return false;
     }
 
+    /**
+     * Sérialise un User.
+     * @return array|mixed
+     */
     function jsonSerialize()
     {
         $arr = array("username" => $this->username,

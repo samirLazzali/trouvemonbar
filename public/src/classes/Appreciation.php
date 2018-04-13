@@ -14,6 +14,9 @@ class Appreciation implements JsonSerializable
     private $type;
     private $timestamp;
 
+    private $authorCache = null;
+    private $postCache = null;
+
     function __construct($post, $author, $type, $timestamp)
     {
         if ($author instanceof User) {
@@ -21,9 +24,7 @@ class Appreciation implements JsonSerializable
             $this->author = $author->getID();
         }
         else
-        {
             $this->author = $author;
-        }
 
         if ($post instanceof Post)
         {
@@ -34,30 +35,46 @@ class Appreciation implements JsonSerializable
             $this->post = $post;
 
         if ($type != Appreciation::LIKE && $type != Appreciation::DISLIKE)
-            throw new Exception("Unknown appreciation: '$type'.");
+            throw new UnknownAppreciationException("Unknown appreciation: '$type'.");
 
         $this->type = $type;
         $this->timestamp = $timestamp;
     }
 
+    /**
+     * Construction à partir d'une ligne de BDD.
+     * @param arr $row
+     * @return Appreciation
+     * @throws Exception si le type d'appréciation dans la ligne n'est pas reconnu.
+     */
     static function fromRow($row)
     {
         return new Appreciation($row["post"], $row["author"], $row["type"], $row["timestamp"]);
     }
 
+
+    /**
+     * Créé une appréciation sur un post
+     * @param Post|string $post la publication (ou son ID) sur laquelle créer l'appréciation
+     * @param User|string $author l'utilisateur (ou son ID) qui créé l'appréciation
+     * @param string $type le type d'appréciation (Like / Dislike / etc.)
+     * @return Appreciation la nouvelle appréciation
+     * @throws PostNotFoundException si la publication n'existe pas
+     * @throws UserNotFoundException si l'utilisateur n'existe pas
+     * @throws UnknownAppreciationException si $type n'est pas reconnu
+     */
     static function create($post, $author, $type)
     {
         if ($author instanceof User)
             $author = $author->getID();
+        else
+            $author = User::fromID($author)->getID():
 
         if ($post instanceof Post)
             $post = $post->getID();
         else
-        {
-            // Check if the post exists, otherwise throw a PostNotFoundException
-            $testPost = Post::fromID($post);
-            $post = $testPost->getID();
-        }
+            $post = Post::fromID($post)->getID();
+
         $timestamp = time();
         $id = uniqid();
 
@@ -80,16 +97,36 @@ class Appreciation implements JsonSerializable
         return new Appreciation($post, $author, $type, $timestamp);
     }
 
+    /**
+     * Créé un like sur un post
+     * @param Post|string $post la publication (ou son ID) sur laquelle créer l'appréciation
+     * @param User|string $author l'utilisateur (ou son ID) qui créé l'appréciation
+     * @return Appreciation la nouvelle appréciation
+     * @throws PostNotFoundException si la publication n'existe pas
+     * @throws UserNotFoundException si l'utilisateur n'existe pas
+     */
     static function createLike($post, $author)
     {
         return Appreciation::create($post, $author, Appreciation::LIKE);
     }
 
+    /**
+     * Créé un dislike sur un post
+     * @param Post|string $post la publication (ou son ID) sur laquelle créer l'appréciation
+     * @param User|string $author l'utilisateur (ou son ID) qui créé l'appréciation
+     * @return Appreciation la nouvelle appréciation
+     * @throws PostNotFoundException si la publication n'existe pas
+     * @throws UserNotFoundException si l'utilisateur n'existe pas
+     */
     static function createDislike($post, $author)
     {
         return Appreciation::create($post, $author, Appreciation::DISLIKE);
     }
 
+    /**
+     * Sérialise une Appreciation en JSON
+     * @return array|mixed
+     */
     function jsonSerialize()
     {
         return array("type" => $this->type,
@@ -108,6 +145,19 @@ class AppreciationExistsException extends Exception
         $message = "An appreciation on $post by $author already exists.";
         $this->author = $author;
         $this->post = $post;
+
+        parent::__construct($message, $code, $previous);
+    }
+}
+
+class UnknownAppreciationException extends Exception
+{
+    protected $given;
+
+    public function __construct($type, $code = 0, Exception $previous = null)
+    {
+        $message = "Unknown appreciation type : '$type'.";
+        $this->given = $type;
 
         parent::__construct($message, $code, $previous);
     }

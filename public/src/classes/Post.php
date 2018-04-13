@@ -25,11 +25,6 @@ class Post implements JsonSerializable
 
     private $timestamp;
 
-    /**
-     * ID l'identifiant (UUID) du post
-     * author : l'auteur (User) du post
-     * content : le contenu du post
-     */
     function __construct($ID, $author, $content, $timestamp)
     {
         $this->ID = $ID;
@@ -38,7 +33,11 @@ class Post implements JsonSerializable
         $this->setAuthor($author);
     }
 
-    /* Factory Method pour l'initialisation depuis une ligne de BDD */
+    /**
+     * Construction à partir d'une ligne de BDD.
+     * @param array $row une ligne de BDD
+     * @return Post
+     */
     static function fromRow($row)
     {
         $p = new Post($row["id"], $row["author"], $row["content"], $row["timestamp"]);
@@ -48,6 +47,12 @@ class Post implements JsonSerializable
         return $p;
     }
 
+    /**
+     * Construction à partir d'un ID de Post.
+     * @param string $ID
+     * @return Post
+     * @throws PostNotFoundException
+     */
     static function fromID($ID)
     {
         $db = connect();
@@ -63,7 +68,13 @@ class Post implements JsonSerializable
         return Post::fromRow($row);
     }
 
-    /* Création d'un repost (et renvoi de l'objet Post associé) */
+
+    /**
+     * Création d'un repost
+     * @param Post|string $post le Post (ou son ID) à reposter
+     * @param User|string $author l'utilisateur (ou son ID) qui reposte
+     * @return Post l'instance du repost
+     */
     static function repost($post, $author)
     {
         $id = uniqid();
@@ -96,6 +107,13 @@ class Post implements JsonSerializable
         return $p;
     }
 
+    /**
+     * Envoie une réponse à une publication.
+     * @param Post|string $post le Post (ou son ID) auquel il faut répondre.
+     * @param User|string $author l'utilisateur (ou son ID) qui répond
+     * @param string $content le contenu de la réponse
+     * @return Post l'instance de la réponse
+     */
     static function respondTo($post, $author, $content)
     {
         $id = uniqid();
@@ -127,6 +145,12 @@ class Post implements JsonSerializable
         return $p;
     }
 
+    /**
+     * Publie un nouveau Post.
+     * @param User|string $author l'utilisateur qui publie
+     * @param string $content le contenu de la publication
+     * @return Post l'instance du post créé.
+     */
     static function post($author, $content)
     {
         if ($author instanceof User)
@@ -150,6 +174,9 @@ class Post implements JsonSerializable
         return $p;
     }
 
+    /**
+     * Supprime un post de la BDD.
+     */
     function delete()
     {
         $db = connect();
@@ -159,6 +186,10 @@ class Post implements JsonSerializable
         $statement->execute();
     }
 
+    /**
+     * Supprime toutes les publications de $arr
+     * @param array $arr un tableau de Post.
+     */
     function deleteAll($arr)
     {
         die("TODO: Post::deleteAll");
@@ -255,6 +286,10 @@ class Post implements JsonSerializable
         return $this->repostOfCache;
     }
 
+    /**
+     * Définit la propriété repostOf du Post.
+     * @param Post|int $post
+     */
     function setRepostOf($post)
     {
         if ($post instanceof Post)
@@ -266,6 +301,11 @@ class Post implements JsonSerializable
             $this->repostOf = $post;
     }
 
+    /**
+     * Renvoie le tableau des appréciations d'un Post.
+     * @return array le tableau des appréciations (sous forme d'Appreciation)
+     * @throws Exception
+     */
     function getAppreciations()
     {
         if ($this->appreciations != null)
@@ -286,6 +326,14 @@ class Post implements JsonSerializable
         return $appreciations;
     }
 
+    /**
+     * Trouve les dernières publications.
+     * @param string_array $people le filtre des personnes (noms d'utilisateur) dont on veut les publications.
+     * Si c'est un tableau vide, les publications ne sont pas filtrées.
+     * @param int $limit le nombre maximum de publications à renvoyer
+     * @return array un tableau de Post
+     * @throws UserNotFoundException si un des utilisateurs de $people n'existe pas.
+     */
     static function findPosts($people, $limit = 50)
     {
         if (count($people) == 0)
@@ -294,7 +342,7 @@ class Post implements JsonSerializable
         {
             $IDs = array();
             foreach ($people as $user) {
-                $p = User::fromUsername($user);
+                $p = User::findWithIDorUsername($user);
                 array_push($IDs, $p->getID());
             }
 
@@ -319,6 +367,10 @@ class Post implements JsonSerializable
         return $posts;
     }
 
+    /**
+     * Sérialise un Post en JSON.
+     * @return array|mixed
+     */
     public function jsonSerialize() {
         $arr = array("id" => $this->ID,
             "content" => $this->content,
