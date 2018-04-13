@@ -42,7 +42,7 @@ class Appreciation implements JsonSerializable
 
     static function fromRow($row)
     {
-        return new Appreciation($row["Post"], $row["Author"], $row["Type"], $row["Timestamp"]);
+        return new Appreciation($row["post"], $row["author"], $row["type"], $row["timestamp"]);
     }
 
     static function create($post, $author, $type)

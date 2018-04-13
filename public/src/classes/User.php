@@ -45,7 +45,7 @@ class User implements JsonSerializable
         $statement->execute();
         $row = $statement->fetch();
 
-        return $row["Password"];
+        return $row["password"];
     }
 
     function __construct($ID, $username, $email)
@@ -57,8 +57,8 @@ class User implements JsonSerializable
 
     static function fromRow($row)
     {
-        $u = new User($row["ID"], $row["Username"], $row["Email"]);
-        $u->setModerator($row["Moderator"] == "0" ? false : true);
+        $u = new User($row["id"], $row["username"], $row["email"]);
+        $u->setModerator($row["moderator"] == "false" ? false : true);
 
         return $u;
     }
@@ -184,7 +184,7 @@ class User implements JsonSerializable
         $id = uniqid();
 
         $db = connect();
-        $SQL = "INSERT INTO " . TABLE_User . " (ID, Username, Email, Password, Moderator) VALUES (:id, :username, :email, :password, 0)";
+        $SQL = "INSERT INTO " . TABLE_User . " (ID, Username, Email, Password, Moderator) VALUES (:id, :username, :email, :password, false)";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $id);
         $statement->bindParam(":username", $username);
@@ -207,7 +207,7 @@ class User implements JsonSerializable
         $statement->execute();
 
         $row = $statement->fetch();
-        $hash = $row["Password"];
+        $hash = $row["password"];
 
         return password_verify($attempt, $hash);
     }

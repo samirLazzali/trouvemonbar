@@ -41,9 +41,9 @@ class Post implements JsonSerializable
     /* Factory Method pour l'initialisation depuis une ligne de BDD */
     static function fromRow($row)
     {
-        $p = new Post($row["ID"], $row["Author"], $row["Content"], $row["Timestamp"]);
-        $p->repostOf = $row["Repost"];
-        $p->responseTo = $row["ResponseTo"];
+        $p = new Post($row["id"], $row["author"], $row["content"], $row["timestamp"]);
+        $p->repostOf = $row["repost"];
+        $p->responseTo = $row["responseto"];
 
         return $p;
     }
