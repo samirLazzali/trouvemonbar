@@ -129,7 +129,7 @@ class User implements JsonSerializable
     static function emailExists($email)
     {
         $db = connect();
-        $SQL = "SELECT 'ID' FROM Users WHERE Email = :email";
+        $SQL = "SELECT ID FROM Users WHERE Email = :email";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":email", $email);
         $statement->execute();
@@ -144,7 +144,7 @@ class User implements JsonSerializable
     static function usernameExists($username)
     {
         $db = connect();
-        $SQL = "SELECT 'ID' FROM Users WHERE Username = :username";
+        $SQL = "SELECT ID FROM Users WHERE Username = :username";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":username", $username);
         $statement->execute();
@@ -159,7 +159,7 @@ class User implements JsonSerializable
     static function idExists($id)
     {
         $db = connect();
-        $SQL = "SELECT 'ID' FROM Users WHERE ID = :id";
+        $SQL = "SELECT ID FROM Users WHERE ID = :id";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $id);
         $statement->execute();

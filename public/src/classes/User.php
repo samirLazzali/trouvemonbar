@@ -39,7 +39,7 @@ class User implements JsonSerializable
     public function getHash()
     {
         $db = connect();
-        $SQL = "SELECT Password FROM " . TABLE_User . " WHERE 'ID' = :id";
+        $SQL = "SELECT Password FROM " . TABLE_User . " WHERE ID = :id";
         $statement = $db->prepare($SQL);
         $statement->bindValue(":id", $this->getID());
         $statement->execute();
@@ -57,8 +57,6 @@ class User implements JsonSerializable
 
     static function fromRow($row)
     {
-        var_dump($row);
-        die();
         $u = new User($row["ID"], $row["Username"], $row["Email"]);
         $u->setModerator($row["Moderator"] == "0" ? false : true);
 
@@ -68,7 +66,7 @@ class User implements JsonSerializable
     static function fromID($ID)
     {
         $db = connect();
-        $SQL = "SELECT * FROM " . TABLE_User . " WHERE 'ID' = :id";
+        $SQL = "SELECT * FROM " . TABLE_User . " WHERE ID = :id";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $ID);
         $statement->execute();
@@ -83,7 +81,7 @@ class User implements JsonSerializable
     static function fromUsername($username)
     {
         $db = connect();
-        $SQL = "SELECT * FROM " . TABLE_User . " WHERE 'Username' = :username";
+        $SQL = "SELECT * FROM " . TABLE_User . " WHERE Username = :username";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":username", $username);
         $statement->execute();
@@ -102,7 +100,7 @@ class User implements JsonSerializable
         elseif (User::emailExists($identifier))
             return User::fromEmail($identifier);
 
-        throw new UserNotFoundException(UserNotFoundException::Given_UsernameOrEmail, $identifier);
+        throw new UserNotFoundException(UserNotFoundException::UsernameOrEmail, $identifier);
     }
 
     static function findWithIDorUsername($data)
@@ -131,7 +129,7 @@ class User implements JsonSerializable
     static function emailExists($email)
     {
         $db = connect();
-        $SQL = "SELECT 'ID' FROM " . TABLE_User . " WHERE 'Email' = :email";
+        $SQL = "SELECT ID FROM Users WHERE Email = :email";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":email", $email);
         $statement->execute();
@@ -146,7 +144,7 @@ class User implements JsonSerializable
     static function usernameExists($username)
     {
         $db = connect();
-        $SQL = "SELECT 'ID' FROM " . TABLE_User . " WHERE 'Username' = :username";
+        $SQL = "SELECT ID FROM Users WHERE Username = :username";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":username", $username);
         $statement->execute();
@@ -161,7 +159,7 @@ class User implements JsonSerializable
     static function idExists($id)
     {
         $db = connect();
-        $SQL = "SELECT 'ID' FROM " . TABLE_User . " WHERE 'ID' = :id";
+        $SQL = "SELECT ID FROM Users WHERE ID = :id";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $id);
         $statement->execute();
@@ -186,7 +184,7 @@ class User implements JsonSerializable
         $id = uniqid();
 
         $db = connect();
-        $SQL = "INSERT INTO " . TABLE_User . " (ID, Username, Email, Password, Moderator) VALUES (:id, :username, :email, :password, false)";
+        $SQL = "INSERT INTO " . TABLE_User . " (ID, Username, Email, Password, Moderator) VALUES (:id, :username, :email, :password, 0)";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $id);
         $statement->bindParam(":username", $username);
@@ -203,7 +201,7 @@ class User implements JsonSerializable
     static function testPassword($ID, $attempt)
     {
         $db = connect();
-        $SQL = "SELECT 'Password' FROM " . TABLE_User . " WHERE 'ID' = :id";
+        $SQL = "SELECT Password FROM Users WHERE ID = :id";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $ID);
         $statement->execute();
@@ -217,7 +215,7 @@ class User implements JsonSerializable
     function findPosts($limit = 50)
     {
         $db = connect();
-        $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE 'Author' = :id ORDER BY 'Timestamp' DESC LIMIT $limit";
+        $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE Author = :id ORDER BY Timestamp DESC LIMIT $limit";
         $statement = $db->prepare($SQL);
         $statement->bindValue(":id", $this->ID);
         $statement->execute();
@@ -238,7 +236,7 @@ class User implements JsonSerializable
         $this->email = $newEmail;
         $this->username = $newUsername;
 
-        $SQL = "UPDATE " . TABLE_User . " SET 'Email' = :email, 'Username' = :username";
+        $SQL = "UPDATE User SET Email = :email, Username = :username";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":email", $email);
         $statement->bindParam(":username", $username);
@@ -254,7 +252,7 @@ class User implements JsonSerializable
     {
         $db = connect();
         
-        $SQL = "DELETE FROM " . TABLE_User . " WHERE 'ID' = :id";
+        $SQL = "DELETE FROM Users WHERE ID = :id";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $this->id);
         $statement->execute();
