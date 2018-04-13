@@ -1,17 +1,32 @@
-# ENSIIE Project Skeleton
+# Projet Web
 
-## Install you application
-* Change the parameters in .env file by your own values.
-* To install and start the application run `make install`
-* Your web site is running here [http:localhost:8080](http:localhost:8080)
+## A toujours faire avant de faire quoi que ce soit :
 
-## Start you application
-`make start`
+Récupérez les dernières modifications des autres, histoire d'éviter de devoir faire des fusions après.
 
-This command starts the application without installing anything.
+```
+git pull
+``` 
 
-## Connect to the database
+## Lancer le projet en local
+
+* Ouvrez un terminal, exécutez `make start`.
+* Rendez-vous ici [http://localhost:8080](http://localhost:8080), le site fonctionne !
+
+## Connexion à la base de données
+
+Si vous avez besoin d'accéder à la BDD du site, utilisez
+
 `make db.connect`
 
-## Run unit tests
+## Tests unitaires
+
+Je sais pas encore comment ça marche, mais ce sera exécuté comme ça :
+
 `make phpunit.run`
+
+## Quelques petits trucs :
+
+* Annuler un commit : `git reset`
+* Annuler tous les changements depuis le dernier commit : `git checkout .`
+* Installer Docker : il faut être chanceux (et courageux)
