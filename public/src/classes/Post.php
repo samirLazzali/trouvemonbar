@@ -174,6 +174,16 @@ class Post implements JsonSerializable
         return $this->ID;
     }
 
+    function getTimestamp()
+    {
+        return $this->timestamp;
+    }
+
+    function getContent()
+    {
+        return $this->content;
+    }
+
     function getRepostID()
     {
         return $this->repostOf;

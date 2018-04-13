@@ -100,7 +100,7 @@ class User implements JsonSerializable
         elseif (User::emailExists($identifier))
             return User::fromEmail($identifier);
 
-        throw new UserNotFoundException(UserNotFoundException::UsernameOrEmail, $identifier);
+        throw new UserNotFoundException(UserNotFoundException::Given_UsernameOrEmail, $identifier);
     }
 
     static function findWithIDorUsername($data)
