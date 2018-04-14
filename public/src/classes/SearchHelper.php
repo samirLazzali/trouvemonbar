@@ -22,6 +22,12 @@ abstract class Search implements JsonSerializable
 //        }
 //    }
 
+    /**
+     * Recherche des utilisateurs.
+     * @param string $term les paramètres de recherche
+     * @param int $limit le nombre maximum de résultats à renvoyer
+     * @return array un tableau de User
+     */
     public static function User($term, $limit = 50)
     {
         $db = connect();
@@ -37,6 +43,12 @@ abstract class Search implements JsonSerializable
         return $results;
     }
 
+    /**
+     * Recherche des posts.
+     * @param string $term les paramètres de recherche
+     * @param int $limit le nombre maximum de résultats à renvoyer
+     * @return array un tableau de Post
+     */
     public static function post($term, $limit = 50)
     {
         $db = connect();
@@ -51,7 +63,6 @@ abstract class Search implements JsonSerializable
             array_push($results, Post::fromRow($row));
         return $results;
     }
-
 
     public function jsonSerialize()
     {

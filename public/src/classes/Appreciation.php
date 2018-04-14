@@ -14,7 +14,13 @@ class Appreciation implements JsonSerializable
     private $type;
     private $timestamp;
 
+    /**
+     * @var null|User authorCache une référence vers une instance de l'utilisateur ayant créé l'appréciation
+     */
     private $authorCache = null;
+    /**
+     * @var null|User postCache une référence vers une instance du post concerné par l'appréciation
+     */
     private $postCache = null;
 
     function __construct($post, $author, $type, $timestamp)
@@ -45,13 +51,12 @@ class Appreciation implements JsonSerializable
      * Construction à partir d'une ligne de BDD.
      * @param arr $row
      * @return Appreciation
-     * @throws Exception si le type d'appréciation dans la ligne n'est pas reconnu.
+     * @throws UnknownAppreciationException si le type d'appréciation dans la ligne n'est pas reconnu.
      */
     static function fromRow($row)
     {
         return new Appreciation($row["post"], $row["author"], $row["type"], $row["timestamp"]);
     }
-
 
     /**
      * Créé une appréciation sur un post

@@ -19,8 +19,11 @@ require_once("api.php");
 
 function connect()
 {
+    /** @var string Le nom d'utilisateur pour la BDD */
     $user = "vitz";
+    /** @var string Le mot de passe pour la BDD */
     $password = "assassindelapolice";
+    /** @var string le nom de la BDD */
     $dbname = "vitz";
 
     $postgres = true;

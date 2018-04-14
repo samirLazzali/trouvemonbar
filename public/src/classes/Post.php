@@ -7,12 +7,18 @@ require_once(__ROOT__ . '/classes/Appreciation.php');
 
 class Post implements JsonSerializable
 {
-    /* L'identifiant du post */
+    /** @var string L'identifiant du post */
     private $ID;
-    /* Le contenu du post */
+    /** @var string Le contenu du post */
     private $content;
 
+    /**
+     * @var null|Post une référence vers une instance de Post dont cette instance est une réponse.
+     */
     private $responseToCache = null;
+    /**
+     * @var string l'identifiant du post dont ce Post est une réponse.
+     */
     private $responseTo = null;
 
     private $repostOfCache = null;
@@ -304,7 +310,6 @@ class Post implements JsonSerializable
     /**
      * Renvoie le tableau des appréciations d'un Post.
      * @return array le tableau des appréciations (sous forme d'Appreciation)
-     * @throws Exception
      */
     function getAppreciations()
     {
@@ -319,8 +324,9 @@ class Post implements JsonSerializable
         $rows = $statement->fetchall();
 
         $appreciations = array();
-        foreach ($rows as $row)
-            array_push($appreciations, Appreciation::fromRow($row));
+        if ($rows)
+            foreach ($rows as $row)
+                array_push($appreciations, Appreciation::fromRow($row));
 
         $this->appreciations = $appreciations;
         return $appreciations;
@@ -328,7 +334,7 @@ class Post implements JsonSerializable
 
     /**
      * Trouve les dernières publications.
-     * @param string_array $people le filtre des personnes (noms d'utilisateur) dont on veut les publications.
+     * @param array $people le filtre des personnes (noms d'utilisateur) dont on veut les publications.
      * Si c'est un tableau vide, les publications ne sont pas filtrées.
      * @param int $limit le nombre maximum de publications à renvoyer
      * @return array un tableau de Post
@@ -361,8 +367,9 @@ class Post implements JsonSerializable
         $rows = $statement->fetchAll();
 
         $posts = array();
-        foreach($rows as $row)
-            array_push($posts, Post::fromRow($row));
+        if ($rows)
+            foreach($rows as $row)
+                array_push($posts, Post::fromRow($row));
 
         return $posts;
     }
@@ -370,6 +377,7 @@ class Post implements JsonSerializable
     /**
      * Sérialise un Post en JSON.
      * @return array|mixed
+     * @throws Exception
      */
     public function jsonSerialize() {
         $arr = array("id" => $this->ID,
