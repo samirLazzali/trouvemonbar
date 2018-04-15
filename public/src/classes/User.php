@@ -100,6 +100,26 @@ class User implements JsonSerializable
     }
 
     /**
+     * @param $email
+     * @return User
+     * @throws UserNotFoundException
+     */
+    static function fromEmail($email)
+    {
+        $db = connect();
+        $SQL = "SELECT * FROM " . TABLE_User . " WHERE Email = :email";
+        $statement = $db->prepare($SQL);
+        $statement->bindParam(":email", $email);
+        $statement->execute();
+        $row = $statement->fetch();
+
+        if (!$row)
+            throw new UserNotFoundException(UserNotFoundException::Given_Email, $email);
+
+        return User::fromRow($row);
+    }
+
+    /**
      * @param $username
      * @return User
      * @throws UserNotFoundException
@@ -240,7 +260,7 @@ class User implements JsonSerializable
         else if (User::usernameExists($username))
             throw new UserExistsException(UserExistsException::Duplicate_Username, $username);
 
-        $hash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
+        $hash = User::hash($password);
         $id = uniqid();
 
         $db = connect();
@@ -305,25 +325,64 @@ class User implements JsonSerializable
 
     /**
      * Met à jour le profil de l'utilisateur.
-     * @param $newId
-     * @param $newEmail
-     * @param $newUsername
+     * @param string $newEmail
+     * @param string $newUsername
+     * @param string $newPassword
      * @return bool
+     * @throws Exception
      */
-    function update($newId, $newEmail, $newUsername)
+    function update($newEmail, $newUsername, $newPassword)
     {
-        throw new Exception("CETTE IMPLEMENTATION EST INCORRECTE.");
-        $db = connect();
-        
-        $this->ID = $newId;
+        // On vérifie que le nouveau nom d'utilisateur n'est pas déjà pris
+        if ($newUsername == null)
+            $newUsername = $this->getUsername();
+        else {
+            try {
+                $u = User::fromUsername($newUsername);
+                if ($u->getID() != $this->getID())
+                    throw new UserExistsException(UserExistsException::Duplicate_Username, $newUsername);
+            } catch (UserNotFoundException $e) {
+
+            }
+        }
+
+        // On vérifie que la nouvelle adresse e-mail n'est pas déjà enregistrée
+        if ($newEmail == null)
+            $newEmail = $this->getEmail();
+        else {
+            try
+            {
+                $u = User::fromEmail($newEmail);
+                if ($u->getID() != $this->getID())
+                    throw new UserExistsException(UserExistsException::Duplicate_Email, $newEmail);
+            }
+            catch (UserNotFoundException $e)
+            {
+
+            }
+        }
+
+        // On met à jour les infos dans l'instance
         $this->email = $newEmail;
         $this->username = $newUsername;
 
-        $SQL = "UPDATE User SET Email = :email, Username = :username";
+        // On se connecte à la BDD
+        $db = connect();
+
+        $SQL = "UPDATE " . TABLE_User . " SET Email = :email, Username = :username WHERE ID = :id";
         $statement = $db->prepare($SQL);
-        $statement->bindParam(":email", $email);
-        $statement->bindParam(":username", $username);
+        $statement->bindParam(":email", $newEmail);
+        $statement->bindParam(":username", $newUsername);
+        $statement->bindValue(":id", $this->getID());
         $statement->execute();
+
+        if ($newPassword != null) {
+            $SQL = "UPDATE " . TABLE_User . " SET Password = :hash WHERE ID = :id";
+            $statement = $db->prepare($SQL);
+            $statement->bindValue(":hash", User::hash($neswPassword));
+            $statement->bindValue(":id", $this->getID());
+            $statement->execute();
+        }
 
         if ($statement->rowCount() == 1)
             return true;
@@ -351,6 +410,16 @@ class User implements JsonSerializable
     }
 
     /**
+     * Calcul le hash d'un mot de passe.
+     * @param string $password
+     * @return string
+     */
+    public static function hash($password)
+    {
+        return password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
+    }
+
+    /**
      * Sérialise un User.
      * @return array|mixed
      */
@@ -365,7 +434,8 @@ class User implements JsonSerializable
 }
 
 /**
- * Exception
+ * Exception levée lorsqu'un utilisateur qu'on essaie de crééer (via fromID par exemple) n'est pas trouvé.
+ * Class UserNotFoundException
  */
 class UserNotFoundException extends Exception
 {
@@ -403,4 +473,3 @@ class UserExistsException extends Exception
         parent::__construct($message, $code, $previous);
     }
 }
-?>
