@@ -1,4 +1,13 @@
 <?php
+/**
+ * Recherche des utilisateurs
+ * Méthode : GET
+ * Paramètres :
+ * - term  : le terme de la recherche
+ * - limit : le nombre maximal d'utilisateurs à renvoyer
+ * Renvoie :
+ * - status = success, <Liste de <User sérialisé>>
+ */
 
 require_once("../../config.php");
 require_once("SearchHelper.php");

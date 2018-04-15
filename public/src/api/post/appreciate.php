@@ -1,4 +1,14 @@
 <?php
+/**
+ * Ajoute une appréciation sur un post pour l'utilisateur connecté
+ * Méthode : GET
+ * Paramètres :
+ * - type : le type d'appréciation (Like ou Dislike)
+ * - post : l'identifiant du post auquel ajouter l'appréciation
+ * Renvoie :
+ * - status = success en cas de réussite
+ * - status = error si le post est inconnu, l'utilisateur n'est pas connecté
+ */
 
 require_once("../../config.php");
 require_once("Appreciation.php");

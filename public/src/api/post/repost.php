@@ -1,4 +1,12 @@
 <?php
+/**
+ * Publie un repost.
+ * Méthode : GET
+ * Paramètres :
+ * - post : identifiant du post à reposter
+ * Renvoie :
+ * - status = success
+ */
 
 require_once("../../config.php");
 

@@ -1,4 +1,16 @@
 <?php
+/**
+ * Créé un utilisateur.
+ * Méthode : POST
+ * Paramètres :
+ * - username : le nom d'utilisateur demandé
+ * - password : le mot de passe du nouvel utilisateur
+ * - email    : l'adresse e-mail du nouvel utilisateur
+ * Renvoie :
+ * - status = error si le nom d'utilisateur ou l'e-mail est déjà utilisé
+ * - status = success, <User sérialisé> sinon
+ */
+
 
 require_once("../../config.php");
 require_once("User.php");

@@ -1,8 +1,12 @@
 <?php
-
 /**
- * Supprime le tweet passé en paramètre GET 'id' (si l'utilisateur a les droits nécessaires)
- * Type requête : GET
+ * Supprime un post
+ * Méthode : GET
+ * Paramètres :
+ * - id : l'identifiant du post à supprimer
+ * Renvoie :
+ * - status = success si le post a pu etre supprimé
+ * - status = error si le post n'appartient pas à l'utilisateur connecté et s'il n'est pas modérateur
  */
 
 require_once("../../config.php");

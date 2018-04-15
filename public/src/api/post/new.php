@@ -1,4 +1,15 @@
 <?php
+/**
+ * Publie un nouveau post
+ * Méthode : POST
+ * Paramètres :
+ * - content : le contenu du tweet
+ * - responseTo : le post auquel on veut répondre (par défaut : null)
+ * Renvoie :
+ * - status = success, <Post sérialisé> si l'opération est un succès
+ * - status = erreur si responseTo n'est pas un ID correct de Post.
+ */
+
 
 require_once("../../config.php");
 require_once("User.php");

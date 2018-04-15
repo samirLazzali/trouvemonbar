@@ -1,4 +1,9 @@
 <?php
+/**
+ * Déconnecte l'utilisateur actuel.
+ * Méthode : GET
+ */
+
 
 require_once("../../config.php");
 

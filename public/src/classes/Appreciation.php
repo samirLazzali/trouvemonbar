@@ -73,7 +73,7 @@ class Appreciation implements JsonSerializable
         if ($author instanceof User)
             $author = $author->getID();
         else
-            $author = User::fromID($author)->getID():
+            $author = User::fromID($author)->getID();
 
         if ($post instanceof Post)
             $post = $post->getID();

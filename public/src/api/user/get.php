@@ -1,35 +1,29 @@
 <?php
-    require_once("../../config.php");
-    require_once("User.php");
+/**
+ * Renvoie les informations d'un utilisateur
+ * Méthode : GET
+ * Paramètres :
+ * - identifier : l'ID ou le nom d'utilisateur de l'utilisateur dont on veut les informations
+ * Renvoie :
+ * - status = error si l'utilisateur n'est pas trouvé
+ * - status = success, <User sérialisé> sinon
+ */
 
-    $requestedId = null;
-    $requestedUsername = null;
+require_once("../../config.php");
+require_once("User.php");
 
-    if (isset($_GET['id']))
-    {
-        $requestedId = $_GET['id'];
+if (isset($_GET['identifier']))
+    $identifier = $_GET['identifier'];
+else
+    error_die("Missing GET argument 'identifier'.");
 
-        try {
-            $u = User::fromId($requestedId);
-            success_die($u);
-        }
-        catch (UserNotFoundException $e) {
-            error_die($e->getMessage());
-        }
-    }
-    elseif (isset($_GET['username']))
-    {
-        $requestedUsername = $_GET['username'];
-        $u = User::fromUsername($requestedUsername);
+try
+{
+    $u = User::findWithIDorUsername($identifier);
+}
+catch (UserNotFoundException $e)
+{
+    error_die($e->getMessage());
+}
 
-        try
-        {
-            $u = User::fromUsername($requestedUsername);
-            success_die($u);
-        }
-        catch (UserNotFoundException $e) {
-            error_die($e->getMessage());
-        }
-    }
-    else
-        error_die("One GET parameter among 'ID' and 'Username' has to be given.");
+success_die($u);

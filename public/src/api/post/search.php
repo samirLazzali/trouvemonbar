@@ -1,4 +1,15 @@
 <?php
+/**
+ * Recherche des posts.
+ * Méthode : GET
+ * Paramètres :
+ * - term  : le(s) terme(s) de la recherche
+ * - limit : le nombre maximal de posts à renvoyer (par défaut : 50)
+ * Renvoie
+ * - status = success, <Liste de <Post sérialisé>>
+ * Détails :
+ *     SELECT * FROM Post WHERE Content LIKE %term%
+ */
 
 require_once("../../config.php");
 require_once("SearchHelper.php");

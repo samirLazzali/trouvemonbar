@@ -1,4 +1,14 @@
 <?php
+/**
+ * Renvoie les posts d'un utilisateur.
+ * Méthode : GET
+ * Paramètres :
+ * - identifier : l'ID ou le nom d'utilisateur de l'utilisateur dont on veut les posts
+ * - limit      : le nombre maximal de posts à renvoyer
+ * Renvoie :
+ * - status = error si l'utilisateur n'existe pas
+ * - status = success, <Liste de <Post sérialisé>> sinon
+ */
 
 require_once("../../config.php");
 require_once("User.php");
@@ -10,12 +20,10 @@ if (isset($_GET['count']))
 else
     $limit = DEFAULT_LIMIT;
 
-if (isset($_GET['id']))
-    $identifier = $_GET['id'];
-elseif (isset($_GET['username']))
-    $identifier = $_GET['username'];
+if (isset($_GET['identifier']))
+    $identifier = $_GET['identifier'];
 else
-    error_die("Missing parameter 'Username' or 'ID'");
+    error_die("Missing GET argument 'identifier'.");
 
 try
 {
