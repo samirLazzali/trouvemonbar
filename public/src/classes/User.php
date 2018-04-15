@@ -379,7 +379,7 @@ class User implements JsonSerializable
         if ($newPassword != null) {
             $SQL = "UPDATE " . TABLE_User . " SET Password = :hash WHERE ID = :id";
             $statement = $db->prepare($SQL);
-            $statement->bindValue(":hash", User::hash($neswPassword));
+            $statement->bindValue(":hash", User::hash($newPassword));
             $statement->bindValue(":id", $this->getID());
             $statement->execute();
         }
