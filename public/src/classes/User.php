@@ -303,6 +303,167 @@ class User implements JsonSerializable
     }
 
     /**
+     * Suit l'utilisateur donné en paramètre
+     * @param User|string $user l'utilisateur à suivre
+     * @throws UserNotFoundException si $user est un string associé à un utilisateur qui n'existe pas.
+     */
+    function follow($user)
+    {
+        $userId = null;
+        if ($user instanceof User)
+            $userId = $user->getID();
+        else
+        {
+            $user = User::findWithIDorUsername($user);
+            $userId = $user->getID();
+        }
+
+        /* On ne veut pas violer la contrainte d'unicité, alors on se désabonne, au cas où */
+        $this->unfollow($user);
+
+        $db = connect();
+        $SQL = "INSERT INTO " . TABLE_Subscription . " (Followed, Follower) VALUES (:followed, :follower)";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue($statement, ":followed", $userId);
+        $statement->bindValue($statement, ":follower", getID());
+        $statement->execute();
+    }
+
+    /**
+     * Se désabonne de l'utilisateur donné en paramètre
+     * @param User|string $user l'utilisateur à suivre
+     * @throws UserNotFoundException si $user est un string associé à un utilisateur qui n'existe pas.
+     */
+    function unfollow($user)
+    {
+        $userId = null;
+        if ($user instanceof User)
+            $userId = $user->getID();
+        else
+        {
+            $user = User::findWithIDorUsername($user);
+            $userId = $user->getID();
+        }
+
+        $db = connect();
+        $SQL = "DELETE FROM " . TABLE_Subscription . " WHERE Followed = :followed AND Follower = :follower";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue($statement, ":followed", $userId);
+        $statement->bindValue($statement, ":follower", getID());
+        $statement->execute();
+    }
+
+    /**
+     * Vérifie si l'utilisateur suit quelqu'un.
+     * @param User|string $user l'utilisateur dont on veut vérifier s'il est suivi.
+     * @throws UserNotFoundException si $user est un string décrivant un utilisateur inexistant.
+     * @return true si l'utilisateur suit $user
+     */
+    function follows($user)
+    {
+        $userId = null;
+        if ($user instanceof User)
+            $userId = $user->getID();
+        else
+        {
+            $user = User::findWithIDorUsername($user);
+            $userId = $user->getID();
+        }
+
+        $db = connect();
+        $SQL = "SELECT * FROM " . TABLE_Subscription . " WHERE Follower = :follower AND Followed = :followed";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue($statement, ":followed", $userId);
+        $statement->bindValue($statement, ":follower", getID());
+        $statement->execute();
+
+        $rows = $statement->fetch();
+        if (!$rows)
+            return false;
+
+        return true;
+    }
+
+    /**
+     * Vérifie si l'utilisateur est suivi par un utilisateur.
+     * @param User|string $user l'utilisateur dont on veut s'il suit l'utilisateur.
+     * @throws UserNotFoundException si $user est un string décrivant un utilisateur inexistant.
+     * @return true si $user suit l'utilisateur
+     */
+    function isFollowed($user)
+    {
+        $userId = null;
+        if ($user instanceof User)
+            $userId = $user->getID();
+        else
+        {
+            $user = User::findWithIDorUsername($user);
+            $userId = $user->getID();
+        }
+
+        $db = connect();
+        $SQL = "SELECT * FROM " . TABLE_Subscription . " WHERE Follower = :follower AND Followed = :followed";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue($statement, ":followed", getID());
+        $statement->bindValue($statement, ":follower", $userId);
+        $statement->execute();
+
+        $rows = $statement->fetch();
+        if (!$rows)
+            return false;
+
+        return true;
+    }
+
+    /**
+     * Renvoie tous les abonnements de l'utilisateur.
+     * @return array les abonnements
+     */
+    function getSubscriptions()
+    {
+        $db = connect();
+        $SQL = "SELECT * FROM " . TABLE_Subscription . " WHERE Follower = :follower";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue($statement, ":follower", getID());
+        $statement->execute();
+
+        $rows = $statement->fetchAll();
+        $result = array();
+
+        if (!$rows)
+            return $result;
+
+        foreach($rows as $row)
+            array_push($result, User::fromRow($row));
+
+        return $result;
+    }
+
+    /**
+     * Renvoie tous les abonnés de l'utilisateur.
+     * @return array les abonnés
+     */
+    function getFollowers()
+    {
+        $db = connect();
+        $SQL = "SELECT * FROM " . TABLE_Subscription . " WHERE Followed = :followed";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue($statement, ":followed", getID());
+        $statement->execute();
+
+        $rows = $statement->fetchAll();
+        $result = array();
+
+        if (!$rows)
+            return $result;
+
+        foreach($rows as $row)
+            array_push($result, User::fromRow($row));
+
+        return $result;
+    }
+
+    /**
      * Renvoie les publications de l'utilisateur.
      * @param int $limit le nombre maximum de publications à renvoyer
      * @return array un tableau de Post
