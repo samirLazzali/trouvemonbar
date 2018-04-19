@@ -29,5 +29,5 @@ CREATE TABLE IF NOT EXISTS Appreciation (
 CREATE TABLE IF NOT EXISTS Subscription (
 	Follower CHAR(13),
 	Followed CHAR(13),
-	PRIMARY KEY(Follower, Followed);
+	PRIMARY KEY(Follower, Followed)
 );
