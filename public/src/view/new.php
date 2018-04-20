@@ -13,24 +13,25 @@
             Création de compte
         </title>
         <meta charset="UTF-8" />
-        <script src="forms.js"></script>
+        <link rel="stylesheet" type="text/css" href="CSS/new.css"/>
     </head>
     <body>
-        <h2>Création de compte</h2>
-        <form onSubmit="return validate_input_signup();">
-            <input id="field-username" type="text" name="username" placeholder="Nom d'utilisateur" />
-            <input id="field-password" type="password" name="password" placeholder="Mot de passe" />
-            <input id="field-email"    type="text" name="email" placeholder="Adresse email" />
-            <button type="submit" value="Créer son propre compte">
-                Terminer
-            </button>
-        </form>
-        <p>
-            Si vous avez déjà un compte cliquez
-            <a title="Créer un compte" href="login.php">
-                ici
-            </a>
-            .
-        </p>
+        <div>
+            <h2>Création de compte</h2>
+            <form method="post" action="../api/user/new.php">
+                <input type="text" name="username" placeholder="Nom d'utilisateur" /><br>
+                <input type="password" name="password" placeholder="Mot de passe" /><br>
+                <input type="text" name="email" placeholder="Adresse email" /><br>
+                <button type="submit" value="Créer son propre compte">
+                   Créer
+                </button>
+            </form>
+            <p1>
+                Si vous avez déjà un compte cliquez
+                <a title="Créer un compte" href="login.php">
+                    ici
+                </a>
+            </p1>
+        </div>
     </body>
 </html>
