@@ -1,0 +1,52 @@
+title {
+}
+
+body {
+    background-color : darkred;
+}
+form {
+    text-align: center
+}
+
+div {
+    position:absolute;
+    left: 50%;
+    top: 60%;
+    width: 400px;
+    height: 260px;
+    margin-left: -200px;
+    margin-top: -130px;
+
+    background-color: salmon;
+    padding:5px;
+    border:2px solid white;
+    -moz-border-radius:9px;
+    -khtml-border-radius:9px;
+    -webkit-border-radius:9px;
+    border-radius:9px;
+}
+div.centre {
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    width: 200px;
+    height: 200px;
+    margin-left: -100px; /* Cette valeur doit être la moitié négative de la valeur du width */
+    margin-top: -100px; /* Cette valeur doit être la moitié négative de la valeur du height */
+}
+
+
+h2{
+    font-size: 30px;
+    font-family : "Lucida Console";
+    text-align: center;
+}
+
+p1.centre {
+    text-align: center;
+    left : 50%;
+}
+
+form {
+    font-size: 20px;
+}

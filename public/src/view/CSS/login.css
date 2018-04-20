@@ -1,0 +1,65 @@
+title {
+
+ }
+
+body {
+    background-color : darkred;
+}
+form {
+    text-align: center
+}
+
+div {
+    position:absolute;
+    left: 50%;
+    top: 60%;
+    width: 400px;
+    height: 260px;
+    margin-left: -200px;
+    margin-top: -130px;
+
+    background-color: salmon;
+    padding:5px;
+    border:2px solid white;
+    -moz-border-radius:9px;
+    -khtml-border-radius:9px;
+    -webkit-border-radius:9px;
+    border-radius:9px;
+}
+div.centre {
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    width: 200px;
+    height: 200px;
+    margin-left: -100px; /* Cette valeur doit être la moitié négative de la valeur du width */
+    margin-top: -100px; /* Cette valeur doit être la moitié négative de la valeur du height */
+}
+
+h1{
+    font-size: 80px;
+    font-family : "Snap ITC";
+    text-align: center;
+    color: white;
+}
+
+h2{
+    font-size: 30px;
+    font-family : "Lucida Console";
+    text-align: center;
+    color: white;
+}
+
+h3 {
+    font-size: 25px;
+    font-family : "Lucida Console";
+}
+
+p1 {
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+
+form {
+    font-size: 20px;
+}
