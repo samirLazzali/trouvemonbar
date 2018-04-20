@@ -19,7 +19,9 @@ catch (UserNotFoundException $e)
     die("Utilisateur non trouvé : $username");
 }
 
-if (User::testPassword($u->getID(), $password))
+if (User::testPassword($u->getID(), $password)) {
     authenticate($u);
+    header("Location: feed.php");
+}
 else
     die("Mauvais mot de passe.");

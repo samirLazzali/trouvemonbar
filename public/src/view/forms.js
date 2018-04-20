@@ -48,7 +48,7 @@ function validate_input_signup() {
         if (this.readyState == 4 && this.status == 200)
         {
             var result = JSON.parse(xhttp.responseText);
-            if (result["status"] == 200)
+            if (result["status"] == STATUS_OK)
             {
                 document.location.href = "login.php";
             }
@@ -75,7 +75,5 @@ function validate_input_signup() {
     xhttp.open("POST", "../api/user/new.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("username=" + fUsername.value + "&password=" + fPassword.value + "&email=" + fEmail.value);
-
-    console.log("salut");
     return false;
 }
