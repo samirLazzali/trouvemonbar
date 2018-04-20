@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin-ext');
 @font-face {
     font-family: SomethingStrange;
-    src: url("/src/assets/fonts/SomethingStrange.ttf");
+    src: url("../fonts/SomethingStrange.ttf");
 }
+

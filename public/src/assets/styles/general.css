@@ -1,0 +1,47 @@
+@import url("fonts.css");
+
+:root {
+    --red: #c0392b;
+    --light-red: #e74c3c;
+    --redish-white: #FFCCBC;
+}
+
+* {
+    box-sizing: border-box;
+        font-family: 'PT Sans', sans-serif;
+}
+
+body {
+    background-color: var(--red);
+}
+
+
+.title {
+    font-size: 3em;
+    text-align: center;
+    letter-spacing: 8px;
+    font-family: SomethingStrange;
+}
+
+.moto {
+    font-family: 'Lobster', cursive;
+    font-weight: lighter;
+    text-align: center;
+    letter-spacing: 5px;
+}
+
+.infobox {
+    display: none;
+    width: 300px;
+    margin: 15px auto 0px;
+    padding: 15px 15px 15px 15px;
+    border-radius: 5px;
+}
+
+.error {
+    background-color: var(--light-red);
+}
+
+.center {
+    text-align: center;
+}
