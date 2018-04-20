@@ -7,6 +7,7 @@
  */
 ?>
 
+<!DOCTYPE HTML>
 <html>
     <head>
         <title>
