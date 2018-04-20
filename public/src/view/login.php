@@ -13,7 +13,7 @@
             VITZ
         </title>
         <meta charset="utf-8" />
-        <link rel="stylesheet" type="text/css" href="Login.css"/>
+        <link rel="stylesheet" type="text/css" href="CSS/login.css"/>
     </head>
     <body >
         <h1>
