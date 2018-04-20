@@ -57,9 +57,11 @@ class Trend
         return $hashtagCount;
     }
 
-    private static function getHashtags($post)
+    public static function getHashtags($post)
     {
-        $words = explode(" ", $post->getContent());
+        $content = $post->getContent();
+        $words = preg_split("/[^[:alnum:]#@]+/", $content);
+
         $hashtags = array();
         foreach($words as $word)
         {

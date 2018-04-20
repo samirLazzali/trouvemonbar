@@ -2,8 +2,8 @@
 
 if (!defined('__ROOT__')) define('__ROOT__', dirname(dirname(__FILE__)));
 require_once(__ROOT__ . '/config.php');
-require_once(__ROOT__ . '/classes/User.php');
-require_once(__ROOT__ . '/classes/Appreciation.php');
+require_once('User.php');
+require_once('Appreciation.php');
 
 class Post implements JsonSerializable
 {
@@ -372,6 +372,38 @@ class Post implements JsonSerializable
                 array_push($posts, Post::fromRow($row));
 
         return $posts;
+    }
+
+    /**
+     * Trouve les hashtags contenus dans le tweet
+     * @return array de string
+     */
+    public function getHashtags()
+    {
+        return Trend::getHashtags($this);
+    }
+
+    /**
+     * Renvoie une représentation du tweet en HTML, avec les liens pour les mentions et les hashtags
+     * @return string le code HTML
+     */
+    public function toHtml()
+    {
+        $content = $this->content;
+        $ex = preg_split("/[^[:alnum:]#@]+/", $content);
+
+        foreach($ex as $term)
+        {
+            $toAdd = $term;
+
+            $firstChar = substr($term, 0, 1);
+            if ($firstChar == '#')
+                $content = str_replace($term, "<a class='inpost inpost-hashtag' href='hashtag/$toAdd'>$toAdd</a>", $content);
+            elseif ($firstChar == '@')
+                $content = str_replace($term, "<a class='inpost inpost-mention' href='profile/$toAdd'>$toAdd</a>", $content);
+
+        }
+        return $content;
     }
 
     /**
