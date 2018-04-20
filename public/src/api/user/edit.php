@@ -38,17 +38,20 @@ else
 if (isset($_POST['password']))
     $currentPassword = $_POST['password'];
 else
-    error_die("Missing POST parameter 'password'.");
+    error_die("password", ERROR_FieldMissing);
 
 if (!User::testPassword($u->getID(), $currentPassword))
-    error_die("Wrong password.");
+    error_die("Wrong password.", ERROR_WrongPassword);
 
 try {
     $u->update($newEmail, $newUsername, $newPassword);
 }
 catch (UserExistsException $e)
 {
-    error_die($e->getMessage());
+    if ($e->getDuplicate() == UserExistsException::Duplicate_Username)
+        error_die($e->getMessage(), ERROR_UsernameRegistered);
+    else
+        error_die($e->getMessage(), ERROR_EmailRegistered);
 }
 
 success_die($u);

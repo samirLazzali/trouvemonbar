@@ -23,7 +23,7 @@ else
 if (isset($_GET['identifier']))
     $identifier = $_GET['identifier'];
 else
-    error_die("Missing GET argument 'identifier'.");
+    error_die("identifier", ERROR_FieldMissing);
 
 try
 {
@@ -33,5 +33,5 @@ try
 }
 catch (UserNotFoundException $e)
 {
-    error_die("No such user.");
+    error_die("No such user.", ERROR_NotFound);
 }

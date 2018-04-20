@@ -7,8 +7,20 @@
 }
 
 * {
+    font-family: 'PT Sans', sans-serif;
     box-sizing: border-box;
-        font-family: 'PT Sans', sans-serif;
+}
+
+h1, h2, p, a {
+    color: var(--redish-white);
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 body {

@@ -15,7 +15,7 @@ require_once("User.php");
 if (isset($_GET['identifier']))
     $identifier = $_GET['identifier'];
 else
-    error_die("Missing GET argument 'identifier'.");
+    error_die("identifier", ERROR_FieldMissing);
 
 try
 {
@@ -23,7 +23,7 @@ try
 }
 catch (UserNotFoundException $e)
 {
-    error_die($e->getMessage());
+    error_die($e->getMessage(), ERROR_NotFound);
 }
 
 success_die($u);

@@ -18,7 +18,7 @@ require_once("Post.php");
 if (isset($_POST['content']))
     $content = $_POST['content'];
 else
-    error_die("Missing POST field 'content'.");
+    error_die("content", ERROR_FieldMissing);
 
 if (isset($_POST['responseTo']))
     $responseTo = $_POST['responseTo'];

@@ -17,15 +17,15 @@ if (isset($_GET['type']))
 {
     $type = $_GET['type'];
     if (!($type == Appreciation::LIKE || $type == Appreciation::DISLIKE))
-        error_die("Unknown appreciation: '$type'.");
+        error_die("Unknown appreciation: '$type'.", ERROR_InvalidType);
 }
 else
-    error_die("Missing GET argument 'type'.");
+    error_die("type", ERROR_FieldMissing);
 
 if (isset($_GET['post']))
     $postId = $_GET['post'];
 else
-    error_die("Missing GET argument 'post'.");
+    error_die("post", ERROR_FieldMissing);
 
 $user = verify_logged_in();
 
@@ -34,6 +34,6 @@ try {
 }
 catch (PostNotFoundException $e)
 {
-    error_die($e->getMessage());
+    error_die($e->getMessage(), ERROR_NotFound);
 }
 success_die($a);

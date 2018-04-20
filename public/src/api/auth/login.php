@@ -17,12 +17,12 @@ require_once("User.php");
 if (isset($_POST['identifier']))
     $identifier = $_POST['identifier'];
 else
-    error_die("Missing POST parameter 'identifier'.");
+    error_die("identifier", ERROR_FieldMissing);
 
 if (isset($_POST['password']))
     $password = $_POST['password'];
 else
-    error_die("Missing POST parameter 'password'.");
+    error_die("password", ERROR_FieldMissing);
 
 try
 {
@@ -30,11 +30,11 @@ try
 }
 catch (UserNotFoundException $e)
 {
-    error_die($e->getMessage());
+    error_die($e->getMessage(), ERROR_NotFound);
 }
 
 if (User::testPassword($u->getID(), $password))
     authenticate($u);
 else
-    error_die("Authentication failed: Bad password.");
+    error_die("Authentication failed: Bad password.", ERROR_WrongPassword);
 

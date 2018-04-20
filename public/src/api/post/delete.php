@@ -15,7 +15,7 @@ require_once("User.php");
 if (isset($_GET['id']))
     $id = $_GET['id'];
 else
-    error_die("Missing GET argument 'id'.");
+    error_die("id", ERROR_FieldMissing);
 
 $u = verify_logged_in();
 
@@ -24,7 +24,7 @@ try {
 }
 catch (PostNotFoundException $e)
 {
-    error_die($e->getMessage());
+    error_die($e->getMessage(), ERROR_NotFound);
 }
 
 if ($p->getAuthorID() == $u->getID() || $u->getModerator())
@@ -33,4 +33,4 @@ if ($p->getAuthorID() == $u->getID() || $u->getModerator())
     success_die($p);
 }
 else
-    error_die("User doesn't have sufficient rights to delete post '$id'.");
+    error_die("User doesn't have sufficient rights to delete post '$id'.", ERROR_Permissions);

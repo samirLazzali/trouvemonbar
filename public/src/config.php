@@ -17,6 +17,7 @@ define("AUTH_COOKIE_EXP", 24 * 60 * 60);
 set_include_path(get_include_path() . ":" . SITE_ROOT . ":" . CLASSES_ROOT . ":" . API_ROOT . ":" . HELPERS_ROOT);
 
 require_once("api.php");
+require_once("status.php");
 
 function connect()
 {

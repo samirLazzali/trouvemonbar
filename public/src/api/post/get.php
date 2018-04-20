@@ -15,7 +15,7 @@ require_once("Post.php");
 if (isset($_GET['id']))
     $id = $_GET['id'];
 else
-    error_die("Missing GET argument 'id'.");
+    error_die("id", ERROR_FieldMissing);
 
 $u = verify_logged_in();
 
@@ -25,5 +25,5 @@ try {
 }
 catch (PostNotFoundException $e)
 {
-    error_die($e->getMessage());
+    error_die($e->getMessage(), ERROR_NotFound);
 }

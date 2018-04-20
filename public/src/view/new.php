@@ -32,24 +32,25 @@
         <div id="info-password-weak" class="error infobox">
             Une erreur est survenue : votre mot de passe n'est pas assez complexe.
         </div>
+        <div id="info-missing-field" class="error infobox">
+            ...
+        </div>
 
         <div class="form-wrapper">
             <form onSubmit="return validate_input_signup();">
                 <input class="field topInput" id="field-username" type="text" name="username" placeholder="Nom d'utilisateur" />
                 <input class="field" id="field-password" type="password" name="password" placeholder="Mot de passe" />
-                <input class="field" id="field-email"    type="text" name="email" placeholder="Adresse email" />
-                <button class="button" type="submit" value="Créer son propre compte">
-                    Terminer
+                <input class="field" id="field-email" type="email" name="email" placeholder="Adresse email" />
+                <button class="button" type="submit" value="Valider la création de compte.">
+                    Créer mon compte
                 </button>
             </form>
         </div>
 
         <p class="center">
-            Si vous avez déjà un compte cliquez
-            <a title="Créer un compte" href="login.php">
-                ici
+            <a title="Se connecter" href="login.php">
+                Vous avez déjà un compte ?
             </a>
-            .
         </p>
     </body>
 </html>

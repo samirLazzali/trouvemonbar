@@ -38,5 +38,5 @@ try
 } 
 catch (UserNotFoundException $e)
 {
-    error_die($e->getMessage());
+    error_die($e->getMessage(), ERROR_NotFound);
 }

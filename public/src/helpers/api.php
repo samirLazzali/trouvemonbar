@@ -15,11 +15,12 @@ function json_die($status)
 /**
  * Affiche un message d'erreur et arrête l'exécution du script.
  * @param JsonSerializable $status le message d'erreur (ou un JsonSerializable)
+ * @param int $status le statut (HTTP) de l'erreur
  */
-function error_die($status)
+function error_die($description, $status = STATUS_OK)
 {
-    $status = array("status" => "error", "result" => null, "description" => $status);
-    json_die($status);
+    $message = array("status" => $status, "result" => null, "description" => $description);
+    json_die($message);
 }
 
 /**
@@ -28,7 +29,7 @@ function error_die($status)
  */
 function success_die($result)
 {
-    $status = array("status" => "success", "result" => $result);
+    $status = array("status" => 200, "result" => $result);
     json_die($status);
 }
 
@@ -94,7 +95,7 @@ function verify_logged_in()
 {
     $u = getUserFromCookie();
     if ($u == null)
-        error_die("User not logged in.");
+        error_die("User not logged in.", ERROR_LoggedOut);
 
     return $u;
 }
