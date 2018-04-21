@@ -1,14 +1,14 @@
 <?php
 
-abstract class Report
+abstract class Report implements JsonSerializable
 {
     private $reason;
     private $reporter;
-    private $reporterCache;
+    private $reporterCache = null;
     private $ID;
 
-    static public const Type_UserReport = "User";
-    static public const Type_PostReport = "Post";
+    const Type_UserReport = "User";
+    const Type_PostReport = "Post";
 
     protected function __construct($ID, $reason, $reporter)
     {
@@ -22,11 +22,44 @@ abstract class Report
 
         $this->reason = $reason;
     }
+
+    public static function fromRow($row)
+    {
+        if ($row['type'] == Report::Type_PostReport)
+            return new PostReport($row['id'], $row['reason'], $row['reporter'], $row['target']);
+        elseif ($row['type'] == Report::Type_UserReport)
+            return new UserReport($row['id'], $row['reason'], $row['reporter'], $row['target']);
+        else
+            throw new Exception("Unknwon report type : " . $row["type"]);
+    }
+
+    public function getID()
+    {
+        return $this->ID;
+    }
+
+    public function getReporter()
+    {
+        if ($this->reporterCache == null)
+            $this->reporterCache = User::fromID($this->reporter);
+
+        return $this->reporterCache;
+    }
+
+    public function getReporterId()
+    {
+        return $this->reporter;
+    }
+
+    public function getReason()
+    {
+        return $this->reason;
+    }
 }
 
-class Post extends Report
+class PostReport extends Report
 {
-    private $postCache;
+    private $postCache = null;
     private $post;
 
     public function __construct($ID, $reason, $reporter, $post)
@@ -58,11 +91,33 @@ class Post extends Report
 
         return new PostReport($reportId, $reason, $reporter, $post);
     }
+
+    public function getPost()
+    {
+        if ($this->postCache == null)
+            $this->postCache = Post::fromID($this->post);
+
+        return $this->postCache;
+    }
+
+    public function getPostId()
+    {
+        return $this->post;
+    }
+
+    public function jsonSerialize()
+    {
+        return array("id" => $this->getID(),
+            "type" => Report::Type_PostReport,
+            "reason" => $this->getReason(),
+            "reporter" => $this->getReporterId(),
+            "post" => $this->getPostId());
+    }
 }
 
 class UserReport extends Report
 {
-    private $userCache;
+    private $userCache = null;
     private $user;
 
     public function __construct($ID, $reason, $reporter, $user)
@@ -76,5 +131,27 @@ class UserReport extends Report
         }
         else
             $this->user = $user;
+    }
+
+    public function getUser()
+    {
+        if ($this->userCache == null)
+            $this->userCache = User::fromID($this->user);
+
+        return $this->userCache;
+    }
+
+    public function getUserId()
+    {
+        return $this->user;
+    }
+
+    public function jsonSerialize()
+    {
+        return array("id" => $this->getID(),
+            "type" => Report::Type_UserReport,
+            "reason" => $this->getReason(),
+            "reporter" => $this->getReporterId(),
+            "user" => $this->getUserId());
     }
 }

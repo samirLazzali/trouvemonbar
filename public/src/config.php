@@ -4,6 +4,7 @@ define('TABLE_User', "Users");
 define('TABLE_Appreciation', "Appreciation");
 define('TABLE_Posts', "Post");
 define('TABLE_Subscription', "Subscription");
+define('TABLE_Report', "Report");
 
 // realpath($_SERVER["DOCUMENT_ROOT"]) . 
 define("SITE_ROOT", "/var/www/html/public/src");

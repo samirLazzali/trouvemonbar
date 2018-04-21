@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS Subscription (
 CREATE TABLE IF NOT EXISTS Report (
 	ID CHAR(13),
     Type CHAR(10),
-	Post CHAR(13),
+	Target CHAR(13),
 	Reporter CHAR(13),
 	REASON TEXT,
 	PRIMARY KEY(ID)

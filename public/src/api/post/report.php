@@ -11,7 +11,7 @@
  */
 
 require_once("../../config.php");
-require_once("Appreciation.php");
+require_once("Report.php");
 
 if (isset($_POST['post']))
     $post = $_POST['post'];
@@ -19,7 +19,7 @@ else
     error_die("post", ERROR_FieldMissing);
 
 if (isset($_POST['reason']))
-    $reason = $_POST['post'];
+    $reason = $_POST['reason'];
 else
     $reason = null;
 
@@ -34,4 +34,5 @@ catch (PostNotFoundException $e)
     error_die($e->getMessage(), ERROR_NotFound);
 }
 
-$p->addReport($user, $reason);
+$report = PostReport::create($p, $reason, $user);
+success_die($report);
