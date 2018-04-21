@@ -23,3 +23,7 @@ INSERT INTO Post(ID, Author, Content, Timestamp, Repost, ResponseTo)
     VALUES ('pcc', 'c', 'Je vais bien !', 1523814465, NULL, 'pac');
 INSERT INTO Post(ID, Author, Content, Timestamp, Repost, ResponseTo)
     VALUES ('pec', 'e', 'Je suis malade :(', 1523814475, NULL, 'pac');
+
+/* Un truc à report */
+INSERT INTO Post(ID, Author, Content, Timestamp, Repost, ResponseTo)
+    VALUES ('pad', 'a', 'TSP c''est de pédés.', 1523814689, NULL, NULL);

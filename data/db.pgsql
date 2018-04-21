@@ -31,3 +31,12 @@ CREATE TABLE IF NOT EXISTS Subscription (
 	Followed CHAR(13),
 	PRIMARY KEY(Follower, Followed)
 );
+
+CREATE TABLE IF NOT EXISTS Report (
+	ID CHAR(13),
+    Type CHAR(10),
+	Post CHAR(13),
+	Reporter CHAR(13),
+	REASON TEXT,
+	PRIMARY KEY(ID)
+);
