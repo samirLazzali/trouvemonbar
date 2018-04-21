@@ -9,3 +9,4 @@ define("ERROR_FieldMissing", 463);
 define("ERROR_WrongPassword", 464);
 define("ERROR_Permissions", 465);
 define("ERROR_InvalidType", 466);
+define("ERROR_LoggedOut", 467);
