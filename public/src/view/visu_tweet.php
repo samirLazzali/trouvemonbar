@@ -1,7 +1,7 @@
 <?php
 if (!defined('__ROOT__')) define('__ROOT__', dirname(dirname(__FILE__)));
 require_once(__ROOT__ . '/config.php');
-require_once(__ROOT__ . 'classes/Post.php');
+require_once(__ROOT__ . '/classes/Post.php');
 /**
  * Created by PhpStorm.
  * User: yeti
@@ -18,40 +18,41 @@ $u = verify_logged_in();
 
 try {
     $p = Post::fromID($id);
-    success_die($p);
 }
 catch (PostNotFoundException $e)
 {
     error_die($e->getMessage(), ERROR_NotFound);
 }
 
-$array = $p::getResponsesTo();
+$array = $p->getResponsesTo();
 
-$author = $p::getAuhtor();
-$content = $p::toHtml();
-$date = $p::getTimestamp();
+$author = $p->getAuthor()->getUsername();
+$content = $p->toHtml();
+$date = $p->getTimestamp();
 
 ?>
 <!DOCTYPE HTML>
 <html>
 <head>
+    <title>Publication de <?=$author?></title>
+    <link rel="stylesheet" type="text/css" href="/src/assets/styles/visu_tweet.css" />
     <meta charset="utf-8" />
 </head>
 <body>
     <div class="feed-wrapper">
         <div class="post-wrapper">
             <div class="post-header">
-                <a class="author-name-link" href="profile/<? $author ?>">
+                <a class="author-name-link" href="profile/<?=$author?>">
                      <span class="author-name">
-                        <? $author ?>
+                        <?=$author?>
                      </span>
                 </a>
                 <span class="post-date">
-                    <? $date ?>
+                    <?=$date?>
                 </span>
             </div>
             <div class="post-content">
-                <? $content ?>
+                <?=$content?>
             </div>
             <div class="post-options">
                 <ul>
@@ -67,25 +68,26 @@ $date = $p::getTimestamp();
                 </ul>
             </div>
         </div>
-        <div class="responses-wrapper">
+            <h2>Réponses</h2>
             <?php
                 foreach ($array as $item)
                 {
-                    $author = $item::getAuhtor();
-                    $content = $item::toHtml();
-                    $date = $item::getTimestamp(); ?>
+                    $author = $item->getAuthor()->getUsername() ;
+                    $content = $item->toHtml();
+                    $date = $item->getTimestamp();?>
+        <div class="responses-wrapper">
                     <div class="post-header">
-                        <a class="author-name-link" href="profile/<? $author ?>">
+                        <a class="author-name-link" href="profile/<?=$author ?>">
                              <span class="author-name">
-                                <? $author ?>
+                                <?=$author ?>
                              </span>
                         </a>
                         <span class="post-date">
-                            <? $date ?>
+                            <?=$date ?>
                         </span>
                     </div>
                     <div class="post-content">
-                        <? $content ?>
+                        <?=$content ?>
                     </div>
                     <div class="post-options">
                         <ul>
@@ -100,11 +102,11 @@ $date = $p::getTimestamp();
                             </li>
                         </ul>
                     </div>
-                <?php
+        </div>
+                    <?php
                 }
             ?>
-        </div>
-    </div>
 
+    </div>
 </body>
 </html>

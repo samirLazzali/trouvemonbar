@@ -46,7 +46,7 @@ class Post implements JsonSerializable
      */
     static function fromRow($row)
     {
-        $p = new Post($row["id"], $row["author"], $row["content"], $row["timestamp"]);
+        $p = new Post(trim($row["id"]), $row["author"], $row["content"], $row["timestamp"]);
         $p->repostOf = $row["repost"];
         $p->responseTo = $row["responseto"];
 
@@ -427,12 +427,12 @@ class Post implements JsonSerializable
      * Fonction qui renvoie un tableau avec tout les post qui répondent au post courant (faite par yéti donc à check)
      * @return array (post*)
      */
-    function getResponsesTo()
+    public function getResponsesTo()
     {
         $db = connect();
         $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE ResponseTo = :id";
         $statement = $db->prepare($SQL);
-        $statement->bindValue($statement, ":followed", getID());
+        $statement->bindValue(":id", $this->getID());
         $statement->execute();
 
         $rows = $statement->fetchAll();
@@ -442,7 +442,7 @@ class Post implements JsonSerializable
             return $result;
 
         foreach($rows as $row)
-            array_push($result, Post::fromRow($row));
+            $result[] = Post::fromRow($row);
 
         return $result;
     }

@@ -1,0 +1,53 @@
+@import url("general.css");
+
+.post-wrapper {
+    padding: 15px;
+    background-color: var(--light-red);
+}
+
+.responses-wrapper {
+    padding: 15px;
+    background-color: var(--light-red);
+}
+
+.post-header {
+    margin-bottom: 10px;
+}
+
+.author-name-link:hover {
+    text-decoration: underline;
+}
+
+.author-name-link {
+    text-decoration: none;
+}
+
+.author-name {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.post-date {
+    font-size: 0.8em;
+}
+
+.post-content {
+    font-size: 1em;
+}
+
+.post-options {
+    margin-top: 10px;
+}
+
+.action {
+    list-style: none;
+    display: inline;
+}
+
+.action:after {
+    content: "\00b7";
+}
+
+.action:last-child:after {
+    content: "";
+}
