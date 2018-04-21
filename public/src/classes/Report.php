@@ -133,6 +133,23 @@ class UserReport extends Report
             $this->user = $user;
     }
 
+    public static function create($user, $reason, $reporter)
+    {
+        $reportId = uniqid();
+
+        $SQL = "INSERT INTO " . TABLE_Report . " (ID, Type, Target, Reporter, Reason) VALUES (:id, :type, :target, :reporter, :reason)";
+        $db = connect();
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":id", $reportId);
+        $statement->bindValue(":type", Report::Type_UserReport);
+        $statement->bindValue(":target", $user->getID());
+        $statement->bindValue(":reporter", $reporter->getID());
+        $statement->bindValue(":reason", $reason);
+        $statement->execute();
+
+        return new UserReport($reportId, $reason, $reporter, $user);
+    }
+
     public function getUser()
     {
         if ($this->userCache == null)

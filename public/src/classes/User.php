@@ -464,6 +464,31 @@ class User implements JsonSerializable
     }
 
     /**
+     * Renvoie tous les signalements portés contre cet utilisateur.
+     * @return array de Report tous les signalements de contre cet utilisateur
+     * @throws Exception
+     */
+    function getReports()
+    {
+        $db = connect();
+        $SQL = "SELECT * FROM " . TABLE_Report . " WHERE Type = " . Report::Type_UserReport . " AND Target = :user";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":user", $this->getID());
+        $statement->execute();
+
+        $rows = $statement->fetchAll();
+        $result = array();
+
+        if (!$rows)
+            return $result;
+
+        foreach($rows as $row)
+            array_push($result, Report::fromRow($row));
+
+        return $result;
+    }
+
+    /**
      * Renvoie les publications de l'utilisateur.
      * @param int $limit le nombre maximum de publications à renvoyer
      * @return array un tableau de Post
