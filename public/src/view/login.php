@@ -6,7 +6,6 @@
  * Time: 13:06
  */
 ?>
-
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -14,7 +13,7 @@
             VITZ
         </title>
         <meta charset="utf-8" />
-        <link rel="stylesheet" type="text/css" href="CSS/login.css"/>
+        <link rel="stylesheet" type="text/css" href="Login.css"/>
     </head>
     <body >
         <h1>
