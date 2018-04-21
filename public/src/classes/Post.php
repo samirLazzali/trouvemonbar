@@ -422,6 +422,31 @@ class Post implements JsonSerializable
 
         return $arr;
     }
+
+    /**
+     * Fonction qui renvoie un tableau avec tout les post qui répondent au post courant (faite par yéti donc à check)
+     * @return array (post*)
+     */
+    function getResponsesTo()
+    {
+        $db = connect();
+        $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE ResponseTo = :id";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue($statement, ":followed", getID());
+        $statement->execute();
+
+        $rows = $statement->fetchAll();
+        $result = array();
+
+        if (!$rows)
+            return $result;
+
+        foreach($rows as $row)
+            array_push($result, Post::fromRow($row));
+
+        return $result;
+    }
+
 }
 
 class PostNotFoundException extends Exception
