@@ -57,7 +57,7 @@ $date = $p->getTimestamp();
             <div class="post-options">
                 <ul>
                     <li class="action">
-                        <a href="#" class="action-repost">Repost</a>
+                        <a href="#" class="action-repost">Respond</a>
                     </li>
                     <li class="action">
                         <a href="#" class="action-like">Like</a>

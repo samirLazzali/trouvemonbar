@@ -78,6 +78,6 @@ require_once("User.php");
         ?>
 
         <a href="List_suscribe.php?user=<?= $user->getUsername(); ?>">Liste des abonnements / abonnés</a>
-        <a href="main.php">Retour vers la page principale</a>
+        <a href="feed.php">Retour vers la page principale</a>
     </body>
 </html>
