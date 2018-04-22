@@ -4,13 +4,8 @@
  * Décrit une tendance.
  */
 
-class Trend
+abstract class Trend
 {
-    /** @var int le nombre de tweets avec ce hashtag */
-    private $postCount;
-    /** @var array les tweets avec ce hashtag */
-    private $posts = null;
-
     /**
      * Trouve les tendances du réseau.
      * @param int $limit le nombre maximal de hashtags à renvoyer

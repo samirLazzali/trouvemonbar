@@ -7,11 +7,6 @@ require_once('Appreciation.php');
 
 class Post implements JsonSerializable
 {
-    /** @var string L'identifiant du post */
-    private $ID;
-    /** @var string Le contenu du post */
-    private $content;
-
     /**
      * @var null|Post une référence vers une instance de Post dont cette instance est une réponse.
      */
@@ -73,7 +68,6 @@ class Post implements JsonSerializable
 
         return Post::fromRow($row);
     }
-
 
     /**
      * Création d'un repost
@@ -180,6 +174,51 @@ class Post implements JsonSerializable
         return $p;
     }
 
+    /**
+     * Construction d'un post* qui recense les publications contenant un certain hashtag
+     * @param string $tag
+     * @return array post
+     */
+
+    static function fromHashtag($tag)
+    {
+        $db = connect();
+        $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE content like :hashtag";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":hashtag", "%".$tag."%");
+        $statement->execute();
+
+        $rows = $statement->fetchAll();
+        $result = array();
+
+        if (!$rows)
+            return $result;
+
+        foreach($rows as $row)
+            $result[] = Post::fromRow($row);
+
+        return $result;
+    }
+
+    /**
+     * Construction d'un post* qui contient les $limit publications les plus aimées/détestées selon la valeur de $like (1 : les top likes, 0 ...)
+     * @param int $like
+     * @param int $limit
+     * @param int $timelimit
+     * @return array post
+     */
+/* @TODO
+    static function topLikes($like=1, $limit=10, $timelimit)
+    {
+        $db = connect();
+        $SQL = "SELECT * FROM " . TABLE_Appreciation . " JOIN ". TABLE_Posts . " ON post.id = post WHERE  like :hashtag";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":hashtag", "%".$tag."%");
+        $result = array();
+
+        return $result;
+    }
+*/
     /**
      * Supprime un post de la BDD.
      */
@@ -446,7 +485,6 @@ class Post implements JsonSerializable
 
         return $result;
     }
-
 }
 
 class PostNotFoundException extends Exception
