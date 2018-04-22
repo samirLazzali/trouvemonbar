@@ -73,7 +73,7 @@ class User implements JsonSerializable
     static function fromRow($row)
     {
         $u = new User(trim($row['id']), $row["username"], $row["email"]);
-        $u->setModerator($row["moderator"] == "false" ? false : true);
+        $u->setModerator($row["moderator"] == "true" ? true : false);
 
         return $u;
     }

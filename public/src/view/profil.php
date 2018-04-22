@@ -64,10 +64,10 @@ require_once("User.php");
 
         <h1>Page de profil de <?=$user->getUsername();?> </h1>
 
-        <p>Email : <?$user->getEmail(); ?></p>
+        <p>Email : <?=$user->getEmail(); ?></p>
 
         <?php
-        if ($user->getModerator() == true)
+        if ($user->getModerator())
         {
             ?>
             <p>
