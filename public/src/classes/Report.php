@@ -30,7 +30,7 @@ abstract class Report implements JsonSerializable
         elseif ($row['type'] == Report::Type_UserReport)
             return new UserReport($row['id'], $row['reason'], $row['reporter'], $row['target']);
         else
-            throw new Exception("Unknwon report type : " . $row["type"]);
+            throw new Exception("Unknown report type : " . $row["type"]);
     }
 
     public function getID()
@@ -105,6 +105,22 @@ class PostReport extends Report
         return $this->post;
     }
 
+    public static function getReports()
+    {
+        $db = connect();
+        $SQL = "SELECT * FROM " . TABLE_Report . " WHERE Type = " . Report::Type_PostReport;
+        $statement = $db->prepare($SQL);
+        $statement->execute();
+
+        $result = array();
+        $rows = $statement->fetchAll();
+        if (!$rows)
+            return $result;
+
+        foreach($rows as $row)
+            array_push($result, PostReport::fromRow($row));
+    }
+
     public function jsonSerialize()
     {
         return array("id" => $this->getID(),
@@ -161,6 +177,22 @@ class UserReport extends Report
     public function getUserId()
     {
         return $this->user;
+    }
+
+    public static function getReports()
+    {
+        $db = connect();
+        $SQL = "SELECT * FROM " . TABLE_Report . " WHERE Type = " . Report::Type_UserReport;
+        $statement = $db->prepare($SQL);
+        $statement->execute();
+
+        $result = array();
+        $rows = $statement->fetchAll();
+        if (!$rows)
+            return $result;
+
+        foreach($rows as $row)
+            array_push($result, UserReport::fromRow($row));
     }
 
     public function jsonSerialize()

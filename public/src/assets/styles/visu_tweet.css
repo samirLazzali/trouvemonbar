@@ -3,6 +3,14 @@
 .post-wrapper {
     padding: 15px;
     background-color: var(--light-red);
+    margin-bottom: 5px;
+}
+
+.post-wrapper:hover {
+    background-color: white;
+    -webkit-transition: background-color 250ms linear;
+    -ms-transition: background-color 250ms linear;
+    transition: background-color 250ms linear;
 }
 
 .responses-wrapper {

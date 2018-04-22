@@ -74,35 +74,36 @@ $date = $p->getTimestamp();
                 {
                     $author = $item->getAuthor()->getUsername() ;
                     $content = $item->toHtml();
-                    $date = $item->getTimestamp();?>
-        <div class="responses-wrapper">
-                    <div class="post-header">
-                        <a class="author-name-link" href="profile/<?=$author ?>">
-                             <span class="author-name">
-                                <?=$author ?>
-                             </span>
-                        </a>
-                        <span class="post-date">
-                            <?=$date ?>
-                        </span>
+                    $date = $item->getTimestamp();
+            ?>
+                    <div class="responses-wrapper">
+                        <div class="post-header">
+                            <a class="author-name-link" href="profile/<?=$author ?>">
+                                 <span class="author-name">
+                                    <?=$author ?>
+                                 </span>
+                            </a>
+                            <span class="post-date">
+                                <?=$date ?>
+                            </span>
+                        </div>
+                        <div class="post-content">
+                            <?=$content ?>
+                        </div>
+                        <div class="post-options">
+                            <ul>
+                                <li class="action">
+                                    <a href="#" class="action-repost">Repost</a>
+                                </li>
+                                <li class="action">
+                                    <a href="#" class="action-like">Like</a>
+                                </li>
+                                <li class="action">
+                                    <a href="#" class="action-dislike">Dislike</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="post-content">
-                        <?=$content ?>
-                    </div>
-                    <div class="post-options">
-                        <ul>
-                            <li class="action">
-                                <a href="#" class="action-repost">Repost</a>
-                            </li>
-                            <li class="action">
-                                <a href="#" class="action-like">Like</a>
-                            </li>
-                            <li class="action">
-                                <a href="#" class="action-dislike">Dislike</a>
-                            </li>
-                        </ul>
-                    </div>
-        </div>
                     <?php
                 }
             ?>

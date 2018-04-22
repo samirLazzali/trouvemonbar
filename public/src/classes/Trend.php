@@ -46,7 +46,6 @@ class Trend
             }
         }
 
-
         asort($hashtagCount);
 
         if ($limit == 0)

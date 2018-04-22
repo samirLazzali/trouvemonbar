@@ -1,6 +1,6 @@
 <?php
 /**
- * Trouve les tendances du réseau.
+ * Trouve les hashtags les plus postés sur le réseau pour une période donnée.
  * Méthode : GET
  * Paramètres :
  * - timespan : la période (en secondes) sur laquelle chercher les tendances
