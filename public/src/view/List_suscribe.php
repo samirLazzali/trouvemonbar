@@ -1,14 +1,7 @@
 <?php
 if (!defined('__ROOT__')) define('__ROOT__', dirname(dirname(__FILE__)));
 require_once(__ROOT__.'/config.php');
-require_once(__ROOT__.'/classes/User.php');
-/**
- * Created by PhpStorm.
- * User: Drascma
- * Date: 21/04/18
- * Time: 10:28
- */
-
+require_once("User.php");
 ?>
 
 <!DOCTYPE HTML>
@@ -27,21 +20,27 @@ require_once(__ROOT__.'/classes/User.php');
         <?php die(); } ?>
 
         <?php
-        if (isset($_GET['user'])) {
-            $get = 1;
+        if (isset($_GET['user']))
+        {
             $user = $_GET['user'];
+            try {
+                $user = User::fromUsername($user);
+            }
+            catch (UserNotFoundException $e)
+            {
+                die("<p>Utilisateur non trouvé : $user.</p>");
+            }
         }
-        else {
-            $get = 0;
+        else
             $user = getUserFromCookie();
-        }
         ?>
 
         <h1>
-            Liste des abonnements de <?=$user -> getUsername();?> :
+            Liste des abonnements de <?=$user->getUsername();?> :
         </h1>
 
         <?php
+
         $subscription = $user->getSubscriptions();
         foreach($subscription as $sub)
         {
@@ -68,20 +67,7 @@ require_once(__ROOT__.'/classes/User.php');
         }
         ?>
 
-        <?php
-        if ($get  == 0) {
-            ?>
-            <a href = "profil.php">Retour vers le Profil</a>
-            <?php
-        }
-        else {
-            ?>
-            <a href = "profil.php?user=<?=$user; ?>">Retour vers le Profil</a>
-            <?php
-        }
-        ?>
-
-        <a href = "profil.php">Retour vers le Profil</a>
+        <a href = "profil.php?user=<?=$user->getUsername()?>">Retour vers le Profil</a>
 
     </body>
 
