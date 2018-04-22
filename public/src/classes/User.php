@@ -422,9 +422,9 @@ class User implements JsonSerializable
     function getSubscriptions()
     {
         $db = connect();
-        $SQL = "SELECT * FROM " . TABLE_Subscription . " WHERE Follower = :follower";
+        $SQL = "SELECT * FROM " . TABLE_Subscription . " JOIN " . TABLE_User . " ON " . TABLE_User . ".ID = Followed WHERE Follower = :follower ";
         $statement = $db->prepare($SQL);
-        $statement->bindValue($statement, ":follower", getID());
+        $statement->bindValue(":follower", $this->getID());
         $statement->execute();
 
         $rows = $statement->fetchAll();
@@ -446,9 +446,9 @@ class User implements JsonSerializable
     function getFollowers()
     {
         $db = connect();
-        $SQL = "SELECT * FROM " . TABLE_Subscription . " WHERE Followed = :followed";
+        $SQL = "SELECT * FROM " . TABLE_Subscription . " JOIN " . TABLE_User . " ON " . TABLE_User . ".ID = Follower WHERE Followed = :followed";
         $statement = $db->prepare($SQL);
-        $statement->bindValue($statement, ":followed", getID());
+        $statement->bindValue(  ":followed", $this->getID());
         $statement->execute();
 
         $rows = $statement->fetchAll();
