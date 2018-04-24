@@ -1,26 +1,75 @@
 <?php
 require '../vendor/autoload.php';
-
 //postgres
 $dbName = getenv('DB_NAME');
 $dbUser = getenv('DB_USER');
 $dbPassword = getenv('DB_PASSWORD');
 $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 
-$userRepository = new \User\UserRepository($connection);
-$users = $userRepository->fetchAll();
-$pseudo = "YouChama";
+$userRepository = new User\UserRepository($connection);
+$amisRepository = new Amis\AmisRepository($connection);
+$tweetRepository = new Tweet\TweetRepository($connection);
+
+
+
+
+
+$pseudo = "Jaime";
 ?>
 
 
 <html>
 <body>
-<script type="text/javascript">
-    function AtResearch(){
-        var r = document.getElementById("@research");
-        if(r.value==""){
-            r.value="@"
-        }
+
+<style>
+    #err{
+      color: red;
+      font-size: 11px;
+    }
+</style>
+<script>
+
+        var Tweets =  <?php
+                    $sth = $connection->prepare('SELECT auteur,contenu,nb_like,date_post FROM "amis" JOIN "tweet" ON personne1=auteur WHERE personne2=\''.$pseudo.'\' UNION SELECT auteur,contenu,nb_like,date_post FROM "amis" JOIN "tweet" ON personne2=auteur WHERE personne1=\''.$pseudo.'\'  ');
+                    $sth->execute();
+                    $result = $sth->fetch(PDO::FETCH_OBJ);
+                    echo '[';
+                    while($result){
+                        echo "[\"$result->auteur\",\"$result->contenu\",\"$result->nb_like\",\"$result->date_post\"]";
+                        $result = $sth->fetch(PDO::FETCH_OBJ);
+                        if($result){
+                            echo ",";
+                        }
+                       
+                     }
+                    echo ']';
+
+                    ?> ;
+
+
+
+         var FriendList = <?php
+                    $sth = $connection->prepare('SELECT * FROM "amis" WHERE personne1=\''.$pseudo.'\' OR personne2=\''.$pseudo.'\' ');
+                    $sth->execute();
+                    $result = $sth->fetch(PDO::FETCH_OBJ);
+                    echo '[';
+                    while($result){
+                        echo '"';
+                        if($result->personne1 == $pseudo){
+                            echo "$result->personne2" ;
+                        }
+                        else{
+                             echo "$result->personne1" ;
+                        }
+                        echo '"';
+                        $result = $sth->fetch(PDO::FETCH_OBJ);
+                        if($result){
+                             echo ',';
+                        }
+                     }
+                    echo ']';
+                    ?> ;
+
         var AtList = 
                 <?php
                     $sth = $connection->prepare('SELECT firstname FROM "user"');
@@ -39,45 +88,93 @@ $pseudo = "YouChama";
                     echo ']';
                     ?> ;
 
-        var content = r.value.toString();
-        var l = content.length;
-        content = content.substr(1, l-1); 
-        var result = document.getElementById("result");
-        if(l!=1){
-            result.innerHTML = "Résultats :<br";
-            for(var i = 0; i < AtList.length; i++){
-                if(AtList[i].substr(0, l-1) == content){
-                    result.innerHTML += " " + '<a href="profil.php?id=' +AtList[i] +'">' +  AtList[i]+"</a><br>" ;
-                }
-             } 
-        }
 
-        else{
-             result.innerHTML = "";
+    function tweets(){
+        document.write("Derniers Tweets :<br/><br/>");
+        for(var i=0; i<Tweets.length;i++){
+             document.write(Tweets[i][0] + " a tweeté à " + Tweets[i][3] +" : <br/>"+ Tweets[i][1]+"<br/>" );
+             document.write("<button>J'aime</button> Nb de J'aimes : "+ Tweets[i][2] + "<br/><br/>");
+
         }
     }
-    function HashTagResearch(){
-        var r = document.getElementById("#research");
-        if(r.value==""){
-            r.value="#"
+
+
+    function liste_amis(){
+        document.write("<p>Vos amis:</p>");
+        for(var i=0;i<FriendList.length;i++){
+            document.write(FriendList[i]+"<br/>");
+        }
+        document.write("<br/>");
+    }
+    function liste_pseudos(){
+        for(var i=0;i<AtList.length;i++){
+            document.write("<option value='"+AtList[i]+"' id='"+AtList[i]+"'>");
+        }
+    }
+    function surligne(champ, erreur){
+        if(erreur) champ.style.backgroundColor = "#fba";
+        else champ.style.backgroundColor = "";
+    }
+    function is_in_list(value){
+        for(var i=0;i<AtList.length;i++){
+            if(value==AtList[i]){
+                return true;
+            }
+        }
+        return false;
+    }
+    function verifPseudo(champ){
+        var err = document.getElementById("err");
+        var visite = document.getElementById("visite");
+        if(champ.value.length==0){
+            surligne(champ, false);
+            err.innerHTML="";
+            return true;
+        }
+        else if(!(is_in_list(champ.value))){
+            surligne(champ, true);
+            err.innerHTML="Entrez un pseudo valide";
+            visite.type="hidden";
+            return false;
+        }
+        else{
+            surligne(champ, false);
+            err.innerHTML="";
+            visite.type="submit";
+            return true;
         }
     }
 </script>
-Bienvenue <?php echo $pseudo ?> ! 
-<form>
-    Rechercher un # :<br>
-    <input type="text" id="#research" onkeyup=HashTagResearch()  value="#"><br>
-    Rechercher un @:<br>
-    <input type="text" id="@research" onkeyup=AtResearch() value="@"><br>
-    <p id="result"></p>
+Bienvenue <?php echo $pseudo ?> ! <br>
+
+Rechercher un # :<br>
+<form method='post' action="hashtag.php">
+  <input list="hashtags" name="hashtag">
+  <datalist id="hashtags">
+</datalist>
+  <input id="afficherhashtag" type="submit" value="Afficher le Hashtag">
 </form>
+Rechercher un @ :<br>
+<form method='post' action="profil.php">
+  <input list="pseudos" name="pseudo" onblur="verifPseudo(this)">
+  <datalist id="pseudos">
+  <script >liste_pseudos()</script>
+  </datalist>
+  <input type="hidden" id="visite" value="Visiter le profil">
+</form>
+<p id="err"></p>
 <button>Ecrire un Tweet</button>
 <button>Ecrire un message</button>
-<a href='<?php echo "edition.php?id=$pseudo" ?>'>Personnaliser ...</a><br>
-Derniers Tweets :
-<form>
-
+<form method='post' action="edition.php">
+<input type="hidden" name="pseudo" value="<?php echo "".$pseudo."" ?>"></input>
+<input type="submit" value="Personnaliser ...">
 </form>
+<script >
+    liste_amis();
+    tweets();
+</script>
+
+
 </body>
 </html>
 
