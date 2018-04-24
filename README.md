@@ -1,7 +1,7 @@
 # Projet WEB Groupe du BG (Gub)
 
 ## Installation
-* Installer docker à coup de sudo-apt install docker.io ou un truc du genre
+* Installer docker à coup de sudo apt-get install docker.io et docker-compose ou un truc du genre
 * Changer les paramètres dans le fichier .env (vim .env dans le repo) : Changer l'adresse IP REMOTE\_HOST (demander au prof), le DOCKER\_USER et le DOCKER\_USER\_ID (pour recup celui la taper `$(echo id -u $USER)` dans le terminal ou demander au prof
 * Lancer `make install` dans le repo pour installer docker sur le site
 * Le site sera up sur [http:localhost:8080](http:localhost:8080) et modifié en temps réel avec vos modifs
