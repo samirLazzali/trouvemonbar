@@ -47,19 +47,24 @@ INSERT INTO "amis"(personne1, personne2) VALUES ('Erickson', 'Jaime');
 INSERT INTO "amis"(personne1, personne2) VALUES ('Pena', 'Vicky');
 
 CREATE TABLE "tweet" (
-    id SERIAL PRIMARY KEY ,
-    auteur VARCHAR NOT NULL ,
-    contenu VARCHAR NOT NULL ,
-    nb_like INT ,
-    date_post timestamp
+  id SERIAL PRIMARY KEY ,
+  auteur VARCHAR NOT NULL ,
+  date_envoie timestamp ,
+  contenu VARCHAR
+);
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('John', '1999-12-23 12:45:23', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('Vicky', '1999-12-23 12:45:23', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('Brendan', '1999-12-23 12:45:23', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('Otis', '1999-12-23 12:45:23', '****');
 
+CREATE TABLE "like" (
+  tweet_id int references "tweet"(id) ,
+  user_id int   references "user"(id)
 );
 
-
-INSERT INTO "tweet"(auteur, contenu,nb_like,date_post) VALUES ('John', 'Salut à tous', 0, '2016-11-22 16:25:12' );
-INSERT INTO "tweet"(auteur, contenu,nb_like,date_post) VALUES ('Vicky', 'Ceci est un tweet', 0, '2018-04-15 15:22:22' );
-INSERT INTO "tweet"(auteur, contenu,nb_like,date_post) VALUES ('Otis', 'Yo', 0, '2017-04-15 18:42:22' );
-
+INSERT INTO "like"(tweet_id, user_id) VALUES (1, 1);
+INSERT INTO "like"(tweet_id, user_id) VALUES (1, 2);
+INSERT INTO "like"(tweet_id, user_id) VALUES (1, 3);
 
 
 
