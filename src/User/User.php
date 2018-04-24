@@ -11,17 +11,22 @@ class User
     /**
      * @var string
      */
-    private $firstname;
+    private $prenom;
 
     /**
      * @var string
      */
-    private $lastname;
+    private $nom;
 
     /**
-     * @var \DateTimeInterface
+     * @var string
      */
-    private $birthday;
+    private $surnom;
+
+    /**
+     * @var string
+     */
+    private $password;
 
     /**
      * @return int
@@ -44,71 +49,54 @@ class User
     /**
      * @return string
      */
-    public function getFirstname()
+    public function getprenom()
     {
-        return $this->firstname;
+        return $this->prenom;
     }
 
     /**
      * @param string $firstname
      * @return User
      */
-    public function setFirstname($firstname)
+    public function setprenom($firstname)
     {
-        $this->firstname = $firstname;
+        $this->prenom = $firstname;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getLastname()
+    public function getnom()
     {
-        return $this->lastname;
+        return $this->nom;
     }
 
     /**
      * @param string $lastname
      * @return User
      */
-    public function setLastname($lastname)
+    public function setnom($lastname)
     {
-        $this->lastname = $lastname;
+        $this->nom = $lastname;
         return $this;
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return string
      */
-    public function getBirthday(): \DateTimeInterface
+    public function getsurnom()
     {
-        return $this->birthday;
+        return $this->surnom;
     }
 
     /**
-     * @param \DateTimeInterface $birthday
+     * @param string $surnom
      * @return User
      */
-    public function setBirthday(\DateTimeInterface $birthday)
+    public function setsurnom(string $surnom)
     {
-        $this->birthday = $birthday;
+        $this->surnom = $surnom;
         return $this;
     }
-
-
-    /**
-     * @return int
-     * @throws \OutOfRangeException
-     */
-    public function getAge(): int
-    {
-        $now = new \DateTime();
-
-        if ($now < $this->getBirthday()) {
-            throw new \OutOfRangeException('Birthday in the future');
-        }
-
-        return $now->diff($this->getBirthday())->y;
-    }
 }
-
