@@ -24,9 +24,9 @@ class UserRepository
             $user = new User();
             $user
                 ->setId($row->id)
-                ->setFirstname($row->firstname)
-                ->setLastname($row->lastname)
-                ->setBirthday(new \DateTimeImmutable($row->birthday));
+                ->setPrenom($row->prenom)
+                ->setNom($row->nom)
+                ->setScore($row->score);
 
             $users[] = $user;
         }

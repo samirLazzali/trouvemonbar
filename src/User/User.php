@@ -11,17 +11,17 @@ class User
     /**
      * @var string
      */
-    private $firstname;
+    private $prenom;
 
     /**
      * @var string
      */
-    private $lastname;
+    private $nom;
 
     /**
-     * @var \DateTimeInterface
+     * @var int
      */
-    private $birthday;
+    private $score;
 
     /**
      * @return int
@@ -44,71 +44,55 @@ class User
     /**
      * @return string
      */
-    public function getFirstname()
+    public function getPrenom()
     {
-        return $this->firstname;
+        return $this->prenom;
     }
 
     /**
      * @param string $firstname
      * @return User
      */
-    public function setFirstname($firstname)
+    public function setPrenom($prenom)
     {
-        $this->firstname = $firstname;
+        $this->prenom = $prenom;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getLastname()
+    public function getNom()
     {
-        return $this->lastname;
+	return $this->nom;
     }
 
     /**
      * @param string $lastname
      * @return User
      */
-    public function setLastname($lastname)
+    public function setNom($nom)
     {
-        $this->lastname = $lastname;
+        $this->nom = $nom;
         return $this;
     }
 
     /**
      * @return \DateTimeInterface
      */
-    public function getBirthday(): \DateTimeInterface
+    public function getScore() 
     {
-        return $this->birthday;
+        return $this->score;
     }
 
     /**
      * @param \DateTimeInterface $birthday
      * @return User
      */
-    public function setBirthday(\DateTimeInterface $birthday)
+    public function setScore($score)
     {
-        $this->birthday = $birthday;
+        $this->score = $score;
         return $this;
-    }
-
-
-    /**
-     * @return int
-     * @throws \OutOfRangeException
-     */
-    public function getAge(): int
-    {
-        $now = new \DateTime();
-
-        if ($now < $this->getBirthday()) {
-            throw new \OutOfRangeException('Birthday in the future');
-        }
-
-        return $now->diff($this->getBirthday())->y;
     }
 }
 

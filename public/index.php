@@ -19,22 +19,22 @@ $users = $userRepository->fetchAll();
 <body>
 
 <div class="container">
-    <h3><?php echo 'Hello world from Docker! php' . PHP_VERSION; ?></h3>
+    <h3><?php echo 'Bienvenue sur le site des boloss !' ?></h3>
 
     <table class="table table-bordered table-hover table-striped">
         <thead style="font-weight: bold">
             <td>#</td>
-            <td>Firstname</td>
-            <td>Lastname</td>
-            <td>Age</td>
+	    <td>Prénom</td>
+            <td>Nom</td>
+            <td>Score</td>
         </thead>
         <?php /** @var \User\User $user */
         foreach ($users as $user) : ?>
             <tr>
                 <td><?php echo $user->getId() ?></td>
-                <td><?php echo $user->getFirstname() ?></td>
-                <td><?php echo $user->getLastname() ?></td>
-                <td><?php echo $user->getAge() ?> years</td>
+                <td><?php echo $user->getPrenom() ?></td>
+                <td><?php echo $user->getNom() ?></td>
+                <td><?php echo $user->getScore() ?> points</td>
             </tr>
         <?php endforeach; ?>
     </table>
