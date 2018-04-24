@@ -19,6 +19,7 @@ set_include_path(get_include_path() . ":" . SITE_ROOT . ":" . CLASSES_ROOT . ":"
 
 require_once("api.php");
 require_once("status.php");
+require_once("affichage.php");
 
 function connect()
 {
