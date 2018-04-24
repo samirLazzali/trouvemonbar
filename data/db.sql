@@ -45,8 +45,7 @@ CREATE TABLE public."user" (
     pseudo varchar(32) NOT NULL,
     mdp varchar(40) NOT NULL,
     mail varchar(100) NOT NULL,
-    inscription integer NOT NULL
-    
+    inscription integer NOT NULL    
 );
 
 
