@@ -37,13 +37,13 @@ INSERT INTO "message"(emetteur, recepteur, date_envoie, contenu) VALUES ('Otis',
 CREATE TABLE "tweet" (
   id SERIAL PRIMARY KEY ,
   auteur VARCHAR NOT NULL ,
-  date timestamp ,
+  date_envoie timestamp ,
   contenu VARCHAR
 );
-INSERT INTO "tweet"(auteur, data, contenu) VALUES ('John', '1999-12-23 12:45:23', '****');
-INSERT INTO "tweet"(auteur, data, contenu) VALUES ('Jackie', '1999-12-23 12:45:23', '****');
-INSERT INTO "tweet"(auteur, data, contenu) VALUES ('Brendan', '1999-12-23 12:45:23', '****');
-INSERT INTO "tweet"(auteur, data, contenu) VALUES ('Otis', '1999-12-23 12:45:23', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('John', '1999-12-23 12:45:23', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('Jackie', '1999-12-23 12:45:23', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('Brendan', '1999-12-23 12:45:23', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('Otis', '1999-12-23 12:45:23', '****');
 
 CREATE TABLE "like" (
   tweet_id int foreign key references "tweet"(id) ,

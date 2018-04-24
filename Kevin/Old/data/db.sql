@@ -45,14 +45,14 @@ INSERT INTO "tweet"(auteur, date, contenu) VALUES ('Jackie', '1999-12-23 12:45:2
 INSERT INTO "tweet"(auteur, date, contenu) VALUES ('Brendan', '1999-12-23 12:45:23', '****');
 INSERT INTO "tweet"(auteur, date, contenu) VALUES ('Otis', '1999-12-23 12:45:23', '****');
 
-/*CREATE TABLE "like" (
+CREATE TABLE "like" (
   tweet_id int FOREIGN KEY REFERENCES tweet(id) ,
   user_id int FOREIGN KEY REFERENCES user(id)
 );
 
 INSERT INTO "like"(tweet_id, user_id) VALUES (1, 1);
 INSERT INTO "like"(tweet_id, user_id) VALUES (1, 2);
-INSERT INTO "like"(tweet_id, user_id) VALUES (1, 3);*/
+INSERT INTO "like"(tweet_id, user_id) VALUES (1, 3);
 
 
 

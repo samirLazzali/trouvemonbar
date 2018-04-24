@@ -1,7 +1,5 @@
 <?php
 namespace Message;
-include("Message.php");
-
 class MessageRepository
 {
     /**
@@ -18,9 +16,9 @@ class MessageRepository
         $this->connection = $connection;
     }
 
-    public function fetchAll()
+    public function fetchAll($emetteur, $recepteur)
     {
-        $rows = $this->connection->query('SELECT * FROM "message"')->fetchAll(\PDO::FETCH_OBJ);
+        $rows = $this->connection->query('SELECT * FROM "message" WHERE "recepteur"=$recepteur AND "emetteur"=$emetteur')->fetchAll(\PDO::FETCH_OBJ);
         $messages = [];
         foreach ($rows as $row) {
             $message = new Message();
@@ -28,7 +26,7 @@ class MessageRepository
                 ->setId($row->id)
                 ->setEmetteur($row->emetteur)
                 ->setRecepteur($row->recepteur)
-                ->setDate(new \DateTime($row->date_envoie)) /* Conversion de date ???*/
+                ->setDate(new \DateTimeImmutable($row->date_envoie));
                 ->setContenu($row->contenu);
             $messages[] = $message;
         }

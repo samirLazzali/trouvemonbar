@@ -14,9 +14,9 @@ class MessageManager
 {
     private $db;
 
-    public function construct($db)
+    public function __construct(\PDO $connection)
     {
-        $this->setDb($db);
+        $this->db = $connection;
     }
 
     public function setDb(PDO $db)
@@ -26,37 +26,49 @@ class MessageManager
 
     public function add(Message $msg)
     {
-        $req = 'INSERT INTO message(emetteur, recepteur, date_envoie, contenu) VALUES ('.$msg->getEmetteur().','.$msg->getRecepteur().','.
-            date_format($msg->getDate(),"Y-m-d H:i:s").','.$msg->getContenu().')';
+        $req = $this->db->prepare('INSERT INTO "message"(emetteur, recepteur, date_envoie, contenu) VALUES (:emetteur,:recepteur,:date_envoie,:contenu)');
 
-        $this->db->query($req);
+        $req->bindValue(':emetteur', $msg->getEmetteur());
+        $req->bindValue(':recepteur', $msg->getRecepteur());
+        $req->bindValue(':date_envoie', date_format($msg->getDate(),"Y-m-d H:i:s"));
+        $req->bindValue(':contenu', $msg->getContenu());
+
+        $req->execute();
     }
 
-    public function get($id)
-    {
-        $req = 'INSERT INTO message(emetteur, recepteur, date_envoie, contenu) VALUES ('.$msg->getEmetteur().','.$msg->getRecepteur().','.
-            date_format($msg->getDate(),"Y-m-d H:i:s").','.$msg->getContenu().')';
-
-        $this->db->query($req);
+    public function delete(Message $msg){
+        $this->db->exec('DELETE FROM message WHERE id = '.$msg.getId());
     }
 
-     public function update($id)
-    {
-        $req = 'INSERT INTO message(emetteur, recepteur, date_envoie, contenu) VALUES ('.$msg->getEmetteur().','.$msg->getRecepteur().','.
-            date_format($msg->getDate(),"Y-m-d H:i:s").','.$msg->getContenu().')';
+    public function update(Message $msg){
+         $req = $this->db->prepare('UPDATE message SET emetteur = :emetteur, recepteur = :recepteur, date_envoie = :date_envoie, contenu = :contenu WHERE id = :id');
 
-        $this->db->query($req);
+        $req->bindValue(':emetteur', $msg->getEmetteur());
+        $req->bindValue(':recepteur', $msg->getRecepteur());
+        $req->bindValue(':date_envoie', date_format($msg->getDate(),"Y-m-d H:i:s"));
+        $req->bindValue(':contenu', $msg->getContenu());
+        $req->bindValue(':id', $msg->getId());
+
+        $req->execute();
+
     }
 
-    public function delete(Message $msg)
-    {
-        $req = 'DELETE INTO message(emetteur, recepteur, date_envoie, contenu) VALUES ('.$msg->getEmetteur().','.$msg->getRecepteur().','.
-            date_format($msg->getDate(),"Y-m-d H:i:s").','.$msg->getContenu().')';
+    public function get($id){
+        $id = (int) $id;
 
-        $this->db->query($req);
+        $req = $this->db->query('SELECT emetteur, recepteur, date_envoie, contenu FROM message WHERE id = '.$id);
+
+        $res = $req->fetch(\PDO::FETCH_ASSOC);
+        $msg = new Message();
+        $msg
+                ->setId($id)
+                ->setEmetteur($res['emetteur'])
+                ->setRecepteur($res['recepteur'])
+                ->setDate(new \DateTime($res['date_envoie'])) 
+                ->setContenu($res['contenu']);
+
+        return $msg;
+
     }
-
-
-
 
 }
