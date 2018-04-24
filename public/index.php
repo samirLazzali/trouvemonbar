@@ -19,14 +19,13 @@ $users = $userRepository->fetchAll();
     <link rel="stylesheet" type="text/css"  href="style_index.css">
 </head>
 <body>
-
 <form method="post" action="changement_de_page.php" id="menu_bouton">
-    <div classe="bouton"><input type="submit" name="acc" value="Acceuil" ></div>
+    <div classe="bouton"><input type="submit" name="acc" value="Accueil" ></div>
     <div classe="bouton"><input type="submit" name="ap" value="Apéral" ></div>
-    <div classe="bouton"><input type="submit" value="Oenologiie" ></div>
-    <div classe="bouton"><input type="submit" value="Réunion" ></div>
-    <div classe="bouton"><input type="submit" value="Classement" ></div>
-    <div classe="bouton"><input type="submit" value="Admin" ></div>
+    <div classe="bouton"><input type="submit" name="oe" value="Oenologiie" ></div>
+    <div classe="bouton"><input type="submit" name="reu" value="Réunion" ></div>
+    <div classe="bouton"><input type="submit" name="clas" value="Classement" ></div>
+    <div classe="bouton"><input type="submit" name="adm" value="Admin" ></div>
 </form>
 
 <div id="boutons_connexion">
