@@ -38,10 +38,16 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE public."user" (
-    id integer NOT NULL,
+    id integer NOT NULL auto_increment,
     prenom character varying NOT NULL,
     nom character varying NOT NULL,
     score integer NOT NULL
+    pseudo varchar(32) NOT NULL,
+    mdp varchar(40) NOT NULL,
+    mail varchar(100) NOT NULL,
+    inscription bigint(20) NOT NULL,
+    
+
 
 );
 
