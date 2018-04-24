@@ -34,7 +34,10 @@ catch (UserNotFoundException $e)
 }
 
 if (User::testPassword($u->getID(), $password))
+{
     authenticate($u);
+    success_die(STATUS_OK);
+}
 else
     error_die("Authentication failed: Bad password.", ERROR_WrongPassword);
 
