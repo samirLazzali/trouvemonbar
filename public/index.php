@@ -13,11 +13,13 @@ $users = $userRepository->fetchAll();
 
 <html>
 <head>
+    <title> Apéral  </title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../style/style_index.css">
+    <link rel="stylesheet" type="text/css"  href="style_index.css">
 </head>
 <body>
+
 <div id="menu_bouton">
     <div classe="bouton"><input type="submit" value="Acceuil" ></div>
     <div classe="bouton"><input type="submit" value="Apéral" ></div>
@@ -26,6 +28,12 @@ $users = $userRepository->fetchAll();
     <div classe="bouton"><input type="submit" value="Classement" ></div>
     <div classe="bouton"><input type="submit" value="Admin" ></div>
 </div>
+
+<div id="boutons_connexion">
+    <div classe="bouton"><input type="submit" value="s'inscrire" ></div>
+    <div classe="bouton"><input type="submit" value="Se connecter" ></div>
+</div>
+
 <div class="container">
     <h3><?php echo 'Bienvenue sur le site des boloss !' ?></h3>
 
@@ -47,5 +55,10 @@ $users = $userRepository->fetchAll();
         <?php endforeach; ?>
     </table>
 </div>
+
+<h4>Prochaine réunion</h4>
+<div id="prochaine_réunion">
+    <?php echo $date_réunion ?>
+
 </body>
 </html>
