@@ -10,12 +10,13 @@ $userRepository = new User\UserRepository($connection);
 $amisRepository = new Amis\AmisRepository($connection);
 $tweetRepository = new Tweet\TweetRepository($connection);
 $messageRepository = new Message\MessageRepository($connection);
-$messages=$messageRepository->fetchAll();
-
+$tweets=$tweetRepository->fetchAll();
+$tweetManager = new Tweet\TweetManager($connection);
 
 
 $pseudo = "Jaime";
 ?>
+
 
 
 <html>
@@ -99,9 +100,18 @@ $pseudo = "Jaime";
     }
 
     function EcrireTweet(){
-        var tweet = prompt("Exprimez vous : ");
+       var ok = document.getElementById("ok");
+       ok.type="submit";
+       var textarea = document.getElementById("textarea");
+       textarea.style="display";
+
+        
+
     }
 
+    function ConfirmationTweet(){
+        alert("Tweet Envoyé");
+    }
 
     function liste_amis(){
         document.write("<p>Vos amis:</p>");
@@ -167,11 +177,20 @@ Rechercher un @ :<br>
   <input type="hidden" id="visite" value="Visiter le profil">
 </form>
 <p id="err"></p>
-<button onclick="EcrireTweet()">Ecrire un Tweet</button>
-<button>Ecrire un message</button>
 <form method='post' action="edition.php">
 <input type="hidden" name="pseudo" value="<?php echo "".$pseudo."" ?>"></input>
 <input type="submit" value="Personnaliser ...">
+</form>
+
+<button onclick="EcrireTweet()">Ecrire un tweet</button>
+
+<form method='post' action="ecriretweet.php">
+<input type="hidden" name="pseudo" value="<?php echo "".$pseudo."" ?>"></input><br/>
+<textarea  name= "textarea" id="textarea" style="display: none" placeholder="Exprimez vous..." rows="5" cols="50"></textarea>
+<input id="ok" onclick="ConfirmationTweet()" type="hidden" value="Envoyer">
+</form>
+<button>Ecrire un message</button>
+
 </form>
 <script >
     liste_amis();
