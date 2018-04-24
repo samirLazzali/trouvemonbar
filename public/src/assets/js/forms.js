@@ -131,7 +131,7 @@ function login()
             else
                 console.log("Mauvais statut '" + status);
         };
-        xhttp.open("POST", "/api/user/login.php", true);
+        xhttp.open("POST", "/api/auth/login.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("identifier=" + username + "&password=" + password);
         return false;
