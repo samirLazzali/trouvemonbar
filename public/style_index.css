@@ -1,8 +1,8 @@
 #menu_bouton{
+	display: fle;
+}
+
+#boutons_connexion{
 	display: flex;
 }
 
-h1
-{
-	color : green;
-}
