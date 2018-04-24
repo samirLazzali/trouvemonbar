@@ -1,5 +1,6 @@
-#menu_bouton{
-	display: fle;
+#menu_bouton
+{
+	display: flex;
 }
 
 #boutons_connexion{
