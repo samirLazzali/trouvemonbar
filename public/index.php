@@ -6,18 +6,13 @@ $dbUser = getenv('DB_USER');
 $dbPassword = getenv('DB_PASSWORD');
 $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 
-?>
+require "../src/app/helpers.php";
 
-<html>
-<head>
-    <!-- Latest compiled and minified CSS -->
-    <title> Guiilde </title>
-</head>
-<body>
+write_header("Guiilde");
 
-<div class="container">
-    <h3> Guiilde</h3>
-    <h4> Association de jeu de rôle de l'ENSIIE</h4>
-</div>
-</body>
-</html>
+include view("index_view.php");
+
+write_foot();
+
+
+
