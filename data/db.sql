@@ -33,6 +33,52 @@ SET default_tablespace = '';
 
 SET default_with_oids = false;
 
+CREATE TABLE public.tags (
+    name character varying(20) UNIQUE NOT NULL
+);
+
+--
+-- Name: annonce; Type: TABLE; Schema: public; Owner: ensiie
+--
+
+CREATE TABLE public.annonce (
+    id integer NOT NULL,
+    op integer,
+    semestre integer,
+    module character varying(4),
+    genre character varying(30),
+    titre character varying(100),
+    description character varying(240),
+    paiement integer,
+    service character varying(40),
+    answered boolean DEFAULT false
+);
+
+
+ALTER TABLE public.annonce OWNER TO ensiie;
+
+--
+-- Name: annonce_id_seq; Type: SEQUENCE; Schema: public; Owner: ensiie
+--
+
+CREATE SEQUENCE public.annonce_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.annonce_id_seq OWNER TO ensiie;
+
+--
+-- Name: annonce_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ensiie
+--
+
+ALTER SEQUENCE public.annonce_id_seq OWNED BY public.annonce.id;
+
+
 --
 -- Name: user; Type: TABLE; Schema: public; Owner: ensiie
 --
@@ -74,7 +120,7 @@ ALTER SEQUENCE public.user_id_seq OWNED BY public."user".id;
 --
 
 CREATE TABLE public.users (
-    id integer DEFAULT nextval('public.user_id_seq'::regclass) NOT NULL,
+    id integer NOT NULL,
     email character varying(40) NOT NULL,
     username character varying(20) NOT NULL,
     password character varying(32) NOT NULL,
@@ -100,10 +146,32 @@ CREATE SEQUENCE public.users_id_seq
 ALTER TABLE public.users_id_seq OWNER TO ensiie;
 
 --
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ensiie
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
 -- Name: user id; Type: DEFAULT; Schema: public; Owner: ensiie
 --
 
 ALTER TABLE ONLY public."user" ALTER COLUMN id SET DEFAULT nextval('public.user_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: ensiie
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Data for Name: annonce; Type: TABLE DATA; Schema: public; Owner: ensiie
+--
+
+COPY public.annonce (id, op, semestre, module, genre, description, paiement, service, answered) FROM stdin;
+\.
 
 
 --
@@ -131,8 +199,18 @@ COPY public."user" (id, firstname, lastname, birthday) FROM stdin;
 --
 
 COPY public.users (id, email, username, password, admin) FROM stdin;
-0	jean-baptiste.skutnik@ensiie.fr	Spoutnik	dacae7562117be083f8ec98f3e56f690	t
+1	jean-baptiste.skutnik@ensiie.fr	Spoutnik	dacae7562117be083f8ec98f3e56f690	t
+2	yassir.chekour@ensiie.fr	Yassir	098f6bcd4621d373cade4e832627b4f6	t
+3	victor.meas@ensiie.fr	Vicky	098f6bcd4621d373cade4e832627b4f6	t
+4	hugo.trachino@ensiie.fr	Nuja	098f6bcd4621d373cade4e832627b4f6	t
 \.
+
+
+--
+-- Name: annonce_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ensiie
+--
+
+SELECT pg_catalog.setval('public.annonce_id_seq', 1, false);
 
 
 --
@@ -146,7 +224,7 @@ SELECT pg_catalog.setval('public.user_id_seq', 12, true);
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ensiie
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 1, false);
+SELECT pg_catalog.setval('public.users_id_seq', 4, true);
 
 
 --
@@ -171,6 +249,14 @@ ALTER TABLE ONLY public.users
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (email);
+
+
+--
+-- Name: annonce fk_original_poster; Type: FK CONSTRAINT; Schema: public; Owner: ensiie
+--
+
+ALTER TABLE ONLY public.annonce
+    ADD CONSTRAINT fk_original_poster FOREIGN KEY (op) REFERENCES public.users(id);
 
 
 --

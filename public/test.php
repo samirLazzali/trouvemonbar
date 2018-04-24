@@ -10,7 +10,7 @@ include('../src/login/login.php'); // Includes Login Script
 <html>
     <head>
 	<title>Login Form in PHP with Session</title>
-	<link href="style.css" rel="stylesheet" type="text/css">
+	<link href="http://skutnik.iiens.net/github_like.css" rel="stylesheet" type="text/css">
     </head>
     <body>
 	<div id="main">
