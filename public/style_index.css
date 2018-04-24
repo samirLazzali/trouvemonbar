@@ -2,7 +2,7 @@
 	display: flex;
 }
 
-h1
-{
-	color : green;
+#boutons_connexion{
+	display: flex;
 }
+
