@@ -12,8 +12,8 @@
             Vitz # Création de compte
         </title>
         <meta charset="UTF-8" />
-        <link rel="stylesheet" type="text/css" href="/src/assets/styles/signup.css" />
-        <script src="forms.js"></script>
+        <link rel="stylesheet" type="text/css" href="/assets/styles/signup.css" />
+        <script src="/assets/js/forms.js"></script>
     </head>
     <body>
         <h1 class="title">Vitz</h1>

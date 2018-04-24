@@ -1,11 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Drascma
- * Date: 19/04/18
- * Time: 13:06
- */
-?>
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -13,7 +5,8 @@
             VITZ
         </title>
         <meta charset="utf-8" />
-        <link rel="stylesheet" type="text/css" href="Login.css"/>
+        <link rel="stylesheet" type="text/css" href="/assets/styles/login.css"/>
+        <script src="/assets/js/forms.js"></script>
     </head>
     <body >
         <h1>
@@ -25,11 +18,14 @@
         </h2>
 
         <p1>
-            <div>
+            <div >
                 <h3>Connexion</h3>
-                <form method="post" action="login-confirm.php">
-                    <input type="text" name="username" placeholder="Nom d'utilisateur" /><br>
-                    <input type="password" name="password" placeholder="Mot de passe" /><br>
+                <div id="infobox" class="error infobox">
+                    ...
+                </div>
+                <form onSubmit="return login()">
+                    <input id="field-username" type="text" name="username" placeholder="Nom d'utilisateur" />
+                    <input id="field-password" type="password" name="password" placeholder="Mot de passe" />
                     <button type="submit" value="Se connecter">
                         Se connecter
                     </button>
