@@ -4,6 +4,7 @@
 
 -- Dumped from database version 10.3
 -- Dumped by pg_dump version 10.3
+
 DROP TABLE "user";
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -41,12 +42,7 @@ CREATE TABLE public."user" (
     id integer NOT NULL,
     prenom character varying NOT NULL,
     nom character varying NOT NULL,
-    score integer NOT NULL,
-    pseudo varchar(32) NOT NULL,
-    mdp varchar(40) NOT NULL,
-    mail varchar(100) NOT NULL,
-    inscription integer NOT NULL
-    
+    score integer NOT NULL
 );
 
 
@@ -85,11 +81,11 @@ ALTER TABLE ONLY public."user" ALTER COLUMN id SET DEFAULT nextval('public.user_
 -- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: ensiie
 --
 
-COPY public."user" (id, prenom, nom, score, pseudo, mdp, mail, inscription) FROM stdin;
-1	Thomas	Gubeno	500	Gub	bg	tgubeno@gmail.com	1
-2	Dorian	Laugier	450	Derien	lol	doriang	1
-3	Simon	Lauzeral	200	SimSim	bla	blabla	1
-4	Paul	Thibaud	10	Hansen	blabla	tttt	1
+COPY public."user" (id, prenom, nom, score) FROM stdin;
+1	Thomas	Gubeno	500
+2	Dorian	Laugier	450
+3	Simon	Lauzeral	200
+4	Paul	Thibaud	10
 \.
 
 
