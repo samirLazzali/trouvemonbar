@@ -3,6 +3,7 @@ var newUsernameActive = false;
 var newMdpActive = false;
 var newEmailActive = false;
 
+
 function newPost_onFocus()
 {
     var div = document.getElementById("new-post-content");
@@ -27,9 +28,24 @@ function sendNewPost()
     if (div.innerHTML.trim() == "")
         return;
 
-    //TODO: envoyer la requête pour poster !
+    CreatePost(div.innerHTML, null);
+
     div.innerHTML = "";
     newPost_onBlur();
 }
+
+function CreatePost(value, user_Response)
+{
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/api/post/new.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    if(user_Response == null){
+        xhttp.send("content="+value);
+    }
+    else {
+        xhttp.send("content=" + value + "&ResponseTo=" + user_Response);
+    }
+}
+
 
 

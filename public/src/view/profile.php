@@ -1,7 +1,7 @@
 <?php
-if (!defined('__ROOT__')) define('__ROOT__', dirname(dirname(__FILE__)));
-require_once(__ROOT__.'/config.php');
+require_once("../config.php");
 require_once("User.php");
+?>
 
 /**
  * Created by PhpStorm.
@@ -77,7 +77,7 @@ require_once("User.php");
         }
         ?>
 
-        <a href="List_suscribe.php?user=<?= $user->getUsername(); ?>">Liste des abonnements / abonnés</a>
+        <a href="subscriptions.php?user=<?= $user->getUsername(); ?>">Liste des abonnements / abonnés</a>
         <a href="feed.php">Retour vers la page principale</a>
     </body>
 </html>
