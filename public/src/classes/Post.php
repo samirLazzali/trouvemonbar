@@ -207,18 +207,35 @@ class Post implements JsonSerializable
      * @param int $timelimit
      * @return array post
      */
-/* @TODO
-    static function topLikes($like=1, $limit=10, $timelimit)
+    // @TODO
+    static function topLikes($like='like', $limit=10, $timelimit=7200)
     {
         $db = connect();
-        $SQL = "SELECT * FROM " . TABLE_Appreciation . " JOIN ". TABLE_Posts . " ON post.id = post WHERE  like :hashtag";
+        $SQL = "SELECT post, count(id) as nblikes 
+                FROM (SELECT * FROM" . TABLE_Appreciation . " WHERE type = :appre AND timestamp >= :timelimit ) as toto 
+                GROUP BY post
+                ORDER BY nblikes DESC
+                LIMIT :limit";
+
+
         $statement = $db->prepare($SQL);
-        $statement->bindValue(":hashtag", "%".$tag."%");
+        $statement->bindValue(":appre", $like);
+        $statement->bindValue(":limit", $limit);
+        $statement->bindValue(":timelimit", $timelimit);
+        $statement->execute();
+
+        $rows = $statement->fetchAll();
         $result = array();
+
+        foreach ($rows as $row)
+        {
+            //verifier cette ligne !!!
+            $result[] = Post::fromID($row['post']);
+        }
 
         return $result;
     }
-*/
+
     /**
      * Supprime un post de la BDD.
      */

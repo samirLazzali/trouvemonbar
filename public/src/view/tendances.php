@@ -7,9 +7,35 @@ $trends = Trend::getTrends();
 
 $tags = array_keys($trends);
 
+
+//TODO
+/* afficher tous (cliquables) les tags + top likes/dislikes
+ */
+
 foreach ($tags as $tag)
 {
-    //TODO
-    /*insérer du html/JS pour que lorsqu'on clique sur le nom, ça affiche tout les posts concernés dans un la bonne partie de l'écran genre en dessou de la liste des tendances*/
-    /*ça pourait être sympa d'afficher les tweets de la #1 tendance dès le départ, !si elle existe!*/
+
 }
+
+/* TODO
+ * on initialise la page avec les toplikes pour pas laisser de blancs
+ */
+
+$posts = Post::topLikes();
+
+
+/* affichage des posts */
+
+foreach ($posts as $post)
+{
+    /* TODO
+     * écrire dans post.php la fonction qui écrit de code html correspondant à l'affichage d'un post
+     * pour pouvoir l'appeler ici
+     */
+    $post->codeHtml();
+}
+
+/* TODO
+ * script js qui permet de changer la valeur de $posts et de réexécuter l'affichage de $post
+ * (déclenchement on click sur un tag)
+ */
