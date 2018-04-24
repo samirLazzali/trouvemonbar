@@ -6,47 +6,57 @@
  * Time: 17:30
  */
 
+namespace Message;
+require '../vendor/autoload.php';
+
 
 class MessageManager
 {
-    private $_db; // Instance de PDO.
+    private $db;
 
-    public function __construct($db)
+    public function construct($db)
     {
         $this->setDb($db);
     }
 
-    public function add(Personnage $perso)
+    public function setDb(PDO $db)
     {
-        // Préparation de la requête d'insertion.
-        // Assignation des valeurs pour le nom, la force, les dégâts, l'expérience et le niveau du personnage.
-        // Exécution de la requête.
+        $this->db = $db;
     }
 
-    public function delete(Personnage $perso)
+    public function add(Message $msg)
     {
-        // Exécute une requête de type DELETE.
+        $req = 'INSERT INTO message(emetteur, recepteur, date_envoie, contenu) VALUES ('.$msg->getEmetteur().','.$msg->getRecepteur().','.
+            date_format($msg->getDate(),"Y-m-d H:i:s").','.$msg->getContenu().')';
+
+        $this->db->query($req);
     }
 
     public function get($id)
     {
-        // Exécute une requête de type SELECT avec une clause WHERE, et retourne un objet Personnage.
+        $req = 'INSERT INTO message(emetteur, recepteur, date_envoie, contenu) VALUES ('.$msg->getEmetteur().','.$msg->getRecepteur().','.
+            date_format($msg->getDate(),"Y-m-d H:i:s").','.$msg->getContenu().')';
+
+        $this->db->query($req);
     }
 
-    public function getList()
+     public function update($id)
     {
-        // Retourne la liste de tous les personnages.
+        $req = 'INSERT INTO message(emetteur, recepteur, date_envoie, contenu) VALUES ('.$msg->getEmetteur().','.$msg->getRecepteur().','.
+            date_format($msg->getDate(),"Y-m-d H:i:s").','.$msg->getContenu().')';
+
+        $this->db->query($req);
     }
 
-    public function update(Personnage $perso)
+    public function delete(Message $msg)
     {
-        // Prépare une requête de type UPDATE.
-        // Assignation des valeurs à la requête.
-        // Exécution de la requête.
+        $req = 'DELETE INTO message(emetteur, recepteur, date_envoie, contenu) VALUES ('.$msg->getEmetteur().','.$msg->getRecepteur().','.
+            date_format($msg->getDate(),"Y-m-d H:i:s").','.$msg->getContenu().')';
+
+        $this->db->query($req);
     }
 
-    public function setDb(PDO $db)
-    {
-        $this->_db = $db;
-    }
+
+
+
 }
