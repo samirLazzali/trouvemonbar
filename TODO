@@ -1,0 +1,29 @@
+
+
+creer le systeme d'authentification
+    -les mdps doivent être stockes en hash dans la bdd
+    - les champs de texte doivent être protégés contre les inputs méchants
+
+effectuer l(integration google calendar
+    -affichage
+    -modification
+
+creer les notifications mail
+
+gerer la mise en ligne de fichier
+    -attention a la privaute!!
+
+gerer la creation de seance
+
+ajouter bootstrap
+
+validation des caracteres en js
+
+ecrire le rapport
+
+au moins 1 rendu dynamique (mis à jour du flux des tables)
+
+faire des tests avec postman
+
+preparer la soutenance
+
