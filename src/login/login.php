@@ -5,8 +5,8 @@ $dbUser = getenv('DB_USER');
 $dbPassword = getenv('DB_PASSWORD');
 $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 
-function lookUp($connection, $username, $md5Pass) {
-    $rows = $connection->query("SELECT * FROM users WHERE username='$username' AND password='$md5Pass'")->fetchAll(\PDO::FETCH_OBJ);
+function lookUp($connection, $email, $md5Pass) {
+    $rows = $connection->query("SELECT * FROM users WHERE email='$email' AND password='$md5Pass'")->fetchAll(\PDO::FETCH_OBJ);
 
     foreach ($rows as $entry) {
 	return $entry->id;
@@ -20,17 +20,17 @@ function lookUp($connection, $username, $md5Pass) {
 
     if (isset($_POST['submit'])) {
 
-	if (empty($_POST['username']) || empty($_POST['password'])) {
+	if (empty($_POST['email']) || empty($_POST['password'])) {
 	    $error = "Username or Password is invalid";
 	} else {
 	    // Define $username and $password
-	    $username=$_POST['username'];
+	    $email=$_POST['email'];
 	    $password=md5($_POST['password']);
 
-	    if (lookUp($connection, $username, $password) != -1) {
+	    if (lookUp($connection, $email, $password) != -1) {
 		echo "Logged in";
 	    } else {
-		echo "Invalid credentials: '$username', '$password'";
+		echo "Invalid credentials: '$email', '$password'";
 	    }
 	}
 
