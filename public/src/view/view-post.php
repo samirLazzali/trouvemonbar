@@ -26,6 +26,9 @@ catch (PostNotFoundException $e)
 
 $array = $p->getResponsesTo();
 
+$author = $p->getAuthor()->getUsername();
+$content = $p->toHtml();
+$date = $p->getTimestamp();
 
 ?>
 <!DOCTYPE HTML>
@@ -38,13 +41,22 @@ $array = $p->getResponsesTo();
 <body>
     <div class="column-wrapper">
         <div class="post-feed">
-            <?php affichePost($p) ?>
+
+        <?php affichePost($p) ?>
+
         </div>
+    </div>
+    <div class="column-wrapper">
+        <h1>
+            - Réponses -
+        </h1>
         <div class="post-feed">
-            <?php foreach ($array as $item)
-                {
-                    affichePost($item);
-                } ?>
+            <?php
+            foreach ($array as $item)
+            {
+                affichePost($item);
+            }
+            ?>
         </div>
     </div>
 </body>

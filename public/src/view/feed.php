@@ -12,7 +12,7 @@
 <body>
     <h2>Liste des pages fonctionnelles</h2>
     <p>
-        <a title="examiner un post" href="visu_tweet.php?id=pac">
+        <a title="examiner un post" href="view-post.php?id=pac">
             détails sur un post
         </a>
         <br>

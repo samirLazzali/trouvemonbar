@@ -302,6 +302,33 @@ class User implements JsonSerializable
         return password_verify($attempt, $hash);
     }
 
+    function getNotifications()
+    {
+        // On commence par trouver qui a liké nos tweets
+        $db = connect();
+        $SQL = "SELECT * FROM " . TABLE_Appreciation . " JOIN " . TABLE_Posts . " ON " . TABLE_Appreciation . ".Post = " . TABLE_Posts . ".ID WHERE " . TABLE_Posts . ".Author = :author ORDER BY " . TABLE_Appreciation . ".Timestamp DESC LIMIT 20";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":author", $this->getID());
+        $statement->execute();
+
+        $appreciations = $statement->fetchAll();
+
+
+        $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE Content LIKE :content ORDER BY Timestamp DESC LIMIT 20";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":content", "%@" . $this->getUsername() . "%");
+        $statement->execute();
+
+        $mentions = $statement->fetchAll();
+
+        $r_appreciations = array();
+
+        foreach($appreciations as $appreciation)
+            $r_appreciations[] = Appreciation::fromRow($appreciation);
+
+        return array($r_appreciations, $mentions);
+    }
+
     /**
      * Suit l'utilisateur donné en paramètre
      * @param User|string $user l'utilisateur à suivre
