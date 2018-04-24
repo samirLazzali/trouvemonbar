@@ -50,7 +50,7 @@ function validate_input_signup() {
             var result = JSON.parse(xhttp.responseText);
             if (result["status"] == STATUS_OK)
             {
-                document.location.href = "login.php";
+                document.location.href = "login";
             }
             else
             {
@@ -72,8 +72,68 @@ function validate_input_signup() {
             }
         }
     };
-    xhttp.open("POST", "../api/user/new.php", true);
+    xhttp.open("POST", "/api/user/new.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("username=" + fUsername.value + "&password=" + fPassword.value + "&email=" + fEmail.value);
     return false;
+}
+
+function login()
+{
+    var fieldUsername = document.getElementById("field-username");
+    var fieldPassword = document.getElementById("field-password");
+
+    var username = fieldUsername.value.trim();
+    var password = fieldPassword.value.trim();
+
+    var infobox = document.getElementById("infobox");
+    infobox.style.display = "none";
+
+    if (username == "")
+    {
+        infobox.innerHTML = "Vous devez entrer un nom d'utilisateur.";
+        infobox.style.display = "block";
+        return false;
+    }
+    else if (password == "")
+    {
+        infobox.innerHTML = "Vous devez entrer votre mot de passe.";
+        infobox.style.display = "block";
+        return false;
+    }
+    else
+    {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200)
+            {
+                var result = JSON.parse(xhttp.responseText);
+                if (result["status"] == STATUS_OK)
+                    document.location.href = "/main";
+                else
+                {
+                    console.log("Erreur de connexion.")
+                    infobox.style.display = "block";
+                    switch(result["status"])
+                    {
+                        case (ERROR_WrongPassword):
+                            infobox.innerHTML = "Le mot de passe entré est incorrect.";
+                            return false;
+                        case (ERROR_NotFound):
+                            infobox.innerHTML = "Aucun utilisateur trouvé avec ces informations.";
+                            return false;
+                        default:
+                            infobox.innerHTML("Une erreur s'est produite : " + result["description"] + " (Code " + result["status"] + ")");
+                            return false;
+                    }
+                }
+            }
+            else
+                console.log("Mauvais statut '" + status);
+        };
+        xhttp.open("POST", "/api/user/login.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("identifier=" + username + "&password=" + password);
+        return false;
+    }
 }

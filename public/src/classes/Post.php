@@ -206,13 +206,14 @@ class Post implements JsonSerializable
      * @param int $limit
      * @param int $timelimit
      * @return array post
+     * @throws PostNotFoundException
      */
     // @TODO
-    static function topLikes($like='like', $limit=10, $timelimit=7200)
+    static function topLikes($like = Appreciation::LIKE, $limit=10, $timelimit=7200)
     {
         $db = connect();
         $SQL = "SELECT post, count(id) as nblikes 
-                FROM (SELECT * FROM" . TABLE_Appreciation . " WHERE type = :appre AND timestamp >= :timelimit ) as toto 
+                FROM (SELECT * FROM " . TABLE_Appreciation . " WHERE type = :appre AND timestamp >= :timelimit ) as toto 
                 GROUP BY post
                 ORDER BY nblikes DESC
                 LIMIT :limit";
@@ -228,10 +229,7 @@ class Post implements JsonSerializable
         $result = array();
 
         foreach ($rows as $row)
-        {
-            //verifier cette ligne !!!
             $result[] = Post::fromID($row['post']);
-        }
 
         return $result;
     }

@@ -23,7 +23,6 @@ foreach ($tags as $tag)
 
 $posts = Post::topLikes();
 
-
 /* affichage des posts */
 
 foreach ($posts as $post)
@@ -32,7 +31,8 @@ foreach ($posts as $post)
      * écrire dans post.php la fonction qui écrit de code html correspondant à l'affichage d'un post
      * pour pouvoir l'appeler ici
      */
-    $post->codeHtml();
+    echo $post->toHtml();
+    echo "<br />";
 }
 
 /* TODO
