@@ -4,7 +4,6 @@
 
 -- Dumped from database version 10.3
 -- Dumped by pg_dump version 10.3
-
 DROP TABLE "user";
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -43,6 +42,11 @@ CREATE TABLE public."user" (
     prenom character varying NOT NULL,
     nom character varying NOT NULL,
     score integer NOT NULL
+    pseudo varchar(32) NOT NULL,
+    mdp varchar(40) NOT NULL,
+    mail varchar(100) NOT NULL,
+    inscription bigint(20) NOT NULL,
+    
 );
 
 
