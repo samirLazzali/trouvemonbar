@@ -1,6 +1,5 @@
 <?php
-require_once('../config.php');
-require_once('../classes/Post.php');
+require_once('Post.php');
 
 /**
  * fichier qui contient des fonctions d'affichage en html de truc
