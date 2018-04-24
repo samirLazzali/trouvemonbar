@@ -9,8 +9,8 @@ $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=
 $userRepository = new User\UserRepository($connection);
 $amisRepository = new Amis\AmisRepository($connection);
 $tweetRepository = new Tweet\TweetRepository($connection);
-
-
+$messageRepository = new Message\MessageRepository($connection);
+$messages=$messageRepository->fetchAll();
 
 
 
@@ -30,12 +30,12 @@ $pseudo = "Jaime";
 <script>
 
         var Tweets =  <?php
-                    $sth = $connection->prepare('SELECT auteur,contenu,nb_like,date_post FROM "amis" JOIN "tweet" ON personne1=auteur WHERE personne2=\''.$pseudo.'\' UNION SELECT auteur,contenu,nb_like,date_post FROM "amis" JOIN "tweet" ON personne2=auteur WHERE personne1=\''.$pseudo.'\'  ');
+                    $sth = $connection->prepare('SELECT auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne1=auteur WHERE personne2=\''.$pseudo.'\' UNION SELECT auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne2=auteur WHERE personne1=\''.$pseudo.'\'  ');
                     $sth->execute();
                     $result = $sth->fetch(PDO::FETCH_OBJ);
                     echo '[';
                     while($result){
-                        echo "[\"$result->auteur\",\"$result->contenu\",\"$result->nb_like\",\"$result->date_post\"]";
+                        echo "[\"$result->auteur\",\"$result->contenu\",\"$result->date_envoie\"]";
                         $result = $sth->fetch(PDO::FETCH_OBJ);
                         if($result){
                             echo ",";
@@ -92,10 +92,14 @@ $pseudo = "Jaime";
     function tweets(){
         document.write("Derniers Tweets :<br/><br/>");
         for(var i=0; i<Tweets.length;i++){
-             document.write(Tweets[i][0] + " a tweeté à " + Tweets[i][3] +" : <br/>"+ Tweets[i][1]+"<br/>" );
-             document.write("<button>J'aime</button> Nb de J'aimes : "+ Tweets[i][2] + "<br/><br/>");
+             document.write(Tweets[i][0] + " a tweeté à " + Tweets[i][2] +" : <br/>"+ Tweets[i][1]+"<br/>" );
+             document.write("<button>J'aime</button> Nb de J'aimes : "+  "<br/><br/>");
 
         }
+    }
+
+    function EcrireTweet(){
+        var tweet = prompt("Exprimez vous : ");
     }
 
 
@@ -163,7 +167,7 @@ Rechercher un @ :<br>
   <input type="hidden" id="visite" value="Visiter le profil">
 </form>
 <p id="err"></p>
-<button>Ecrire un Tweet</button>
+<button onclick="EcrireTweet()">Ecrire un Tweet</button>
 <button>Ecrire un message</button>
 <form method='post' action="edition.php">
 <input type="hidden" name="pseudo" value="<?php echo "".$pseudo."" ?>"></input>
