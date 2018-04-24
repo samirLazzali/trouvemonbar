@@ -15,9 +15,17 @@ $users = $userRepository->fetchAll();
 <head>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../style/style_index.css">
 </head>
 <body>
-
+<div id="menu_bouton">
+    <div classe="bouton"><input type="submit" value="Acceuil" ></div>
+    <div classe="bouton"><input type="submit" value="Apéral" ></div>
+    <div classe="bouton"><input type="submit" value="Oenologiie" ></div>
+    <div classe="bouton"><input type="submit" value="Réunion" ></div>
+    <div classe="bouton"><input type="submit" value="Classement" ></div>
+    <div classe="bouton"><input type="submit" value="Admin" ></div>
+</div>
 <div class="container">
     <h3><?php echo 'Bienvenue sur le site des boloss !' ?></h3>
 
