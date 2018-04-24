@@ -59,6 +59,8 @@ $users = $userRepository->fetchAll();
 <h4>Prochaine réunion</h4>
 <div id="prochaine_réunion">
     <?php echo $date_réunion ?>
-
+    <input type="submit" value="Participer">
+</div>
 </body>
 </html>
+
