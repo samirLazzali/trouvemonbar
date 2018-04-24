@@ -42,6 +42,7 @@ class tweet{
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
     }
 
     /**
@@ -58,6 +59,7 @@ class tweet{
     public function setAuteur($auteur)
     {
         $this->auteur = $auteur;
+        return $this;
     }
 
     /**
@@ -74,6 +76,7 @@ class tweet{
     public function setDate($date)
     {
         $this->date = $date;
+        return $this;
     }
 
     /**
@@ -90,6 +93,7 @@ class tweet{
     public function setContenu($contenu)
     {
         $this->contenu = $contenu;
+         return $this;
     }
 }
 

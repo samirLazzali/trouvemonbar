@@ -1,12 +1,12 @@
 
 <?php
-require '../src/Message/Message.php';
 
 include("../src/Vue.php");
 
 
 /* Recupération des users*/
 require '../vendor/autoload.php';
+require '../src/Message/MessageRepository.php';
 
 //postgres
 $dbName = getenv('DB_NAME');
@@ -17,11 +17,9 @@ $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=
 $userRepository = new \User\UserRepository($connection);
 $users = $userRepository->fetchAll();
 
-include '../src/Message/MessageRepository.php';
 $messageRepository = new \Message\MessageRepository($connection);
 $messages = $messageRepository->fetchAll();
 
-$pseudo = Moi;
 
 
 
@@ -44,20 +42,23 @@ foreach ($users as $user) :
 	echo $user->getAge().' years'.'</p>';
 endforeach;
 
+echo 'MESSAGES : ';
+
 foreach ($messages as $message) : 
-	echo '<p>'.$message->getId().' ';
-	echo $message->getEmetteur().' ';
-	echo $message->getRecepteur().' ';
-	echo $message->getContenu().'</p>';
+	affiche_message($message);
 endforeach;
 
 
-
-
-
-
-
 affiche_message($msg1);
+
+
+
+
+
+
+
+
+
 
 pied();
 ?>

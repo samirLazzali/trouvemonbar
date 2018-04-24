@@ -51,6 +51,7 @@ class Message
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
     }
 
     /**
@@ -67,6 +68,7 @@ class Message
     public function setEmetteur($emetteur)
     {
         $this->emetteur = $emetteur;
+        return $this;
     }
 
     /**
@@ -83,6 +85,7 @@ class Message
     public function setRecepteur($recepteur)
     {
         $this->recepteur = $recepteur;
+        return $this;
     }
 
     /**
@@ -99,6 +102,7 @@ class Message
     public function setDate($date)
     {
         $this->date = $date;
+        return $this;
     }
 
     /**
@@ -115,6 +119,7 @@ class Message
     public function setContenu($contenu)
     {
         $this->contenu = $contenu;
+        return $this;
     }
 }
 
