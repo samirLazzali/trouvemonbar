@@ -20,16 +20,57 @@ function footer(){
 
 }
 
-function indexco(){
+function getoffers($semestre, $module, $matiere){
+	$requete = "SELECT * FROM annonce"; //default
+	if($semestre){ //on ajoute des parametres en fonction de la recherche
+		if($module){
+			if($matiere){
+				$requete = $requete." WHERE semestre = $semestre AND  module = $module AND matiere = $matiere";
+			}
+			else
+				$requete = $requete."  WHERE semestre = $semestre AND  module = $module";
+		}
+		else
+			$requete = $requete." WHERE semestre = $semestre";
+	}
+	else if($module){
+		if($matiere){
+			$requete = $requete." WHERE module = $module AND matiere = $matiere";
+			}
+		else
+			$requete = $requete." WHERE module = $module";
+	}
+	else if($matiere){
+		$requete = $requete." WHERE matiere = $matiere";
+	}
+	$connexion = db_connect();
+	$reponse = db_query($connexion, $requete);
+	db_close($connexion);
+	return $reponse;
+}
+function print_offer($offer){
+	print "<div class=\"offer\">";
+	print "<span class =\"offertitle\" onclick=\"document.getElementById($offer.getid()).style.display='block'\">$offer.gettitre()</span>";//on click fait aparaitre le reste.
+	print "<p class=\"offerdesc\" id=\"$offer.getid()\" style=\"display:none\"> offer.getdescription()</p>"; //display none
+	print "</div>";
 
+}
+function show_offers($offers){
+	foreach($offers as $offer){
+		printoffer($offer);
+}
+function indexco(){
+/*	$semestre, $genre, $type = res de post */
+    $offers = getoffers($semestre, $matiere, $type);
+	show_offers($offers);
 }
 
 function indexnotco(){
-	print "<h1> Bienvenue chez les bons bails! </h1>"
+	print "<h1> Bienvenue chez les bons bails! </h1>";
 	print "<p> lorem ipsum .... </br>
 				Connectez vous pour accéder aux offres 
-		</p>"
-	print "<p class='connexion'>
+			</p>";
+	print "<p class='connexion'> Connectez-Vous! </p>"; // dans les styles mettre que class connexion ouvre onclick() auth()
 
 }
 
