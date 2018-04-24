@@ -72,7 +72,7 @@ function validate_input_signup() {
             }
         }
     };
-    xhttp.open("POST", "/api/user/new.php", true);
+    xhttp.open("POST", "/api/user/new", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("username=" + fUsername.value + "&password=" + fPassword.value + "&email=" + fEmail.value);
     return false;
@@ -131,7 +131,7 @@ function login()
             else
                 console.log("Mauvais statut '" + status);
         };
-        xhttp.open("POST", "/api/auth/login.php", true);
+        xhttp.open("POST", "/api/auth/login", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("identifier=" + username + "&password=" + password);
         return false;

@@ -33,7 +33,7 @@
                 <br>
                 <br>
                 Si vous n'avez pas encore de compte cliquez
-                <a title="Créer un compte" href="new.php">
+                <a title="Créer un compte" href="/signup">
                     ici
                 </a>
             </div>
