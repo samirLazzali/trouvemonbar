@@ -171,3 +171,7 @@ textarea {
   margin-top: -20px;
   text-align: right;
 }
+
+.errorDisp {
+    color: red;
+}

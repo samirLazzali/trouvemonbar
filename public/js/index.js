@@ -42,4 +42,15 @@ $('.tab a').on('click', function (e) {
   
 });
 
+document.getElementById("connect").onclick = function(e) {
+    if (document.getElementById("form").style.display == 'none') {
+	//document.getElementById("form").style.display='block';
+	$('.form').fadeIn(500);
+    } else {
+	//document.getElementById("form").style.display='none';
+	$('.form').fadeOut(500);
+    }
+};
+
+
 
