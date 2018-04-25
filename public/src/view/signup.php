@@ -48,7 +48,7 @@
         </div>
 
         <p class="center">
-            <a title="Se connecter" href="login.php">
+            <a title="Se connecter" href="login">
                 Vous avez déjà un compte ?
             </a>
         </p>

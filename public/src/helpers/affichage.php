@@ -1,6 +1,5 @@
 <?php
 require_once("Post.php");
-
 /**
  * fichier qui contient des fonctions d'affichage en html de truc
  */

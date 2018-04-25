@@ -1,6 +1,5 @@
 <?php
-if (!defined('__ROOT__')) define('__ROOT__', dirname(dirname(__FILE__)));
-require_once(__ROOT__.'/config.php');
+require_once("../config.php");
 require_once("User.php");
 ?>
 
@@ -8,7 +7,7 @@ require_once("User.php");
 <html>
     <head>
         <title>
-            VITZ
+            VITZ - Abonnements
         </title>
         <meta charset="utf-8" />
     </head>
@@ -67,7 +66,7 @@ require_once("User.php");
         }
         ?>
 
-        <a href = "profil.php?user=<?=$user->getUsername()?>">Retour vers le Profil</a>
+        <a href = "profile.php?user=<?=$user->getUsername()?>">Retour vers le Profil</a>
 
     </body>
 

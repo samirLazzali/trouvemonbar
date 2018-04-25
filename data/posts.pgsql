@@ -27,3 +27,7 @@ INSERT INTO Post(ID, Author, Content, Timestamp, Repost, ResponseTo)
 /* Un truc à report */
 INSERT INTO Post(ID, Author, Content, Timestamp, Repost, ResponseTo)
     VALUES ('pad', 'a', 'TSP c''est de pédés.', 1523814689, NULL, NULL);
+
+/* Et enfin une mention */
+INSERT INTO Post(ID, Author, Content, Timestamp, Repost, ResponseTo)
+    VALUES ('pbc', 'b', 'Salut @Oxymore', 1523814895, NULL, NULL);
