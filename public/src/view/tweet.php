@@ -32,7 +32,6 @@ $array = $p->getResponsesTo();
 <html>
 <head>
     <title>Publication de <?=$author?></title>
-    <link rel="stylesheet" type="text/css" href="/src/assets/styles/visu_tweet.css" />
     <meta charset="utf-8" />
 </head>
 <body>
@@ -41,6 +40,7 @@ $array = $p->getResponsesTo();
             <?php affichePost($p) ?>
         </div>
         <div class="post-feed">
+            <h2> Réponses </h2>
             <?php foreach ($array as $item)
                 {
                     affichePost($item);
