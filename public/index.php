@@ -55,15 +55,29 @@ $users = $userRepository->fetchAll();
     </table>
 </div>
 
-<form method="get" action="connect.php">
+<h1>Se connecter</h1>
+<br />
+<form method="post" action="connect.php">
 <fieldset><legend>Pseudo : </legend><input type="text" name="pseudo"/></fieldset>
 <fieldset><legend>Mot de passe : </legend><input type="password" name="mdp"/></fieldset>
 <input type="submit" name="submit" value="Se connecter"/>
 </form>
+<br />
+
+<h1>S'inscrire</h1>
+<br />
+<form method = "post" action="inscription.php">
+<fieldset><legend>Prénom : </legend><input type ="text" name="prenominsc" /></fieldset>
+<fieldset><legend>Nom : </legend><input type="text" name="nominsc" /></fieldset>
+<fieldset><legend>E-mail : </legend><input type="text" name="mailinsc" /></fieldset>
+<fieldset><legend>Pseudo : </legend><input type="text" name="pseudoinsc" /></fieldset>
+<fieldset><legend>Mot de passe : </legend><input type ="text" name"mdpinsc" /></fieldset>
+<input type ="submit" name="submit" value="S'inscrire"/>
+<br />
 
 <h4>Prochaine réunion</h4>
 <form action id="prochaine_réunion">
-    <?php echo $date_réunion ?>
+    <?php echo $date_reunion ?>
     <input type="submit" value="Participer">
 </form>
 </body>
