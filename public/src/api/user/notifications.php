@@ -16,4 +16,4 @@ foreach($appreciations as $appreciation)
     $appreciation->getPost();
 }
 
-var_dump($notifications);
+success_die($notifications);

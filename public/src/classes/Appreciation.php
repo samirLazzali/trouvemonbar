@@ -47,6 +47,32 @@ class Appreciation implements JsonSerializable
         $this->timestamp = $timestamp;
     }
 
+    public function getAuthor()
+    {
+        if ($this->authorCache == null)
+            $this->authorCache = User::fromID($this->author);
+
+        return $this->authorCache;
+    }
+
+    public function getAuthorId()
+    {
+        return $this->author;
+    }
+
+    public function getPost()
+    {
+        if ($this->postCache == null)
+            $this->postCache = Post::fromID($this->post);
+
+        return $this->postCache;
+    }
+
+    public function getPostId()
+    {
+        return $this->post;
+    }
+
     /**
      * Construction à partir d'une ligne de BDD.
      * @param arr $row
@@ -134,9 +160,21 @@ class Appreciation implements JsonSerializable
      */
     function jsonSerialize()
     {
-        return array("type" => $this->type,
-            "author" => $this->author,
-            "post" => $this->post);
+        $r = array("type" => $this->type,
+            "authorId" => $this->author,
+            "postId" => $this->post);
+
+        if ($this->postCache != null)
+            $r["post"] = $this->postCache;
+        else
+            $r["post"] = null;
+
+        if ($this->authorCache != null)
+            $r["author"] = $this->authorCache;
+        else
+            $r["author"] = null;
+
+        return $r;
     }
 }
 

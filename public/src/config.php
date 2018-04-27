@@ -21,6 +21,10 @@ require_once("api.php");
 require_once("status.php");
 require_once("affichage.php");
 
+require_once("Appreciation.php");
+require_once("User.php");
+require_once("Post.php");
+
 function connect()
 {
     /** @var string Le nom d'utilisateur pour la BDD */

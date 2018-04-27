@@ -2,7 +2,6 @@
 
 if (!defined('__ROOT__')) define('__ROOT__', dirname(dirname(__FILE__)));
 require_once(__ROOT__ . '/config.php');
-require_once(__ROOT__ . '/classes/Post.php');
 
 class User implements JsonSerializable
 {
@@ -313,7 +312,6 @@ class User implements JsonSerializable
 
         $appreciations = $statement->fetchAll();
 
-
         $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE Content LIKE :content ORDER BY Timestamp DESC LIMIT 20";
         $statement = $db->prepare($SQL);
         $statement->bindValue(":content", "%@" . $this->getUsername() . "%");
@@ -326,7 +324,12 @@ class User implements JsonSerializable
         foreach($appreciations as $appreciation)
             $r_appreciations[] = Appreciation::fromRow($appreciation);
 
-        return array($r_appreciations, $mentions);
+        $r_mentions = array();
+
+        foreach($mentions as $mention)
+            $r_mentions[] = Post::fromRow($mention);
+
+        return array($r_appreciations, $r_mentions);
     }
 
     /**
