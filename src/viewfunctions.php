@@ -7,11 +7,33 @@ function header($titre)
     print "  <head>\n";
     print "    <meta charset=\"utf-8\" />\n";
     print "    <title>$titre</title>\n";
-    print "    <link rel=\"stylesheet\" href=\"tpStyle.css\"/>\n";
+    print "    <link rel="stylesheet" href="public/css/normalize.css">\n";
+    print "    <link rel="stylesheet" href="public/css/header.css">\n";
+    print "    <link href="https://www.stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">\n";
     print "  </head>\n";
   
     print "  <body>\n";
-    print "    <header><h1> $titre </h1></header>\n";
+    print "    <header role="header">\n";
+    print "    <nav class="menu" role="navigation">\n";
+    print "    <div class="inner">\n";
+    print "    <div class="m-left">\n";
+    print "    <h1 class="logo">$titre</h1>\n";
+    print "    </div>\n";
+    print "    <div class="m-right">\n";
+    print "    <a href="#" class="m-link"><i class="fa fa-home" aria-hidden="true"></i>
+ Accueil</a>\n";
+    print "    <a href="#" class="m-link"><i class="fa fa-newspaper-o" aria-hidden="true"></i>
+ Annonces</a>\n";
+    print "    <a href="#" class="m-link"><i class="fa fa-question-circle-o" aria-hidden="true"></i>
+ A propos</a>\n";
+    print "    <a href="#" class="m-link"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+ Contact</a>\n";
+    print "    </div>\n";
+    print "    </div>\n";
+    print "    </nav>\n";
+    print "    </header>\n";
+    print "    </body>\n";
+    print "    </html>\n";
 }
 
 function footer(){
