@@ -15,6 +15,10 @@ function header($titre)
 }
 
 function footer(){
+    print "<div id="footer">";
+    print"<p>&copy; <b> 2018 ENSIIE </b> | Skutnik . Chekour  . Trachino . Meas - All Rights Reserved  </p> </br>";
+    print"<p> <b> Contact </b> : 06 59 42 47 94 | lesbonsbails@gmail.com | </p>";"
+    print"</div>";"
 	print "  </body>\n";
 	print "</html>";
 
