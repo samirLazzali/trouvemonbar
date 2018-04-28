@@ -32,8 +32,6 @@ function header($titre)
     print "    </div>\n";
     print "    </nav>\n";
     print "    </header>\n";
-    print "    </body>\n";
-    print "    </html>\n";
 }
 
 function footer(){
