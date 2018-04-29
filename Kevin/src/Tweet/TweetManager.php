@@ -5,9 +5,8 @@
  * Date: 2018/4/19
  * Time: 13:36
  */
-namespace Message;
+namespace Tweet;
 require '../vendor/autoload.php';
-
 class TweetManager{
     private $db;
 
@@ -23,6 +22,7 @@ class TweetManager{
         $req->bindValue(':auteur', $tweet->getAuteur());
         $req->bindValue(':date_envoie', $tweet->getDate());
         $req->bindValue(':contenu', $tweet->getContenu());
+        $req->execute();
     }
 
     public function delete(Tweet $tweet){
@@ -35,30 +35,26 @@ class TweetManager{
                                     WHERE id = :id');
 
         $req->bindValue(':auteur', $twe->getAuteur());
-        $req->bindValue(':date_envoie', date_formah nat($twe->getDate(),"Y-m-d H:i:s"));
+        $req->bindValue(':date_envoie', date_format($twe->getDate(),"Y-m-d H:i:s"));
         $req->bindValue(':contenu', $twe->getContenu());
         $req->bindValue(':id', $twe->getId());
 
         $req->execute();
     }
 
-    public function get($id){
-        $id = (int) $id;
-
-        $req = $this->db->query('SELECT * FROM "tweet" WHERE id = '.$id);
-
-        $res = $req->fetch(\PDO::FETCH_OBJ);
-        $twe = new Tweet();
-        $twe
-            ->setId($id)
-            ->setAuteur($res['auteur'])
-            ->setDate(new \DateTime($res['date_envoie']))
-            ->setContenu($res['contenu']);
-
-        return $twe;
+    public function get($pseudo){
+        $sth = $this->db->prepare('SELECT * FROM "tweet" WHERE auteur=\''.$pseudo.'\'');
+        $sth->execute();
+        return $sth ;
+        
 
     }
 
+    public function show_tweet($tweet){
+        print "</br> $tweet->auteur a tweeté à $tweet->date_envoie : </br> $tweet->contenu </br>";
+        print "<button> J'aime</button> Nombre de j'aime :  </br> ";
+    }
+    
 
 
 }

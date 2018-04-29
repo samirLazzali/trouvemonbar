@@ -1,6 +1,5 @@
 <?php
 require '../vendor/autoload.php';
-require '../src/Tweet/TweetRepository.php';
 //postgres
 $dbName = getenv('DB_NAME');
 $dbUser = getenv('DB_USER');
@@ -8,13 +7,16 @@ $dbPassword = getenv('DB_PASSWORD');
 $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 
 $userRepository = new User\UserRepository($connection);
-//$amisRepository = new Amis\AmisRepository($connection);
+$amisRepository = new Amis\AmisRepository($connection);
 $tweetRepository = new Tweet\TweetRepository($connection);
-
+$messageRepository = new Message\MessageRepository($connection);
+$tweets=$tweetRepository->fetchAll();
+$tweetManager = new Tweet\TweetManager($connection);
 
 
 $pseudo = "Jaime";
 ?>
+
 
 
 <html>
@@ -47,26 +49,26 @@ $pseudo = "Jaime";
 
 
 
-        //var FriendList = <?php
-        //           $sth = $connection->prepare('SELECT * FROM "amis" WHERE personne1=\''.$pseudo.'\' OR personne2=\''.$pseudo.'\' ');
-        //           $sth->execute();
-        //           $result = $sth->fetch(PDO::FETCH_OBJ);
-        //           echo '[';
-        //           while($result){
-        //               echo '"';
-        //               if($result->personne1 == $pseudo){
-        //                   echo "$result->personne2" ;
-        //               }
-        //               else{
-        //                    echo "$result->personne1" ;
-        //               }
-        //               echo '"';
-        //               $result = $sth->fetch(PDO::FETCH_OBJ);
-        //               if($result){
-        //                    echo ',';
-        //               }
-        //            }
-        //           echo ']';
+         var FriendList = <?php
+                    $sth = $connection->prepare('SELECT * FROM "amis" WHERE personne1=\''.$pseudo.'\' OR personne2=\''.$pseudo.'\' ');
+                    $sth->execute();
+                    $result = $sth->fetch(PDO::FETCH_OBJ);
+                    echo '[';
+                    while($result){
+                        echo '"';
+                        if($result->personne1 == $pseudo){
+                            echo "$result->personne2" ;
+                        }
+                        else{
+                             echo "$result->personne1" ;
+                        }
+                        echo '"';
+                        $result = $sth->fetch(PDO::FETCH_OBJ);
+                        if($result){
+                             echo ',';
+                        }
+                     }
+                    echo ']';
                     ?> ;
 
         var AtList = 
@@ -98,14 +100,23 @@ $pseudo = "Jaime";
     }
 
     function EcrireTweet(){
-        var tweet = prompt("Exprimez vous : ");
+       var ok = document.getElementById("ok");
+       ok.type="submit";
+       var textarea = document.getElementById("textarea");
+       textarea.style="display";
+
+        
+
     }
 
+    function ConfirmationTweet(){
+        alert("Tweet Envoyé");
+    }
 
     function liste_amis(){
         document.write("<p>Vos amis:</p>");
         for(var i=0;i<FriendList.length;i++){
-            document.write(FriendList[i]+"<br/>");
+            document.write("<a href=\"profil.php?pseudo=" + FriendList[i] + "\">" + FriendList[i] + "</a><br/>");
         }
         document.write("<br/>");
     }
@@ -163,28 +174,22 @@ Rechercher un @ :<br>
   <datalist id="pseudos">
   <script >liste_pseudos()</script>
   </datalist>
-  <input type="hidden" id="visite" value="Visiter le profil">
+  <input type="hidden" id="visite" name="visite" value="Visiter le profil">
 </form>
 <p id="err"></p>
-
-
-
-<button onclick="EcrireTweet()">Ecrire un Tweet</button>
-
-
-<form method='post' action="GestionMessage.php">
-
-<input type="hidden" name="pseudo" value="<?php echo "".$pseudo."" ?>"></input>
-<input type="submit" value="Ecrire un Message">
+<form method='post' action=<?php echo "edition.php?pseudo=$pseudo" ?>>
+<input type="submit" name="editio" value="Personnaliser ...">
 </form>
 
+<button onclick="EcrireTweet()">Ecrire un tweet</button>
 
+<form method='post' action="ecriretweet.php">
+<input type="hidden" name="pseudo" value="<?php echo "".$pseudo."" ?>"></input><br/>
+<textarea  name= "textarea" id="textarea" style="display: none" placeholder="Exprimez vous..." rows="5" cols="50"></textarea>
+<input id="ok" onclick="ConfirmationTweet()" type="hidden" value="Envoyer">
+</form>
+<button>Ecrire un message</button>
 
-
-
-<form method='post' action="edition.php">
-<input type="hidden" name="pseudo" value="<?php echo "".$pseudo."" ?>"></input>
-<input type="submit" value="Personnaliser ...">
 </form>
 <script >
     liste_amis();

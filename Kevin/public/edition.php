@@ -1,5 +1,7 @@
 <?php
-$pseudo = $_GET['id']; 
+
+$pseudo = $_GET['pseudo']; 
+
 ?>
 <html>
 <head>
@@ -14,6 +16,6 @@ $pseudo = $_GET['id'];
 		<input type="password" id="mdp" ><br>
 		<button>Changer</button>
 	</form>
-	<a href="index.php">Retour </a><br>
+	<a href="accueil.php">Retour </a><br>
 </body>
 </html>
