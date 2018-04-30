@@ -20,13 +20,13 @@ function header($titre)
     print "    <h1 class="logo">$titre</h1>\n";
     print "    </div>\n";
     print "    <div class="m-right">\n";
-    print "    <a href="#" class="m-link"><i class="fa fa-home" aria-hidden="true"></i>
+    print "    <a href=\"#\" class="m-link"><i class="fa fa-home" aria-hidden="true"></i>
  Accueil</a>\n";
-    print "    <a href="#" class="m-link"><i class="fa fa-newspaper-o" aria-hidden="true"></i>
+    print "    <a href=\"#\" class="m-link"><i class="fa fa-newspaper-o" aria-hidden="true"></i>
  Annonces</a>\n";
-    print "    <a href="#" class="m-link"><i class="fa fa-question-circle-o" aria-hidden="true"></i>
+    print "    <a href=\"#\" class="m-link"><i class="fa fa-question-circle-o" aria-hidden="true"></i>
  A propos</a>\n";
-    print "    <a href="#" class="m-link"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+    print "    <a href`\"#\" class="m-link"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>
  Contact</a>\n";
     print "    </div>\n";
     print "    </div>\n";
@@ -84,17 +84,17 @@ function show_offers($offers){
 		printoffer($offer);
 }
 function indexco(){
-/*	$semestre, $genre, $type = res de post */
-    $offers = getoffers($semestre, $matiere, $type);
+/*	$semestre, $genre, $type = res de post 
+*/	$offers = getoffers($semestre, $matiere, $type);
 	show_offers($offers);
 }
 
 function indexnotco(){
-	print "<h1> Bienvenue chez les bons bails! </h1>";
+	print "<h1> Bienvenue chez les bons bails! </h1>"
 	print "<p> lorem ipsum .... </br>
 				Connectez vous pour accéder aux offres 
-			</p>";
-	print "<p class='connexion'> Connectez-Vous! </p>"; // dans les styles mettre que class connexion ouvre onclick() auth()
+			</p>"
+	print "<p class='connexion'> Connectez-Vous! </p>" // dans les styles mettre que class connexion ouvre onclick() auth()
 
 }
 
