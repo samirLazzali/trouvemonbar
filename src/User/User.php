@@ -24,6 +24,79 @@ class User
     private $birthday;
 
     /**
+     * @return string
+     */
+    public function getNickname()
+    {
+        return $this->nickname;
+    }
+
+   /**
+     * @param string $nickname
+     * @return User
+     */
+    public function setNickname($nickname)
+    {
+        $this->nickname = $nickname;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDomicile()
+    {
+        return $this->domicile;
+    }
+
+   /**
+     * @param string $domicile
+     * @return User
+     */
+    public function setDomicile($domicile)
+    {
+        $this->domicile = $domicile;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMdp()
+    {
+        return $this->mdp;
+    }
+
+   /**
+     * @param string $mdp
+     * @return User
+     */
+    public function setMdp($mdp)
+    {
+        $this->mdp = $mdp;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId_groupe()
+    {
+        return $this->id_groupe;
+    }
+
+    /**
+     * @param int $id_groupe
+     * @return User
+     */
+    public function setId_groupe($id)
+    {
+        $this->id_groupe = $id_groupe;
+        return $this;
+    }
+
+
+    /**
      * @return int
      */
     public function getId()
