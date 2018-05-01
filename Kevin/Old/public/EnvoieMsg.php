@@ -1,5 +1,7 @@
 <?php
 require '../vendor/autoload.php';
+require '../src/Message/MessageManager.php';
+require '../src/Message/Message.php';
 
 //postgres
 $dbName = getenv('DB_NAME');
@@ -17,13 +19,13 @@ $msg = new \Message\Message();
 $recepteur = "Otis";
 
 $msg->setEmetteur($_GET['pseudo']);
-$msg->setRecepteur($_GET['recepteur']);
+$msg->setRecepteur($recepteur);
 $msg->setDate(new DateTime);
 $msg->setContenu($_GET['m']);
 
 $msgManager->add($msg);
 
 
-//echo("OKKK");
+echo("OKKK");
 ?>
 

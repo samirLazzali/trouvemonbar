@@ -1,8 +1,8 @@
 <?php
 function affiche_message($message){
-    return 'Message de '.$message->getEmetteur().' à '.$message->getRecepteur().' à '.
+    return 'De '.$message->getEmetteur().' à '.
     ($message->getDate())->format('H:i:s').' le '.
-    ($message->getDate())->format('Y-m-d').': '.$message->getContenu();
+    ($message->getDate())->format('Y-m-d').' : '.$message->getContenu();
 }
 
 require '../vendor/autoload.php';
@@ -27,9 +27,13 @@ $result = $sth->fetch(PDO::FETCH_OBJ);
 $Res = "";
 while($result){
 	$msg = new \Message\Message();
-	$msg->setEmetteur($result->emetteur)
-		->setRecepteur($result->recepteur)
-		->setDate(new \DateTime($result->date_envoie))
+	if (strcmp($result->emetteur, $emetteur)){
+        $msg->setEmetteur("Moi");
+	}
+	else{
+        $msg->setEmetteur($result->emetteur);
+    }
+	$msg->setDate(new \DateTime($result->date_envoie))
 		->setContenu($result->contenu);
 
 	$Res .= affiche_message($msg);
@@ -40,6 +44,6 @@ while($result){
 	}
 }
 echo($Res);
-?> 
+?>
 
 

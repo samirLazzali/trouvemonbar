@@ -15,6 +15,7 @@ $tweetManager = new Tweet\TweetManager($connection);
 
 
 $pseudo = "Jaime";
+$id = 7;
 ?>
 
 
@@ -31,12 +32,12 @@ $pseudo = "Jaime";
 <script>
 
         var Tweets =  <?php
-                    $sth = $connection->prepare('SELECT auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne1=auteur WHERE personne2=\''.$pseudo.'\' UNION SELECT auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne2=auteur WHERE personne1=\''.$pseudo.'\'  ');
+                    $sth = $connection->prepare('SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne1=auteur WHERE personne2=\''.$pseudo.'\' UNION SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne2=auteur WHERE personne1=\''.$pseudo.'\'  ');
                     $sth->execute();
                     $result = $sth->fetch(PDO::FETCH_OBJ);
                     echo '[';
                     while($result){
-                        echo "[\"$result->auteur\",\"$result->contenu\",\"$result->date_envoie\"]";
+                        echo "[\"$result->auteur\",\"$result->contenu\",\"$result->date_envoie\",\"$result->id\"]";
                         $result = $sth->fetch(PDO::FETCH_OBJ);
                         if($result){
                             echo ",";
@@ -90,14 +91,41 @@ $pseudo = "Jaime";
                     ?> ;
 
 
+                /************************** AJOUT DE KEVIN ****************************/
+    function nbLike(id){
+        var xhttp;
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {// 4 = request finished and response is ready, 200 = "OK"
+                document.getElementById('like_'+id).innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "nbLike.php?T_id="+id , true);
+        xhttp.send();
+    }
+    function Liker(T_id){
+        var xhttp;
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {// 4 = request finished and response is ready, 200 = "OK"
+                alert("Tweet Liké");
+            }
+        };
+        xhttp.open("GET", "Liker.php?pseudo_id=<?php echo $id; ?>+T_id="+T_id, true);
+        xhttp.send();
+    }
+
     function tweets(){
         document.write("Derniers Tweets :<br/><br/>");
         for(var i=0; i<Tweets.length;i++){
              document.write(Tweets[i][0] + " a tweeté à " + Tweets[i][2] +" : <br/>"+ Tweets[i][1]+"<br/>" );
-             document.write("<button>J'aime</button> Nb de J'aimes : "+  "<br/><br/>");
-
+             document.write("<button id=\""+ Tweets[i][3] + "\" onclick=\"Liker("+Tweets[i][3]+")\">J'aime</button> Nb de J'aimes : <span id=\"like_"+ Tweets[i][3]+"\"></span><br/><br/>");
+             nbLike(Tweets[i][3])
         }
     }
+
+        /**************************************** FIN AJOUT *************************************/
+
 
     function EcrireTweet(){
        var ok = document.getElementById("ok");
@@ -158,6 +186,11 @@ $pseudo = "Jaime";
             return true;
         }
     }
+
+   
+
+
+
 </script>
 Bienvenue <?php echo $pseudo ?> ! <br>
 
@@ -188,12 +221,21 @@ Rechercher un @ :<br>
 <textarea  name= "textarea" id="textarea" style="display: none" placeholder="Exprimez vous..." rows="5" cols="50"></textarea>
 <input id="ok" onclick="ConfirmationTweet()" type="hidden" value="Envoyer">
 </form>
-<button>Ecrire un message</button>
 
+
+
+<!-- AJOUT DE KEVIN-->
+<form method='post' action="Msg_Ecrire.php">
+    <input type="hidden" name="pseudo" value="<?php echo "".$pseudo."" ?>"></input><br/>
+    <input type="hidden" name="id" value="<?php echo "".$id."" ?>"></input><br/>
+    <input type="submit" name="envoyer" value="Écrire un message">
 </form>
+
+
 <script >
     liste_amis();
     tweets();
+   // document.getElementById('1').innerHTML = "MDR";
 </script>
 
 

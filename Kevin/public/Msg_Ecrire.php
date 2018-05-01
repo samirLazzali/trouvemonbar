@@ -1,8 +1,7 @@
 
 <?php
-$pseudo = 'Jaime';//$_POST['pseudo'];
-
-
+$pseudo = $_POST['pseudo'];
+$pseudo = $_POST['id'];
 /************** VUE *////////////////////////s
 function enTete($titre, $style)
 {
@@ -99,9 +98,6 @@ endforeach;
 
 //$msgManager->add($msg1);
 
-/* A MODIFIER */
-$recepteur = "Otis";
-
 /* MESSAGE MANAGER */
 $msgManager = new \Message\MessageManager($connection);
 
@@ -117,16 +113,18 @@ $msgManager = new \Message\MessageManager($connection);
  			if (this.readyState == 4 && this.status == 200) {// 4 = request finished and response is ready, 200 = "OK"
  				var Res = this.responseText;
 	 			var Msgs = Res.split(",,")
-	 			document.getElementById("m1").innerHTML = Msgs[Msgs.length-6];
-	 			document.getElementById("m2").innerHTML = Msgs[Msgs.length-5];
-	 			document.getElementById("m3").innerHTML = Msgs[Msgs.length-4];
-	 			document.getElementById("m4").innerHTML = Msgs[Msgs.length-3];
-	 			document.getElementById("m5").innerHTML = Msgs[Msgs.length-2];
-	 			document.getElementById("m6").innerHTML = Msgs[Msgs.length-1];
+	 			var chat = document.getElementById("chatbox");
+	 			chat.innerHTML = "";
+                for(var i=0;i<Msgs.length;i++){
+                    chat.innerHTML += Msgs[i];
+                    chat.innerHTML += '</br>';
+                }
+                chat.scrollTop = chat.scrollHeight;
  		}
 		};
-		xhttp.open("GET", "Conversation.php?emetteur=<?php echo $pseudo; ?>"+"&recepteur="+ document.getElementById('envoyer').value , true);
-		xhttp.send(); 
+		xhttp.open("GET", "Msg_Conversation.php?emetteur="+ document.getElementById('envoyer').value +"&recepteur=<?php echo $pseudo; ?>" , true);
+		xhttp.send();
+
 	}
 
 /*POUR ACTUALISATION AUTOMATIQUE ??? */
@@ -143,7 +141,7 @@ $msgManager = new \Message\MessageManager($connection);
 			return;
 		}
 		xhttp = new XMLHttpRequest();
-		xhttp.open("GET", "EnvoieMsg.php?m="+Msg+"&pseudo=<?php echo $pseudo; ?>"+"&recepteur="+ document.getElementById('envoyer').value , true);
+		xhttp.open("GET", "Msg_Envoie.php?m="+Msg+"&pseudo=<?php echo $pseudo; ?>"+"&recepteur="+ document.getElementById('envoyer').value , true);
 		xhttp.send(); 
 		Champ.value = "";
 	}
@@ -169,6 +167,8 @@ $msgManager = new \Message\MessageManager($connection);
                     }
                     echo ']';
                     ?> ;
+   // var FriendList_ID =
+
 
     function liste_amis(){
     	document.write("<p>Vos amis:</p>");
@@ -186,24 +186,19 @@ $msgManager = new \Message\MessageManager($connection);
 	
 </script>
 
+<head>
+    <link rel="stylesheet" href="CSS/stylesheet1.css">
+    <title>Mes messages (<?php echo $pseudo ?>)</title>
+</head>
 <body>
 
 
-<h1 id="h1" value="ALOO"></h1> 
+<h1 id="h1"></h1>
 
 <p id="dialogue"></p>
 
-<div id="chatbox" class="chatbox" disabled="disabled">
+<div id="chatbox" class="chatbox">
 
-	<ul>
-		<li id="m1"></li>
-		<li id="m2"></li>
-		<li id="m3"></li>
-		<li id="m4"></li>
-		<li id="m5"></li>
-		<li id="m6"></li>
-	</ul>
-	
 </div>	
 
 <button onclick="Conversation();">Recharger</button>
@@ -211,12 +206,13 @@ $msgManager = new \Message\MessageManager($connection);
 <div>
 	<textarea id="msg" placeholder="Votre message ..." rows="5" cols="50"></textarea>
 
-	<button type="button" id="envoyer" onclick="EnvoiMessage(); Conversation();">Envoyer</button>
+	<button type="button" id="envoyer" onclick="EnvoiMessage()/*; setTimeout(Conversation(),10000);*/">Envoyer</button>
 </div>
 
 
 
 
+<a href="accueil.php">Retour à l'accueil</a><br>
 <?php
 pied();
 ?>
