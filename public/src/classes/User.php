@@ -319,17 +319,41 @@ class User implements JsonSerializable
 
         $mentions = $statement->fetchAll();
 
+        $SQL = "SELECT 
+                    Repost.ID AS ID, 
+                    Repost.Repost AS Repost,
+                    Repost.Author AS Author,
+                    Repost.Content AS Content,
+                    NULL AS ResponseTo,
+                    Repost.Timestamp AS Timestamp
+                FROM " .
+                TABLE_Posts . " AS Repost 
+                JOIN " . TABLE_Posts . " AS Original 
+                ON Repost.Repost = Original.ID 
+                WHERE Original.Author = :author";
+
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":author", $this->getID());
+        $statement->execute();
+
+        $reposts = $statement->fetchAll();
+
         $r_appreciations = array();
 
         foreach($appreciations as $appreciation)
             $r_appreciations[] = Appreciation::fromRow($appreciation);
+
+        $r_reposts = array();
+        foreach($reposts as $repost)
+            $r_reposts[] = Post::fromRow($repost);
+
 
         $r_mentions = array();
 
         foreach($mentions as $mention)
             $r_mentions[] = Post::fromRow($mention);
 
-        return array($r_appreciations, $r_mentions);
+        return array($r_appreciations, $r_mentions, $r_reposts);
     }
 
     /**

@@ -460,6 +460,14 @@ class Post implements JsonSerializable
         return $content;
     }
 
+    function getOriginalPost()
+    {
+        if ($this->repostOf == null)
+            return null;
+        else
+            return Post::fromID($this->repostOf);
+    }
+
     /**
      * Sérialise un Post en JSON.
      * @return array|mixed
