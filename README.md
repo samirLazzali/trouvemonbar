@@ -6,6 +6,8 @@
     * DOCKER__USER_ID : result of the command $(echo id -u $USER)
 * To install and start the application run `make install`
 * Your web site is running here [http:localhost:8080](http:localhost:8080)
+* pgadmin4 is running here [http://localhost:80](http:localhost:80) 
+(sometimes at 0.0.0.0:80)
 
 ## Start you application
 `make start`

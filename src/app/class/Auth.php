@@ -7,24 +7,66 @@
  * This file contains the authentication functions
  */
 
-namespace User;
 
-
+/**
+ * Class Auth
+ * Singleton
+ * Holds info about who is logged in
+ */
 class Auth
 {
 
+    private static $user = false;
 
-    /*
-     * return password in hash form
+    /**
+     * @brief called automatically when the app is launched
      */
-    function hash_password($password)
+    public static function get_user()
     {
+        if(!empty($_SESSION['user'])) {
+            try {
+                self::$user = $_SESSION['user'];
+            }
+            catch(\Exception $e)
+            {
+                self::logout();
+                error(500);
+            }
+        }
     }
 
-    /*
-     * check if password is correct against database
+    /**
+     * @brief create the user session
+     * @param string user id
      */
-    function check_credentials($username, $password)
+    public static function login($id)
+    {
+        $_SESSION['user'] = $id;
+    }
+
+    /**
+     * @return User current user
+     */
+    public static function user()
+    {
+        //return self::$user;
+    }
+
+    /**
+     * @return true if user is logged in
+     */
+    public static function logged()
+    {
+        return ! empty($_SESSION['user']);
+    }
+
+    /**
+     * @brief destroy the session
+     */
+    public static function logout()
+    {
+        unset($_SESSION['user']);
+    }
 
 }
 

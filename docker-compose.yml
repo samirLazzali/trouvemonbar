@@ -1,6 +1,5 @@
 version: '3.3'
 services:
-
   nginx:
     build: ./.docker/nginx-php
     restart: "no"
@@ -55,6 +54,16 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
       - .:/var/www/html
     working_dir: /var/www/html
+    networks:
+      - "ensiie"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "80:80"
+    environment:
+      - "PGADMIN_DEFAULT_EMAIL=josephine.barthel11@gmail.com"
+      - "PGADMIN_DEFAULT_PASSWORD=ensiie"
     networks:
       - "ensiie"
 
