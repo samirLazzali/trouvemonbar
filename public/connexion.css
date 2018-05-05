@@ -1,11 +1,9 @@
-body {font-family: Arial, Helvetica, sans-serif;
-      margin: auto;
-}
+body {font-family: Arial, Helvetica, sans-serif;}
+
 input[type=text], input[type=password] {
-    margin: auto;
     width: 33%;
 	padding: 12px 20px;
-	margin: 8px 0;
+	margin: 33%;
 	display: inline-block;
 	border: 1px solid #ccc;
 	box-sizing: border-box;
@@ -21,7 +19,7 @@ button {
     background-color: #1E90FF;
     color: white;
 	padding: 14px 20px;
-    margin: 8px 0;
+    margin: 33%;
 	border: none;
     cursor: pointer;
     width: 33%;
