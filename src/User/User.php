@@ -24,6 +24,28 @@ class User
     private $birthday;
 
     /**
+     * @var string
+     */
+    private $nickname;
+
+    /**
+     * @var string
+     */
+    private $domicile;
+
+    /**
+     * @var string
+     */
+    private $mdp;
+
+    /**
+     * @var int
+     */
+    private $id_groupe;
+
+
+
+    /**
      * @return string
      */
     public function getNickname()

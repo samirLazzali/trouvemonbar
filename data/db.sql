@@ -3,17 +3,17 @@ DROP TABLE IF EXISTS "user","Evenements","Musique","Type","Groupe";
 /*Utilisateurs*/
 CREATE TABLE "user" (
     id SERIAL PRIMARY KEY ,
-    firstname VARCHAR NOT NULL ,
-    lastname VARCHAR NOT NULL ,
+    firstname VARCHAR ,
+    lastname VARCHAR ,
     birthday date ,
     nickname VARCHAR NOT NULL ,
-    domicile VARCHAR NOT NULL ,
+    domicile VARCHAR ,
     mdp VARCHAR ,
     id_groupe INT NOT NULL
     );
 
-INSERT INTO "user"(firstname, lastname, birthday,nickname,domicile,mdp,id_groupe) VALUES ('John', 'Doe', '1967-11-22','Johnny','Grigny-La-Grande-Borne',NULL,1);
-INSERT INTO "user"(firstname, lastname, birthday,nickname,domicile,mdp,id_groupe) VALUES ('Yvette', 'Angel', '1932-01-24','Yvi','Aulnay-Sous-Bois',NULL,1);
+INSERT INTO "user"(firstname, lastname, birthday,nickname,domicile,mdp,id_groupe) VALUES ('Jo', 'Doe', '1967-11-22','Johnny','Grigny-La-Grande-Borne','ab4f63f9ac65152575886860dde480a1',1);
+INSERT INTO "user"(firstname, lastname, birthday,nickname,domicile,mdp,id_groupe) VALUES ('Yvette', 'Angel', '1932-01-24','Yvi','Aulnay-Sous-Bois','ab4f63f9ac65152575886860dde480a1',1);
 INSERT INTO "user"(firstname, lastname, birthday,nickname,domicile,mdp,id_groupe) VALUES ('Amelia', 'Waters', '1981-12-01','Meli','Sevran',NULL,1);
 INSERT INTO "user"(firstname, lastname, birthday,nickname,domicile,mdp,id_groupe) VALUES ('Manuel', 'Holloway', '1979-07-25','Manu','Corbeil-Essonne',NULL,1);
 INSERT INTO "user"(firstname, lastname, birthday,nickname,domicile,mdp,id_groupe) VALUES ('Alonzo', 'Erickson', '1947-11-13','Pataya','Marseille',NULL,1);
@@ -26,7 +26,7 @@ INSERT INTO "user"(firstname, lastname, birthday,nickname,domicile,mdp,id_groupe
 INSERT INTO "user"(firstname, lastname, birthday,nickname,domicile,mdp,id_groupe) VALUES ('Delores', 'Williamson', '1961-07-19','Delo','Creteil',NULL,1);
 INSERT INTO "user"(firstname,lastname,birthday,nickname,domicile,mdp,id_groupe) VALUES ('Martin','Dufour','1997-08-27','Feuj','Strasbourg',NULL,2);
 INSERT INTO "user"(firstname,lastname,birthday,nickname,domicile,mdp,id_groupe) VALUES ('Hugues','Genin','1998-02-14','Barnum','Jenlain',NULL,2);
-INSERT INTO "user"(firstname,lastname,birthday,nickname,domicile,mdp,id_groupe) VALUES ('Quentin','Pichollet','1997-08-19','Pichet','Orléans',NULL,2);
+INSERT INTO "user"(firstname,lastname,birthday,nickname,domicile,mdp,id_groupe) VALUES ('Quentin','Pichollet','1997-08-19','Pichet','Orléans','2f3497b77103fbaa8794550ed1c2c75b',2);
 INSERT INTO "user"(firstname,lastname,birthday,nickname,domicile,mdp,id_groupe) VALUES ('Christian','Morello','1997-11-01','Leji','Besançon',NULL,2);
 /*Evenements*/
 CREATE TABLE "Evenements" (
