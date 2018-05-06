@@ -5,7 +5,7 @@ function affiche_message($message){
     ($message->getDate())->format('Y-m-d').' : '.$message->getContenu();
 }
 
-require '../vendor/autoload.php';
+require '../../vendor/autoload.php';
 
 //postgres
 $dbName = getenv('DB_NAME');

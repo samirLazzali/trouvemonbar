@@ -23,19 +23,20 @@ POUR METTRE à jour msg : AJAX AUSSI
 
 + CHAT defilant? OK
 
-MAIS UN Probleme tjr : raffraichissement automatique
+MAIS UN Probleme tjr : raffraichissement automatique -> OK actualisation auto toute les 10 secs
 
 
 + Nombre de like et possibilité de like
     Modification de  :
         nbLike()
         tweet()
-        Liker() -> Pas encore fonctionnel
+        Liker() -> OKKKK
+        Dislike si déjà liker
 
 
 ATTENTION ---------> POUR Les modifications dans SQL, utiliser ID au lieu du pseudo
 
-pb -> TABLE AMIS PAS BONNE : Il faut mettre id des users en attribut
+pb -> TABLE AMIS PAS BONNE : Il faut mettre id des users en attribut ---> OKKKKKK
 
 
 

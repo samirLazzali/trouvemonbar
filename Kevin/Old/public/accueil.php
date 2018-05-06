@@ -132,9 +132,10 @@ function prenom_user($id_user){
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {// 4 = request finished and response is ready, 200 = "OK"
                 alert("Tweet Liké");
+                document.location.reload(true);
             }
         };
-        xhttp.open("GET", "Liker.php?pseudo_id=<?php echo $_SESSION['id']; ?>+T_id="+T_id, true);
+        xhttp.open("GET", "Liker.php?pseudo_id=<?php echo $_SESSION['id']; ?>&T_id="+T_id, true);
         xhttp.send();
     }
 

@@ -6,7 +6,8 @@ $prenom = $_SESSION['prénom'];
 $id = $_SESSION['id'];
 
 /* Recupération des users*/
-require '../vendor/autoload.php';
+require '../../vendor/autoload.php';
+
 
 //postgres
 $dbName = getenv('DB_NAME');
@@ -56,7 +57,7 @@ endforeach;
 //$msgManager->add($msg1);
 
 /* MESSAGE MANAGER */
-$msgManager = new \Message\MessageManager($connection);
+//$msgManager = new \Message\MessageManager($connection);
 
 
 
@@ -134,7 +135,9 @@ function prenom_user($id_user){
                     chat.innerHTML += '</br>';
                 }
                 chat.scrollTop = chat.scrollHeight;
- 		}
+
+                /******************* ACTUALISATION AUTOMATIQUE ******************/
+                window.setTimeout(" Conversation();", 1000*10, "JavaScript"); 		}
 		};
 		xhttp.open("GET", "Msg_Conversation.php?emetteur="+ document.getElementById('envoyer').value +"&recepteur=<?php echo $id; ?>" , true);
 		xhttp.send();
@@ -155,6 +158,12 @@ function prenom_user($id_user){
 			return;
 		}
 		xhttp = new XMLHttpRequest();
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {// 4 = request finished and response is ready, 200 = "OK"
+                Conversation();
+            }
+        };
 		xhttp.open("GET", "Msg_Envoie.php?m="+Msg+"&emetteur=<?php echo $id; ?>"+"&recepteur="+ document.getElementById('envoyer').value , true);
 		xhttp.send(); 
 		Champ.value = "";
@@ -200,7 +209,7 @@ function prenom_user($id_user){
 </script>
 
 <head>
-    <link rel="stylesheet" href="CSS/stylesheet1.css">
+    <link rel="stylesheet" href="../CSS/stylesheet1.css">
     <title>Mes messages (<?php echo $_SESSION['prenom']; ?>)</title>
 </head>
 <body>
@@ -225,7 +234,7 @@ function prenom_user($id_user){
 
 
 
-<a href="accueil.php">Retour à l'accueil</a><br>
+<a href="../accueil.php">Retour à l'accueil</a><br>
 <?php
 pied();
 ?>

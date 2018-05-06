@@ -9,8 +9,8 @@ $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=
 
 
 $sth = $connection->prepare('INSERT INTO "like"(tweet_id, user_id) VALUES (:tweet_id, :user_id)');
-$sth->bindValue(':tweet_id', $_GET['T_id']);
-$sth->bindValue(':user_id', $_GET['pseudo_id']);
+$sth->bindParam(':tweet_id', $_GET['T_id']);
+$sth->bindParam(':user_id', $_GET['pseudo_id']);
 $sth->execute();
 
 ?>

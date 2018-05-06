@@ -48,14 +48,14 @@ INSERT INTO "amis"(personne1, personne2) VALUES ('8', '7');
 
 CREATE TABLE "tweet" (
   id SERIAL PRIMARY KEY ,
-  auteur VARCHAR NOT NULL ,
+  auteur int references "user"(id),
   date_envoie timestamp ,
   contenu VARCHAR
 );
-INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('John', '1999-12-23 12:45:23', '****');
-INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('Vicky', '1999-12-23 12:45:23', '****');
-INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('Brendan', '1999-12-23 12:45:23', '****');
-INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('Otis', '1999-12-23 12:45:23', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('1', '1999-12-23 12:45:23', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('2', '1999-12-23 12:45:23', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('3', '1999-12-23 12:45:23', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('5', '1999-12-23 12:45:23', '****');
 
 CREATE TABLE "like" (
   tweet_id int references "tweet"(id) ,

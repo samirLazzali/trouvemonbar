@@ -14,16 +14,6 @@ $dbPassword = getenv('DB_PASSWORD');
 $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 
 
-
-/**************AJOUT ******************/
-function prenom_user($id_user){
-    global $connection;
-    $sth = $connection->prepare('SELECT * FROM "user" WHERE id=\''.$id_user.'\';');
-    $sth->execute();
-    $result = $sth->fetch(PDO::FETCH_OBJ);
-    return $result->firstname;
-}
-
 //$msgManager = new \Message\MessageManager($connection);
 
 $emetteur = $_GET['emetteur'];
@@ -41,7 +31,7 @@ while($result){
         $msg->setEmetteur("Moi");
 	}
 	else{
-        $msg->setEmetteur(prenom_user($result->emetteur));
+        $msg->setEmetteur($result->emetteur);
     }
 	$msg->setDate(new \DateTime($result->date_envoie))
 		->setContenu($result->contenu);

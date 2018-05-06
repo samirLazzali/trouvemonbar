@@ -14,8 +14,9 @@ $msgManager = new \Message\MessageManager($connection);
 $msg = new \Message\Message();
 
 
+$recepteur = "Otis";
 
-$msg->setEmetteur($_GET['emetteur']);
+$msg->setEmetteur($_GET['pseudo']);
 $msg->setRecepteur($_GET['recepteur']);
 $msg->setDate(new DateTime);
 $msg->setContenu($_GET['m']);

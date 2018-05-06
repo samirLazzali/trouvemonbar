@@ -1,67 +1,8 @@
+
 <?php
-
-session_start();
-
-$prenom = $_SESSION['prénom'];
-$id = $_SESSION['id'];
-
-/* Recupération des users*/
-require '../vendor/autoload.php';
-
-//postgres
-$dbName = getenv('DB_NAME');
-$dbUser = getenv('DB_USER');
-$dbPassword = getenv('DB_PASSWORD');
-$connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-
-$userRepository = new \User\UserRepository($connection);
-$users = $userRepository->fetchAll();
-
-$messageRepository = new \Message\MessageRepository($connection);
-$messages = $messageRepository->fetchAll();
-
-
-
-
-
-//enTete("Vos Messages", "CSS/stylesheet1.css");
-$msg1 = new \Message\Message();
-
-$msg1->setEmetteur("Dupont");
-$msg1->setRecepteur($users['1']->getFirstname());
-$msg1->setDate(new DateTime);
-$msg1->setContenu("Bonjour, comment tu vas?");
-
-
-
-/*foreach ($users as $user) :
-	echo '<p>'.$user->getId().' ';
-	echo $user->getFirstname().' ';
-	echo $user->getLastname().' ';
-	echo $user->getAge().' years'.'</p>';
-endforeach;*/
-
-/*
-foreach ($messages as $message) :
-	affiche_message($message);
-endforeach;
-
-*/
-
-//affiche_message($msg1);
-
-
-
-
-//$msgManager->add($msg1);
-
-/* MESSAGE MANAGER */
-$msgManager = new \Message\MessageManager($connection);
-
-
-
-
-/************** VUE *****************/
+$pseudo = $_POST['pseudo'];
+$pseudo = $_POST['id'];
+/************** VUE *////////////////////////s
 function enTete($titre, $style)
 {
 	print "<!DOCTYPE html>\n";
@@ -104,16 +45,61 @@ function affiche_message($message){
     echo $message->getContenu();
 }
 
-/* Fonction pour recuperer le prenom de quelqu'un */
-function prenom_user($id_user){
-    global $connection;
-    $sth = $connection->prepare('SELECT * FROM "user" WHERE id=\''.$id_user.'\';');
-    $sth->execute();
-    $result = $sth->fetch(PDO::FETCH_OBJ);
-    return $result->firstname;
-}
 
 
+
+/* Recupération des users*/
+require '../vendor/autoload.php';
+
+//postgres
+$dbName = getenv('DB_NAME');
+$dbUser = getenv('DB_USER');
+$dbPassword = getenv('DB_PASSWORD');
+$connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
+
+$userRepository = new \User\UserRepository($connection);
+$users = $userRepository->fetchAll();
+
+$messageRepository = new \Message\MessageRepository($connection);
+$messages = $messageRepository->fetchAll();
+
+
+
+
+
+//enTete("Vos Messages", "CSS/stylesheet1.css");
+$msg1 = new \Message\Message();
+
+$msg1->setEmetteur("Dupont");
+$msg1->setRecepteur($users['1']->getFirstname());
+$msg1->setDate(new DateTime);
+$msg1->setContenu("Bonjour, comment tu vas?");
+
+
+
+/*foreach ($users as $user) : 
+	echo '<p>'.$user->getId().' ';
+	echo $user->getFirstname().' ';
+	echo $user->getLastname().' ';
+	echo $user->getAge().' years'.'</p>';
+endforeach;*/
+
+/*
+foreach ($messages as $message) : 
+	affiche_message($message);
+endforeach;
+
+*/
+
+//affiche_message($msg1);
+
+
+
+
+//$msgManager->add($msg1);
+
+/* MESSAGE MANAGER */
+$msgManager = new \Message\MessageManager($connection);
 
 
 ?>
@@ -136,7 +122,7 @@ function prenom_user($id_user){
                 chat.scrollTop = chat.scrollHeight;
  		}
 		};
-		xhttp.open("GET", "Msg_Conversation.php?emetteur="+ document.getElementById('envoyer').value +"&recepteur=<?php echo $id; ?>" , true);
+		xhttp.open("GET", "Msg_Conversation.php?emetteur="+ document.getElementById('envoyer').value +"&recepteur=<?php echo $pseudo; ?>" , true);
 		xhttp.send();
 
 	}
@@ -155,38 +141,39 @@ function prenom_user($id_user){
 			return;
 		}
 		xhttp = new XMLHttpRequest();
-		xhttp.open("GET", "Msg_Envoie.php?m="+Msg+"&emetteur=<?php echo $id; ?>"+"&recepteur="+ document.getElementById('envoyer').value , true);
+		xhttp.open("GET", "Msg_Envoie.php?m="+Msg+"&pseudo=<?php echo $pseudo; ?>"+"&recepteur="+ document.getElementById('envoyer').value , true);
 		xhttp.send(); 
 		Champ.value = "";
 	}
 
-    var FriendList = <?php
-        $sth = $connection->prepare('SELECT * FROM "amis" WHERE personne1=\''.$_SESSION['id'].'\' OR personne2=\''.$_SESSION['id'].'\' ');
-        $sth->execute();
-        $result = $sth->fetch(PDO::FETCH_OBJ);
-        echo '[';
-        while($result){
-            echo '["';
-            if($result->personne1 == $_SESSION['id']){
-                echo $result->personne2."\",\"".prenom_user($result->personne2) ;
-            }
-            else{
-                echo $result->personne1."\",\"".prenom_user($result->personne1) ;
-            }
-            echo '"]';
-            $result = $sth->fetch(PDO::FETCH_OBJ);
-            if($result){
-                echo ',';
-            }
-        }
-        echo ']';
-        ?> ;
+	var FriendList = <?php
+                    $sth = $connection->prepare('SELECT * FROM "amis" WHERE personne1=\''.$pseudo.'\' OR personne2=\''.$pseudo.'\' ');
+                    $sth->execute();
+                    $result = $sth->fetch(PDO::FETCH_OBJ);
+                    echo '[';
+                    while($result){
+                        echo '"';
+                        if($result->personne1 == $pseudo){
+                            echo "$result->personne2" ;
+                        }
+                        else{
+                             echo "$result->personne1" ;
+                        }
+                        echo '"';
+                        $result = $sth->fetch(PDO::FETCH_OBJ);
+                        if($result){
+                             echo ',';
+                        }
+                    }
+                    echo ']';
+                    ?> ;
+   // var FriendList_ID =
 
 
     function liste_amis(){
     	document.write("<p>Vos amis:</p>");
     	for(var i=0;i<FriendList.length;i++){
-    		document.write("<button value=\""+ FriendList[i][1] + "\" onclick=\"document.getElementById('h1').innerHTML=\'Ma conversation avec " + FriendList[i][1] + "\'; document.getElementById('envoyer').value='"+ FriendList[i][0] +"'; Conversation() \">" + FriendList[i][1] + "</button>");
+    		document.write("<button value=\""+ FriendList[i] + "\" onclick=\"document.getElementById('h1').innerHTML=\'Ma conversation avec " + FriendList[i] + "\'; document.getElementById('envoyer').value='"+ FriendList[i] +"'; Conversation() \">" + FriendList[i] + "</button>");
     	}
     	document.write("<br/>");
     }
@@ -201,7 +188,7 @@ function prenom_user($id_user){
 
 <head>
     <link rel="stylesheet" href="CSS/stylesheet1.css">
-    <title>Mes messages (<?php echo $_SESSION['prenom']; ?>)</title>
+    <title>Mes messages (<?php echo $pseudo ?>)</title>
 </head>
 <body>
 
