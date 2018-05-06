@@ -60,7 +60,7 @@
                         </span>
                     </div>
                     <div style="display: none" class="report-form-wrapper" id="report-form-<?=$mention->getID()?>">
-                        <form class="report-form">
+                        <form onSubmit="reportPost('<?=$mention->getID()?>')" class="report-form">
                             <input type="text" id="report-reason-<?=$mention->getID()?>" class="report-field" placeholder="Raison du signalement">
                             <button type="submit" class="report-submit" onClick="reportPost('<?=$mention->getID()?>')">
                                 Signaler

@@ -40,7 +40,7 @@ function likePost(id)
             }
         }
     };
-    xhttp.open("POST", "/api/post/appreciate?type=Like&post=" + id, true);
+    xhttp.open("GET", "/api/post/appreciate?type=Like&post=" + id, true);
     xhttp.send();
     return false;
 }
@@ -76,7 +76,7 @@ function dislikePost(id)
             }
         }
     };
-    xhttp.open("POST", "/api/post/appreciate?type=Dislike&post=" + id, true);
+    xhttp.open("GET", "/api/post/appreciate?type=Dislike&post=" + id, true);
     xhttp.send();
     return false;
 }
@@ -104,12 +104,42 @@ function repost(id)
             }
         }
     };
-    xhttp.open("POST", "/api/post/repost?post=" + id, true);
+    xhttp.open("GET", "/api/post/repost?post=" + id, true);
     xhttp.send();
     return false;
 }
 
 function reportPost(id)
 {
+    var reason = document.getElementById("report-reason-" + id).value;
+    console.log(reason);
 
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200)
+        {
+            console.log(xhttp.responseText);
+            var result = JSON.parse(xhttp.responseText);
+            if (result["status"] == STATUS_OK)
+            {
+                var reportForm = document.getElementById("report-form-" + id);
+                reportForm.style.display = "none";
+                var reportLinks = document.getElementsByClassName("action-report-" + id);
+                Array.from(reportLinks).forEach(
+                    function(element, index, array)
+                    {
+                        addClass(element, "action-reported");
+                    }
+                )
+            }
+        }
+    }
+    xhttp.open("POST", "/api/post/report", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    if (reason != '')
+        xhttp.send("post=" + id + "&reason=" + reason);
+    else
+        xhttp.send("post=" + id);
+
+    return false;
 }
