@@ -1,9 +1,9 @@
 <?php
     require "../config.php";
-    if (getUserFromCookie() != null) {
+    /*if (getUserFromCookie() != null) {
         header("Location: feed.php");
         die();
-    }
+    } */
 ?>
 <!DOCTYPE HTML>
 <html>

@@ -1,0 +1,6 @@
+@import url("general.css");
+@import url("post.css");
+
+.moderator-tick {
+    font-size: 0.75em;
+}

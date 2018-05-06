@@ -360,8 +360,8 @@ class Post implements JsonSerializable
         if ($this->responseTo == null)
             return null;
 
-        if ($this->responseToCache == null)
-            return null;
+        if ($this->responseToCache != null)
+            $this->responseToCache;
 
         $this->responseToCache = Post::fromID($this->responseTo);
         return $this->responseToCache;
@@ -372,8 +372,8 @@ class Post implements JsonSerializable
         if ($this->repostOf == null)
             return null;
 
-        if ($this->repostOfCache == null)
-            return null;
+        if ($this->repostOfCache != null)
+            $this->repostOfCache;
 
         $this->repostOfCache = Post::fromID($this->repostOf);
         return $this->repostOfCache;
@@ -485,9 +485,9 @@ class Post implements JsonSerializable
 
             $firstChar = substr($term, 0, 1);
             if ($firstChar == '#')
-                $content = str_replace($term, "<a class='inpost inpost-hashtag' href='hashtag/$toAdd'>$toAdd</a>", $content);
+                $content = str_replace($term, "<a class='inpost inpost-hashtag' href='/hashtag/$toAdd'>$toAdd</a>", $content);
             elseif ($firstChar == '@')
-                $content = str_replace($term, "<a class='inpost inpost-mention' href='profile/$toAdd'>$toAdd</a>", $content);
+                $content = str_replace($term, "<a class='inpost inpost-mention' href='/profile/$toAdd'>$toAdd</a>", $content);
 
         }
         return $content;

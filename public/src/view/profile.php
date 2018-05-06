@@ -10,6 +10,9 @@ require_once("User.php");
             VITZ - Profil
         </title>
         <meta charset="utf-8" />
+        <link rel="stylesheet" href="/assets/styles/profile.css" />
+        <script src="/assets/js/post.js" ></script>
+        <script src="/assets/js/general.js"></script>
     </head>
     <body>
         <?php
@@ -56,22 +59,37 @@ require_once("User.php");
         }
         ?>
 
-        <h1>Page de profil de <?=$user->getUsername();?> </h1>
+        <div class="column-wrapper">
+            <h1>
+                <?=$user->getUsername();?>
+                <?php
+                if ($user->getModerator()):
+                    ?>
+                    <i class="fas fa-check-circle moderator-tick"></i>
+                <?php
+                endif
+                ?>
+            </h1>
 
-        <p>Email : <?=$user->getEmail(); ?></p>
+            <h2 class="section-title">
+                <a href="subscriptions.php?user=<?= $user->getUsername(); ?>">Liste des abonnements / abonnés</a>
+            </h2>
 
-        <?php
-        if ($user->getModerator())
-        {
-            ?>
-            <p>
-                Modérateur
-            </p>
-            <?php
-        }
-        ?>
+            <h2 class="section-title">
+                Dernières publications
+            </h2>
+            <div class="post-feed">
+                <?php
+                $posts = $user->findPosts();
+                foreach($posts as $post) {
+                    if ($post->getRepostID() == null)
+                        affichePost($post);
+                    else
+                        afficheRepost($post, " vous a recyclé");
+                }
+                ?>
+            </div>
 
-        <a href="subscriptions.php?user=<?= $user->getUsername(); ?>">Liste des abonnements / abonnés</a>
-        <a href="feed.php">Retour vers la page principale</a>
+        </div>
     </body>
 </html>
