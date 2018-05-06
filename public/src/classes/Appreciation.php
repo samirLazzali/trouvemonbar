@@ -73,6 +73,11 @@ class Appreciation implements JsonSerializable
         return $this->post;
     }
 
+    public function getTimestamp()
+    {
+        return $this->timestamp;
+    }
+
     /**
      * Construction à partir d'une ligne de BDD.
      * @param arr $row

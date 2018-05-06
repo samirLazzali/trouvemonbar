@@ -1,10 +1,19 @@
 <?php
-require_once("Post.php");
 /**
- * fichier qui contient des fonctions d'affichage en html de truc
+ * fContient des fonctions d'affichage en HTML et de conversion (ex : entre date et représentation humaine).
  */
 
-//TODO écrire les fonctions javascript pour les actions onclick
+/**
+ * Convertit un timestamp en date lisible.
+ * @param int $t le timestamp à convertir.
+ * @return str la date convertie.
+ */
+function timestamp_to_string($t)
+{
+    return date("d/m/Y H:i  ", $t);
+}
+
+//TODO écrire les fonctions javascript pour les actions onclick => à faire dans un fichier JS, pas ici !
 
 function affichePost($post)
 {

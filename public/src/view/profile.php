@@ -3,14 +3,6 @@ require_once("../config.php");
 require_once("User.php");
 ?>
 
-/**
- * Created by PhpStorm.
- * User: drascma
- * Date: 21/04/18
- * Time: 11:42
- */
-?>
-
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -31,6 +23,8 @@ require_once("User.php");
         if (isset($_GET['user'])) {
             // On le récupère
             $user = $_GET['user'];
+            if (substr($user, 0, 1) == "@")
+                $user = substr($user, 1, strlen($user) - 1);
 
             // TRES IMPORTANT :
             // Le but, c'est qu'une fois qu'on a commencé à construire le "corps" de la page, on ne travaille

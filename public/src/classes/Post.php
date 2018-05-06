@@ -70,6 +70,35 @@ class Post implements JsonSerializable
     }
 
     /**
+     * @param $post
+     * @param $author
+     */
+    static function findRepost($post, $author)
+    {
+        if ($post instanceof Post)
+            $originalPostID = $post->getID();
+        else
+            $originalPostID = $post;
+
+        if ($author instanceof User)
+            $authorID = $author->getID();
+        else
+            $authorID = $author;
+
+        $db = connect();
+        $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE Repost = :post AND Author = :author";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":post", $originalPostID);
+        $statement->bindValue(":author", $authorID);
+        $statement->execute();
+
+        if($row = $statement->fetch())
+            return Post::fromRow($row);
+        else
+            return null;
+    }
+
+    /**
      * Création d'un repost
      * @param Post|string $post le Post (ou son ID) à reposter
      * @param User|string $author l'utilisateur (ou son ID) qui reposte
@@ -91,8 +120,12 @@ class Post implements JsonSerializable
             $authorID = $author;
 
 
+        $existingRepost = Post::findRepost($post, $author);
+        if ($existingRepost != null)
+            return $existingRepost;
+
         $db = connect();
-        $SQL = "INSERT INTO " . TABLE_Posts . " VALUES (ID, Author, Content, Timestamp, Repost, ResponseTo) VALUES (:id, :authorId, NULL, :timestamp, :originalPost, NULL)";
+        $SQL = "INSERT INTO " . TABLE_Posts . " (ID, Author, Content, Timestamp, Repost, ResponseTo) VALUES (:id, :authorId, NULL, :timestamp, :originalPost, NULL)";
 
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $id);
@@ -461,6 +494,14 @@ class Post implements JsonSerializable
 
         }
         return $content;
+    }
+
+    function getOriginalPost()
+    {
+        if ($this->repostOf == null)
+            return null;
+        else
+            return Post::fromID($this->repostOf);
     }
 
     /**

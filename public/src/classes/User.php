@@ -88,7 +88,7 @@ class User implements JsonSerializable
         $db = connect();
         $SQL = "SELECT * FROM " . TABLE_User . " WHERE ID = :id";
         $statement = $db->prepare($SQL);
-        $statement->bindParam(":id", $ID);
+        $statement->bindValue(":id", $ID);
         $statement->execute();
         $row = $statement->fetch();
 
@@ -106,9 +106,9 @@ class User implements JsonSerializable
     static function fromEmail($email)
     {
         $db = connect();
-        $SQL = "SELECT * FROM " . TABLE_User . " WHERE Email = :email";
+        $SQL = "SELECT * FROM " . TABLE_User . " WHERE LOWER(Email) = :email";
         $statement = $db->prepare($SQL);
-        $statement->bindParam(":email", $email);
+        $statement->bindValue(":email", strtolower($email));
         $statement->execute();
         $row = $statement->fetch();
 
@@ -126,9 +126,9 @@ class User implements JsonSerializable
     static function fromUsername($username)
     {
         $db = connect();
-        $SQL = "SELECT * FROM " . TABLE_User . " WHERE Username = :username";
+        $SQL = "SELECT * FROM " . TABLE_User . " WHERE LOWER(Username) = :username";
         $statement = $db->prepare($SQL);
-        $statement->bindParam(":username", $username);
+        $statement->bindValue(":username", strtolower($username));
         $statement->execute();
         $row = $statement->fetch();
 
@@ -191,9 +191,9 @@ class User implements JsonSerializable
     static function emailExists($email)
     {
         $db = connect();
-        $SQL = "SELECT ID FROM Users WHERE Email = :email";
+        $SQL = "SELECT ID FROM Users WHERE LOWER(Email) = :email";
         $statement = $db->prepare($SQL);
-        $statement->bindParam(":email", $email);
+        $statement->bindValue(":email", strtolower($email));
         $statement->execute();
         $row = $statement->fetch();
 
@@ -211,9 +211,9 @@ class User implements JsonSerializable
     static function usernameExists($username)
     {
         $db = connect();
-        $SQL = "SELECT ID FROM Users WHERE Username = :username";
+        $SQL = "SELECT ID FROM Users WHERE LOWER(Username) = :username";
         $statement = $db->prepare($SQL);
-        $statement->bindParam(":username", $username);
+        $statement->bindValue(":username", strtolower($username));
         $statement->execute();
         $row = $statement->fetch();
 
@@ -233,7 +233,7 @@ class User implements JsonSerializable
         $db = connect();
         $SQL = "SELECT ID FROM Users WHERE ID = :id";
         $statement = $db->prepare($SQL);
-        $statement->bindParam(":id", $id);
+        $statement->bindValue(":id", $id);
         $statement->execute();
         $row = $statement->fetch();
 
@@ -265,10 +265,10 @@ class User implements JsonSerializable
         $db = connect();
         $SQL = "INSERT INTO " . TABLE_User . " (ID, Username, Email, Password, Moderator) VALUES (:id, :username, :email, :password, false)";
         $statement = $db->prepare($SQL);
-        $statement->bindParam(":id", $id);
-        $statement->bindParam(":username", $username);
-        $statement->bindParam(":email", $email);
-        $statement->bindParam(":password", $hash);
+        $statement->bindValue(":id", $id);
+        $statement->bindValue(":username", $username);
+        $statement->bindValue(":email", $email);
+        $statement->bindValue(":password", $hash);
         $statement->execute();
 
         $u = new User($id, $username, $email);
@@ -292,7 +292,7 @@ class User implements JsonSerializable
         $db = connect();
         $SQL = "SELECT Password FROM Users WHERE ID = :id";
         $statement = $db->prepare($SQL);
-        $statement->bindParam(":id", $ID);
+        $statement->bindValue(":id", $ID);
         $statement->execute();
 
         $row = $statement->fetch();
@@ -319,17 +319,41 @@ class User implements JsonSerializable
 
         $mentions = $statement->fetchAll();
 
+        $SQL = "SELECT 
+                    Repost.ID AS ID, 
+                    Repost.Repost AS Repost,
+                    Repost.Author AS Author,
+                    Repost.Content AS Content,
+                    NULL AS ResponseTo,
+                    Repost.Timestamp AS Timestamp
+                FROM " .
+                TABLE_Posts . " AS Repost 
+                JOIN " . TABLE_Posts . " AS Original 
+                ON Repost.Repost = Original.ID 
+                WHERE Original.Author = :author";
+
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":author", $this->getID());
+        $statement->execute();
+
+        $reposts = $statement->fetchAll();
+
         $r_appreciations = array();
 
         foreach($appreciations as $appreciation)
             $r_appreciations[] = Appreciation::fromRow($appreciation);
+
+        $r_reposts = array();
+        foreach($reposts as $repost)
+            $r_reposts[] = Post::fromRow($repost);
+
 
         $r_mentions = array();
 
         foreach($mentions as $mention)
             $r_mentions[] = Post::fromRow($mention);
 
-        return array($r_appreciations, $r_mentions);
+        return array($r_appreciations, $r_mentions, $r_reposts);
     }
 
     /**
@@ -587,8 +611,8 @@ class User implements JsonSerializable
 
         $SQL = "UPDATE " . TABLE_User . " SET Email = :email, Username = :username WHERE ID = :id";
         $statement = $db->prepare($SQL);
-        $statement->bindParam(":email", $newEmail);
-        $statement->bindParam(":username", $newUsername);
+        $statement->bindValue(":email", $newEmail);
+        $statement->bindValue(":username", $newUsername);
         $statement->bindValue(":id", $this->getID());
         $statement->execute();
 
@@ -616,7 +640,7 @@ class User implements JsonSerializable
         
         $SQL = "DELETE FROM Users WHERE ID = :id";
         $statement = $db->prepare($SQL);
-        $statement->bindParam(":id", $this->id);
+        $statement->bindValue(":id", $this->id);
         $statement->execute();
 
         if ($statement->rowCount() == 1)
