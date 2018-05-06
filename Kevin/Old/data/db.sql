@@ -21,47 +21,58 @@ INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Delores', 'Williamson
 
 CREATE TABLE "message" (
     id SERIAL PRIMARY KEY ,
-    emetteur VARCHAR NOT NULL ,
-    recepteur VARCHAR NOT NULL ,
+    emetteur int references "user"(id) ,
+    recepteur int references "user"(id) ,
     date_envoie timestamp,
     contenu VARCHAR
 );
 
-INSERT INTO "message"(emetteur, recepteur, date_envoie, contenu) VALUES ('John', 'Jaime', '1967-11-22 09:03:12', 'Bonjour');
-INSERT INTO "message"(emetteur, recepteur, date_envoie, contenu) VALUES ('Jackie', 'Alonzo', '1967-11-22 12:55:39', 'Allo ');
-INSERT INTO "message"(emetteur, recepteur, date_envoie, contenu) VALUES ('Brendan', 'Otis', '1967-11-22 11:53:39', 'Au revoir');
-INSERT INTO "message"(emetteur, recepteur, date_envoie, contenu) VALUES ('Manuel', 'Otis', '1967-11-22 23:55:22', 'Salut');
-INSERT INTO "message"(emetteur, recepteur, date_envoie, contenu) VALUES ('Otis', 'Manuel', '1967-11-22 15:22:22', 'Merci');
+INSERT INTO "message"(emetteur, recepteur, date_envoie, contenu) VALUES ('1', '7', '1967-11-22 09:03:12', 'Bonjour');
+INSERT INTO "message"(emetteur, recepteur, date_envoie, contenu) VALUES ('7', '4', '1967-11-22 12:55:39', 'Allo ');
+INSERT INTO "message"(emetteur, recepteur, date_envoie, contenu) VALUES ('9', '3', '1967-11-22 11:53:39', 'Au revoir');
+INSERT INTO "message"(emetteur, recepteur, date_envoie, contenu) VALUES ('8', '7', '1967-11-22 23:55:22', 'Salut');
+INSERT INTO "message"(emetteur, recepteur, date_envoie, contenu) VALUES ('2', '5', '1967-11-22 15:22:22', 'Merci');
 
+
+CREATE TABLE "amis" (
+    id SERIAL PRIMARY KEY ,
+    personne1 int references "user"(id) ,
+    personne2 int references "user"(id) 
+);
+
+
+INSERT INTO "amis"(personne1, personne2) VALUES ('1', '7');
+INSERT INTO "amis"(personne1, personne2) VALUES ('7', '2');
+INSERT INTO "amis"(personne1, personne2) VALUES ('3', '7');
+INSERT INTO "amis"(personne1, personne2) VALUES ('8', '7');
 
 CREATE TABLE "tweet" (
   id SERIAL PRIMARY KEY ,
   auteur VARCHAR NOT NULL ,
-  date timestamp ,
+  date_envoie timestamp ,
   contenu VARCHAR
 );
-INSERT INTO "tweet"(auteur, date, contenu) VALUES ('John', '1999-12-23 12:45:23', '****');
-INSERT INTO "tweet"(auteur, date, contenu) VALUES ('Jackie', '1999-12-23 12:45:23', '****');
-INSERT INTO "tweet"(auteur, date, contenu) VALUES ('Brendan', '1999-12-23 12:45:23', '****');
-INSERT INTO "tweet"(auteur, date, contenu) VALUES ('Otis', '1999-12-23 12:45:23', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('John', '1999-12-23 12:45:23', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('Vicky', '1999-12-23 12:45:23', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('Brendan', '1999-12-23 12:45:23', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('Otis', '1999-12-23 12:45:23', '****');
 
-/*CREATE TABLE "like" (
-  tweet_id int FOREIGN KEY REFERENCES tweet(id) ,
-  user_id int FOREIGN KEY REFERENCES user(id)
+CREATE TABLE "like" (
+  tweet_id int references "tweet"(id) ,
+  user_id int references "user"(id)
 );
 
 INSERT INTO "like"(tweet_id, user_id) VALUES (1, 1);
 INSERT INTO "like"(tweet_id, user_id) VALUES (1, 2);
-INSERT INTO "like"(tweet_id, user_id) VALUES (1, 3);*/
+INSERT INTO "like"(tweet_id, user_id) VALUES (1, 3);
 
-
-
-
-
-
-
-
-
+CREATE TABLE "commentaire" (
+  id_comment SERIAL PRIMARY KEY ,
+  tweet_id int references "tweet"(id) ,
+  date_envoie timestamp ,
+  contenu VARCHAR
+);
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('John', '1999-12-23 12:45:23', '****');
 
 
 

@@ -7,6 +7,7 @@ include("../src/Vue.php");
 /* Recupération des users*/
 require '../vendor/autoload.php';
 require '../src/Message/MessageRepository.php';
+require '../src/Message/MessageManager.php';
 
 //postgres
 $dbName = getenv('DB_NAME');
@@ -27,10 +28,9 @@ $messages = $messageRepository->fetchAll();
 //enTete("Vos Messages", "CSS/stylesheet1.css");
 $msg1 = new \Message\Message();
 
-//$msg1->setEmetteur();
+$msg1->setEmetteur("Dupont");
 $msg1->setRecepteur($users['1']->getFirstname());
 $msg1->setDate(new DateTime);
-$msg1->setId(1);
 $msg1->setContenu("Bonjour, comment tu vas?");
 
 
@@ -51,6 +51,11 @@ endforeach;
 
 affiche_message($msg1);
 
+
+
+$msgManager = new \Message\MessageManager($connection);
+
+$msgManager->add($msg1);
 
 
 

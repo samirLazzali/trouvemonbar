@@ -44,11 +44,11 @@ function affiche_erreur($str) {
 /* Fonctions pour messages */
 
 function affiche_message($message){
-    echo '      <h3>Message de '.$message->getEmetteur().' à '.
+    echo '      Message de '.$message->getEmetteur().' à '.
     ($message->getDate())->format('H:i:s').' le '.
-    ($message->getDate())->format('Y-m-d').'</h6>';
+    ($message->getDate())->format('Y-m-d').'</br>';
     print "\n";
-    echo '          <p>'.$message->getContenu().'</p>';
+    echo $message->getContenu();
     print "\n";
 }
 

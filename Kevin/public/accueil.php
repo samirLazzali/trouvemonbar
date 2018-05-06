@@ -1,4 +1,19 @@
 <?php
+session_start();
+$_SESSION['nom'] = "King";
+$_SESSION['prénom'] = "Jaime";
+$_SESSION['id'] = 7;
+$_SESSION['birthday'] = "1967-11-22";
+
+function config() {
+    global $nom_hote, $nom_user, $nom_base, $mdp;
+    $_SESSION['nomhote'] = $nom_hote;
+    $_SESSION['nombase'] = $nom_base;
+    $_SESSION['nomuser'] = $nom_user;
+    $_SESSION['mdp'] = $mdp;
+}
+
+
 require '../vendor/autoload.php';
 //postgres
 $dbName = getenv('DB_NAME');
@@ -14,8 +29,16 @@ $tweets=$tweetRepository->fetchAll();
 $tweetManager = new Tweet\TweetManager($connection);
 
 
-$pseudo = "Jaime";
-$id = 7;
+
+/************* AJOUT KEVIN ******************/
+function prenom_user($id_user){
+    global $connection;
+    $sth = $connection->prepare('SELECT * FROM "user" WHERE id=\''.$id_user.'\';');
+    $sth->execute();
+    $result = $sth->fetch(PDO::FETCH_OBJ);
+    return $result->firstname;
+}
+
 ?>
 
 
@@ -32,7 +55,7 @@ $id = 7;
 <script>
 
         var Tweets =  <?php
-                    $sth = $connection->prepare('SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne1=auteur WHERE personne2=\''.$pseudo.'\' UNION SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne2=auteur WHERE personne1=\''.$pseudo.'\'  ');
+                    $sth = $connection->prepare('SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne1=auteur WHERE personne2=\''.$_SESSION['id'].'\' UNION SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne2=auteur WHERE personne1=\''.$_SESSION['id'].'\'  ');
                     $sth->execute();
                     $result = $sth->fetch(PDO::FETCH_OBJ);
                     echo '[';
@@ -51,19 +74,19 @@ $id = 7;
 
 
          var FriendList = <?php
-                    $sth = $connection->prepare('SELECT * FROM "amis" WHERE personne1=\''.$pseudo.'\' OR personne2=\''.$pseudo.'\' ');
+                    $sth = $connection->prepare('SELECT * FROM "amis" WHERE personne1=\''.$_SESSION['id'].'\' OR personne2=\''.$_SESSION['id'].'\' ');
                     $sth->execute();
                     $result = $sth->fetch(PDO::FETCH_OBJ);
                     echo '[';
                     while($result){
-                        echo '"';
-                        if($result->personne1 == $pseudo){
-                            echo "$result->personne2" ;
+                        echo '["';
+                        if($result->personne1 == $_SESSION['id']){
+                            echo $result->personne2."\",\"".prenom_user($result->personne2) ;
                         }
                         else{
-                             echo "$result->personne1" ;
+                            echo $result->personne1."\",\"".prenom_user($result->personne1) ;
                         }
-                        echo '"';
+                        echo '"]';
                         $result = $sth->fetch(PDO::FETCH_OBJ);
                         if($result){
                              echo ',';
@@ -111,7 +134,7 @@ $id = 7;
                 alert("Tweet Liké");
             }
         };
-        xhttp.open("GET", "Liker.php?pseudo_id=<?php echo $id; ?>+T_id="+T_id, true);
+        xhttp.open("GET", "Liker.php?pseudo_id=<?php echo $_SESSION['id']; ?>+T_id="+T_id, true);
         xhttp.send();
     }
 
@@ -144,7 +167,7 @@ $id = 7;
     function liste_amis(){
         document.write("<p>Vos amis:</p>");
         for(var i=0;i<FriendList.length;i++){
-            document.write("<a href=\"profil.php?pseudo=" + FriendList[i] + "\">" + FriendList[i] + "</a><br/>");
+            document.write("<a href=\"profil.php?pseudo=" + FriendList[i][0] + "\">" + FriendList[i][1] + "</a><br/>");
         }
         document.write("<br/>");
     }
@@ -192,16 +215,16 @@ $id = 7;
 
 
 </script>
-Bienvenue <?php echo $pseudo ?> ! <br>
+Bienvenue <?php echo $_SESSION['prénom'] ?> ! </br>
 
-Rechercher un # :<br>
+Rechercher un # :</br>
 <form method='post' action="hashtag.php">
   <input list="hashtags" name="hashtag">
   <datalist id="hashtags">
 </datalist>
   <input id="afficherhashtag" type="submit" value="Afficher le Hashtag">
 </form>
-Rechercher un @ :<br>
+Rechercher un @ :</br>
 <form method='post' action="profil.php">
   <input list="pseudos" name="pseudo" onblur="verifPseudo(this)">
   <datalist id="pseudos">
@@ -210,14 +233,14 @@ Rechercher un @ :<br>
   <input type="hidden" id="visite" name="visite" value="Visiter le profil">
 </form>
 <p id="err"></p>
-<form method='post' action=<?php echo "edition.php?pseudo=$pseudo" ?>>
+<form method='post' action=<?php echo "edition.php?pseudo=".$_SESSION['prénom'] ?>>
 <input type="submit" name="editio" value="Personnaliser ...">
 </form>
 
 <button onclick="EcrireTweet()">Ecrire un tweet</button>
 
 <form method='post' action="ecriretweet.php">
-<input type="hidden" name="pseudo" value="<?php echo "".$pseudo."" ?>"></input><br/>
+<input type="hidden" name="pseudo" value="<?php echo $_SESSION['prénom'] ?>"></input><br/>
 <textarea  name= "textarea" id="textarea" style="display: none" placeholder="Exprimez vous..." rows="5" cols="50"></textarea>
 <input id="ok" onclick="ConfirmationTweet()" type="hidden" value="Envoyer">
 </form>
@@ -225,11 +248,7 @@ Rechercher un @ :<br>
 
 
 <!-- AJOUT DE KEVIN-->
-<form method='post' action="Msg_Ecrire.php">
-    <input type="hidden" name="pseudo" value="<?php echo "".$pseudo."" ?>"></input><br/>
-    <input type="hidden" name="id" value="<?php echo "".$id."" ?>"></input><br/>
-    <input type="submit" name="envoyer" value="Écrire un message">
-</form>
+<a href="Msg_Ecrire.php">Écrire un message</a></br>
 
 
 <script >

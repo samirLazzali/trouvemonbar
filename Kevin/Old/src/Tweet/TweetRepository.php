@@ -29,7 +29,7 @@ class TweetRepository{
                 ->setId($row->id)
                 ->setAuteur($row->auteur)
                 ->setDate(new \DateTimeImmutable($row->date_envoie))
-                ->setConenu($row->contenu);
+                ->setContenu($row->contenu);
             $tweets[] = $tweet;
         }
         return $tweets;

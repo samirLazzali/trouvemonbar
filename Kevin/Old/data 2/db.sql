@@ -34,34 +34,45 @@ INSERT INTO "message"(emetteur, recepteur, date_envoie, contenu) VALUES ('Manuel
 INSERT INTO "message"(emetteur, recepteur, date_envoie, contenu) VALUES ('Otis', 'Manuel', '1967-11-22 15:22:22', 'Merci');
 
 
+CREATE TABLE "amis" (
+    id SERIAL PRIMARY KEY ,
+    personne1 VARCHAR NOT NULL ,
+    personne2 VARCHAR NOT NULL 
+);
+
+
+INSERT INTO "amis"(personne1, personne2) VALUES ('John', 'Jaime');
+INSERT INTO "amis"(personne1, personne2) VALUES ('Jaime', 'Vicky');
+INSERT INTO "amis"(personne1, personne2) VALUES ('Erickson', 'Jaime');
+INSERT INTO "amis"(personne1, personne2) VALUES ('Pena', 'Vicky');
+
 CREATE TABLE "tweet" (
   id SERIAL PRIMARY KEY ,
   auteur VARCHAR NOT NULL ,
-  date timestamp ,
+  date_envoie timestamp ,
   contenu VARCHAR
 );
-INSERT INTO "tweet"(auteur, date, contenu) VALUES ('John', '1999-12-23 12:45:23', '****');
-INSERT INTO "tweet"(auteur, date, contenu) VALUES ('Jackie', '1999-12-23 12:45:23', '****');
-INSERT INTO "tweet"(auteur, date, contenu) VALUES ('Brendan', '1999-12-23 12:45:23', '****');
-INSERT INTO "tweet"(auteur, date, contenu) VALUES ('Otis', '1999-12-23 12:45:23', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('John', '1999-12-23 12:45:23', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('Vicky', '1999-12-23 12:45:23', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('Brendan', '1999-12-23 12:45:23', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('Otis', '1999-12-23 12:45:23', '****');
 
-/*CREATE TABLE "like" (
-  tweet_id int FOREIGN KEY REFERENCES tweet(id) ,
-  user_id int FOREIGN KEY REFERENCES user(id)
+CREATE TABLE "like" (
+  tweet_id int references "tweet"(id) ,
+  user_id int references "user"(id)
 );
 
 INSERT INTO "like"(tweet_id, user_id) VALUES (1, 1);
 INSERT INTO "like"(tweet_id, user_id) VALUES (1, 2);
-INSERT INTO "like"(tweet_id, user_id) VALUES (1, 3);*/
+INSERT INTO "like"(tweet_id, user_id) VALUES (1, 3);
 
-
-
-
-
-
-
-
-
+CREATE TABLE "commentaire" (
+  id_comment SERIAL PRIMARY KEY ,
+  tweet_id int references "tweet"(id) ,
+  date_envoie timestamp ,
+  contenu VARCHAR
+);
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('John', '1999-12-23 12:45:23', '****');
 
 
 
