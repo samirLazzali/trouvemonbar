@@ -10,7 +10,18 @@
 
 require "../../src/app/helpers.php";
 
-/*
- * @todo : create a new user here by calling User() functions here
- */
+
+$password = $_POST["password"];
+$nick = $_POST["nick"];
+$mail = $_POST["mail"];
+
+//cas où l'insertion échoué
+if( ($id = User::insertUser($nick, $password, $mail)) !== false)
+{
+    //cas où l'insertion réussie
+    Auth::login($id);
+    redirect("../index.php");
+}
+
+flash("Erreur : l'utilisateur n'a pas pu être inséré");
 redirect("../subscribe.php");

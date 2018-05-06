@@ -13,8 +13,5 @@ if(Auth::logged())
 
 write_header("Se connecter");
 
-$flashes = flash();
-foreach ($flashes as $flash)
-    echo $flash;
 include view("authentication_view.php");
 write_foot();

@@ -4,7 +4,9 @@
             Les valeurs par défaut sont écrites en grisé
             le formulaire est centré
             le formulaire est correctement mis en forme en utilisant les classes bootstrap
-            faire de meme pour suscrive_view.php -->
+            faire de meme pour suscrive_view.php
+     todo : password lost page
+     -->
 
 
 <div class="container-fluid justify-content-center">

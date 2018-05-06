@@ -29,15 +29,15 @@ class User
         if($query->rowCount() != 0)
         {
             $result = $query->fetch(PDO::FETCH_ASSOC);
-            $expectedPasswo = $result['password'];
-            if($expectedPasswo === $passwd)
+            $hash = $result['password'];
+
+            if( password_verify( $passwd, $hash))
                 return $result['userid'];
             else return false;
         }
-        else {
-            flash("no results </br>");
+        else
             return false;
-        }
+
     }
 
     ///
@@ -46,11 +46,12 @@ class User
     public $userid, $password,$nick, $mail, $firstname, $lastname;
     /**
      * User constructor.
+     * @throws exception user does not exist
      */
     public function __construct($idUser)
     {
         //query
-        $query = db()->prepare("SELECT * FROM user WHERE userid = ?");
+        $query = db()->prepare("SELECT * FROM users WHERE userid = ?");
         $query->execute([$idUser]);
 
         if($query->rowCount() != 1) throw  new  Exception("User can't be found :".$idUser );
@@ -81,18 +82,27 @@ class User
      * @param $nick
      * @param $passwd
      * @param $mail
-     * @todo fill
+     * @return string db()->lastInsertId() id of the user who was just added in case of success
+     * @todo add check if mail or nick already exists
      */
-    public function insertUser($nick, $passwd, $mail)
+    public static function insertUser($nick, $passwd, $mail)
     {
 
+        $query = db()->prepare("INSERT INTO users (nick, mail, password) VALUES( ?, ?, ? )");
+        $success = $query->execute([$nick, $mail, password_hash( $passwd, PASSWORD_DEFAULT)]);
+        if($success)
+            return db()->lastInsertId('user_userid_seq');
+
+        else
+            return false;
     }
+
     /**
      * @return int
      */
     public function getId()
     {
-        return $this->idUser;
+        return $this->userid;
     }
 
     /**
@@ -101,12 +111,13 @@ class User
      */
     public function setId($id)
     {
-        $this->id = $id;
+        $this->userid = $id;
         return $this;
     }
 
     public function getNick()
     {
+        return $this->nick;
     }
 
     public function setNick($nick)

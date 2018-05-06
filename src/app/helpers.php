@@ -106,7 +106,7 @@ function filter_string($string)
 /**
  * @param $title string page title
  * @brief Write the header for the page
- * @todo transfer in a Layout in class in the views directory
+ * @todo transfer in a Layout class in the views directory
  */
 function write_header($title)
 {
@@ -127,8 +127,9 @@ function write_header($title)
         {
             $index_button = Navbar::generate_navbar_button("index.php", "Accueil");
             $login_button = Navbar::generate_navbar_button("authentication.php", "Se connecter", false);
+            $games_button = Navbar::generate_navbar_button("games.php", "Tables");
             $subscribe_button = Navbar::generate_navbar_button("subscribe.php", "S'inscrire", false);
-            $navbar = new Navbar(array($index_button),  array( $login_button , $subscribe_button) );
+            $navbar = new Navbar(array($index_button, $games_button),  array( $login_button , $subscribe_button) );
             echo $navbar->get_html();
         }
         /*
@@ -136,11 +137,20 @@ function write_header($title)
         */
         else
         {
-            $index_button = Navbar::generate_navbar_button("index.php", "Accueil");
+            try {
+                $user = new User($_SESSION['user']);
+            }
+            catch(Exception $e)
+            {
+                Auth::logout();
+                redirect("index.php");
+            }
+            $index_button = Navbar::generate_navbar_button("index.php", "Calendrier");
             $games_button = Navbar::generate_navbar_button("games.php", "Tables");
-            $profile_button = Navbar::generate_navbar_button("user_profile.php", "Mon profil");
+            $users_button = Navbar::generate_navbar_button("userlist.php", "Joueurs");
+            $profile_button = Navbar::generate_navbar_button("user_profile.php", $user->getNick() );
             $logout_button = Navbar::generate_navbar_button("actions/disconnect.php", "Se déconnecter");
-            $navbar = new Navbar(array($index_button, $games_button), array($profile_button, $logout_button));
+            $navbar = new Navbar(array($index_button, $games_button, $users_button), array($profile_button, $logout_button));
             echo $navbar->get_html();
         }
 

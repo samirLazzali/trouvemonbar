@@ -13,10 +13,6 @@ if(Auth::logged())
 
 write_header("Guiilde");
 
-$flashes = flash();
-foreach($flashes as $flash)
-    echo $flash;
-
 include view("subscribe_view.php");
 
 write_foot();
