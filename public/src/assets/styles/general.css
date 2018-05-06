@@ -35,8 +35,13 @@ a:hover {
 
 .column-wrapper {
     background-color: #34495e;
-    width: 35%;
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
     padding: 5px 0px 0px 0px;
+}
+
+.splitter {
+    height: 3px;
+    background-color: #c6d0d1;
 }

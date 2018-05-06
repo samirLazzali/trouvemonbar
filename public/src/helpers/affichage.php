@@ -26,9 +26,11 @@ function affichePost($post, $show_actions = true, $text_after_name = "")
         <div class="post-header">
             <a href="/profile/<?= $author ?>" class="post-header-author">
                 <?= $author ?>
-            </a>
+            </a> <?= $text_after_name ?>
             <span class="post-header-date">
-                <?= $date ?>
+                <a href="/post/<?= $id ?>">
+                    <?= $date ?>
+                </a>
             </span>
         </div>
 
@@ -57,9 +59,9 @@ function affichePost($post, $show_actions = true, $text_after_name = "")
                         </span>
         </div>
         <div style="display: none" class="report-form-wrapper" id="report-form-<?=$id?>">
-            <form onSubmit="reportPost('<?=$id?>')" class="report-form">
+            <form onSubmit="return reportPost('<?=$id?>')" class="report-form">
                 <input type="text" id="report-reason-<?=$id?>" class="report-field" placeholder="Raison du signalement">
-                <button type="submit" class="report-submit" onClick="reportPost('<?=$id?>')">
+                <button type="submit" class="report-submit">
                     Signaler
                 </button>
             </form>
@@ -71,10 +73,12 @@ function affichePost($post, $show_actions = true, $text_after_name = "")
     <?php
 }
 
-function afficheRepost($repost, $text_after) {
+function afficheRepost($repost, $text_after = null) {
     $original = $repost->getOriginalPost();
     $date = timestamp_to_string($repost->getTimestamp());
     $author = $repost->getAuthor()->getUsername();
+    if ($text_after == null)
+        $text_after = " a retweeté"
     ?>
     <div class="post-in-feed">
         <div class="post-header">

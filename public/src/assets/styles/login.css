@@ -1,4 +1,4 @@
-@import url("general.css");
+@import url("general-front.css");
 
 .pageTitle {
     text-align: center;
@@ -9,14 +9,14 @@
     margin-top: 10px;
 }
 
+input:focus {
+    background-color: var(--light-red);
+}
+
 .field:first-child
 {
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
-}
-
-input:focus {
-    background-color: var(--light-red);
 }
 
 .field {

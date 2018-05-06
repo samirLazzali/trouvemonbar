@@ -33,6 +33,8 @@ function likePost(id)
                         removeClass(element, "action-dislike-on");
                     }
                 );
+
+                console.log("Liked post " + id + " successfully.");
             }
             else
             {
@@ -69,6 +71,7 @@ function dislikePost(id)
                         addClass(element, "action-dislike-on");
                     }
                 );
+                console.log("Disliked post " + id + " successfully.");
             }
             else
             {
@@ -97,6 +100,7 @@ function repost(id)
                         addClass(element, "action-repost-on");
                     }
                 );
+                console.log("Reposted post " + id + " successfully.");
             }
             else
             {
@@ -131,6 +135,7 @@ function reportPost(id)
                         addClass(element, "action-reported");
                     }
                 )
+                console.log("Reported post " + id + " successfully.");
             }
         }
     }
