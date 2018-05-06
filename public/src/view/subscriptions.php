@@ -1,13 +1,19 @@
 <?php
 require_once("../config.php");
 require_once("User.php");
+
+$currentUser = getUserFromCookie();
+$cu_followers = $currentUser->getFollowers();
+$cu_subscriptions = array();
+foreach($currentUser->getSubscriptions() as $sub)
+    $cu_subscriptions[] = $sub->getUsername();
 ?>
 
 <!DOCTYPE HTML>
 <html>
     <head>
         <title>
-            VITZ - Abonnements
+            Vitz - Abonnements
         </title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="/assets/styles/subscriptions.css" />
@@ -61,8 +67,12 @@ require_once("User.php");
                             <?=count($sub->getSubscriptions())?>
                         </span> abonnements -
                         <span class="subscription-item-follow-link">
-                            <a onClick="subscribeToUser('<?=$sub->getUsername()?>');" class="follow-link-<?=$sub->getUsername()?>" href="#">
-                                S'abonner
+                            <a onClick="toggleSubscription('<?=$sub->getUsername()?>');" class="follow-link-<?=$sub->getUsername()?>" href="#">
+                                <?php if(!in_array($sub->getUsername(), $cu_subscriptions)): ?>
+                                    S'abonner
+                                <?php else: ?>
+                                    Abonné
+                                <?php endif ?>
                             </a>
                         </span>
                     </div>
@@ -92,9 +102,15 @@ require_once("User.php");
                             <?=count($foll->getSubscriptions())?>
                         </span> abonnements -
                         <span class="subscription-item-follow-link">
-                            <a onClick="subscribeToUser('<?=$foll->getUsername()?>');" class="follow-link-<?=$foll->getUsername()?>" href="#">
-                                S'abonner
-                            </a>
+                                <?php if(!in_array($foll->getUsername(), $cu_subscriptions)): ?>
+                                    <a onClick="toggleSubscription('<?=$foll->getUsername()?>');" class="follow-link-<?=$foll->getUsername()?>" href="#">
+                                        S'abonner
+                                    </a>
+                                <?php else: ?>
+                                    <a onClick="toggleSubscription('<?=$foll->getUsername()?>');" class="follow-link-following follow-link-<?=$foll->getUsername()?>" href="#">
+                                        Abonné
+                                    </a>
+                                <?php endif ?>
                         </span>
                     </div>
                 </div>
