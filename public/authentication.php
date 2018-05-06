@@ -11,7 +11,7 @@ require_once "../src/app/helpers.php";;
 if(Auth::logged())
     redirect("index.php");
 
-write_header("Se connecter");
 
+$layout = new Layout("visitors");
 include view("authentication_view.php");
-write_foot();
+$layout->show('Se connecter');

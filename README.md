@@ -44,12 +44,15 @@ This command starts the application without installing anything.
  * create a new php file in src/pages .
  * require "../app/helpers.php" . 
     Do not use any other include or require. They should be all handled by the autoloader.
- * call writeHeader("Your title")
  * write the page logic (using the functions in sre/app/models)
  * create your view in src/app/views. Views should be mostly html with a bit of php for variables.
  * go back to your page and include the view using 
-    include view("my_view.php");
- * call writeFoot()
+ 
+        $layout = new Layout(" (users | visitors) ");
+        include view("my_view.php");
+        $layout->show("My title");
+    Use "users" is if the user is logged in, "visitors" if not.    
+
  
  This way, all the "logic" part of the app is contained inside models, and all the "display"
  part is contained inside views. This should make maintenance, upgrades, and debbuging easier.   

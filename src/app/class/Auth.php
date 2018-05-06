@@ -12,6 +12,7 @@
  * Class Auth
  * Singleton
  * Holds info about who is logged in
+ * @todo make singleton
  */
 class Auth
 {
@@ -25,7 +26,7 @@ class Auth
     {
         if(!empty($_SESSION['user'])) {
             try {
-                self::$user = $_SESSION['user'];
+                self::$user = new User($_SESSION['user']);
             }
             catch(\Exception $e)
             {
@@ -45,11 +46,12 @@ class Auth
     }
 
     /**
-     * @return User current user
+     * @return mixed User current user
+     * @throws Exception user could not be found
      */
     public static function user()
     {
-        //return self::$user;
+         return self::$user;
     }
 
     /**
@@ -57,7 +59,7 @@ class Auth
      */
     public static function logged()
     {
-        return ! empty($_SESSION['user']);
+        return !empty($_SESSION['user']);
     }
 
     /**

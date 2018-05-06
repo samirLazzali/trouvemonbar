@@ -11,8 +11,7 @@ require "../src/app/helpers.php";
 if(Auth::logged())
     redirect("index.php");
 
-write_header("Guiilde");
 
+$layout = new Layout("visitors");
 include view("subscribe_view.php");
-
-write_foot();
+$layout->show("S'inscrire");

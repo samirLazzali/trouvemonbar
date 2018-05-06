@@ -57,7 +57,7 @@ class Navbar
     /**
      * @return string html code for the navbar
      */
-    public function get_html()
+    public function getHtml()
     {
         return $this->html;
     }
