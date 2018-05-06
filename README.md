@@ -30,6 +30,7 @@ This command starts the application without installing anything.
     * js : for javascript functions.
     * css : for css files. Soon to be replaced by bootstrap
     * index.php : first php file to be run when a user visit the site.
+    * all pages. 
 * src : for php files. All the app logic is there.
     * app : for models and views. Users should not access there directly.
         * models : for classes that represent the underlying logic of the app
@@ -37,11 +38,11 @@ This command starts the application without installing anything.
         * class : for useful function regrouped into a class, such as Auth
     * helpers : for other functions such as math and string processing related ones.
     * db : for database related functions (connection, query, disconnect)
-    * pages : pages of the web site. Users should access these.
+    
 * test : for unit tests. 
 
 #How to create a page
- * create a new php file in src/pages .
+ * create a new php file in public .
  * require "../app/helpers.php" . 
     Do not use any other include or require. They should be all handled by the autoloader.
  * write the page logic (using the functions in sre/app/models)
