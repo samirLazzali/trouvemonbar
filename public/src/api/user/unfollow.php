@@ -30,3 +30,4 @@ catch (UserNotFoundException $e)
 }
 
 $user->unfollow($u);
+success_die($u);

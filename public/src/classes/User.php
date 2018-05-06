@@ -378,8 +378,8 @@ class User implements JsonSerializable
         $db = connect();
         $SQL = "INSERT INTO " . TABLE_Subscription . " (Followed, Follower) VALUES (:followed, :follower)";
         $statement = $db->prepare($SQL);
-        $statement->bindValue($statement, ":followed", $userId);
-        $statement->bindValue($statement, ":follower", getID());
+        $statement->bindValue(":followed", $userId);
+        $statement->bindValue(":follower", $this->getID());
         $statement->execute();
     }
 
@@ -402,8 +402,8 @@ class User implements JsonSerializable
         $db = connect();
         $SQL = "DELETE FROM " . TABLE_Subscription . " WHERE Followed = :followed AND Follower = :follower";
         $statement = $db->prepare($SQL);
-        $statement->bindValue($statement, ":followed", $userId);
-        $statement->bindValue($statement, ":follower", getID());
+        $statement->bindValue(":followed", $userId);
+        $statement->bindValue(":follower", $this->getID());
         $statement->execute();
     }
 
@@ -427,8 +427,8 @@ class User implements JsonSerializable
         $db = connect();
         $SQL = "SELECT * FROM " . TABLE_Subscription . " WHERE Follower = :follower AND Followed = :followed";
         $statement = $db->prepare($SQL);
-        $statement->bindValue($statement, ":followed", $userId);
-        $statement->bindValue($statement, ":follower", getID());
+        $statement->bindValue(":followed", $userId);
+        $statement->bindValue(":follower", $this->getID());
         $statement->execute();
 
         $rows = $statement->fetch();
@@ -458,8 +458,8 @@ class User implements JsonSerializable
         $db = connect();
         $SQL = "SELECT * FROM " . TABLE_Subscription . " WHERE Follower = :follower AND Followed = :followed";
         $statement = $db->prepare($SQL);
-        $statement->bindValue($statement, ":followed", getID());
-        $statement->bindValue($statement, ":follower", $userId);
+        $statement->bindValue(":followed", $this->getID());
+        $statement->bindValue(":follower", $userId);
         $statement->execute();
 
         $rows = $statement->fetch();
