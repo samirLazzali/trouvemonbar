@@ -72,7 +72,7 @@ require_once("User.php");
             </h1>
 
             <h2 class="section-title">
-                <a href="/subscriptions/<?= $user->getUsername(); ?>">Liste des abonnements / abonnés</a>
+                <a class="section-title" href="/subscriptions/<?= $user->getUsername(); ?>">Liste des abonnements / abonnés</a>
             </h2>
 
             <h2 class="section-title">
