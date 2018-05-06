@@ -160,34 +160,33 @@ function prenom_user($id_user){
 		Champ.value = "";
 	}
 
-	var FriendList = <?php
-                    $sth = $connection->prepare('SELECT * FROM "amis" WHERE personne1=\''.$id.'\' OR personne2=\''.$prenom.'\' ');
-                    $sth->execute();
-                    $result = $sth->fetch(PDO::FETCH_OBJ);
-                    echo '[';
-                    while($result){
-                        echo '"';
-                        if($result->personne1 == $prenom){
-                            echo '"'.$result->personne2.'"' ;
-                        }
-                        else{
-                             echo '"'.$result->personne1.'"' ;
-                        }
-                        echo '"';
-                        $result = $sth->fetch(PDO::FETCH_OBJ);
-                        if($result){
-                             echo ',';
-                        }
-                    }
-                    echo ']';
-                    ?> ;
-   // var FriendList_ID =
+    var FriendList = <?php
+        $sth = $connection->prepare('SELECT * FROM "amis" WHERE personne1=\''.$_SESSION['id'].'\' OR personne2=\''.$_SESSION['id'].'\' ');
+        $sth->execute();
+        $result = $sth->fetch(PDO::FETCH_OBJ);
+        echo '[';
+        while($result){
+            echo '["';
+            if($result->personne1 == $_SESSION['id']){
+                echo $result->personne2."\",\"".prenom_user($result->personne2) ;
+            }
+            else{
+                echo $result->personne1."\",\"".prenom_user($result->personne1) ;
+            }
+            echo '"]';
+            $result = $sth->fetch(PDO::FETCH_OBJ);
+            if($result){
+                echo ',';
+            }
+        }
+        echo ']';
+        ?> ;
 
 
     function liste_amis(){
     	document.write("<p>Vos amis:</p>");
     	for(var i=0;i<FriendList.length;i++){
-    		document.write("<button value=\""+ FriendList[i] + "\" onclick=\"document.getElementById('h1').innerHTML=\'Ma conversation avec " + FriendList[i] + "\'; document.getElementById('envoyer').value='"+ FriendList[i] +"'; Conversation() \">" + FriendList[i] + "</button>");
+    		document.write("<button value=\""+ FriendList[i][1] + "\" onclick=\"document.getElementById('h1').innerHTML=\'Ma conversation avec " + FriendList[i][1] + "\'; document.getElementById('envoyer').value='"+ FriendList[i][0] +"'; Conversation() \">" + FriendList[i][1] + "</button>");
     	}
     	document.write("<br/>");
     }

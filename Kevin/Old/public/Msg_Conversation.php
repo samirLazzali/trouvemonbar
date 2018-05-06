@@ -41,10 +41,10 @@ while($result){
         $msg->setEmetteur("Moi");
 	}
 	else{
-        $msg->setEmetteur($result->emetteur);
+        $msg->setEmetteur(prenom_user($result->emetteur));
     }
 	$msg->setDate(new \DateTime($result->date_envoie))
-		->setContenu(prenom_user($result->contenu));
+		->setContenu($result->contenu);
 
 	$Res .= affiche_message($msg);
 	

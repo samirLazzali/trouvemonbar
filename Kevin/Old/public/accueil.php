@@ -29,6 +29,16 @@ $tweets=$tweetRepository->fetchAll();
 $tweetManager = new Tweet\TweetManager($connection);
 
 
+
+/************* AJOUT KEVIN ******************/
+function prenom_user($id_user){
+    global $connection;
+    $sth = $connection->prepare('SELECT * FROM "user" WHERE id=\''.$id_user.'\';');
+    $sth->execute();
+    $result = $sth->fetch(PDO::FETCH_OBJ);
+    return $result->firstname;
+}
+
 ?>
 
 
@@ -45,7 +55,7 @@ $tweetManager = new Tweet\TweetManager($connection);
 <script>
 
         var Tweets =  <?php
-                    $sth = $connection->prepare('SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne1=auteur WHERE personne2=\''.$_SESSION['prénom'].'\' UNION SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne2=auteur WHERE personne1=\''.$_SESSION['prénom'].'\'  ');
+                    $sth = $connection->prepare('SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne1=auteur WHERE personne2=\''.$_SESSION['id'].'\' UNION SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne2=auteur WHERE personne1=\''.$_SESSION['id'].'\'  ');
                     $sth->execute();
                     $result = $sth->fetch(PDO::FETCH_OBJ);
                     echo '[';
@@ -64,19 +74,19 @@ $tweetManager = new Tweet\TweetManager($connection);
 
 
          var FriendList = <?php
-                    $sth = $connection->prepare('SELECT * FROM "amis" WHERE personne1=\''.$_SESSION['prénom'].'\' OR personne2=\''.$_SESSION['prénom'].'\' ');
+                    $sth = $connection->prepare('SELECT * FROM "amis" WHERE personne1=\''.$_SESSION['id'].'\' OR personne2=\''.$_SESSION['id'].'\' ');
                     $sth->execute();
                     $result = $sth->fetch(PDO::FETCH_OBJ);
                     echo '[';
                     while($result){
-                        echo '"';
-                        if($result->personne1 == $_SESSION['prénom']){
-                            echo "$result->personne2" ;
+                        echo '["';
+                        if($result->personne1 == $_SESSION['id']){
+                            echo $result->personne2."\",\"".prenom_user($result->personne2) ;
                         }
                         else{
-                             echo "$result->personne1" ;
+                            echo $result->personne1."\",\"".prenom_user($result->personne1) ;
                         }
-                        echo '"';
+                        echo '"]';
                         $result = $sth->fetch(PDO::FETCH_OBJ);
                         if($result){
                              echo ',';
@@ -157,7 +167,7 @@ $tweetManager = new Tweet\TweetManager($connection);
     function liste_amis(){
         document.write("<p>Vos amis:</p>");
         for(var i=0;i<FriendList.length;i++){
-            document.write("<a href=\"profil.php?pseudo=" + FriendList[i] + "\">" + FriendList[i] + "</a><br/>");
+            document.write("<a href=\"profil.php?pseudo=" + FriendList[i][0] + "\">" + FriendList[i][1] + "</a><br/>");
         }
         document.write("<br/>");
     }

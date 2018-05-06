@@ -15,7 +15,7 @@ $msg = new \Message\Message();
 
 
 
-$msg->setEmetteur($_GET['pseudo']);
+$msg->setEmetteur($_GET['emetteur']);
 $msg->setRecepteur($_GET['recepteur']);
 $msg->setDate(new DateTime);
 $msg->setContenu($_GET['m']);
