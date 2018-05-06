@@ -63,7 +63,7 @@ a:hover {
     border-bottom: 0px;
 }
 
-.post-in-feed:hover {
+.post-in-feed:hover, .post-in-feed:hover .post-in-feed {
     background-color: #e67e22;
     transition: 250ms;
 }
@@ -118,4 +118,67 @@ a:hover {
 
 .mention {
     font-weight: 500;
+}
+
+.action-like-on {
+    color: tomato;
+}
+
+.action-dislike-on {
+    color: tomato;
+}
+
+.action-repost-on {
+    color: #34495e;
+}
+
+
+.report-form-wrapper {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.report-form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: none;
+}
+
+.report-field {
+    flex-grow: 1;
+    margin-right: 5px;
+    margin-left: 0px;
+    font-size: 1em;
+    background: #95a5a6;
+    line-height: 2em;
+    box-shadow: 2px 2px 0px #e74c3c;
+    width: 100%;
+    padding: 2px 8px 2px 8px;
+    border: 0px;
+    outline: none;
+    transition: 250ms;
+}
+
+.report-field:focus {
+    background: #c6d0d1;
+    transition: 250ms;
+}
+
+.report-submit {
+    margin-right: 5px;
+    padding: 5px 5px 5px 5px;
+    font-size: 1em;
+
+    background: #95a5a6;
+    line-height: 2em;
+    box-shadow: 2px 2px 0px #e74c3c;
+    padding: 2px 5px 2px 5px;
+    border: 0px;
+    transition: 250ms;
+}
+
+.report-submit:hover {
+    background-color: #e67e22;
+    transition: 250ms;
 }

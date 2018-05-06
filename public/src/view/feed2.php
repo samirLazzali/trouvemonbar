@@ -45,22 +45,22 @@ require_once("../classes/Post.php");
                 </div>
                 <div class="post-actions">
                     <span class="post-action">
-                        <a onclick="likePost(<?=$post->getID();?>)" href="#" class="action-link">
+                        <a onclick="likePost('<?=$post->getID()?>')" href="#" class="action-link">
                             Like
                         </a>
                     </span>
                     <span class="post-action">
-                        <a onclick="dislikePost(<?=$post->getID();?>)" href="#" class="action-link">
+                        <a onclick="dislikePost('<?=$post->getID()?>')" href="#" class="action-link">
                             Dislike
                         </a>
                     </span>
                     <span class="post-action">
-                        <a onclick="repost(<?=$post->getID();?>)" href="#" class="action-link">
+                        <a onclick="repost('<?=$post->getID()?>')" href="#" class="action-link">
                             Reposter
                         </a>
                     </span>
                     <span class="post-action">
-                        <a onclick="report(<?=$post->getID();?>)" href="#" class="action-link">
+                        <a onclick="report('<?=$post->getID()?>')" href="#" class="action-link">
                             Signaler
                         </a>
                     </span>

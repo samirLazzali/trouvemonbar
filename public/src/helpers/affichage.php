@@ -10,7 +10,7 @@
  */
 function timestamp_to_string($t)
 {
-    return date("d/m/Y H:i:s", $t);
+    return date("d/m/Y H:i  ", $t);
 }
 
 //TODO écrire les fonctions javascript pour les actions onclick => à faire dans un fichier JS, pas ici !
