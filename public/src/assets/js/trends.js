@@ -44,6 +44,11 @@ function postToHtml(author, content, date, id)
     return text;
 }
 
+
+/*fonction qui affiche dans la page tout les posts cotentant un tag
+@param hashtag le tag à passer en entrée
+ */
+
 function getPostsFromHashtag(hashtag)
 {
     var request = new XMLHttpRequest();
@@ -57,7 +62,9 @@ function getPostsFromHashtag(hashtag)
             var date;
             var id;
             var result = JSON.parse(request.responseText);
-            text += hashtag;
+            text += "<h2 class=\"selected-hashtag-name\">" +
+                        #hashtag +
+                    "</h2>";
             forEach(result as r)
             {
                 author = r['author'];
@@ -74,6 +81,33 @@ function getPostsFromHashtag(hashtag)
         }
     };
     request.open("/api/trends/fromTag?tag=" + hashtag);
+    request.send();
+    return false;
+}
+
+function getHashtags()
+{
+    var request =  new XMLHttpRequest();
+    request.onreadystatechange = function()
+    {
+        if (this.readyState == 4 && this.status == 200)
+        {
+            var result = JSON.parse(request.responseText);
+            var text = '';
+            forEach(result as r)
+            {
+                text += "<a href='#' class='hashtag-link' onclick='getPostsFromHashtag("+ r +")'>" +
+                            r +
+                        "</a>";
+            }
+            document.getElementById('div.hashtag-in-list').innerHTML = text;
+        }
+        else
+        {
+            alert("Va te faire foutre.");
+        }
+    };
+    request.open("/api/trends/hashtag");
     request.send();
     return false;
 }
@@ -109,6 +143,5 @@ function getTopLikes()
     request.open("/api/trends/topLikes");
     request.send();
     return false;
+
 }
-
-

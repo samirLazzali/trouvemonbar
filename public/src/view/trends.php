@@ -15,7 +15,7 @@ $tags = array_keys($trends);
     <head>
         <meta charset="utf-8" />
     </head>
-    <body>
+    <body onload="getTopLikes()">
         <div>
         </div>
         <div class="column-wrapper">
@@ -23,10 +23,10 @@ $tags = array_keys($trends);
                 - tendances -
             </h1>
             <div id="trend-types">
-                <a onClick="updateTrends('hashtags');" id="trend-selector-hashtags" class="trend-type-wrapper selected" href="#">
+                <a onClick="getHashtags();" id="trend-selector-hashtags" class="trend-type-wrapper selected" href="#">
                     Hashtags
                 </a>
-                <a onClick="updateTrends('likes');" id="trend-selector-likes" class="trend-type-wrapper" href="#">
+                <a onClick="getTopLikes();" id="trend-selector-likes" class="trend-type-wrapper" href="#">
                     Les plus aimés
                 </a>
                 <a onClick="updateTrends('fights');" id="trend-selector-fights" class="trend-type-wrapper" href="#">
@@ -50,6 +50,12 @@ $tags = array_keys($trends);
                     <?php
                     }
                     ?>
+                </div>
+            </div>
+            <div id="most-tweeted-hashtags">
+                <div class="hashtags">
+                    <div class="hashtag-in-list">
+                    </div>
                 </div>
             </div>
             <div class="post-feed">
