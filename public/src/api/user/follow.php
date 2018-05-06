@@ -30,3 +30,4 @@ catch (UserNotFoundException $e)
 }
 
 $user->follow($u);
+success_die($u);

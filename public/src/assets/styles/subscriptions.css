@@ -1,0 +1,33 @@
+@import url("general.css");
+@import url("post.css");
+
+.subscriptions-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.subscription-item {
+    padding: 5px 15px 5px 15px;
+    flex-grow: 1;
+    background-color: #ffeacb;
+    border-bottom: 1px solid lightgray;
+}
+
+.subscription-item:hover {
+    background-color: #e67e22;
+    transition: 250ms;
+}
+
+.subscription-item:last-child {
+    border-bottom: 0px;
+}
+
+.subscription-item-user-name {
+    font-size: 1.2em;
+}
+
+.subscription-item-user-info {
+    padding-left: 10px;
+}

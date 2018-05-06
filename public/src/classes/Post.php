@@ -57,7 +57,7 @@ class Post implements JsonSerializable
     static function fromID($ID)
     {
         $db = connect();
-        $SQL = "SELECT * FROM " . TABLE_Posts . " JOIN " . TABLE_User . " ON " . TABLE_Posts . ".Author = " . TABLE_User . ".ID WHERE " . TABLE_Posts . " ID = :id";
+        $SQL = "SELECT * FROM " . TABLE_Posts . " JOIN " . TABLE_User . " ON " . TABLE_Posts . ".Author = " . TABLE_User . ".ID WHERE " . TABLE_Posts . ".ID = :id";
         $statement = $db->prepare($SQL);
         $statement->bindValue(":id", $ID);
         $statement->execute();
