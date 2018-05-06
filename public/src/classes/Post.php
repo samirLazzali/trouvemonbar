@@ -57,7 +57,7 @@ class Post implements JsonSerializable
     static function fromID($ID)
     {
         $db = connect();
-        $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE ID = :id";
+        $SQL = "SELECT * FROM " . TABLE_Posts . " JOIN " . TABLE_User . " ON " . TABLE_Posts . ".Author = " . TABLE_User . ".ID WHERE " . TABLE_Posts . " ID = :id";
         $statement = $db->prepare($SQL);
         $statement->bindValue(":id", $ID);
         $statement->execute();
@@ -216,7 +216,7 @@ class Post implements JsonSerializable
     static function fromHashtag($tag)
     {
         $db = connect();
-        $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE content like :hashtag";
+        $SQL = "SELECT * FROM " . TABLE_Posts . " JOIN " . TABLE_User . " ON " . TABLE_Posts . ".Author = " . TABLE_User . ".ID WHERE content like :hashtag";
         $statement = $db->prepare($SQL);
         $statement->bindValue(":hashtag", "%".$tag."%");
         $statement->execute();
@@ -227,8 +227,11 @@ class Post implements JsonSerializable
         if (!$rows)
             return $result;
 
-        foreach($rows as $row)
-            $result[] = Post::fromRow($row);
+        foreach($rows as $row) {
+            $p = Post::fromRow($row);
+            $p->setAuthor(User::fromUsername($row["username"]));
+            $result[] = $p;
+        }
 
         return $result;
     }
@@ -513,7 +516,8 @@ class Post implements JsonSerializable
             "timestamp" => $this->timestamp,
             "repostOf" => $this->repostOf,
             "responseTo" => $this->responseTo,
-            "appreciations" => $this->getAppreciations());
+            "appreciations" => $this->getAppreciations(),
+            "author" => $this->authorCache);
 
         return $arr;
     }
