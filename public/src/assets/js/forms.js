@@ -107,6 +107,7 @@ function login()
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200)
             {
+                console.log(xhttp.responseText);
                 var result = JSON.parse(xhttp.responseText);
                 if (result["status"] == STATUS_OK)
                     document.location.href = "/main";

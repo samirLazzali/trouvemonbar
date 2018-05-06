@@ -1,6 +1,11 @@
 <?php
     require_once("../config.php");
     $user = getUserFromCookie();
+    if ($user == null)
+    {
+        header("Location: /login");
+        die();
+    }
 ?>
 <!DOCTYPE HTML>
 <html>
