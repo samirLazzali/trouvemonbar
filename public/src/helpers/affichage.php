@@ -14,7 +14,7 @@ function affichePost($post)
     ?>
     <div class="post-in-feed">
         <div class="post-header">
-            <a href="profile/Oxymore" class="post-header-author">
+            <a href="profile/<?= $author ?>" class="post-header-author">
                 <?= $author ?>
             </a>
             <span class="post-header-date">
