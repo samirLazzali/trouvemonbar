@@ -72,13 +72,13 @@ class UserRepository
 			    }
 			    else 
 			    {
-				    echo 'Mauvais mot de passe';
+				    echo "<center><p class=\"alert\">Mauvais mot de passe !</p></center>";
 			    }
 		    }
 	    }
 		
 	    if ($flag==0){
-		    echo 'Mauvais pseudo';
+		    echo "<center><p class=\"alert\">Mauvais pseudo !</p></center>";
 	    }
     }
 
@@ -102,18 +102,19 @@ class UserRepository
                                 'pseudo' => $pseudo,
                                 'mdp' => $mdp,
                                 'id_groupe'=> $userlevel )) ;
-			       
-				echo ' Vous êtes inscrit !  ' ;
- 
+
+				echo '<center><h3> Vous êtes maintenant inscrit ! </h3></center> ';
+				echo '<center><h4> Vous pouvez dès à présent vous <a href="connexion.html">connecter<a></h4></center>';
 			}
 			else 
 			{ 
-				echo " <center>Erreur : Le pseudo est déja utilisé .</center>" ; 
+
+				echo " <center><p class=\"alert\">Le pseudo est déja utilisé !</p></center>" ; 
 			}
 	}
 	else 
 	{ 
-		echo " <center>Erreur : Les deux mots de passe entrés sont différents .</center>" ;
+		echo "<center><p class=\"alert\">Les deux mots de passe entrés sont différents !</p></center>" ;
 	}
     
     }

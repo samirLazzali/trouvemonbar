@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<link rel="stylesheet" href="connexion.css" type="text/css">
+
+
+</head>
+<body>
+
 <?php 
 require '../vendor/autoload.php'; 
 //postgres 
@@ -8,9 +18,32 @@ $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=
 
 $userRepository = new \User\UserRepository($connection);
 
-$userRepository->connect($_POST['uname'],$_POST['psw']);
+if (!empty($_POST)){
+	$userRepository->connect($_POST['uname'],$_POST['psw']);
+}
 
-?> 
+?>
+
+<h2>Connexion</h2>
+
+<form action="connexion.php" method="post">
+  <div class="container">
+    <label for="uname"><b>Pseudo</b></label><br/>
+    <input type="text" placeholder="Entrez votre pseudo" name="uname" required>
+	<br/>
+    <br/>
+    <label for="psw"><b>Mot de passe</b></label><br/>
+    <input type="password" placeholder="Entrez votre mot de passe" name="psw" required>
+    <br/><br/>
+    <button type="submit">Login</button>
+  </div>
+</form>
+
+<center><p>Pas encore inscrit ? <a href="inscription.php" style=color:dodgerblue>Inscrivez-vous !</a></p></center>
+
+</body>
+</html>
+
 
 
 

@@ -28,8 +28,11 @@ button:hover {
     opacity: 0.5;
 }
 
-h1{margin: 12px 42%;}
+h1{margin: 12px;}
 
 b{margin: 8px 33%;}
 
-p{margin: 8px 33%;}
+.alert {
+	color : red;
+	font-weight: bold;
+}
