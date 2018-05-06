@@ -104,7 +104,7 @@ class UserRepository
                                 'id_groupe'=> $userlevel )) ;
 
 				echo '<center><h3> Vous êtes maintenant inscrit ! </h3></center> ';
-				echo '<center><h4> Vous pouvez dès à présent vous <a href="connexion.html">connecter<a></h4></center>';
+				echo '<center><h4> Vous pouvez dès à présent vous <a href="connexion.php">connecter<a></h4></center>';
 			}
 			else 
 			{ 
