@@ -14,8 +14,8 @@
     <p> Ou <a href="subscribe.php"> créer votre compte </a> </p>
 
     <form class="" action="actions/authentication_action.php" method="post">
-        <input type="email" name="email" value="Email"/> </br>
-        <input type="password" name="password" value="Password"/> </br>
+        <input type="email" name="email" placeholder="Email"/> </br>
+        <input type="password" name="password" placeholder="Password"/> </br>
         <input class="btn bg-success text-white" type="submit" value="Se connecter"/>
     </form>
 </div>

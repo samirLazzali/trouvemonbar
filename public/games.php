@@ -11,4 +11,24 @@
  * @todo create a search function (systems, creators, table status)
  * @todo display looking for players only by default
  * @todo create game button
+ * @todo if "create game" is disabled, a tooltip says "login to create your game" when mousing over the button
  */
+
+require "../src/app/helpers.php";
+$gamelist = Game::gamelist();
+
+
+//the create game button is disabled if the user is not logged in
+$disabled = Auth::logged() ? "" : "disabled";
+
+if(Auth::logged())
+{
+    $layout = new Layout("users");
+    include view("game_list_view.php");
+    $layout->show('Tables');
+}
+else {
+    $layout = new Layout("visitors");
+    include view("game_list_view.php");
+    $layout->show('Tables');
+}

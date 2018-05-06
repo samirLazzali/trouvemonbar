@@ -7,15 +7,27 @@
  * Time: 18:17
  */
 
-namespace User;
-
 
 /**
  * Class Game
- * @package User
- * For the needs of this app, a "game" is a role-playing game session that is scheduled by a User
+ * For the purpose of this app, a "game" is a role-playing game session that is scheduled by a User
  */
 class Game
 {
+    public function __construct()
+    {
 
+    }
+
+    /**
+     * @return array list of all games in the database
+     */
+    public static function gamelist()
+    {
+
+        $query = db()->prepare("SELECT gameid, gamename FROM game");
+        $query->execute();
+
+        return $query->fetchAll();
+    }
 }

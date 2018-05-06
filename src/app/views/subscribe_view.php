@@ -17,9 +17,9 @@
 <p> Ou <a href="authentication.php"> se connecter à votre compte </a> </p>
 
 <form action="actions/subscribe_action.php" method="post">
-    <input type="email" name="mail" value="Email"/> </br>
-    <input type="text" name="nick" value="Pseudo"/> </br>
-    <input type="password" name="password" value="Password"/> </br>
+    <input type="email" name="mail" placeholder="Email"/> </br>
+    <input type="text" name="nick" placeholder="Pseudo"/> </br>
+    <input type="password" name="password" placeholder="Password"/> </br>
     <input class="btn bg-success text-white" type="submit" name="Créer un nouveau compte" value="Créer un nouveau compte"/>
 </form>
 </div>

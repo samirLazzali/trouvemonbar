@@ -10,3 +10,12 @@
  * @todo the submit button adds this game to the database with its status sets at "looking for players"
  * @todo add the option to select related files
  */
+
+require "../src/app/helpers.php";
+
+if(!Auth::logged())
+    redirect("games.php");
+
+$layout = new Layout("users");
+include view("create_game_view.php");
+$layout->show('Tables');

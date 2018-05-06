@@ -2,7 +2,6 @@
 
 require "../src/app/helpers.php";
 
-
 if(Auth::logged())
 {
     $layout = new Layout("users");
