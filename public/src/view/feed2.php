@@ -25,7 +25,7 @@ require_once("../classes/Post.php");
     <?php
     $limit=4;
     $people=array();
-    $posts = findPosts($people, $limit);
+    $posts = Post::findPosts($people, $limit);
         ?>
     <div class="post-feed">
         <?php
@@ -33,8 +33,8 @@ require_once("../classes/Post.php");
         ?>
             <div class="post-in-feed">
                 <div class="post-header">
-                    <a href="profile/<?=$post->getAuthor();?>" class="post-header-author">
-                        <p><?=$post->getAuthor();?></p>
+                    <a href="profile/<?=$post->getAuthor()->getUsername();?>" class="post-header-author">
+                        <p><?=$post->getAuthor()->getUsername();?></p>
                     </a>
                     <span class="post-header-date">
                         <p><?=$post->getTimestamp();?></p>
@@ -55,7 +55,7 @@ require_once("../classes/Post.php");
                         </a>
                     </span>
                     <span class="post-action">
-                        <a onclick="repost(<?=$post->getID();?>, <?=$post->getAuthor();?>)" href="#" class="action-link">
+                        <a onclick="repost(<?=$post->getID();?>)" href="#" class="action-link">
                             Reposter
                         </a>
                     </span>
