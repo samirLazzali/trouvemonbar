@@ -96,7 +96,7 @@ class UserRepository
  
                         if($nb_rows2 != 1)
                         {      
-				$this->connection->prepare('INSERT INTO "user"(nickname,mdp,id_groupe) VALUES (:pseudo,:mdp,:id_groupe)');
+				$req=$this->connection->prepare('INSERT INTO "user"(nickname,mdp,id_groupe) VALUES (:pseudo,:mdp,:id_groupe)');
 				
 				$req->execute(array(
                                 'pseudo' => $pseudo,
