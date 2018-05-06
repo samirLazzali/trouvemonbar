@@ -7,6 +7,27 @@ $cu_followers = $currentUser->getFollowers();
 $cu_subscriptions = array();
 foreach($currentUser->getSubscriptions() as $sub)
     $cu_subscriptions[] = $sub->getUsername();
+
+function formatter_nombre_abonnes($n)
+{
+    if ($n == 0)
+        return "Aucun abonné";
+    elseif ($n == 1)
+        return "Un abonné";
+    else
+        return "$n abonnés";
+}
+
+function formatter_nombre_abonnements($n)
+{
+    if ($n == 0)
+        return "Aucun abonnement";
+    elseif($n == 1)
+        return "Un abonnement";
+    else
+        return "$n abonnements";
+}
+
 ?>
 
 <!DOCTYPE HTML>
@@ -22,7 +43,7 @@ foreach($currentUser->getSubscriptions() as $sub)
         <script src="/assets/js/user.js"></script>
     </head>
 
-    <body >
+    <body>
         <?php
         if (getUserFromCookie() == null) { ?>
             <p>Vous n'etes pas connecté. <a href="login.php">Connexion</a></p>
@@ -61,11 +82,11 @@ foreach($currentUser->getSubscriptions() as $sub)
                     </div>
                     <div class="subscription-item-user-info">
                         <span class="subscription-item-count">
-                            <?=count($sub->getFollowers())?>
-                        </span> abonnés -
+                            <?=formatter_nombre_abonnes(count($sub->getFollowers()))?>
+                        </span> -
                         <span class="subscription-item-count">
-                            <?=count($sub->getSubscriptions())?>
-                        </span> abonnements -
+                            <?=formatter_nombre_abonnements(count($sub->getSubscriptions()))?>
+                        </span> -
                         <span class="subscription-item-follow-link">
                             <a onClick="toggleSubscription('<?=$sub->getUsername()?>');" class="follow-link-<?=$sub->getUsername()?>" href="#">
                                 <?php if(!in_array($sub->getUsername(), $cu_subscriptions)): ?>
@@ -85,10 +106,10 @@ foreach($currentUser->getSubscriptions() as $sub)
             <h1>
                 - Abonnés -
             </h1>
+            <div class="subscriptions-wrapper">
             <?php
             $followers = $user->getFollowers();
-            foreach($followers as $foll)
-            {
+            foreach($followers as $foll):
                 ?>
                 <div class="subscription-item">
                     <div class="subscription-item-user-name">
@@ -96,11 +117,11 @@ foreach($currentUser->getSubscriptions() as $sub)
                     </div>
                     <div class="subscription-item-user-info">
                         <span class="subscription-item-count">
-                            <?=count($foll->getFollowers())?>
-                        </span> abonnés -
+                            <?=formatter_nombre_abonnes(count($foll->getFollowers()))?>
+                        </span> -
                         <span class="subscription-item-count">
-                            <?=count($foll->getSubscriptions())?>
-                        </span> abonnements -
+                            <?=formatter_nombre_abonnements(count($foll->getSubscriptions()))?>
+                        </span> -
                         <span class="subscription-item-follow-link">
                                 <?php if(!in_array($foll->getUsername(), $cu_subscriptions)): ?>
                                     <a onClick="toggleSubscription('<?=$foll->getUsername()?>');" class="follow-link-<?=$foll->getUsername()?>" href="#">
@@ -114,9 +135,10 @@ foreach($currentUser->getSubscriptions() as $sub)
                         </span>
                     </div>
                 </div>
-                <?php
-            }
+            <?php
+                endforeach
             ?>
+            </div>
         </div>
     </body>
 
