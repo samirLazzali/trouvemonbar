@@ -5,20 +5,17 @@ include '../src/login/login.php'
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="generator" content=
-  "HTML Tidy for HTML5 for Linux version 5.6.0">
   <meta charset="UTF-8">
   <title>Sign-Up/Login Form</title>
   <link href=
   'https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600'
   rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href=
-  "https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <button class="button button-block" id="connect">Connect</button>
-  <div id="form" class="form" style="display: none;">
+  <div id="form" class="form" style="display: <?php if (isset($_POST['login']) || isset($_POST['create'])) {echo "block";} else {echo "none";}?>;">
     <ul class="tab-group">
       <li class="tab active">
         <a href="#login">Log In</a>

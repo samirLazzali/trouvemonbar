@@ -1,8 +1,11 @@
 <?php
-include("authentication.php"); 
+//include("authentication.php");
 include("viewfunctions.php");
+include("login/login.php");
 
-header("Hello"); 
+header_t("Hello");
+buttonLogin();
+displayLogin();
 if(verif_authent()){ // si le gars est authentified ==>  acces aux offres
 	indexco();
 }
