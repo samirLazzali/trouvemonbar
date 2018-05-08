@@ -44,14 +44,10 @@ function prenom_user($id_user){
 
 
 <html>
+<head>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
 <body>
-
-<style>
-    #err{
-      color: red;
-      font-size: 11px;
-    }
-</style>
 <script>
       /*  function nbLike(id){
             var xhttp;
@@ -131,7 +127,9 @@ function prenom_user($id_user){
                 /************************** AJOUT DE KEVIN ****************************/
 
     function Liker(T_id){
+
         var xhttp;
+
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {// 4 = request finished and response is ready, 200 = "OK"
@@ -158,12 +156,22 @@ function prenom_user($id_user){
         xhttp.send();
     }
 
+    function deja_liker(T_id){
+
+        document.getElementById(T_id).innerHTML="Je n'aime plus";
+
+    }
+
     function tweets(){
-        document.write("Derniers Tweets :<br/><br/>");
+        document.write("<div class=\"alltweets\">Derniers Tweets :<br/><br/>");
         for(var i=0; i<Tweets.length;i++){
-             document.write(Tweets[i][0] + " a tweeté à " + Tweets[i][2] +" : <br/>"+ Tweets[i][1]+"<br/>" );
-             document.write("<button id=\""+ Tweets[i][3] + "\" onclick=\"Liker("+Tweets[i][3]+")\">J'aime</button> Nb de J'aimes :"+ Tweets[i][4] +"<br/><br/>");
+             document.write("<div class=\"tweets\">" + Tweets[i][0] + " a tweeté à " + Tweets[i][2] +" : <br/>"+ Tweets[i][1]+"<br/>" );
+             document.write("<button id=\""+ Tweets[i][3] + "\" onclick=\"Liker("+Tweets[i][3]+")\">J'aime</button> Nb de J'aimes :"+ Tweets[i][4] +"</br>");
+            document.write("<button id=\"Comment\">Afficher les commentaires</button></div><br/><br/>");
+
         }
+        document.write("</div");
+
     }
 
         /**************************************** FIN AJOUT *************************************/
@@ -174,9 +182,6 @@ function prenom_user($id_user){
        ok.type="submit";
        var textarea = document.getElementById("textarea");
        textarea.style="display";
-
-        
-
     }
 
     function ConfirmationTweet(){
@@ -184,11 +189,11 @@ function prenom_user($id_user){
     }
 
     function liste_amis(){
-        document.write("<p>Vos amis:</p>");
+        document.write("<div class=\"amis\">Vos amis:<br/>");
         for(var i=0;i<FriendList.length;i++){
-            document.write("<a href=\"profil.php?pseudo=" + FriendList[i][0] + "\">" + FriendList[i][1] + "</a><br/>");
+            document.write("<a href=\"profil.php?pseudo=" + FriendList[i][1] + "\">@" + FriendList[i][1] + "</a><br/>");
         }
-        document.write("<br/>");
+        document.write("</div>");
     }
     function liste_pseudos(){
         for(var i=0;i<AtList.length;i++){
@@ -228,46 +233,72 @@ function prenom_user($id_user){
             return true;
         }
     }
-
+    
    
 
 
 
 </script>
-Bienvenue <?php echo $_SESSION['prénom'] ?> ! </br>
 
-Rechercher un # :</br>
-<form method='post' action="hashtag.php">
-  <input list="hashtags" name="hashtag">
-  <datalist id="hashtags">
-</datalist>
-  <input id="afficherhashtag" type="submit" value="Afficher le Hashtag">
-</form>
-Rechercher un @ :</br>
-<form method='post' action="profil.php">
-  <input list="pseudos" name="pseudo" onblur="verifPseudo(this)">
-  <datalist id="pseudos">
-  <script >liste_pseudos()</script>
-  </datalist>
-  <input type="hidden" id="visite" name="visite" value="Visiter le profil">
-</form>
-<p id="err"></p>
-<form method='post' action=<?php echo "edition.php?pseudo=".$_SESSION['prénom'] ?>>
-<input type="submit" name="editio" value="Personnaliser ...">
-</form>
 
-<button onclick="EcrireTweet()">Ecrire un tweet</button>
 
-<form method='post' action="ecriretweet.php">
+
+<nav id="fontmenu">
+    <ul id="menu">
+        <li>
+            <span class="nomsite">Twitiie</span>    
+        </li>
+        <li>
+           <a href="accueil.php">Accueil</a>
+        </li>
+        <li>
+           <a href=<?php echo "edition.php?pseudo=".$_SESSION['prénom'] ?>>Mon Profil</a>
+        </li>
+        <li>
+           <a href="Msg/Msg_Ecrire.php">Message</a></br>
+
+        </li>
+    </ul>
+</nav>
+
+
+    <ul id="recherches">
+        <li>
+                 Rechercher un # :
+            <form method='post' action="hashtag.php">
+              <input list="hashtags" name="hashtag">
+              <datalist id="hashtags">
+            </datalist>
+              <input id="afficherhashtag" type="submit" value="Afficher le Hashtag">
+            </form>
+        </li>
+        <li>
+             Rechercher un @ :
+            <form method='post' action="profil.php">
+              <input list="pseudos" name="pseudo" onblur="verifPseudo(this)">
+              <datalist id="pseudos">
+              <script >liste_pseudos()</script>
+              </datalist>
+              <input type="hidden" id="visite" name="visite" value="Visiter le profil">
+            </form>
+            <p id="err"></p>
+       </li>
+    </ul>
+
+    
+
+
+
+
+<span class="writetweetstext">Ecrire un tweet</span>
+<form class="writetweets" method='post' action="ecriretweet.php">
 <input type="hidden" name="pseudo" value="<?php echo $_SESSION['prénom'] ?>"></input><br/>
-<textarea  name= "textarea" id="textarea" style="display: none" placeholder="Exprimez vous..." rows="5" cols="50"></textarea>
-<input id="ok" onclick="ConfirmationTweet()" type="hidden" value="Envoyer">
+<textarea  name= "textarea" id="textarea"  placeholder="Exprimez vous..." rows="5" cols="50"></textarea>
+<input id="ok" onclick="ConfirmationTweet()" type="submit" value="Envoyer">
 </form>
-
-
 
 <!-- AJOUT DE KEVIN-->
-<a href="Msg/Msg_Ecrire.php">Écrire un message</a></br>
+
 
 
 <script >

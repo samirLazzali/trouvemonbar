@@ -149,7 +149,7 @@ function prenom_user($id_user){
 
 
 	function EnvoiMessage(){
-		var Champ = document.getElementById("msg");
+		var Champ = document.getElementById("sendField");
 		var Msg = Champ.value;
 //console.log("test");
 
@@ -193,48 +193,74 @@ function prenom_user($id_user){
 
 
     function liste_amis(){
-    	document.write("<p>Vos amis:</p>");
+    	document.write("<p class=\"titre\">Vos amis:</p>");
     	for(var i=0;i<FriendList.length;i++){
     		document.write("<button value=\""+ FriendList[i][1] + "\" onclick=\"document.getElementById('h1').innerHTML=\'Ma conversation avec " + FriendList[i][1] + "\'; document.getElementById('envoyer').value='"+ FriendList[i][0] +"'; Conversation() \">" + FriendList[i][1] + "</button>");
     	}
     	document.write("<br/>");
     }
 
-	liste_amis();
-
-
-
-
-	
 </script>
 
 <head>
-    <link rel="stylesheet" href="../CSS/stylesheet1.css">
+    <link rel="stylesheet" href="../CSS/style.css">
     <title>Mes messages (<?php echo $_SESSION['prenom']; ?>)</title>
 </head>
 <body>
 
+<nav id="fontmenu">
+    <ul id="menu">
+        <li>
+            <span class="nomsite">Twitiie</span>
+        </li>
+        <li>
+            <a href="../accueil.php">Accueil</a>
+        </li>
+        <li>
+            <a href=<?php echo "../edition.php?pseudo=".$_SESSION['prénom'] ?>>Mon Profil</a>
+        </li>
+        <li>
+            <a href="Msg_Ecrire.php">Message</a></br>
 
+        </li>
+    </ul>
+</nav>
+
+
+
+
+<div class="conteneur">
+
+
+
+<div class="chat_liste_amis">
+    <script>
+        liste_amis();
+    </script>
+</div>
+
+<section>
 <h1 id="h1"></h1>
 
 <p id="dialogue"></p>
 
-<div id="chatbox" class="chatbox">
+    <div>
+        <div id="chatbox" class="chatbox"></div>
+        <div>
+            <input type="text" id="sendField" placeholder="Votre message ..." onkeypress="if (event.keyCode==13){EnvoiMessage();}" ></input>
 
-</div>	
+            <button type="button" id="envoyer" onclick="EnvoiMessage()">Envoyer</button>
+            <button onclick="Conversation();">Recharger</button>
 
-<button onclick="Conversation();">Recharger</button>
+        </div>
+    </div>
+</section>
 
-<div>
-	<textarea id="msg" placeholder="Votre message ..." rows="5" cols="50"></textarea>
-
-	<button type="button" id="envoyer" onclick="EnvoiMessage()/*; setTimeout(Conversation(),10000);*/">Envoyer</button>
 </div>
 
 
 
-
-<a href="../accueil.php">Retour à l'accueil</a><br>
+<!-- <a href="../accueil.php">Retour à l'accueil</a><br> -->
 <?php
 pied();
 ?>

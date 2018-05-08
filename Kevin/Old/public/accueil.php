@@ -53,6 +53,17 @@ function prenom_user($id_user){
     }
 </style>
 <script>
+      /*  function nbLike(id){
+            var xhttp;
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {// 4 = request finished and response is ready, 200 = "OK"
+                    document.getElementById('like_'+id).innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "nbLike.php?T_id="+id , true);
+            xhttp.send();
+        }*/
 
         var Tweets =  <?php
                     $sth = $connection->prepare('SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne1=auteur WHERE personne2=\''.$_SESSION['id'].'\' UNION SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne2=auteur WHERE personne1=\''.$_SESSION['id'].'\'  ');
@@ -60,7 +71,12 @@ function prenom_user($id_user){
                     $result = $sth->fetch(PDO::FETCH_OBJ);
                     echo '[';
                     while($result){
-                        echo "[\"$result->auteur\",\"$result->contenu\",\"$result->date_envoie\",\"$result->id\"]";
+                        /********************** AJOUT POUR RECUPERER NB DE LIKES *******************************/
+                        $likes_res = $connection->prepare('SELECT count(tweet_id) AS nb FROM "like" WHERE tweet_id='.$result->id);
+                        $likes_res->execute();
+                        $likes = $likes_res->fetch(PDO::FETCH_OBJ);
+
+                        echo "[\"".prenom_user($result->auteur)."\",\"$result->contenu\",\"$result->date_envoie\",\"$result->id\",\"".$likes->nb."\"]";
                         $result = $sth->fetch(PDO::FETCH_OBJ);
                         if($result){
                             echo ",";
@@ -71,9 +87,7 @@ function prenom_user($id_user){
 
                     ?> ;
 
-
-
-         var FriendList = <?php
+        var FriendList = <?php
                     $sth = $connection->prepare('SELECT * FROM "amis" WHERE personne1=\''.$_SESSION['id'].'\' OR personne2=\''.$_SESSION['id'].'\' ');
                     $sth->execute();
                     $result = $sth->fetch(PDO::FETCH_OBJ);
@@ -115,27 +129,32 @@ function prenom_user($id_user){
 
 
                 /************************** AJOUT DE KEVIN ****************************/
-    function nbLike(id){
-        var xhttp;
-        xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {// 4 = request finished and response is ready, 200 = "OK"
-                document.getElementById('like_'+id).innerHTML = this.responseText;
-            }
-        };
-        xhttp.open("GET", "nbLike.php?T_id="+id , true);
-        xhttp.send();
-    }
+
     function Liker(T_id){
         var xhttp;
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {// 4 = request finished and response is ready, 200 = "OK"
-                alert("Tweet Liké");
-                document.location.reload(true);
+                if (this.responseText == -1){
+                    /* SUPPRIMER LIKE */
+                    var xhttp2;
+                    xhttp2 = new XMLHttpRequest();
+                    xhttp2.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {// 4 = request finished and response is ready, 200 = "OK"
+                            alert("Tweet Disliké");
+                            document.location.reload(true);
+                        }
+                    };
+                    xhttp2.open("GET", "Likes/Dislike.php?pseudo_id=<?php echo $_SESSION['id']; ?>&T_id="+T_id, true);
+                    xhttp2.send();
+                }
+                else{
+                    alert("Tweet Liké");
+                    document.location.reload(true);
+                }
             }
         };
-        xhttp.open("GET", "Liker.php?pseudo_id=<?php echo $_SESSION['id']; ?>&T_id="+T_id, true);
+        xhttp.open("GET", "Likes/Liker.php?pseudo_id=<?php echo $_SESSION['id']; ?>&T_id="+T_id, true);
         xhttp.send();
     }
 
@@ -143,8 +162,7 @@ function prenom_user($id_user){
         document.write("Derniers Tweets :<br/><br/>");
         for(var i=0; i<Tweets.length;i++){
              document.write(Tweets[i][0] + " a tweeté à " + Tweets[i][2] +" : <br/>"+ Tweets[i][1]+"<br/>" );
-             document.write("<button id=\""+ Tweets[i][3] + "\" onclick=\"Liker("+Tweets[i][3]+")\">J'aime</button> Nb de J'aimes : <span id=\"like_"+ Tweets[i][3]+"\"></span><br/><br/>");
-             nbLike(Tweets[i][3])
+             document.write("<button id=\""+ Tweets[i][3] + "\" onclick=\"Liker("+Tweets[i][3]+")\">J'aime</button> Nb de J'aimes :"+ Tweets[i][4] +"<br/><br/>");
         }
     }
 
@@ -249,7 +267,7 @@ Rechercher un @ :</br>
 
 
 <!-- AJOUT DE KEVIN-->
-<a href="Msg_Ecrire.php">Écrire un message</a></br>
+<a href="Msg/Msg_Ecrire.php">Écrire un message</a></br>
 
 
 <script >

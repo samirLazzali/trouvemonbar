@@ -1,5 +1,7 @@
 <?php
-require '../vendor/autoload.php';
+//require_once '/var/www/html/src/Message/Message.php';
+//require_once '/var/www/html/src/Message/MessageManager.php';
+require '../../vendor/autoload.php';
 
 //postgres
 $dbName = getenv('DB_NAME');
