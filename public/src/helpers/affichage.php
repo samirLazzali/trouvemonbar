@@ -1,6 +1,6 @@
 <?php
 /**
- * fContient des fonctions d'affichage en HTML et de conversion (ex : entre date et représentation humaine).
+ * Contient des fonctions d'affichage en HTML et de conversion (ex : entre date et représentation humaine).
  */
 
 /**

@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS Report (
     Type CHAR(10),
 	Target CHAR(13),
 	Reporter CHAR(13),
-	REASON TEXT,
+	Reason TEXT,
+	Resolved BOOLEAN,
 	PRIMARY KEY(ID)
 );

@@ -24,6 +24,9 @@ require_once("affichage.php");
 require_once("Appreciation.php");
 require_once("User.php");
 require_once("Post.php");
+require_once("Report.php");
+require_once("SearchHelper.php");
+require_once("Trend.php");
 
 function connect()
 {

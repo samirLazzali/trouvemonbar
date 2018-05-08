@@ -1,2 +1,27 @@
 @import url("general.css");
 
+.post-report-reports-wrapper {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.post-report-report {
+    padding-left: 50px;
+}
+
+.post-report-reporter {
+    font-weight: bold;
+}
+
+.post-report-reporter:after {
+    content: " : ";
+}
+
+.moderation-actions-wrapper {
+    margin-left: 15px;
+    padding-bottom: 10px;
+}
+
+.moderation-action {
+    margin-right: 15px;
+}

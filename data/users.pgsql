@@ -1,5 +1,5 @@
 /* Insertion de quelques utilisateurs */
-INSERT INTO Users (ID, Username, Email, Password, Moderator) VALUES ('a', 'Oxymore', 'thomas.kowalski@ensiie.fr', '$2y$12$bZ8u12c3LG4cWZPkeSBmBOqJoQqBltYzUlrJ5.7B.tiuUnPRZVNSO', false);
+INSERT INTO Users (ID, Username, Email, Password, Moderator) VALUES ('a', 'Oxymore', 'thomas.kowalski@ensiie.fr', '$2y$12$bZ8u12c3LG4cWZPkeSBmBOqJoQqBltYzUlrJ5.7B.tiuUnPRZVNSO', true);
 INSERT INTO Users (ID, Username, Email, Password, Moderator) VALUES ('b', 'Iko', 'pierrick.barbarroux@ensiie.fr', '$2y$12$bZ8u12c3LG4cWZPkeSBmBOqJoQqBltYzUlrJ5.7B.tiuUnPRZVNSO', false);
 INSERT INTO Users (ID, Username, Email, Password, Moderator) VALUES ('c', 'Yéti', 'thibaut.milhaud@ensiie.fr', '$2y$12$bZ8u12c3LG4cWZPkeSBmBOqJoQqBltYzUlrJ5.7B.tiuUnPRZVNSO', false);
 INSERT INTO Users (ID, Username, Email, Password, Moderator) VALUES ('d', 'Drascma', 'florian.barre@ensiie.fr', '$2y$12$bZ8u12c3LG4cWZPkeSBmBOqJoQqBltYzUlrJ5.7B.tiuUnPRZVNSO', false);
