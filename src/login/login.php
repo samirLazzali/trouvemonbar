@@ -81,6 +81,8 @@ function verif_authent() {
 
 $error = '';
 
+
+
 function buttonLogin() {
     echo "<button class=\"button button-block\" id=\"connect\">Connect</button>";
 }

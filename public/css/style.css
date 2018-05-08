@@ -11,8 +11,36 @@ html {
 
 body {
     height: 100%;
+    width = 100%;
     margin:0;
     padding:0;
+    display: grid;
+    grid-gap: 50px;
+    grid-template-areas:
+	"header header header"
+	"sidebar main main"
+	"footer footer footer";
+}
+
+header {
+    grid-area: header;
+}
+
+footer {
+    grid-area: footer;
+}
+
+header button, header button-block {
+  font-size: 12px;
+  display: block;
+  width: 100%;
+  padding: 5px 10px;
+  background: none;
+  background-image: none;
+  border: 1px solid #a0b3b0;
+  color: #ffffff;
+  border-radius: 0;
+  transition: border-color .25s ease, box-shadow .25s ease;
 }
 
 a {
@@ -31,6 +59,15 @@ a:hover {
   margin: 40px auto;
   border-radius: 4px;
   box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+  grid-area: sidebar;
+}
+
+#form {
+    opacity:0.92;
+    /*position: absolute;*/
+    width: 700px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .tab-group {
@@ -181,5 +218,3 @@ textarea {
 .errorDisp {
     color: red;
 }
-
-
