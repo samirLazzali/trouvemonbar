@@ -51,7 +51,7 @@ if ($user == null)
             <input class="field" type="text" value="<?= $user->getUsername() ?>" id="new-username" /><br/>
 
             <label class="field-label" for="new-password">Nouveau mot de passe</label>
-            <input class="field" type="password" placeholder="Mot de passe" id="new-password" /><br/>
+            <input class="field" type="password" placeholder="motdepasse" id="new-password" /><br/>
 
             <button class="bouton" type="submit">
                 Sauvegarder
