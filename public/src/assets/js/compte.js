@@ -1,7 +1,4 @@
 var newPostActive = false;
-var newUsernameActive = false;
-var newMdpActive = false;
-var newEmailActive = false;
 
 
 function newPost_onFocus()
@@ -48,4 +45,48 @@ function CreatePost(value, user_Response)
 }
 
 
+function Change_info()
+{
+    var nmail = document.getElementById("new-email");
+    var npwd = document.getElementById("new-password");
+    var nusername = document.getElementById("new-username");
 
+    var mfieldpwd = document.getElementById("info-empty-pwd");
+    var infoboxMissingField = document.getElementById("info-missing-field");
+
+    mfieldpwd.style.display = "none";
+    infoboxMissingField.style.display = "none";
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200)
+        {
+            var result = JSON.parse(xhttp.responseText);
+            if (result["status"] == STATUS_OK)
+            {
+                document.location.href = "login";
+            }
+            else
+            {
+                switch(result["status"])
+                {
+                    case (ERROR_FieldMissing):
+                        mfieldpwd.style.display = "block";
+                        return false;
+                    case (ERROR_WrongPassword):
+                        // La je sais pas quoi mettre, parce que si le mot de passe d'origine est pas bon, l'utilisateur est pas censé
+                        //être déja connecté sur cette page
+                        return false;
+                    default:
+                        infoboxMissingField.innerHTML("Une erreur s'est produite : " + result["description"] + " (Code " + result["status"] + ")");
+                        return false;
+                }
+            }
+        }
+    };
+    xhttp.open("POST", "/api/user/edit", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("username=" + nusername.value + "&password=" + npwd.value + "&email=" + nmail.value);
+    return false;
+
+}

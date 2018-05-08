@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i');
+@import url('https://use.fontawesome.com/releases/v5.0.10/css/all.css');
+
+* {
+    font-family: 'Slabo 27px', serif;
+}
+
+h1 {
+    text-align: center;
+    color: #e67e22;
+    text-transform: uppercase;
+    font-family: 'Ubuntu';
+    font-weight: 200;
+}
+
+body {
+    background: #7f8c8d;
+}
+
+.column-wrapper {
+    background-color: #34495e;
+    width: 35%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px 15px 5px 15px;
+}
+
+#new-post-content {
+    font-size: 1.2em;
+    background: #95a5a6;
+    line-height: 2em;
+    min-height: 5em;
+    box-shadow: 2px 2px 0px #e74c3c;
+    width: auto;
+    margin: 0px 0px 15px 0px;
+    padding: 2px 8px 2px 8px;
+    border: 0px;
+    transition: 250ms;
+}
+
+.button-send {
+    font-size: 1em;
+    background: #95a5a6;
+    line-height: 2em;
+    box-shadow: 2px 2px 0px #e74c3c;
+    width: 10%;
+    margin: -5px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    border: 0px;
+    transition: 250ms;
+    display: block;
+    margin-right: 0px;
+    margin-left: auto;
+}
+
+.field-label {
+    color: #e67e22;
+    display: block;
+    letter-spacing: 0.5px;
+}
+
+.field {
+    font-size: 1.2em;
+    background: #95a5a6;
+    line-height: 2em;
+    box-shadow: 2px 2px 0px #e74c3c;
+    width: 100%;
+    margin: 5px 0px 15px 0px;
+    padding: 2px 8px 2px 8px;
+    border: 0px;
+    outline: none;
+    transition: 250ms;
+}
+
+.field:focus {
+    background: #c6d0d1;
+    transition: 250ms;
+}
+
+input {
+    box-sizing: border-box;
+}
+
+.bouton {
+    font-size: 1.2em;
+    background: #95a5a6;
+    line-height: 2em;
+    box-shadow: 2px 2px 0px #e74c3c;
+    width: 100%;
+    margin: 5px 0px 15px 0px;
+    padding: 2px 5px 2px 5px;
+    border: 0px;
+    transition: 250ms;
+}
+
+.bouton:hover {
+    background-color: #e67e22;
+    transition: 250ms;
+}

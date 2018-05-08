@@ -2,13 +2,6 @@
 require_once("../config.php");
 require_once("User.php");
 ?>
-
-/**
- * Created by PhpStorm.
- * User: drascma
- * Date: 24/04/18
- * Time: 10:03
- */
 <?php
 // On regarde si l'utilisateur est connecté (on ne veut pas que les gens pas connectés accèdent au profil)
 if (getUserFromCookie() == null) { ?>
@@ -48,7 +41,9 @@ else {
         VITZ - Compte
     </title>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="/assets/styles/compte.css" />
     <script src="/assets/js/compte.js"></script>
+    <script src="/assets/js/general.js"></script>
 </head>
 <body>
 <div class="form-wrapper">
@@ -60,21 +55,27 @@ else {
             <div onBlur="newPost_onBlur()"" onFocus="newPost_onFocus()" id="new-post-content" contenteditable="true">
             Nouvelle publication...
         </div>
-        <button class="fas fa-paper-plane button-send" type="submit" onClick="sendNewPost()">
+        <button class="fas fa-paper-plane button-send" type="submit" onClick="sendNewPost();">
         </button>
     </div>
     <h1>
         - mon compte -
     </h1>
-    <form onsubmit="return Change_info()">
+    <div id="info-empty-pwd" class="error infobox">
+        Erreur : le mot de passe ne peut pas être vide
+    </div>
+    <div id="info-missing-field" class="error infobox">
+        Erreur, veuillez réessayer
+    </div>
+    <form onsubmit="return Change_info();">
         <label class="field-label" for="new-email">Adresse e-mail</label>
-        <input class="field" type="text" placeholder=<?php $user->getEmail()?> id="new-email" />
+        <input class="field" type="text" placeholder="<?php $user->getEmail();?>"  id="new-email" /><br/>
 
         <label class="field-label" for="new-username">Nom d'utilisateur</label>
-        <input class="field" type="text" placeholder=<?php $user->getUsername()?> id="new-username" />
+        <input class="field" type="text" placeholder=<?php $user->getUsername();?> id="new-username" /><br/>
 
         <label class="field-label" for="new-password">Mot de passe</label>
-        <input class="field" type="password" placeholder="Mot de passe" id="new-password" />
+        <input class="field" type="password" placeholder="Mot de passe" id="new-password" /><br/>
 
         <button class="bouton" type="submit">
             Sauvegarder
