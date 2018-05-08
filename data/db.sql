@@ -1,19 +1,61 @@
 CREATE TABLE "user" (
-    id SERIAL PRIMARY KEY ,
-    firstname VARCHAR NOT NULL ,
-    lastname VARCHAR NOT NULL ,
-    birthday date
+  surname VARCHAR NOT NULL PRIMARY KEY ,
+  firstname VARCHAR NOT NULL ,
+  lastname VARCHAR NOT NULL ,
+  id INTEGER(1) (CHECK id between 1 and 3) ,
 );
 
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('John', 'Doe', '1967-11-22');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Yvette', 'Angel', '1932-01-24');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Amelia', 'Waters', '1981-12-01');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Manuel', 'Holloway', '1979-07-25');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Alonzo', 'Erickson', '1947-11-13');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Otis', 'Roberson', '1995-01-09');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Jaime', 'King', '1924-05-30');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Vicky', 'Pearson', '1982-12-12)');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Silvia', 'Mcguire', '1971-03-02');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Brendan', 'Pena', '1950-02-17');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Jackie', 'Cohen', '1967-01-27');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Delores', 'Williamson', '1961-07-19');
+CREATE TABLE "Ingredients" (
+  nom_ing  VARCHAR NOT NULL PRIMARY KEY ,
+  prix DOUBLE
+);
+
+CREATE TABLE "Recettes" (
+  nom_rec VARCHAR NOT NULL PRIMARY KEY ,
+  temps INTEGER ,
+  prix DOUBLE
+);
+
+CREATE TABLE "Ingredients_Recettes" (
+  nom_recette VARCHAR NOT NULL ,
+  nom_ingredient VARCHAR NOT NULL ,
+  CONSTRAINT pk_IR PRIMARY KEY (nom_recette, nom_ingredient),
+  FOREIGN KEY (nom_recette) REFERENCES Recettes(nom_rec),
+  FOREIGN KEY (nom_ingredient) REFERENCES Ingredients(nom_ing)
+);
+
+
+CREATE TABLE "Soirees" (
+  nom_soiree VARCHAR NOT NULL PRIMARY KEY ,
+  recette_propose VARCHAR NOT NULL ,
+  FOREIGN KEY (recette_propose) REFERENCES Recettes(nom_rec),
+);
+
+
+CREATE TABLE "Statistiques" (
+  soiree VARCHAR NOT NULL PRIMARY KEY,
+  nb_assiettes_prepares INTEGER ,
+  nb_assiettes_vendues INTEGER ,
+  prix_achat DOUBLE ,
+  prix_vente DOUBLE ,
+  benefice DOUBLE ,
+  FOREIGN KEY (soiree) REFERENCES Soirees(nom_soiree)
+);
+
+INSERT INTO user(surname, firstname, lastname, id) VALUES (Source,Corentin,Leloup,1);
+INSERT INTO user(surname, firstname, lastname, id) VALUES (Patou,Clément,Gavoille,1);
+INSERT INTO user(surname, firstname, lastname, id) VALUES (Felps,Arnaud,Kopp,1);
+INSERT INTO user(surname, firstname, lastname, id) VALUES (Pruneau,Valentin,Bruneau,1);
+INSERT INTO user(surname, firstname, lastname, id) VALUES (Pichet,Quentin,Pichollet,2);
+INSERT INTO user(surname, firstname, lastname, id) VALUES (Derien,Dorian,Laugier,2);
+
+INSERT INTO Ingredients(nom_ing, prix) VALUES (Saucisson,1.73);
+INSERT INTO Ingredients(nom_ing, prix) VALUES (Saucisse,1);
+INSERT INTO Ingredients(nom_ing, prix) VALUES (Pâte,0.37);
+
+INSERT INTO Ingredients_Recettes(nom_recette, nom_ingredient) VALUES (feuillete_saucisse,Pâte);
+INSERT INTO Ingredients_Recettes(nom_recette, nom_ingredient) VALUES (feuillete_saucisse,Saucisse);
+
+INSERT INTO Recettes(nom_rec, temps) VALUES (feuillete_saucisse,10);
+
+INSERT INTO Soirees(nom_soiree, recette_propose) VALUES (BTP,feuillete_saucisse);
