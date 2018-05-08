@@ -5,7 +5,7 @@ $dbName = getenv('DB_NAME');
 $dbUser = getenv('DB_USER');
 $dbPassword = getenv('DB_PASSWORD');
 $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-
+session_start();
 $userRepository = new User\UserRepository($connection);
 $amisRepository = new Amis\AmisRepository($connection);
 $tweetRepository = new Tweet\TweetRepository($connection);
@@ -17,7 +17,7 @@ $pseudo = $_POST['pseudo'];
 $date = new DateTime();
 $tweet = new Tweet\Tweet();
 $tweet
-                ->setAuteur($pseudo)
+                ->setAuteur($_SESSION['id'])
                 ->setDate($date->format('Y-m-d H:i:s'))
                 ->setContenu($content);
 
