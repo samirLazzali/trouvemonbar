@@ -7,7 +7,7 @@ require_once("User.php");
 <html>
     <head>
         <title>
-            VITZ - Profil
+            Vitz - Profil
         </title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="/assets/styles/profile.css" />

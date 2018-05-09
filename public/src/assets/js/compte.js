@@ -47,7 +47,7 @@ function CreatePost(value, user_Response)
     xhttp.open("POST", "/api/post/new", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     if(user_Response == null){
-        xhttp.send("content="+value);
+        xhttp.send("content=" + value);
     }
     else {
         xhttp.send("content=" + value + "&ResponseTo=" + user_Response);

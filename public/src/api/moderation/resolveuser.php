@@ -6,17 +6,17 @@ $u = verify_logged_in();
 if (!$u->getModerator())
     error_die("Current user doesn't have sufficient rights.", ERROR_Permissions);
 
-if (isset($_GET['post']))
-    $postId = $_GET['post'];
+if (isset($_GET['user']))
+    $userId = $_GET['user'];
 else
     error_die("post", ERROR_FieldMissing);
 
 if (isset($_GET['delete'])) {
-    $deletePost = $_GET['delete'];
-    if (strtolower($deletePost) == "true")
-        $deletePost = true;
-    elseif (strtolower($deletePost) == "false")
-        $deletePost = false;
+    $deleteUser = $_GET['delete'];
+    if (strtolower($deleteUser) == "true")
+        $deleteUser = true;
+    elseif (strtolower($deleteUser) == "false")
+        $deleteUser = false;
     else
         error_die("delete should be true or false.", STATUS_ERROR);
 }
@@ -25,16 +25,16 @@ else
 
 try
 {
-    $p = Post::fromID($postId);
+    $u = User::findWithIDorUsername($userId);
 }
-catch (PostNotFoundException $e)
+catch (UserNotFoundException $e)
 {
-    error_die("Post not found.", ERROR_Permissions);
+    error_die("User not found.", ERROR_NotFound);
 }
 
-$resolved = PostReport::resolveAll($p);
+$resolved = UserReport::resolveAll($p);
 
-if ($deletePost)
-    $p->delete();
+if ($deleteUser)
+    $u->delete();
 
 success_die("$resolved reports resolved.");

@@ -23,6 +23,7 @@ else
         <a class="menu-item" href="/trends">Tendances</a>
         <a class="menu-item" href="/profile/Oxymore">Profil</a>
         <a class="menu-item" href="/account">Compte</a>
+        <a class="menu-item" href="/notifications">Notifications</a>
 
         <?php if ($loggedin && $menu_user->getModerator()): ?>
             <a class="menu-item" href="/moderation">Modération</a>

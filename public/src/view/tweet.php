@@ -30,21 +30,23 @@ $responses = $p->getResponsesTo();
     <script src="/assets/js/general.js"></script>
 </head>
 <body>
+    <?php require "menu.php"; ?>
     <div class="column-wrapper">
         <h1>
             - Discussion -
         </h1>
         <div class="post-feed">
-            <?php affichePost($p) ?>
+            <?php
+            affichePost($p)
+            // TODO : afficher les likes, dislikes, etc.
+            ?>
         </div>
         <div class="splitter">
-
         </div>
         <div class="post-feed">
             <?php foreach ($responses as $item)
-                {
                     affichePost($item);
-                } ?>
+            ?>
         </div>
     </div>
 </body>

@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>
-            VITZ
+            Vitz
         </title>
         <meta charset="utf-8" />
         <link rel="stylesheet" type="text/css" href="/assets/styles/login.css"/>
@@ -10,7 +10,7 @@
     </head>
     <body >
         <h1 class="title">
-            VITZ
+            Vitz
         </h1>
 
         <h2 class="moto">

@@ -23,6 +23,7 @@
     $mentions = $notifications[1];
     $reposts = $notifications[2];
 ?>
+    <?php require "menu.php"; ?>
 
     <div class="column-wrapper">
         <h1>- Notifications -</h1>
