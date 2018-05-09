@@ -14,6 +14,7 @@ var newPostActive = false;
 function newPost_onFocus()
 {
     var div = document.getElementById("new-post-content");
+    addClass(div, "post-content-active");
 
     if(!newPostActive)
         div.innerHTML = "";
@@ -22,18 +23,26 @@ function newPost_onFocus()
 function newPost_onBlur()
 {
     var div = document.getElementById("new-post-content");
+    div.style.backgroundColor = "#95a5a6";
     div.innerHTML = div.innerHTML.trim();
     newPostActive = div.innerHTML != "";
-    if(!newPostActive)
+    if(!newPostActive) {
         div.innerHTML = "Nouvelle publication...";
+    }
 }
 
 function sendNewPost()
 {
     var div = document.getElementById("new-post-content");
 
-    if (div.innerHTML.trim() == "")
+    if(!newPostActive)
         return;
+
+    if (div.innerHTML.trim() == "")
+    {
+        console.log("Not sending empty post.");
+        return;
+    }
 
     CreatePost(div.innerHTML, null);
 
@@ -44,6 +53,21 @@ function sendNewPost()
 function CreatePost(value, user_Response)
 {
     var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.status == 200 && this.readyState == 4)
+        {
+            var result = JSON.parse(xhttp.responseText);
+            if (result["status"] == STATUS_OK)
+            {
+                var div = document.getElementById("new-post-content");
+                div.style.backgroundColor = "#8BC34A";
+            }
+            else
+            {
+                console.log("Can't post.");
+            }
+        }
+    }
     xhttp.open("POST", "/api/post/new", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     if(user_Response == null){

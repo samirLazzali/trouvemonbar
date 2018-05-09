@@ -16,6 +16,10 @@ catch (PostNotFoundException $e)
     error_die($e->getMessage(), ERROR_NotFound);
 }
 
+$author = $p->getAuthor()->getUsername();
+$reposts = $p->getReposts();
+$likes = $p->getLikers();
+$dislikes = $p->getDislikers();
 $responses = $p->getResponsesTo();
 
 ?>
@@ -37,11 +41,23 @@ $responses = $p->getResponsesTo();
         </h1>
         <div class="post-feed">
             <?php
-            affichePost($p)
-            // TODO : afficher les likes, dislikes, etc.
+            affichePost($p);
             ?>
-        </div>
-        <div class="splitter">
+            <div class="splitter">
+            </div>
+            <div class="post-interactions">
+                <div class="post-interaction">
+                    <?= count($reposts) ?> recyclages
+                </div>
+                <div class="post-interaction">
+                    <?= count($likes) ?> likes
+                </div>
+                <div class="post-interaction">
+                    <?= count($dislikes) ?> dislikes
+                </div>
+            </div>
+            <div class="splitter">
+            </div>
         </div>
         <div class="post-feed">
             <?php foreach ($responses as $item)

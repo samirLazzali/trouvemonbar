@@ -148,3 +148,12 @@
     background-color: #e67e22;
     transition: 250ms;
 }
+
+.post-interactions {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.post-interaction {
+    padding: 5px 15px 5px 15px;
+}

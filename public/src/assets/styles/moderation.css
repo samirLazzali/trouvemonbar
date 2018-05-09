@@ -58,3 +58,11 @@
 .moderation-action {
     margin-right: 15px;
 }
+
+.report-resolved {
+    background-color: #8BC34A;
+}
+
+.report-resolved *, .report-resolved a {
+    color: black;
+}

@@ -33,6 +33,7 @@ else
         <link rel="stylesheet" type="text/css" href="/assets/styles/post.css" />
         <link rel="stylesheet" type="text/css" href="/assets/styles/general.css" />
         <script src="/assets/js/moderation.js"></script>
+        <script src="/assets/js/general.js"></script>
         <meta charset="utf-8" />
     </head>
     <body>
@@ -98,7 +99,7 @@ else
                                             </a>
                                         </span>
                                         <span class="post-report-reason">
-                                            <?= $report->getReason() ?>
+                                            <?= $report->getReason() != "" ? $report->getReason() : "<span class='italic'>Aucune raison donnée.</span>" ?>
                                         </span>
                                     </div>
                                 <?php endforeach ?>

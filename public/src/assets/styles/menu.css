@@ -3,7 +3,7 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-evenly;
-    background-color: #ffeacb;
+    background-color: #34495e;
     margin-top: 0px;
     margin-bottom: 10px;
     margin-left: 0px;
@@ -11,7 +11,7 @@
 }
 
 .menu-item {
-    color: black;
+    color: #c6d0d1;
     font-size: 1.2em;
     flex-grow: 1;
     text-align: center;
@@ -28,6 +28,7 @@
 }
 
 .menu-item:hover {
+    color: black;
     background-color: #e67e22;
     transition: 250ms;
     text-decoration: none;

@@ -276,7 +276,7 @@ class Post implements JsonSerializable
     function delete()
     {
         $db = connect();
-        $SQL = "DELETE FROM " . TABLE_Posts . " WHERE ID = :id";
+        $SQL = "DELETE FROM " . TABLE_Posts . " WHERE ID = :id OR Repost = :id";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $this->ID);
         $statement->execute();
@@ -382,6 +382,25 @@ class Post implements JsonSerializable
         return $this->repostOfCache;
     }
 
+    function getReposts()
+    {
+        $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE Repost = :id";
+        $db = connect();
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":id", $this->ID);
+        $statement->execute();
+
+        $results = $statement->fetchAll();
+        if (!$results)
+            return array();
+
+        $reposters = array();
+        foreach($results as $row)
+            $reposters[] = Post::fromRow($row);
+
+        return $reposters;
+    }
+
     /**
      * Définit la propriété repostOf du Post.
      * @param Post|int $post
@@ -420,6 +439,42 @@ class Post implements JsonSerializable
 
         $this->appreciations = $appreciations;
         return $appreciations;
+    }
+
+    function getLikers()
+    {
+        $db = connect();
+        $SQL = "SELECT * FROM Appreciation WHERE Post = :id AND Type = :type";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":id", $this->ID);
+        $statement->bindValue(":type", Appreciation::LIKE);
+        $statement->execute();
+        $rows = $statement->fetchall();
+
+        $likers = array();
+        if ($rows)
+            foreach ($rows as $row)
+                $likers[] = User::fromID($row['author']);
+
+         return $likers;
+    }
+
+    function getDislikers()
+    {
+        $db = connect();
+        $SQL = "SELECT * FROM Appreciation WHERE Post = :id AND Type = :type";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":id", $this->ID);
+        $statement->bindValue(":type", Appreciation::DISLIKE);
+        $statement->execute();
+        $rows = $statement->fetchall();
+
+        $likers = array();
+        if ($rows)
+            foreach ($rows as $row)
+                $likers[] = User::fromID($row['author']);
+
+        return $likers;
     }
 
     /**

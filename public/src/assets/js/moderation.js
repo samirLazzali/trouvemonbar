@@ -20,9 +20,7 @@ function resolvePostReport(postId, deletePost)
             if (result["status"] == STATUS_OK)
             {
                 var div = document.getElementById("post-report-" + postId);
-                div.style.backgroundColor = "#00b894";
-                div.style.color = "black";
-
+                addClass(div, "report-resolved");
                 console.log("Resolved post report " + postId + " successfully.");
             }
             else
