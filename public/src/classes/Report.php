@@ -69,6 +69,11 @@ class PostReport extends Report
 {
     private $postCache = null;
     private $post;
+    private $status;
+
+    const Status_Open = "Open";
+    const Status_Ignored = "Ignored";
+    const Status_Deleted = "Deleted";
 
     public function __construct($ID, $reason, $reporter, $post, $resolved)
     {
@@ -79,8 +84,23 @@ class PostReport extends Report
             $this->post = $post->getID();
             $this->postCache = $post;
         }
-        else
+        else {
             $this->post = $post;
+            try
+            {
+                $p = Post::fromID($post);
+                $this->status = PostReport::Status_Ignored;
+            }
+            catch (PostNotFoundException $e)
+            {
+                if ($resolved)
+                    $this->status = PostReport::Status_Deleted;
+                else
+                    $this->status = PostReport::Status_Ignored;
+            }
+        }
+
+
     }
 
     public static function create($post, $reason, $reporter)
@@ -95,7 +115,7 @@ class PostReport extends Report
         $statement->bindValue(":target", $post->getID());
         $statement->bindValue(":reporter", $reporter->getID());
         $statement->bindValue(":reason", $reason);
-        $statement->bindValue(":resolved", false);
+        $statement->bindValue(":resolved", "f");
         $statement->execute();
 
         return new PostReport($reportId, $reason, $reporter, $post, false);
@@ -124,7 +144,16 @@ class PostReport extends Report
     public function getPost()
     {
         if ($this->postCache == null)
-            $this->postCache = Post::fromID($this->post);
+        {
+            try
+            {
+                $this->postCache = Post::fromID($this->post);
+            }
+            catch (PostNotFoundException $e)
+            {
+                return null;
+            }
+        }
 
         return $this->postCache;
     }
@@ -146,12 +175,20 @@ class PostReport extends Report
         return $statement->rowCount();
     }
 
-    public static function getReports()
+    public static function getReports($getResolved = false)
     {
         $db = connect();
-        $SQL = "SELECT * FROM " . TABLE_Report . " WHERE Type = :type";
+        if ($getResolved)
+            $SQL = "SELECT * FROM " . TABLE_Report . " WHERE Type = :type";
+        else
+            $SQL = "SELECT * FROM " . TABLE_Report . " WHERE Type = :type AND Resolved = :resolved";
+
         $statement = $db->prepare($SQL);
         $statement->bindValue(":type", Report::Type_PostReport );
+
+        if (!$getResolved)
+            $statement->bindValue(":resolved", "false");
+
         $statement->execute();
 
         $result = array();
@@ -159,8 +196,13 @@ class PostReport extends Report
         if (!$rows)
             return $result;
 
-        foreach($rows as $row)
-            array_push($result, PostReport::fromRow($row));
+        foreach($rows as $row) {
+            $report = PostReport::fromRow($row);
+            if ($report->status == PostReport::Status_Deleted)
+                continue;
+
+            array_push($result, $report);
+        }
 
         return $result;
     }

@@ -1,8 +1,41 @@
 @import url("general.css");
 
-.post-report-reports-wrapper {
+.smiley {
+    text-align: center;
+    font-size: 4em;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    font-family: Courier;
+    letter-spacing: -15px;
+    color: #c6d0d1;
+}
+
+.all-done-message {
+    font-weight: normal;
+    text-align: center;
+    color: #c6d0d1;
+    font-size: 2em;
+}
+
+.no-reports-message {
+    font-weight: normal;
+    text-align: center;
+    color: #c6d0d1;
+    padding-bottom: 15px;
+}
+
+.post-reports {
+    background-color: #34495e;
+}
+
+.post-report-reports-wrapper, .post-report-reports-wrapper a {
     margin-top: 15px;
     margin-bottom: 15px;
+    color: #c6d0d1;
+}
+
+.moderation-actions-wrapper, .moderation-actions-wrapper a {
+    color: #c6d0d1;
 }
 
 .post-report-report {

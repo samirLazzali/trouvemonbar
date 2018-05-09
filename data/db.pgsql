@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS Users (
 	Email TEXT,
     Password TEXT,
     Moderator BOOLEAN,
+    State TEXT,
 	PRIMARY KEY(ID)
 );
 

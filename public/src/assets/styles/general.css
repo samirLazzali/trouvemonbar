@@ -45,3 +45,7 @@ a:hover {
     height: 3px;
     background-color: #c6d0d1;
 }
+
+.center {
+    text-align: center;
+}

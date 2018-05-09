@@ -10,6 +10,12 @@ class User implements JsonSerializable
     private $email;
     private $isModerator;
 
+    const AccountState_Active = "Active";
+    const AccountState_DisabledByModerators = "DisabledByModerators";
+    const AccountState_Disabled = "Disabled";
+    const AccountState_Inactive = "Inactive";
+
+
     /**
      * Renvoie l'ID de l'utilisateur.
      */
@@ -263,12 +269,13 @@ class User implements JsonSerializable
         $id = uniqid();
 
         $db = connect();
-        $SQL = "INSERT INTO " . TABLE_User . " (ID, Username, Email, Password, Moderator) VALUES (:id, :username, :email, :password, false)";
+        $SQL = "INSERT INTO " . TABLE_User . " (ID, Username, Email, Password, Moderator) VALUES (:id, :username, :email, :password, false, :state)";
         $statement = $db->prepare($SQL);
         $statement->bindValue(":id", $id);
         $statement->bindValue(":username", $username);
         $statement->bindValue(":email", $email);
         $statement->bindValue(":password", $hash);
+        $statement->bindValue(":state", User::AccountState_Active);
         $statement->execute();
 
         $u = new User($id, $username, $email);
