@@ -16,8 +16,7 @@ $tags = array_keys($trends);
         <meta charset="utf-8" />
     </head>
     <body onload="getTopLikes()">
-        <div>
-        </div>
+        <?php require "menu.php"; ?>
         <div class="column-wrapper">
             <h1>
                 - tendances -

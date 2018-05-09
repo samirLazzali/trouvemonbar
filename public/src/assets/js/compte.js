@@ -1,5 +1,15 @@
-var newPostActive = false;
+var STATUS_OK = 200;
+var STATUS_ERROR = 400;
+var ERROR_NotFound = 404;
+var ERROR_EmailRegistered = 460;
+var ERROR_UsernameRegistered = 461;
+var ERROR_PasswordWeak = 462;
+var ERROR_FieldMissing = 463;
+var ERROR_WrongPassword = 464;
+var ERROR_Permissions = 465;
+var ERROR_InvalidType = 466;
 
+var newPostActive = false;
 
 function newPost_onFocus()
 {

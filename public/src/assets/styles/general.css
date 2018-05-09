@@ -1,4 +1,5 @@
 @import url("fonts.css");
+@import url('menu.css');
 
 * {
     box-sizing: border-box;
@@ -48,4 +49,8 @@ a:hover {
 
 .center {
     text-align: center;
+}
+
+.display-none {
+    display: none;
 }

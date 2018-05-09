@@ -1,28 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Slabo+27px');
-@import url('https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i');
-@import url('https://use.fontawesome.com/releases/v5.0.10/css/all.css');
-
-* {
-    font-family: 'Slabo 27px', serif;
-}
-
-h1 {
-    text-align: center;
-    color: #e67e22;
-    text-transform: uppercase;
-    font-family: 'Ubuntu';
-    font-weight: 200;
-}
+@import url('general.css');
 
 body {
     background: #7f8c8d;
 }
 
 .column-wrapper {
-    background-color: #34495e;
-    width: 35%;
-    margin-left: auto;
-    margin-right: auto;
     padding: 5px 15px 5px 15px;
 }
 

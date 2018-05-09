@@ -15,6 +15,7 @@ require_once("User.php");
         <script src="/assets/js/general.js"></script>
     </head>
     <body>
+        <?php require "menu.php"; ?>
         <?php
         // On regarde si l'utilisateur est connecté (on ne veut pas que les gens pas connectés accèdent au profil)
         if (getUserFromCookie() == null) { ?>

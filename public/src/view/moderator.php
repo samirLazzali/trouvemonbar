@@ -36,6 +36,7 @@ else
         <meta charset="utf-8" />
     </head>
     <body>
+        <?php require "menu.php"; ?>
         <div class="column-wrapper">
             <h1>
                 - Modération -

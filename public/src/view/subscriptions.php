@@ -3,6 +3,13 @@ require_once("../config.php");
 require_once("User.php");
 
 $currentUser = getUserFromCookie();
+
+if ($currentUser == null)
+{
+    header("Location: /login");
+    die();
+}
+
 $cu_followers = $currentUser->getFollowers();
 $cu_subscriptions = array();
 foreach($currentUser->getSubscriptions() as $sub)
@@ -45,11 +52,6 @@ function formatter_nombre_abonnements($n)
 
     <body>
         <?php
-        if (getUserFromCookie() == null) { ?>
-            <p>Vous n'etes pas connecté. <a href="login.php">Connexion</a></p>
-        <?php die(); } ?>
-
-        <?php
         if (isset($_GET['user']))
         {
             $user = $_GET['user'];
@@ -66,6 +68,11 @@ function formatter_nombre_abonnements($n)
         ?>
 
         <div class="column-wrapper">
+            <h2 class="section-title">
+                <a class="section-title" href="/profile/<?=$user->getUsername();?>">
+                    Retour
+                </a>
+            </h2>
             <h1>
                 - Abonnements -
             </h1>

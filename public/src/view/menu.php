@@ -5,11 +5,27 @@
 
 $menu = true;
 
-?>
-<a href="/login">Connexion</a>
-<a href="/signup">Inscription</a>
-<a href="/latest">Derniers</a>
-<a href="/trends">Tendances</a>
-<a href="/profile/Oxymore">Profil</a>
-<a href="/new">Nouveau</a>
+$menu_user = getUserFromCookie();
+if ($menu_user == null)
+    $loggedin = false;
+else
+    $loggedin = true;
 
+?>
+
+<?php if ($menu): ?>
+    <menu class="menu">
+        <?php if (!$loggedin): ?>
+            <a class="menu-item" href="/login">Connexion</a>
+            <a class="menu-item" href="/signup">Inscription</a>
+        <?php endif ?>
+        <a class="menu-item" href="/feed">Derniers</a>
+        <a class="menu-item" href="/trends">Tendances</a>
+        <a class="menu-item" href="/profile/Oxymore">Profil</a>
+        <a class="menu-item" href="/account">Compte</a>
+
+        <?php if ($loggedin && $menu_user->getModerator()): ?>
+            <a class="menu-item" href="/moderation">Modération</a>
+        <?php endif ?>
+    </menu>
+<?php endif ?>

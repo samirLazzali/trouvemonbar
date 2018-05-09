@@ -12,8 +12,11 @@ require_once("../classes/Post.php");
     </title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="assets/styles/feed.css" />
+    <script src="/assets/js/general.js"><</script>
+    <script src="/assets/js/post.js"><</script>
 </head>
 <body>
+<?php require "menu.php"; ?>
 <div class="column-wrapper">
     <h1>
         - Derniers Tweets -
