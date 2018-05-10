@@ -79,12 +79,20 @@ function affiche_message($message){
 }
 
 
-function listeDiscussion($LFriends){
+function listeDiscussion($listeAmis){
     print "<p class=\"titre\">Vos amis:</p>\n";
-    foreach($LFriends as $F){
+    foreach($listeAmis as $F){
         echo '<button s=\''.$F['id'].'\' onclick="document.getElementById(\'h1\').innerHTML=\'Ma conversation avec '.$F['prénom'].'\'; document.getElementById(\'envoyer\').value='.$F['id'].'; Conversation()">'.$F['prénom'].'</button>';
         print("\n");
     }
+}
+
+function afficheListeAmis($listeAmis){
+    print "<div class=\"amis\">Vos amis:<br/>\n";
+    foreach($listeAmis as $F){
+        echo "<a href=\"profil.php?pseudo=".$F['prénom']."&id=".$F['id']."\">@".$F['prénom']."</a><br/>\n";
+    }
+    print "</div>\n";
 }
 
 

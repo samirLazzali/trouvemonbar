@@ -78,7 +78,7 @@ $tweetManager = new Tweet\TweetManager($connection);
 
                     ?> ;
 
-        var FriendList = <?php
+      /*  var FriendList = </*?php
                     $sth = $connection->prepare('SELECT * FROM "amis" WHERE personne1=\''.$_SESSION['id'].'\' OR personne2=\''.$_SESSION['id'].'\' ');
                     $sth->execute();
                     $result = $sth->fetch(PDO::FETCH_OBJ);
@@ -98,7 +98,7 @@ $tweetManager = new Tweet\TweetManager($connection);
                         }
                      }
                     echo ']';
-                    ?> ;
+                    ?> ;*/
 
         var AtList = 
                 <?php
@@ -229,7 +229,13 @@ $tweetManager = new Tweet\TweetManager($connection);
         }
     }
     
-   
+   /* function suggestionHashtag(){
+
+    }
+    function suggestionUser(){
+
+    }*/
+
 
 
 
@@ -281,9 +287,11 @@ afficheMenu()
 <!-- AJOUT DE KEVIN-->
 
 
-
+<?php
+$friendList = get_friendList($_SESSION['id']);
+afficheListeAmis($friendList);
+?>
 <script >
-    liste_amis();
     tweets();
    // document.getElementById('1').innerHTML = "MDR";
 </script>

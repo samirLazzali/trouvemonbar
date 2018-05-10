@@ -1,12 +1,11 @@
 <?php
-
 //session_start();
 
-$prenom = $_SESSION['prénom'];
-$id = $_SESSION['id'];
+//$prenom = $_SESSION['prénom'];
+//$id = $_SESSION['id'];
 
 /* Recupération des users*/
-require '../vendor/autoload.php';
+//require_once '../vendor/autoload.php';
 
 
 //postgres
@@ -34,7 +33,7 @@ function prenom_user($id_user){
 
 function get_friendList($id){
     global $connection;
-    $sth = $connection->prepare('SELECT * FROM "amis" WHERE personne1=\''.$_SESSION['id'].'\' OR personne2=\''.$_SESSION['id'].'\' ');
+    $sth = $connection->prepare('SELECT * FROM "amis" WHERE personne1=\''.$id.'\' OR personne2=\''.$id.'\' ');
     $sth->execute();
     $result = $sth->fetch(PDO::FETCH_OBJ);
 
@@ -42,7 +41,7 @@ function get_friendList($id){
     $i=0;
     while($result){
         $Res[$i] = array();
-        if($result->personne1 == $_SESSION['id']){
+        if($result->personne1 == $id){
             $Res[$i]['id'] = $result->personne2;
             $Res[$i]['prénom'] = prenom_user($result->personne2) ;
         }
@@ -60,6 +59,25 @@ function get_friendList($id){
 /* echo '<pre>';                     POUR AFFICHER ARRAY
     echo '</pre>';*/
 
+
+function liker($T_id, $id){
+    global $connection;
+    /*
+     * Test si on a déjà liké ce tweet
+     */
+    $req = $connection->query("SELECT * FROM \"like\" WHERE tweet_id = $T_id AND user_id=$id");
+
+    if ($req->rowCount() == 1){
+        $connection->exec("DELETE FROM \"like\" WHERE tweet_id = $T_id AND user_id=$id");
+    }
+    else{
+        $sth = $connection->prepare('INSERT INTO "like"(tweet_id, user_id) VALUES (:tweet_id, :user_id)');
+        $sth->bindValue(':tweet_id', $T_id);
+        $sth->bindValue(':user_id', $id);
+        $sth->execute();
+    }
+
+}
 
 
 
