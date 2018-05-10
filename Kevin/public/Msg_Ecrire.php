@@ -6,8 +6,8 @@ $prenom = $_SESSION['prénom'];
 $id = $_SESSION['id'];
 
 /* Recupération des users*/
-require '../../vendor/autoload.php';
-
+require_once '../vendor/autoload.php';
+require_once 'Vue.php';
 
 //postgres
 $dbName = getenv('DB_NAME');
@@ -63,56 +63,9 @@ endforeach;
 
 
 /************** VUE *****************/
-function enTete($titre, $style)
-{
-	print "<!DOCTYPE html>\n";
-	print "<html>\n";
-	print "  <head>\n";
-	print "    <meta charset=\"utf-8\" />\n";
-	print "    <title>$titre</title>\n";
-	print "    <link rel=\"stylesheet\" href=\"$style\"/>\n";
-	print "  </head>\n";
-
-	print "  <body>\n";
-	print "    <header><h1> $titre </h1></header>\n";
-}
-
-function pied(){
-	print "  </body>\n";
-	print "</html>";
-}
-
-function affiche($str) {
-	echo $str;
-}
 
 
-function affiche_info($str) {
-	echo '<p>'.$str.'</p>';
-}
 
-function affiche_erreur($str) {
-	echo '<p class="erreur">'.$str.'</p>';
-}
-
-
-/* Fonctions pour messages */
-
-function affiche_message($message){
-    echo 'Message de '.$message->getEmetteur().' à '.
-    ($message->getDate())->format('H:i:s').' le '.
-    ($message->getDate())->format('Y-m-d').': ';
-    echo $message->getContenu();
-}
-
-/* Fonction pour recuperer le prenom de quelqu'un */
-function prenom_user($id_user){
-    global $connection;
-    $sth = $connection->prepare('SELECT * FROM "user" WHERE id=\''.$id_user.'\';');
-    $sth->execute();
-    $result = $sth->fetch(PDO::FETCH_OBJ);
-    return $result->firstname;
-}
 
 
 
@@ -132,21 +85,17 @@ function prenom_user($id_user){
 	 			chat.innerHTML = "";
                 for(var i=0;i<Msgs.length;i++){
                     chat.innerHTML += Msgs[i];
-                    chat.innerHTML += '</br>';
+                    chat.innerHTML += '</br></br>';
                 }
                 chat.scrollTop = chat.scrollHeight;
 
                 /******************* ACTUALISATION AUTOMATIQUE ******************/
                 window.setTimeout(" Conversation();", 1000*10, "JavaScript"); 		}
 		};
-		xhttp.open("GET", "Msg_Conversation.php?emetteur="+ document.getElementById('envoyer').value +"&recepteur=<?php echo $id; ?>" , true);
+		xhttp.open("GET", "Msg/Msg_Conversation.php?emetteur="+ document.getElementById('envoyer').value +"&recepteur=<?php echo $id; ?>" , true);
 		xhttp.send();
 
 	}
-
-/*POUR ACTUALISATION AUTOMATIQUE ??? */
-	/*function chatRefresh() { var XHR = new XMLHttpRequest();  XHR.onreadystatechange = function(){ if (XHR.status == 200 && XHR.readyState == 4) { Conversation(); chatRefresh(); } }; }*/
-
 
 	function EnvoiMessage(){
 		var Champ = document.getElementById("sendField");
@@ -164,51 +113,21 @@ function prenom_user($id_user){
                 Conversation();
             }
         };
-		xhttp.open("GET", "Msg_Envoie.php?m="+Msg+"&emetteur=<?php echo $id; ?>"+"&recepteur="+ document.getElementById('envoyer').value , true);
+		xhttp.open("GET", "Msg/Msg_Envoie.php?m="+Msg+"&emetteur=<?php echo $id; ?>"+"&recepteur="+ document.getElementById('envoyer').value , true);
 		xhttp.send(); 
 		Champ.value = "";
 	}
 
-    var FriendList = <?php
-        $sth = $connection->prepare('SELECT * FROM "amis" WHERE personne1=\''.$_SESSION['id'].'\' OR personne2=\''.$_SESSION['id'].'\' ');
-        $sth->execute();
-        $result = $sth->fetch(PDO::FETCH_OBJ);
-        echo '[';
-        while($result){
-            echo '["';
-            if($result->personne1 == $_SESSION['id']){
-                echo $result->personne2."\",\"".prenom_user($result->personne2) ;
-            }
-            else{
-                echo $result->personne1."\",\"".prenom_user($result->personne1) ;
-            }
-            echo '"]';
-            $result = $sth->fetch(PDO::FETCH_OBJ);
-            if($result){
-                echo ',';
-            }
-        }
-        echo ']';
-        ?> ;
-
-
-    function liste_amis(){
-    	document.write("<p class=\"titre\">Vos amis:</p>");
-    	for(var i=0;i<FriendList.length;i++){
-    		document.write("<button value=\""+ FriendList[i][1] + "\" onclick=\"document.getElementById('h1').innerHTML=\'Ma conversation avec " + FriendList[i][1] + "\'; document.getElementById('envoyer').value='"+ FriendList[i][0] +"'; Conversation() \">" + FriendList[i][1] + "</button>");
-    	}
-    	document.write("<br/>");
-    }
 
 </script>
 
 <head>
     <link rel="stylesheet" href="../CSS/style.css">
-    <title>Mes messages (<?php echo $_SESSION['prenom']; ?>)</title>
+    <title>Mes messages (<?php echo $_SESSION['prénom']; ?>)</title>
 </head>
 <body>
 
-<nav id="fontmenu">
+<!-- <nav id="fontmenu">
     <ul id="menu">
         <li>
             <span class="nomsite">Twitiie</span>
@@ -217,7 +136,7 @@ function prenom_user($id_user){
             <a href="../accueil.php">Accueil</a>
         </li>
         <li>
-            <a href=<?php echo "../edition.php?pseudo=".$_SESSION['prénom'] ?>>Mon Profil</a>
+            <a href=<?php //echo "../edition.php?pseudo=".$_SESSION['prénom'] ?>>Mon Profil</a>
         </li>
         <li>
             <a href="Msg_Ecrire.php">Message</a></br>
@@ -225,7 +144,12 @@ function prenom_user($id_user){
         </li>
     </ul>
 </nav>
+-->
 
+<?php
+
+    afficheMenu();
+?>
 
 
 
@@ -234,9 +158,9 @@ function prenom_user($id_user){
 
 
 <div class="chat_liste_amis">
-    <script>
-        liste_amis();
-    </script>
+    <?php
+        listeDiscussion(get_friendList($id));
+    ?>
 </div>
 
 <section>
@@ -260,7 +184,7 @@ function prenom_user($id_user){
 
 
 
-<!-- <a href="../accueil.php">Retour à l'accueil</a><br> -->
+<!-- <a href="../accueil.php?idLike=2">Retour à l'accueil</a><br> -->
 <?php
 pied();
 ?>

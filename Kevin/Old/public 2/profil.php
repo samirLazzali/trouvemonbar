@@ -12,18 +12,19 @@ $dbName = getenv('DB_NAME');
 	$messageRepository = new Message\MessageRepository($connection);
 	$tweetManager = new Tweet\TweetManager($connection);
 
-
-
 if(isset($_POST['visite'])){ // si formulaire soumis
 	$pseudo = $_POST['pseudo']; 
 }
 else{
 	$pseudo = $_GET['pseudo'];
+
 }
 
+$sth = $connection->prepare('SELECT id FROM "user" WHERE firstname=\''.$pseudo.'\'');
+    $sth->execute();
+    $result = $sth->fetch(PDO::FETCH_OBJ);
 
-
-
+$id = $result->id;
 
 	
 ?>
@@ -43,10 +44,11 @@ if(!empty($pseudo)){
     while($result){
       	if($pseudo==$result->firstname){
       		print "Profil de $pseudo : </br> Dernier Tweets </br>";
-			$tweets = $tweetManager->get($pseudo);
+			$tweets = $tweetManager->get($id);
 			$tweet = $tweets->fetch(PDO::FETCH_OBJ);
 			while($tweet){
-				$tweetManager->show_tweet($tweet);
+
+				$tweetManager->show_tweet($pseudo,$tweet);
 				$tweet = $tweets->fetch(PDO::FETCH_OBJ);
 			}
 			break;

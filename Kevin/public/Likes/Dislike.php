@@ -10,4 +10,3 @@ $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=
 $connection->exec('DELETE FROM "like" WHERE tweet_id = '.$_GET['T_id'].'AND user_id = '.$_GET['pseudo_id']);
 
 ?>
-

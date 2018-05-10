@@ -15,6 +15,9 @@ function config() {
 
 
 require '../vendor/autoload.php';
+require_once 'Vue.php';
+
+
 //postgres
 $dbName = getenv('DB_NAME');
 $dbUser = getenv('DB_USER');
@@ -30,14 +33,6 @@ $tweetManager = new Tweet\TweetManager($connection);
 
 
 
-/************* AJOUT KEVIN ******************/
-function prenom_user($id_user){
-    global $connection;
-    $sth = $connection->prepare('SELECT * FROM "user" WHERE id=\''.$id_user.'\';');
-    $sth->execute();
-    $result = $sth->fetch(PDO::FETCH_OBJ);
-    return $result->firstname;
-}
 
 ?>
 
@@ -127,14 +122,14 @@ function prenom_user($id_user){
                 /************************** AJOUT DE KEVIN ****************************/
 
     function Liker(T_id){
-
-        var xhttp;
+        document.location.href = 'Likes/Liker.php?T_id='+T_id+'&pseudo_id=<?php echo $_SESSION['id']; ?>';
+       /* var xhttp;
 
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {// 4 = request finished and response is ready, 200 = "OK"
                 if (this.responseText == -1){
-                    /* SUPPRIMER LIKE */
+
                     var xhttp2;
                     xhttp2 = new XMLHttpRequest();
                     xhttp2.onreadystatechange = function() {
@@ -143,7 +138,7 @@ function prenom_user($id_user){
                             document.location.reload(true);
                         }
                     };
-                    xhttp2.open("GET", "Likes/Dislike.php?pseudo_id=<?php echo $_SESSION['id']; ?>&T_id="+T_id, true);
+                    xhttp2.open("GET", "Likes/Dislike.php?pseudo_id=<//?php echo $_SESSION['id']; ?>&T_id="+T_id, true);
                     xhttp2.send();
                 }
                 else{
@@ -152,8 +147,8 @@ function prenom_user($id_user){
                 }
             }
         };
-        xhttp.open("GET", "Likes/Liker.php?pseudo_id=<?php echo $_SESSION['id']; ?>&T_id="+T_id, true);
-        xhttp.send();
+        xhttp.open("GET", "Likes/Liker.php?pseudo_id=<//?php echo $_SESSION['id']; ?>&T_id="+T_id, true);
+        xhttp.send();*/
     }
 
     function deja_liker(T_id){
@@ -243,23 +238,9 @@ function prenom_user($id_user){
 
 
 
-<nav id="fontmenu">
-    <ul id="menu">
-        <li>
-            <span class="nomsite">Twitiie</span>    
-        </li>
-        <li>
-           <a href="accueil.php">Accueil</a>
-        </li>
-        <li>
-           <a href=<?php echo "edition.php?pseudo=".$_SESSION['prénom'] ?>>Mon Profil</a>
-        </li>
-        <li>
-           <a href="Msg/Msg_Ecrire.php">Message</a></br>
-
-        </li>
-    </ul>
-</nav>
+<?php
+afficheMenu()
+?>
 
 
     <ul id="recherches">
