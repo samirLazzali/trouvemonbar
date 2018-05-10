@@ -1,0 +1,43 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #333;
+}
+
+
+li a {
+    display: block;
+    color: #ffffff;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #03af87;
+}
+
+.dc{
+    float:right;
+}
+
+.home{
+    float:left;
+}
+
+#title{
+    text-align: center;
+}
+
+#title1{
+    font-family: Georgia, serif;
+    font-size: 80px;
+    color: #03af87;
+    font-style: italic;
+    font-variant: small-caps;
+}
