@@ -6,6 +6,11 @@
 
 #boutons_connexion{
 	display: flex;
-	justify-content:flex-end;
+	flex-direction:column;
+	align-items:flex-end;
 }
 
+.sous_menu{
+	display:flex;
+	justify_content:flex-start;
+}

@@ -11,9 +11,9 @@ function menu_navigation()
     echo '</form>';
 }
 
-function menu_connection(){
-    echo '<form id="boutons_connexion">';
-    echo '<div classe="bouton"><input type="submit" value="inscription" ></div>';
-    echo '<div classe="bouton"><input type="submit" value="connection" ></div>';
+function menu_connexion(){
+    echo '<form method = "post" action = "changement_de_page.php" id="boutons_connexion">';
+    echo '<div classe="bouton"><input type="submit" name="co" value="Se connecter" ></div>';
+    echo '<div classe="bouton"><input type="submit" name="ins" value="S\'inscrire" ></div>';
     echo '</form>';
 }

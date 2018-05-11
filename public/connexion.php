@@ -13,25 +13,23 @@ $users = $userRepository->fetchAll();
 
 <html>
 <head>
-    <title> Acceuil  </title>
+    <title> Classement </title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"  href="style_index.css">
 </head>
-<body>
 
+<body>
 
 <?php
 menu_connexion();
 menu_navigation()
 ?>
 
-
-<h3>Prochaine réunion</h3>
-<form action id="prochaine_réunion">
-    <?php echo $date_reunion ?>
-    <input type="submit" value="Participer">
+<h1>Se connecter</h1>
+<br />
+<form method="post" action="connect.php">
+<fieldset><legend>Pseudo : </legend><input type="text" name="pseudo"/></fieldset>
+<fieldset><legend>Mot de passe : </legend><input type="password" name="mdp"/></fieldset>
+<input type="submit" name="submit" value="Se connecter"/>
 </form>
-</body>
-</html>
-

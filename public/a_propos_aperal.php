@@ -21,12 +21,12 @@ $users = $userRepository->fetchAll();
 <body>
 
 <?php
-menu_connection();
+menu_connexion();
 menu_navigation()
 ?>
 
 
-<div id="menu_aperal">
+<div class="sous_menu" id="menu_aperal">
 <form action="a_propos_aperal.php" method="post">
     <input type="submit" value="A propos">
 </form>
