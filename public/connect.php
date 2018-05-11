@@ -1,5 +1,5 @@
 <?php
-re '../vendor/autoload.php';
+require '../vendor/autoload.php';
 
 //postgres
 $dbName = getenv('DB_NAME');
@@ -11,7 +11,7 @@ session_start();
 
 function login($connection)
 {
-    int compteur;
+    $compteur=0;
     if(empty($_POST['pseudo']) || empty($_POST['mdp']))
     {
 	return "Veuillez remplir les champs";

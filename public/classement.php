@@ -22,7 +22,7 @@ $users = $userRepository->fetchAll();
 <body>
 
 <?php
-menu_connection();
+menu_connexion();
 menu_navigation()
 ?>
 

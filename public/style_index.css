@@ -1,3 +1,12 @@
+/*div.banniere {
+	background-image:url("images.png");
+	background-repeat:no-repeat;
+	background-size: contain;
+}*/
+div.banniere {
+	background:linear-gradient(to bottom, rgb(85,85,85),rgb(130,130,130))
+}
+
 #menu_bouton
 {
 	display: flex;
@@ -13,4 +22,16 @@
 .sous_menu{
 	display:flex;
 	justify_content:flex-start;
+}
+
+.button {
+	 color:white;
+	 background: linear-gradient(to bottom, black, rgb(145, 145, 145));
+	 border:none
+ }
+
+.button:hover {
+	color:lightgrey;
+	background: linear-gradient(to bottom, black, rgb(145, 145, 145));
+	border:white;
 }

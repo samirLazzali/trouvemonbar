@@ -20,12 +20,12 @@ $users = $userRepository->fetchAll();
 </head>
 <body>
 
-
+<div class="banniere">
 <?php
 menu_connexion();
 menu_navigation()
 ?>
-
+</div>
 
 <h3>Prochaine réunion</h3>
 <form action id="prochaine_réunion">

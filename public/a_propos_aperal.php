@@ -20,28 +20,16 @@ $users = $userRepository->fetchAll();
 </head>
 <body>
 
+<div class="banniere">
 <?php
 menu_connexion();
-menu_navigation()
+menu_navigation();
+?>
+</div>
+<?php
+sous_menu_aperal();
 ?>
 
-
-<div class="sous_menu" id="menu_aperal">
-<form action="a_propos_aperal.php" method="post">
-    <input type="submit" value="A propos">
-</form>
-<form action="preparatif_aperal.php" method="post">
-    <input type="submit" value="Préparatifs">
-</form>
-<form action="recette.php" method="post">
-    <input type="submit" value="Recettes">
-</form>
-<form action="intendance.php" method="post">
-    <input type="submit" value="Intendance">
-</form>
-<form action="avis.php" method="post">
-    <input type="submit" value="Avis">
-</form>
-</div>
-
-Aperal depuis la nuit des temps est considéré comme LA référence dans l'apéritif de compétition avec notament 3 coupe du monde à son actif
+<h4>Aperal depuis la nuit des temps est considéré comme LA référence dans l'apéritif de compétition avec notament 3 coupe du monde à son actif</h4>
+</body>
+</html>
