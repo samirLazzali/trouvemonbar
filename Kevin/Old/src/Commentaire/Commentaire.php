@@ -35,10 +35,9 @@ class Commentaire
     /**
      * @param mixed $id
      */
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
-        return $this;
     }
 
     /**
@@ -52,11 +51,9 @@ class Commentaire
     /**
      * @param mixed $owener_id
      */
-    public function setOwnerId($owner_id)
+    public function setOwnerId($owener_id): void
     {
-        $this->owner_id = $owner_id;
-        return $this;
-
+        $this->owener_id = $owner_id;
     }
 
     /**
@@ -70,11 +67,9 @@ class Commentaire
     /**
      * @param mixed $target_id
      */
-    public function setTargetId($target_id)
+    public function setTargetId($targer_id): void
     {
         $this->target_id = $target_id;
-        return $this;
-
     }
 
     /**
@@ -88,10 +83,9 @@ class Commentaire
     /**
      * @param mixed $date
      */
-    public function setDate($date)
+    public function setDate($date): void
     {
         $this->date = $date;
-        return $this;
     }
 
     /**
@@ -105,10 +99,9 @@ class Commentaire
     /**
      * @param mixed $contenu
      */
-    public function setContenu($contenu)
+    public function setContenu($contenu): void
     {
         $this->contenu = $contenu;
-        return $this;
     }
 
     /**
@@ -122,27 +115,25 @@ class Commentaire
     /**
      * @param mixed $parent_id
      */
-    public function setParentId($parent_id)
+    public function setParentId($parent_id): void
     {
         $this->parent_id = $parent_id;
-        return $this;
     }
 
-        /**
+    /**
      * @return mixed
      */
     public function getParentType()
     {
-        return $this->parent_type;
+        return $this->partent_type;
     }
 
     /**
      * @param mixed $parent_type
      */
-    public function setParentType($parent_type)
+    public function setParentType($parent_type): void
     {
         $this->parent_type = $parent_type;
-        return $this;
     }
 
 

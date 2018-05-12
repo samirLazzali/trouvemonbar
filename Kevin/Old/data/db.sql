@@ -78,12 +78,8 @@ CREATE TABLE "commentaire" (
   parent_id integer ,
   parent_type typeDeCommentaire
 );
-INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('1','2', '1999-12-23 12:45:23', '****', '2', 'tweet');
-INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('1','7', '1999-12-23 12:45:23', 'FAZFAZFAZFAZ', '2', 'tweet');
-INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('1','7', '1999-12-23 12:45:23', 'FAZFAZFAZFAZ', '3', 'tweet');
-INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('1','7', '1999-12-23 12:45:23', '1234555555', '1', 'tweet');
-INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('1','7', '1999-12-23 12:45:23', 'bonjour', '1', 'commentaire');
-INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('1','7', '1999-12-23 12:45:23', 'aurevoir', '1', 'commentaire');
+INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('1','2', '1999-12-23 12:45:23', '****', '1', 'tweet');
+
 
 
 

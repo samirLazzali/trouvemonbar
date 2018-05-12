@@ -45,6 +45,12 @@ Ajout CSS pour messages
 PROBLEME : Affichage de laccueil pas bon pour petit ecran
 
 
+# Commentaire
++ getCommentaires -> Ok
++ afficheCommentaires -> Ok
+
+A faire :
++ ajout bouton pour ecrire commentaires
 
 
 

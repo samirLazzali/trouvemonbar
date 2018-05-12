@@ -65,8 +65,7 @@ function liker($T_id, $id){
     /*
      * Test si on a déjà liké ce tweet
      */
-    $req = $connection->prepare("SELECT * FROM \"like\" WHERE tweet_id = $T_id AND user_id=$id");
-    $req->execute();
+    $req = $connection->query("SELECT * FROM \"like\" WHERE tweet_id = $T_id AND user_id=$id");
 
     if ($req->rowCount() == 1){
         $connection->exec("DELETE FROM \"like\" WHERE tweet_id = $T_id AND user_id=$id");

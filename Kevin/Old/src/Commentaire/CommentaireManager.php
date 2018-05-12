@@ -67,13 +67,13 @@ class CommentaireManager
         $com = new Commentaire();
 
         $com
-            ->setId($id)
-            ->setOwnerId($res['owner_id'])
-            ->setTargetId($res['target_id'])
-            ->setDate(new \DateTime($res['date_envoie']))
-            ->setContenu($res['contenu'])
-            ->setParentId($res['parent_id'])
-            ->setParentType($res['parent_type']);
+                ->setId($id)
+                ->setOwnerId($res['owner_id'])
+                ->setTargetId($res['target_id'])
+                ->setDate($res['date_envoie'])
+                ->setContenu($res['contenu'])
+                ->setParentId($res['parent_id'])
+                ->setParentType($res['parent_type']);
 
         return $com;
 
