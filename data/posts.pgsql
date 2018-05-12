@@ -31,3 +31,18 @@ INSERT INTO Post(ID, Author, Content, Timestamp, Repost, ResponseTo)
 /* Et enfin une mention */
 INSERT INTO Post(ID, Author, Content, Timestamp, Repost, ResponseTo)
     VALUES ('pbc', 'b', 'Salut @Oxymore', 1523814895, NULL, NULL);
+
+
+/* Maintenant on va insérer quelques appréciations */
+INSERT INTO Appreciation(ID, Post, Author, Timestamp, Type) 
+    VALUES ('aaa', 'pad', 'b', 1523814895, 'Like');
+INSERT INTO Appreciation(ID, Post, Author, Timestamp, Type) 
+    VALUES ('aab', 'pad', 'c', 1523814900, 'Like');
+INSERT INTO Appreciation(ID, Post, Author, Timestamp, Type) 
+    VALUES ('aac', 'pad', 'd', 1523814915, 'Like');
+INSERT INTO Appreciation(ID, Post, Author, Timestamp, Type) 
+    VALUES ('aad', 'pad', 'e', 1523814930, 'Like');
+
+INSERT INTO Appreciation(ID, Post, Author, Timestamp, Type) 
+    VALUES ('aba', 'pca', 'a', 1523814456, 'Like');
+

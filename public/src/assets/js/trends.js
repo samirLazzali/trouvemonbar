@@ -119,6 +119,7 @@ function getTopLikes()
     {
         if (this.readyState == 4 && this.status == 200)
         {
+            console.log(this.responseText);
             var text = '';
             var author;
             var content;
@@ -135,12 +136,8 @@ function getTopLikes()
             }
             document.getElementById('div.post-feed').innerHTML = text;
         }
-        else
-        {
-            alert("Va te faire foutre.");
-        }
     };
-    request.open("/api/trends/topLikes");
+    request.open("/api/trends/toplikes");
     request.send();
     return false;
 

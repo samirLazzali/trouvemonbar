@@ -247,13 +247,13 @@ class Post implements JsonSerializable
     // @TODO
     static function topLikes($like = Appreciation::LIKE, $limit=10, $timelimit=7200)
     {
+        $timeLimit = 0;
         $db = connect();
         $SQL = "SELECT post, count(id) as nblikes 
-                FROM (SELECT * FROM " . TABLE_Appreciation . " WHERE type = :appre AND timestamp >= :timelimit ) as toto 
+                FROM (SELECT * FROM " . TABLE_Appreciation . " WHERE type = :appre AND timestamp >= :timelimit) as toto 
                 GROUP BY post
                 ORDER BY nblikes DESC
                 LIMIT :limit";
-
 
         $statement = $db->prepare($SQL);
         $statement->bindValue(":appre", $like);
@@ -263,7 +263,7 @@ class Post implements JsonSerializable
 
         $rows = $statement->fetchAll();
         $result = array();
-
+        
         foreach ($rows as $row)
             $result[] = Post::fromID($row['post']);
 
