@@ -19,7 +19,8 @@ else
             <a class="menu-item" href="/login">Connexion</a>
             <a class="menu-item" href="/signup">Inscription</a>
         <?php endif ?>
-        <a class="menu-item" href="/feed">Derniers</a>
+        <a class="menu-item" href="/feed">Fil</a>
+        <a class="menu-item" href="/latest">Derniers</a>
         <a class="menu-item" href="/trends">Tendances</a>
         <a class="menu-item" href="/profile/<?=$menu_user->getUsername()?>">Profil</a>
         <a class="menu-item" href="/account">Compte</a>

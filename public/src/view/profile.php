@@ -47,11 +47,17 @@ require_once("User.php");
             }
             catch (UserNotFoundException $e)
             {
-                // Si jamais on nous envoie une exception comme quoi l'utilisateur n'existe pas
-                die("<p>L'utilisateur n'existe pas !</p>");
-                // Bon en vrai le die(...) c'est un truc à ne pas faire, mieux vaudrait avoir une variable
-                // $trouve = false ou true qui nous dit si l'utilisateur existe, et s'il n'existe pas, on affiche
-                // un joli cadre "Utilisateur non trouvé etc."
+                ?>
+                    <div class="column-wrapper">
+                        <h1>
+                            Cet utilisateur n'existe pas.
+                        </h1>
+                        <a href="/feed" class="centerlink">
+                            Retour aux dernières publications.
+                        </a>
+                    </div>
+                <?php
+                die();
             }
         }
         else {

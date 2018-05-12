@@ -34,6 +34,7 @@ else
         <link rel="stylesheet" type="text/css" href="/assets/styles/general.css" />
         <script src="/assets/js/moderation.js"></script>
         <script src="/assets/js/general.js"></script>
+        <title>Vitz - Modération</title>
         <meta charset="utf-8" />
     </head>
     <body>

@@ -1,10 +1,18 @@
-<!DOCTYPE HTML>
-
 <?php
+
 require_once("../config.php");
-require_once("../classes/Post.php");
+
+$u = getUserFromCookie();
+
+if ($u == null)
+{
+    header("Location: /login");
+    die();
+}
+
 ?>
 
+<!DOCTYPE HTML>
 <html>
 <head>
     <title>
@@ -23,8 +31,8 @@ require_once("../classes/Post.php");
     </h1>
 
     <?php
-    $limit=50;
-    $people=array();
+    $limit = 50;
+    $people = $u->getSubscriptions();
     $posts = Post::findPosts($people, $limit);
         ?>
     <div class="post-feed">

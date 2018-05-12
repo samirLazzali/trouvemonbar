@@ -492,10 +492,15 @@ class Post implements JsonSerializable
         else
         {
             $IDs = array();
-            foreach ($people as $user) {
-                $p = User::findWithIDorUsername($user);
-                array_push($IDs, $p->getID());
-            }
+            if ($people[0] instanceof User)
+                foreach ($people as $user) {
+                    array_push($IDs, $user->getID());
+                }
+            else
+                foreach ($people as $user) {
+                    $p = User::findWithIDorUsername($user);
+                    array_push($IDs, $p->getID());
+                }
 
             $SQL = "SELECT * FROM Post WHERE Author IN (";
 
