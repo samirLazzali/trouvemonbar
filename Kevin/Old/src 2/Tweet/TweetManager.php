@@ -7,6 +7,7 @@
  */
 namespace Tweet;
 require '../vendor/autoload.php';
+
 class TweetManager{
     private $db;
 
@@ -43,16 +44,25 @@ class TweetManager{
     }
 
     public function get($id){
-        $sth = $this->db->prepare('SELECT * FROM "tweet" WHERE auteur=\''.$id.'\'');
+        $sth = $this->db->prepare('SELECT * FROM "tweet" WHERE id=\''.$id.'\'');
         $sth->execute();
-        return $sth ;
-        
 
+        $res = $sth->fetch(\PDO::FETCH_ASSOC);
+
+        $T = new Tweet();
+
+        $T
+            ->setId($id)
+            ->setAuteur($res['auteur'])
+            ->setDate(new \DateTime($res['date_envoie']))
+            ->setContenu($res['contenu']);
+
+        return $T;
     }
 
     public function show_tweet($pseudo,$tweet){
-        print "</br> $pseudo a tweeté à $tweet->date_envoie : </br> $tweet->contenu </br>";
-        print "<button> J'aime</button> Nombre de j'aime :  </br> ";
+        echo "</br> $pseudo a tweeté à ".($tweet->getDate())->format('H:i:s')." le ".($tweet->getDate())->format('Y-m-d')." </br> ".$tweet->getContenu()."</br>";
+        //print "<button> J'aime</button> Nombre de j'aime :  </br> ";
     }
     
 

@@ -37,7 +37,7 @@ class MessageManager
     }
 
     public function delete(Message $msg){
-        $this->db->exec('DELETE FROM message WHERE id = '.$msg.getId());
+        $this->db->exec('DELETE FROM message WHERE id = '.$msg->getId());
     }
 
     public function update(Message $msg){
