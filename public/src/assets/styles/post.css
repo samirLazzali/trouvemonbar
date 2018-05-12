@@ -1,3 +1,5 @@
+@import url('general.css');
+
 .like-icon {
     color: Tomato;
 }
@@ -108,7 +110,7 @@
 .report-form {
     display: flex;
     flex-direction: row;
-    flex-wrap: none;
+    flex-wrap: nowrap ;
 }
 
 .report-field {
@@ -156,4 +158,28 @@
 
 .post-interaction {
     padding: 5px 15px 5px 15px;
+    background-color: var(--lightyellow);
+}
+
+.post-interactions-details {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.post-interactions-details-item {
+    padding: 5px 15px 5px 15px;
+    font-size: 1em;
+    background-color: #ffeacb;
+    border-bottom: 1px solid lightgray;
+}
+
+.post-interactions-details-item:hover {
+    background-color: #e67e22;
+    transition: 250ms;
+}
+
+.interaction-type-selected {
+    background-color: var(--carott);
 }

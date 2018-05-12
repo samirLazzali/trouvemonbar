@@ -102,10 +102,6 @@ function getHashtags()
             }
             document.getElementById('div.hashtag-in-list').innerHTML = text;
         }
-        else
-        {
-            alert("Va te faire foutre.");
-        }
     };
     request.open("/api/trends/hashtag");
     request.send();

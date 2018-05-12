@@ -148,3 +148,33 @@ function reportPost(id)
 
     return false;
 }
+
+function showLikes() {
+    var divLikes = document.getElementById("details-likes");
+    var divReposts = document.getElementById("details-reposts");
+
+    var selectorDetailsLikes = document.getElementById("linkDetailsLikes");
+    var selectorDetailsReposts = document.getElementById("linkDetailsReposts");
+
+    divLikes.style.display = "block";
+    divReposts.style.display = "none";
+
+    addClass(selectorDetailsLikes, "interaction-type-selected");
+    removeClass(selectorDetailsReposts, "interaction-type-selected");
+    return false;
+}
+
+function showReposts() {
+    var divLikes = document.getElementById("details-likes");
+    var divReposts = document.getElementById("details-reposts");
+
+    var selectorDetailsLikes = document.getElementById("linkDetailsLikes");
+    var selectorDetailsReposts = document.getElementById("linkDetailsReposts");
+
+    divLikes.style.display = "none";
+    divReposts.style.display = "block";
+
+    addClass(selectorDetailsReposts, "interaction-type-selected");
+    removeClass(selectorDetailsLikes, "interaction-type-selected");
+    return false;
+}

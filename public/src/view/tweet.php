@@ -56,18 +56,37 @@ function formatter_nombre($n, $mot)
             <div class="splitter">
             </div>
             <div class="post-interactions">
-                <div class="post-interaction">
-                    <?= formatter_nombre(count($reposts), "repost") ?>
+                <div class="post-interaction interaction-type-selected" id="linkDetailsReposts">
+                    <a href="#" onclick="return showReposts();">
+                        <?= formatter_nombre(count($reposts), "recyclage") ?>
+                    </a>
                 </div>
-                <div class="post-interaction">
-                    <?= formatter_nombre(count($likes), "like") ?>
+                <div class="post-interaction" id="linkDetailsLikes">
+                    <a href="#" onclick="return showLikes();">
+                        <?= formatter_nombre(count($likes), "like") ?>
+                    </a>
                 </div>
                 <div class="post-interaction">
                     <?= formatter_nombre(count($dislikes), "dislike") ?>
                 </div>
             </div>
-            <div class="splitter">
+            <div class="post-interaction-details" id="details-reposts">
+                <?php foreach ($reposts as $repost): ?>
+                    <div class="post-interactions-details-item">
+                        <a href="/profile/<?= $repost->getAuthor()->getUsername(); ?>">
+                            <?= $repost->getAuthor()->getUsername(); ?>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
             </div>
+            <div class="post-interaction-details display-none" id="details-likes">
+                <?php foreach ($likes as $liker): ?>
+                    <div class="post-interactions-details-item">
+                        <a href="/profile/<?= $liker->getUsername(); ?>">
+                            <?= $liker->getUsername(); ?>
+                        </a>
+                    </div>
+                <?php endforeach; ?>            </div>
         </div>
         <div class="post-feed">
             <?php foreach ($responses as $item)
