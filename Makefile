@@ -20,7 +20,7 @@ stop:
 	docker-compose down -v
 	docker-compose rm -v
 
-install: uninstall start composer.install db.install
+install: uninstall start composer.install db.install db.init
 
 depedencies: /usr/bin/docker /usr/local/bin/docker-compose
 

@@ -38,24 +38,30 @@ if ($user == null)
         <h1>
             - mon compte -
         </h1>
-        <div id="info-empty-pwd" class="display-none error infobox">
-            Erreur : le mot de passe ne peut pas être vide.
-        </div>
         <div id="info-missing-field" class="display-none error infobox">
             Erreur : le champ % doit etre rempli.
         </div>
-        <form onsubmit="return Change_info();">
+        <form onsubmit="return updateAccount();">
             <label class="field-label" for="new-email">Adresse e-mail</label>
-            <input class="field" type="text" placeholder="Nouvelle adresse e-mail" value="<?= $user->getEmail() ?>"  id="new-email" /><br/>
+            <input class="field" onClick="accountFields_color()" type="text" placeholder="Nouvelle adresse e-mail" value="<?= $user->getEmail() ?>"  id="new-email" /><br/>
 
             <label class="field-label" for="new-username">Nom d'utilisateur</label>
-            <input class="field" type="text" placeholder="Nouveau nom d'utilisateur" value="<?= $user->getUsername() ?>" id="new-username" /><br/>
-
-            <label class="field-label" for="new-password">Nouveau mot de passe</label>
-            <input class="field" type="password" placeholder="Nouveau mot de passe" id="new-password" /><br/>
-
+            <input class="field" onclick="accountFields_color()" type="text" placeholder="Nouveau nom d'utilisateur" value="<?= $user->getUsername() ?>" id="new-username" /><br/>
             <button class="bouton" type="submit">
-                Sauvegarder
+                Mettre à jour les informations
+            </button>
+        </form>
+        <div style="height: 50px;"></div>
+        <div id="info-password" class="display-none error infobox">
+            Erreur : le mot de passe ne peut pas être vide.
+        </div>
+        <form onSubmit="return updatePassword();">
+            <label class="field-label" for="current-password">Mot de passe actuel</label>
+            <input onclick="passwordFields_color()" class="field" type="password" placeholder="Mot de passe actuel" id="current-password" /><br/>
+            <label class="field-label" for="new-password">Nouveau mot de passe</label>
+            <input onclick="passwordFields_color()" class="field" type="password" placeholder="Nouveau mot de passe" id="new-password" /><br/>
+            <button class="bouton" type="submit">
+                Modifier le mot de passe
             </button>
         </form>
     </div>

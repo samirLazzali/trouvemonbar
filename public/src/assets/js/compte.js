@@ -44,13 +44,13 @@ function sendNewPost()
         return;
     }
 
-    CreatePost(div.innerHTML, null);
+    account_createPost(div.innerHTML, null);
 
     div.innerHTML = "";
     newPost_onBlur();
 }
 
-function CreatePost(value, user_Response)
+function account_createPost(value, user_Response)
 {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -78,41 +78,153 @@ function CreatePost(value, user_Response)
     }
 }
 
-
-function Change_info()
-{
+function accountFields_color() {
     var nmail = document.getElementById("new-email");
-    var npwd = document.getElementById("new-password");
     var nusername = document.getElementById("new-username");
 
-    var mfieldpwd = document.getElementById("info-empty-pwd");
+    removeClass(nmail, "field-validated");
+    removeClass(nusername, "field-validated");
+    removeClass(nmail, "invalid-field");
+    removeClass(nusername, "invalid-field");
+}
+
+function passwordFields_color() {
+    var fieldCurrent = document.getElementById("current-password");
+    var fieldNew = document.getElementById("new-password");
+
+    removeClass(fieldCurrent, "field-validated");
+    removeClass(fieldNew, "field-validated");
+    removeClass(fieldCurrent, "invalid-field");
+    removeClass(fieldNew, "invalid-field");
+}
+
+
+function updatePassword() {
+    var fieldCurrentPassword = document.getElementById("current-password");
+    var fieldNewPassword = document.getElementById("new-password");
+
+    fieldCurrentPassword.blur();
+    fieldNewPassword.blur();
+
+    if (fieldCurrentPassword.value == "")
+    {
+        addClass(fieldCurrentPassword, "invalid-field");
+        fieldCurrentPassword.focus();
+        return false;
+    }
+
+    if (fieldNewPassword.value == "")
+    {
+        addClass(fieldNewPassword, "invalid-field");
+        fieldNewPassword.focus();
+        return false;
+    }
+
+    var infoboxPassword = document.getElementById("info-password");
+    infoboxPassword.style.display = "none";
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200)
+        {
+            console.log(xhttp.responseText);
+            passwordFields_color();
+            var result = JSON.parse(xhttp.responseText);
+            if (result["status"] == STATUS_OK)
+            {
+                addClass(fieldCurrentPassword, "field-validated");
+                addClass(fieldNewPassword, "field-validated");
+                fieldNewPassword.value = "";
+                return false;
+            }
+            else
+            {
+                switch(result["status"]) {
+                    case ERROR_FieldMissing:
+                        infoboxPassword.style.display = "block";
+                        infoboxPassword.innerHTML = "Vous avez oublié de remplir un champ.";
+                        return false;
+                    case ERROR_WrongPassword:
+                        infoboxPassword.style.display = "block";
+                        infoboxPassword.innerHTML = "Le mot de passe actuel est incorrect.";
+                        fieldCurrentPassword.focus();
+                        fieldCurrentPassword.select();
+                        return false;
+                    default:
+                        infoboxPassword.style.display = "block";
+                        infoboxPassword.innerHTML = "Une erreur s'est produite : " + result["description"] + " (Code " + result["status"] + ")";
+                        return false;
+                }
+            }
+        }
+    }
+    xhttp.open("POST", "/api/user/editpassword");
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("newpassword=" + fieldNewPassword.value + "&password=" + fieldCurrentPassword.value);
+    return false;
+}
+
+function updateAccount()
+{
+    var fieldEmail = document.getElementById("new-email");
+    var fieldUsername = document.getElementById("new-username");
+
+    fieldEmail.blur();
+    fieldUsername.blur();
+
+    if (fieldEmail.value == "")
+    {
+        addClass(fieldEmail, "invalid-field");
+        fieldEmail.focus();
+        return false;
+    }
+
+    if (fieldUsername.value == "") {
+        addClass(fieldUsername, "invalid-field");
+        fieldUsername.focus();
+        return false;
+    }
+
+
+
     var infoboxMissingField = document.getElementById("info-missing-field");
 
-    mfieldpwd.style.display = "none";
     infoboxMissingField.style.display = "none";
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200)
         {
+            accountFields_color();
+            console.log(xhttp.responseText);
             var result = JSON.parse(xhttp.responseText);
             if (result["status"] == STATUS_OK)
             {
-                document.location.href = "login";
+                addClass(fieldUsername, "field-validated");
+                addClass(fieldEmail, "field-validated");
             }
             else
             {
                 switch(result["status"])
                 {
                     case (ERROR_FieldMissing):
-                        mfieldpwd.style.display = "block";
+                        infoboxMissingField.style.display = "block";
                         return false;
-                    case (ERROR_WrongPassword):
-                        // La je sais pas quoi mettre, parce que si le mot de passe d'origine est pas bon, l'utilisateur est pas censé
-                        //être déja connecté sur cette page
+                    case ERROR_UsernameRegistered:
+                        infoboxMissingField.style.display = "block";
+                        infoboxMissingField.innerHTML = "Ce nom d'utilisateur est déjà utilisé !";
+                        addClass(fieldUsername, "invalid-field");
+                        fieldUsername.focus();
+                        return false;
+                    case ERROR_EmailRegistered:
+                        infoboxMissingField.style.display = "block";
+                        infoboxMissingField.innerHTML = "Cet e-mail est déjà enregistré !";
+                        addClass(fieldEmail, "invalid-field");
+                        fieldEmail.focus();
                         return false;
                     default:
-                        infoboxMissingField.innerHTML("Une erreur s'est produite : " + result["description"] + " (Code " + result["status"] + ")");
+                        infoboxMissingField.style.display = "block";
+                        infoboxMissingField.innerHTML = "Une erreur s'est produite : " + result["description"] + " (Code " + result["status"] + ")";
                         return false;
                 }
             }
@@ -120,7 +232,7 @@ function Change_info()
     };
     xhttp.open("POST", "/api/user/edit", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("username=" + nusername.value + "&password=" + npwd.value + "&email=" + nmail.value);
+    xhttp.send("username=" + fieldUsername.value + "&email=" + fieldEmail.value);
     return false;
 
 }

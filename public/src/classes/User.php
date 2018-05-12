@@ -574,11 +574,10 @@ class User implements JsonSerializable
      * Met à jour le profil de l'utilisateur.
      * @param string $newEmail
      * @param string $newUsername
-     * @param string $newPassword
      * @return bool
      * @throws Exception
      */
-    function update($newEmail, $newUsername, $newPassword)
+    function update($newEmail, $newUsername)
     {
         // On vérifie que le nouveau nom d'utilisateur n'est pas déjà pris
         if ($newUsername == null)
@@ -623,18 +622,22 @@ class User implements JsonSerializable
         $statement->bindValue(":id", $this->getID());
         $statement->execute();
 
-        if ($newPassword != null) {
-            $SQL = "UPDATE " . TABLE_User . " SET Password = :hash WHERE ID = :id";
-            $statement = $db->prepare($SQL);
-            $statement->bindValue(":hash", User::hash($newPassword));
-            $statement->bindValue(":id", $this->getID());
-            $statement->execute();
-        }
-
         if ($statement->rowCount() == 1)
             return true;
         else
             return false;
+    }
+
+    function updatePassword($newPassword)
+    {
+        $hash = User::hash($newPassword);
+
+        $SQL = "UPDATE " . TABLE_User . " SET Password = :hash WHERE ID = :id";
+        $db = connect();
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":hash", $hash);
+        $statement->bindValue(":id", $this->getID());
+        $statement->execute();
     }
 
     /**
@@ -663,6 +666,7 @@ class User implements JsonSerializable
      */
     public static function hash($password)
     {
+        $password = trim($password);
         return password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
     }
 
@@ -681,7 +685,7 @@ class User implements JsonSerializable
 }
 
 /**
- * Exception levée lorsqu'un utilisateur qu'on essaie de crééer (via fromID par exemple) n'est pas trouvé.
+ * Exception levée lorsqu'un utilisateur qu'on essaie de construire (via fromID par exemple) n'est pas trouvé.
  * Class UserNotFoundException
  */
 class UserNotFoundException extends Exception
@@ -718,5 +722,10 @@ class UserExistsException extends Exception
         $this->duplicateValue = $duplicateValue;
 
         parent::__construct($message, $code, $previous);
+    }
+
+    public function getDuplicate()
+    {
+        return $this->duplicate;
     }
 }

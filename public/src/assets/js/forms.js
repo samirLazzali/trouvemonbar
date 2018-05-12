@@ -110,7 +110,7 @@ function login()
                 console.log(xhttp.responseText);
                 var result = JSON.parse(xhttp.responseText);
                 if (result["status"] == STATUS_OK)
-                    document.location.href = "/main";
+                    document.location.href = "/feed";
                 else
                 {
                     console.log("Erreur de connexion.")
@@ -129,8 +129,6 @@ function login()
                     }
                 }
             }
-            else
-                console.log("Mauvais statut '" + status);
         };
         xhttp.open("POST", "/api/auth/login", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

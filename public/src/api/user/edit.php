@@ -16,7 +16,6 @@
  */
 
 require_once("../../config.php");
-require_once("User.php");
 
 $u = verify_logged_in();
 
@@ -30,21 +29,8 @@ if (isset($_POST['email']))
 else
     $newEmail = null;
 
-if (isset($_POST['newpasword']))
-    $newPassword = $_POST['newpassword'];
-else
-    $newPassword = null;
-
-if (isset($_POST['password']))
-    $currentPassword = $_POST['password'];
-else
-    error_die("password", ERROR_FieldMissing);
-
-if (!User::testPassword($u->getID(), $currentPassword))
-    error_die("Wrong password.", ERROR_WrongPassword);
-
 try {
-    $u->update($newEmail, $newUsername, $newPassword);
+    $u->update($newEmail, $newUsername);
 }
 catch (UserExistsException $e)
 {
@@ -54,4 +40,5 @@ catch (UserExistsException $e)
         error_die($e->getMessage(), ERROR_EmailRegistered);
 }
 
+authenticate($u);
 success_die($u);

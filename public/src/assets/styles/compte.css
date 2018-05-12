@@ -60,6 +60,14 @@ body {
     transition: 250ms;
 }
 
+.field-validated {
+    background: var(--green);
+}
+
+.invalid-field {
+    background: var(--tomato);
+}
+
 input {
     box-sizing: border-box;
 }
