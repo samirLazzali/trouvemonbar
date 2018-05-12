@@ -149,7 +149,7 @@ endforeach;
 
 
 
-<div class="conteneur">
+<div class="conteneur_chat">
 
 
 
@@ -164,7 +164,7 @@ endforeach;
 
 <p id="dialogue"></p>
 
-    <div>
+    <div id="chat" style="display: none">
         <div id="chatbox" class="chatbox"></div>
         <div>
             <input type="text" id="sendField" placeholder="Votre message ..." onkeypress="if (event.keyCode==13){EnvoiMessage();}" ></input>

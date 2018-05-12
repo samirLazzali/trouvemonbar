@@ -173,7 +173,7 @@ enTete("Accueil", "CSS/style.css");
             document.write("<button id=\"Comment\">Afficher les commentaires</button></div><br/><br/>");
 
         }
-        document.write("</div");
+        document.write("</div>");
 
     }
 
@@ -285,7 +285,6 @@ afficheMenu()
 
 <div class="conteneur">
 
-
 <div class="writetweets">
     <p class="writetweetstext">Ecrire un tweet</p>
     <form method='post' action="ecriretweet.php">
@@ -301,16 +300,24 @@ afficheMenu()
         tweets();
         // document.getElementById('1').innerHTML = "MDR";
     </script>
-</div>
+
+
 
 <?php
 $friendList = get_friendList($_SESSION['id']);
 afficheListeAmis($friendList);
 ?>
 
+</div>
 
 
+<footer>
+    <div>
+        <p>Twiitie 2018</p>
+    </div>
 
-</body>
-</html>
+</footer>
 
+<?php
+pied();
+?>

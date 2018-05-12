@@ -82,7 +82,7 @@ function affiche_message($message){
 function listeDiscussion($listeAmis){
     print "<p class=\"titre\">Vos amis:</p>\n";
     foreach($listeAmis as $F){
-        echo '<button s=\''.$F['id'].'\' onclick="document.getElementById(\'h1\').innerHTML=\'Ma conversation avec '.$F['prénom'].'\'; document.getElementById(\'envoyer\').value='.$F['id'].'; Conversation()">'.$F['prénom'].'</button>';
+        echo '<button s=\''.$F['id'].'\' onclick="document.getElementById(\'h1\').innerHTML=\'Ma conversation avec '.$F['prénom'].'\'; document.getElementById(\'envoyer\').value='.$F['id'].'; Conversation(); document.getElementById(\'chat\').style.display = \'block\';">'.$F['prénom'].'</button>';
         print("\n");
     }
 }
