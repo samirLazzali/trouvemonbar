@@ -1,28 +1,28 @@
 <?php
 
-function sqlquery($requete, $number)
+function sqlquery($connection,$requete, $number)
 {
-	$query = mysql_query($requete) or exit('Erreur SQL : '.mysql_error().' Ligne : '. __LINE__ .'.');
+	$query = mysqli_query($connection,$requete) or exit('Erreur SQL : '.mysqli_error($connection).' Ligne : '. __LINE__ .'.');
 	queries();
 	
 	if($number == 1)
 	{
-		$query1 = mysql_fetch_assoc($query);
-		mysql_free_result($query);
+		$query1 = mysqli_fetch_assoc($query);
+		mysqli_free_result($query);
 		return $query1;
 	}
 	
 	else if($number == 2)
 	{
-		while($query1 = mysql_fetch_assoc($query))
+		while($query1 = mysqli_fetch_assoc($query))
 		{
 			$query2[] = $query1;
 		}
-		mysql_free_result($query);
+		mysqli_free_result($query);
 		return $query2;
 	}
 	
-	else //Erreur
+	else
 	{
 		exit('Argument de sqlquery non renseigné ou incorrect.');
 	}
@@ -36,20 +36,28 @@ function queries($num = 1)
 
 function connexion_bdd()
 {
-	$bd_nom_serveur='127.0.0.1';
+	$bd_nom_serveur='localhost';
 	$bd_login='root';
 	$bd_mot_de_passe='';
+	$bd_nom_bd='catisfaction';
 	
 	//Connexion à la base de données
-	//mysql_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
-	//mysql_query("set names 'utf8'");
+	$connection = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
+	mysqli_select_db($connection,$bd_nom_bd);
+	mysqli_query($connection,"set names 'utf8'");
 }
 
 function actualiser_session()
 {
+	$bd_nom_serveur='localhost';
+	$bd_login='root';
+	$bd_mot_de_passe='';
+	$bd_nom_bd='catisfaction';
+	$connection = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
+	mysqli_select_db($connection,$bd_nom_bd);
 	if(isset($_SESSION['id_user']) && intval($_SESSION['id_user']) != 0)
 	{
-		$retour = sqlquery("SELECT id_user, login, password FROM user WHERE id_user = ".intval($_SESSION['id_user']), 1);
+		$retour = sqlquery($connection,"SELECT id_user, login, password FROM Utilisateur WHERE id_user = ".intval($_SESSION['id_user']), 1);
 		if(isset($retour['login']) && $retour['login'] != '')
 		{
 			if($_SESSION['password'] != $retour['password'])
@@ -83,7 +91,7 @@ function actualiser_session()
 		{
 			if(intval($_COOKIE['id_user']) != 0)
 			{
-				$retour = sqlquery("SELECT id_user, login, password	FROM user WHERE id_user = ".intval($_COOKIE['id_user']), 1);
+				$retour = sqlquery($connection,"SELECT id_user, login, password	FROM Utilisateur WHERE id_user = ".intval($_COOKIE['id_user']), 1);
 				
 				if(isset($retour['login']) && $retour['login'] != '')
 				{
@@ -147,13 +155,19 @@ function vider_cookie()
 
 function checklogin($login)
 {
+	$bd_nom_serveur='localhost';
+	$bd_login='root';
+	$bd_mot_de_passe='';
+	$bd_nom_bd='catisfaction';
+	$connection = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
+	mysqli_select_db($connection,$bd_nom_bd);
 	if($login == '') return 'vide';
 	else if(strlen($login) < 3) return 'court';
 	else if(strlen($login) > 32) return 'long';
 	
 	else
 	{
-		$result = sqlquery("SELECT COUNT(*) AS nbr FROM user WHERE login = '".mysql_real_escape_string($login)."'", 1);
+		$result = sqlquery($connection,"SELECT COUNT(*) AS nbr FROM Utilisateur WHERE login = '".mysqli_real_escape_string($connection,$login)."'", 1);
 		global $queries;
 		$queries++;
 		
@@ -164,6 +178,12 @@ function checklogin($login)
 
 function checkpassword($password)
 {
+	$bd_nom_serveur='localhost';
+	$bd_login='root';
+	$bd_mot_de_passe='';
+	$bd_nom_bd='catisfaction';
+	$connection = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
+	mysqli_select_db($connection,$bd_nom_bd);
 	if($password == '') return 'vide';
 	else if(strlen($password) < 4) return 'court';
 	else if(strlen($password) > 50) return 'long';
@@ -184,12 +204,18 @@ function checkpasswordS($password, $password2)
 
 function checkmail($email)
 {
+	$bd_nom_serveur='localhost';
+	$bd_login='root';
+	$bd_mot_de_passe='';
+	$bd_nom_bd='catisfaction';
+	$connection = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
+	mysqli_select_db($connection,$bd_nom_bd);
 	if($email == '') return 'Champ vide';
 	else if(!preg_match('#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#is', $email)) return 'invalide';
 	
 	else
 	{
-		$result = sqlquery("SELECT COUNT(*) AS nbr FROM user WHERE mail = '".mysql_real_escape_string($email)."'", 1);
+		$result = sqlquery($connection,"SELECT COUNT(*) AS nbr FROM Utilisateur WHERE mail = '".mysqli_real_escape_string($connection,$email)."'", 1);
 		global $queries;
 		$queries++;
 		
@@ -206,13 +232,19 @@ function checkmailS($email, $email2)
 
 function checkphone($phone_number)
 {
+	$bd_nom_serveur='localhost';
+	$bd_login='root';
+	$bd_mot_de_passe='';
+	$bd_nom_bd='catisfaction';
+	$connection = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
+	mysqli_select_db($connection,$bd_nom_bd);
 	if($phone_number == '') return 'vide';
 	else if(strlen($phone_number) < 10) return 'court';
 	else if(strlen($phone_number) > 10) return 'long';
 	
 	else
 	{
-		$result = sqlquery("SELECT COUNT(*) AS nbr FROM user WHERE phone_number = '".mysql_real_escape_string($phone_number)."'", 1);
+		$result = sqlquery($connection,"SELECT COUNT(*) AS nbr FROM Utilisateur WHERE phone_number = '".mysqli_real_escape_string($connection,$phone_number)."'", 1);
 		global $queries;
 		$queries++;
 		
