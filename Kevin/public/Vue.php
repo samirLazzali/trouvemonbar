@@ -20,7 +20,7 @@ function enTete($titre, $style)
     print "  </head>\n";
 
     print "  <body>\n";
-    print "    <header><h1>$titre</h1></header>\n";
+   // print "    <header><h1>$titre</h1></header>\n";
 }
 
 function pied(){

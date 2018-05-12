@@ -121,11 +121,6 @@ endforeach;
 
 </script>
 
-<head>
-    <link rel="stylesheet" href="../CSS/style.css">
-    <title>Mes messages (<?php echo $_SESSION['prénom']; ?>)</title>
-</head>
-<body>
 
 <!-- <nav id="fontmenu">
     <ul id="menu">
@@ -147,6 +142,7 @@ endforeach;
 -->
 
 <?php
+    enTete("Mes messages", "../CSS/style.css");
 
     afficheMenu();
 ?>
@@ -186,6 +182,7 @@ endforeach;
 
 <!-- <a href="../accueil.php?idLike=2">Retour à l'accueil</a><br> -->
 <?php
+
 pied();
 ?>
 

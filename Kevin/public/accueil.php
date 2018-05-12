@@ -34,15 +34,23 @@ $tweetManager = new Tweet\TweetManager($connection);
 
 
 
+
+
+enTete("Accueil", "CSS/style.css");
+
 ?>
 
 
 
-<html>
+<!-- <html>
 <head>
     <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
+-->
+
+
+
 <script>
       /*  function nbLike(id){
             var xhttp;
@@ -248,7 +256,7 @@ $tweetManager = new Tweet\TweetManager($connection);
 afficheMenu()
 ?>
 
-
+<div class="recherche">
     <ul id="recherches">
         <li>
                  Rechercher un # :
@@ -271,30 +279,36 @@ afficheMenu()
             <p id="err"></p>
        </li>
     </ul>
-
-    
-
+</div>
 
 
 
-<span class="writetweetstext">Ecrire un tweet</span>
-<form class="writetweets" method='post' action="ecriretweet.php">
-<input type="hidden" name="pseudo" value="<?php echo $_SESSION['prénom'] ?>"></input><br/>
-<textarea  name= "textarea" id="textarea"  placeholder="Exprimez vous..." rows="5" cols="50"></textarea>
-<input id="ok" onclick="ConfirmationTweet()" type="submit" value="Envoyer">
-</form>
+<div class="conteneur">
 
+
+<div class="writetweets">
+    <p class="writetweetstext">Ecrire un tweet</p>
+    <form method='post' action="ecriretweet.php">
+    <input type="hidden" name="pseudo" value="<?php echo $_SESSION['prénom'] ?>"></input><br/>
+    <textarea  name= "textarea" id="textarea"  placeholder="Exprimez vous..." rows="5" cols="50"></textarea>
+    <input id="ok" onclick="ConfirmationTweet()" type="submit" value="Envoyer">
+    </form>
+</div>
 <!-- AJOUT DE KEVIN-->
 
+    <script >
+        //liste_amis();
+        tweets();
+        // document.getElementById('1').innerHTML = "MDR";
+    </script>
+</div>
 
 <?php
 $friendList = get_friendList($_SESSION['id']);
 afficheListeAmis($friendList);
 ?>
-<script >
-    tweets();
-   // document.getElementById('1').innerHTML = "MDR";
-</script>
+
+
 
 
 </body>
