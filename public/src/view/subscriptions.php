@@ -51,6 +51,7 @@ function formatter_nombre_abonnements($n)
     </head>
 
     <body>
+        <?php require "menu.php"; ?>
         <?php
         if (isset($_GET['user']))
         {

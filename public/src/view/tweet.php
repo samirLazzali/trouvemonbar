@@ -22,6 +22,16 @@ $likes = $p->getLikers();
 $dislikes = $p->getDislikers();
 $responses = $p->getResponsesTo();
 
+function formatter_nombre($n, $mot)
+{
+    if ($n == 0)
+        return "Aucun $mot";
+    elseif ($n == 1)
+        return "Un $mot";
+    else
+        return "$n $mot" . "s";
+}
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -47,13 +57,13 @@ $responses = $p->getResponsesTo();
             </div>
             <div class="post-interactions">
                 <div class="post-interaction">
-                    <?= count($reposts) ?> recyclages
+                    <?= formatter_nombre(count($reposts), "repost") ?>
                 </div>
                 <div class="post-interaction">
-                    <?= count($likes) ?> likes
+                    <?= formatter_nombre(count($likes), "like") ?>
                 </div>
                 <div class="post-interaction">
-                    <?= count($dislikes) ?> dislikes
+                    <?= formatter_nombre(count($dislikes), "dislike") ?>
                 </div>
             </div>
             <div class="splitter">
