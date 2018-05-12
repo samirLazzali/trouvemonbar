@@ -50,7 +50,7 @@ CREATE TABLE "tweet" (
   id SERIAL PRIMARY KEY ,
   auteur int references "user"(id),
   date_envoie timestamp ,
-  contenu VARCHAR(300)
+  contenu VARCHAR
 );
 INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('1', '1999-12-23 12:45:23', '****');
 INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('2', '1999-12-23 12:45:23', '****');
@@ -68,14 +68,12 @@ INSERT INTO "like"(tweet_id, user_id) VALUES (1, 3);
 
 CREATE TABLE "commentaire" (
   id_comment SERIAL PRIMARY KEY ,
-  auteur int references "user"(id),
   tweet_id int references "tweet"(id) ,
   date_envoie timestamp ,
-  contenu VARCHAR(300) ,
-  parent int DEFAULT -1 /* en réponse au commentaire numéro parent */
+  contenu VARCHAR
 );
-INSERT INTO "commentaire"(auteur, tweet_id, date_envoie, contenu) VALUES ('1', '1', '1999-12-23 12:45:23', 'GG');
-INSERT INTO "commentaire"(auteur, tweet_id, date_envoie, contenu, parent) VALUES ('1', '1', '1999-12-23 12:45:23', 'Oui', '1');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('John', '1999-12-23 12:45:23', '****');
+
 
 
 

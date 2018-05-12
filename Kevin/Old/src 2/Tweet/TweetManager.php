@@ -42,16 +42,16 @@ class TweetManager{
         $req->execute();
     }
 
-    public function get($pseudo){
-        $sth = $this->db->prepare('SELECT * FROM "tweet" WHERE auteur=\''.$pseudo.'\'');
+    public function get($id){
+        $sth = $this->db->prepare('SELECT * FROM "tweet" WHERE auteur=\''.$id.'\'');
         $sth->execute();
         return $sth ;
         
 
     }
 
-    public function show_tweet($tweet){
-        print "</br> $tweet->auteur a tweeté à $tweet->date_envoie : </br> $tweet->contenu </br>";
+    public function show_tweet($pseudo,$tweet){
+        print "</br> $pseudo a tweeté à $tweet->date_envoie : </br> $tweet->contenu </br>";
         print "<button> J'aime</button> Nombre de j'aime :  </br> ";
     }
     

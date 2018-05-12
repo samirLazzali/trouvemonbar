@@ -7,7 +7,8 @@
             "User\\": "src/User/",
             "Message\\": "src/Message/",
             "Amis\\": "src/Amis/",
-            "Tweet\\": "src/Tweet/"
+            "Tweet\\": "src/Tweet/",
+            "Commentaire\\": "src/Commentaire/"
         }
     },
     "autoload-dev": {

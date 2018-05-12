@@ -1,38 +1,31 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: xujiahui
+ * Date: 08/05/2018
+ * Time: 10:08 PM
+ */
+
 namespace Commentaire;
 
 class Commentaire
 {
-    /**
-     * @var int
-     */
     private $id;
 
-    /**
-     * @var string
-     */
-    private $emetteur;
+    private $owner_id;
 
-    /**
-     * @var string
-     */
-    private $recepteur;
+    private $target_id;
 
-    /**
-     * @var \DateTimeInterface
-     */
     private $date;
 
-    /**
-     * @var string
-     */
     private $contenu;
 
+    private $parent_id;
 
-    //Liste des setters et getters
+    private $parent_type;
 
     /**
-     * @return int
+     * @return mixed
      */
     public function getId()
     {
@@ -40,50 +33,47 @@ class Commentaire
     }
 
     /**
-     * @param int $id
+     * @param mixed $id
      */
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
-        return $this;
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getEmetteur()
+    public function getOwnerId()
     {
-        return $this->emetteur;
+        return $this->owner_id;
     }
 
     /**
-     * @param string $emetteur
+     * @param mixed $owener_id
      */
-    public function setEmetteur($emetteur)
+    public function setOwnerId($owener_id): void
     {
-        $this->emetteur = $emetteur;
-        return $this;
+        $this->owener_id = $owner_id;
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getRecepteur()
+    public function getTargetId()
     {
-        return $this->recepteur;
+        return $this->target_id;
     }
 
     /**
-     * @param string $recepteur
+     * @param mixed $target_id
      */
-    public function setRecepteur($recepteur)
+    public function setTargetId($targer_id): void
     {
-        $this->recepteur = $recepteur;
-        return $this;
+        $this->target_id = $target_id;
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return mixed
      */
     public function getDate()
     {
@@ -91,16 +81,15 @@ class Commentaire
     }
 
     /**
-     * @param \DateTimeInterface $date
+     * @param mixed $date
      */
-    public function setDate($date)
+    public function setDate($date): void
     {
         $this->date = $date;
-        return $this;
     }
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getContenu()
     {
@@ -108,12 +97,44 @@ class Commentaire
     }
 
     /**
-     * @param string $contenu
+     * @param mixed $contenu
      */
-    public function setContenu($contenu)
+    public function setContenu($contenu): void
     {
         $this->contenu = $contenu;
-        return $this;
     }
-}
 
+    /**
+     * @return mixed
+     */
+    public function getParentId()
+    {
+        return $this->parent_id;
+    }
+
+    /**
+     * @param mixed $parent_id
+     */
+    public function setParentId($parent_id): void
+    {
+        $this->parent_id = $parent_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParentType()
+    {
+        return $this->partent_type;
+    }
+
+    /**
+     * @param mixed $parent_type
+     */
+    public function setParentType($parent_type): void
+    {
+        $this->parent_type = $parent_type;
+    }
+
+
+}

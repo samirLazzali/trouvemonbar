@@ -39,7 +39,10 @@ ATTENTION ---------> POUR Les modifications dans SQL, utiliser ID au lieu du pse
 pb -> TABLE AMIS PAS BONNE : Il faut mettre id des users en attribut ---> OKKKKKK
 
 
+Ajout CSS pour messages 
 
+
+PROBLEME : Affichage de laccueil pas bon pour petit ecran
 
 
 

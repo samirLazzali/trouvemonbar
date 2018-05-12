@@ -1,7 +1,6 @@
 <?php
 require_once '../../vendor/autoload.php';
 require_once "../Modele.php";
-session_start();
 
 /*$dbName = getenv('DB_NAME');
 $dbUser = getenv('DB_USER');

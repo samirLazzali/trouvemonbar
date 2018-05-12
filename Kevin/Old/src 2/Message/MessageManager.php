@@ -7,7 +7,7 @@
  */
 
 namespace Message;
-require '../vendor/autoload.php';
+//require '../vendor/autoload.php';
 
 
 class MessageManager
