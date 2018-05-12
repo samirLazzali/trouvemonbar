@@ -1,3 +1,4 @@
+@import url('fonts.css');
 
 :root {
     --red: #c0392b;
@@ -5,15 +6,28 @@
     --redish-white: #FFCCBC;
 }
 
+* {
+    font-family: 'Ubuntu', serif;
+}
+
 body {
     background-color: var(--red);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 .title {
     font-size: 3em;
     text-align: center;
     letter-spacing: 8px;
-    font-family: SomethingStrange;
+    font-family: SomethingStrange, SansSerif;
 }
 
 .moto {
@@ -37,4 +51,43 @@ body {
 
 .center {
     text-align: center;
+}
+
+.field {
+    font-size: 1.2em;
+    background: #95a5a6;
+    line-height: 1.2em;
+    box-shadow: 2px 2px 0px #e74c3c;
+    width: 100%;
+    margin: 5px 0px 15px 0px;
+    padding: 2px 8px 2px 8px;
+    border: 0px;
+    outline: none;
+    transition: 250ms;
+}
+
+.field:focus {
+    background: var(--light-red);
+    transition: 250ms;
+}
+
+input {
+    box-sizing: border-box;
+}
+
+.bouton {
+    font-size: 1.2em;
+    background: #95a5a6;
+    line-height: 2em;
+    box-shadow: 2px 2px 0px #e74c3c;
+    width: 100%;
+    margin: 5px 0px 15px 0px;
+    padding: 2px 5px 2px 5px;
+    border: 0px;
+    transition: 250ms;
+}
+
+.bouton:hover {
+    background-color: var(--light-red);
+    transition: 250ms;
 }
