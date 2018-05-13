@@ -12,16 +12,14 @@ require_once 'Modele.php';
 
 
 
-enTete("Accueil", "CSS/style.css");
 
-afficheMenu();
 
 $T_id = $_GET['T_id'];
 $id_user = $_GET['pseudo_id'];
 
 
-echo $T_id;
-echo $id_user;
+echo "tweet_id = ".$T_id."</br>";
+echo "user_id = ".$id_user;
 
 
 
@@ -44,7 +42,6 @@ function getCommentaires($T_id, $type) {
     $result = $sth->fetch(PDO::FETCH_OBJ);
 
     $Res = array();
-    $i = 0;
 
     while ($result) {
         $com = new Commentaire\Commentaire();
@@ -57,9 +54,8 @@ function getCommentaires($T_id, $type) {
            ->setParentId($result->parent_id)
            ->setParentType($result->parent_type);
 
-       $Res[$i] = $com;
+       $Res[] = $com;
        $result = $sth->fetch(PDO::FETCH_OBJ);
-       $i++;
     }
 
     return $Res;
@@ -107,8 +103,12 @@ function afficherCommentaires($T) {
 
 //afficherCommentaires($listeCommentaire1);
 
-?>
 
+enTete("Tweet", "CSS/style.css");
+
+afficheMenu();
+titreH1("Tweet de ".prenom_user($tweet->getAuteur()));
+?>
 
 
 <div class="conteneur">

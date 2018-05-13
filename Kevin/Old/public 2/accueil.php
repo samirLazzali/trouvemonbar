@@ -165,12 +165,16 @@ enTete("Accueil", "CSS/style.css");
 
     }
 
+    function afficherCommentaire(T_id){
+        document.location.href = 'tweetCommentaires.php?T_id='+T_id+'&pseudo_id=<?php echo $_SESSION['id']; ?>';
+    }
+
     function tweets(){
         document.write("<div class=\"alltweets\">Derniers Tweets :<br/><br/>");
         for(var i=0; i<Tweets.length;i++){
              document.write("<div class=\"tweets\">" + Tweets[i][0] + " a tweeté à " + Tweets[i][2] +" : <br/>"+ Tweets[i][1]+"<br/>" );
              document.write("<button id=\""+ Tweets[i][3] + "\" onclick=\"Liker("+Tweets[i][3]+")\">J'aime</button> Nb de J'aimes :"+ Tweets[i][4] +"</br>");
-            document.write("<button id=\"Comment\">Afficher les commentaires</button></div><br/><br/>");
+            document.write("<button id=\"Comment\" onclick=\"afficherCommentaire("+Tweets[i][3]+")\">Afficher les commentaires</button></div><br/><br/>");
 
         }
         document.write("</div>");

@@ -257,7 +257,9 @@ enTete("Accueil", "CSS/style.css");
 
 
 <?php
-afficheMenu()
+afficheMenu();
+//titreH1("Accueil");
+
 ?>
 
 <div class="recherche">
@@ -276,7 +278,7 @@ afficheMenu()
             <form method='post' action="profil.php">
               <input list="pseudos" name="pseudo" onblur="verifPseudo(this)">
               <datalist id="pseudos">
-              <script >liste_pseudos()</script>
+              <script >//liste_pseudos()</script>
               </datalist>
               <input type="hidden" id="visite" name="visite" value="Visiter le profil">
             </form>
@@ -301,13 +303,14 @@ afficheMenu()
 
     <script >
         //liste_amis();
-        tweets();
+       // tweets();
         // document.getElementById('1').innerHTML = "MDR";
     </script>
 
 
 
 <?php
+afficheListeTweets(getTweetAmis($_SESSION['id']));
 $friendList = get_friendList($_SESSION['id']);
 afficheListeAmis($friendList);
 ?>

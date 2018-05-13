@@ -136,7 +136,7 @@ form{
   
  /* position: absolute;  postulat de départ
   top: 35%; left: 2%;*/
-    padding : 20px 20px 20px 20px;
+    padding : 10px 20px 10px 20px;
     margin-left: 10px;
     margin-right: 10px;
     margin-top: 10px;
@@ -145,6 +145,7 @@ form{
     border : 1px solid var(--primary);
     border-radius: 20px 20px 0px 0px;
     background-color: white;
+    font-size: 150%;
 
 }
 
@@ -203,7 +204,7 @@ form{
 
 
 footer{
-    background-color: red;
+    background-color: var(--tertiary);
     margin-bottom: 0px;
     height: 100px;
     border: 1px solid #600 ; /* A ENLEVER */
@@ -221,6 +222,10 @@ footer{
 
 .conteneur > * {
     margin: 10px;
+}
+
+h1{
+    text-align: center;
 }
 
 

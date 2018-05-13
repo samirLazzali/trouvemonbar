@@ -81,6 +81,36 @@ function liker($T_id, $id){
 }
 
 
+function getTweetAmis($id){
+    global $connection;
+    $sth = $connection->prepare('SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne1=auteur WHERE personne2=\''.$id.'\' UNION SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne2=auteur WHERE personne1=\''.$id.'\'  ');
+    $sth->execute();
+    $result = $sth->fetch(PDO::FETCH_OBJ);
+    $res = array();
+    $i = 0;
+    while($result){
+        /********************** AJOUT POUR RECUPERER NB DE LIKES *******************************/
+        $likes_res = $connection->prepare('SELECT count(tweet_id) AS nb FROM "like" WHERE tweet_id='.$result->id);
+        $likes_res->execute();
+        $likes = $likes_res->fetch(PDO::FETCH_OBJ);
+
+        $res[$i][] = $likes->nb;
+
+        $tweet = new Tweet\Tweet();
+        $tweet->setAuteur($result->auteur)
+            ->setContenu($result->contenu)
+            ->setDate(new \DateTime($result->date_envoie))
+            ->setId($result->id);
+
+        $res[$i][] = $tweet;
+        $i++;
+       /* echo "[\"".prenom_user($result->auteur)."\",\"$result->contenu\",\"$result->date_envoie\",\"$result->id\",\"".$likes->nb."\"]";
+        $result = $sth->fetch(PDO::FETCH_OBJ);*/
+        $result = $sth->fetch(PDO::FETCH_OBJ);
+     }
+     return $res;
+}
+
 
 
 

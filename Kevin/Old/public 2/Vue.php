@@ -6,7 +6,7 @@ $prenom = $_SESSION['prénom'];
 $id = $_SESSION['id'];
 
 /* Recupération des users*/
-require_once '../vendor/autoload.php';
+//require_once '../vendor/autoload.php';
 require_once 'Modele.php';
 
 function enTete($titre, $style)

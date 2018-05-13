@@ -72,7 +72,6 @@ endforeach;
 
 ?>
 
-<html>
 <script>
 	function Conversation(){ /* PAS BON : FAIRE avec AJAX */
 		var xhttp;
@@ -145,6 +144,8 @@ endforeach;
     enTete("Mes messages", "../CSS/style.css");
 
     afficheMenu();
+    titreH1("Mes messages privés");
+
 ?>
 
 

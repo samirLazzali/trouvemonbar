@@ -66,20 +66,16 @@ INSERT INTO "like"(tweet_id, user_id) VALUES (1, 1);
 INSERT INTO "like"(tweet_id, user_id) VALUES (1, 2);
 INSERT INTO "like"(tweet_id, user_id) VALUES (1, 3);
 
-
-CREATE TYPE typeDeCommentaire AS ENUM ('tweet', 'commentaire');
-
 CREATE TABLE "commentaire" (
-  id SERIAL PRIMARY KEY ,
-  owner_id int REFERENCES "user"(id) ,
-  target_id int REFERENCES "user"(id) ,
+  id_comment SERIAL PRIMARY KEY ,
+  auteur int references "user"(id),
+  tweet_id int references "tweet"(id) ,
   date_envoie timestamp ,
-  contenu VARCHAR ,
-  parent_id integer ,
-  parent_type typeDeCommentaire
+  contenu VARCHAR(300) ,
+  parent int DEFAULT -1 /* en réponse au commentaire numéro parent */
 );
-INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('1','2', '1999-12-23 12:45:23', '****', '1', 'tweet');
-
+INSERT INTO "commentaire"(auteur, tweet_id, date_envoie, contenu) VALUES ('1', '1', '1999-12-23 12:45:23', 'GG');
+INSERT INTO "commentaire"(auteur, tweet_id, date_envoie, contenu, parent) VALUES ('1', '1', '1999-12-23 12:45:23', 'Oui', '1');
 
 
 

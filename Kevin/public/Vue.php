@@ -41,6 +41,10 @@ function affiche_erreur($str) {
 }
 
 
+function titreH1($titre){
+    print "<h1>$titre</h1>\n";
+}
+
 
 
 /* Fonctions d'affichage générales */
@@ -91,6 +95,21 @@ function afficheListeAmis($listeAmis){
     print "<div class=\"amis\">Vos amis:<br/>\n";
     foreach($listeAmis as $F){
         echo "<a href=\"profil.php?pseudo=".$F['prénom']."&id=".$F['id']."\">@".$F['prénom']."</a><br/>\n";
+    }
+    print "</div>\n";
+}
+
+function afficheListeTweets($listeTweets){
+    print "<div class=\"alltweets\">Derniers Tweets :<br/><br/>\n";
+    for($i=0; $i<sizeof($listeTweets); $i++){
+        echo "    <div class=\"tweets\">".prenom_user($listeTweets[$i][1]->getAuteur())." a tweeté à ".
+            ($listeTweets[$i][1]->getDate())->format('H:i:s')." le ".($listeTweets[$i][1]->getDate())->format('Y-m-d').
+            "</br> ".$listeTweets[$i][1]->getContenu()."<br/>";
+        print "\n";
+        echo "        <button id=\"".$listeTweets[$i][1]->getId()."\" onclick=\"Liker(".$listeTweets[$i][1]->getId().")\">J'aime</button>Nb de J'aimes : ".$listeTweets[$i][0]."</br>";
+        print "\n";
+        echo "        <button id=\"Comment\" onclick=\"afficherCommentaire(".$listeTweets[$i][1]->getId().")\">Afficher les commentaires</button>";
+        print "\n    </div><br/><br/>\n";
     }
     print "</div>\n";
 }
