@@ -7,6 +7,15 @@ include('../includes/config.php');
 include('../includes/functions.php');
 connexion_bdd();
 actualiser_session();
+$bd_nom_serveur='localhost';
+$bd_login='root';
+$bd_mot_de_passe='';
+$bd_nom_bd='catisfaction';
+	
+//Connexion à la base de données
+$connexion = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
+mysqli_select_db($connexion,$bd_nom_bd);
+mysqli_query($connexion,"set names 'utf8'");
 if(isset($_SESSION['id_user']))
 {
 	header('Location: '.ROOTPATH.'/index.php');
@@ -257,4 +266,100 @@ else
 	header('Location: ../index.php');
 	exit();
 }
-?>
+
+if($_SESSION['erreurs'] > 0) $titre = 'Erreur lors de l\'inscription';
+else $titre = 'Finalisation de l\'inscription';
+
+include('../includes/top.php');?>
+		
+		<div id="contenu">
+			<?php
+			if($_SESSION['erreurs'] == 0)
+			{
+				$insertion = "INSERT INTO Utilisateur VALUES(NULL, '".mysqli_real_escape_string($connexion,$login)."',
+				'".mysqli_real_escape_string($connexion,$mail)."','".md5($password)."','".mysqli_real_escape_string($connexion,$phone_number)."')";
+				
+				if(mysqli_query($connexion,$insertion))
+				{
+					$queries++;
+					empty_session();
+					$_SESSION['inscrit'] = $login;
+				?>
+				<h1>Inscription validée !</h1>
+				<p>Nous vous remercions de vous être inscrit sur notre site, votre inscription a été validée !<br/>
+			Vous pouvez vous connecter avec vos identifiants <a href="connexion.php">ici</a>.
+			</p>
+			<?php
+				}
+				
+				else
+				{
+					if(stripos(mysqli_error($connexion), $_SESSION['form_login']) !== FALSE)
+					{
+						unset($_SESSION['form_login']);
+						$_SESSION['login_info'] = '<span class="erreur">Le nom d\'utilisateur '.htmlspecialchars($login, ENT_QUOTES).' est déjà pris, choisissez-en un autre.</span><br/>';
+						$_SESSION['erreurs']++;
+					}
+					
+					if(stripos(mysqli_error($connexion), $_SESSION['form_mail']) !== FALSE)
+					{
+						unset($_SESSION['form_mail']);
+						unset($_SESSION['form_mail_verif']);
+						$_SESSION['mail_info'] = '<span class="erreur">Le mail '.htmlspecialchars($mail, ENT_QUOTES).' est déjà pris.</span><br/>';
+						$_SESSION['mail_verif_info'] = str_replace('mail', 'mail de vérification', $_SESSION['mail_info']);
+						$_SESSION['erreurs']++;
+						$_SESSION['erreurs']++;
+					}
+					
+					if($_SESSION['erreurs'] == 0)
+					{
+						$sqlbug = true;
+						$_SESSION['erreurs']++;
+					}
+				}
+			}
+			if($_SESSION['erreurs'] > 0)
+			{
+				if($_SESSION['erreurs'] == 1) {
+					$_SESSION['nb_erreurs'] = '<span class="erreur">Il y a eu 1 erreur.</span><br/>';
+				}
+				else {
+					$_SESSION['nb_erreurs'] = '<span class="erreur">Il y a eu '.$_SESSION['erreurs'].' erreurs.</span><br/>';
+				}
+			?>
+			<h1>Inscription non validée.</h1>
+			<p>Vous avez rempli le formulaire d'inscription du site et nous vous en remercions, cependant, nous n'avons
+			pas pu valider votre inscription, en voici les raisons :<br/>
+			<?php
+				echo $_SESSION['nb_erreurs'];
+				echo $_SESSION['login_info'];
+				echo $_SESSION['password_info'];
+				echo $_SESSION['password_verif_info'];
+				echo $_SESSION['mail_info'];
+				echo $_SESSION['mail_verif_info'];
+				echo $_SESSION['phone_number_info'];
+				
+				if(1)
+				{
+			?>
+			Nous vous proposons donc de revenir à la page précédente pour corriger les erreurs.</p>
+			<div class="center"><a href="inscription.php">Retour vers l'inscription</a></div>
+			<?php
+				}
+				
+				else
+				{
+			?>
+			Une erreur est survenue dans la base de données, votre formulaire semble ne pas contenir d'erreurs, donc
+			il est possible que le problème vienne de notre côté, nous vous conseillons de réessayer de vous inscrire</p>
+			
+			<div class="center"><a href="inscription.php">Retenter une inscription</a>
+			<?php
+				}
+			}
+			?>
+		</div>
+
+		<?php
+		include('../includes/bottom.php');
+		?>

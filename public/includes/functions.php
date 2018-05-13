@@ -1,8 +1,8 @@
 <?php
 
-function sqlquery($connection,$requete, $number)
+function sqlquery($connexion,$requete, $number)
 {
-	$query = mysqli_query($connection,$requete) or exit('Erreur SQL : '.mysqli_error($connection).' Ligne : '. __LINE__ .'.');
+	$query = mysqli_query($connexion,$requete) or exit('Erreur SQL : '.mysqli_error($connexion).' Ligne : '. __LINE__ .'.');
 	queries();
 	
 	if($number == 1)
@@ -42,9 +42,9 @@ function connexion_bdd()
 	$bd_nom_bd='catisfaction';
 	
 	//Connexion à la base de données
-	$connection = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
-	mysqli_select_db($connection,$bd_nom_bd);
-	mysqli_query($connection,"set names 'utf8'");
+	$connexion = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
+	mysqli_select_db($connexion,$bd_nom_bd);
+	mysqli_query($connexion,"set names 'utf8'");
 }
 
 function actualiser_session()
@@ -53,11 +53,11 @@ function actualiser_session()
 	$bd_login='root';
 	$bd_mot_de_passe='';
 	$bd_nom_bd='catisfaction';
-	$connection = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
-	mysqli_select_db($connection,$bd_nom_bd);
+	$connexion = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
+	mysqli_select_db($connexion,$bd_nom_bd);
 	if(isset($_SESSION['id_user']) && intval($_SESSION['id_user']) != 0)
 	{
-		$retour = sqlquery($connection,"SELECT id_user, login, password FROM Utilisateur WHERE id_user = ".intval($_SESSION['id_user']), 1);
+		$retour = sqlquery($connexion,"SELECT id_user, login, password FROM Utilisateur WHERE id_user = ".intval($_SESSION['id_user']), 1);
 		if(isset($retour['login']) && $retour['login'] != '')
 		{
 			if($_SESSION['password'] != $retour['password'])
@@ -91,7 +91,7 @@ function actualiser_session()
 		{
 			if(intval($_COOKIE['id_user']) != 0)
 			{
-				$retour = sqlquery($connection,"SELECT id_user, login, password	FROM Utilisateur WHERE id_user = ".intval($_COOKIE['id_user']), 1);
+				$retour = sqlquery($connexion,"SELECT id_user, login, password	FROM Utilisateur WHERE id_user = ".intval($_COOKIE['id_user']), 1);
 				
 				if(isset($retour['login']) && $retour['login'] != '')
 				{
@@ -159,15 +159,15 @@ function checklogin($login)
 	$bd_login='root';
 	$bd_mot_de_passe='';
 	$bd_nom_bd='catisfaction';
-	$connection = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
-	mysqli_select_db($connection,$bd_nom_bd);
+	$connexion = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
+	mysqli_select_db($connexion,$bd_nom_bd);
 	if($login == '') return 'vide';
 	else if(strlen($login) < 3) return 'court';
 	else if(strlen($login) > 32) return 'long';
 	
 	else
 	{
-		$result = sqlquery($connection,"SELECT COUNT(*) AS nbr FROM Utilisateur WHERE login = '".mysqli_real_escape_string($connection,$login)."'", 1);
+		$result = sqlquery($connexion,"SELECT COUNT(*) AS nbr FROM Utilisateur WHERE login = '".mysqli_real_escape_string($connexion,$login)."'", 1);
 		global $queries;
 		$queries++;
 		
@@ -182,8 +182,8 @@ function checkpassword($password)
 	$bd_login='root';
 	$bd_mot_de_passe='';
 	$bd_nom_bd='catisfaction';
-	$connection = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
-	mysqli_select_db($connection,$bd_nom_bd);
+	$connexion = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
+	mysqli_select_db($connexion,$bd_nom_bd);
 	if($password == '') return 'vide';
 	else if(strlen($password) < 4) return 'court';
 	else if(strlen($password) > 50) return 'long';
@@ -208,14 +208,14 @@ function checkmail($email)
 	$bd_login='root';
 	$bd_mot_de_passe='';
 	$bd_nom_bd='catisfaction';
-	$connection = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
-	mysqli_select_db($connection,$bd_nom_bd);
+	$connexion = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
+	mysqli_select_db($connexion,$bd_nom_bd);
 	if($email == '') return 'Champ vide';
 	else if(!preg_match('#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#is', $email)) return 'invalide';
 	
 	else
 	{
-		$result = sqlquery($connection,"SELECT COUNT(*) AS nbr FROM Utilisateur WHERE mail = '".mysqli_real_escape_string($connection,$email)."'", 1);
+		$result = sqlquery($connexion,"SELECT COUNT(*) AS nbr FROM Utilisateur WHERE mail = '".mysqli_real_escape_string($connexion,$email)."'", 1);
 		global $queries;
 		$queries++;
 		
@@ -236,15 +236,15 @@ function checkphone($phone_number)
 	$bd_login='root';
 	$bd_mot_de_passe='';
 	$bd_nom_bd='catisfaction';
-	$connection = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
-	mysqli_select_db($connection,$bd_nom_bd);
+	$connexion = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
+	mysqli_select_db($connexion,$bd_nom_bd);
 	if($phone_number == '') return 'vide';
 	else if(strlen($phone_number) < 10) return 'court';
 	else if(strlen($phone_number) > 10) return 'long';
 	
 	else
 	{
-		$result = sqlquery($connection,"SELECT COUNT(*) AS nbr FROM Utilisateur WHERE phone_number = '".mysqli_real_escape_string($connection,$phone_number)."'", 1);
+		$result = sqlquery($connexion,"SELECT COUNT(*) AS nbr FROM Utilisateur WHERE phone_number = '".mysqli_real_escape_string($connexion,$phone_number)."'", 1);
 		global $queries;
 		$queries++;
 		
