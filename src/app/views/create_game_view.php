@@ -29,62 +29,69 @@
 
         <!--SCHEDULE SELECTION -->
         <div class="form-group">
-            <label for="schedule"> Horaires proposés : </label>
-
-
-            <button href="" class="btn btn-primary btn-sm"> Ajouter une date </button>
-            <button href="" class="btn btn-primary btn-sm"> Ajouter un horaire régulier </button> <br>
+            <label for="schedule"> Horaires proposés : </label> <br>
 
                 <!-- ADD A SCHEDULE -->
-                <form id="oneshot" class="" action="">
-
-                    <!-- form for adding one-time session
-                    todo : finish and improve. create js function for the button -->
-                    <input type="date" name="date"/>
-                    <button type="submit" class="btn btn-primary btn-sm"> Ok </button>
-
-                </form>
-
-                <!-- form for adding  reccurent sessions
-                todo : finish and impprove. create js function for the button-->
-                <form id="reccurent_session" class="" action="">
-
-                    <!-- DAY OF WEEK -->
-                    <div class="form-group">
-                        <select id="dayofweek" class="">
-                            <option value="lundi" selected> Lundi</option>
-                            <option value="mardi" > Mardi</option>
-                            <option value="mercredi"> Mercredi</option>
-                            <option value="jeudi"> Jeudi</option>
-                            <option value="vendredi"> Vendredi </option>
-                            <option value="samedi"> Samedi</option>
-                            <option value="dimanche"> Dimanche</option>
-                        </select>
 
 
-                        <!-- RECURRENCE -->
-                        <select id="reccurence">
-                            <!-- todo : list of all recurrence available in the database. remove test value-->
-                            <option value="1"> Toutes les semaines </option>
-                            <option value="2"> Une fois toutes les deux semaines</option>
-                        </select>
+            <!-- ADD A ONE-TIME SESSION -->
 
-                        <!-- STARTING HOUR -->
-                        <label for="starttime"> Début: </label>
-                        <input type="time" id="starttime" name="starttime" value="20:00"/>
+            <form id="oneshot">
+                <label for="dateoneshot"> Date:</label>
+                <input  id="dateoneshot" type="date" name="date"/>
 
-                        <!-- ENDING HOUR -->
-                        <label for="endtime"> Fin: </label>
-                        <input type="time" id="endtime" name="endtime" value="00:00"/>
 
-                        <!-- SUBMIT -->
-                        <button type="submit" class="btn btn-primary btn-sm"> Ok </button>
+                <label for="starttimeoneshor"> Début:</label>
+                <input type="time" name="starttimeoneshot" id="starttimeoneshot" value="20:00"/>
 
-                    </div>
-                </form>
 
-            <ul>
+                <label for="endtimeoneshot"> Fin: </label>
+                <input type="time"  name="endtime" id="endtimeoneshot" value="00:00"/>
+
+                <button type="button" class="btn btn-primary btn-sm" onclick="add_one_shot()"> Ajouter une date</button>
+
+            </form>
+            <br>
+
+
+            <!-- ADD RECCURENT SESSSIONS -->
+
+
+                <!-- day of week -->
+                <select class="" id="dayofweek">
+                    <option value="lundi" selected> Lundi</option>
+                    <option value="mardi"> Mardi</option>
+                    <option value="mercredi"> Mercredi</option>
+                    <option value="jeudi"> Jeudi</option>
+                    <option value="vendredi"> Vendredi</option>
+                    <option value="samedi"> Samedi</option>
+                    <option value="dimanche"> Dimanche</option>
+                </select>
+
+
+                <!-- reccurence -->
+                <select id="reccurence">
+                    <!-- todo : list of all recurrence available in the database. remove test value-->
+                    <option value="toutes les semaines"> Toutes les semaines</option>
+                    <option value="toutes les deux semaines"> Toutes les deux semaines</option>
+                </select>
+
+                <!-- starting hour todo: use timepicker library instead -->
+                <label for="starttimereccurence"> Début: </label>
+                <input type="time" id="starttimereccurence" name="starttime" value="20:00"/>
+
+                <!-- ending hour -->
+                <label for="endtimereccurence""> Fin: </label>
+                <input type="time" id="endtimereccurence"" name="endtime" value="00:00"/>
+
+                <!-- submit -->
+                <button type="button" class="btn btn-primary btn-sm" onclick="add_reccurent()"> Ajouter un horaire récurrent</button>
+
+
+
+            <ul id="listSchedules">
                 <!-- todo : liste of schedule added so far -->
+
             </ul>
         </div>
 
@@ -103,5 +110,6 @@
         </div>
     </form>
 
+    <script src="js/add_schedule_script.js"></script>
 
 </div>
