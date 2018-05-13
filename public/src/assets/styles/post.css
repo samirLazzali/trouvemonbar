@@ -16,6 +16,10 @@
     color: Tomato;
 }
 
+.post-response {
+    color: var(--green);
+}
+
 .post-in-feed {
     padding: 5px 15px 5px 15px;
     background-color: #ffeacb;
@@ -28,7 +32,7 @@
 }
 
 .post-in-feed:hover, .post-in-feed:hover .post-in-feed {
-    background-color: #e67e22;
+    background-color: var(--carott);
     transition: 250ms;
 }
 
