@@ -47,6 +47,10 @@ class Appreciation implements JsonSerializable
         $this->timestamp = $timestamp;
     }
 
+    public function getType() {
+        return $this->type;
+    }
+
     public function getAuthor()
     {
         if ($this->authorCache == null)

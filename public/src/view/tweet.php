@@ -62,9 +62,7 @@ function formatter_nombre($n, $mot)
             Retour aux dernières publications.
         </a>
     </div>
-    <?php endif;
-    die();
-    ?>
+    <?php die(); endif; ?>
     <div class="column-wrapper">
         <h1>
             - Discussion -
