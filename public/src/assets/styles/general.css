@@ -78,6 +78,10 @@ a:hover {
     display: none;
 }
 
+.display-block {
+    display: block;
+}
+
 .error {
     background-color: #e74c3c;
     color: #ffeacb;

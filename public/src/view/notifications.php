@@ -30,13 +30,14 @@
         <div class="post-feed">
             <?php
                 foreach($mentions as $mention)
-                    affichePost($mention, true,"a riposté !");
+                    affichePost($mention, true,"a riposté !", '<i class="fas fa-chess-knight post-response"></i>');
             ?>
             <?php
                 foreach($appreciations as $appreciation):
             ?>
             <div class="post-in-feed">
                 <div class="post-header">
+                    <span class="fas fa-heart post-liked"></span>
                     <a href="/profile/<?=$appreciation->getAuthor()->getUsername()?>" class="post-header-author"><?=$appreciation->getAuthor()->getUsername()?></a>
                     <span class="notification-liked-you">a aimé votre publication.</span> <span class="post-header-date"><?=timestamp_to_string($appreciation->getTimestamp())?></span>
                 </div>
@@ -54,6 +55,7 @@
             ?>
             <div class="post-in-feed">
                 <div class="post-header">
+                    <span class="fas fa-redo post-reposted"></span>
                     <a href="/profile/<?=$repost->getAuthor()->getUsername()?>" class="post-header-author">
                         <?=$repost->getAuthor()->getUsername()?>
                     </a>

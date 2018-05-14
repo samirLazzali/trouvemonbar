@@ -15,7 +15,7 @@ function timestamp_to_string($t)
 
 //TODO écrire les fonctions javascript pour les actions onclick => à faire dans un fichier JS, pas ici !
 
-function affichePost($post, $show_actions = true, $text_after_name = "")
+function affichePost($post, $show_actions = true, $text_after_name = "", $text_before_name = "")
 {
     $author = $post->getAuthor()->getUsername();
     $content = $post->toHtml();
@@ -24,6 +24,7 @@ function affichePost($post, $show_actions = true, $text_after_name = "")
     ?>
     <div class="post-in-feed">
         <div class="post-header">
+            <?= $text_before_name ?>
             <a href="/profile/<?= $author ?>" class="post-header-author">
                 <?= $author ?>
             </a> <?= $text_after_name ?>
