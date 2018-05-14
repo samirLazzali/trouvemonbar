@@ -10,17 +10,21 @@ $u = verify_logged_in();
 
 try {
     $p = Post::fromID($id);
+    $notFound = false;
 }
 catch (PostNotFoundException $e)
 {
-    error_die($e->getMessage(), ERROR_NotFound);
+    $notFound = true;
+    $author = "";
 }
 
-$author = $p->getAuthor()->getUsername();
-$reposts = $p->getReposts();
-$likes = $p->getLikers();
-$dislikes = $p->getDislikers();
-$responses = $p->getResponsesTo();
+if(!$notFound) {
+    $author = $p->getAuthor()->getUsername();
+    $reposts = $p->getReposts();
+    $likes = $p->getLikers();
+    $dislikes = $p->getDislikers();
+    $responses = $p->getResponsesTo();
+}
 
 function formatter_nombre($n, $mot)
 {
@@ -36,7 +40,11 @@ function formatter_nombre($n, $mot)
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Publication de <?=$author?></title>
+    <?php if(!$notFound): ?>
+        <title>Publication de <?=$author?></title>
+    <?php else: ?>
+        <title>Vitz</title>
+    <?php endif ?>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="/assets/styles/general.css" />
     <link rel="stylesheet" href="/assets/styles/post.css" />
@@ -45,6 +53,18 @@ function formatter_nombre($n, $mot)
 </head>
 <body>
     <?php require "menu.php"; ?>
+    <?php if ($notFound): ?>
+    <div class="column-wrapper">
+        <h1>
+            Cette publication n'existe pas.
+        </h1>
+        <a href="/feed" class="centerlink">
+            Retour aux dernières publications.
+        </a>
+    </div>
+    <?php endif;
+    die();
+    ?>
     <div class="column-wrapper">
         <h1>
             - Discussion -
