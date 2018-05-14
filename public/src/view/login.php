@@ -1,3 +1,11 @@
+<?php
+if (isset($_GET['source'])) {
+    $source = "signup";
+    $infoboxClass = "success";
+}
+else
+    $infoboxClass = "";
+?>
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -5,8 +13,9 @@
             Vitz
         </title>
         <meta charset="utf-8" />
-        <link rel="stylesheet" type="text/css" href="/assets/styles/login.css"/>
+        <link rel="stylesheet" type="text/css" href="/assets/styles/login-signup.css"/>
         <script src="/assets/js/forms.js"></script>
+        <script src="/assets/js/general.js"></script>
     </head>
     <body >
         <h1 class="title">
@@ -20,8 +29,10 @@
             Connexion
         </h2>
 
-        <div id="infobox" class="error infobox">
-            ...
+        <div id="infobox" class="infobox <?= $infoboxClass ?>">
+            <?php if (isset($source) && $source == "signup"): ?>
+                Votre compte a été créé ! Vous pouvez dès maintenant vous connecter.
+            <?php endif ?>
         </div>
         <div class="form-wrapper">
             <form id="form-login" onSubmit="return login()">
@@ -38,7 +49,5 @@
                 Vous n'avez pas de compte ?
             </a>
         </p>
-            .
-
     </body>
 </html>

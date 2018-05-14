@@ -4,10 +4,13 @@
     --red: #c0392b;
     --light-red: #e74c3c;
     --redish-white: #FFCCBC;
+    --green: #8BC34A;
 }
 
 * {
+    box-sizing: border-box;
     font-family: 'Ubuntu', serif;
+    color: var(--redish-white);
 }
 
 body {
@@ -16,7 +19,6 @@ body {
 
 a {
     text-decoration: none;
-    color: black;
 }
 
 a:hover {
@@ -32,13 +34,13 @@ a:hover {
 
 .moto {
     font-family: 'Lobster', cursive;
+    font-family: 'Skranji';
     font-weight: lighter;
     text-align: center;
-    letter-spacing: 5px;
+    letter-spacing: 1px;
 }
 
 .infobox {
-    display: none;
     width: 300px;
     margin: 15px auto 0px;
     padding: 15px 15px 15px 15px;
@@ -46,48 +48,15 @@ a:hover {
 }
 
 .error {
-    background-color: var(--light-red);
+    background-color: var(--redish-white);
+    color: black;
+}
+
+.success {
+    background-color: var(--green);
+    color: black;
 }
 
 .center {
     text-align: center;
-}
-
-.field {
-    font-size: 1.2em;
-    background: #95a5a6;
-    line-height: 1.2em;
-    box-shadow: 2px 2px 0px #e74c3c;
-    width: 100%;
-    margin: 5px 0px 15px 0px;
-    padding: 2px 8px 2px 8px;
-    border: 0px;
-    outline: none;
-    transition: 250ms;
-}
-
-.field:focus {
-    background: var(--light-red);
-    transition: 250ms;
-}
-
-input {
-    box-sizing: border-box;
-}
-
-.bouton {
-    font-size: 1.2em;
-    background: #95a5a6;
-    line-height: 2em;
-    box-shadow: 2px 2px 0px #e74c3c;
-    width: 100%;
-    margin: 5px 0px 15px 0px;
-    padding: 2px 5px 2px 5px;
-    border: 0px;
-    transition: 250ms;
-}
-
-.bouton:hover {
-    background-color: var(--light-red);
-    transition: 250ms;
 }

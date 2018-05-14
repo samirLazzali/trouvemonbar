@@ -47,10 +47,11 @@ function validate_input_signup() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200)
         {
+            console.log(xhttp.responseText);
             var result = JSON.parse(xhttp.responseText);
             if (result["status"] == STATUS_OK)
             {
-                document.location.href = "login";
+                document.location.href = "/login";
             }
             else
             {
@@ -115,6 +116,8 @@ function login()
                 {
                     console.log("Erreur de connexion.")
                     infobox.style.display = "block";
+                    addClass(infobox, "error");
+                    removeClass(infobox, "success");
                     switch(result["status"])
                     {
                         case (ERROR_WrongPassword):

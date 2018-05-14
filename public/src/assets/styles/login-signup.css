@@ -24,10 +24,17 @@ input:focus {
     text-align: left;
     padding: 10px 15px 10px 15px;
     background-color: var(--redish-white);
+    color: black;
     margin: 0px;
     width: 100%;
     border: 0px;
     font-size: 1em;
+}
+
+.field:focus {
+    background-color: var(--light-red);
+    color: var(--redish-white);
+    transition: 250ms;
 }
 
 .button {
@@ -36,7 +43,8 @@ input:focus {
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     font-size: 1em;
-    background-color: var(--redish-white);
+    background-color: var(--light-red);
+    color: var(--redish-white);
     min-width: 100%;
     padding: 10px 15px 10px 15px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.125);
@@ -48,13 +56,14 @@ input:focus {
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     font-size: 1em;
-    background-color: var(--light-red);
+    background-color: var(--red);
+    transition: 250ms;
     min-width: 100%;
     padding: 10px 15px 10px 15px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.125);
 }
 
-.form-wrapper {
+.form-wrapper, #form-login {
     border: 0px;
     border-radius: 10px;
     height: auto;
@@ -64,3 +73,37 @@ input:focus {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.125);
 }
 
+
+/*
+.field {
+    font-size: 1.2em;
+    background: #95a5a6;
+    line-height: 1.2em;
+    width: 100%;
+    margin: 5px 0px 15px 0px;
+    padding: 2px 8px 2px 8px;
+    border: 0px;
+    outline: none;
+    transition: 250ms;
+}
+
+.field:focus {
+    background: var(--light-red);
+    transition: 250ms;
+}
+
+.bouton {
+    font-size: 1.2em;
+    color: var(--redish-white);
+    background-color: var(--red);
+    width: 100%;
+    padding: 7px 5px 7px 5px;
+    border: 0px;
+    transition: 250ms;
+}
+
+.bouton:hover {
+    background-color: var(--light-red);
+    transition: 250ms;
+    border-bottom-left-radius: 14px;
+}

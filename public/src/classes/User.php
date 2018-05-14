@@ -269,7 +269,7 @@ class User implements JsonSerializable
         $id = uniqid();
 
         $db = connect();
-        $SQL = "INSERT INTO " . TABLE_User . " (ID, Username, Email, Password, Moderator) VALUES (:id, :username, :email, :password, false, :state)";
+        $SQL = "INSERT INTO " . TABLE_User . " (ID, Username, Email, Password, Moderator, State) VALUES (:id, :username, :email, :password, false, :state)";
         $statement = $db->prepare($SQL);
         $statement->bindValue(":id", $id);
         $statement->bindValue(":username", $username);
