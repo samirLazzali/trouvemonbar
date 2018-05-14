@@ -15,6 +15,8 @@ $tags = array_keys($trends);
     <head>
         <meta charset="utf-8" />
         <script src="/assets/js/trends.js"></script>
+        <script src="/assets/js/general.js"></script>
+        <script src="/assets/js/post.js"></script>
     </head>
     <body onload="getTopLikes()">
         <?php require "menu.php"; ?>
@@ -26,13 +28,13 @@ $tags = array_keys($trends);
                 <a onClick="getHashtags();" id="trend-selector-hashtags" class="trend-type-wrapper selected" href="#">
                     Hashtags
                 </a>
-                <a onClick="getTopLikes();" id="trend-selector-likes" class="trend-type-wrapper" href="#">
+                <a onClick="getTopLikes();" onload="getTopLikes();" id="trend-selector-likes" class="trend-type-wrapper" href="#">
                     Les plus aimés
                 </a>
                 <a onClick="updateTrends('fights');" id="trend-selector-fights" class="trend-type-wrapper" href="#">
                     Fights
                 </a>
-                <a onClick="updateTrends('controversial');" id="trend-selector-controversial" class="trend-type-wrapper" href="#">
+                <a onClick="test();" id="trend-selector-controversial" class="trend-type-wrapper" href="#">
                     Controversé
                 </a>
             </div>
@@ -43,7 +45,7 @@ $tags = array_keys($trends);
                     {
                     ?>
                     <div class="hashtag-in-list">
-                        <a onclick="htagList('<?= $tag ?>')" href="#" class="hashtag-link">
+                        <a onclick="getPostsFromHashtag('<?= $tag ?>')" href="#" class="hashtag-link">
                             <?= $tag ?>,
                         </a>
                     </div>
@@ -52,42 +54,8 @@ $tags = array_keys($trends);
                     ?>
                 </div>
             </div>
-            <div id="most-tweeted-hashtags">
-                <div class="hashtags">
-                    <div class="hashtag-in-list">
-                    </div>
-                </div>
-            </div>
-            <div class="post-feed">
+            <div class="post-feed" id="post-feed">
             </div>
         </div>
     </body>
 </html>
-
-
-
-
-
-/* TODO
-* on initialise la page avec les toplikes pour pas laisser de blancs
-*/
-
-$posts = Post::topLikes();
-
-/* affichage des posts */
-
-foreach ($posts as $post)
-{
-/* TODO
-* écrire dans post.php la fonction qui écrit de code html correspondant à l'affichage d'un post
-* pour pouvoir l'appeler ici
-*/
-echo $post->toHtml();
-echo "<br />";
-}
-
-/* TODO
-* script js qui permet de changer la valeur de $posts et de réexécuter l'affichage de $post
-* (déclenchement on click sur un tag)
-*/
-?>

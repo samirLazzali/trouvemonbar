@@ -1,47 +1,38 @@
-function postToHtml(author, content, date, id)
+
+function timeConverter(UNIX_timestamp){
+  var a = new Date(UNIX_timestamp * 1000);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var date = a.getDate();
+  var hour = a.getHours();
+  var min = a.getMinutes();
+  var sec = a.getSeconds();
+  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+  return time;
+}
+
+function getHashtags()
 {
-    var text =
-        '    <div class="post-in-feed">\n' +
-        '        <div class="post-header">\n' +
-        '            <a href="profile/'+ author +'" class="post-header-author">\n' +
-        '                <?= $author ?>\n' +
-        '            </a>\n' +
-        '            <span class="post-header-date">\n' +
-        '                <?= $date ?>\n' +
-        '            </span>\n' +
-        '        </div>\n' +
-        '        <div class="post-content">\n' +
-                         content +
-        '        </div>\n' +
-        '        <div class="post-actions">\n' +
-        '            <span class="post-action">\n' +
-        '                <a onclick="like(' + id + ')" href="#" class="action-link">\n' +
-        '                    Like\n' +
-        '                </a>\n' +
-        '            </span>\n' +
-        '            <span class="post-action">\n' +
-        '                <a onclick="dislike(' + id + ')" href="#" class="action-link">\n' +
-        '                    Dislike\n' +
-        '                </a>\n' +
-        '            </span>\n' +
-        '            <span class="post-action">\n' +
-        '                <a onclick="respondTo(' + id + ')" href="#" class="action-link">\n' +
-        '                    Riposter\n' +
-        '                </a>\n' +
-        '            </span>\n' +
-        '            <span class="post-action">\n' +
-        '                <a onclick="repost(' + id + ')" href="#" class="action-link">\n' +
-        '                    <span class="far fa-redo-alt"></span>\n' +
-        '                </a>\n' +
-        '            </span>\n' +
-        '            <span class="post-action">\n' +
-        '                <a onclick="report(' + id + ')" href="#" class="action-link">\n' +
-        '                    Signaler\n' +
-        '                </a>\n' +
-        '            </span>\n' +
-        '        </div>\n' +
-        '    </div>';
-    return text;
+    var request =  new XMLHttpRequest();
+    request.onreadystatechange = function()
+    {
+        if (this.readyState == 4 && this.status == 200)
+        {
+            var result = JSON.parse(request.responseText);
+            var text = '';
+            result.forEach(
+                function(r) {
+                    text += "<a href='#' class='hashtag-link' onclick='getPostsFromHashtag(" + r + ")'>" +
+                        r +
+                        "</a>";
+                })
+            document.getElementById('hashtag-in-list').innerHTML = text;
+        }
+    };
+    request.open("GET", "/api/trends/hashtag", true);
+    request.send();
+    return false;
 }
 
 
@@ -63,50 +54,26 @@ function getPostsFromHashtag(hashtag)
             var id;
             var result = JSON.parse(request.responseText);
             text += "<h2 class=\"selected-hashtag-name\">" +
-                        #hashtag +
+                        "#" + hashtag +
                     "</h2>";
-            forEach(result as r)
-            {
-                author = r['author'];
-                content = r['content'];
-                date = r['timestamp'];
-                id = r['id'];
-                text += postToHtml(author, content, date, id);
-            }
+            result.forEach
+            (function (r)
+                {
+                    author = r['author'];
+                    content = r['content'];
+                    date = timeConverter(r['timestamp']);
+                    id = r['id'];
+                    text += postToHtml(author, content, date, id);
+                }
+            )
             document.getElementById('div.post-feed').innerHTML = text;
         }
-        else
-        {
-            alert("Va te faire foutre.");
-        }
     };
-    request.open("/api/trends/fromTag?tag=" + hashtag);
+    request.open("GET", "/api/trends/fromTag?tag=" + hashtag, true);
     request.send();
     return false;
 }
 
-function getHashtags()
-{
-    var request =  new XMLHttpRequest();
-    request.onreadystatechange = function()
-    {
-        if (this.readyState == 4 && this.status == 200)
-        {
-            var result = JSON.parse(request.responseText);
-            var text = '';
-            forEach(result as r)
-            {
-                text += "<a href='#' class='hashtag-link' onclick='getPostsFromHashtag("+ r +")'>" +
-                            r +
-                        "</a>";
-            }
-            document.getElementById('div.hashtag-in-list').innerHTML = text;
-        }
-    };
-    request.open("/api/trends/hashtag");
-    request.send();
-    return false;
-}
 
 function getTopLikes()
 {
@@ -116,25 +83,31 @@ function getTopLikes()
         if (this.readyState == 4 && this.status == 200)
         {
             console.log(this.responseText);
-            var text = '';
+            var text = postToHtml("yeti","trop soulé", "" );
             var author;
             var content;
             var date;
             var id;
             var result = JSON.parse(request.responseText);
-            forEach(result as r)
-            {
-                author = r['author'];
-                content = r['content'];
-                date = r['timestamp'];
-                id = r['id'];
-                text += postToHtml(author, content, date, id);
-            }
-            document.getElementById('div.post-feed').innerHTML = text;
+            result.forEach(
+                function (r) {
+                    author = 'toto';//r['author'];
+                    content = r['content'];
+                    date = timeConverter(r['timestamp']);
+                    id = r['id'];
+                    text += postToHtml(author, content, date, id);
+            })
+
+            document.getElementById('post-feed').innerHTML = text;
         }
     };
-    request.open("/api/trends/toplikes");
+    request.open("GET", "/api/trends/toplikes", true);
     request.send();
     return false;
 
+}
+
+function test()
+{
+    document.getElementById('post-feed').innerHTML = "toto";
 }
