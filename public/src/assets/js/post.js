@@ -178,3 +178,49 @@ function showReposts() {
     removeClass(selectorDetailsLikes, "interaction-type-selected");
     return false;
 }
+
+function postToHtml(author, content, date, id)
+{
+    var text =
+        '    <div class="post-in-feed">\n' +
+        '        <div class="post-header">\n' +
+        '            <a href="profile/'+ author +'" class="post-header-author">\n' +
+        author +
+        '            </a>\n' +
+        '            <span class="post-header-date">\n' +
+        '                <?= $date ?>\n' +
+        '            </span>\n' +
+        '        </div>\n' +
+        '        <div class="post-content">\n' +
+        content +
+        '        </div>\n' +
+        '        <div class="post-actions">\n' +
+        '            <span class="post-action">\n' +
+        '                <a onclick="like(' + id + ')" href="#" class="action-link">\n' +
+        '                    Like\n' +
+        '                </a>\n' +
+        '            </span>\n' +
+        '            <span class="post-action">\n' +
+        '                <a onclick="dislike(' + id + ')" href="#" class="action-link">\n' +
+        '                    Dislike\n' +
+        '                </a>\n' +
+        '            </span>\n' +
+        '            <span class="post-action">\n' +
+        '                <a onclick="respondTo(' + id + ')" href="#" class="action-link">\n' +
+        '                    Riposter\n' +
+        '                </a>\n' +
+        '            </span>\n' +
+        '            <span class="post-action">\n' +
+        '                <a onclick="repost(' + id + ')" href="#" class="action-link">\n' +
+        '                    <span class="far fa-redo-alt"></span>\n' +
+        '                </a>\n' +
+        '            </span>\n' +
+        '            <span class="post-action">\n' +
+        '                <a onclick="report(' + id + ')" href="#" class="action-link">\n' +
+        '                    Signaler\n' +
+        '                </a>\n' +
+        '            </span>\n' +
+        '        </div>\n' +
+        '    </div>';
+    return text;
+}
