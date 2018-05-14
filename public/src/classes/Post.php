@@ -216,9 +216,10 @@ class Post implements JsonSerializable
     static function fromHashtag($tag)
     {
         $db = connect();
-        $SQL = "SELECT * FROM " . TABLE_Posts . " JOIN " . TABLE_User . " ON " . TABLE_Posts . ".Author = " . TABLE_User . ".ID WHERE content like :hashtag";
+        // JOIN " . TABLE_User . " ON " . TABLE_Posts . ".Author = " . TABLE_User . ".ID
+        $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE Content LIKE :hashtag ORDER BY Timestamp DESC";
         $statement = $db->prepare($SQL);
-        $statement->bindValue(":hashtag", "%".$tag."%");
+        $statement->bindValue(":hashtag", "%$tag%");
         $statement->execute();
 
         $rows = $statement->fetchAll();
@@ -229,7 +230,7 @@ class Post implements JsonSerializable
 
         foreach($rows as $row) {
             $p = Post::fromRow($row);
-            $p->setAuthor(User::fromUsername($row["username"]));
+            $p->getAuthor();
             $result[] = $p;
         }
 
@@ -547,8 +548,10 @@ class Post implements JsonSerializable
             $toAdd = $term;
 
             $firstChar = substr($term, 0, 1);
-            if ($firstChar == '#')
-                $content = str_replace($term, "<a class='inpost inpost-hashtag' href='/hashtag/$toAdd'>$toAdd</a>", $content);
+            if ($firstChar == '#') {
+                $hashtagName = substr($toAdd, 1, strlen($toAdd) - 1);
+                $content = str_replace($term, "<a class='inpost inpost-hashtag' href='/hashtag/$hashtagName'>$toAdd</a>", $content);
+            }
             elseif ($firstChar == '@')
                 $content = str_replace($term, "<a class='inpost inpost-mention' href='/profile/$toAdd'>$toAdd</a>", $content);
 
