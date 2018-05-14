@@ -265,8 +265,12 @@ class Post implements JsonSerializable
         $rows = $statement->fetchAll();
         $result = array();
         
-        foreach ($rows as $row)
-            $result[] = Post::fromID($row['post']);
+        foreach ($rows as $row) {
+            $p = Post::fromID($row['post']);
+            $p->getAuthor();
+            $p->content = $p->toHtml();
+            $result[] = $p;
+        }
 
         return $result;
     }

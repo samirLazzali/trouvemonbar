@@ -40,18 +40,9 @@ $tags = array_keys($trends);
             </div>
             <div id="most-tweeted-hashtags">
                 <div class="hashtags">
-                    <?php
-                    foreach ($tags as $tag)
-                    {
-                    ?>
-                    <div class="hashtag-in-list">
-                        <a onclick="getPostsFromHashtag('<?= $tag ?>')" href="#" class="hashtag-link">
-                            <?= $tag ?>,
-                        </a>
+                    <div class="hashtag-in-list" id="hashtag-in-list">
+                        prout
                     </div>
-                    <?php
-                    }
-                    ?>
                 </div>
             </div>
             <div class="post-feed" id="post-feed">
