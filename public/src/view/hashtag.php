@@ -28,7 +28,7 @@ if ($tag == "")
 <html>
 <head>
     <title>
-        Derniers tweets
+        Vitz - #<?= $tag ?>
     </title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="/assets/styles/feed.css" />
@@ -39,7 +39,7 @@ if ($tag == "")
 <?php require "menu.php"; ?>
 <div class="column-wrapper">
     <h1>
-        - Derniers Tweets -
+        - #<?= $tag ?> - Derniers -
     </h1>
 
     <?php
