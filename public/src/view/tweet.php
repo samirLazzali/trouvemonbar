@@ -26,12 +26,13 @@ if(!$notFound) {
     $responses = $p->getResponsesTo();
 }
 
-function formatter_nombre($n, $mot)
+function formatter_nombre($n, $mot, $feminin = false)
 {
+    $eFinal = $feminin ? "e" : "";
     if ($n == 0)
-        return "Aucun $mot";
+        return "Aucun$eFinal $mot";
     elseif ($n == 1)
-        return "Un $mot";
+        return "Un$eFinal $mot";
     else
         return "$n $mot" . "s";
 }
@@ -74,7 +75,12 @@ function formatter_nombre($n, $mot)
             <div class="splitter">
             </div>
             <div class="post-interactions">
-                <div class="post-interaction interaction-type-selected" id="linkDetailsReposts">
+                <div class="post-interaction interaction-type-selected" id="linkDetailsResponses">
+                    <a href="#" onclick="return showResponses();">
+                        <?= formatter_nombre(count($responses), "réponse", true) ?>
+                    </a>
+                </div>
+                <div class="post-interaction" id="linkDetailsReposts">
                     <a href="#" onclick="return showReposts();">
                         <?= formatter_nombre(count($reposts), "recyclage") ?>
                     </a>
@@ -105,11 +111,11 @@ function formatter_nombre($n, $mot)
                         </a>
                     </div>
                 <?php endforeach; ?>            </div>
-        </div>
-        <div class="post-feed">
-            <?php foreach ($responses as $item)
+            <div class="post-feed" id="details-responses">
+                <?php foreach ($responses as $item)
                     affichePost($item);
-            ?>
+                ?>
+            </div>
         </div>
     </div>
 </body>

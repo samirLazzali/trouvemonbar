@@ -57,7 +57,7 @@ function affichePost($post, $show_actions = true, $text_after_name = "", $text_b
                             <a onClick="toggleBlock('Response-div-<?=$id?>');"  href="#" class="action-respond-<?=$id?> action-link">Riposter</a>
                         </span>
             <span class="post-action">
-                            <a onClick="toggleBlock('report-form-<?=$id?>');"  href="#" class="action-report-<?=$id?> action-link">Signaler</a>
+                            <a onClick="toggleBlock('report-form-<?=$id?>');"  href="#" class="action-report-<?=$id?> action-link action-link-report">Signaler</a>
                         </span>
         </div>
         <div style="display: none" class="report-form-wrapper" id="report-form-<?=$id?>">
@@ -68,14 +68,11 @@ function affichePost($post, $show_actions = true, $text_after_name = "", $text_b
                 </button>
             </form>
         </div>
-        <div style="display: none" id="Response-div-<?=$id?>">
-            <div class="new-post-wrapper">
-                <div onBlur="respondPost_onBlur('<?=$id?>')" onFocus="respondPost_onFocus('<?=$id?>')" id="respond-post-<?=$id?>" contenteditable="true">
-                      Réponse .....
-                </div>
+        <div style="display: none" class="response-form-wrapper" id="Response-div-<?=$id?>">
+            <div onBlur="respondPost_onBlur('<?=$id?>')" class="response-field" onFocus="respondPost_onFocus('<?=$id?>')" id="respond-post-<?=$id?>" contenteditable="true">
+                  Réponse...
             </div>
-            <button class="fas fa-paper-plane button-send" type="submit" onClick="SendResponse('<?=$id?>');">
-            </button>
+            <button class="fas fa-paper-plane response-submit" type="submit" onClick="verifyAndSendResponse('<?=$id?>');"></button>
         </div>
         <?php
             endif

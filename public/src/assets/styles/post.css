@@ -24,7 +24,17 @@
     padding: 5px 15px 5px 15px;
     background-color: #ffeacb;
     transition: 250ms;
-    border-bottom: 1px solid lightgray;
+    border-bottom: 2px solid var(--darkblue);
+}
+
+.post-in-feed:hover .action-link-report {
+    display: block;
+    transition: 250ms;
+}
+
+.post-in-feed .action-link-report {
+    display: none;
+    transition: 250ms;
 }
 
 .post-in-feed:last-child {
@@ -79,6 +89,7 @@
     text-align: right;
 }
 
+
 .action-link {
     text-decoration: none;
     color: black;
@@ -109,13 +120,13 @@
     color : #ffeacb;
 }
 
-.report-form-wrapper {
+.report-form-wrapper, .response-form-wrapper {
     display: block;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-.report-form {
+.report-form, .response-form-wrapper  {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap ;
@@ -141,7 +152,7 @@
     transition: 250ms;
 }
 
-.report-submit {
+.report-submit, .response-submit {
     margin-right: 5px;
     padding: 5px 5px 5px 5px;
     font-size: 1em;
@@ -154,9 +165,29 @@
     transition: 250ms;
 }
 
-.report-submit:hover {
+.report-submit:hover, .response-submit:hover {
     background-color: #e67e22;
     transition: 250ms;
+}
+
+.response-submit {
+    width: 60px;
+}
+
+.response-field {
+    flex-grow: 1;
+    margin-right: 5px;
+    margin-left: 0px;
+    font-size: 1em;
+    background: #95a5a6;
+    line-height: 2em;
+    box-shadow: 2px 2px 0px #e74c3c;
+    width: 100%;
+    padding: 2px 8px 2px 8px;
+    border: 0px;
+    outline: none;
+    transition: 250ms;
+    margin-bottom: 5px;
 }
 
 .post-interactions {

@@ -163,15 +163,15 @@ function respondPost_onFocus(id)
 function respondPost_onBlur(id)
 {
     var div = document.getElementById("respond-post-" + id);
-    div.style.backgroundColor = "#95a5a6";
+    div.style.backgroundColor = "var(--darkblue)";
     div.innerHTML = div.innerHTML.trim();
     Responseactive = div.innerHTML != "";
     if(!Responseactive) {
-        div.innerHTML = "Réponse .....";
+        div.innerHTML = "Réponse...";
     }
 }
 
-function SendResponse(id){
+function verifyAndSendResponse(id){
     var div = document.getElementById("respond-post-" + id);
 
     if(!Responseactive)
@@ -183,14 +183,14 @@ function SendResponse(id){
         return;
     }
 
-    createResponse(div.innerHTML, id);
+    sendResponse(div.innerHTML, id);
 
     div.innerHTML = "";
     respondPost_onBlur(id);
 
 }
 
-function createResponse(value, id){
+function sendResponse(value, id){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.status == 200 && this.readyState == 4)
@@ -209,36 +209,63 @@ function createResponse(value, id){
     }
     xhttp.open("POST", "/api/post/new", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("content=" + value + "&ResponseTo=" + id);
+    xhttp.send("content=" + value + "&responseTo=" + id);
 }
 
 function showLikes() {
     var divLikes = document.getElementById("details-likes");
     var divReposts = document.getElementById("details-reposts");
+    var divResponses = document.getElementById("details-responses");
 
     var selectorDetailsLikes = document.getElementById("linkDetailsLikes");
     var selectorDetailsReposts = document.getElementById("linkDetailsReposts");
+    var selectorDetailsResponses = document.getElementById("linkDetailsResponses");
 
     divLikes.style.display = "block";
+    divResponses.style.display = "none";
     divReposts.style.display = "none";
 
     addClass(selectorDetailsLikes, "interaction-type-selected");
     removeClass(selectorDetailsReposts, "interaction-type-selected");
+    removeClass(selectorDetailsResponses, "interaction-type-selected");
     return false;
 }
 
 function showReposts() {
     var divLikes = document.getElementById("details-likes");
     var divReposts = document.getElementById("details-reposts");
+    var divResponses = document.getElementById("details-responses");
 
     var selectorDetailsLikes = document.getElementById("linkDetailsLikes");
     var selectorDetailsReposts = document.getElementById("linkDetailsReposts");
+    var selectorDetailsResponses = document.getElementById("linkDetailsResponses");
 
     divLikes.style.display = "none";
+    divResponses.style.display = "none";
     divReposts.style.display = "block";
 
     addClass(selectorDetailsReposts, "interaction-type-selected");
     removeClass(selectorDetailsLikes, "interaction-type-selected");
+    removeClass(selectorDetailsResponses, "interaction-type-selected");
+    return false;
+}
+
+function showResponses() {
+    var divLikes = document.getElementById("details-likes");
+    var divReposts = document.getElementById("details-reposts");
+    var divResponses = document.getElementById("details-responses");
+
+    var selectorDetailsLikes = document.getElementById("linkDetailsLikes");
+    var selectorDetailsReposts = document.getElementById("linkDetailsReposts");
+    var selectorDetailsResponses = document.getElementById("linkDetailsResponses");
+
+    divLikes.style.display = "none";
+    divResponses.style.display = "block";
+    divReposts.style.display = "none";
+
+    removeClass(selectorDetailsReposts, "interaction-type-selected");
+    removeClass(selectorDetailsLikes, "interaction-type-selected");
+    addClass(selectorDetailsResponses, "interaction-type-selected");
     return false;
 }
 
@@ -251,7 +278,9 @@ function postToHtml(author, content, date, id)
         author +
         '            </a>\n' +
         '            <span class="post-header-date">\n' +
-        '                ' + date + '\n' +
+        '                <a href="/post/' + id + '">\n' +
+        '                    ' + date + '\n' +
+        '                </a>\n' +
         '            </span>\n' +
         '        </div>\n' +
         '        <div class="post-content">\n' +
@@ -268,6 +297,11 @@ function postToHtml(author, content, date, id)
         '                    Dislike\n' +
         '                </a>\n' +
         '            </span>\n' +
+        '            <span class="post-action">\n' +
+        '                <a onClick="toggleBlock(\'Response-div-' + id + '\');" href="#" class="action-respond-' + id + ' action-link">\n' +
+        '                   Riposter\n' +
+        '                </a>\n' +
+        '            </span>' +
         '            <span class="post-action">\n' +
         '                <a onclick="repost(\'' + id + '\')" href="#" class="action-link">\n' +
         '                    Recycler<!--<span class="fa fa-redo-alt"></span>-->\n' +
@@ -288,6 +322,12 @@ function postToHtml(author, content, date, id)
         '                </button>\n' +
         '            </form>\n' +
         '        </div>\n' +
+            '    <div style="display: none" class="response-form-wrapper" id="Response-div-' + id + '">\n' +
+            '        <div onBlur="respondPost_onBlur(\'' + id + '\')" class="response-field" onFocus="respondPost_onFocus(\'' + id + '\')" id="respond-post-' + id + '" contenteditable="true">\n' +
+            '              Réponse...\n' +
+            '        </div>\n' +
+            '        <button class="fas fa-paper-plane response-submit" type="submit" onClick="verifyAndSendResponse(\'' + id + '\');"></button>\n' +
+            '    </div>\n' +
         '    </div>';
     return text;
 }

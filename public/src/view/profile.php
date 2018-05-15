@@ -110,7 +110,7 @@ else
                 <a class="section-title" href="/subscriptions/<?= $user->getUsername(); ?>">Liste des abonnements / abonnés</a>
             </h2>
             <h2 class="section-title">
-                <a onClick="toggleSubscription('<?=$user->getUsername()?>');" class="follow-link-following" href="#">
+                <a onClick="toggleSubscription('<?=$user->getUsername()?>');" class="user-follow-link user-follow-link-<?= $user->getUsername(); ?> <?= in_array($user->  getUsername(), $cu_subscriptions) ? " user-follow-link-following" : "" ?>" href="#">
                     <?php if(!in_array($user->getUsername(), $cu_subscriptions)): ?>
                         S'abonner
                     <?php else: ?>

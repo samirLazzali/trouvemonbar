@@ -4,3 +4,7 @@
 .moderator-tick {
     font-size: 0.75em;
 }
+
+.user-follow-link {
+    color: var(--bluegray);
+}
