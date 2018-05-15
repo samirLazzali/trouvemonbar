@@ -58,6 +58,7 @@ div#nav{
     background-color: deepskyblue;
     border-right: outset;
     border-bottom: outset;
+    text-align: center;
 }
 
 div#menu{
@@ -68,11 +69,15 @@ div#menu{
 }
 
 div#menu>h3{
-    text-align: center;
     background-color: lightblue;
 }
 
 div#menu>p{
+    text-align: left;
     line-height: 30px;
     font-size: 15px;
+}
+
+div#nav>button{
+    margin : 10px;
 }

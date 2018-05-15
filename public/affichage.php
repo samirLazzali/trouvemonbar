@@ -8,11 +8,11 @@ function head($mp){
     echo "</head>";
 }
 
-function body(){
+function body($connecte){
     echo "<body>";
     _header();
     echo "<dib id=\"corps\">";
-    _nav();
+    _nav($connecte);
     _article();
     echo "</div>";
     echo "</body>";
@@ -24,8 +24,29 @@ function _header(){
     echo "</div>";
 }
 
-function _nav(){
+function _nav($connecte){
     echo  "<div id=\"nav\">";
+    menu();
+    if ($connecte==1) {
+        profil();
+    }
+    else {
+        echo "<button type=\"button\" ONCLICK=\"window.location.href='connexion.php'\">Se connecter</button>";
+    }
+    echo "</div>";
+}
+
+
+
+/*TODO*/
+function profil(){
+    echo "<div id=\"menu\">";
+    echo "<h3>Profil</h3>";
+    echo "<p>Afficher les détails du profil à l'aide de la bd</p>";
+    echo "</div>";
+}
+
+function menu(){
     echo "<div id=\"menu\">";
     echo "<h3>Aperal</h3>";
     echo "<p>";
@@ -36,7 +57,6 @@ function _nav(){
     echo "<a href=\"oenologie.php\">Oenologie : A quand la prochaine réu ?</a></br>";
     echo "<a href=\"course.php\">Nous contacter</a></br>";
     echo "</p>";
-    echo "</div>";
     echo "</div>";
 }
 
