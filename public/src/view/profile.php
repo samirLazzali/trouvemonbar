@@ -1,6 +1,33 @@
 <?php
 require_once("../config.php");
 require_once("User.php");
+
+$currentUser = getUserFromCookie();
+
+if ($currentUser == null)
+{
+    header("Location: /login");
+    die();
+}
+
+$cu_subscriptions = array();
+foreach($currentUser->getSubscriptions() as $sub)
+    $cu_subscriptions[] = $sub->getUsername();
+
+
+if (isset($_GET['user']))
+{
+    $user = $_GET['user'];
+    try {
+        $user = User::fromUsername($user);
+    }
+    catch (UserNotFoundException $e)
+    {
+        die("<p>Utilisateur non trouvé : $user.</p>");
+    }
+}
+else
+    $user = getUserFromCookie();
 ?>
 
 <!DOCTYPE HTML>
@@ -13,6 +40,7 @@ require_once("User.php");
         <link rel="stylesheet" href="/assets/styles/profile.css" />
         <script src="/assets/js/post.js" ></script>
         <script src="/assets/js/general.js"></script>
+        <script src="/assets/js/user.js"></script>
     </head>
     <body>
         <?php require "menu.php"; ?>
@@ -81,10 +109,19 @@ require_once("User.php");
             <h2 class="section-title">
                 <a class="section-title" href="/subscriptions/<?= $user->getUsername(); ?>">Liste des abonnements / abonnés</a>
             </h2>
-
+            <h2 class="section-title">
+                <a onClick="toggleSubscription('<?=$user->getUsername()?>');" class="follow-link-following" href="#">
+                    <?php if(!in_array($user->getUsername(), $cu_subscriptions)): ?>
+                        S'abonner
+                    <?php else: ?>
+                        Abonné
+                    <?php endif ?>
+                </a>
+            </h2>
             <h2 class="section-title">
                 Dernières publications
             </h2>
+
             <div class="post-feed">
                 <?php
                 $posts = $user->findPosts();
