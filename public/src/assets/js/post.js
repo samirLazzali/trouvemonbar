@@ -188,7 +188,7 @@ function postToHtml(author, content, date, id)
         author +
         '            </a>\n' +
         '            <span class="post-header-date">\n' +
-        '                <?= $date ?>\n' +
+        '                ' + date + '\n' +
         '            </span>\n' +
         '        </div>\n' +
         '        <div class="post-content">\n' +
@@ -196,30 +196,38 @@ function postToHtml(author, content, date, id)
         '        </div>\n' +
         '        <div class="post-actions">\n' +
         '            <span class="post-action">\n' +
-        '                <a onclick="like(' + id + ')" href="#" class="action-link">\n' +
+        '                <a onclick="likePost(\'' + id + '\')" href="#" class="action-link">\n' +
         '                    Like\n' +
         '                </a>\n' +
         '            </span>\n' +
         '            <span class="post-action">\n' +
-        '                <a onclick="dislike(' + id + ')" href="#" class="action-link">\n' +
+        '                <a onclick="dislikePost(\'' + id + '\')" href="#" class="action-link">\n' +
         '                    Dislike\n' +
         '                </a>\n' +
         '            </span>\n' +
         '            <span class="post-action">\n' +
-        '                <a onclick="respondTo(' + id + ')" href="#" class="action-link">\n' +
+        '                <a onclick="respondTo(\'' + id + '\')" href="#" class="action-link">\n' +
         '                    Riposter\n' +
         '                </a>\n' +
         '            </span>\n' +
         '            <span class="post-action">\n' +
-        '                <a onclick="repost(' + id + ')" href="#" class="action-link">\n' +
-        '                    <span class="far fa-redo-alt"></span>\n' +
+        '                <a onclick="repost(\'' + id + '\')" href="#" class="action-link">\n' +
+        '                    Recycler<!--<span class="fa fa-redo-alt"></span>-->\n' +
         '                </a>\n' +
         '            </span>\n' +
         '            <span class="post-action">\n' +
-        '                <a onclick="report(' + id + ')" href="#" class="action-link">\n' +
+        '                <a onclick="toggleBlock(\'report-form-' + id + '\')" href="#" class="action-link">\n' +
         '                    Signaler\n' +
         '                </a>\n' +
         '            </span>\n' +
+        '        </div>\n' +
+        '        <div style="display: none" class="report-form-wrapper" id="report-form-' + id + '">\n' +
+        '            <form onSubmit="return reportPost(\'' + id + '\')" class="report-form">\n' +
+        '                <input type="text" id="report-reason-' + id + '" class="report-field" placeholder="Raison du signalement">\n' +
+        '                <button type="submit" class="report-submit">\n' +
+        '                    Signaler\n' +
+        '                </button>\n' +
+        '            </form>\n' +
         '        </div>\n' +
         '    </div>';
     return text;

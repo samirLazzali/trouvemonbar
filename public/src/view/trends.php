@@ -1,7 +1,5 @@
 <?php
-if (!defined('__ROOT__')) define('__ROOT__', dirname(dirname(__FILE__)));
-require_once(__ROOT__ . '/config.php');
-require_once(__ROOT__ . '/classes/Trend.php');
+require_once("../config.php");
 
 $trends = Trend::getTrends();
 
@@ -9,11 +7,11 @@ $tags = array_keys($trends);
 
 
 ?>
-
 <!DOCTYPE HTML>
 <html>
     <head>
         <meta charset="utf-8" />
+        <link rel="stylesheet" href="/assets/styles/trends.css" />
         <script src="/assets/js/trends.js"></script>
         <script src="/assets/js/general.js"></script>
         <script src="/assets/js/post.js"></script>
@@ -25,24 +23,25 @@ $tags = array_keys($trends);
                 - tendances -
             </h1>
             <div id="trend-types">
-                <a onClick="getHashtags();" id="trend-selector-hashtags" class="trend-type-wrapper selected" href="#">
+                <a onClick="getHashtags();" id="trend-selector-hashtags" class="trend-type-wrapper" href="#">
                     Hashtags
                 </a>
-                <a onClick="getTopLikes();" onload="getTopLikes();" id="trend-selector-likes" class="trend-type-wrapper" href="#">
+                <a onClick="getTopLikes();" id="trend-selector-likes" class="trend-type-wrapper selected" href="#">
                     Les plus aimés
                 </a>
+                <!--
                 <a onClick="updateTrends('fights');" id="trend-selector-fights" class="trend-type-wrapper" href="#">
                     Fights
                 </a>
+                -->
+                <!--
                 <a onClick="test();" id="trend-selector-controversial" class="trend-type-wrapper" href="#">
                     Controversé
                 </a>
+                -->
             </div>
             <div id="most-tweeted-hashtags">
-                <div class="hashtags">
-                    <div class="hashtag-in-list" id="hashtag-in-list">
-                        prout
-                    </div>
+                <div class="hashtags" id="hashtag-list">
                 </div>
             </div>
             <div class="post-feed" id="post-feed">

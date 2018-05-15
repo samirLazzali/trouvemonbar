@@ -1,0 +1,74 @@
+@import url('general.css');
+@import url('post.css');
+
+#trend-types {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.trend-type-wrapper {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0px 0px 0px 0px;
+    padding: 4px 3px 4px 3px;
+    background: #7f8c8d;
+    color: #e67e22;
+    text-decoration: none;
+    font-size: 1em;
+    width: 33%;
+}
+
+.trend-type-wrapper:hover {
+    background-color: #34495e;
+    font-weight: 420;
+}
+
+.selected {
+    background-color: #34495e;
+}
+
+#most-tweeted-hashtags {
+    margin-top: 5px;
+    background-color: #7f8c8d;
+}
+
+.hashtags {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-content: stretch;
+}
+
+.hashtag-in-list {
+    padding: 3px 5px 3px 5px;
+    color: var(--bluegray);
+}
+
+.selected-hashtag-name {
+    color: var(--bluegray);
+    text-align: center;
+}
+
+.hashtag-in-list:hover {
+    background-color: orange;
+    transition: 250ms;
+}
+
+.display-block {
+    display: block;
+}
+
+.display-none {
+    display: none;
+}
+
+.hashtag-link {
+    text-decoration: none;
+    color: black;
+}
+
+.hashtag-link:hover {
+    text-decoration: underline;
+}

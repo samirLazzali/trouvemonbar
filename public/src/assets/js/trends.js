@@ -14,6 +14,9 @@ function timeConverter(UNIX_timestamp){
 
 function getHashtags()
 {
+    removeClass(document.getElementById("trend-selector-likes"), "selected");
+    addClass(document.getElementById("trend-selector-hashtags"), "selected");
+    document.getElementById("hashtag-list").style.display = "flex";
     var request =  new XMLHttpRequest();
     request.onreadystatechange = function()
     {
@@ -24,13 +27,9 @@ function getHashtags()
             console.log(result);
             var text = '';
             for(var tag in result) {
-                text += "<a href='#' class='hashtag-link' onclick='getPostsFromHashtag(" + tag + ")'>" +
-                    tag +
-                    "</a>";
+                text += "<div class='hashtag-in-list'><a href='#' class='hashtag-link' onclick='getPostsFromHashtag(\"" + tag + "\")'>" + tag + "</a></div>";
             }
-            alert('wut ?')
-            document.getElementById('hashtag-in-list').innerHTML = text;
-            alert('wot ?')
+            document.getElementById('hashtag-list').innerHTML = text;
         }
     };
     request.open("GET", "/api/trends/hashtag", true);
@@ -45,7 +44,6 @@ function getHashtags()
 
 function getPostsFromHashtag(hashtag)
 {
-    alert(nique)
     var request = new XMLHttpRequest();
     request.onreadystatechange = function()
     {
@@ -57,7 +55,6 @@ function getPostsFromHashtag(hashtag)
             var date;
             var id;
             var result = JSON.parse(request.responseText)["result"];
-            console.log(result);
             text += "<h2 class=\"selected-hashtag-name\">" +
                         "#" + hashtag +
                     "</h2>";
@@ -74,7 +71,8 @@ function getPostsFromHashtag(hashtag)
             document.getElementById('post-feed').innerHTML = text;
         }
     };
-    request.open("GET", "/api/trends/fromTag?tag=" + hashtag, true);
+    hashtag = hashtag.replace("#", "");
+    request.open("GET", "/api/trends/fromtag?tag=" + hashtag, true);
     request.send();
     return false;
 }
@@ -82,12 +80,14 @@ function getPostsFromHashtag(hashtag)
 
 function getTopLikes()
 {
+    addClass(document.getElementById("trend-selector-likes"), "selected");
+    removeClass(document.getElementById("trend-selector-hashtags"), "selected");
+    document.getElementById("hashtag-list").style.display = "none";
     var request =  new XMLHttpRequest();
     request.onreadystatechange = function()
     {
         if (this.readyState == 4 && this.status == 200)
         {
-            console.log(this.responseText);
             var text = "";
             var author;
             var content;
@@ -109,10 +109,4 @@ function getTopLikes()
     request.open("GET", "/api/trends/toplikes", true);
     request.send();
     return false;
-
-}
-
-function test()
-{
-    document.getElementById('post-feed').innerHTML = "toto";
 }

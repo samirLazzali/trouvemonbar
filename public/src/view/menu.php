@@ -26,10 +26,12 @@ else
             <a class="menu-item" href="/profile/<?=$menu_user->getUsername()?>">Profil</a>
             <a class="menu-item" href="/account">Compte</a>
             <a class="menu-item" href="/notifications">Notifications</a>
-            <a class="menu-item" href="/logout">Déconnexion</a>
         <?php endif ?>
         <?php if ($loggedin && $menu_user->getModerator()): ?>
             <a class="menu-item" href="/moderation">Modération</a>
         <?php endif ?>
+        <?php if($loggedin): ?>
+            <a class="menu-item" href="/logout">Déconnexion</a>
+        <?php endif; ?>
     </menu>
 <?php endif ?>

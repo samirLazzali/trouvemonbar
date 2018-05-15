@@ -215,11 +215,12 @@ class Post implements JsonSerializable
 
     static function fromHashtag($tag)
     {
+        $tag = str_replace("#", "", $tag);
         $db = connect();
         // JOIN " . TABLE_User . " ON " . TABLE_Posts . ".Author = " . TABLE_User . ".ID
         $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE Content LIKE :hashtag ORDER BY Timestamp DESC";
         $statement = $db->prepare($SQL);
-        $statement->bindValue(":hashtag", "%$tag%");
+        $statement->bindValue(":hashtag", "%#$tag%");
         $statement->execute();
 
         $rows = $statement->fetchAll();
@@ -284,6 +285,11 @@ class Post implements JsonSerializable
         $SQL = "DELETE FROM " . TABLE_Posts . " WHERE ID = :id OR Repost = :id";
         $statement = $db->prepare($SQL);
         $statement->bindParam(":id", $this->ID);
+        $statement->execute();
+
+        $SQL = "DELETE FROM " . TABLE_Appreciation . " WHERE Post = :post";
+        $statement = $db->prepare($SQL);
+        $statement->bindParam(":post", $this->ID);
         $statement->execute();
     }
 
