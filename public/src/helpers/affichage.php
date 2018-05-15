@@ -70,11 +70,11 @@ function affichePost($post, $show_actions = true, $text_after_name = "", $text_b
         </div>
         <div style="display: none" id="Response-div-<?=$id?>">
             <div class="new-post-wrapper">
-                <div onBlur="respondPost_onBlur(id)" onFocus="respondPost_onFocus(id)" id="respond-post-<?=$id?>" contenteditable="true">
+                <div onBlur="respondPost_onBlur('<?=$id?>')" onFocus="respondPost_onFocus('<?=$id?>')" id="respond-post-<?=$id?>" contenteditable="true">
                       Réponse .....
                 </div>
             </div>
-            <button class="fas fa-paper-plane button-send" type="submit" onClick="SendResponse(id, author);">
+            <button class="fas fa-paper-plane button-send" type="submit" onClick="SendResponse('<?=$id?>');">
             </button>
         </div>
         <?php

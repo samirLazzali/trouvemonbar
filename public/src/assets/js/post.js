@@ -171,7 +171,7 @@ function respondPost_onBlur(id)
     }
 }
 
-function SendResponse(id, user_Response){
+function SendResponse(id){
     var div = document.getElementById("respond-post-" + id);
 
     if(!Responseactive)
@@ -183,14 +183,14 @@ function SendResponse(id, user_Response){
         return;
     }
 
-    createResponse(div.innerHTML, user_Response);
+    createResponse(div.innerHTML, id);
 
     div.innerHTML = "";
     respondPost_onBlur(id);
 
 }
 
-function createResponse(value, user_Response){
+function createResponse(value, id){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.status == 200 && this.readyState == 4)
@@ -209,13 +209,7 @@ function createResponse(value, user_Response){
     }
     xhttp.open("POST", "/api/post/new", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    if(user_Response == null){
-        xhttp.send("content=" + value);
-    }
-    else {
-        xhttp.send("content=" + value + "&ResponseTo=" + user_Response);
-    }
-
+    xhttp.send("content=" + value + "&ResponseTo=" + id);
 }
 
 function showLikes() {
