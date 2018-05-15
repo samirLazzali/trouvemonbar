@@ -4,7 +4,7 @@
     <?php
     if(empty($gamelist)) echo "Il n'y a aucune table proposée pour le moment !";
     foreach($gamelist as $game)
-        echo "<p href='view_game.php?id=$game->id'> $game->gamename </p> "
+        echo "<a href='view_game.php?id=$game->gameid'> $game->gamename </a> <br> "
     ?>
 </div>
 

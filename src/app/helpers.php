@@ -74,7 +74,7 @@ function error($code = 500, $message = null)
 {
     if(is_null($message))
     {
-        switch(code) {
+        switch($code) {
             case 500:
                 $message = "An internal error occured ! ";
                 break;

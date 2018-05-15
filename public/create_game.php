@@ -16,6 +16,11 @@ require "../src/app/helpers.php";
 if(!Auth::logged())
     redirect("games.php");
 
+
+//query options for scrolling lists
+$gamesystems = Gamesystem::make_list();
+$reccurrences = Reccurrence::makelist();
+
 $layout = new Layout("users");
 include view("create_game_view.php");
 $layout->show('Tables');

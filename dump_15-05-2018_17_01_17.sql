@@ -337,6 +337,43 @@ CREATE TABLE public.mastery (
 ALTER TABLE public.mastery OWNER TO ensiie;
 
 --
+-- Name: oneshot; Type: TABLE; Schema: public; Owner: ensiie
+--
+
+CREATE TABLE public.oneshot (
+    scheduleid integer NOT NULL,
+    starttime time without time zone NOT NULL,
+    endtime time without time zone NOT NULL,
+    date date NOT NULL,
+    gameid integer NOT NULL
+);
+
+
+ALTER TABLE public.oneshot OWNER TO ensiie;
+
+--
+-- Name: oneshot_scheduleid_seq; Type: SEQUENCE; Schema: public; Owner: ensiie
+--
+
+CREATE SEQUENCE public.oneshot_scheduleid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.oneshot_scheduleid_seq OWNER TO ensiie;
+
+--
+-- Name: oneshot_scheduleid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ensiie
+--
+
+ALTER SEQUENCE public.oneshot_scheduleid_seq OWNED BY public.oneshot.scheduleid;
+
+
+--
 -- Name: participation; Type: TABLE; Schema: public; Owner: ensiie
 --
 
@@ -349,21 +386,54 @@ CREATE TABLE public.participation (
 ALTER TABLE public.participation OWNER TO ensiie;
 
 --
--- Name: schedule; Type: TABLE; Schema: public; Owner: ensiie
+-- Name: reccurrence; Type: TABLE; Schema: public; Owner: ensiie
 --
 
-CREATE TABLE public.schedule (
-    scheduleid integer NOT NULL,
-    day public.dayofweek NOT NULL,
-    hour public.hour,
-    date date,
-    recurrent boolean NOT NULL,
-    reccurence character varying(50),
-    gameid integer NOT NULL
+CREATE TABLE public.reccurrence (
+    reccurrenceid integer NOT NULL,
+    reccurrencename character varying(50) NOT NULL
 );
 
 
-ALTER TABLE public.schedule OWNER TO ensiie;
+ALTER TABLE public.reccurrence OWNER TO ensiie;
+
+--
+-- Name: reccurence_reccurrenceid_seq; Type: SEQUENCE; Schema: public; Owner: ensiie
+--
+
+CREATE SEQUENCE public.reccurence_reccurrenceid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.reccurence_reccurrenceid_seq OWNER TO ensiie;
+
+--
+-- Name: reccurence_reccurrenceid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ensiie
+--
+
+ALTER SEQUENCE public.reccurence_reccurrenceid_seq OWNED BY public.reccurrence.reccurrenceid;
+
+
+--
+-- Name: reccurrent; Type: TABLE; Schema: public; Owner: ensiie
+--
+
+CREATE TABLE public.reccurrent (
+    scheduleid integer NOT NULL,
+    gameid integer NOT NULL,
+    reccurrenceid integer NOT NULL,
+    starttime time without time zone NOT NULL,
+    endtime time without time zone NOT NULL,
+    day integer NOT NULL
+);
+
+
+ALTER TABLE public.reccurrent OWNER TO ensiie;
 
 --
 -- Name: schedule_scheduleid_seq; Type: SEQUENCE; Schema: public; Owner: ensiie
@@ -384,7 +454,7 @@ ALTER TABLE public.schedule_scheduleid_seq OWNER TO ensiie;
 -- Name: schedule_scheduleid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ensiie
 --
 
-ALTER SEQUENCE public.schedule_scheduleid_seq OWNED BY public.schedule.scheduleid;
+ALTER SEQUENCE public.schedule_scheduleid_seq OWNED BY public.reccurrent.scheduleid;
 
 
 --
@@ -473,10 +543,24 @@ ALTER TABLE ONLY public.gametag ALTER COLUMN tagid SET DEFAULT nextval('public.g
 
 
 --
--- Name: schedule scheduleid; Type: DEFAULT; Schema: public; Owner: ensiie
+-- Name: oneshot scheduleid; Type: DEFAULT; Schema: public; Owner: ensiie
 --
 
-ALTER TABLE ONLY public.schedule ALTER COLUMN scheduleid SET DEFAULT nextval('public.schedule_scheduleid_seq'::regclass);
+ALTER TABLE ONLY public.oneshot ALTER COLUMN scheduleid SET DEFAULT nextval('public.oneshot_scheduleid_seq'::regclass);
+
+
+--
+-- Name: reccurrence reccurrenceid; Type: DEFAULT; Schema: public; Owner: ensiie
+--
+
+ALTER TABLE ONLY public.reccurrence ALTER COLUMN reccurrenceid SET DEFAULT nextval('public.reccurence_reccurrenceid_seq'::regclass);
+
+
+--
+-- Name: reccurrent scheduleid; Type: DEFAULT; Schema: public; Owner: ensiie
+--
+
+ALTER TABLE ONLY public.reccurrent ALTER COLUMN scheduleid SET DEFAULT nextval('public.schedule_scheduleid_seq'::regclass);
 
 
 --
@@ -515,6 +599,9 @@ COPY public.file (fileid, filename, filehash, private, extension) FROM stdin;
 --
 
 COPY public.game (gameid, gamename, gamedesc, duration, private, gamesystemid, creator, illustration) FROM stdin;
+8	La Choucroute Garnie	 Blabla	1	t	1	11	\N
+42	Rise of the Rezty	 Je suis une table	456	t	1	11	\N
+43	La légende des cinq gâteaux	 Miam	5	t	2	11	\N
 \.
 
 
@@ -523,6 +610,8 @@ COPY public.game (gameid, gamename, gamedesc, duration, private, gamesystemid, c
 --
 
 COPY public.gamesystem (gamesystemid, systemname, systemdescription) FROM stdin;
+1	Pathfinder	Blabla
+2	Legend of The Five Rings	Blabla
 \.
 
 
@@ -543,6 +632,14 @@ COPY public.mastery (gamesystemid, userid) FROM stdin;
 
 
 --
+-- Data for Name: oneshot; Type: TABLE DATA; Schema: public; Owner: ensiie
+--
+
+COPY public.oneshot (scheduleid, starttime, endtime, date, gameid) FROM stdin;
+\.
+
+
+--
 -- Data for Name: participation; Type: TABLE DATA; Schema: public; Owner: ensiie
 --
 
@@ -551,10 +648,22 @@ COPY public.participation (userid, gameid) FROM stdin;
 
 
 --
--- Data for Name: schedule; Type: TABLE DATA; Schema: public; Owner: ensiie
+-- Data for Name: reccurrence; Type: TABLE DATA; Schema: public; Owner: ensiie
 --
 
-COPY public.schedule (scheduleid, day, hour, date, recurrent, reccurence, gameid) FROM stdin;
+COPY public.reccurrence (reccurrenceid, reccurrencename) FROM stdin;
+1	toutes les semaines
+2	tous les quinze jours
+3	toutes les trois semaines
+4	une fois par mois\n
+\.
+
+
+--
+-- Data for Name: reccurrent; Type: TABLE DATA; Schema: public; Owner: ensiie
+--
+
+COPY public.reccurrent (scheduleid, gameid, reccurrenceid, starttime, endtime, day) FROM stdin;
 \.
 
 
@@ -594,7 +703,7 @@ SELECT pg_catalog.setval('public.file_fileid_seq', 1, false);
 -- Name: game_gameid_seq; Type: SEQUENCE SET; Schema: public; Owner: ensiie
 --
 
-SELECT pg_catalog.setval('public.game_gameid_seq', 1, false);
+SELECT pg_catalog.setval('public.game_gameid_seq', 62, true);
 
 
 --
@@ -612,10 +721,24 @@ SELECT pg_catalog.setval('public.gametag_tagid_seq', 1, false);
 
 
 --
+-- Name: oneshot_scheduleid_seq; Type: SEQUENCE SET; Schema: public; Owner: ensiie
+--
+
+SELECT pg_catalog.setval('public.oneshot_scheduleid_seq', 3, true);
+
+
+--
+-- Name: reccurence_reccurrenceid_seq; Type: SEQUENCE SET; Schema: public; Owner: ensiie
+--
+
+SELECT pg_catalog.setval('public.reccurence_reccurrenceid_seq', 1, false);
+
+
+--
 -- Name: schedule_scheduleid_seq; Type: SEQUENCE SET; Schema: public; Owner: ensiie
 --
 
-SELECT pg_catalog.setval('public.schedule_scheduleid_seq', 1, false);
+SELECT pg_catalog.setval('public.schedule_scheduleid_seq', 2, true);
 
 
 --
@@ -639,6 +762,14 @@ ALTER TABLE ONLY public.attachedfile
 
 ALTER TABLE ONLY public.comment
     ADD CONSTRAINT comment_pkey PRIMARY KEY (commentid);
+
+
+--
+-- Name: reccurrent day_valid; Type: CHECK CONSTRAINT; Schema: public; Owner: ensiie
+--
+
+ALTER TABLE public.reccurrent
+    ADD CONSTRAINT day_valid CHECK ((day < 7)) NOT VALID;
 
 
 --
@@ -682,6 +813,14 @@ ALTER TABLE ONLY public.mastery
 
 
 --
+-- Name: oneshot oneshot_pkey; Type: CONSTRAINT; Schema: public; Owner: ensiie
+--
+
+ALTER TABLE ONLY public.oneshot
+    ADD CONSTRAINT oneshot_pkey PRIMARY KEY (scheduleid);
+
+
+--
 -- Name: participation participation_pkey; Type: CONSTRAINT; Schema: public; Owner: ensiie
 --
 
@@ -698,10 +837,18 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: schedule schedule_pkey; Type: CONSTRAINT; Schema: public; Owner: ensiie
+-- Name: reccurrence reccurrence_pkey; Type: CONSTRAINT; Schema: public; Owner: ensiie
 --
 
-ALTER TABLE ONLY public.schedule
+ALTER TABLE ONLY public.reccurrence
+    ADD CONSTRAINT reccurrence_pkey PRIMARY KEY (reccurrenceid);
+
+
+--
+-- Name: reccurrent schedule_pkey; Type: CONSTRAINT; Schema: public; Owner: ensiie
+--
+
+ALTER TABLE ONLY public.reccurrent
     ADD CONSTRAINT schedule_pkey PRIMARY KEY (scheduleid);
 
 
@@ -761,7 +908,7 @@ CREATE INDEX gamesystemid_index ON public.game USING btree (gamesystemid);
 -- Name: schedule_gameid_index; Type: INDEX; Schema: public; Owner: ensiie
 --
 
-CREATE INDEX schedule_gameid_index ON public.schedule USING btree (gameid);
+CREATE INDEX schedule_gameid_index ON public.reccurrent USING btree (gameid);
 
 
 --
@@ -837,6 +984,14 @@ ALTER TABLE ONLY public.mastery
 
 
 --
+-- Name: oneshot oneshot_gameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ensiie
+--
+
+ALTER TABLE ONLY public.oneshot
+    ADD CONSTRAINT oneshot_gameid_fkey FOREIGN KEY (gameid) REFERENCES public.game(gameid);
+
+
+--
 -- Name: participation participation_gameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ensiie
 --
 
@@ -853,10 +1008,18 @@ ALTER TABLE ONLY public.participation
 
 
 --
--- Name: schedule schedule_gameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ensiie
+-- Name: reccurrent reccurrent_reccurrenceid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ensiie
 --
 
-ALTER TABLE ONLY public.schedule
+ALTER TABLE ONLY public.reccurrent
+    ADD CONSTRAINT reccurrent_reccurrenceid_fkey FOREIGN KEY (reccurrenceid) REFERENCES public.reccurrence(reccurrenceid);
+
+
+--
+-- Name: reccurrent schedule_gameid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ensiie
+--
+
+ALTER TABLE ONLY public.reccurrent
     ADD CONSTRAINT schedule_gameid_fkey FOREIGN KEY (gameid) REFERENCES public.game(gameid);
 
 
