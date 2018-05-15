@@ -1,0 +1,78 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+html,body{
+    height: 100%;
+    width: 100%;
+    position: relative;
+
+}
+
+body{
+    min-width: 100%;
+    min-height: 100%;
+    position : relative;
+    display: table;
+    padding-bottom: 30px;
+}
+
+div#header{
+    height: 80px;
+    background-image: url("images/vignes.jpg");
+    text-align: center;
+    vertical-align: bottom;
+    border-bottom: outset;
+}
+
+div#header>h1{
+    color: red;
+    text-shadow: blue 1px 1px, blue -1px 1px, blue -1px -1px, blue 1px -1px;;
+    font-size: 50px;
+}
+
+div#article{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+div#footer{
+    height: 15px;
+    width: 100%;
+    background-color: lightgray;
+    text-align: end;
+    font-size: 10px;
+    position: absolute;
+    display: table-row;
+    bottom: 0;
+}
+
+div#nav{
+    width : 15%;
+    float: left;
+    background-color: deepskyblue;
+    border-right: outset;
+    border-bottom: outset;
+}
+
+div#menu{
+    margin : 10px;
+    padding : 5px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+div#menu>h3{
+    text-align: center;
+    background-color: lightblue;
+}
+
+div#menu>p{
+    line-height: 30px;
+    font-size: 15px;
+}
