@@ -17,7 +17,8 @@ function timestamp_to_string($t)
 
 function affichePost($post, $show_actions = true, $text_after_name = "", $text_before_name = "")
 {
-    $author = $post->getAuthor()->getUsername();
+    $author = $post->getAuthor();
+    $user = $author ->getUsername();
     $content = $post->toHtml();
     $date = timestamp_to_string($post->getTimestamp());
     $id = $post->getID();
@@ -25,8 +26,8 @@ function affichePost($post, $show_actions = true, $text_after_name = "", $text_b
     <div class="post-in-feed">
         <div class="post-header">
             <?= $text_before_name ?>
-            <a href="/profile/<?= $author ?>" class="post-header-author">
-                <?= $author ?>
+            <a href="/profile/<?= $user ?>" class="post-header-author">
+                <?= $user ?>
             </a> <?= $text_after_name ?>
             <span class="post-header-date">
                 <a href="/post/<?= $id ?>">
@@ -53,7 +54,7 @@ function affichePost($post, $show_actions = true, $text_after_name = "", $text_b
                             <a onClick="repost('<?=$id?>');"  href="#" class="action-repost-<?=$id?> action-link">Recycler</a>
                         </span>
             <span class="post-action">
-                            <a onClick="respondToPost('<?=$id?>');"  href="#" class="action-respond-<?=$id?> action-link">Riposter</a>
+                            <a onClick="toggleBlock('Response-div-<?=$id?>');"  href="#" class="action-respond-<?=$id?> action-link">Riposter</a>
                         </span>
             <span class="post-action">
                             <a onClick="toggleBlock('report-form-<?=$id?>');"  href="#" class="action-report-<?=$id?> action-link">Signaler</a>
@@ -66,6 +67,15 @@ function affichePost($post, $show_actions = true, $text_after_name = "", $text_b
                     Signaler
                 </button>
             </form>
+        </div>
+        <div style="display: none" id="Response-div-<?=$id?>">
+            <div class="new-post-wrapper">
+                <div onBlur="respondPost_onBlur(id)" onFocus="respondPost_onFocus(id)" id="respond-post-<?=$id?>" contenteditable="true">
+                      Réponse .....
+                </div>
+            </div>
+            <button class="fas fa-paper-plane button-send" type="submit" onClick="SendResponse(id, author);">
+            </button>
         </div>
         <?php
             endif

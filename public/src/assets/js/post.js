@@ -9,6 +9,8 @@ var ERROR_WrongPassword = 464;
 var ERROR_Permissions = 465;
 var ERROR_InvalidType = 466;
 
+var Responseactive = false;
+
 function likePost(id)
 {
     var xhttp = new XMLHttpRequest();
@@ -149,6 +151,73 @@ function reportPost(id)
     return false;
 }
 
+function respondPost_onFocus(id)
+{
+    var div = document.getElementById("respond-post-" + id);
+    addClass(div, "post-content-active");
+
+    if(!Responseactive)
+        div.innerHTML = "";
+}
+
+function respondPost_onBlur(id)
+{
+    var div = document.getElementById("respond-post-" + id);
+    div.style.backgroundColor = "#95a5a6";
+    div.innerHTML = div.innerHTML.trim();
+    Responseactive = div.innerHTML != "";
+    if(!Responseactive) {
+        div.innerHTML = "Réponse .....";
+    }
+}
+
+function SendResponse(id, user_Response){
+    var div = document.getElementById("respond-post-" + id);
+
+    if(!Responseactive)
+        return;
+
+    if (div.innerHTML.trim() == "")
+    {
+        console.log("Not sending empty post.");
+        return;
+    }
+
+    createResponse(div.innerHTML, user_Response);
+
+    div.innerHTML = "";
+    respondPost_onBlur(id);
+
+}
+
+function createResponse(value, user_Response){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.status == 200 && this.readyState == 4)
+        {
+            var result = JSON.parse(xhttp.responseText);
+            if (result["status"] == STATUS_OK)
+            {
+                var div = document.getElementById("respond-post-" + id);
+                div.style.backgroundColor = "#8BC34A";
+            }
+            else
+            {
+                console.log("Can't post.");
+            }
+        }
+    }
+    xhttp.open("POST", "/api/post/new", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    if(user_Response == null){
+        xhttp.send("content=" + value);
+    }
+    else {
+        xhttp.send("content=" + value + "&ResponseTo=" + user_Response);
+    }
+
+}
+
 function showLikes() {
     var divLikes = document.getElementById("details-likes");
     var divReposts = document.getElementById("details-reposts");
@@ -206,11 +275,6 @@ function postToHtml(author, content, date, id)
         '                </a>\n' +
         '            </span>\n' +
         '            <span class="post-action">\n' +
-        '                <a onclick="respondTo(\'' + id + '\')" href="#" class="action-link">\n' +
-        '                    Riposter\n' +
-        '                </a>\n' +
-        '            </span>\n' +
-        '            <span class="post-action">\n' +
         '                <a onclick="repost(\'' + id + '\')" href="#" class="action-link">\n' +
         '                    Recycler<!--<span class="fa fa-redo-alt"></span>-->\n' +
         '                </a>\n' +
@@ -220,6 +284,7 @@ function postToHtml(author, content, date, id)
         '                    Signaler\n' +
         '                </a>\n' +
         '            </span>\n' +
+
         '        </div>\n' +
         '        <div style="display: none" class="report-form-wrapper" id="report-form-' + id + '">\n' +
         '            <form onSubmit="return reportPost(\'' + id + '\')" class="report-form">\n' +
