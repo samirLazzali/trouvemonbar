@@ -232,6 +232,7 @@ class Post implements JsonSerializable
         foreach($rows as $row) {
             $p = Post::fromRow($row);
             $p->getAuthor();
+            $p->content = $p->toHtml();
             $result[] = $p;
         }
 
