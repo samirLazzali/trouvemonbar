@@ -16,7 +16,7 @@ require_once("Trend.php");
 if (isset($_GET['timespan']))
     $timespan = $_GET['timespan'];
 else
-    $timespan = 3600;
+    $timespan = 0;
 
 if (isset($_GET['limit']))
     $limit = $_GET['limit'];
