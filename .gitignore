@@ -11,3 +11,4 @@ src/.vs/slnx.sqlite
 *.php~
 
 *.conf~
+*.pyc
