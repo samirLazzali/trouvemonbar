@@ -60,3 +60,11 @@ a:hover {
 .center {
     text-align: center;
 }
+
+.display-block {
+    display: block;
+}
+
+.display-none {
+    display: none;
+}

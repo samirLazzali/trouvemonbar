@@ -56,7 +56,7 @@ abstract class Trend
         $content = $post->getContent();
         setlocale(LC_ALL, 'fr_FR@euro');
         $words = preg_split("/[^[:alnum:]#@éèàôöûüâäîïêëŷÿ]+/", $content);
-        
+
         $hashtags = array();
         foreach($words as $word)
         {

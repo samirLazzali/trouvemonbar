@@ -27,7 +27,7 @@ function getHashtags()
             console.log(result);
             var text = '';
             for(var tag in result) {
-                text += "<div class='hashtag-in-list'><a href='#' class='hashtag-link' onclick='getPostsFromHashtag(\"" + tag + "\")'>" + tag + "</a></div>";
+                text += "<div class='hashtag-in-list' title='Afficher les publications liées à ce hashtag'><a href='#' class='hashtag-link' onclick='getPostsFromHashtag(\"" + tag + "\")'>" + tag + "</a></div>";
             }
             document.getElementById('hashtag-list').innerHTML = text;
         }

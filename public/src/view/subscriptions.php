@@ -86,7 +86,7 @@ function formatter_nombre_abonnements($n)
                 ?>
                 <div class="subscription-item">
                     <div class="subscription-item-user-name">
-                        <a href="/profile/<?=$sub->getUsername()?>">
+                        <a href="/profile/<?=$sub->getUsername()?>" title="Se rendre sur le profil">
                             <?=$sub->getUsername()?>
                         </a>
                     </div>
@@ -123,7 +123,7 @@ function formatter_nombre_abonnements($n)
                 ?>
                 <div class="subscription-item">
                     <div class="subscription-item-user-name">
-                        <a href="/profile/<?=$foll->getUsername()?>">
+                        <a href="/profile/<?=$foll->getUsername()?>" title="Se rendre sur le profil">
                             <?=$foll->getUsername()?>
                         </a>
                     </div>

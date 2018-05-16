@@ -26,10 +26,10 @@ function affichePost($post, $show_actions = true, $text_after_name = "", $text_b
     <div class="post-in-feed">
         <div class="post-header">
             <?= $text_before_name ?>
-            <a href="/profile/<?= $user ?>" class="post-header-author">
+            <a href="/profile/<?= $user ?>" class="post-header-author" title="Se rendre sur le profil de l'auteur.">
                 <?= $user ?>
             </a> <?= $text_after_name ?>
-            <span class="post-header-date">
+            <span class="post-header-date" title="Permalien">
                 <a href="/post/<?= $id ?>">
                     <?= $date ?>
                 </a>
@@ -44,26 +44,36 @@ function affichePost($post, $show_actions = true, $text_after_name = "", $text_b
             if ($show_actions):
         ?>
         <div class="post-actions">
-                        <span class="post-action">
-                            <a onClick="likePost('<?=$id?>');" href="#" class="action-like-<?=$id?> action-link">Like</a>
-                        </span>
             <span class="post-action">
-                            <a onClick="dislikePost('<?=$id?>');" href="#" class="action-dislike-<?=$id?> action-link">Dislike</a>
-                        </span>
+                <a onClick="likePost('<?=$id?>');" href="#" class="action-like-<?=$id?> action-link" title="J'aime cette publication">
+                     <?= $post->getLikeCount(); ?> Like
+                </a>
+            </span>
             <span class="post-action">
-                            <a onClick="repost('<?=$id?>');"  href="#" class="action-repost-<?=$id?> action-link">Recycler</a>
-                        </span>
+                <a onClick="dislikePost('<?=$id?>');" href="#" class="action-dislike-<?=$id?> action-link" title="Je n'aime pas cette publication.">
+                    <?= $post->getDislikeCount(); ?> Dislike
+                </a>
+            </span>
             <span class="post-action">
-                            <a onClick="toggleBlock('Response-div-<?=$id?>');"  href="#" class="action-respond-<?=$id?> action-link">Riposter</a>
-                        </span>
+                <a onClick="repost('<?=$id?>');"  href="#" class="action-repost-<?=$id?> action-link" title="Republier ce contenu">
+                    <?= $post->getRepostCount(); ?> Recycler
+                </a>
+            </span>
             <span class="post-action">
-                            <a onClick="toggleBlock('report-form-<?=$id?>');"  href="#" class="action-report-<?=$id?> action-link action-link-report">Signaler</a>
-                        </span>
+                <a onClick="toggleBlock('Response-div-<?=$id?>');"  href="#" class="action-respond-<?=$id?> action-link" title="Répondre à cette publication">
+                    Riposter
+                </a>
+            </span>
+            <span class="post-action">
+                <a onClick="toggleBlock('report-form-<?=$id?>');"  href="#" class="action-report-<?=$id?> action-link action-link-report" title="Cette publication pose un problème ?">
+                    Signaler
+                </a>
+            </span>
         </div>
         <div style="display: none" class="report-form-wrapper" id="report-form-<?=$id?>">
             <form onSubmit="return reportPost('<?=$id?>')" class="report-form">
                 <input type="text" id="report-reason-<?=$id?>" class="report-field" placeholder="Raison du signalement">
-                <button type="submit" class="report-submit">
+                <button type="submit" class="report-submit" title="Confirmer le signalement">
                     Signaler
                 </button>
             </form>
@@ -72,7 +82,9 @@ function affichePost($post, $show_actions = true, $text_after_name = "", $text_b
             <div onBlur="respondPost_onBlur('<?=$id?>')" class="response-field" onFocus="respondPost_onFocus('<?=$id?>')" id="respond-post-<?=$id?>" contenteditable="true">
                   Réponse...
             </div>
-            <button class="fas fa-paper-plane response-submit" type="submit" onClick="verifyAndSendResponse('<?=$id?>');"></button>
+            <button class="fas fa-paper-plane response-submit" type="submit" onClick="verifyAndSendResponse('<?=$id?>');" title="Envouer la réponse">
+
+            </button>
         </div>
         <?php
             endif
@@ -99,6 +111,16 @@ function afficheRepost($repost, $text_after = null) {
 
         <div class="post-content">
             <?php affichePost($original, false); ?>
+        </div>
+        <div class="post-actions">
+            <span class="post-action">
+                <a onClick="repost('<?=$original->getID()?>');"  href="#" class="action-repost-<?=$original->getID()?> action-link" title="Je souhaite republier ce contenu.">
+                    <?= $original->getRepostCount(); ?> Recycler
+                </a>
+            </span>
+            <span class="post-actions">
+
+            </span>
         </div>
     </div>
     <?php

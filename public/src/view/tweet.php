@@ -94,7 +94,7 @@ function formatter_nombre($n, $mot, $feminin = false)
                     <?= formatter_nombre(count($dislikes), "dislike") ?>
                 </div>
             </div>
-            <div class="post-interaction-details" id="details-reposts">
+            <div class="post-interaction-details display-none" id="details-reposts">
                 <?php foreach ($reposts as $repost): ?>
                     <div class="post-interactions-details-item">
                         <a href="/profile/<?= $repost->getAuthor()->getUsername(); ?>">
@@ -111,7 +111,7 @@ function formatter_nombre($n, $mot, $feminin = false)
                         </a>
                     </div>
                 <?php endforeach; ?>            </div>
-            <div class="post-feed" id="details-responses">
+            <div class="post-feed displa-none" id="details-responses">
                 <?php foreach ($responses as $item)
                     affichePost($item);
                 ?>

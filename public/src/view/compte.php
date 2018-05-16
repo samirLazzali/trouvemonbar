@@ -43,24 +43,24 @@ if ($user == null)
         </div>
         <form onsubmit="return updateAccount();">
             <label class="field-label" for="new-email">Adresse e-mail</label>
-            <input class="field" onClick="accountFields_color()" type="text" placeholder="Nouvelle adresse e-mail" value="<?= $user->getEmail() ?>"  id="new-email" /><br/>
+            <input class="field" onClick="accountFields_color()" type="text" placeholder="Nouvelle adresse e-mail" value="<?= $user->getEmail() ?>"  id="new-email" title="Entrez ici une nouvelle adresse e-mail."/>
 
             <label class="field-label" for="new-username">Nom d'utilisateur</label>
-            <input class="field" onclick="accountFields_color()" type="text" placeholder="Nouveau nom d'utilisateur" value="<?= $user->getUsername() ?>" id="new-username" /><br/>
-            <button class="bouton" type="submit">
+            <input class="field" onclick="accountFields_color()" type="text" placeholder="Nouveau nom d'utilisateur" value="<?= $user->getUsername() ?>" id="new-username" title="Entrez ici un nouveau nom d'utilisateur."/>
+            <button class="bouton" type="submit" title="Confirmer le changement d'informations personnelles.">
                 Mettre à jour les informations
             </button>
         </form>
         <div style="height: 50px;"></div>
-        <div id="info-password" class="display-none error infobox">
+        <div id="info-password" class="display-none error infobox" title="Boite d'information">
             Erreur : le mot de passe ne peut pas être vide.
         </div>
         <form onSubmit="return updatePassword();">
             <label class="field-label" for="current-password">Mot de passe actuel</label>
-            <input onclick="passwordFields_color()" class="field" type="password" placeholder="Mot de passe actuel" id="current-password" /><br/>
+            <input onclick="passwordFields_color()" class="field" type="password" placeholder="Mot de passe actuel" id="current-password" title="Vous devez confirmer votre mot de passe actuel afin de pouvoir le changer."/>
             <label class="field-label" for="new-password">Nouveau mot de passe</label>
-            <input onclick="passwordFields_color()" class="field" type="password" placeholder="Nouveau mot de passe" id="new-password" /><br/>
-            <button class="bouton" type="submit">
+            <input onclick="passwordFields_color()" class="field" type="password" placeholder="Nouveau mot de passe" id="new-password" title="Entrez ici un nouveau mot de passe."/>
+            <button class="bouton" type="submit" title="Confirmer le changement de mot de passe.">
                 Modifier le mot de passe
             </button>
         </form>

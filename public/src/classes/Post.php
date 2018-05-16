@@ -490,6 +490,56 @@ class Post implements JsonSerializable
     }
 
     /**
+     * Trouve le nombre de likes d'un Post
+     * @return int le nombre de likes du Post
+     */
+    function getLikeCount()
+    {
+        $db = connect();
+        $SQL = "SELECT COUNT(ID) FROM " . TABLE_Appreciation . " WHERE Type = :type AND Post = :post";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":type", Appreciation::LIKE);
+        $statement->bindValue(":post", $this->ID);
+        $statement->execute();
+
+        $result = $statement->fetch();
+        return $result['count'];
+    }
+
+    /**
+     * Trouve le nombre de likes d'un Post
+     * @return int le nombre de likes du Post
+     */
+    function getDislikeCount()
+    {
+        $db = connect();
+        $SQL = "SELECT COUNT(ID) FROM " . TABLE_Appreciation . " WHERE Type = :type AND Post = :post";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":type", Appreciation::DISLIKE);
+        $statement->bindValue(":post", $this->ID);
+        $statement->execute();
+
+        $result = $statement->fetch();
+        return $result['count'];
+    }
+
+    /**
+     * Trouve le nombre de likes d'un Post
+     * @return int le nombre de likes du Post
+     */
+    function getRepostCount()
+    {
+        $db = connect();
+        $SQL = "SELECT COUNT(ID) FROM " . TABLE_Posts . " WHERE Repost = :post";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":post", $this->ID);
+        $statement->execute();
+
+        $result = $statement->fetch();
+        return $result['count'];
+    }
+
+    /**
      * Trouve les dernières publications.
      * @param array $people le filtre des personnes (noms d'utilisateur) dont on veut les publications.
      * Si c'est un tableau vide, les publications ne sont pas filtrées.
@@ -591,6 +641,9 @@ class Post implements JsonSerializable
             "repostOf" => $this->repostOf,
             "responseTo" => $this->responseTo,
             "appreciations" => $this->getAppreciations(),
+            "repostCount" => $this->getRepostCount(),
+            "likeCount" => $this->getLikeCount(),
+            "dislikeCount" => $this->getDislikeCount(),
             "author" => $this->authorCache);
 
         return $arr;

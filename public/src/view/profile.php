@@ -18,6 +18,7 @@ foreach($currentUser->getSubscriptions() as $sub)
 if (isset($_GET['user']))
 {
     $user = $_GET['user'];
+    $user = str_replace("@", "", $user);
     try {
         $user = User::fromUsername($user);
     }
@@ -46,11 +47,11 @@ else
         <?php require "menu.php"; ?>
         <?php
         // On regarde si l'utilisateur est connecté (on ne veut pas que les gens pas connectés accèdent au profil)
-        if (getUserFromCookie() == null) { ?>
-            <p>Vous n'etes pas connecté. <a href="login.php">Connexion</a></p>
-            <?php die(); } ?>
+        if (getUserFromCookie() == null) {
+            header("Location: /login");
+            die();
+        }
 
-        <?php
         // Si jamais on nous a donné un nom d'utilisateur dont on veut le profil, on va récupérer ce nom
         if (isset($_GET['user'])) {
             // On le récupère
@@ -95,7 +96,7 @@ else
         ?>
 
         <div class="column-wrapper">
-            <h1>
+            <h1 title="Pseudo de cet utilisateur">
                 <?=$user->getUsername();?>
                 <?php
                 if ($user->getModerator()):

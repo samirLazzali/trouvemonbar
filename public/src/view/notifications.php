@@ -40,7 +40,7 @@
                     <div class="post-header">
                         <span class="fas fa-heart post-liked"></span>
                         <a href="/profile/<?=$appreciation->getAuthor()->getUsername()?>" class="post-header-author"><?=$appreciation->getAuthor()->getUsername()?></a>
-                        <span class="notification-liked-you">a aimé votre publication.</span> <span class="post-header-date"><?=timestamp_to_string($appreciation->getTimestamp())?></span>
+                        <span class="notification-liked-you">a aimé votre publication.</span> <span class="post-header-date" title="Heure de l'appréciation"><?=timestamp_to_string($appreciation->getTimestamp())?></span>
                     </div>
 
                     <div class="post-content">
@@ -60,8 +60,12 @@
                     <a href="/profile/<?=$repost->getAuthor()->getUsername()?>" class="post-header-author">
                         <?=$repost->getAuthor()->getUsername()?>
                     </a>
-                    <span class="notification-reposted-you">vous a recyclé.</span>
-                    <span class="post-header-date"><?=timestamp_to_string($repost->getTimestamp())?></span>
+                    <span class="notification-reposted-you">
+                        vous a recyclé.
+                    </span>
+                    <span class="post-header-date" title="Date de la republication">
+                        <?=timestamp_to_string($repost->getTimestamp())?>
+                    </span>
                 </div>
 
                 <div class="post-content">

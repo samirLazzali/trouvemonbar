@@ -106,10 +106,10 @@ else
                                 <?php endforeach ?>
                             </div>
                             <div class="moderation-actions-wrapper">
-                                <a class="moderation-action" href="#" onClick="resolvePostReport('<?= $report->getPostId(); ?>', true)">
+                                <a class="moderation-action" href="#" onClick="resolvePostReport('<?= $report->getPostId(); ?>', true)" title="Supprimer cette publication.">
                                     <i class="fa fa-trash"></i> <span>Supprimer</span>
                                 </a>
-                                <a class="moderation-action" href="#" onClick="resolvePostReport('<?= $report->getPostId(); ?>', false)">
+                                <a class="moderation-action" href="#" onClick="resolvePostReport('<?= $report->getPostId(); ?>', false)" title="Ignorer les signalements associés à cette publication.">
                                     <i class="fas fa-check"></i> <span>Ignorer</span>
                                 </a>
                             </div>
