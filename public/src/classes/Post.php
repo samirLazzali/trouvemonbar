@@ -602,7 +602,7 @@ class Post implements JsonSerializable
     public function toHtml()
     {
         $content = $this->content;
-        $ex = preg_split("/[^[:alnum:]#@]+/", $content);
+        $ex = preg_split("/[^[:alnum:]#@_éèàôöûüâäîïêëŷÿ]+/", $content);
 
         foreach($ex as $term)
         {
@@ -615,9 +615,14 @@ class Post implements JsonSerializable
             }
             elseif ($firstChar == '@')
                 $content = str_replace($term, "<a class='inpost inpost-mention' href='/profile/$toAdd'>$toAdd</a>", $content);
-
         }
-        return $content;
+
+        $regexUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
+        if(preg_match($regexUrl, $content, $url)) {
+            $content = preg_replace($regexUrl, "<a href=" . $url[0] .">" . $url[0] . "</a> ", $content);
+        }
+
+            return $content;
     }
 
     function getOriginalPost()

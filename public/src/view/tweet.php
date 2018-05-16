@@ -26,17 +26,6 @@ if(!$notFound) {
     $responses = $p->getResponsesTo();
 }
 
-function formatter_nombre($n, $mot, $feminin = false)
-{
-    $eFinal = $feminin ? "e" : "";
-    if ($n == 0)
-        return "Aucun$eFinal $mot";
-    elseif ($n == 1)
-        return "Un$eFinal $mot";
-    else
-        return "$n $mot" . "s";
-}
-
 ?>
 <!DOCTYPE HTML>
 <html>

@@ -12,3 +12,7 @@ src/.vs/slnx.sqlite
 
 *.conf~
 *.pyc
+
+*.py~
+
+\.env~

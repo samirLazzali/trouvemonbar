@@ -13,7 +13,16 @@ function timestamp_to_string($t)
     return date("d/m/Y H:i  ", $t);
 }
 
-//TODO écrire les fonctions javascript pour les actions onclick => à faire dans un fichier JS, pas ici !
+function formatter_nombre($n, $mot, $feminin = false)
+{
+    $eFinal = $feminin ? "e" : "";
+    if ($n == 0)
+        return "Aucun$eFinal $mot";
+    elseif ($n == 1)
+        return "Un$eFinal $mot";
+    else
+        return "$n $mot" . "s";
+}
 
 function affichePost($post, $show_actions = true, $text_after_name = "", $text_before_name = "")
 {
@@ -46,17 +55,17 @@ function affichePost($post, $show_actions = true, $text_after_name = "", $text_b
         <div class="post-actions">
             <span class="post-action">
                 <a onClick="likePost('<?=$id?>');" href="#" class="action-like-<?=$id?> action-link" title="J'aime cette publication">
-                     <?= $post->getLikeCount(); ?> Like
+                     <?= formatter_nombre($post->getLikeCount(), "like"); ?>
                 </a>
             </span>
             <span class="post-action">
                 <a onClick="dislikePost('<?=$id?>');" href="#" class="action-dislike-<?=$id?> action-link" title="Je n'aime pas cette publication.">
-                    <?= $post->getDislikeCount(); ?> Dislike
+                    <?= formatter_nombre($post->getDislikeCount(), "dislike"); ?>
                 </a>
             </span>
             <span class="post-action">
                 <a onClick="repost('<?=$id?>');"  href="#" class="action-repost-<?=$id?> action-link" title="Republier ce contenu">
-                    <?= $post->getRepostCount(); ?> Recycler
+                    <?= formatter_nombre($post->getRepostCount(), "recyclage"); ?>
                 </a>
             </span>
             <span class="post-action">
@@ -115,7 +124,7 @@ function afficheRepost($repost, $text_after = null) {
         <div class="post-actions">
             <span class="post-action">
                 <a onClick="repost('<?=$original->getID()?>');"  href="#" class="action-repost-<?=$original->getID()?> action-link" title="Je souhaite republier ce contenu.">
-                    <?= $original->getRepostCount(); ?> Recycler
+                    <?= formatter_nombre($original->getRepostCount(), "recyclage"); ?>
                 </a>
             </span>
             <span class="post-actions">

@@ -54,8 +54,7 @@ abstract class Trend
     public static function getHashtags($post)
     {
         $content = $post->getContent();
-        setlocale(LC_ALL, 'fr_FR@euro');
-        $words = preg_split("/[^[:alnum:]#@éèàôöûüâäîïêëŷÿ]+/", $content);
+        $words = preg_split("/[^[:alnum:]#@_éèàôöûüâäîïêëŷÿ]+/", $content);
 
         $hashtags = array();
         foreach($words as $word)
