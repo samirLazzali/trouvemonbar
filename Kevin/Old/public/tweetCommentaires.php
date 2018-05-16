@@ -116,7 +116,7 @@ titreH1("Tweet de ".prenom_user($tweet->getAuteur()));
 <div class="tweet">
     <div class="tweettext">
     <?php
-        afficheTweet($tweet);
+        $tweetManager->show_tweet(prenom_user($tweet->getAuteur()), $tweet);
      //   echo '<button onclick="afficherChampId('.$tweet->getId().');">Répondre</button></br>';
 
         echo '<form method="POST" action="Commentaire/envoiCommentaire.php">'."\n";

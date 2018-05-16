@@ -1,0 +1,21 @@
+h1{
+	/* text-align: center;*/
+	color: blue;
+}
+
+p.erreur{
+	color: red;
+}
+
+textarea {
+	resize: none;
+}
+
+#chatbox {
+	width: 500px;
+	height: 300px;
+	background-color: honeydew;
+	border: 1px solid black;
+	overflow:auto;
+
+}

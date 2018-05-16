@@ -72,6 +72,7 @@ endforeach;
 
 ?>
 
+<html>
 <script>
 	function Conversation(){ /* PAS BON : FAIRE avec AJAX */
 		var xhttp;
@@ -144,8 +145,6 @@ endforeach;
     enTete("Mes messages", "../CSS/style.css");
 
     afficheMenu();
-    titreH1("Mes messages privés");
-
 ?>
 
 
@@ -163,7 +162,8 @@ endforeach;
 <section>
 <h1 id="h1"></h1>
 
-    <p id="dialogue"></p>
+<p id="dialogue"></p>
+
     <div id="chat" style="display: none">
         <div id="chatbox" class="chatbox"></div>
         <div>
