@@ -45,7 +45,18 @@ Ajout CSS pour messages
 PROBLEME : Affichage de laccueil pas bon pour petit ecran
 
 
+12/05
+# Commentaire
++ getCommentaires -> Ok
++ afficheCommentaires -> Ok
 
+A faire :
++ ajout bouton pour ecrire commentaires
+
+# 13/05
++ Ajout de getListeTweets($id) dans Modele.php
++ Ajout de afficheListeTweets($T) dans Vue.php
++ Modification de profil.php
 
 
 

@@ -6,7 +6,7 @@
  * Time: 13:36
  */
 namespace Tweet;
-require '../vendor/autoload.php';
+//require '../vendor/autoload.php';
 
 class TweetManager{
     private $db;

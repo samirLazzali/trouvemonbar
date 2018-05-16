@@ -27,7 +27,7 @@ class TweetManager{
     }
 
     public function delete(Tweet $tweet){
-        $this->db->exec('DELETE FROM "tweet" WHERE id = '.$tweet.getId());
+        $this->db->exec('DELETE FROM "tweet" WHERE id = '.$tweet->getId());
     }
 
     public function update(Tweet $twe){

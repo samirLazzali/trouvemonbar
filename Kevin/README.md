@@ -1,10 +1,7 @@
-Projet_Web : TwittIIe
-
-Journal 26/04
+#Projet_Web : TwittIIe
 
 
-
-POUR LA sécurité : 
+## POUR LA sécurité : 
 
 function test_input($data) {
   $data = trim($data);
@@ -19,7 +16,7 @@ test_input($debitInit) DANS LES WHERE
 POUR METTRE à jour msg : AJAX AUSSI
 
 
-1/05/18
+### 1/05/18
 
 + CHAT defilant? OK
 
@@ -53,10 +50,38 @@ PROBLEME : Affichage de laccueil pas bon pour petit ecran
 A faire :
 + ajout bouton pour ecrire commentaires
 
-# 13/05
+### 13/05
 + Ajout de getListeTweets($id) dans Modele.php
 + Ajout de afficheListeTweets($T) dans Vue.php
 + Modification de profil.php
+
++ 
+
+### 16/05
+
++ Faire les notifs ???
++ Finir commentaires -> Ajout envoie par post OK
+
++ FAIRE MESSAGE EN MODE POST ???
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

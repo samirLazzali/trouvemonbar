@@ -7,7 +7,7 @@
  */
 
 namespace Commentaire;
-require '../vendor/autoload.php';
+//require '../vendor/autoload.php';
 
 class CommentaireManager
 {
@@ -29,7 +29,7 @@ class CommentaireManager
 
         $req->bindValue(':owner_id', $com->getOwnerId());
         $req->bindValue(':target_id', $com->getTargetId());
-        $req->bindValue(':date_envoie', $com->getDate());
+        $req->bindValue(':date_envoie',  date_format($com->getDate(),"Y-m-d H:i:s"));
         $req->bindValue(':contenu', $com->getContenu());
         $req->bindValue(':parent_id', $com->getParentId());
         $req->bindValue(':parent_type', $com->getParentType());

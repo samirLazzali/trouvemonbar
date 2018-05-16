@@ -39,7 +39,7 @@ class CommentaireManager
 
     public function delete(Commentaire $com)
     {
-        $this->db->exec('DELETE FROM commentaire WHERE id = '.$com->getId());
+        $this->db->exec('DELETE FROM commentaire WHERE id = '.$com.getId());
     }
 
     public function update(Commentaire $com)
