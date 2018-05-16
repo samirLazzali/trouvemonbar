@@ -25,10 +25,10 @@ $dbPassword = getenv('DB_PASSWORD');
 $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 
 $userRepository = new User\UserRepository($connection);
-$amisRepository = new Amis\AmisRepository($connection);
-$tweetRepository = new Tweet\TweetRepository($connection);
-$messageRepository = new Message\MessageRepository($connection);
-$tweets=$tweetRepository->fetchAll();
+//$amisRepository = new Amis\AmisRepository($connection);
+//$tweetRepository = new Tweet\TweetRepository($connection);
+//$messageRepository = new Message\MessageRepository($connection);
+//$tweets=$tweetRepository->fetchAll();
 $tweetManager = new Tweet\TweetManager($connection);
 
 
@@ -130,33 +130,7 @@ enTete("Accueil", "CSS/style.css");
                 /************************** AJOUT DE KEVIN ****************************/
 
     function Liker(T_id){
-        document.location.href = 'Likes/Liker.php?T_id='+T_id+'&pseudo_id=<?php echo $_SESSION['id']; ?>';
-       /* var xhttp;
-
-        xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {// 4 = request finished and response is ready, 200 = "OK"
-                if (this.responseText == -1){
-
-                    var xhttp2;
-                    xhttp2 = new XMLHttpRequest();
-                    xhttp2.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {// 4 = request finished and response is ready, 200 = "OK"
-                            alert("Tweet Disliké");
-                            document.location.reload(true);
-                        }
-                    };
-                    xhttp2.open("GET", "Likes/Dislike.php?pseudo_id=<//?php echo $_SESSION['id']; ?>&T_id="+T_id, true);
-                    xhttp2.send();
-                }
-                else{
-                    alert("Tweet Liké");
-                    document.location.reload(true);
-                }
-            }
-        };
-        xhttp.open("GET", "Likes/Liker.php?pseudo_id=<//?php echo $_SESSION['id']; ?>&T_id="+T_id, true);
-        xhttp.send();*/
+        document.location.href = 'Likes/Liker.php?T_id='+T_id;
     }
 
     function deja_liker(T_id){
@@ -166,7 +140,7 @@ enTete("Accueil", "CSS/style.css");
     }
 
     function afficherCommentaire(T_id){
-        document.location.href = 'tweetCommentaires.php?T_id='+T_id+'&pseudo_id=<?php echo $_SESSION['id']; ?>';
+        document.location.href = 'tweetCommentaires.php?T_id='+T_id;
     }
 
     function tweets(){
@@ -318,13 +292,9 @@ afficheListeAmis($friendList);
 </div>
 
 
-<footer>
-    <div>
-        <p>Twiitie 2018</p>
-    </div>
 
-</footer>
 
 <?php
+footer();
 pied();
 ?>

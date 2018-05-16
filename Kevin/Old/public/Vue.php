@@ -28,6 +28,15 @@ function pied(){
     print "</html>";
 }
 
+function footer(){
+    print "<footer>\n";
+    print "<div>\n";
+    print "    <p>Twiitie 2018</p>\n";
+    print "</div>\n";
+    print "</footer>";
+}
+
+
 function affiche($str) {
     echo $str;
 }
@@ -86,7 +95,7 @@ function affiche_message($message){
 function listeDiscussion($listeAmis){
     print "<p class=\"titre\">Vos amis:</p>\n";
     foreach($listeAmis as $F){
-        echo '<button s=\''.$F['id'].'\' onclick="document.getElementById(\'h1\').innerHTML=\'Ma conversation avec '.$F['prénom'].'\'; document.getElementById(\'envoyer\').value='.$F['id'].'; Conversation(); document.getElementById(\'chat\').style.display = \'block\';">'.$F['prénom'].'</button>';
+        echo '<button id=\''.$F['id'].'\' onclick="document.getElementById(\'h1\').innerHTML=\'Ma conversation avec '.$F['prénom'].'\'; document.getElementById(\'envoyer\').value='.$F['id'].'; Conversation(); document.getElementById(\'chat\').style.display = \'block\';">'.$F['prénom'].'</button>';
         print("\n");
     }
 }

@@ -14,11 +14,19 @@ $dbUser = getenv('DB_USER');
 $dbPassword = getenv('DB_PASSWORD');
 $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 
-$userRepository = new \User\UserRepository($connection);
+
+
+/* Les Managers */
+
+$tweetManager = new Tweet\TweetManager($connection);
+$commentaireManager = new Commentaire\CommentaireManager($connection);
+$messageManager = new Message\MessageManager($connection);
+
+/*$userRepository = new \User\UserRepository($connection);
 $users = $userRepository->fetchAll();
 
 $messageRepository = new \Message\MessageRepository($connection);
-$messages = $messageRepository->fetchAll();
+$messages = $messageRepository->fetchAll();*/
 
 
 /* Fonction pour recuperer le prenom de quelqu'un */
@@ -112,6 +120,23 @@ function getTweetAmis($id){
 }
 
 
+
+function ecrireCommentaire($idParent, $type, $contenu, $TargetOwner){
+
+    global $commentaireManager;
+
+    $com = new \Commentaire\Commentaire();
+    $com
+        ->setOwnerId($_SESSION['id'])
+        ->setTargetId($TargetOwner)
+        ->setDate(new \DateTime())
+        ->setContenu($contenu)
+        ->setParentId($idParent)
+        ->setParentType($type);
+
+    $commentaireManager->add($com);
+
+}
 
 
 

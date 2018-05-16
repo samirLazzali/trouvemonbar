@@ -126,6 +126,14 @@ titreH1("Tweet de ".prenom_user($tweet->getAuteur()));
         echo '<input type="text" size=50 name="contenu" placeholder="Veuillez saisir votre commentaire ...">'."\n";
         echo '<input type="submit" value="Envoyer">'."\n";
         echo "</form>\n";
+
+    if (isset($_SESSION['admin'])) {
+        //AFFICHE BOUTON SUPPRESSION*/
+        echo '<form method="POST" action="Tweet/deleteTweet.php">'."\n";
+        echo '<input type="hidden" name="idTweet" value="'.$tweet->getId().'">';
+        echo '<input type="submit" value="Supprimer le tweet">'."\n";
+        echo "</form>\n";
+    }
     ?>
     </div>
     <div class="listeCommentaires">
