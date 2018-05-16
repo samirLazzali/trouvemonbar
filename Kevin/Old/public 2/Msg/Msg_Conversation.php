@@ -16,13 +16,8 @@ $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=
 
 
 /**************AJOUT ******************/
-function prenom_user($id_user){
-    global $connection;
-    $sth = $connection->prepare('SELECT * FROM "user" WHERE id=\''.$id_user.'\';');
-    $sth->execute();
-    $result = $sth->fetch(PDO::FETCH_OBJ);
-    return $result->firstname;
-}
+require_once '../Modele.php';
+
 
 //$msgManager = new \Message\MessageManager($connection);
 

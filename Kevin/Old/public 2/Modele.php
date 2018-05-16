@@ -14,11 +14,19 @@ $dbUser = getenv('DB_USER');
 $dbPassword = getenv('DB_PASSWORD');
 $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 
-$userRepository = new \User\UserRepository($connection);
+
+
+/* Les Managers */
+
+$tweetManager = new Tweet\TweetManager($connection);
+$commentaireManager = new Commentaire\CommentaireManager($connection);
+$messageManager = new Message\MessageManager($connection);
+
+/*$userRepository = new \User\UserRepository($connection);
 $users = $userRepository->fetchAll();
 
 $messageRepository = new \Message\MessageRepository($connection);
-$messages = $messageRepository->fetchAll();
+$messages = $messageRepository->fetchAll();*/
 
 
 /* Fonction pour recuperer le prenom de quelqu'un */
@@ -81,7 +89,54 @@ function liker($T_id, $id){
 }
 
 
+function getTweetAmis($id){
+    global $connection;
+    $sth = $connection->prepare('SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne1=auteur WHERE personne2=\''.$id.'\' UNION SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne2=auteur WHERE personne1=\''.$id.'\'  ');
+    $sth->execute();
+    $result = $sth->fetch(PDO::FETCH_OBJ);
+    $res = array();
+    $i = 0;
+    while($result){
+        /********************** AJOUT POUR RECUPERER NB DE LIKES *******************************/
+        $likes_res = $connection->prepare('SELECT count(tweet_id) AS nb FROM "like" WHERE tweet_id='.$result->id);
+        $likes_res->execute();
+        $likes = $likes_res->fetch(PDO::FETCH_OBJ);
 
+        $res[$i][] = $likes->nb;
+
+        $tweet = new Tweet\Tweet();
+        $tweet->setAuteur($result->auteur)
+            ->setContenu($result->contenu)
+            ->setDate(new \DateTime($result->date_envoie))
+            ->setId($result->id);
+
+        $res[$i][] = $tweet;
+        $i++;
+       /* echo "[\"".prenom_user($result->auteur)."\",\"$result->contenu\",\"$result->date_envoie\",\"$result->id\",\"".$likes->nb."\"]";
+        $result = $sth->fetch(PDO::FETCH_OBJ);*/
+        $result = $sth->fetch(PDO::FETCH_OBJ);
+     }
+     return $res;
+}
+
+
+
+function ecrireCommentaire($idParent, $type, $contenu, $TargetOwner){
+
+    global $commentaireManager;
+
+    $com = new \Commentaire\Commentaire();
+    $com
+        ->setOwnerId($_SESSION['id'])
+        ->setTargetId($TargetOwner)
+        ->setDate(new \DateTime())
+        ->setContenu($contenu)
+        ->setParentId($idParent)
+        ->setParentType($type);
+
+    $commentaireManager->add($com);
+
+}
 
 
 

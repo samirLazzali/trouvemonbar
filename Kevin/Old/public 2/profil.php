@@ -1,15 +1,19 @@
 <?php
-require '../vendor/autoload.php';
+session_start();
+
+require_once '../vendor/autoload.php';
+require_once 'Vue.php';
+
 //postgres
 $dbName = getenv('DB_NAME');
 	$dbUser = getenv('DB_USER');
 	$dbPassword = getenv('DB_PASSWORD');
 	$connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-    $userRepository = new User\UserRepository($connection);
-	$amisRepository = new Amis\AmisRepository($connection);
-	$tweetRepository = new Tweet\TweetRepository($connection);
-	$tweets=$tweetRepository->fetchAll();
-	$messageRepository = new Message\MessageRepository($connection);
+    //$userRepository = new User\UserRepository($connection);
+	//$amisRepository = new Amis\AmisRepository($connection);
+	//$tweetRepository = new Tweet\TweetRepository($connection);
+	//$tweets=$tweetRepository->fetchAll();
+	//$messageRepository = new Message\MessageRepository($connection);
 	$tweetManager = new Tweet\TweetManager($connection);
 
 if(isset($_POST['visite'])){ // si formulaire soumis
@@ -20,46 +24,48 @@ else{
 
 }
 
-$sth = $connection->prepare('SELECT id FROM "user" WHERE firstname=\''.$pseudo.'\'');
+/*$sth = $connection->prepare('SELECT id FROM "user" WHERE firstname=\''.$pseudo.'\'');
     $sth->execute();
-    $result = $sth->fetch(PDO::FETCH_OBJ);
+    $result = $sth->fetch(PDO::FETCH_OBJ);*/
 
-$id = $result->id;
+$id = $_GET['id'];
 
-	
+/*
+if(!$result){
+    print "Profil Introuvable";
+}
+*/
+
+
+
+enTete("Profil de $pseudo", "CSS/style.css");
+
+afficheMenu();
 ?>
 
-<html>
-	<head>
-		
-	</head>
-	<body>
+
 
 <?php
 
 if(!empty($pseudo)){
-	$sth = $connection->prepare('SELECT firstname FROM "user"');
+	$sth = $connection->prepare('SELECT * FROM "tweet" WHERE auteur='.$id);
     $sth->execute();
     $result = $sth->fetch(PDO::FETCH_OBJ);
-    while($result){
-      	if($pseudo==$result->firstname){
-      		print "Profil de $pseudo : </br> Dernier Tweets </br>";
-			$tweets = $tweetManager->get($id);
-			$tweet = $tweets->fetch(PDO::FETCH_OBJ);
-			while($tweet){
+    print "Profil de $pseudo : </br> Dernier Tweets </br>";
 
-				$tweetManager->show_tweet($pseudo,$tweet);
-				$tweet = $tweets->fetch(PDO::FETCH_OBJ);
-			}
-			break;
-      	}
+
+
+    while($result){
+        $tweet = new Tweet\Tweet();
+        $tweet
+            ->setId($result->id)
+            ->setAuteur($result->auteur)
+            ->setDate(new \DateTime($result->date_envoie))
+            ->setContenu($result->contenu);
+
+        $tweetManager->show_tweet(prenom_user($result->auteur),$tweet);
         $result = $sth->fetch(PDO::FETCH_OBJ);
     }
-
-    if(!$result){
-    		print "Profil Introuvable";
-    }
-	
 }
 
 else{
