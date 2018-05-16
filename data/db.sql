@@ -9,17 +9,22 @@ CREATE DATABASE IF NOT EXISTS Catisfaction;
 
 DROP TABLE IF EXISTS Utilisateur;
 CREATE TABLE IF NOT EXISTS Utilisateur(
-	id_user INTEGER(4) AUTO_INCREMENT PRIMARY KEY,
+	id_user INTEGER(4) AUTO_INCREMENT PRIMARY KEY NOT NULL,
 	login VARCHAR(100) NOT NULL,
 	mail VARCHAR(255) NOT NULL,
 	password VARCHAR(50) NOT NULL,
 	phone_number INTEGER(10) NOT NULL
 	/* user_type type_user */
 	);
+	
+DROP TABLE IF EXISTS Connected;
+CREATE TABLE IF NOT EXISTS Connected(
+	id_connected INTEGER(4) UNIQUE KEY NOT NULL
+	);
 	   
 DROP TABLE IF EXISTS Cats;
 CREATE TABLE IF NOT EXISTS Cats(
-       id_cat INTEGER(4) AUTO_INCREMENT PRIMARY KEY,
+       id_cat INTEGER(4) AUTO_INCREMENT PRIMARY KEY NOT NULL,
        name_cat VARCHAR(100) NOT NULL,
        /*sex type_sex NOT NULL, */
        birthday_cat DATE,

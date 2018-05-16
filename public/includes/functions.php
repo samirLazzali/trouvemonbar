@@ -2,23 +2,24 @@
 
 function sqlquery($connexion,$requete, $number)
 {
-	$query = mysqli_query($connexion,$requete) or exit('Erreur SQL : '.mysqli_error($connexion).' Ligne : '. __LINE__ .'.');
+	$query = pg_query($connexion,$requete);
+	//$query = mysqli_query($connexion,$requete) or exit('Erreur SQL : '.mysqli_error($connexion).' Ligne : '. __LINE__ .'.');
 	queries();
 	
 	if($number == 1)
 	{
-		$query1 = mysqli_fetch_assoc($query);
-		mysqli_free_result($query);
+		$query1 = pg_fetch_assoc($query);
+		pg_free_result($query);
 		return $query1;
 	}
 	
 	else if($number == 2)
 	{
-		while($query1 = mysqli_fetch_assoc($query))
+		while($query1 = pg_fetch_assoc($query))
 		{
 			$query2[] = $query1;
 		}
-		mysqli_free_result($query);
+		pg_free_result($query);
 		return $query2;
 	}
 	
@@ -36,25 +37,16 @@ function queries($num = 1)
 
 function connexion_bdd()
 {
-	$bd_nom_serveur='localhost';
-	$bd_login='root';
-	$bd_mot_de_passe='';
-	$bd_nom_bd='catisfaction';
 	
 	//Connexion à la base de données
-	$connexion = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
-	mysqli_select_db($connexion,$bd_nom_bd);
-	mysqli_query($connexion,"set names 'utf8'");
+	$connexion = pg_connect("host=localhost dbname=catisfaction user = root");
+	pg_query($connexion,"set names 'utf8'");
 }
 
 function actualiser_session()
 {
-	$bd_nom_serveur='localhost';
-	$bd_login='root';
-	$bd_mot_de_passe='';
-	$bd_nom_bd='catisfaction';
-	$connexion = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
-	mysqli_select_db($connexion,$bd_nom_bd);
+	$connexion = pg_connect("host=localhost dbname=catisfaction user = root");
+	pg_query($connexion,"set names 'utf8'");
 	if(isset($_SESSION['id_user']) && intval($_SESSION['id_user']) != 0)
 	{
 		$retour = sqlquery($connexion,"SELECT id_user, login, password FROM Utilisateur WHERE id_user = ".intval($_SESSION['id_user']), 1);
@@ -143,6 +135,13 @@ function actualiser_session()
 			vider_cookie();
 		}
 	}
+    if(isset($_SESSION['id_user']))
+	{	$id = $_SESSION['id_user'];
+	}
+    else 
+	{	$id = -1;
+	}
+    updateConnected($id);
 }
 
 function vider_cookie()
@@ -155,19 +154,15 @@ function vider_cookie()
 
 function checklogin($login)
 {
-	$bd_nom_serveur='localhost';
-	$bd_login='root';
-	$bd_mot_de_passe='';
-	$bd_nom_bd='catisfaction';
-	$connexion = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
-	mysqli_select_db($connexion,$bd_nom_bd);
+	$connexion = pg_connect("host=localhost dbname=catisfaction user = root");
+	pg_query($connexion,"set names 'utf8'");
 	if($login == '') return 'vide';
 	else if(strlen($login) < 3) return 'court';
 	else if(strlen($login) > 32) return 'long';
 	
 	else
 	{
-		$result = sqlquery($connexion,"SELECT COUNT(*) AS nbr FROM Utilisateur WHERE login = '".mysqli_real_escape_string($connexion,$login)."'", 1);
+		$result = sqlquery($connexion,"SELECT COUNT(*) AS nbr FROM Utilisateur WHERE login = '".pg_escape_string($connexion,$login)."'", 1);
 		global $queries;
 		$queries++;
 		
@@ -178,12 +173,8 @@ function checklogin($login)
 
 function checkpassword($password)
 {
-	$bd_nom_serveur='localhost';
-	$bd_login='root';
-	$bd_mot_de_passe='';
-	$bd_nom_bd='catisfaction';
-	$connexion = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
-	mysqli_select_db($connexion,$bd_nom_bd);
+	$connexion = pg_connect("host=localhost dbname=catisfaction user = root");
+	pg_query($connexion,"set names 'utf8'");
 	if($password == '') return 'vide';
 	else if(strlen($password) < 4) return 'court';
 	else if(strlen($password) > 50) return 'long';
@@ -204,18 +195,15 @@ function checkpasswordS($password, $password2)
 
 function checkmail($email)
 {
-	$bd_nom_serveur='localhost';
-	$bd_login='root';
-	$bd_mot_de_passe='';
-	$bd_nom_bd='catisfaction';
-	$connexion = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
+	$connexion = pg_connect("host=localhost dbname=catisfaction user = root");
+	pg_query($connexion,"set names 'utf8'");
 	mysqli_select_db($connexion,$bd_nom_bd);
 	if($email == '') return 'Champ vide';
 	else if(!preg_match('#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#is', $email)) return 'invalide';
 	
 	else
 	{
-		$result = sqlquery($connexion,"SELECT COUNT(*) AS nbr FROM Utilisateur WHERE mail = '".mysqli_real_escape_string($connexion,$email)."'", 1);
+		$result = sqlquery($connexion,"SELECT COUNT(*) AS nbr FROM Utilisateur WHERE mail = '".pg_escape_string($connexion,$email)."'", 1);
 		global $queries;
 		$queries++;
 		
@@ -232,19 +220,15 @@ function checkmailS($email, $email2)
 
 function checkphone($phone_number)
 {
-	$bd_nom_serveur='localhost';
-	$bd_login='root';
-	$bd_mot_de_passe='';
-	$bd_nom_bd='catisfaction';
-	$connexion = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
-	mysqli_select_db($connexion,$bd_nom_bd);
+	$connexion = pg_connect("host=localhost dbname=catisfaction user = root");
+	pg_query($connexion,"set names 'utf8'");
 	if($phone_number == '') return 'vide';
 	else if(strlen($phone_number) < 10) return 'court';
 	else if(strlen($phone_number) > 10) return 'long';
 	
 	else
 	{
-		$result = sqlquery($connexion,"SELECT COUNT(*) AS nbr FROM Utilisateur WHERE phone_number = '".mysqli_real_escape_string($connexion,$phone_number)."'", 1);
+		$result = sqlquery($connexion,"SELECT COUNT(*) AS nbr FROM Utilisateur WHERE phone_number = '".pg_escape_string($connexion,$phone_number)."'", 1);
 		global $queries;
 		$queries++;
 		
@@ -259,5 +243,14 @@ function empty_session()
 	{
 		unset($_SESSION[$cle]);
 	}
+}
+
+function updateConnected($id)
+{	if($id != -1)
+    {	$id = $_SESSION['id_user'];
+    }
+	$connexion = pg_connect("host=localhost dbname=catisfaction user = root");
+	pg_query($connexion,"set names 'utf8'");
+    pg_query($connexion,"INSERT INTO Connected VALUES(".$id.") ON DUPLICATE KEY UPDATE id_connected = ".$id."");
 }
 ?>
