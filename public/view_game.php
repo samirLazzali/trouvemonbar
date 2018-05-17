@@ -21,7 +21,7 @@ require "../src/app/helpers.php";
     // Si le paramètre id est manquant ou invalide
    if(empty( $gameid) or !is_numeric( $gameid)){
 
-        include "../src/app/views/erreur_parametre_profil.php";
+        include "../src/app/views/erreur_parametre_game.php";
 
     }
     else {
