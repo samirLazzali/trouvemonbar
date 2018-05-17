@@ -21,6 +21,7 @@ class Auth
 
     /**
      * @brief called automatically when the app is launched
+     * @throws exception if user can't be found
      */
     public static function get_user()
     {

@@ -141,6 +141,33 @@ function flash($message = null) {
     $_SESSION['flash'][] = $message;
 }
 
+/**
+ * @param $int number between 0 and 6
+ * @return string corresponding day of the week in French
+ */
+function int_to_dayofweek($int)
+{
+    $map = array("dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi");
+    return $map[$int];
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

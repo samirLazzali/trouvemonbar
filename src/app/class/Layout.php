@@ -31,7 +31,7 @@ class Layout
         $index_button = Navbar::generate_navbar_button("index.php", "Calendrier");
         $games_button = Navbar::generate_navbar_button("games.php", "Tables");
         $users_button = Navbar::generate_navbar_button("userlist.php", "Joueurs");
-        $profile_button = Navbar::generate_navbar_button("user_profile.php", $user->getNick() );
+        $profile_button = Navbar::generate_navbar_button("user_profile.php?user=".$user->getId(), $user->getNick() );
         $logout_button = Navbar::generate_navbar_button("actions/disconnect.php", "Se déconnecter");
         $this->navbar = new Navbar(array($index_button, $games_button, $users_button), array($profile_button, $logout_button));
 

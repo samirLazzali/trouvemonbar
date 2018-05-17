@@ -120,7 +120,7 @@
         <!-- DESCRIPTION -->
         <div class="form-group">
             <label for="gamedesc"> Description: </label>
-            <textarea form="form_game" class="form-control" rows="3" id="gamedesc" name="gamedesc" placeholder="Description de la table"> </textarea>
+            <textarea form="form_game" class="form-control" rows="3" id="gamedesc" name="gamedesc" placeholder="Description de la table"></textarea>
         </div>
 
         <!-- todo : add functionality : link a file from user's collection to this game -->

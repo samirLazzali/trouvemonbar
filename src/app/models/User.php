@@ -147,11 +147,23 @@ class User
     }
 
     /**
-     * todo : a list of all ids of all the games of the user
+     * @return array list of the games for which the user is GM
      */
-    public function hisGames()
+    public function gm_for()
     {
+        $query = db()->prepare("SELECT * FROM game, users WHERE game.creator = users.userid AND userid= ?");
+        $query->execute([$this->userid]);
 
+        return $query->fetchAll();
+    }
+
+
+    public function pc_for()
+    {
+        $query = db()->prepare("SELECT * FROM game NATURAL JOIN participation WHERE userid= ?");
+        $query->execute([$this->userid]);
+
+        return $query->fetchAll();
     }
 
     /**

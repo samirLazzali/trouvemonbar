@@ -40,6 +40,22 @@ class Reccurrence
         return $query->fetchAll(PDO::FETCH_CLASS, "Reccurrence");
     }
 
+    /**
+     * @param $id int id of the reccurence
+     * @return string name of the reccurrence
+     */
+    public static function id_to_reccurrence($id)
+    {
+        $query = db()->prepare("SELECT reccurrencename FROM reccurrence WHERE reccurrenceid = ?");
+        $query->execute([$id]);
+
+        if($query->rowCount() != 1) return " ? ";
+
+        $result = $query->fetch();
+        return $result->reccurrencename;
+
+    }
+
 }
 
 

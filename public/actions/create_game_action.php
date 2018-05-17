@@ -50,6 +50,10 @@ if( ($id = Game::insert_game( $gamename, $gamedesc, $duration, $gamesystemid, $c
         }
     }
 
+    //send the mail notification
+   if(! (Mail::game_created(new Game($id))) )
+       flash("Erreur : le mail n'a pas pu être envoye");
+
 }
 else
     flash("Erreur : la table n'a pas pu être ajoutée");

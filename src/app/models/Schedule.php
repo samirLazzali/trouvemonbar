@@ -8,7 +8,31 @@
 
 class Schedule
 {
+    /**
+     * @return mixed
+     */
+    public function getStarttime()
+    {
+        return $this->starttime;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getEndtime()
+    {
+        return $this->endtime;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGameid()
+    {
+        return $this->gameid;
+    }
+
+    private $starttime, $endtime, $gameid;
     /**
      * @brief inset a new oneshot schedule in the db
      * @param $date string

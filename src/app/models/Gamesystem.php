@@ -75,7 +75,30 @@ class Gamesystem
 
     }
 
+    /**
+     * @param $id int id of the system
+     * @return false if nothing was found (or more than 1 row), systemname if something found
+     */
+    public static function id_to_name($id)
+    {
+        $query = db()->prepare("SELECT systemname FROM gamesystem WHERE gamesystemid = ?");
+        $query->execute([$id]);
+
+        if($query->rowCount() != 1 ) return false;
+        $result = $query->fetch();
+        return $result->systemname;
+
+    }
+
 }
+
+
+
+
+
+
+
+
 
 
 
