@@ -13,7 +13,7 @@ function body($connecte){
     _header();
     echo "<dib id=\"corps\">";
     _nav($connecte);
-    _article();
+    _main();
     echo "</div>";
     echo "</body>";
 }
@@ -35,8 +35,6 @@ function _nav($connecte){
     }
     echo "</div>";
 }
-
-
 
 /*TODO*/
 function profil(){
@@ -60,7 +58,13 @@ function menu(){
     echo "</div>";
 }
 
-function _article() {
+function _main() {
+    echo "<div id=\"main\">";
+    _article();
+    echo "</div>";
+}
+
+function _article(){
     echo "<div id=\"article\">";
     echo "<h1>Bienvenu sur le nouveau site d'Aperal</h1>";
     echo "</div>";

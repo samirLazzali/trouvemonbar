@@ -15,11 +15,11 @@ body{
     min-height: 100%;
     position : relative;
     display: table;
-    padding-bottom: 30px;
+    background-image: url("images/fond.jpg");
 }
 
 div#header{
-    height: 80px;
+    height: 5em;
     background-image: url("images/vignes.jpg");
     text-align: center;
     vertical-align: bottom;
@@ -29,16 +29,22 @@ div#header{
 div#header>h1{
     color: red;
     text-shadow: blue 1px 1px, blue -1px 1px, blue -1px -1px, blue 1px -1px;;
-    font-size: 50px;
+    font-size: 3em;
+}
+
+div#main{
+    padding: 1em;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: white;
 }
 
 div#article{
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    padding-top: 10px;
-    padding-right: 30px;
-    padding-left: 30px;
+    background-color: blanchedalmond;
+    min-height: 100vh;
+    padding: 0.5em;
+    border-radius: 10px;
 }
 
 div#footer{
@@ -62,8 +68,8 @@ div#nav{
 }
 
 div#menu{
-    margin : 10px;
-    padding : 5px;
+    margin : 0.5em;
+    padding : 0.5em;
     background-color: white;
     border-radius: 10px;
 }
@@ -74,10 +80,10 @@ div#menu>h3{
 
 div#menu>p{
     text-align: left;
-    line-height: 30px;
-    font-size: 15px;
+    line-height: 2em;
+    font-size: 0.8em;
 }
 
 div#nav>button{
-    margin : 10px;
+    margin : 0.8em;
 }
