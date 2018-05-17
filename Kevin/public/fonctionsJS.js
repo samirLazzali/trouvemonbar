@@ -46,7 +46,7 @@ function liste_amis(){
     }
     document.write("</div>");
 }
-function liste_pseudos(){
+function liste_pseudos(AtList){
     for(var i=0;i<AtList.length;i++){
         document.write("<option value='"+AtList[i]+"' id='"+AtList[i]+"'>");
     }

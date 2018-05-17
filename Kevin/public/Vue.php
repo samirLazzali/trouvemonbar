@@ -78,7 +78,6 @@ function afficheMenu(){
     print "         <a href=\"Msg_Ecrire.php\">Message</a></br>\n";
     print "    </li>\n";
     print "    <li>\n";
-
     print "        <a href=\"deconnexion.php\">\n";
     print "        Déconnexion <img src=\"logout.png\" alt=\"bouton de déconnexion\">\n";
     print "        </a>";
@@ -124,7 +123,7 @@ function afficheListeAmis($listeAmis){
 
 
 function afficheTweet($tweet){
-    echo prenom_user($tweet->getAuteur())." a tweeté à ".
+    echo ajoutNomLien('@'.prenom_user($tweet->getAuteur()))." a tweeté à ".
         ($tweet->getDate())->format('H:i:s')." le ".($tweet->getDate())->format('Y-m-d').
         "</br><br/> ".ajoutNomLien(ajoutHashtagLien($tweet->getContenu()))."<br/></br>";
 }
@@ -138,10 +137,10 @@ function afficheListeTweets($listeTweets){
         echo "    <div class=\"tweets\">";
         echo afficheTweet($listeTweets[$i][1]);
         print "\n";
-        echo "        <button id=\"".$listeTweets[$i][1]->getId()."\" onclick=\"Liker(".$listeTweets[$i][1]->getId().")\">J'aime</button>Nb de J'aimes : ".$listeTweets[$i][0]."</br>";
+        echo "        <button id=\"".$listeTweets[$i][1]->getId()."\" onclick=\"Liker(".$listeTweets[$i][1]->getId().")\">J'aime</button> Likes : ".$listeTweets[$i][0];
         print "\n";
-        echo "        <button id=\"Comment\" onclick=\"afficherCommentaire(".$listeTweets[$i][1]->getId().")\">Afficher les commentaires</button>";
-        print "\n    </div><br/><br/>\n";
+        echo "        <button id=\"Comment\" onclick=\"afficherCommentaire(".$listeTweets[$i][1]->getId().")\">Commenter</button>";
+        print "\n    </div>\n";
     }
     print "</div>\n";
 }
