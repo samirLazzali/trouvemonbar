@@ -99,12 +99,12 @@
     font-weight: 500;
 }
 
-.action-like-on {
+.action-like-on, .action-dislike-on {
     color: tomato;
 }
 
-.action-dislike-on {
-    color: tomato;
+.post-in-feed:hover .action-like-on, .post-in-feed:hover .action-dislike-on {
+    color: var(--bluegray);
 }
 
 .action-repost-on {

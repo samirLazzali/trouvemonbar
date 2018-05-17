@@ -19,11 +19,12 @@ class DBHandler():
 
         self.addUserDirect(t["user"]["screen_name"], userId)
 
-        if "source_status_id" in t['entities']:
-            repost = str(t['entities']['source_status_id'])[-12:]
+        if "retweeted_status" in t:
+            repost = str(t['retweeted_status']['id'])[-12:]
+            self.addTweet(t['retweeted_status'])
         else:
             repost = 'NULL'
-            
+
         if repost != 'NULL':
             repost = "'" + repost + "'"
 
@@ -32,8 +33,8 @@ class DBHandler():
         else:
             responseTo = 'NULL'
 
-        if repost != 'NULL':
-            repost = "'" + repost + "'"
+        if responseTo != 'NULL':
+            responseTo = "'" + repost + "'"
 
         
         SQL = "INSERT INTO Post (ID, Author, Content, Timestamp, Repost, ResponseTo) VALUES ('{id}', '{author}', '{content}', '{timestamp}', {repost}, {responseto})".format(id = _id, author = userId, content = content.replace("'", "''"), timestamp = int(time.time()), repost = repost, responseto = responseTo)
