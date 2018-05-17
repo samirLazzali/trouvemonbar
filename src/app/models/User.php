@@ -46,6 +46,7 @@ class User
     public $userid, $password,$nick, $mail, $firstname, $lastname;
     /**
      * User constructor.
+     * @param $idUser int
      * @throws exception user does not exist
      */
     public function __construct($idUser)
@@ -64,6 +65,54 @@ class User
             $this->$attr = $user->$attr;
         }
 
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMail()
+    {
+        return $this->mail;
+    }
+
+    /**
+     * @param mixed $mail
+     */
+    public function setMail($mail)
+    {
+        $this->mail = $mail;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * @param mixed $firstname
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * @param mixed $lastname
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
     }
 
     /**
@@ -97,6 +146,25 @@ class User
             return false;
     }
 
+    /**
+     * todo : a list of all ids of all the games of the user
+     */
+    public function hisGames()
+    {
+
+    }
+
+    /**
+     * todo idem with systems
+     */
+    public function hisSystems()
+    {
+
+    }
+
+    ///
+    /// GETTERS AND SETTERS
+    ///
     /**
      * @return int
      */
