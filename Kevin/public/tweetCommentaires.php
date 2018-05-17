@@ -107,6 +107,13 @@ titreH1("Tweet de ".prenom_user($tweet->getAuteur()));
     function afficherChampId(ID){
         document.getElementById(ID).style.display = "inline";
     }
+
+    function champVide(id){
+        var doc = document.getElementById(id);
+        if (doc.value == ""){
+            alert("Commentaire vide");
+        }
+    }
 </script>
 
 

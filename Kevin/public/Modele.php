@@ -196,6 +196,13 @@ function getTweetId($id){
 }
 
 
+/********************* HASHTAG *********************/
 
+/*
+ * Renvoie la liste des hashtags présent d'un tweet
+ *//*
+function ($text){
 
+}
+*/
 

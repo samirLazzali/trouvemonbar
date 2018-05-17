@@ -28,7 +28,7 @@ else{
     $sth->execute();
     $result = $sth->fetch(PDO::FETCH_OBJ);*/
 
-$id = $_GET['id'];
+$id = idUser($pseudo);
 
 /*
 if(!$result){
@@ -39,8 +39,11 @@ if(!$result){
 
 
 enTete("Profil de $pseudo", "CSS/style.css");
-
 afficheMenu();
+
+titreH1("Profil de $pseudo");
+
+
 ?>
 <script src="fonctionsJS.js"></script>
 
@@ -59,11 +62,5 @@ else{
 
 
 
-	
+pied();
 ?>
-</div>
-	<br/>
-	
-	<a href="accueil.php">Retour </a>
-	</body>
-</html>
