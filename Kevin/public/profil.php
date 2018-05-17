@@ -42,36 +42,26 @@ enTete("Profil de $pseudo", "CSS/style.css");
 
 afficheMenu();
 ?>
+<script src="fonctionsJS.js"></script>
 
 
+<div class="conteneur">
 
 <?php
 
 if(!empty($pseudo)){
-	$sth = $connection->prepare('SELECT * FROM "tweet" WHERE auteur='.$id.' ORDER BY date_envoie DESC');
-    $sth->execute();
-    $result = $sth->fetch(PDO::FETCH_OBJ);
-    print "Profil de $pseudo</br> Dernier Tweets </br>";
-
-    while($result){
-        $tweet = new Tweet\Tweet();
-        $tweet
-            ->setId($result->id)
-            ->setAuteur($result->auteur)
-            ->setDate(new \DateTime($result->date_envoie))
-            ->setContenu($result->contenu);
-
-        $tweetManager->show_tweet(prenom_user($result->auteur),$tweet);
-        $result = $sth->fetch(PDO::FETCH_OBJ);
-    }
+    $tweets = getTweetId($id);
+    afficheListeTweets($tweets);
 }
-
 else{
 		print "Champ Vide";
 }
 
+
+
 	
 ?>
+</div>
 	<br/>
 	
 	<a href="accueil.php">Retour </a>

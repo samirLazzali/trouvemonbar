@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+
+$_SESSION['admin'] = "1";
+
+
 $_SESSION['nom'] = "King";
 $_SESSION['prénom'] = "Jaime";
 $_SESSION['id'] = 7;

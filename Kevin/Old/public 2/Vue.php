@@ -55,9 +55,9 @@ function titreH1($titre){
 }
 
 
-
-/* Fonctions d'affichage générales */
-
+/*
+ *  Affiche le menu navigation
+ */
 function afficheMenu(){
     global $prenom;
     print "<nav id=\"fontmenu\">\n";
@@ -91,7 +91,9 @@ function affiche_message($message){
     print "</br>";
 }
 
-
+/*
+ *
+ */
 function listeDiscussion($listeAmis){
     print "<p class=\"titre\">Vos amis:</p>\n";
     foreach($listeAmis as $F){
@@ -100,6 +102,9 @@ function listeDiscussion($listeAmis){
     }
 }
 
+/*
+ * Affiche la liste des amis
+ */
 function afficheListeAmis($listeAmis){
     print "<div class=\"amis\">Vos amis:<br/>\n";
     foreach($listeAmis as $F){
@@ -108,12 +113,33 @@ function afficheListeAmis($listeAmis){
     print "</div>\n";
 }
 
+/*
+ * $text est un string
+ * Remplace les @ par des liens cliquables vers les profils
+ */
+function ajoutNomLien($text){
+    $T = explode(" ", $text);
+    for ($i=0; $i<count($T); $i++){
+        if ('@' == $T[$i][0]){
+            $T[$i] = "<a href=\"profil.php?pseudo=".substr($T[$i],1)."&id=".idUser(substr($T[$i],1))."\">$T[$i]</a>";
+        }
+    }
+    return implode(" ",$T);
+}
+
+
+function afficheTweet($tweet){
+    echo prenom_user($tweet->getAuteur())." a tweeté à ".
+        ($tweet->getDate())->format('H:i:s')." le ".($tweet->getDate())->format('Y-m-d').
+        "</br><br/> ".ajoutNomLien($tweet->getContenu())."<br/></br>";
+}
+
+
 function afficheListeTweets($listeTweets){
     print "<div class=\"alltweets\">Derniers Tweets :<br/><br/>\n";
     for($i=0; $i<sizeof($listeTweets); $i++){
-        echo "    <div class=\"tweets\">".prenom_user($listeTweets[$i][1]->getAuteur())." a tweeté à ".
-            ($listeTweets[$i][1]->getDate())->format('H:i:s')." le ".($listeTweets[$i][1]->getDate())->format('Y-m-d').
-            "</br> ".$listeTweets[$i][1]->getContenu()."<br/>";
+        echo "    <div class=\"tweets\">";
+        echo afficheTweet($listeTweets[$i][1]);
         print "\n";
         echo "        <button id=\"".$listeTweets[$i][1]->getId()."\" onclick=\"Liker(".$listeTweets[$i][1]->getId().")\">J'aime</button>Nb de J'aimes : ".$listeTweets[$i][0]."</br>";
         print "\n";
@@ -122,8 +148,6 @@ function afficheListeTweets($listeTweets){
     }
     print "</div>\n";
 }
-
-
 
 
 

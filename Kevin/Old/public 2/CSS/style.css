@@ -94,7 +94,7 @@ form{
   /*position: absolute;
    top : 20% ;left: 40%;*/
   text-align: center;
-    border: 1px solid #600 ; /* A ENLEVER */
+    /*border: 1px solid #600 ;  A ENLEVER */
 
 }
 
@@ -124,8 +124,7 @@ form{
   top: 20%; left: 80%;*/
     text-align: center;
     width: 100px;
-    border: 1px solid #600 ; /* A ENLEVER */
-
+    /*border: 1px solid #600 ;  A ENLEVER */
 }
 
 .amis a{
@@ -153,7 +152,7 @@ form{
     border : 1px solid var(--primary);
     border-radius: 20px 20px 0px 0px;
     background-color: white;
-    font-size: 150%;
+    font-size: 120%;
 
 }
 
@@ -205,7 +204,7 @@ form{
 
 .recherche{
     height: 50px;
-    border: 1px solid #600 ; /* A ENLEVER */
+    /*border: 1px solid #600 ;  A ENLEVER */
 
 }
 
@@ -225,7 +224,7 @@ footer{
     justify-content: space-around;
     align-items: flex-start;
     flex-wrap: wrap;
-    border: 1px solid #600 ; /* A ENLEVER */
+    /*border: 1px solid #600 ;  A ENLEVER */
 }
 
 .conteneur > * {
@@ -254,7 +253,7 @@ h1{
     justify-content: flex-start;
     align-items: flex-start;
     flex-wrap: wrap;
-    border: 1px solid #600 ; /* A ENLEVER */
+    /*border: 1px solid #600 ;  A ENLEVER */
 }
 
 .conteneur_chat > * {

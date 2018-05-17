@@ -85,6 +85,12 @@ form{
 	 font-size : 18px;
 }
 
+#menu img{
+    width:20px;
+    height:20px;
+    vertical-align:middle;
+}
+
 #err{
       color: red;
       font-size: 11px;
@@ -119,6 +125,15 @@ form{
     color : white;
 }
 
+.tweets a{
+    text-decoration: none;
+}
+
+.tweets a:hover {
+    color: orangered;
+}
+
+
 .amis{
     /*position: absolute;  postulat de départ
   top: 20%; left: 80%;*/
@@ -129,8 +144,7 @@ form{
 
 .amis a{
 	color: var(--primary);
-	text-decoration: none;
-	
+
 	line-height: 50px;
 	text-shadow: 0 1px 0 rgba(0,0,0,0.2);
 }
@@ -351,7 +365,16 @@ h1{
 }
 
 
+/*************** Profil **************/
 
+.conteneurProfil{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    /*border: 1px solid #600 ;  A ENLEVER */
+}
 
 
 

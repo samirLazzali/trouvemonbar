@@ -48,12 +48,10 @@ afficheMenu();
 <?php
 
 if(!empty($pseudo)){
-	$sth = $connection->prepare('SELECT * FROM "tweet" WHERE auteur='.$id);
+	$sth = $connection->prepare('SELECT * FROM "tweet" WHERE auteur='.$id.' ORDER BY date_envoie DESC');
     $sth->execute();
     $result = $sth->fetch(PDO::FETCH_OBJ);
-    print "Profil de $pseudo : </br> Dernier Tweets </br>";
-
-
+    print "Profil de $pseudo</br> Dernier Tweets </br>";
 
     while($result){
         $tweet = new Tweet\Tweet();

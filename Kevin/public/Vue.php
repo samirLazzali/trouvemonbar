@@ -69,10 +69,19 @@ function afficheMenu(){
     print "        <a href=\"accueil.php\">Accueil</a>\n";
     print "    </li>\n";
     print "    <li>\n";
-    print "        <a href=\"edition.php?pseudo=$prenom\">Mon Profil</a>\n";
+    print "        <a href=\"profil.php?pseudo=".prenom_user($_SESSION['id'])."&id=".$_SESSION['id']."\">Mon Profil</a><br/>\n";
+    print "    </li>\n";
+    print "    <li>\n";
+    print "        <a href=\"edition.php?pseudo=$prenom\">Edition profil</a>\n";
     print "    </li>\n";
     print "    <li>\n";
     print "         <a href=\"Msg_Ecrire.php\">Message</a></br>\n";
+    print "    </li>\n";
+    print "    <li>\n";
+
+    print "        <a href=\"deconnexion.php\">\n";
+    print "        Déconnexion <img src=\"logout.png\" alt=\"bouton de déconnexion\">\n";
+    print "        </a>";
     print "    </li>\n";
     print "</ul>\n";
     print "</nav>\n";
@@ -113,28 +122,16 @@ function afficheListeAmis($listeAmis){
     print "</div>\n";
 }
 
-/*
- * $text est un string
- * Remplace les @ par des liens cliquables vers les profils
- */
-function ajoutNomLien($text){
-    $T = explode(" ", $text);
-    for ($i=0; $i<count($T); $i++){
-        if ('@' == $T[$i][0]){
-            $T[$i] = "<a href=\"profil.php?pseudo=".substr($T[$i],1)."&id=".idUser(substr($T[$i],1))."\">$T[$i]</a>";
-        }
-    }
-    return implode(" ",$T);
-}
-
 
 function afficheTweet($tweet){
     echo prenom_user($tweet->getAuteur())." a tweeté à ".
         ($tweet->getDate())->format('H:i:s')." le ".($tweet->getDate())->format('Y-m-d').
-        "</br><br/> ".ajoutNomLien($tweet->getContenu())."<br/></br>";
+        "</br><br/> ".ajoutNomLien(ajoutHashtagLien($tweet->getContenu()))."<br/></br>";
 }
 
-
+/*
+ * $listeTweets est un tableau de 2 colonnes avec une colonne pour les tweets et l'autre pour likes
+ */
 function afficheListeTweets($listeTweets){
     print "<div class=\"alltweets\">Derniers Tweets :<br/><br/>\n";
     for($i=0; $i<sizeof($listeTweets); $i++){
@@ -151,8 +148,48 @@ function afficheListeTweets($listeTweets){
 
 
 
+/*
+ * $text est un string
+ * Remplace les @ par des liens cliquables vers les profils
+ */
+function ajoutNomLien($text){
+    $T = explode(" ", $text);
+    for ($i=0; $i<count($T); $i++){
+        if (isset($T[$i][0])) {
+            if ('@' == $T[$i][0]) {
+                $id = idUser(substr($T[$i], 1));
+                if ($id != FALSE) {
+                    $T[$i] = "<a href=\"profil.php?pseudo=" . substr($T[$i], 1) . "&id=" . $id . "\">$T[$i]</a>";
+                }
+            }
+        }
+    }
+    return implode(" ",$T);
+}
 
+/*
+ * $text est un string
+ * Remplace les hashtag # par des liens cliquables vers une page contenant tous les tweets avec ce hashtag
+ */
+function ajoutHashtagLien($text){
+    $T = explode(" ", $text);
+    for ($i=0; $i<count($T); $i++){
+        if (isset($T[$i][0])) {
+            if ('#' == $T[$i][0]) {
+                $T[$i] = "<a href=\"hashtag.php?hashtag=" . substr($T[$i], 1) . "\">$T[$i]</a>";
+            }
+        }
+    }
+    return implode(" ",$T);
+}
 
+/*
+ * $text est un string
+ * Utilisation de ajoutNomLien et ajoutHashtagLien
+ */
+function ajoutLienNH($text){
+    return ajoutNomLien(ajoutHashtagLien($text));
+}
 
 
 

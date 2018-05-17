@@ -27,6 +27,6 @@ else{
 
 liker($_GET['T_id'], $_SESSION['id']);
 
-header("Location: ../accueil.php");
+header("Location: ".$_SERVER['HTTP_REFERER']."");
 ?>
 

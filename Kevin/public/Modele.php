@@ -34,6 +34,7 @@ function prenom_user($id_user){
     global $connection;
     $sth = $connection->prepare('SELECT * FROM "user" WHERE id=\''.$id_user.'\';');
     $sth->execute();
+
     $result = $sth->fetch(PDO::FETCH_OBJ);
     return $result->firstname;
 }
@@ -42,6 +43,9 @@ function idUser($pseudo){
     global $connection;
     $sth = $connection->prepare('SELECT * FROM "user" WHERE firstname=\''.$pseudo.'\';');
     $sth->execute();
+    if ($sth->rowCount() == 0){
+        return FALSE;
+    }
     $result = $sth->fetch(PDO::FETCH_OBJ);
     return $result->id;
 }
@@ -95,21 +99,30 @@ function liker($T_id, $id){
 
 }
 
+/*
+ * Renvoie le nombre de likes du tweet $T_id
+ */
+function getTweetLikes($T_id){
+    global $connection;
+    $likes_res = $connection->prepare('SELECT count(tweet_id) AS nb FROM "like" WHERE tweet_id='.$T_id);
+    $likes_res->execute();
+    $likes = $likes_res->fetch(PDO::FETCH_OBJ);
+    return $likes->nb;
+}
 
+/*
+ * Renvoie un tableau contenant tous les tweets des amis de l'utilisateur ayant pour id=$id
+ */
 function getTweetAmis($id){
     global $connection;
-    $sth = $connection->prepare('SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne1=auteur WHERE personne2=\''.$id.'\' UNION SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne2=auteur WHERE personne1=\''.$id.'\'  ');
+    $sth = $connection->prepare('SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne1=auteur WHERE personne2=\''.$id.'\' UNION SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne2=auteur WHERE personne1=\''.$id.'\'');
     $sth->execute();
     $result = $sth->fetch(PDO::FETCH_OBJ);
     $res = array();
     $i = 0;
     while($result){
         /********************** AJOUT POUR RECUPERER NB DE LIKES *******************************/
-        $likes_res = $connection->prepare('SELECT count(tweet_id) AS nb FROM "like" WHERE tweet_id='.$result->id);
-        $likes_res->execute();
-        $likes = $likes_res->fetch(PDO::FETCH_OBJ);
-
-        $res[$i][] = $likes->nb;
+        $res[$i][] = getTweetLikes($result->id);
 
         $tweet = new Tweet\Tweet();
         $tweet->setAuteur($result->auteur)
@@ -153,7 +166,34 @@ function deleteTweet($id){
     $tweetManager->delete($tweet);
 }
 
+/*
+ * Renvoie un tableau contenant tous les tweets de l'utilisateur $id
+ */
+function getTweetId($id){
+    global $connection;
+    $sth = $connection->prepare('SELECT * FROM "tweet" WHERE auteur='.$id.' ORDER BY date_envoie DESC');
+    $sth->execute();
+    $result = $sth->fetch(PDO::FETCH_OBJ);
 
+    $T = array();
+    $i = 0;
+
+    while($result) {
+        $T[$i][] = getTweetLikes($result->id);
+
+        $tweet = new Tweet\Tweet();
+        $tweet
+            ->setId($result->id)
+            ->setAuteur($result->auteur)
+            ->setDate(new \DateTime($result->date_envoie))
+            ->setContenu($result->contenu);
+        $T[$i][] = $tweet;
+        $result = $sth->fetch(PDO::FETCH_OBJ);
+        $i++;
+    }
+
+    return $T;
+}
 
 
 

@@ -38,6 +38,13 @@ function prenom_user($id_user){
     return $result->firstname;
 }
 
+function idUser($pseudo){
+    global $connection;
+    $sth = $connection->prepare('SELECT * FROM "user" WHERE firstname=\''.$pseudo.'\';');
+    $sth->execute();
+    $result = $sth->fetch(PDO::FETCH_OBJ);
+    return $result->id;
+}
 
 function get_friendList($id){
     global $connection;
@@ -139,7 +146,12 @@ function ecrireCommentaire($idParent, $type, $contenu, $TargetOwner){
 }
 
 
+function deleteTweet($id){
+    global $tweetManager;
 
+    $tweet = $tweetManager->get($id);
+    $tweetManager->delete($tweet);
+}
 
 
 
