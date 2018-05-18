@@ -42,7 +42,7 @@ CREATE TABLE public.annonce (
     postDate date,
     op integer,
     semestre integer,
-    module character varying(4),
+    module character varying(20),
     genre character varying(30),
     titre character varying(100),
     description character varying(240),
