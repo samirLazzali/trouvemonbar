@@ -108,30 +108,30 @@ CREATE TABLE IF NOT EXISTS Searched_colors(
 		);
 
 
-/* INSERT INTO "colors"(id_color,name_color) VALUES ('1','Noir');
-INSERT INTO "colors"(id_color,name_color) VALUES ('2','Bleu');
-INSERT INTO "colors"(id_color,name_color) VALUES ('3','Chocolat');
-INSERT INTO "colors"(id_color,name_color) VALUES ('4','Lilas');
-INSERT INTO "colors"(id_color,name_color) VALUES ('5','Cannelle');
-INSERT INTO "colors"(id_color,name_color) VALUES ('6','Fauve');
-INSERT INTO "colors"(id_color,name_color) VALUES ('7','Roux');
-INSERT INTO "colors"(id_color,name_color) VALUES ('8','Crème');
-INSERT INTO "colors"(id_color,name_color) VALUES ('9','Blanc');
-INSERT INTO "colors"(id_color,name_color) VALUES ('10','Ambre');
-INSERT INTO "colors"(id_color,name_color) VALUES ('11','Ambre clair');
-INSERT INTO "colors"(id_color,name_color) VALUES ('12','Abricot');
+INSERT INTO Colors VALUES ('1','Noir');
+INSERT INTO Colors VALUES ('2','Bleu');
+INSERT INTO Colors VALUES ('3','Chocolat');
+INSERT INTO Colors VALUES ('4','Lilas');
+INSERT INTO Colors VALUES ('5','Cannelle');
+INSERT INTO Colors VALUES ('6','Fauve');
+INSERT INTO Colors VALUES ('7','Roux');
+INSERT INTO Colors VALUES ('8','Crème');
+INSERT INTO Colors VALUES ('9','Blanc');
+INSERT INTO Colors VALUES ('10','Ambre');
+INSERT INTO Colors VALUES ('11','Ambre clair');
+INSERT INTO Colors VALUES ('12','Abricot');
 
-INSERT INTO "personality_traits"(id_trait,name_trait) VALUES('1','');
-INSERT INTO "personality_traits"(id_trait,name_trait) VALUES('2','');
-INSERT INTO "personality_traits"(id_trait,name_trait) VALUES('3','');
-INSERT INTO "personality_traits"(id_trait,name_trait) VALUES('4','');
-INSERT INTO "personality_traits"(id_trait,name_trait) VALUES('5','');
-INSERT INTO "personality_traits"(id_trait,name_trait) VALUES('6','');
-INSERT INTO "personality_traits"(id_trait,name_trait) VALUES('7','');
-INSERT INTO "personality_traits"(id_trait,name_trait) VALUES('8','');
-INSERT INTO "personality_traits"(id_trait,name_trait) VALUES('9','');
-INSERT INTO "personality_traits"(id_trait,name_trait) VALUES('10','');
 
+INSERT INTO Personality_traits VALUES('1','Malicieux');
+INSERT INTO Personality_traits VALUES('2','Joueur');
+INSERT INTO Personality_traits VALUES('3','Calin');
+INSERT INTO Personality_traits VALUES('4','Paresseux');
+INSERT INTO Personality_traits VALUES('5','Bruyant');
+INSERT INTO Personality_traits VALUES('6','Tonique');
+INSERT INTO Personality_traits VALUES('7','Emotif');
+INSERT INTO Personality_traits VALUES('8','Chasseur');
+
+/*
 INSERT INTO "breeds"(id_breed,name_breed) VALUES ('1','');
 INSERT INTO "breeds"(id_breed,name_breed) VALUES ('2','');
 INSERT INTO "breeds"(id_breed,name_breed) VALUES ('3','');

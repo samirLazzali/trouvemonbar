@@ -5,7 +5,6 @@ header('Content-type: text/html; charset = utf-8');
 include('includes/config.php');
 
 include('includes/functions.php');
-connexion_bdd();
 actualiser_session();
 
 $titre = '';

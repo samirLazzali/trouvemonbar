@@ -1,25 +1,26 @@
 <?php
 
-function sqlquery($connexion,$requete, $number)
+function sqlquery($requete, $number)
 {
-	$query = pg_query($connexion,$requete);
-	//$query = mysqli_query($connexion,$requete) or exit('Erreur SQL : '.mysqli_error($connexion).' Ligne : '. __LINE__ .'.');
+	$query = global $connexion->query("$requete");
 	queries();
 	
 	if($number == 1)
 	{
-		$query1 = pg_fetch_assoc($query);
-		pg_free_result($query);
-		return $query1;
+		$query->setFetchMode(PDO::FETCH_OBJ);
+		$result = $query->fetch();
+		$query->closeCursor();
+		return $result;
 	}
 	
 	else if($number == 2)
 	{
-		while($query1 = pg_fetch_assoc($query))
+		$query->setFetchMode(PDO::FETCH_OBJ);
+		while($query1 = $query->fetch())
 		{
 			$query2[] = $query1;
 		}
-		pg_free_result($query);
+		$query->closeCursor();
 		return $query2;
 	}
 	
@@ -35,21 +36,11 @@ function queries($num = 1)
 	$queries = $queries + intval($num);
 }
 
-function connexion_bdd()
-{
-	
-	//Connexion à la base de données
-	$connexion = pg_connect("host=localhost dbname=catisfaction user = root");
-	pg_query($connexion,"set names 'utf8'");
-}
-
 function actualiser_session()
 {
-	$connexion = pg_connect("host=localhost dbname=catisfaction user = root");
-	pg_query($connexion,"set names 'utf8'");
 	if(isset($_SESSION['id_user']) && intval($_SESSION['id_user']) != 0)
 	{
-		$retour = sqlquery($connexion,"SELECT id_user, login, password FROM Utilisateur WHERE id_user = ".intval($_SESSION['id_user']), 1);
+		$retour = sqlquery("SELECT id_user, login, password FROM Utilisateur WHERE id_user = ".intval($_SESSION['id_user']), 1);
 		if(isset($retour['login']) && $retour['login'] != '')
 		{
 			if($_SESSION['password'] != $retour['password'])
@@ -83,7 +74,7 @@ function actualiser_session()
 		{
 			if(intval($_COOKIE['id_user']) != 0)
 			{
-				$retour = sqlquery($connexion,"SELECT id_user, login, password	FROM Utilisateur WHERE id_user = ".intval($_COOKIE['id_user']), 1);
+				$retour = sqlquery("SELECT id_user, login, password	FROM Utilisateur WHERE id_user = ".intval($_COOKIE['id_user']), 1);
 				
 				if(isset($retour['login']) && $retour['login'] != '')
 				{
@@ -249,8 +240,6 @@ function updateConnected($id)
 {	if($id != -1)
     {	$id = $_SESSION['id_user'];
     }
-	$connexion = pg_connect("host=localhost dbname=catisfaction user = root");
-	pg_query($connexion,"set names 'utf8'");
-    pg_query($connexion,"INSERT INTO Connected VALUES(".$id.") ON DUPLICATE KEY UPDATE id_connected = ".$id."");
+	global $connexion->exec("INSERT INTO Connected VALUES(".$id.") ON DUPLICATE KEY UPDATE id_connected = ".$id."");
 }
 ?>
