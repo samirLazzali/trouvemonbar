@@ -2,7 +2,8 @@
 
 function sqlquery($requete, $number)
 {
-	$query = global $connexion->query("$requete");
+	$query = global $connexion
+	$query->query("$requete");
 	queries();
 	
 	if($number == 1)
