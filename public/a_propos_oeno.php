@@ -21,7 +21,14 @@ $users = $userRepository->fetchAll();
 </head>
 <body>
 
+<div class="banniere">
+    <?php
+    menu_connexion();
+    menu_navigation();
+    ?>
+</div>
 <?php
+<<<<<<< HEAD
 menu_connexion();
 menu_navigation()
 ?>
@@ -37,3 +44,7 @@ menu_navigation()
     <form action="liste_vin.php" method="post">
         <input type="submit" value="Liste des vins">
 </div>
+=======
+    sous_menu_oenologie();
+    ?>
+>>>>>>> 0d5af52654b605e619e69a477fcb2b6a17bf2b77

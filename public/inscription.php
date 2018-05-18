@@ -27,7 +27,7 @@ menu_navigation()
 
 <h1>S'inscrire</h1>
 <br />
-<form method = "post" >
+<form method = "post" action="#" >
     <fieldset><legend>Prénom : </legend><input type ="text" name="prenominsc" /></fieldset>
     <fieldset><legend>Nom : </legend><input type="text" name="nominsc" /></fieldset>
     <fieldset><legend>E-mail : </legend><input type="text" name="mailinsc" /></fieldset>
@@ -38,8 +38,11 @@ menu_navigation()
 
 <?php
 if (isset($_POST['nominsc']) && $_POST!=null) {   //améliorer la condition
-    $req = $connection->prepare('INSERT INTO public.user(id,prenom,nom,score,pseudo,mdp,mail,inscription) VALUES(:id,:prenom,:nom,:score,:pseudo,:mdp,:mail,:inscription)');
-    $test = $req->execute(['id' => 5, /* A CHANGER*/
+    foreach ($users as $user) {
+        echo $user->getPrenom();
+    }
+    $req = $connection->prepare('INSERT INTO user(id,prenom,nom,score,pseudo,mdp,mail,inscription) VALUES(:id,:prenom,:nom,:score,:pseudo,:mdp,:mail,:inscription)');
+    $test = $req->execute(['id' => 1, // A CHANGER
         'prenom' => $_POST['prenominsc'],
         'nom' => $_POST['nominsc'],
         'score' => 0,
@@ -47,9 +50,9 @@ if (isset($_POST['nominsc']) && $_POST!=null) {   //améliorer la condition
         'mdp' => $_POST['mdpinsc'],
         'mail' => $_POST['mailinsc'],
         'inscription' => 1   //je ne sais pas ce que c'est
-    ]); 
-    $rep=$connection->query("SELECT * FROM public.user");
-    $tuple=$rep->fetchAll();
-    echo $tuple[1]['prenom'];
+    ]);
+    foreach ($users as $user){
+        echo $user->getPrenom();
+    }
 }
 ?>
