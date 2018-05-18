@@ -27,15 +27,7 @@ $users = $userRepository->fetchAll();
     menu_navigation();
     ?>
 </div>
-<<<<<<< HEAD
 
 <?php
     sous_menu_oenologie();
 ?>
-=======
-
-<?php
-    sous_menu_oenologie();
-?>
-
->>>>>>> b29d501e2d675f3759931434148b4622d26db271
