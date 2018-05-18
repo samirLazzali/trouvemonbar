@@ -220,7 +220,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 .gtco-nav ul li.btn-cta a span {
   border: 2px solid rgba(255, 255, 255, 0.5);
-  padding: 4px 20px;
+  padding: 2px 30px;
   color: #fff;
   display: -moz-inline-stack;
   display: inline-block;
@@ -229,6 +229,10 @@ h1, h2, h3, h4, h5, h6, figure {
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
+  position: relative;
+  top : 0px;
+  left: 200px;
+  margin-bottom: 2px;
   -webkit-border-radius: 7px;
   -moz-border-radius: 7px;
   -ms-border-radius: 7px;

@@ -7,7 +7,7 @@ function menu_navigation()
     echo '<div class="col-sm-4 col-xs-12">';
     echo '<div id="gtco-logo"><a href="index.html">Apéral <em>-</em> Oenologiie</a></div>';
     echo '</div>';
-    echo '<div class="col-xs-8 text-right menu-1">';
+    echo '<div class="col-xs-4 text-right menu-1">';
     echo '<ul>';
     echo '<li><a href="index.php">Accueil</a></li>';
     echo '<li><a href="a_propos_aperal.php">Apéral</a></li>';
@@ -16,9 +16,12 @@ function menu_navigation()
     echo '<li><a href="classement.php">Classement</a></li>';
     echo '<li><a href="profil.php">Profil</a></li>';
     echo '<li><a href="Admin.php">Admin</a></li>';
+    /*
     echo '<li class="btn-cta"><a href="reunion.php"><span>PUTE</span></a></li>';
     echo '<li class="btn-cta"><a href="reunion.php"><span>PUTE (2)</span></a></li>';
+     */
     echo '</ul>';
+    echo '</div>';
     echo '</div>';
     echo '</div>';
     echo '</div>';
@@ -37,10 +40,24 @@ function menu_navigation()
 }
 
 function menu_connexion(){
-    echo '<form method = "post" action = "changement_de_page.php" id="boutons_connexion">';
+    echo '<nav class="gtco-nav" role="navigation">';
+    echo '<div class="gtco-container">';
+    echo '<div class="row">';
+    echo '<div class="col-sm-30 col-xs-30">';
+    echo '<div class="col-xs-15 text-right menu-1">';
+    echo '<ul>';
+    echo '<li class="btn-cta"><a href="inscription.php"><span>S\'inscrire</span></a></li>';
+    echo '<li class="btn-cta"><a href="connexion.php"><span>Se connecter</span></a></li>';
+    echo '</ul>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+    echo '</nav>';
+    /*echo '<form method = "post" action = "changement_de_page.php" id="boutons_connexion">';
     echo '<div class="bouton"><input type="submit" class="button" name="co" value="Se connecter" ></div>';
     echo '<div class="bouton"><input type="submit" class="button" name="ins" value="inscription" ></div>';
-    echo '</form>';
+    echo '</form>';*/
 }
 
 function sous_menu_aperal(){

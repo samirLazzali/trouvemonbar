@@ -41,6 +41,7 @@ $users = $userRepository->fetchAll();
 <div class="banniere">
 <?php
 menu_navigation();
+menu_connexion();
 ?>
 </div>
 
@@ -57,17 +58,6 @@ menu_navigation();
                                                         <span class="intro-text-small">Welcome to Splash</span>
                                                         <h1>Build website using this template.</h1>
                                                 </div>
-                                                <div class="col-md-4 col-md-push-1 animate-box" data-animate-effect="fadeInRight">
-                                                        <div class="form-wrap">
-                                                                <div class="tab">                                                                        
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
 
 
 <h3>Prochaine réunion</h3>
@@ -77,4 +67,10 @@ menu_navigation();
 </form>
 </body>
 </html>
+
+</div>
+</div>
+</div>
+</div>
+
 
