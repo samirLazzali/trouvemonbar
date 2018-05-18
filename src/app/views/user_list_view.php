@@ -28,8 +28,8 @@ foreach ($userlist as $user)
 echo "</table>";
 ?>
 <!--search bar -->
-<form action="search_action.php" method="get">
-    nom：<input type="text" name="name" value="" size="8">
+<form action="search_user.php" method="get">
+    nom：<input type="text" name="lastname" value="" size="8">
     pseudo:<input type="text" name="nick" value="" size="8">
     jeu de rôle：<input type="text" name="gamename" value="" size="8">
     <input type="submit" value="search">
