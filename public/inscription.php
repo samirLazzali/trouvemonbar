@@ -41,18 +41,23 @@ if (isset($_POST['nominsc']) && $_POST!=null) {   //améliorer la condition
     foreach ($users as $user) {
         echo $user->getPrenom();
     }
-    $req = $connection->prepare('INSERT INTO user(id,prenom,nom,score,pseudo,mdp,mail,inscription) VALUES(:id,:prenom,:nom,:score,:pseudo,:mdp,:mail,:inscription)');
-    $test = $req->execute(['id' => 1, // A CHANGER
+    $iid=$connection->query("SELECT 'id' FROM public.user")->fetchAll();
+    $i=1;
+    foreach($iid as $id){
+        $i++;
+    }
+    echo $i;
+
+    $req = $connection->prepare('INSERT INTO public.user(id,prenom,nom,score,pseudo,mdp,mail,inscription) VALUES(:id,:prenom,:nom,:score,:pseudo,:mdp,:mail,:inscription)');
+    $test = $req->execute(['id' => $i, // A CHANGER
         'prenom' => $_POST['prenominsc'],
         'nom' => $_POST['nominsc'],
         'score' => 0,
         'pseudo' => $_POST['pseudoinsc'],
         'mdp' => $_POST['mdpinsc'],
         'mail' => $_POST['mailinsc'],
-        'inscription' => 1   //je ne sais pas ce que c'est
-    ]);
-    foreach ($users as $user){
-        echo $user->getPrenom();
-    }
+        'inscription' => 1,   //je ne sais pas ce que c'est
+    ]); 
+    
 }
 ?>
