@@ -29,7 +29,11 @@ function header_t($titre) {
     print "    <a href=\"#\" class=\"m-link\"><i class=\"fa fa-question-circle-o\" aria-hidden=\"true\"></i> A propos</a>\n";
     print "    <a href=\"#\" class=\"m-link\"><i class=\"fa fa-paper-plane-o\" aria-hidden=\"true\"></i> Contact</a>\n";
 
-    buttonLogin();
+    if (verif_authent()) {
+	buttonLogout();
+    } else {
+	buttonLogin();
+    }
     
     print "    </div>\n";
     print "    </div>\n";

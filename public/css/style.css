@@ -30,6 +30,10 @@ footer {
     grid-area: footer;
 }
 
+.main {
+    grid-area: main;
+}
+
 header button, header button-block {
   font-size: 12px;
   display: block;

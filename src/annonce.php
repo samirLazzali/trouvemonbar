@@ -70,10 +70,17 @@ class Annonce {
 	$this->paiement = $paiement;
     }
 
-    public static function translateOp($connection, $id) {
+    public static function uidToUsername($connection, $id) {
 	$rows = dbQuery($connection, "SELECT * FROM users WHERE id='$id'");
 	foreach ($rows as $row) {
 	    return $row->username;
+	}
+    }
+
+    public static function usernameToUid($connection, $username) {
+	$rows = dbQuery($connection, "SELECT * FROM users WHERE username='$username'");
+	foreach ($rows as $row) {
+	    return $row->id;
 	}
     }
 
@@ -88,7 +95,7 @@ class Annonce {
 	    $annonce->setId($row->id);
 	    $annonce->setTitle($row->titre);
 	    $annonce->setDate(new \DateTimeImmutable($row->postdate));
-	    $annonce->setOp(Annonce::translateOp($connection, $row->op));
+	    $annonce->setOp(Annonce::uidToUsername($connection, $row->op));
 	    $annonce->setContent($row->description);
 	    $annonce->setGenre($row->genre);
 	    $annonce->setSemestre($row->semestre);
