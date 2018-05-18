@@ -15,6 +15,7 @@ require "../src/app/helpers.php";
 
 
 $userlist=User::userlist();
+$usergamelist=User::usergamelist();
 $layout = new Layout("users");
 include view("user_list_view.php");
 $layout->show("Tous les joueurs ");

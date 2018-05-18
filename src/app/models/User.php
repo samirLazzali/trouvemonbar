@@ -218,6 +218,15 @@ class User
         return $query->fetchAll();
     }
 
+    public static function searchlist($arr)
+    {
+        $query = db()->prepare($arr);
+        $query->execute();
+
+        return $query->fetchAll();
+    }
+
+
     /**
      * @return array list of all users  in the database
      */
