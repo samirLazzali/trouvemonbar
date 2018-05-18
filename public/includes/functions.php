@@ -2,7 +2,10 @@
 
 function sqlquery($requete, $number)
 {
-	$query = global $connexion
+	$dbName = getenv('DB_NAME');
+	$dbUser = getenv('DB_USER');
+	$dbPassword = getenv('DB_PASSWORD');
+	$query = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 	$query->query("$requete");
 	queries();
 	
@@ -241,6 +244,10 @@ function updateConnected($id)
 {	if($id != -1)
     {	$id = $_SESSION['id_user'];
     }
-	global $connexion->exec("INSERT INTO Connected VALUES(".$id.") ON DUPLICATE KEY UPDATE id_connected = ".$id."");
+	$dbName = getenv('DB_NAME');
+	$dbUser = getenv('DB_USER');
+	$dbPassword = getenv('DB_PASSWORD');
+	$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
+	$connexion->exec("INSERT INTO Connected VALUES(".$id.") ON DUPLICATE KEY UPDATE id_connected = ".$id."");
 }
 ?>
