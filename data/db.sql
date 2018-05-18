@@ -5,6 +5,7 @@
 -- Dumped from database version 10.3
 -- Dumped by pg_dump version 10.3
 DROP TABLE "user";
+DROP TABLE "reunion";
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -111,3 +112,9 @@ ALTER TABLE ONLY public."user"
 -- PostgreSQL database dump complete
 --
 
+CREATE TABLE public."reunion"(
+soiree varchar(100) NOT NULL,
+cr varchar(1000) NOT NULL,
+datee integer NOT NULL,
+participant varchar(40) NOT NULL
+);
