@@ -31,5 +31,5 @@ $users = $userRepository->fetchAll();
 </div>
 
 <?php
-/*    sous_menu_oenologie();*/
+    sous_menu_oenologie();
 ?>

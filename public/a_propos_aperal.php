@@ -26,11 +26,15 @@ $users = $userRepository->fetchAll();
 
 <div class="banniere">
 <?php
-menu_navigation();
+/*menu_navigation(); */
 ?>
 </div>
+<br />
+<br />
+<br />
+<br />
 <?php
-/* sous_menu_aperal();*/
+sous_menu_aperal();
 ?>
 <br />
 <br />
