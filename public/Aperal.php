@@ -1,5 +1,5 @@
 <?php
-echo 'ca marche 1';
+session_start();
 ?>
 
 
