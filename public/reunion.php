@@ -24,4 +24,26 @@ $users = $userRepository->fetchAll();
     menu_navigation()
     ?>
 </div>
+<h3><?php echo 'Réunions' ?></h3>
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead style="font-weight: bold">
+        <td>#</td>
+        <td>Soirée</td>
+        <td>Date</td>
+        <td>Participants</td>
+        <td>Compte Rendu</td>
+        </thead>
+        <?php /** @var \User\User $user */
+        $tuple=$connection->query("SELECT * FROM public.reunion");
+        foreach ($tuple as $tu) : ?>
+            <tr>
+                <td><?php echo $tu['soiree'] ?></td>
+                <td><?php echo $tu['datee'] ?></td>
+                <td><?php echo $tu['participant'] ?></td>
+                <td><?php echo $tu['cr'] ?> </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+
 
