@@ -1,6 +1,9 @@
 <?php
 session_start();
+<<<<<<< HEAD
 
+=======
+>>>>>>> b29d501e2d675f3759931434148b4622d26db271
 require '../vendor/autoload.php';
 
 //postgres

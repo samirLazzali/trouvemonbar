@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../vendor/autoload.php';
 include('menu.php');
 //postgres
@@ -21,10 +22,12 @@ $users = $userRepository->fetchAll();
 
 <body>
 
-<?php
-menu_connexion();
-menu_navigation()
-?>
+<div class="banniere">
+    <?php
+    menu_connexion();
+    menu_navigation()
+    ?>
+</div>
 
 <div class="container">
     <h3><?php echo 'Classement des apériiens' ?></h3>
