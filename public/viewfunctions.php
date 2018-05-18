@@ -10,7 +10,7 @@ function header_t($titre) {
     print "    <title>$titre</title>\n";
     print "    <link rel=\"stylesheet\" href=\"css/normalize.css\">\n";
     print "    <link rel=\"stylesheet\" href=\"css/header.css\">\n";
-    print "    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>";
+    print "    <link rel=\"stylesheet\" href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>";
     print "    <link href=\"https://www.stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\" rel=\"stylesheet\" integrity=\"sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN\" crossorigin=\"anonymous\">\n";
     print "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css\">";
     print "    <link rel=\"stylesheet\" href=\"css/style.css\">";
