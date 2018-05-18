@@ -3,8 +3,8 @@
 	background-repeat:no-repeat;
 	background-size: contain;
 }*/
-div.banniere {
-	background:linear-gradient(to bottom, rgb(85,85,85),rgb(130,130,130))
+.banniere {
+	background:linear-gradient(to bottom, black,rgb(130,130,130));
 }
 
 #menu_bouton

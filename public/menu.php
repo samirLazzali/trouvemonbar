@@ -16,6 +16,8 @@ function menu_navigation()
     echo '<li><a href="classement.php">Classement</a></li>';
     echo '<li><a href="profil.php">Profil</a></li>';
     echo '<li><a href="Admin.php">Admin</a></li>';
+    echo '<li class="btn-cta"><a href="reunion.php"><span>PUTE</span></a></li>';
+    echo '<li class="btn-cta"><a href="reunion.php"><span>PUTE (2)</span></a></li>';
     echo '</ul>';
     echo '</div>';
     echo '</div>';
