@@ -20,7 +20,10 @@ function getUsername($email) {
 }
 
 function login() {
-    session_start(); // Starting Session
+    if (session_status() == PHP_SESSION_NONE) {
+	session_start();
+    }
+
     $error=''; // Variable To Store Error Message
     if (empty($_POST['email']) || empty($_POST['password'])) {
         return "Username or Password is invalid";
@@ -31,7 +34,7 @@ function login() {
     
 	    if (lookUp($email, $password) != -1) {
 	        $_SESSION['email'] = $email;
-	        return "Logged in";
+	        print "Logged in";
 	    } else {
 	        return "Invalid credentials: '$email', '$password'";
 	    }
@@ -78,10 +81,6 @@ function create() {
 function verif_authent() {
     return isset($_SESSION['email']);
 }
-
-$error = '';
-
-
 
 function buttonLogin() {
     echo "<button class=\"button button-block\" id=\"connect\">Connect</button>";

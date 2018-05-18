@@ -42,36 +42,36 @@ function footer(){
     print "<p>&copy; <b> 2018 ENSIIE </b> | Skutnik . Chekour . Trachino . Meas - All Rights Reserved  </p> </br>";
     print "<p> <b> Contact </b> : 06 59 42 47 94 | lesbonsbails@gmail.com | </p>";
     print "		</div>\n";
-	print "  </body>\n";
-	print "</html>";
+    print "  </body>\n";
+    print "</html>";
 
 }
 
 function getoffers($semestre, $module, $matiere){
-	$requete = "SELECT * FROM annonce"; //default
-	if($semestre){ //on ajoute des parametres en fonction de la recherche
-		if($module){
-			if($matiere){
-				$requete = $requete." WHERE semestre = $semestre AND  module = $module AND matiere = $matiere";
-			}
-			else
-				$requete = $requete."  WHERE semestre = $semestre AND  module = $module";
-		}
-		else
-			$requete = $requete." WHERE semestre = $semestre";
+    $requete = "SELECT * FROM annonce"; //default
+    if($semestre){ //on ajoute des parametres en fonction de la recherche
+	if($module){
+	    if($matiere){
+		$requete = $requete." WHERE semestre = $semestre AND  module = $module AND matiere = $matiere";
+	    }
+	    else
+		$requete = $requete."  WHERE semestre = $semestre AND  module = $module";
 	}
-	else if($module){
-		if($matiere){
-			$requete = $requete." WHERE module = $module AND matiere = $matiere";
-			}
-		else
-			$requete = $requete." WHERE module = $module";
+	else
+	    $requete = $requete." WHERE semestre = $semestre";
+    }
+    else if($module){
+	if($matiere){
+	    $requete = $requete." WHERE module = $module AND matiere = $matiere";
 	}
-	else if($matiere){
-		$requete = $requete." WHERE matiere = $matiere";
-	}
-	$connexion = db_connect();
-	$reponse = db_query($connexion, $requete);
+	else
+	    $requete = $requete." WHERE module = $module";
+    }
+    else if($matiere){
+	$requete = $requete." WHERE matiere = $matiere";
+    }
+    $connexion = dbConnect();
+    $reponse = dbQuery($connexion, $requete);
 	db_close($connexion);
 	return $reponse;
 }
