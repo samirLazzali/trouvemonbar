@@ -28,47 +28,22 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
 
     echo '<h1>Réunions</h1>';
     echo '<form method="post" action="#">';
-    echo '    <fieldset><legend>Prénom : </legend><input type ="text" name="prenommodif" /></fieldset>';
-    echo '    <fieldset><legend>Nom : </legend><input type="text" name="nommodif" /></fieldset>';
-    echo '    <fieldset><legend>E-mail : </legend><input type="text" name="mailmodif" /></fieldset>';
-    echo '    <fieldset><legend>Pseudo : </legend><input type="text" name="pseudomodif" /></fieldset>';
-    echo '    <fieldset><legend>nouveau mot de passe : </legend><input type ="text" name="mdpmodif" /></fieldset>';
-    echo '   <fieldset><legend>confirmer mot de passe : </legend><input type ="text" name="mdpmodif2" /></fieldset>';
+    echo '    <fieldset><legend>Soirée </legend><input type ="text" name="soiree" /></fieldset>';
+    echo '    <fieldset><legend>Date </legend><input type="text" name="date" /></fieldset>';
+    echo '    <fieldset><legend>Participant </legend><input type="text" name="participant" /></fieldset>';
+    echo '    <fieldset><legend>Compte Rendu</legend><input type="text" name="cr" /></fieldset>';
     echo '   <input type ="submit" name="submit" value="Modifier"/>';
     echo '</form>';
 
 
-    $prenom = $_SESSION['prenom'];
-    $nom = $_SESSION['nom'];
-    $email = $_SESSION['email'];
-    $pseudo = $_SESSION['pseudo'];
-    $mdp = $_SESSION['mdp'];
-
-    if (isset($_POST['prenommodif']) && $_POST['prenommodif'] != null) {
-        $prenom = $_POST['prenommodif'];
-    }
-    if (isset($_POST['nommodif']) && $_POST['nommodif'] != null) {
-        $nom = $_POST['nommodif'];
-    }
-    if (isset($_POST['mailmodif']) && $_POST['mailmodif'] != null) {
-        $email = $_POST['mailmodif'];
-    }
-    if (isset($_POST['pseudomodif']) && $_POST['pseudomodif'] != null) {
-        $pseudo = $_POST['pseudomodif'];
-    }
-    if (isset($_POST['mdpmodif']) && $_POST['mdpmodif'] != null && isset($_POST['mdpmodif2']) && $_POST['mdpmodif2'] != null && $_POST['mdpmodif'] == $_POST['mdpmodif2']) {
-        $mdp = $_POST['mdpmodif'];
-    }
-
-    $req = $connection->prepare('UPDATE public.user SET prenom:prenom, nom=:nom, mdp=:mdp, mail=:mail pseudo=:pseudo');
-    $test = $req->execute(['prenom' => $prenom,
-        'nom' => $nom,
-        'mdp' => $mdp,
-        'mail' => $email,
-        'pseudo' => $pseudo,
+   $req = $connection->prepare('INSERT INTO public.reunion(soiree,cr,datee,participant) VALUES(:soiree,:cr,:datee,:participant)');
+    $test = $req->execute(['soiree' => $_POST['soiree'], 
+        'cr' => $_POST['cr'],
+        'datee' => $_POST['date'],
+        'participant' => $_POST['participant'],  
     ]);
 }
 else {
-    echo '<h2>veuillez vous connecter pour acceder à cette page</h2>';
-    echo '<a href="connexion.php">connexion</a>';
+    echo "<h2>Vous n'avez pas les droits</h2>";
+    echo "<a href='index.php'>Acceuil</a>";
 }
