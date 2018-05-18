@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,500,900');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono');
+
 *, *:before, *:after {
   box-sizing: border-box;
 }
@@ -218,3 +221,47 @@ textarea {
 .errorDisp {
     color: red;
 }
+div.annonce {
+  text-align:center;
+  }
+div.title {
+  text-decoration: none;
+    color: #fff;
+    font-family: 'Roboto';
+    font-weight: 900;
+    font-size: 28px;
+    margin-top: 20px;
+    padding-top: 5px;
+  width:600px;
+  height:40px;
+  background-color:#5FE6BD;
+  }
+div.info {
+  padding-top: 20px;
+  float:left;
+  font-family: 'IBM Plex Mono';
+    font-weight: 900;
+    font-size: 18px;
+  width:100px;
+  height:400px;
+  background-color:#FF;
+  }
+div.description {
+  padding-top: 20px;
+  font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 15px;
+  float:left;
+  width:500px;
+  height:400px;
+  background-color:#EEEEEE;
+  }
+div.logi {
+  padding-top: 5px;
+  font-family:'IBM Plex Mono';
+  font-size: 17px;
+  clear:both;
+  width:600px;
+  height:30px;
+  background-color:#FF5722;
+  }
