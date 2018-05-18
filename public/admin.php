@@ -18,11 +18,13 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
     echo '<title> profil  </title>';
     echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">';
     echo '<link rel="stylesheet" type="text/css"  href="style_index.css">';
+    echo '<link rel="stylesheet" href="css/bootstrap.css">';
+    echo '<link rel="stylesheet" href="css/style.css">';
+
     echo '</head>';
     echo '<body>';
 
     echo '<div class="banniere">';
-    menu_connexion();
     menu_navigation();
     echo '</div>';
 
@@ -44,6 +46,11 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
     ]);
 }
 else {
-    echo "<h2>Vous n'avez pas les droits</h2>";
-    echo "<a href='index.php'>Acceuil</a>";
+    echo '<link rel="stylesheet" href="css/style.css">';
+    echo '<html>';
+    echo '<body>';
+    echo "<h2>Vous n'avez pas les droits d'administration !</h2>";
+    echo "<a href='index.php'>Accueil</a>";
+    echo '</body>';
+    echo '</html>';
 }

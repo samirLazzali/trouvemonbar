@@ -27,10 +27,10 @@ $users = $userRepository->fetchAll();
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/themify-icons.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/magnific-popu.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.them.default.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
 
     <script src="js/modernizr-2.6.2.min.js"></script>

@@ -18,19 +18,24 @@ $users = $userRepository->fetchAll();
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"  href="style_index.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
 
 <div class="banniere">
 <?php
-menu_connexion();
 menu_navigation();
 ?>
 </div>
 <?php
-sous_menu_aperal();
+/* sous_menu_aperal();*/
 ?>
+<br />
+<br />
+<br />
 
-<h4>Aperal depuis la nuit des temps est considéré comme LA référence dans l'apéritif de compétition avec notament 3 coupe du monde à son actif</h4>
+<h4>Aperal depuis la nuit des temps est considéré comme LA référence dans l'apéritif de compétition avec notamment 3 coupe du monde à son actif</h4>
 </body>
 </html>

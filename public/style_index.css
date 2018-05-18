@@ -3,6 +3,9 @@
 	background-repeat:no-repeat;
 	background-size: contain;
 }*/
+thead{
+    color: black;
+}
 .banniere {
 	background:linear-gradient(to bottom, black,rgb(130,130,130));
 }
