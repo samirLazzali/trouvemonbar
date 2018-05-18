@@ -24,12 +24,6 @@ $users = $userRepository->fetchAll();
 </head>
 <body>
 
-<div class="banniere">
-    <?php
-    menu_navigation();
-    ?>
-</div>
-
 <?php
-    sous_menu_oenologie();
+    menu_oeno();
 ?>

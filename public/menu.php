@@ -29,7 +29,7 @@ function menu_navigation()
 function menu_connexion(){
 }
 
-function sous_menu_aperal(){
+function menu_aperal(){
     /* echo '<form method = "post" class="sous_menu" action ="changement_de_page.php" id="boutons_aperal">';
     echo '<div class="bouton"><input type="submit" class="button" name="propA" value="A propos" ></div>';
     echo '<div class="bouton"><input type="submit" class="button" name="prepA" value="Préparatif" ></div>';
@@ -65,8 +65,6 @@ function sous_menu_aperal(){
     echo '<li><a href="index.php">Nique</a></li>';
     echo '<li><a href="a_propos_aperal.php">les</a></li>';
     echo '<li><a href="a_propos_oeno.php">pd</a></li>';
-    echo '<li><a href="reunion.php">Réunions</a></li>';
-    echo '<li><a href="classement.php">Classement</a></li>';
     echo '</ul>';
     echo '</div>';
     echo '</div>';
@@ -75,7 +73,7 @@ function sous_menu_aperal(){
 
 }
 
-function sous_menu_oenologie(){
+function menu_oeno(){
     /* echo '<form method = "post" class="sous_menu" action ="changement_de_page.php" id="boutons_aperal">';
     echo '<div class="bouton"><input type="submit" class="button" name="propO" value="A propos" ></div>';
     echo '<div class="bouton"><input type="submit" class="button" name="prepO" value="Préparatif" ></div>';
@@ -110,8 +108,6 @@ function sous_menu_oenologie(){
 	echo '<li><a href="index.php">Nique</a></li>';
 	echo '<li><a href="a_propos_aperal.php">les</a></li>';
 	echo '<li><a href="a_propos_oeno.php">pd</a></li>';
-	echo '<li><a href="reunion.php">Réunions</a></li>';
-	echo '<li><a href="classement.php">Classement</a></li>';
 	echo '</ul>';
 	echo '</div>';
 	echo '</div>';

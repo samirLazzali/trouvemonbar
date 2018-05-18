@@ -24,22 +24,15 @@ $users = $userRepository->fetchAll();
 </head>
 <body>
 
-<div class="banniere">
 <?php
-/*menu_navigation(); */
-?>
-</div>
-<br />
-<br />
-<br />
-<br />
-<?php
-sous_menu_aperal();
+menu_aperal();
 ?>
 <br />
 <br />
 <br />
-
+<br />
+<br />
+<br />
 <h4>Aperal depuis la nuit des temps est considéré comme LA référence dans l'apéritif de compétition avec notamment 3 coupe du monde à son actif</h4>
 </body>
 </html>
