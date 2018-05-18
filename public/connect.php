@@ -26,6 +26,12 @@ function login($connection)
 	$res=$match->fetchAll();
 	foreach($res as $re){
 		if($re['pseudo']==$pseudo && $re['mdp']==$pwd){
+			$_SESSION['prenom']=$re['prenom'];
+			$_SESSION['nom']=$re['nom'];
+			$_SESSION['email']=$re['mail'];
+			$_SESSION['pseudo']=$re['pseudo'];
+			$_SESSION['mdp']=$re['mdp'];
+			$_SESSION['connect']=$re['inscription'];
 			header("location:index.php");
 		}
 	}
@@ -33,6 +39,7 @@ function login($connection)
 
 }
 }
+
 
 login($connection);
 
