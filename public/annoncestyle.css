@@ -1,0 +1,57 @@
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 150px;
+	height: 150px;
+}
+
+
+
+html, body {
+    background-color: black;
+	color: white;
+	font-family:"Segoe UI";
+}
+
+header,h1{
+    background-color: black;
+	color: white;
+	font-family:"Segoe UI";
+	text-align: center;
+}
+
+form{
+	text-align: center;
+}
+
+input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
+
+label {
+  color: lighten(#5FE6BD,40%);
+  display: inline-block;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 5px 20px;
+}
+
+input[type=radio]:checked + label{
+  color: lighten(#5FE6BD,60%);
+  background: #332f35;
+}
+
+label + input[type=radio] + label {
+  border-left: solid 3px #332f35;
+}
+.radio-group {
+  border: solid 3px #332f35;
+  display: inline-block;
+  margin: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
