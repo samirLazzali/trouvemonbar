@@ -15,7 +15,9 @@ class Annonce {
 
     public function display() {
 	print "<div class=annonce id=a$this->id>";
-	print "<span class=title><strong>$this->title</strong></span>";
+	print "<div class=title>";
+	print "$this->title";
+	print "</div>";
 
 	print "<div class=info>";
 	print "$this->genre - $this->op - S$this->semestre";

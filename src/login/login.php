@@ -34,11 +34,14 @@ function login() {
     
 	    if (lookUp($email, $password) != -1) {
 	        $_SESSION['email'] = $email;
-	        print "Logged in";
 	    } else {
 	        return "Invalid credentials: '$email', '$password'";
 	    }
     }
+}
+
+function logout() {
+    session_destroy();
 }
 
 function create() {
