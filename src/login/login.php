@@ -24,24 +24,26 @@ function login() {
 	session_start();
     }
 
-    $error=''; // Variable To Store Error Message
-    if (empty($_POST['email']) || empty($_POST['password'])) {
-        return "Username or Password is invalid";
+    if (isset($_POST['logout'])) {
+	session_destroy();
     } else {
+
+	$error=''; // Variable To Store Error Message
+	if (empty($_POST['email']) || empty($_POST['password'])) {
+	    return "Username or Password is invalid";
+	} else {
 	    // Define $username and $password
 	    $email=$_POST['email'];
 	    $password=md5($_POST['password']);
-    
-	    if (lookUp($email, $password) != -1) {
-	        $_SESSION['email'] = $email;
-	    } else {
-	        return "Invalid credentials: '$email', '$password'";
-	    }
-    }
-}
 
-function logout() {
-    session_destroy();
+	    if (($row = lookUp($email, $password)) != null) {
+		$_SESSION['email'] = $row->email;
+		$_SESSION['username'] = $row->username;
+	    } else {
+		return "Invalid credentials: '$email', '$password'";
+	    }
+	}
+    }
 }
 
 function create() {
@@ -89,8 +91,14 @@ function buttonLogin() {
     echo "<button class=\"button button-block\" id=\"connect\">Connect</button>";
 }
 
+function buttonLogout() {
+    print "<form align=\"right\" name=\"form1\" method=\"post\" action=\"\">";
+    print "<input name=\"logout\" type=\"submit\" id=\"logout\" value=\"log out\">";
+    print "</form>";
+}
+
 function displayLogin() {
-    echo "<div id=\"form\" class=\"form\" style=\"display: <?php if (isset(\$_POST['login']) || isset(\$_POST['create'])) {echo \"block\";} else {echo \"none\";}?>";
+    echo "<div id=\"form\" class=\"form\" style=\"display: none\">";
     echo "<ul class=\"tab-group\">";
     echo "<li class=\"tab active\">";
     echo "<a href=\"#login\">Log In</a>";

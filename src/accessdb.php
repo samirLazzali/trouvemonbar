@@ -57,10 +57,10 @@ function lookUp($email, $md5Pass) {
     $rows = dbQuery($connection, "SELECT * FROM users WHERE email='$email' AND password='$md5Pass'");
 
     foreach ($rows as $entry) {
-	return $entry->id;
+	return $entry;
     }
 
-    return -1;
+    return null;
 }
 
 ?>
