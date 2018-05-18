@@ -15,8 +15,11 @@ function menu_navigation()
     echo '<li><a href="reunion.php">Réunions</a></li>';
     echo '<li><a href="classement.php">Classement</a></li>';
     echo '<li><a href="profil.php">Profil</a></li>';
-    echo '<li><a href="Admin.php">Admin</a></li>';
+    echo '<li><a href="admin.php">Admin</a></li>';
     /*
+=======
+    echo '<li><a href="admin.php">Admin</a></li>';
+>>>>>>> bdb356e98434eef6374d031e1ebb068a8f533f04
     echo '<li class="btn-cta"><a href="reunion.php"><span>PUTE</span></a></li>';
     echo '<li class="btn-cta"><a href="reunion.php"><span>PUTE (2)</span></a></li>';
      */

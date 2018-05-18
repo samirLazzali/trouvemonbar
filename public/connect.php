@@ -26,6 +26,7 @@ function login($connection)
 	$res=$match->fetchAll();
 	foreach($res as $re){
 		if($re['pseudo']==$pseudo && $re['mdp']==$pwd){
+			$_SESSION['id']=$re['id'];
 			$_SESSION['prenom']=$re['prenom'];
 			$_SESSION['nom']=$re['nom'];
 			$_SESSION['email']=$re['mail'];
