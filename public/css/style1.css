@@ -1,0 +1,54 @@
+body
+	{
+		background: #ffffff;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 400;
+	}
+html,body {
+  width: 100%;
+  overflow-x: hidden;
+}
+html {
+  font-size: 100%;
+}
+h1 {
+  padding-top:200px;
+  letter-spacing: 0.5rem;
+  text-transform: uppercase;
+  font-size: 2.8rem;
+}
+#slideshow {
+  top: 0;
+  left: 0;
+  z-index: -10;
+  width: 100vw;
+  backface-visibility: hidden;
+}
+#home {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+        align-items: center;
+  text-align: center;
+  height: 100vh;
+  color: #ffffff;
+}
+#home .bouton {
+    background: transparent;
+    border: 3px solid #ffffff;
+    border-radius: 0px;
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 14px 36px;
+    margin-top: 42px;
+    margin-right: 16px;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    text-decoration: none;
+}
+#home .bouton:hover {
+  background: #5FE6BD;
+  color: #ffffff;
+  border-color: transparent;
+}
