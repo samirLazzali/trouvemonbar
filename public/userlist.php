@@ -13,6 +13,8 @@
 
 require "../src/app/helpers.php";
 
+if(!Auth::logged())
+    redirect("index.php");
 
 $userlist=User::userlist();
 $usergamelist=User::usergamelist();
