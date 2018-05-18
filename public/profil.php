@@ -58,8 +58,17 @@ if (isset($_POST['mailmodif']) && $_POST['mailmodif']!=null){
 if (isset($_POST['pseudomodif']) && $_POST['pseudomodif']!=null){
     $pseudo=$_POST['pseudomodif'];
 }
-if (isset($_POST['mdpmodif']) && $_POST['mdpmodif']!=null && isset($_POST['mdpmodif2']) && $_POST['mdpmodif2']!=null){
-    
+if (isset($_POST['mdpmodif']) && $_POST['mdpmodif']!=null && isset($_POST['mdpmodif2']) && $_POST['mdpmodif2']!=null && $_POST['mdpmodif']==$_POST['mdpmodif2']){
+    $mdp=$_POST['mdpmodif'];
 }
+
+$req = $connection->prepare('UPDATE public.user SET prenom:prenom, nom=:nom, mdp=:mdp, mail=:mail pseudo=:pseudo');
+$test = $req->execute(['prenom'=>$prenom,
+    'nom' => $nom,
+    'mdp' => $mdp,
+    'mail' => $email,
+    'pseudo' => $pseudo,
+    ]);
+
 
 
