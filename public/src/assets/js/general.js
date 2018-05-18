@@ -20,6 +20,7 @@ function toggleBlock(id)
         elt.style.display = 'block';
     else
         elt.style.display = 'none';
+    return false;
 }
 
 function timeConverter(UNIX_timestamp){

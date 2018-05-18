@@ -98,7 +98,7 @@ function formatter_nombre_abonnements($n)
                             <?=formatter_nombre_abonnements(count($sub->getSubscriptions()))?>
                         </span> -
                         <span class="subscription-item-follow-link">
-                            <a onClick="toggleSubscription('<?=$sub->getUsername()?>');" class="follow-link-<?=$sub->getUsername()?>" href="#">
+                            <a onClick="return toggleSubscription('<?=$sub->getUsername()?>');" class="follow-link-<?=$sub->getUsername()?>" href="#">
                                 <?php if(!in_array($sub->getUsername(), $cu_subscriptions)): ?>
                                     S'abonner
                                 <?php else: ?>

@@ -33,7 +33,7 @@ if ($user == null)
                 Nouvelle publication...
             </div>
         </div>
-        <button class="fas fa-paper-plane button-send" type="submit" onClick="sendNewPost();">
+        <button class="fas fa-paper-plane button-send" type="submit" onClick="return sendNewPost();">
         </button>
         <h1>
             - mon compte -

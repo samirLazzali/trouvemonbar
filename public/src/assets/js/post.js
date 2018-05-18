@@ -175,19 +175,19 @@ function verifyAndSendResponse(id){
     var div = document.getElementById("respond-post-" + id);
 
     if(!Responseactive)
-        return;
+        return false;
 
     if (div.innerHTML.trim() == "")
     {
         console.log("Not sending empty post.");
-        return;
+        return false;
     }
 
     sendResponse(div.innerHTML, id);
 
     div.innerHTML = "";
     respondPost_onBlur(id);
-
+    return false;
 }
 
 function sendResponse(value, id){
@@ -269,9 +269,8 @@ function showResponses() {
     return false;
 }
 
-function rawPostToHtml(post)
+function rawPostToHtml(post, showActions = true)
 {
-    console.log(post);
     var author = post["author"]["username"];
     var content = post["content"];
     var date = timeConverter(post["timestamp"]);
@@ -279,7 +278,7 @@ function rawPostToHtml(post)
     var likes = post["likeCount"];
     var dislikes = post["dislikeCount"];
     var reposts = post["repostCount"];
-    return postToHtml(author, content, date, id, likes, dislikes, reposts);
+    return postToHtml(author, content, date, id, likes, dislikes, reposts, showActions);
 }
 
 function formatterNombre(n, mot)
@@ -292,7 +291,41 @@ function formatterNombre(n, mot)
         return n + " " + mot + "s";
 }
 
-function postToHtml(author, content, date, id, likecount = -1, dislikecount = -1, repostcount = -1)
+function rawRepostToHtml(post) {
+    var original = post['original'];
+    var originalId = original['id'];
+    var author = post['author']['username'];
+    var date = timeConverter(post['timestamp']);
+    var id = post['id'];
+    var text =
+        '    <div class="post-in-feed">\n' +
+        '        <div class="post-header">\n' +
+        '            <a href="/profile/' + author + '>" class="post-header-author">\n' +
+        '                ' + author + '\n' +
+        '            </a>\n' +
+        '            <span class="notification-reposted-you"> a recyclé</span>\n' +
+        '            <span class="post-header-date">' + date + '</span>\n' +
+        '        </div>\n' +
+        '\n' +
+        '        <div class="post-content">\n';
+    text = text + rawPostToHtml(original, false);
+    text = text +
+        '        </div>\n' +
+        '        <div class="post-actions">\n' +
+        '            <span class="post-action">\n' +
+        '                <a onClick="return repost(' + originalId + ');"  href="#" class="action-repost-<?=$original->getID()?> action-link" title="Je souhaite republier ce contenu.">\n' +
+        '                    ' + formatterNombre(original["repostCount"], "recyclage") + '\n' +
+        '                </a>\n' +
+        '            </span>\n' +
+        '            <span class="post-actions">\n' +
+        '\n' +
+        '            </span>\n' +
+        '        </div><div id="report-form-' + id + '"></div>\n' +
+        '    </div>';
+    return text;
+}
+
+function postToHtml(author, content, date, id, likecount = -1, dislikecount = -1, repostcount = -1, showActions = true)
 {
     if (likecount < 0 || dislikecount < 0 || repostcount < 0) {
         likeText = "Like";
@@ -321,50 +354,54 @@ function postToHtml(author, content, date, id, likecount = -1, dislikecount = -1
         '        <div class="post-content">\n' +
         '            ' + content + '\n' +
         '        </div>\n' +
-        '\n' +
-        '        <div class="post-actions">\n' +
-        '            <span class="post-action">\n' +
-        '                <a onClick="likePost(\'' + id + '\');" href="#" class="action-like-' + id + ' action-link" title="J\'aime cette publication">\n' +
-        '                     ' + likeText + '\n' +
-        '                </a>\n' +
-        '            </span>\n' +
-        '            <span class="post-action">\n' +
-        '                <a onClick="dislikePost(\'' + id + '\');" href="#" class="action-dislike-' + id + ' action-link" title="Je n\'aime pas cette publication.">\n' +
-        '                    ' + dislikeText + '\n' +
-        '                </a>\n' +
-        '            </span>\n' +
-        '            <span class="post-action">\n' +
-        '                <a onClick="repost(\'' + id + '\');"  href="#" class="action-repost-' + id + ' action-link" title="Republier ce contenu">\n' +
-        '                    ' + repostText + '\n' +
-        '                </a>\n' +
-        '            </span>\n' +
-        '            <span class="post-action">\n' +
-        '                <a onClick="toggleBlock(\'Response-div-' + id + '\');"  href="#" class="action-respond-' + id + ' action-link" title="Répondre à cette publication">\n' +
-        '                    Riposter\n' +
-        '                </a>\n' +
-        '            </span>\n' +
-        '            <span class="post-action">\n' +
-        '                <a onClick="toggleBlock(\'report-form-' + id + '\');"  href="#" class="action-report-' + id + ' action-link action-link-report" title="Cette publication pose un problème ?">\n' +
-        '                    Signaler\n' +
-        '                </a>\n' +
-        '            </span>\n' +
-        '        </div>\n' +
-        '        <div style="display: none" class="report-form-wrapper" id="report-form-' + id + '">\n' +
-        '            <form onSubmit="return reportPost(\'' + id + '\')" class="report-form">\n' +
-        '                <input type="text" id="report-reason-' + id + '" class="report-field" placeholder="Raison du signalement">\n' +
-        '                <button type="submit" class="report-submit" title="Confirmer le signalement">\n' +
-        '                    Signaler\n' +
-        '                </button>\n' +
-        '            </form>\n' +
-        '        </div>\n' +
-        '        <div style="display: none" class="response-form-wrapper" id="Response-div-' + id + '">\n' +
-        '            <div onBlur="respondPost_onBlur(\'' + id + '\')" class="response-field" onFocus="respondPost_onFocus(\'' + id + '\')" id="respond-post-' + id + '" contenteditable="true">\n' +
-        '                  Réponse...\n' +
-        '            </div>\n' +
-        '            <button class="fas fa-paper-plane response-submit" type="submit" onClick="verifyAndSendResponse(\'' + id + '\');" title="Envoyer la réponse">\n' +
-        '\n' +
-        '            </button>\n' +
-        '        </div>\n' +
+        '\n';
+    if (showActions) {
+        text +=
+            '        <div class="post-actions">\n' +
+            '            <span class="post-action">\n' +
+            '                <a onClick="return likePost(\'' + id + '\');" href="#" class="action-like-' + id + ' action-link" title="J\'aime cette publication">\n' +
+            '                     ' + likeText + '\n' +
+            '                </a>\n' +
+            '            </span>\n' +
+            '            <span class="post-action">\n' +
+            '                <a onClick="return dislikePost(\'' + id + '\');" href="#" class="action-dislike-' + id + ' action-link" title="Je n\'aime pas cette publication.">\n' +
+            '                    ' + dislikeText + '\n' +
+            '                </a>\n' +
+            '            </span>\n' +
+            '            <span class="post-action">\n' +
+            '                <a onClick="return repost(\'' + id + '\');"  href="#" class="action-repost-' + id + ' action-link" title="Republier ce contenu">\n' +
+            '                    ' + repostText + '\n' +
+            '                </a>\n' +
+            '            </span>\n' +
+            '            <span class="post-action">\n' +
+            '                <a onClick="return toggleBlock(\'Response-div-' + id + '\');"  href="#" class="action-respond-' + id + ' action-link" title="Répondre à cette publication">\n' +
+            '                    Riposter\n' +
+            '                </a>\n' +
+            '            </span>\n' +
+            '            <span class="post-action">\n' +
+            '                <a onClick="toggleBlock(\'report-form-' + id + '\');"  href="#" class="action-report-' + id + ' action-link action-link-report" title="Cette publication pose un problème ?">\n' +
+            '                    Signaler\n' +
+            '                </a>\n' +
+            '            </span>\n' +
+            '        </div>\n' +
+            '        <div style="display: none" class="report-form-wrapper" id="report-form-' + id + '">\n' +
+            '            <form onSubmit="return reportPost(\'' + id + '\')" class="report-form">\n' +
+            '                <input type="text" id="report-reason-' + id + '" class="report-field" placeholder="Raison du signalement">\n' +
+            '                <button type="submit" class="report-submit" title="Confirmer le signalement">\n' +
+            '                    Signaler\n' +
+            '                </button>\n' +
+            '            </form>\n' +
+            '        </div>\n' +
+            '        <div style="display: none" class="response-form-wrapper" id="Response-div-' + id + '">\n' +
+            '            <div onBlur="respondPost_onBlur(\'' + id + '\')" class="response-field" onFocus="respondPost_onFocus(\'' + id + '\')" id="respond-post-' + id + '" contenteditable="true">\n' +
+            '                  Réponse...\n' +
+            '            </div>\n' +
+            '            <button class="fas fa-paper-plane response-submit" type="submit" onClick="return verifyAndSendResponse(\'' + id + '\');" title="Envoyer la réponse">\n' +
+            '\n' +
+            '            </button>\n' +
+            '        </div>\n';
+    }
+    text +=
         '    </div>';
     return text;
 }

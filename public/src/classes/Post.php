@@ -376,7 +376,7 @@ class Post implements JsonSerializable
             return null;
 
         if ($this->responseToCache != null)
-            $this->responseToCache;
+            return $this->responseToCache;
 
         $this->responseToCache = Post::fromID($this->responseTo);
         return $this->responseToCache;
@@ -388,7 +388,7 @@ class Post implements JsonSerializable
             return null;
 
         if ($this->repostOfCache != null)
-            $this->repostOfCache;
+            return $this->repostOfCache;
 
         $this->repostOfCache = Post::fromID($this->repostOf);
         return $this->repostOfCache;
@@ -646,6 +646,7 @@ class Post implements JsonSerializable
             "authorId" => $this->author,
             "timestamp" => $this->timestamp,
             "repostOf" => $this->repostOf,
+            "original" => $this->repostOfCache,
             "responseTo" => $this->responseTo,
             "appreciations" => $this->getAppreciations(),
             "repostCount" => $this->getRepostCount(),

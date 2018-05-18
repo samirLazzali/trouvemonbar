@@ -40,6 +40,9 @@ try
     $p = Post::findPosts($people, $limit, $after);
     foreach($p as $post) {
         $post->getAuthor();
+        $post->getRepostOf();
+        if ($post->getRepostID() != null)
+            $post->getRepostOf()->getAuthor();
     }
 
     success_die($p, true);

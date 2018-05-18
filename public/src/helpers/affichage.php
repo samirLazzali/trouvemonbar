@@ -54,27 +54,27 @@ function affichePost($post, $show_actions = true, $text_after_name = "", $text_b
         ?>
         <div class="post-actions">
             <span class="post-action">
-                <a onClick="likePost('<?=$id?>');" href="#" class="action-like-<?=$id?> action-link" title="J'aime cette publication">
+                <a onClick="return likePost('<?=$id?>');" href="#" class="action-like-<?=$id?> action-link" title="J'aime cette publication">
                      <?= formatter_nombre($post->getLikeCount(), "like"); ?>
                 </a>
             </span>
             <span class="post-action">
-                <a onClick="dislikePost('<?=$id?>');" href="#" class="action-dislike-<?=$id?> action-link" title="Je n'aime pas cette publication.">
+                <a onClick="return dislikePost('<?=$id?>');" href="#" class="action-dislike-<?=$id?> action-link" title="Je n'aime pas cette publication.">
                     <?= formatter_nombre($post->getDislikeCount(), "dislike"); ?>
                 </a>
             </span>
             <span class="post-action">
-                <a onClick="repost('<?=$id?>');"  href="#" class="action-repost-<?=$id?> action-link" title="Republier ce contenu">
+                <a onClick="return repost('<?=$id?>');"  href="#" class="action-repost-<?=$id?> action-link" title="Republier ce contenu">
                     <?= formatter_nombre($post->getRepostCount(), "recyclage"); ?>
                 </a>
             </span>
             <span class="post-action">
-                <a onClick="toggleBlock('Response-div-<?=$id?>');"  href="#" class="action-respond-<?=$id?> action-link" title="Répondre à cette publication">
+                <a onClick="return toggleBlock('Response-div-<?=$id?>');"  href="#" class="action-respond-<?=$id?> action-link" title="Répondre à cette publication">
                     Riposter
                 </a>
             </span>
             <span class="post-action">
-                <a onClick="toggleBlock('report-form-<?=$id?>');"  href="#" class="action-report-<?=$id?> action-link action-link-report" title="Cette publication pose un problème ?">
+                <a onClick="return toggleBlock('report-form-<?=$id?>');"  href="#" class="action-report-<?=$id?> action-link action-link-report" title="Cette publication pose un problème ?">
                     Signaler
                 </a>
             </span>
@@ -91,7 +91,7 @@ function affichePost($post, $show_actions = true, $text_after_name = "", $text_b
             <div onBlur="respondPost_onBlur('<?=$id?>')" class="response-field" onFocus="respondPost_onFocus('<?=$id?>')" id="respond-post-<?=$id?>" contenteditable="true">
                   Réponse...
             </div>
-            <button class="fas fa-paper-plane response-submit" type="submit" onClick="verifyAndSendResponse('<?=$id?>');" title="Envoyer la réponse">
+            <button class="fas fa-paper-plane response-submit" type="submit" onClick="return verifyAndSendResponse('<?=$id?>');" title="Envoyer la réponse">
 
             </button>
         </div>
@@ -123,7 +123,7 @@ function afficheRepost($repost, $text_after = null) {
         </div>
         <div class="post-actions">
             <span class="post-action">
-                <a onClick="repost('<?=$original->getID()?>');"  href="#" class="action-repost-<?=$original->getID()?> action-link" title="Je souhaite republier ce contenu.">
+                <a onClick="return repost('<?=$original->getID()?>');"  href="#" class="action-repost-<?=$original->getID()?> action-link" title="Je souhaite republier ce contenu.">
                     <?= formatter_nombre($original->getRepostCount(), "recyclage"); ?>
                 </a>
             </span>

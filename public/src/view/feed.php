@@ -23,7 +23,7 @@ if ($u == null)
     <script src="/assets/js/general.js"><</script>
     <script src="/assets/js/post.js"><</script>
 </head>
-<body onload="toutCa()">
+<body onload="refreshFeed()">
 <?php require "menu.php"; ?>
 <div class="column-wrapper">
     <h1>
@@ -48,7 +48,7 @@ if ($u == null)
 </div>
 <script>
     var lastRefresh = <?= time(); ?>;
-    function toutCa()
+    function refreshFeed()
     {
         var feed = document.getElementById("post-feed");
         var xhttp = new XMLHttpRequest();
@@ -60,21 +60,26 @@ if ($u == null)
                 {
                     lastRefresh = result["timestamp"] - 1;
                     result = result["result"];
+                    var html;
                     if (result.length > 0) {
                         Array.from(result).forEach(function(elt, idx, arr) {
                             var currentReport = document.getElementById("report-form-" + elt["id"]);
                             if (currentReport != undefined)
                                 return;
+                            if (elt["repostOf"] != null)
+                                html = rawRepostToHtml(elt);
+                            else
+                                html = rawPostToHtml(elt);
 
-                            var html = rawPostToHtml(elt);
                             feed.innerHTML = html + feed.innerHTML;
                         });
                     }
-                    toutCa();
+                    // On rappelle refreshFeed dans cinq secondes
+                    setTimeout(function () {
+                        refreshFeed();
+                    }, 5000);
                 }
             }
-            else
-                console.log(this.status);
         };
         xhttp.open("POST", "/api/post/latest");
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

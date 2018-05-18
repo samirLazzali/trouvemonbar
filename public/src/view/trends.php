@@ -23,14 +23,14 @@ $tags = array_keys($trends);
                 - tendances -
             </h1>
             <div id="trend-types">
-                <a onClick="getHashtags();" id="trend-selector-hashtags" class="trend-type-wrapper" href="#" title="Basculer vers les hashtags les plus publiés">
+                <a onClick="return getHashtags();" id="trend-selector-hashtags" class="trend-type-wrapper" href="#" title="Basculer vers les hashtags les plus publiés">
                     Hashtags
                 </a>
-                <a onClick="getTopLikes();" id="trend-selector-likes" class="trend-type-wrapper selected" href="#" title="Basculer vers les publications les plus aimées">
+                <a onClick="return getTopLikes();" id="trend-selector-likes" class="trend-type-wrapper selected" href="#" title="Basculer vers les publications les plus aimées">
                     Les plus aimés
                 </a>
                 <!--
-                <a onClick="updateTrends('fights');" id="trend-selector-fights" class="trend-type-wrapper" href="#">
+                <a onClick="return updateTrends('fights');" id="trend-selector-fights" class="trend-type-wrapper" href="#">
                     Fights
                 </a>
                 -->
