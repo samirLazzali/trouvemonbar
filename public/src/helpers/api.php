@@ -26,10 +26,13 @@ function error_die($description, $status = STATUS_OK)
 /**
  * Affiche un message de succès et arrête l'exécution du script.
  * @param JsonSerializable $result le message de succès (ou un JsonSerializable)
+ * @param boolean $show_timestamp afficher le timestamp ou pas dans la réponse
  */
-function success_die($result)
+function success_die($result, $show_timestamp = true)
 {
     $status = array("status" => 200, "result" => $result);
+    if ($show_timestamp)
+        $status["timestamp"] = time();
     json_die($status);
 }
 

@@ -544,13 +544,14 @@ class Post implements JsonSerializable
      * @param array $people le filtre des personnes (noms d'utilisateur) dont on veut les publications.
      * Si c'est un tableau vide, les publications ne sont pas filtrées.
      * @param int $limit le nombre maximum de publications à renvoyer
+     * @param int after le timestamp minimal des posts à récuprérer
      * @return array un tableau de Post
      * @throws UserNotFoundException si un des utilisateurs de $people n'existe pas.
      */
-    static function findPosts($people, $limit = 50)
+    static function findPosts($people, $limit = 50, $after = 0)
     {
         if (count($people) == 0)
-            $SQL = "SELECT * FROM " . TABLE_Posts . " ORDER BY Timestamp DESC LIMIT $limit";
+            $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE Timestamp > :after ORDER BY Timestamp DESC LIMIT $limit";
         else
         {
             $IDs = array();
@@ -564,7 +565,7 @@ class Post implements JsonSerializable
                     array_push($IDs, $p->getID());
                 }
 
-            $SQL = "SELECT * FROM Post WHERE Author IN (";
+            $SQL = "SELECT * FROM Post WHERE Timestamp > :after AND Author IN (";
 
             foreach ($IDs as $ID) {
                 $SQL .= "'" . $ID . "', ";
@@ -575,6 +576,7 @@ class Post implements JsonSerializable
 
         $db = connect();
         $statement = $db->prepare($SQL);
+        $statement->bindValue(":after", $after);
         $statement->execute();
         $rows = $statement->fetchAll();
 

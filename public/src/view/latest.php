@@ -18,7 +18,7 @@ $limit = 200;
 <html>
 <head>
     <title>
-        Derniers tweets
+        Vitz # Fil
     </title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="assets/styles/feed.css" />
@@ -29,7 +29,7 @@ $limit = 200;
 <?php require "menu.php"; ?>
 <div class="column-wrapper">
     <h1>
-        - Derniers Tweets -
+        - Dernières Publications -
     </h1>
 
     <?php

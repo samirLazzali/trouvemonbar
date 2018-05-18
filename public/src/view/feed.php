@@ -16,18 +16,18 @@ if ($u == null)
 <html>
 <head>
     <title>
-        Derniers tweets
+        Dernières publications
     </title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="assets/styles/feed.css" />
     <script src="/assets/js/general.js"><</script>
     <script src="/assets/js/post.js"><</script>
 </head>
-<body>
+<body onload="toutCa()">
 <?php require "menu.php"; ?>
 <div class="column-wrapper">
     <h1>
-        - Derniers Tweets -
+        - Dernières publications -
     </h1>
 
     <?php
@@ -35,7 +35,7 @@ if ($u == null)
     $people = $u->getSubscriptions();
     $posts = Post::findPosts($people, $limit);
         ?>
-    <div class="post-feed">
+    <div class="post-feed" id="post-feed">
         <?php
         foreach ($posts as $post){
             if ($post->getRepostID() == null)
@@ -46,5 +46,41 @@ if ($u == null)
         ?>
     </div>
 </div>
+<script>
+    var lastRefresh = <?= time(); ?>;
+    function toutCa()
+    {
+        var feed = document.getElementById("post-feed");
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200)
+            {
+                var result = JSON.parse(xhttp.responseText);
+                if (result["status"] == 200)
+                {
+                    lastRefresh = result["timestamp"] - 1;
+                    result = result["result"];
+                    if (result.length > 0) {
+                        Array.from(result).forEach(function(elt, idx, arr) {
+                            var currentReport = document.getElementById("report-form-" + elt["id"]);
+                            if (currentReport != undefined)
+                                return;
+
+                            var html = rawPostToHtml(elt);
+                            feed.innerHTML = html + feed.innerHTML;
+                        });
+                    }
+                    toutCa();
+                }
+            }
+            else
+                console.log(this.status);
+        };
+        xhttp.open("POST", "/api/post/latest");
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("after=" + lastRefresh + "&limit=25");
+        return false;
+    }
+</script>
 </body>
 </html>

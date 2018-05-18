@@ -91,7 +91,7 @@ function affichePost($post, $show_actions = true, $text_after_name = "", $text_b
             <div onBlur="respondPost_onBlur('<?=$id?>')" class="response-field" onFocus="respondPost_onFocus('<?=$id?>')" id="respond-post-<?=$id?>" contenteditable="true">
                   Réponse...
             </div>
-            <button class="fas fa-paper-plane response-submit" type="submit" onClick="verifyAndSendResponse('<?=$id?>');" title="Envouer la réponse">
+            <button class="fas fa-paper-plane response-submit" type="submit" onClick="verifyAndSendResponse('<?=$id?>');" title="Envoyer la réponse">
 
             </button>
         </div>
@@ -107,7 +107,7 @@ function afficheRepost($repost, $text_after = null) {
     $date = timestamp_to_string($repost->getTimestamp());
     $author = $repost->getAuthor()->getUsername();
     if ($text_after == null)
-        $text_after = " a retweeté"
+        $text_after = "a recyclé"
     ?>
     <div class="post-in-feed">
         <div class="post-header">

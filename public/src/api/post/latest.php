@@ -20,6 +20,10 @@ elseif(isset($_GET['limit']))
 else
     $limit = 50;
 
+if (isset($_POST['after']))
+    $after = $_POST['after'];
+else
+    $after = 0;
 
 if (isset($_POST['filter'])) {
     $filter = $_POST['filter'];
@@ -33,8 +37,12 @@ else
 
 try
 {
-    $p = Post::findPosts($people, $limit);
-    success_die($p);
+    $p = Post::findPosts($people, $limit, $after);
+    foreach($p as $post) {
+        $post->getAuthor();
+    }
+
+    success_die($p, true);
 } 
 catch (UserNotFoundException $e)
 {
