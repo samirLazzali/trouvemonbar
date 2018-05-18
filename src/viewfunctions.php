@@ -39,6 +39,7 @@ function header_t($titre) {
 
 function footer(){
     print "<div id=\"footer\">";
+    print "<link rel=\"stylesheet\" href=\"site-style.css\">\n";
     print "<p>&copy; <b> 2018 ENSIIE </b> | Skutnik . Chekour . Trachino . Meas - All Rights Reserved  </p> </br>";
     print "<p> <b> Contact </b> : 06 59 42 47 94 | lesbonsbails@gmail.com | </p>";
     print "		</div>\n";
