@@ -50,6 +50,7 @@ if (isset($_POST['nominsc']) && $_POST!=null) {   //améliorer la condition
     ]); 
     $rep=$connection->query("SELECT * FROM public.user");
     $tuple=$rep->fetchAll();
-    echo $tuple[1]['prenom'];
+    echo $tuple[1]['pseudo'];
+    echo $tuple[1]['mdp'];
 }
 ?>
