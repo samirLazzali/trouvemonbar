@@ -9,6 +9,8 @@
 require "../src/app/helpers.php";
 include "../src/app/models/File.php";
 
+if (!Auth::logged())
+    redirect("index.php");
 
 header("content-type:text/html;charset:utf-8");
 $fileInfo = $_FILES["myfile"];
@@ -19,7 +21,7 @@ $error = $fileInfo["error"];
 $size = $fileInfo["size"];
 $tmp_name = $fileInfo["tmp_name"];
 $maxSize=2*1024*1024;// the maximum
-$allowExt=array("txt","pdf","png","jpg");
+$allowExt=array("txt","pdf","png","jpg","jpeg");
 
 //for Judging error number
 if($error == 0){
@@ -48,7 +50,7 @@ if($error == 0){
 
         $filehash=User\File::filehash($destination);
 
-        if($id=User\File::insert_file($filename,$filehash))
+        if($id=User\File::insert_file($filename,$filehash,$_SESSION['user']))
         {
             $newname=$path.$id.$filename;
             rename($destination,$newname);

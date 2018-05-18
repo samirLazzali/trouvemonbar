@@ -206,5 +206,32 @@ class User
         return $this;
     }
 
+    /**
+     * @return array list of all users and game created  in the database
+     */
+    public static function usergamelist()
+    {
+
+        $query = db()->prepare("SELECT userid,nick,firstname,lastname,gamename,gameid FROM users left join game on userid=creator");
+        $query->execute();
+
+        return $query->fetchAll();
+    }
+
+    /**
+     * @return array list of all users  in the database
+     */
+    public static function userlist()
+    {
+
+        $query = db()->prepare("SELECT userid,nick,firstname,lastname FROM users ");
+        $query->execute();
+
+        return $query->fetchAll();
+    }
+
+
+
+
 }
 
