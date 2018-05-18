@@ -10,14 +10,17 @@ $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=
 
 $userRepository = new \User\UserRepository($connection);
 $users = $userRepository->fetchAll();
+?>
 
-if (isset($_SESSION['connect']) && $_SESSION['connect']>=1) {
-    echo '<html>';
-    echo '<head>';
-    echo '<title> profil  </title>';
-    echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">';
-    echo '<link rel="stylesheet" type="text/css"  href="style_index.css">';
-    echo '</head>';
+    <html>
+        <head>
+            <title> profil  </title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <link rel="stylesheet" type="text/css"  href="style_index.css">
+        </head>
+
+<?php
+    if (isset($_SESSION['connect']) && $_SESSION['connect']>=1) {
     echo '<body>';
 
     echo '<div class="banniere">';
@@ -35,6 +38,7 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']>=1) {
     echo '   <fieldset><legend>confirmer mot de passe : </legend><input type ="text" name="mdpmodif2" /></fieldset>';
     echo '   <input type ="submit" name="submit" value="Modifier"/>';
     echo '</form>';
+    echo '</body>';
 
 
     $prenom = $_SESSION['prenom'];
@@ -55,22 +59,30 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']>=1) {
     if (isset($_POST['pseudomodif']) && $_POST['pseudomodif'] != null) {
         $pseudo = $_POST['pseudomodif'];
     }
-    if (isset($_POST['mdpmodif']) && $_POST['mdpmodif'] != null && isset($_POST['mdpmodif2']) && $_POST['mdpmodif2'] != null && $_POST['mdpmodif'] == $_POST['mdpmodif2']) {
-        $mdp = $_POST['mdpmodif'];
+    if (isset($_POST['mdpmodif']) && $_POST['mdpmodif'] != null && isset($_POST['mdpmodif2'])) {
+        if ($_POST['mdpmodif2'] != null && $_POST['mdpmodif'] == $_POST['mdpmodif2']) {
+            $mdp = $_POST['mdpmodif'];
+        }
+        else{
+            echo 'les deux mot de passe doivent être identique';
+        }
     }
 
-    $req = $connection->prepare('UPDATE public.user SET prenom:prenom, nom=:nom, mdp=:mdp, mail=:mail pseudo=:pseudo WHERE id=$_SESSION["id"]');
-    $test = $req->execute(['prenom' => $prenom,
-        'nom' => $nom,
-        'mdp' => $mdp,
-        'mail' => $email,
-        'pseudo' => $pseudo,
+    $req = $connection->prepare('UPDATE public.user SET prenom=:prenom, nom=:nom, mdp=:mdp, mail=:mail, pseudo=:pseudo WHERE id=:id');
+    $test = $req->execute([':prenom' => $prenom,
+        ':nom' => $nom,
+        ':mdp' => $mdp,
+        ':mail' => $email,
+        ':pseudo' => $pseudo,
+        ':id' => $_SESSION['id'],
     ]);
 }
 else {
-    echo '<h2>veuillez vous connecter pour acceder à cette page</h2>';
-    echo '<a href="connexion.php">connexion</a>';
+        echo '<body>';
+        echo '<h2>veuillez vous connecter pour acceder à cette page</h2>';
+        echo '<a href="connexion.php">connexion</a>';
 }
-
+?>
+</html>
 
 
