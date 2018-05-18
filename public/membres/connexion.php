@@ -4,16 +4,7 @@ session_start();
 header('Content-type: text/html; charset=utf-8');
 include('../includes/config.php');
 include('../includes/functions.php');
-connexion_bdd();
 actualiser_session();
-
-$bd_nom_serveur='localhost';
-$bd_login='root';
-$bd_mot_de_passe='';
-$bd_nom_bd='catisfaction';
-$connexion = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
-mysqli_select_db($connexion,$bd_nom_bd);
-mysqli_query($connexion,"set names 'utf8'");
 
 if(isset($_SESSION['id_user']))
 {
@@ -60,8 +51,8 @@ include('../includes/top.php');
 }
 			else
 			{
-				$result = sqlquery($connexion,"SELECT COUNT(id_user) AS nbr, id_user, login, password FROM Utilisateur WHERE
-				login = '".mysqli_real_escape_string($connexion,$_POST['login'])."' GROUP BY id_user", 1);
+				$result = sqlquery("SELECT COUNT(id_user) AS nbr, id_user, login, password FROM Utilisateur WHERE
+				login = '"$_POST['login']"' GROUP BY id_user", 1);
 				
 				if($result['nbr'] == 1)
 				{
@@ -86,7 +77,7 @@ include('../includes/top.php');
 										ROOTPATH.'/index.php',
 										3
 										);
-						//require_once('../information.php');
+						require_once('../information.php');
 						exit();
 					}
 					
@@ -101,7 +92,7 @@ include('../includes/top.php');
 										ROOTPATH.'/membres/connexion.php',
 										3
 										);
-						//require_once('../information.php');
+						require_once('../information.php');
 						exit();
 					}
 				}
@@ -116,7 +107,7 @@ include('../includes/top.php');
 									ROOTPATH.'/contact.php',
 									3
 									);
-					//require_once('../information.php');
+					require_once('../information.php');
 					exit();
 				}
 				
@@ -130,7 +121,7 @@ include('../includes/top.php');
 									ROOTPATH.'/membres/connexion.php',
 									5
 									);
-					//require_once('../information.php');
+					require_once('../information.php');
 					exit();
 				}
 			}

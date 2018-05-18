@@ -5,17 +5,7 @@ header('Content-type: text/html; charset=utf-8');
 include('../includes/config.php');
 
 include('../includes/functions.php');
-connexion_bdd();
 actualiser_session();
-$bd_nom_serveur='localhost';
-$bd_login='root';
-$bd_mot_de_passe='';
-$bd_nom_bd='catisfaction';
-	
-//Connexion à la base de données
-$connexion = mysqli_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
-mysqli_select_db($connexion,$bd_nom_bd);
-mysqli_query($connexion,"set names 'utf8'");
 if(isset($_SESSION['id_user']))
 {
 	header('Location: '.ROOTPATH.'/index.php');
@@ -276,10 +266,15 @@ include('../includes/top.php');?>
 			<?php
 			if($_SESSION['erreurs'] == 0)
 			{
-				$insertion = "INSERT INTO Utilisateur VALUES(NULL, '".mysqli_real_escape_string($connexion,$login)."',
-				'".mysqli_real_escape_string($connexion,$mail)."','".md5($password)."','".mysqli_real_escape_string($connexion,$phone_number)."')";
+				$insertion = "INSERT INTO Utilisateur VALUES(NULL, '"$login"',
+				'"$mail"','".md5($password)."','"$phone_number"')";
 				
-				if(mysqli_query($connexion,$insertion))
+				$dbName = getenv('DB_NAME');
+				$dbUser = getenv('DB_USER');
+				$dbPassword = getenv('DB_PASSWORD');
+				$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
+				
+				if($connexion->exec($insertion))
 				{
 					$queries++;
 					empty_session();
@@ -294,14 +289,14 @@ include('../includes/top.php');?>
 				
 				else
 				{
-					if(stripos(mysqli_error($connexion), $_SESSION['form_login']) !== FALSE)
+					if($_SESSION['form_login']) !== FALSE)
 					{
 						unset($_SESSION['form_login']);
 						$_SESSION['login_info'] = '<span class="erreur">Le nom d\'utilisateur '.htmlspecialchars($login, ENT_QUOTES).' est déjà pris, choisissez-en un autre.</span><br/>';
 						$_SESSION['erreurs']++;
 					}
 					
-					if(stripos(mysqli_error($connexion), $_SESSION['form_mail']) !== FALSE)
+					if($_SESSION['form_mail']) !== FALSE)
 					{
 						unset($_SESSION['form_mail']);
 						unset($_SESSION['form_mail_verif']);

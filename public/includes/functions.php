@@ -149,15 +149,13 @@ function vider_cookie()
 
 function checklogin($login)
 {
-	$connexion = pg_connect("host=localhost dbname=catisfaction user = root");
-	pg_query($connexion,"set names 'utf8'");
 	if($login == '') return 'vide';
 	else if(strlen($login) < 3) return 'court';
 	else if(strlen($login) > 32) return 'long';
 	
 	else
 	{
-		$result = sqlquery($connexion,"SELECT COUNT(*) AS nbr FROM Utilisateur WHERE login = '".pg_escape_string($connexion,$login)."'", 1);
+		$result = sqlquery("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE login = '"$login"'", 1);
 		global $queries;
 		$queries++;
 		
@@ -168,8 +166,6 @@ function checklogin($login)
 
 function checkpassword($password)
 {
-	$connexion = pg_connect("host=localhost dbname=catisfaction user = root");
-	pg_query($connexion,"set names 'utf8'");
 	if($password == '') return 'vide';
 	else if(strlen($password) < 4) return 'court';
 	else if(strlen($password) > 50) return 'long';
@@ -190,15 +186,12 @@ function checkpasswordS($password, $password2)
 
 function checkmail($email)
 {
-	$connexion = pg_connect("host=localhost dbname=catisfaction user = root");
-	pg_query($connexion,"set names 'utf8'");
-	mysqli_select_db($connexion,$bd_nom_bd);
 	if($email == '') return 'Champ vide';
 	else if(!preg_match('#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#is', $email)) return 'invalide';
 	
 	else
 	{
-		$result = sqlquery($connexion,"SELECT COUNT(*) AS nbr FROM Utilisateur WHERE mail = '".pg_escape_string($connexion,$email)."'", 1);
+		$result = sqlquery("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE mail = '"$email"'", 1);
 		global $queries;
 		$queries++;
 		
@@ -215,15 +208,13 @@ function checkmailS($email, $email2)
 
 function checkphone($phone_number)
 {
-	$connexion = pg_connect("host=localhost dbname=catisfaction user = root");
-	pg_query($connexion,"set names 'utf8'");
 	if($phone_number == '') return 'vide';
 	else if(strlen($phone_number) < 10) return 'court';
 	else if(strlen($phone_number) > 10) return 'long';
 	
 	else
 	{
-		$result = sqlquery($connexion,"SELECT COUNT(*) AS nbr FROM Utilisateur WHERE phone_number = '".pg_escape_string($connexion,$phone_number)."'", 1);
+		$result = sqlquery("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE phone_number = '"$phone_number"'", 1);
 		global $queries;
 		$queries++;
 		
