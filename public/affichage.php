@@ -1,6 +1,25 @@
 <?php
+
 /**
- *
+ * @brief génère l'entete, s'appelle au début du fichier
+ * @param $titre une string
+ */
+function enTete($titre)
+{
+    print "<!DOCTYPE html>\n";
+    print "<html>\n";
+    print "  <head>\n";
+    print "    <meta charset=\"utf-8\" />\n";
+    print "    <title>$titre</title>\n";
+    print "    <link rel=\"stylesheet\" href=\"tpStyle.css\"/>\n";
+    print "  </head>\n";
+
+    print "  <body>\n";
+    print "    <header><h1> $titre </h1></header>\n";
+}
+
+/**
+ * @brief génère le pied, s'appelle à la fin
  */
 function pied(){
     print "</body>";
@@ -9,21 +28,24 @@ function pied(){
 }
 
 /**
- * @param $str
+ * @brief affiche $str (pas forcement utile)
+ * @param $str string
  */
 function affiche($str) {
     echo $str;
 }
 
 /**
- * @param $str
+ * @brief affiche $str sous forme de paragraphe
+ * @param $str une string
  */
 function affiche_info($str) {
     echo '<p>'.$str.'</p>';
 }
 
 /**
- * @param $str
+ * @brief affiche $str sous forme de message d'erreur
+ * @param $str une string
  */
 function affiche_erreur($str) {
     echo '<p class="erreur">'.$str.'</p>';
