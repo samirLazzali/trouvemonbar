@@ -1,5 +1,37 @@
 <?php
+/**
+ *
+ */
+function pied(){
+    print "</body>";
+    print "</html>";
 
+}
+
+/**
+ * @param $str
+ */
+function affiche($str) {
+    echo $str;
+}
+
+/**
+ * @param $str
+ */
+function affiche_info($str) {
+    echo '<p>'.$str.'</p>';
+}
+
+/**
+ * @param $str
+ */
+function affiche_erreur($str) {
+    echo '<p class="erreur">'.$str.'</p>';
+}
+
+/**
+ * @param $mp
+ */
 function head($mp){
     echo "<head>";
     echo "<meta charset=\"UTF−8\"/>";
@@ -8,6 +40,9 @@ function head($mp){
     echo "</head>";
 }
 
+/**
+ * @param $connecte
+ */
 function body($connecte){
     echo "<body>";
     _header();
@@ -18,12 +53,18 @@ function body($connecte){
     echo "</body>";
 }
 
+/**
+ *
+ */
 function _header(){
     echo "<div id=\"header\">";
     echo  "<h1>Aperal</h1>";
     echo "</div>";
 }
 
+/**
+ * @param $connecte
+ */
 function _nav($connecte){
     echo  "<div id=\"nav\">";
     menu();
@@ -44,6 +85,9 @@ function profil(){
     echo "</div>";
 }
 
+/**
+ *
+ */
 function menu(){
     echo "<div id=\"menu\">";
     echo "<h3>Aperal</h3>";
@@ -58,18 +102,27 @@ function menu(){
     echo "</div>";
 }
 
+/**
+ *
+ */
 function _main() {
     echo "<div id=\"main\">";
     _article();
     echo "</div>";
 }
 
+/**
+ *
+ */
 function _article(){
     echo "<div id=\"article\">";
     echo "<h1>Bienvenu sur le nouveau site d'Aperal</h1>";
     echo "</div>";
 }
 
+/**
+ *
+ */
 function _footer(){
     echo"<div id=\"footer\">14/05/2018</div>";
 }
