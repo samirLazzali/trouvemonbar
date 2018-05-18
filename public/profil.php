@@ -59,7 +59,7 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']>=1) {
         $mdp = $_POST['mdpmodif'];
     }
 
-    $req = $connection->prepare('UPDATE public.user SET prenom:prenom, nom=:nom, mdp=:mdp, mail=:mail pseudo=:pseudo');
+    $req = $connection->prepare('UPDATE public.user SET prenom:prenom, nom=:nom, mdp=:mdp, mail=:mail pseudo=:pseudo WHERE id=$_SESSION["id"]');
     $test = $req->execute(['prenom' => $prenom,
         'nom' => $nom,
         'mdp' => $mdp,
