@@ -10,6 +10,7 @@ if(isset($_POST['adm']) AND ($_POST['adm'] == 'Admin')) { header("location:admin
 //menu connection
 if(isset($_POST['co']) AND ($_POST['co'] == "Se connecter")) { header("location:connexion.php"); }
 if(isset($_POST['ins']) AND ($_POST['ins'] == "inscription")) {header("location:inscription.php"); }
+if(isset($_POST['profil']) AND ($_POST['profil'] == "Profil")) {header("location:profil.php"); }
 
 //sous_menu aperal
 if(isset($_POST['propA']) AND ($_POST['propA'] == "A propos")) { header("location:a_propos_aperal.php"); }
