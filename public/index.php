@@ -41,7 +41,6 @@ $users = $userRepository->fetchAll();
 <div class="banniere">
 <?php
 menu_navigation();
-menu_connexion();
 ?>
 </div>
 
