@@ -4,7 +4,7 @@ include("viewfunctions.php");
 include("annonce.php");
 login();
 
-header_t("Bienvenue sur le site des bons bails");
+header_t("Les Bons Bails");
 
 displayLogin();
 
