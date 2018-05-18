@@ -16,11 +16,11 @@ if(isset($_POST['propA']) AND ($_POST['propA'] == "A propos")) { header("locatio
 if(isset($_POST['prepA']) AND ($_POST['prepA'] == "Préparatif")) { header("location:preparatif_aperal.php"); }
 if(isset($_POST['rec']) AND ($_POST['rec'] == "Recettes")) { header("location:recette.php"); }
 if(isset($_POST['inta']) AND ($_POST['inta'] == "Intendance")) { header("location:intendance.php"); }
-if(isset($_POST['ava']) AND ($_POST['ava'] == "Avis")) { header("location:avis.php"); }
+if(isset($_POST['ava']) AND ($_POST['ava'] == "Avis")) { header("location:avis_aperal.php"); }
 
 
 //sous_menu_oenologie
-if(isset($_POST['propO']) AND ($_POST['propO'] == "A propos")) { header("location:a_propos_aperal.php"); }
-if(isset($_POST['prepO']) AND ($_POST['prepO'] == "Préparatif")) { header("location:preparatif_aperal.php"); }
-if(isset($_POST['avO']) AND ($_POST['avO'] == "Avis")) { header("location:avis.php"); }
-if(isset($_POST['vin']) AND ($_POST['vin'] == "Liste des vins")) { header("location:avis.php"); }
+if(isset($_POST['propO']) AND ($_POST['propO'] == "A propos")) { header("location:a_propos_oeno.php"); }
+if(isset($_POST['prepO']) AND ($_POST['prepO'] == "Préparatif")) { header("location:preparatif_oeno.php"); }
+if(isset($_POST['avO']) AND ($_POST['avO'] == "Avis")) { header("location:avis_oeno.php"); }
+if(isset($_POST['vin']) AND ($_POST['vin'] == "Liste des vins")) { header("location:liste_des_vins.php"); }
