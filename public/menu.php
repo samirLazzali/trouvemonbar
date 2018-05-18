@@ -1,14 +1,37 @@
 <?php
 function menu_navigation()
 {
+    echo '<nav class="gtco-nav" role="navigation">';
+    echo '<div class="gtco-container">';
+    echo '<div class="row">';
+    echo '<div class="col-sm-4 col-xs-12">';
+    echo '<div id="gtco-logo"><a href="index.html">Apéral <em>-</em> Oenologiie</a></div>';
+    echo '</div>';
+    echo '<div class="col-xs-8 text-right menu-1">';
+    echo '<ul>';
+    echo '<li><a href="index.php">Accueil</a></li>';
+    echo '<li><a href="a_propos_aperal.php">Apéral</a></li>';
+    echo '<li><a href="a_propos_oeno.php">Oenologiie</a></li>';
+    echo '<li><a href="reunion.php">Réunions</a></li>';
+    echo '<li><a href="classement.php">Classement</a></li>';
+    echo '<li><a href="profil.php">Profil</a></li>';
+    echo '<li><a href="Admin.php">Admin</a></li>';
+    echo '</ul>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+    echo '</nav>';
+    /*
     echo '<form method = "post" action = "changement_de_page.php" id = "menu_bouton" >';
-    echo '<div class = "bouton" ><input type = "submit" class="button" name = "acc" value = "Accueil" ></div >';
+    echo '<li><div class = "" ><input type = "submit" class="button" name = "acc" value = "Accueil" ></div ></li>';
     echo '<div class = "bouton" ><input type = "submit" class="button" name = "ap" value = "Apéral" ></div >';
     echo '<div class = "bouton" ><input type = "submit" class="button" name = "oe" value = "Oenologiie" ></div >';
     echo '<div class = "bouton" ><input type = "submit" class="button" name = "reu" value = "Réunion" ></div >';
     echo '<div class = "bouton" ><input type = "submit" class="button" name = "clas" value = "Classement" ></div >';
+    echo '<div class ="bouton" ><input type = "submit" class="button" name ="profil" value = "Profil" ></div >';
     echo '<div class = "bouton" ><input type = "submit" class="button" name = "adm" value = "Admin" ></div >';
     echo '</form>';
+     */
 }
 
 function menu_connexion(){
