@@ -15,6 +15,7 @@ function newPost_onFocus()
 {
     var div = document.getElementById("new-post-content");
     addClass(div, "post-content-active");
+    removeClass(div, "field-validated");
 
     if(!newPostActive)
         div.innerHTML = "";
@@ -23,12 +24,12 @@ function newPost_onFocus()
 function newPost_onBlur()
 {
     var div = document.getElementById("new-post-content");
-    div.style.backgroundColor = "#95a5a6";
+    removeClass(div, "post-content-active");
+
     div.innerHTML = div.innerHTML.trim();
     newPostActive = div.innerHTML != "";
-    if(!newPostActive) {
+    if(!newPostActive)
         div.innerHTML = "Nouvelle publication...";
-    }
 }
 
 function sendNewPost()
@@ -60,7 +61,10 @@ function account_createPost(value, user_Response)
             if (result["status"] == STATUS_OK)
             {
                 var div = document.getElementById("new-post-content");
-                div.style.backgroundColor = "#8BC34A";
+                addClass(div, "field-validated");
+                setTimeout(function() {
+                    removeClass(div, "field-validated");
+                }, 1500);
             }
             else
             {
@@ -127,7 +131,6 @@ function updatePassword() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200)
         {
-            console.log(xhttp.responseText);
             passwordFields_color();
             var result = JSON.parse(xhttp.responseText);
             if (result["status"] == STATUS_OK)

@@ -1,5 +1,4 @@
 <?php
-
 require_once("../config.php");
 
 $u = getUserFromCookie();
@@ -10,10 +9,8 @@ if ($u == null)
     die();
 }
 
-$limit = 200;
-
+$limit = 50;
 ?>
-
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -24,8 +21,12 @@ $limit = 200;
     <link rel="stylesheet" type="text/css" href="assets/styles/feed.css" />
     <script src="/assets/js/general.js"><</script>
     <script src="/assets/js/post.js"><</script>
+    <script>
+        var lastRefresh = <?= time(); ?>;
+        var filter = "";
+    </script>
 </head>
-<body>
+<body onload="refreshFeed(lastRefresh, filter)">
 <?php require "menu.php"; ?>
 <div class="column-wrapper">
     <h1>
@@ -35,7 +36,7 @@ $limit = 200;
     <?php
     $posts = Post::findPosts(array(), $limit);
     ?>
-    <div class="post-feed">
+    <div class="post-feed" id="post-feed">
         <?php
         foreach ($posts as $post){
             if ($post->getRepostID() == null)

@@ -10,7 +10,6 @@
  */
 
 require_once("../../config.php");
-require_once("User.php");
 
 
 if (isset($_POST['limit']))
@@ -18,15 +17,16 @@ if (isset($_POST['limit']))
 elseif(isset($_GET['limit']))
     $limit = $_GET['limit'];
 else
-    $limit = 50;
+    $limit = 15;
 
 if (isset($_POST['after']))
     $after = $_POST['after'];
 else
     $after = 0;
 
-if (isset($_POST['filter'])) {
+if (isset($_POST['filter']) && trim($_POST['filter']) != '') {
     $filter = $_POST['filter'];
+    $filter = trim($filter, ";");
     $people = explode(";", $filter);
 }
 else

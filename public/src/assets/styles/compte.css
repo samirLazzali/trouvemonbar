@@ -10,7 +10,6 @@ body {
 
 #new-post-content {
     font-size: 1.2em;
-    background: #95a5a6;
     line-height: 2em;
     min-height: 5em;
     box-shadow: 2px 2px 0px #e74c3c;
@@ -19,6 +18,14 @@ body {
     padding: 2px 8px 2px 8px;
     border: 0px;
     transition: 250ms;
+}
+
+.new-post-content {
+    background-color: var(--darkgray);
+}
+
+.new-post-content-active {
+
 }
 
 .button-send {
@@ -61,15 +68,15 @@ body {
 }
 
 .field-validated {
-    background: var(--green);
+    background-color: var(--green);
 }
 
 .invalid-field {
-    background: var(--tomato);
+    background-color: var(--tomato);
 }
 
 input {
-    box-sizing: border-box;
+    box-sizing-color: border-box;
 }
 
 .bouton {

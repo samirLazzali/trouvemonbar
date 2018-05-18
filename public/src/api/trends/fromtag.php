@@ -1,16 +1,20 @@
 <?php
 require_once("../../config.php");
-require_once("Post.php");
-/**
- * Created by PhpStorm.
- * User: yeti
- * Date: 24/04/18
- * Time: 18:39
- */
 
 if (isset($_GET['tag']))
     $tag = $_GET['tag'];
 
+$getOriginals = false;
+if (isset($_GET['getoriginals']))
+    $getOriginals = $_GET['getoriginals'] == "true" ? true : false;
+
 $posts = Post::fromHashtag($tag);
+
+if ($getOriginals)
+    foreach($posts as $post) {
+        $post->getRepostOf();
+        if ($post->getRepostID() != null)
+            $post->getRepostOf()->getAuthor();
+    }
 
 success_die($posts);

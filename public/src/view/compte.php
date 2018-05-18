@@ -29,7 +29,7 @@ if ($user == null)
         </h1>
         <div class="form-wrapper"
             <div class="new-post-wrapper">
-                <div onBlur="newPost_onBlur()" onFocus="newPost_onFocus()" id="new-post-content" contenteditable="true">
+                <div onBlur="newPost_onBlur()" onFocus="newPost_onFocus()" id="new-post-content" class="new-post-content" contenteditable="true">
                 Nouvelle publication...
             </div>
         </div>
