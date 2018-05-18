@@ -85,10 +85,10 @@ ALTER TABLE ONLY public."user" ALTER COLUMN id SET DEFAULT nextval('public.user_
 --
 
 COPY public."user" (id, prenom, nom, score, pseudo, mdp, mail, inscription) FROM stdin;
-1	Thomas	Gubeno	500	Gub	bg	tgubeno@gmail.com	1
-2	Dorian	Laugier	450	Derien	lol	doriang	1
-3	Simon	Lauzeral	200	SimSim	bla	blabla	1
-4	Paul	Thibaud	10	Hansen	blabla	tttt	1
+1	Thomas	Gubeno	500	Gub	bg	tgubeno@gmail.com	2
+2	Dorian	Laugier	450	Derien	lol	doriang	2
+3	Simon	Lauzeral	200	SimSim	bla	blabla	2
+4	Paul	Thibaud	10	Hansen	blabla	tttt	2
 \.
 
 
