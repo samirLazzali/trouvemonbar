@@ -62,5 +62,4 @@ function lookUp($email, $md5Pass) {
 
     return null;
 }
-
 ?>

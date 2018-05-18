@@ -15,7 +15,7 @@
 
 <section id="home">
 	<h1 data-wow-delay="0.4s">We've got the talent</h1>
-    <a href="index2.php" class="bouton" data-wow-delay="0.8s">Réussir</a>
+    <a href="main.php" class="bouton" data-wow-delay="0.8s">Réussir</a>
 </section>
 
 <script src="js/jquery.js"></script>

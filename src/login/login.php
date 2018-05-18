@@ -24,11 +24,9 @@ function login() {
 	session_start();
     }
 
-    if (isset($_POST['logout'])) {
+    if (isset($_GET['logout'])) {
 	session_destroy();
     } else {
-
-	$error=''; // Variable To Store Error Message
 	if (empty($_POST['email']) || empty($_POST['password'])) {
 	    return "Username or Password is invalid";
 	} else {
@@ -88,13 +86,15 @@ function verif_authent() {
 }
 
 function buttonLogin() {
-    echo "<button class=\"button button-block\" id=\"connect\">Connect</button>";
+    //echo "<button class=\"button button-block\" id=\"connect\">Connect</button>";
+    echo "<a href=\"#\" class=\"m-link\" id=\"connect\"><i class=\"fa\" aria-hidden=\"true\"></i> Log In</a>";
 }
 
 function buttonLogout() {
-    print "<form align=\"right\" name=\"form1\" method=\"post\" action=\"\">";
-    print "<input name=\"logout\" type=\"submit\" id=\"logout\" value=\"log out\">";
-    print "</form>";
+   // print "<form align=\"right\" name=\"form1\" method=\"post\" action=\"\">";
+   // print "<input name=\"logout\" type=\"submit\" id=\"logout\" value=\"log out\">";
+   // print "</form>";
+    echo "<a href=\"main.php?logout\" class=\"m-link\" id=\"connect\"><i class=\"fa\" aria-hidden=\"true\"></i> Log Out</a>";
 }
 
 function displayLogin() {
@@ -111,7 +111,7 @@ function displayLogin() {
     echo "<div id=\"login\">";
     echo "<h1>Welcome Back!</h1>";
     echo "<!-- <form action=\"status.php\" method=\"post\"> -->";
-    echo "<form action=\"\" method=\"post\">";
+    echo "<form action=\"main.php\" method=\"post\">";
     echo "<div class=\"field-wrap\">";
     echo "<label>Email Address<span class=\"req\">*</span></label>";
     echo "<input type=\"email\" name=\"email\" required=\"\" autocomplete=\"off\">";
@@ -126,7 +126,7 @@ function displayLogin() {
     echo "</div>";
     echo "<div id=\"signup\">";
     echo "<h1>Sign Up for Free</h1>";
-    echo "<form action=\"\" method=\"post\">";
+    echo "<form action=\"main.php\" method=\"post\">";
     echo "<div class=\"field-wrap\">";
     echo "<label>Email Address<span class=\"req\">*</span></label>";
     echo "<input type=\"email\" name=\"email\" required=\"\" autocomplete=\"off\">";
