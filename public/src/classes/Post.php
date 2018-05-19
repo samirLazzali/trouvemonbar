@@ -683,8 +683,56 @@ class Post implements JsonSerializable
         if (!$rows)
             return $result;
 
-        foreach($rows as $row)
+        foreach($rows as $row) {
             $result[] = Post::fromRow($row);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Fonction qui renvoie un tableau avec tout les post qui répondent au post courant (faite par yéti donc à check)
+     * @return array (post*)
+     */
+    public function getThreadsFrom()
+    {
+        $db = connect();
+        $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE ResponseTo = :id";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":id", $this->getID());
+        $statement->execute();
+
+        $rows = $statement->fetchAll();
+        $threads = array();
+
+        if (!$rows)
+            return $threads;
+
+        foreach($rows as $row) {
+            $post = Post::fromRow($row);
+            $thread = $post->getThread($this->getAuthor(), $post->getAuthor(), $db);
+            $threads[] = $thread;
+        }
+
+        return $threads;
+    }
+
+    public function getThread($u1, $u2, $db)
+    {
+        $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE ResponseTo = :id AND (Author = :u1 OR Author = :u2)";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":id", $this->ID);
+        $statement->bindValue(":u1", $u1->getID());
+        $statement->bindValue(":u2", $u2->getID());
+        $statement->execute();
+
+        $rows = $statement->fetchAll();
+        $result = array($this);
+
+        foreach($rows as $row) {
+            $result[] = Post::fromRow($row);
+            $result = array_merge($result, end($result)->getThread($u1, $u2, $db));
+        }
 
         return $result;
     }

@@ -222,3 +222,7 @@
 .interaction-type-selected {
     background-color: var(--carott);
 }
+
+.response-thread {
+    border-top: 3px black solid;
+}

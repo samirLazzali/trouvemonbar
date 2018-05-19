@@ -23,14 +23,15 @@ $posts = Post::findPosts($people, $limit);
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="assets/styles/feed.css" />
     <script src="/assets/js/general.js"></script>
-    <script src="/assets/js/post.js"><</script>
+    <script src="/assets/js/post.js"></script>
     <script>
         var lastRefresh = <?= time(); ?>;
         var filter = "<?php
                 $subscriptions = $u->getSubscriptions();
-                if (count($subscriptions) > 0)
-                    foreach($subscriptions as $sub)
+                if (count($subscriptions) > 0) {
+                    foreach ($subscriptions as $sub)
                         echo $sub->getUsername() . ";";
+                }
                 else
                     echo $u->getUsername();
             ?>";
