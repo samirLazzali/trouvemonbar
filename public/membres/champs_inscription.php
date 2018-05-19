@@ -286,14 +286,14 @@ include('../includes/top.php');?>
 				
 				else
 				{
-					if($_SESSION['form_login']) !== FALSE)
+					if($_SESSION['form_login'] !== FALSE)
 					{
 						unset($_SESSION['form_login']);
 						$_SESSION['login_info'] = '<span class="erreur">Le nom d\'utilisateur '.htmlspecialchars($login, ENT_QUOTES).' est déjà pris, choisissez-en un autre.</span><br/>';
 						$_SESSION['erreurs']++;
 					}
 					
-					if($_SESSION['form_mail']) !== FALSE)
+					if($_SESSION['form_mail'] !== FALSE)
 					{
 						unset($_SESSION['form_mail']);
 						unset($_SESSION['form_mail_verif']);
