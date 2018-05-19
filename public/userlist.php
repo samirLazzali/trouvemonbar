@@ -10,3 +10,18 @@
  * @todo clicking on a name leads to user_profile.php, passing the correct id via get.
  * @todo search bar (name, nick, games mastered)
  */
+
+require "../src/app/helpers.php";
+
+if(!Auth::logged())
+    redirect("index.php");
+
+$userlist=User::userlist();
+$usergamelist=User::usergamelist();
+$layout = new Layout("users");
+include view("user_list_view.php");
+$layout->show("Tous les joueurs ");
+
+
+
+
