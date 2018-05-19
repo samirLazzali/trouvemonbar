@@ -10,6 +10,7 @@ if ($u == null)
 }
 
 $limit = 50;
+$posts = Post::findPosts(array(), $limit);
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -24,6 +25,7 @@ $limit = 50;
     <script>
         var lastRefresh = <?= time(); ?>;
         var filter = "";
+        var _before = <?= end($posts)->getTimestamp(); ?>;
     </script>
 </head>
 <body onload="refreshFeed(lastRefresh, filter)">
@@ -32,19 +34,21 @@ $limit = 50;
     <h1>
         - Dernières Publications -
     </h1>
-
-    <?php
-    $posts = Post::findPosts(array(), $limit);
-    ?>
     <div class="post-feed" id="post-feed">
         <?php
-        foreach ($posts as $post){
+        foreach ($posts as $post) {
             if ($post->getRepostID() == null)
                 affichePost($post);
             else
                 afficheRepost($post);
+            $before = $post->getTimestamp();
         }
         ?>
+        <a id="link-more-posts" class="link-more-posts" href="#" onClick="return getPostsBefore(_before, filter);">
+            <div class="post-in-feed" id="link-more-posts-wrapper">
+                Plus anciens
+            </div>
+        </a>
     </div>
 </div>
 </body>

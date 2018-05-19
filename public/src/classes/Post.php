@@ -548,10 +548,13 @@ class Post implements JsonSerializable
      * @return array un tableau de Post
      * @throws UserNotFoundException si un des utilisateurs de $people n'existe pas.
      */
-    static function findPosts($people, $limit = 50, $after = 0)
+    static function findPosts($people, $limit = 50, $after = 0, $before = -1)
     {
+        if ($before == -1)
+            $before = time();
+
         if (count($people) == 0)
-            $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE Timestamp > :after ORDER BY Timestamp DESC LIMIT $limit";
+            $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE Timestamp >= :after AND Timestamp <= :before ORDER BY Timestamp DESC LIMIT $limit";
         else
         {
             $IDs = array();
@@ -565,7 +568,7 @@ class Post implements JsonSerializable
                     array_push($IDs, $p->getID());
                 }
 
-            $SQL = "SELECT * FROM Post WHERE Timestamp > :after AND Author IN (";
+            $SQL = "SELECT * FROM Post WHERE Timestamp >= :after AND Timestamp <= :before AND Author IN (";
 
             foreach ($IDs as $ID) {
                 $SQL .= "'" . $ID . "', ";
@@ -577,6 +580,7 @@ class Post implements JsonSerializable
         $db = connect();
         $statement = $db->prepare($SQL);
         $statement->bindValue(":after", $after);
+        $statement->bindValue(":before", $before);
         $statement->execute();
         $rows = $statement->fetchAll();
 

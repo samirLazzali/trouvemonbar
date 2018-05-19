@@ -450,3 +450,53 @@ function refreshFeed(lastRefresh, filter = "")
     xhttp.send("after=" + lastRefresh + "&limit=25&filter=" + filter);
     return false;
 }
+
+function getPostsBefore(before, filter = "")
+{
+    console.log("Before : " + before);
+    var feed = document.getElementById("post-feed");
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200)
+        {
+            var result = JSON.parse(xhttp.responseText);
+            if (result["status"] == 200)
+            {
+                result = result["result"];
+                var html;
+                if (result.length > 0) {
+                    Array.from(result).forEach(function(elt, idx, arr) {
+                        var currentReport = document.getElementById("report-form-" + elt["id"]);
+                        if (currentReport != undefined)
+                            return;
+
+                        if (elt["repostOf"] != null)
+                            html = rawRepostToHtml(elt);
+                        else
+                            html = rawPostToHtml(elt);
+
+                        feed.innerHTML += html;
+
+                        _before = elt["timestamp"];
+                    });
+                }
+                document.getElementById("link-more-posts-wrapper").remove();
+                feed.innerHTML +=
+                    '<a id="link-more-posts" class="link-more-posts" href="#" onClick="return getPostsBefore(_before, filter);">' +
+                    '   <div class="post-in-feed" id="link-more-posts-wrapper">' +
+                    '       Plus anciens' +
+                    '    </div>' +
+                    '</a>';
+            }
+            else
+            {
+                console.log("Error while refreshing feed: status = " + result["status"] + " (" + result["description"] + ")");
+            }
+        }
+    };
+    document.getElementById("link-more-posts-wrapper").innerHTML = "Chargement...";
+    xhttp.open("POST", "/api/post/latest");
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("before=" + before+ "&limit=25&filter=" + filter);
+    return false;
+}
