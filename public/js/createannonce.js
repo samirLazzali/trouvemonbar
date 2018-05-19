@@ -16,7 +16,7 @@ function togglecacher(){
   Objp=document.getElementById('zonetextepaying');
 	Objs=document.getElementById('zonetexteswap');
 	Objp.style.display="none";
-	Objs.style.display="";
+	Objs.style.display="none";
 }
 
 //var modules = [document.getElementById("selectmodule1"), document.getElementById("selectmodule2"), document.getElementById("selectmodule3"), document.getElementById("selectmodule4"), document.getElementById("selectmodule5"), document.getElementById("selectmodule6")];
