@@ -1,4 +1,5 @@
 <?php include("postannonce.php"); 
+require '../src/accessdb.php';
 ?>
 
 <!DOCTYPE html>
