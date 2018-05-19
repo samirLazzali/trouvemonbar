@@ -6,7 +6,11 @@
     <div>
         <?php
     $mail =  $user->getMail();
-    echo "<a href='mailto:$mail' > $mail </a>";
+
+    echo " <div class=\"container-fluid\">
+                <div class='font-weight-bold '> E-mail :  </div>
+                <a href='mailto:$mail'class='list-group' > $mail </a>
+            </div>";
     ?>
     </div>
 
@@ -17,7 +21,7 @@
             if(empty($games)) echo "<div class='font-weight-bold'> Cet utilisateur n'est MJ pour aucune table </div>";
             else {
                 echo "<div class='font-weight-bold'> MJ pour :  </div>";
-                echo "<ul class='list-group'>";
+                echo "<ul class='list-group-flush'>";
                 foreach($games as $game)
                     echo "<li> <a href=view_game.php?id=$game->gameid> $game->gamename </a> </li>";
                 echo "</ul>";
@@ -47,9 +51,10 @@
     <!--OPTION TO EDIT PROFILE FOR THE OWNER -->
     <?php
         if($isOwner)
-            echo "<div class='container-fluid m-1'>
-                    <a class='btn btn-primary' href='edit_profile.php'> Editer mon prolile </a>
-                    </div>";
+            echo "<div class='container-fluid' >
+                    <br/>
+                  <a class='btn btn-primary' href='edit_profile.php'> Editer mon profile </a>
+                  </div>";
     ?>
 
 
