@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
     <link rel="stylesheet" type="text/css" href="css/template.css">
+    <link rel="stylesheet" type="text/css" href="css/relo.css">
     <meta charset="UTF-8">
     <title>Page d'acceuil</title>
 </head>
@@ -18,7 +19,7 @@
     <li><a href="profile.php">Profile</a></li>
 </ul>
 <?php
-include("connexion.php");
+include("./includes/connexion.php");
 ?>
 </body>
 </html>
