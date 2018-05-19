@@ -9,8 +9,12 @@ header_t("Les Bons Bails");
 if(!verif_authent()) { // si le gars est authentified ==>  acces aux offres
     displayLogin();
 }
+if(verif_authent())
+{
+	dispSidebar();
 
-dispSidebar();
+}
+//dispSidebar();
 ?>
 
 <div class="main">
