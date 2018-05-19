@@ -74,6 +74,10 @@ class Annonce {
 	$this->paiement = $paiement;
     }
 
+    public function setService($service) {
+	$this->service = $service;
+    }
+
     public static function uidToUsername($connection, $id) {
 	$rows = dbQuery($connection, "SELECT * FROM users WHERE id='$id'");
 	foreach ($rows as $row) {
@@ -88,9 +92,9 @@ class Annonce {
 	}
     }
 
-    public static function getAnnonces() {
+    public static function getAnnonces($requete = "SELECT * FROM annonce") {
 	$connection = dbConnect();
-	$rows = dbQuery($connection, "SELECT * FROM annonce");
+	$rows = dbQuery($connection, $requete);
 	$annonces = [];
 
 	foreach($rows as $row) {
@@ -103,6 +107,7 @@ class Annonce {
 	    $annonce->setGenre($row->genre);
 	    $annonce->setSemestre($row->semestre);
 	    $annonce->setPaiement($row->paiement);
+	    $annonce->setService($row->service);
 
 	    $annonces[] = $annonce;
 	}
@@ -127,27 +132,47 @@ class Annonce {
 	dbExec($connection, $query);
     }
     
-    public static function getAnnoncesRequete($requete) {
-	$connection = dbConnect();
+    private function set($value, $holder, $required = false) {
+	if (isset($_POST[$value])) {
+	    $holder =
+	}
+    }
 
-	$rows = dbQuery($connection, $requete);
-	$annonces = [];
+    public static function annonceFromPost() {
+	$annonce = new Annonce();
 
-	foreach($rows as $row) {
-	    $annonce = new Annonce();
-	    $annonce->setId($row->id);
-	    $annonce->setTitle($row->titre);
-	    $annonce->setDate(new \DateTimeImmutable($row->postdate));
-	    $annonce->setOp(Annonce::translateOp($connection, $row->op));
-	    $annonce->setContent($row->description);
-	    $annonce->setGenre($row->genre);
-	    $annonce->setSemestre($row->semestre);
-	    $annonce->setPaiement($row->paiement);
+	$annonce->op = $_SESSION['username'];
+	$annonce->date = date("c");
 
-	    $annonces[] = $annonce;
+	if (isset($_POST['annoncetitle']) {
+	    $annonce->setTitle($_POST['annoncetitle']);
+	} else {
+	    return null;
 	}
 
-	return $annonces;
+	if (isset($_POST['annoncedesc']) {
+	    $annonce->setContent($_POST['annoncedesc']);
+	} else {
+	    return null;
+	}
+
+	if (isset($_POST['annoncegenre']) {
+	    $annonce->setGenre($_POST['annoncegenre']);
+	}
+
+	if (isset($_POST['annoncesemester']) {
+	    $annonce->setSemestre($_POST['annoncesemester']);
+	}
+
+	if (isset($_POST['annoncepayamount']) {
+	    $annonce->setPaiement($_POST['annoncepayamount']);
+	}
+
+	if (isset($_POST['annonceswapnature']) {
+	    $annonce->setService($_POST['annonceswapnature']);
+	}
+
+	return $annonce;
     }
 }
 ?>

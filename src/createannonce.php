@@ -3,6 +3,11 @@ include("annonce.php");
 include("viewfunctions.php");
 
 header_t("Hey");
+
+if (isset($_POST['submit']) && ($annonce = Annonce::annonceFromPost()) != null) {
+    $annonce->sendToDb();
+}
+
 ?>
 
 <div class="main">
