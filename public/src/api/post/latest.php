@@ -19,6 +19,9 @@ elseif(isset($_GET['limit']))
 else
     $limit = 15;
 
+if ($limit > 250)
+    $limit = 250;
+
 if (isset($_POST['after']))
     $after = $_POST['after'];
 else

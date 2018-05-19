@@ -22,5 +22,8 @@ if (isset($_GET['limit']))
 else
     $limit = 50;
 
+if ($limit > 250)
+    $limit = 250;
+
 $results = Search::User($term, $limit);
 success_die($results);
