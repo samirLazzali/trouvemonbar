@@ -8,6 +8,8 @@ class Annonce {
     public $tagArray;
     public $genre;
     public $semestre;
+    public $paiement;
+    public $service;
 
     public function getId() {
 	return $this->id;
@@ -88,7 +90,6 @@ class Annonce {
 
     public static function getAnnonces() {
 	$connection = dbConnect();
-
 	$rows = dbQuery($connection, "SELECT * FROM annonce");
 	$annonces = [];
 
@@ -107,6 +108,23 @@ class Annonce {
 	}
 
 	return $annonces;
+    }
+
+    public function sendToDb() {
+	$connection = dbConnect();
+	$opId = usernameToUid($connection, $this->op);
+	$query = "INSERT INTO annonce (postdate, op, semestre, module, genre, titre, description, paiement, service) 
+	    VALUES ($this->date,
+		$opId,
+		$this->semestre, 
+		'$this->module',
+		'$this->genre', 
+		'$this->title', 
+		'$this->content', 
+		$this->paiement, 
+		'$this->service'
+	    );";
+	dbExec($connection, $query);
     }
 }
 ?>

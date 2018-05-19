@@ -13,7 +13,7 @@ function header_t($titre) {
     //print "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">";
     print "    <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.0.13/css/all.css\" integrity=\"sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp\" crossorigin=\"anonymous\">";
     print "    <link rel=\"stylesheet\" href=\"css/style.css\">";
-    print "    <link rel=\"stylesheet\" href=\"css/normalize.css\">\n";
+    //print "    <link rel=\"stylesheet\" href=\"css/normalize.css\">\n";
     print "    <link rel=\"stylesheet\" href=\"css/header.css\">\n";
     print "    <link rel=\"stylesheet\" href=\"css/annonce.css\">\n";
     print "    <link rel=\"stylesheet\" href=\"css/sidebar.css\">\n";
@@ -46,14 +46,13 @@ function header_t($titre) {
 }
 
 function footer(){
-    print "  </body>\n";
-    //print "<div id=\"footer\">";
     print "<footer>";
     print "<link rel=\"stylesheet\" href=\"public/css/normalize.css\">\n";
     print "<p>&copy; <b>2018 ENSIIE</b> | Skutnik . Chekour . Trachino . Meas | All Rights Reserved</p>";
     print "<p><b>Contact</b>: 06 59 42 47 94 | lesbonsbails@gmail.com</p>";
     print "    <script src=\"js/global.js\"></script>";
     print "</footer>";
+    print "  </body>\n";
     print "</html>";
 
 }
