@@ -18,9 +18,12 @@ function sqlquery($requete, $number)
 	
 	else if($number == 2)
 	{
-		$query1 = $query->fetchAll(\PDO::FETCH_OBJ);
+		while($query1 = $query->fetch(\PDO::FETCH_OBJ))
+		{
+			$query2[] = $query1;
+		}
 		$query->closeCursor();
-		return $query1;
+		return $query2;
 	}
 	
 	else
