@@ -14,15 +14,16 @@ html {
 
 body {
     height: 100%;
-    width = 100%;
+    width: 100%;
     margin:0;
     padding:0;
     display: grid;
-    grid-gap: 50px;
+    grid-gap: 40px;
     grid-template-areas:
     "header header header"
     "sidebar main main"
     "footer footer footer";
+    grid-template-columns: min-content;
     background: #c1bdba;
     font-family: 'Titillium Web', sans-serif;
 }
@@ -32,11 +33,13 @@ header {
 }
 
 footer {
+    text-align: center;
     grid-area: footer;
 }
 
 .main {
     grid-area: main;
+    padding: 10px;
 }
 
 header button, header button-block {
@@ -164,7 +167,8 @@ input, textarea {
     padding: 5px 10px;
     background: none;
     background-image: none;
-    border: 1px solid #a0b3b0;
+    border: 1px solid transparent;
+    border-bottom: 1px solid #a0b3b0;
     color: #ffffff;
     border-radius: 0;
     transition: border-color .25s ease, box-shadow .25s ease;
@@ -228,48 +232,4 @@ textarea {
 
 .errorDisp {
     color: red;
-}
-div.annonce {
-    text-align:center;
-}
-div.title {
-    text-decoration: none;
-    color: #fff;
-    font-family: 'Roboto';
-    font-weight: 900;
-    font-size: 28px;
-    margin-top: 20px;
-    padding-top: 5px;
-    width:600px;
-    height:40px;
-    background-color:#5FE6BD;
-}
-div.info {
-    padding-top: 20px;
-    float:left;
-    font-family: 'IBM Plex Mono';
-    font-weight: 900;
-    font-size: 18px;
-    width:100px;
-    height:400px;
-    background-color:#FF;
-}
-div.description {
-    padding-top: 20px;
-    font-family: 'Roboto';
-    font-weight: 400;
-    font-size: 15px;
-    float:left;
-    width:500px;
-    height:400px;
-    background-color:#EEEEEE;
-}
-div.logi {
-    padding-top: 5px;
-    font-family:'IBM Plex Mono';
-    font-size: 17px;
-    clear:both;
-    width:600px;
-    height:30px;
-    background-color:#FF5722;
 }

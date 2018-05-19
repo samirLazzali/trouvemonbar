@@ -1,0 +1,18 @@
+.sidebar {
+    grid-area: sidebar;
+    padding: 10px;
+}
+
+.sidenav {
+    background-color: white;
+    height: auto;
+    width: 150px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+}
+
+.sidenav .m-link {
+    color: #000000;
+}
+

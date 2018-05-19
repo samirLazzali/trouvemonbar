@@ -8,6 +8,8 @@ class Annonce {
     public $tagArray;
     public $genre;
     public $semestre;
+    public $paiement;
+    public $service;
 
     public function getId() {
 	return $this->id;
@@ -16,21 +18,23 @@ class Annonce {
     public function display() {
 	print "<div class=annonce id=a$this->id>";
 	print "<div class=title>";
-	print "$this->title";
+	print "$this->title ";
+	print "<a class=\"toggleAnnonce\"><i class=\"fas fa-angle-up\"></i></a>";
 	print "</div>";
 
+	print "<div class=more>";
 	print "<div class=info>";
-	print "$this->genre - $this->op - S$this->semestre";
+	print "$this->genre</br>$this->op</br>S$this->semestre";
 	print "</div>";
 
 	print "<div class=desc>";
 	print "$this->content";
 	print "</div>";
+	print "</div>";
 
 	print "<div class=logi>";
 	print "$this->paiement kebabs";
 	print "</div>";
-
 	print "</div>";
     }
 
@@ -86,7 +90,6 @@ class Annonce {
 
     public static function getAnnonces() {
 	$connection = dbConnect();
-
 	$rows = dbQuery($connection, "SELECT * FROM annonce");
 	$annonces = [];
 
@@ -106,9 +109,45 @@ class Annonce {
 
 	return $annonces;
     }
-}
 
-
+    public function sendToDb() {
+	$connection = dbConnect();
+	$opId = usernameToUid($connection, $this->op);
+	$query = "INSERT INTO annonce (postdate, op, semestre, module, genre, titre, description, paiement, service) 
+	    VALUES ($this->date,
+		$opId,
+		$this->semestre, 
+		'$this->module',
+		'$this->genre', 
+		'$this->title', 
+		'$this->content', 
+		$this->paiement, 
+		'$this->service'
+	    );";
+	dbExec($connection, $query);
+    }
     
+    public static function getAnnoncesRequete($requete) {
+	$connection = dbConnect();
 
+	$rows = dbQuery($connection, $requete);
+	$annonces = [];
+
+	foreach($rows as $row) {
+	    $annonce = new Annonce();
+	    $annonce->setId($row->id);
+	    $annonce->setTitle($row->titre);
+	    $annonce->setDate(new \DateTimeImmutable($row->postdate));
+	    $annonce->setOp(Annonce::translateOp($connection, $row->op));
+	    $annonce->setContent($row->description);
+	    $annonce->setGenre($row->genre);
+	    $annonce->setSemestre($row->semestre);
+	    $annonce->setPaiement($row->paiement);
+
+	    $annonces[] = $annonce;
+	}
+
+	return $annonces;
+    }
+}
 ?>

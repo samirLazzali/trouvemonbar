@@ -1,0 +1,55 @@
+div.annonce {
+    text-align:center;
+    padding: 10px;
+    border: 3px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+}
+
+.toggleAnnonce {
+    color: white;
+}
+
+div.title {
+    text-decoration: none;
+    color: #fff;
+    /*font-family: 'Roboto';*/
+    font-weight: 900;
+    font-size: 28px;
+    /*margin-top: 20px;*/
+    padding-top: 5px;
+    /*width:600px;*/
+    height:40px;
+    background-color:#5FE6BD;
+}
+div.info {
+    padding-top: 20px;
+    float:left;
+    font-family: 'IBM Plex Mono';
+    font-weight: 900;
+    font-size: 18px;
+    width: 30%;
+    height: 400px;
+    background-color: #FF;
+}
+div.desc {
+    padding-top: 20px;
+    /*font-family: 'Roboto';*/
+    font-weight: 400;
+    font-size: 15px;
+    float:right;
+    min-width: 400px;
+    width: 70%;
+    height: 400px;
+    background-color:#EEEEEE;
+}
+div.logi {
+    padding-top: 5px;
+    font-family:'IBM Plex Mono';
+    font-size: 17px;
+    clear:both;
+    /*width:600px;*/
+    height:30px;
+    background-color:#FF5722;
+}
