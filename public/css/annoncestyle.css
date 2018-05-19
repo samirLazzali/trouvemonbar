@@ -20,24 +20,6 @@
   margin-right: auto;
 }
 
-html, body {
-    background-color: #c1bdba;
-	  color: white;
-    font-weight: bold;
-	  font-family:'Titillium Web', sans-serif;
-}
-
-
-h1{
-  background-color: #5FE6BD;
-	color: white;
-	font-family:'Titillium Web', sans-serif;
-	text-align: center;
-  margin: 0 auto;
-  height: 50px;
-  padding-top: 10px;
-}
-
 form{
 	text-align: center;
 }
