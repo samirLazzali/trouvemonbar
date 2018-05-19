@@ -47,10 +47,10 @@ $('.tab a').on('click', function (e) {
 document.getElementById("connect").onclick = function(e) {
     if (document.getElementById("form").style.display == 'none') {
 	$('.form').fadeIn(500);
-	document.getElementById("connect").innerHTML = " Close";
+	document.getElementById("connect").innerHTML = "<i class=\"fas fa-times-circle\"></i> Close";
     } else {
 	$('.form').fadeOut(500);
-	document.getElementById("connect").innerHTML = " Log In";
+	document.getElementById("connect").innerHTML = "<i class=\"fas fa-sign-in-alt\" aria-hidden=\"true\"></i> Log In";
     }
 };
 

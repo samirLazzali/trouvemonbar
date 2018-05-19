@@ -1,57 +1,96 @@
-
-.center {
+form.create .center {
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 150px;
-	height: 150px;
+	  height: 150px;
+}
+
+form.create .textcenter{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form.create #form_border{
+  width: 500px;
+	height:550px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+form.create html, 
+form.create body {
+    background-color: #c1bdba;
+	  color: white;
+    font-weight: bold;
+	  font-family:'Titillium Web', sans-serif;
 }
 
 
-
-html, body {
-    background-color: black;
+form.create h1{
+  background-color: #5FE6BD;
 	color: white;
-	font-family:"Segoe UI";
+	font-family:'Titillium Web', sans-serif;
+	text-align: center;
+  margin: 0 auto;
+  height: 50px;
+  padding-top: 10px;
 }
 
-header,h1{
-    background-color: black;
-	color: white;
-	font-family:"Segoe UI";
+form.create form{
 	text-align: center;
 }
 
-form{
-	text-align: center;
-}
 
-input[type=radio] {
-  position: absolute;
-  visibility: hidden;
-  display: none;
-}
-
-label {
-  color: lighten(#5FE6BD,40%);
-  display: inline-block;
+form.create input[type=submit],
+form.create input[type=reset]{
+  margin-left: auto;
+  margin-right: auto;
+  background-color: DimGrey;
+  border: 3px solid #332f35;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
   cursor: pointer;
+  border-radius: 25px;
   font-weight: bold;
-  padding: 5px 20px;
 }
 
-input[type=radio]:checked + label{
-  color: lighten(#5FE6BD,60%);
-  background: #332f35;
+form.create input[type=submit]:hover,
+form.create input[type=reset]:hover{
+  background-color: #5FE6BD;
 }
 
-label + input[type=radio] + label {
-  border-left: solid 3px #332f35;
+form.create select {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: DimGrey;
+  color: white;
+  text-align: center;
+  font-size: 13px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
 }
-.radio-group {
+form.create select:hover {
+  background-color: #5FE6BD;
+}
+
+form.create input[type=text],
+form.create input[type=number],
+form.create textarea{
   border: solid 3px #332f35;
-  display: inline-block;
-  margin: 20px;
-  border-radius: 10px;
-  overflow: hidden;
+  border-radius: 5px;
+  background-color: white;
+  font-family:'Titillium Web', sans-serif;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
 }

@@ -8,6 +8,7 @@ class Annonce {
     public $tagArray;
     public $genre;
     public $semestre;
+    public $module;
     public $paiement;
     public $service;
 
@@ -70,8 +71,16 @@ class Annonce {
 	$this->semestre = $semestre;
     }
 
+    public function setModule($module) {
+	$this->module = $module;
+    }
+
     public function setPaiement($paiement) {
 	$this->paiement = $paiement;
+    }
+
+    public function setService($service) {
+	$this->service = $service;
     }
 
     public static function uidToUsername($connection, $id) {
@@ -88,9 +97,9 @@ class Annonce {
 	}
     }
 
-    public static function getAnnonces() {
+    public static function getAnnonces($requete = "SELECT * FROM annonce") {
 	$connection = dbConnect();
-	$rows = dbQuery($connection, "SELECT * FROM annonce");
+	$rows = dbQuery($connection, $requete);
 	$annonces = [];
 
 	foreach($rows as $row) {
@@ -103,6 +112,7 @@ class Annonce {
 	    $annonce->setGenre($row->genre);
 	    $annonce->setSemestre($row->semestre);
 	    $annonce->setPaiement($row->paiement);
+	    $annonce->setService($row->service);
 
 	    $annonces[] = $annonce;
 	}
@@ -112,9 +122,9 @@ class Annonce {
 
     public function sendToDb() {
 	$connection = dbConnect();
-	$opId = usernameToUid($connection, $this->op);
+	$opId = Annonce::usernameToUid($connection, $this->op);
 	$query = "INSERT INTO annonce (postdate, op, semestre, module, genre, titre, description, paiement, service) 
-	    VALUES ($this->date,
+	    VALUES ('$this->date',
 		$opId,
 		$this->semestre, 
 		'$this->module',
@@ -124,30 +134,60 @@ class Annonce {
 		$this->paiement, 
 		'$this->service'
 	    );";
-	dbExec($connection, $query);
+
+	print $query;
+	return dbExec($connection, $query);
     }
     
-    public static function getAnnoncesRequete($requete) {
-	$connection = dbConnect();
+    public static function annonceFromPost($op) {
+	$annonce = new Annonce();
 
-	$rows = dbQuery($connection, $requete);
-	$annonces = [];
+	$annonce->op = $op;
+	$annonce->date = date("Y-m-d H:i:s");
 
-	foreach($rows as $row) {
-	    $annonce = new Annonce();
-	    $annonce->setId($row->id);
-	    $annonce->setTitle($row->titre);
-	    $annonce->setDate(new \DateTimeImmutable($row->postdate));
-	    $annonce->setOp(Annonce::translateOp($connection, $row->op));
-	    $annonce->setContent($row->description);
-	    $annonce->setGenre($row->genre);
-	    $annonce->setSemestre($row->semestre);
-	    $annonce->setPaiement($row->paiement);
-
-	    $annonces[] = $annonce;
+	if (isset($_POST['annoncetitle'])) {
+	    $annonce->setTitle($_POST['annoncetitle']);
+	} else {
+	    return null;
 	}
 
-	return $annonces;
+	if (isset($_POST['annoncedesc'])) {
+	    $annonce->setContent($_POST['annoncedesc']);
+	} else {
+	    return null;
+	}
+
+	if (isset($_POST['annoncegenre'])) {
+	    $annonce->setGenre($_POST['annoncegenre']);
+	} else {
+	    $annonce->setGenre('NULL');
+	}
+
+	if (isset($_POST['annoncesemester'])) {
+	    $annonce->setSemestre($_POST['annoncesemester']);
+	} else {
+	    $annonce->setSemestre('NULL');
+	}
+
+	if (isset($_POST['annoncemodule'])) {
+	    $annonce->setModule($_POST['annoncemodule']);
+	} else {
+	    $annonce->setModule('NULL');
+	}
+
+	if (isset($_POST['annoncepayamount']) && $_POST['annoncepayamount'] != "") {
+	    $annonce->setPaiement($_POST['annoncepayamount']);
+	} else {
+	    $annonce->setPaiement(0);
+	}
+
+	if (isset($_POST['annonceswapnature'])) {
+	    $annonce->setService($_POST['annonceswapnature']);
+	} else {
+	    $annonce->setService('NULL');
+	}
+
+	return $annonce;
     }
 }
 ?>

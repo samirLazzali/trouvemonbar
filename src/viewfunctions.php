@@ -12,11 +12,13 @@ function header_t($titre) {
     print "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css\">";
     //print "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">";
     print "    <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.0.13/css/all.css\" integrity=\"sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp\" crossorigin=\"anonymous\">";
+
     print "    <link rel=\"stylesheet\" href=\"css/style.css\">";
-    //print "    <link rel=\"stylesheet\" href=\"css/normalize.css\">\n";
     print "    <link rel=\"stylesheet\" href=\"css/header.css\">\n";
     print "    <link rel=\"stylesheet\" href=\"css/annonce.css\">\n";
     print "    <link rel=\"stylesheet\" href=\"css/sidebar.css\">\n";
+    //print "    <link rel=\"stylesheet\" href=\"css/annoncestyle.css\">\n";
+
     print "<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>";
     print "  </head>\n";
   
@@ -25,13 +27,13 @@ function header_t($titre) {
     print "    <nav class=\"menu\" role=\"navigation\">\n";
     print "    <div class=\"inner\">\n";
     print "    <div class=\"m-left\">\n";
-    print "    <h1 class=\"logo\">$titre</h1>\n";
+    print "    <h1 class=\"logo\">Les Bons Bails</h1>\n";
     print "    </div>\n";
     print "    <div class=\"m-right\">\n";
-    print "    <a href=\"#\" class=\"m-link\"><i class=\"fa fa-home\" aria-hidden=\"true\"></i> Accueil</a>\n";
-    print "    <a href=\"#\" class=\"m-link\"><i class=\"fa fa-newspaper-o\" aria-hidden=\"true\"></i> Annonces</a>\n";
-    print "    <a href=\"#\" class=\"m-link\"><i class=\"fa fa-question-circle-o\" aria-hidden=\"true\"></i> A propos</a>\n";
-    print "    <a href=\"#\" class=\"m-link\"><i class=\"fa fa-paper-plane-o\" aria-hidden=\"true\"></i> Contact</a>\n";
+    print "    <a href=\"main.php\" class=\"m-link\"><i class=\"fa fa-home\" aria-hidden=\"true\"></i> Accueil</a>\n";
+    print "    <a href=\"createannonce.php\" class=\"m-link\"><i class=\"far fa-newspaper\" aria-hidden=\"true\"></i> Annonces</a>\n";
+    print "    <a href=\"apropos.php\" class=\"m-link\"><i class=\"fas fa-question-circle\" aria-hidden=\"true\"></i> A propos</a>\n";
+    print "    <a href=\"contact.php\" class=\"m-link\"><i class=\"fas fa-paper-plane\" aria-hidden=\"true\"></i> Contact</a>\n";
 
     if (verif_authent()) {
 	buttonLogout();
@@ -49,7 +51,6 @@ function footer(){
     print "<footer>";
     print "<link rel=\"stylesheet\" href=\"public/css/normalize.css\">\n";
     print "<p>&copy; <b>2018 ENSIIE</b> | Skutnik . Chekour . Trachino . Meas | All Rights Reserved</p>";
-    print "<p><b>Contact</b>: 06 59 42 47 94 | lesbonsbails@gmail.com</p>";
     print "    <script src=\"js/global.js\"></script>";
     print "</footer>";
     print "  </body>\n";
@@ -106,12 +107,31 @@ function indexco() {
 }
 
 function indexnotco() {
-	print "<h1> Bienvenue chez les bons bails! </h1>";
-	print "<p> lorem ipsum .... </br>
-				Connectez vous pour accéder aux offres 
-			</p>";
+	print "<div class=\"main\">";
+    print "<div class=annonce>";
+    print "<div class=title> Bienvenue sur Les Bons Bails </div>";
+	print "<div> <br> Connectez vous pour accéder aux offres 
+			</div>";
 	print "<p class='connexion'> Connectez-Vous! </p>"; // dans les styles mettre que class connexion ouvre onclick() auth()
 
+}
+
+function contactsuccess() {
+    print "<div class=\"main\">";
+    print "<div class=annonce>";
+    print "<div class=title> Contact </div>";
+    print "<div> <br> <br> <br> <br> <br> Pour prendre contact avec nos équipes, n'hésitez pas à nous faire signe par telephone <br> au <strong> 06 59 42 47 94 </strong> ou par mail à <strong>lesbonsbails@gmail.com</strong> <br> <br> <br> <br> <br> <br> </div>";
+    print "</div>";
+    print "</div>";
+}
+
+function contactfailure() {
+    print "<div class=\"main\">";
+    print "<div class=annonce>";
+    print "<div class=title> Contact </div>";
+    print "<div> <br> <br> <br> <br> <br> Connectez vous pour accéder a cette page. <br> <br> <br> <br> <br> <br> </div>";
+    print "</div>";
+    print "</div>";
 }
 
 function affiche($str) {
