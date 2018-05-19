@@ -63,8 +63,19 @@ menu_navigation();
     foreach ($res as $reu){
         echo "soirée: {$reu['soiree']} </br>
          date: {$reu['datee']} </br>
-         compt renude: {$reu['cr']} </br>
-         liste des participant: {$reu['participant']} </br> ";
+         compt rendue: {$reu['cr']} </br>";
+    }
+    echo 'participants: ';
+    $req_count=$connection->query("SELECT 'pseudo' FROM public.participant")->fetchAll();
+    if (!empty($req_count)) {
+        $req_part = $connection->query('SELECT pseudo FROM public.Participants NATURAL JOIN public.reunion WHERE datee = (SELECT MAX(datee) FROM public.reunion)');
+        $participants = $req_part->fetchAll();
+        foreach ($participants as $reu) {
+            echo "{$reu['pseudo']} </br>";
+        }
+    }
+    else{
+        echo 'aucun';
     }
     ?>
                         <form action="#" method="post">
@@ -81,12 +92,20 @@ menu_navigation();
 
 <?php
 if (isset ($_POST['participer'])) {
-    $req2 = $connection->query('SELECT participant FROM public.reunion WHERE datee = (SELECT MAX(datee) FROM public.reunion)');
-    $participants = $req2->fetchAll();
-    foreach ($participants as $part) {
-        $req = $connection->prepare('UPDATE public.reunion SET participant=:participant');
-        $test = $req->execute([':participant' => $part."</br>".$_SESSION['prenom']." ".$_SESSION['nom']]);
+    if (isset($_SESSION['connect'])) {
+        $iid = $connection->query("SELECT 'id' FROM public.reunion")->fetchAll();
+        $i = 0;
+        foreach ($iid as $id) {
+            $i++;
+        }
+        $req = $connection->prepare('INSERT INTO public.reunion(id_reu,pseudo) VALUES :id_reu,:pseudo');
+        $req->execute(['id_reu' => $i,
+            'pseudo' => $_SESSION['pseudo'],
+        ]);
+    }
+else {
+        echo 'veuillez vous connectez avant de participer';
+        echo '<a href="connexion.php"> Se connecter</a>';
     }
 }
-
 ?>

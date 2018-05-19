@@ -31,17 +31,22 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
     echo '<h1>Réunions</h1>';
     echo '<form method="post" action="#">';
     echo '    <fieldset><legend>Soirée </legend><input type ="text" name="soiree" /></fieldset>';
-    echo '    <fieldset><legend>Date </legend><input type="text" name="date" /></fieldset>';
+    echo '    <fieldset><legend>Date </legend><input type="date" name="date" /></fieldset>';
     echo '    <fieldset><legend>Compte Rendu</legend><input type="text" name="cr" /></fieldset>';
     echo '   <input type ="submit" name="submit" value="Ajouter"/>';
     echo '</form>';
 
+    $iid=$connection->query("SELECT 'id' FROM public.reunion")->fetchAll();
+    $i=1;
+    foreach($iid as $id){
+        $i++;
+    }
     if (isset($_POST['soiree']) && isset($_POST['date']) && isset($_POST['cr'])) {
-        $req = $connection->prepare('INSERT INTO public.reunion(soiree,cr,datee,participant) VALUES(:soiree,:cr,:datee,:participant)');
-        $test = $req->execute(['soiree' => $_POST['soiree'],
-            'cr' => $_POST['cr'],
+        $req = $connection->prepare('INSERT INTO public.reunion(id_reu,soiree,cr,datee) VALUES(:id_reu,:soiree,:cr,:datee)');
+        $req->execute(['id_reu'=> $i,
+            'soiree' => $_POST['soiree'],
             'datee' => $_POST['date'],
-            'participant' => "",
+            'cr' => $_POST['cr'],
         ]);
     }
 }
