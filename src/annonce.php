@@ -125,6 +125,28 @@ class Annonce {
 		'$this->service'
 	    );";
 	dbExec($connection, $query);
+    
+    public static function getAnnoncesRequete($requete) {
+	$connection = dbConnect();
+
+	$rows = dbQuery($connection, $requete);
+	$annonces = [];
+
+	foreach($rows as $row) {
+	    $annonce = new Annonce();
+	    $annonce->setId($row->id);
+	    $annonce->setTitle($row->titre);
+	    $annonce->setDate(new \DateTimeImmutable($row->postdate));
+	    $annonce->setOp(Annonce::translateOp($connection, $row->op));
+	    $annonce->setContent($row->description);
+	    $annonce->setGenre($row->genre);
+	    $annonce->setSemestre($row->semestre);
+	    $annonce->setPaiement($row->paiement);
+
+	    $annonces[] = $annonce;
+	}
+
+	return $annonces;
     }
 }
 ?>
