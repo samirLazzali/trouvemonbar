@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,12 +7,16 @@
     <title>Page d'acceuil</title>
 </head>
 <body>
-<a href="index.html"><img src="img/logo.png" alt="Logo" height ="88" width="94"></a>
-<ul>
+<h1 id="title">
+    <a href="index.php"><img class="home" src="img/logo.png" alt="Logo" height ="88" width="94"></a>
+    <span id="title1">GolrIIE</span>
+    <a href="index.php"><img class="dc" src="img/logo.png" alt="Logo" height ="88" width="94"></a>
+</h1>
+<img src="img/menu.png" alt="menu">
+<ul id="menu">
     <li><a class="active" href="index.php">Home</a></li>
     <li><a href="posts.php">My posts</a></li>
-    <li><a class="active" href="profile.php">Profile</a></li>
-    <li class="dc"><a href="disconnect.php">Disconnect</a></li>
+    <li><a href="profile.php">Profile</a></li>
 </ul>
 </body>
 </html>
