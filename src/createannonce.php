@@ -11,7 +11,7 @@ header_t("Hey");
   <img src="https://s3.amazonaws.com/cdn.viewpointcs.com/www/images/products/icons/legacy-productBenefitIcon-hostingDB.png" class="center"/>
 </br>
 <div id="form_border">
-    <form name="annonce" method="post" action="create.php">
+    <form name="annonce" class="create" method="post" action="create.php">
 	<div class="radio-group">
 	    <input type="radio" id="offer" name="annoncetype">
 	    <label for="offer">

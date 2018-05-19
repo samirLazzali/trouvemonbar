@@ -1,4 +1,4 @@
-.center {
+form.create .center {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -6,13 +6,13 @@
 	  height: 150px;
 }
 
-.textcenter{
+form.create .textcenter{
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
-#form_border{
+form.create #form_border{
   width: 500px;
 	height:550px;
   display: block;
@@ -20,7 +20,8 @@
   margin-right: auto;
 }
 
-html, body {
+form.create html, 
+form.create body {
     background-color: #c1bdba;
 	  color: white;
     font-weight: bold;
@@ -28,7 +29,7 @@ html, body {
 }
 
 
-h1{
+form.create h1{
   background-color: #5FE6BD;
 	color: white;
 	font-family:'Titillium Web', sans-serif;
@@ -38,20 +39,19 @@ h1{
   padding-top: 10px;
 }
 
-form{
+form.create form{
 	text-align: center;
 }
 
 
-input[type=radio] {
-  position: absolute;
+form.create input[type=radio] {
   visibility: hidden;
   display: none;
   margin: 0 auto;
   background-color: DimGrey;
 }
 
-label {
+form.create label {
   display: inline-block;
   cursor: pointer;
   font-weight: bold;
@@ -59,18 +59,18 @@ label {
   width: 60px;
 }
 
-input[type=radio]:checked + label{
+form.create input[type=radio]:checked + label{
   background: #5FE6BD;
 }
-input[type=radio]:not(:checked)+ label{
+form.create input[type=radio]:not(:checked)+ label{
   color: lighten(#5FE6BD,60%);
   background: DimGrey;
 }
 
-label + input[type=radio] + label {
+form.create label + input[type=radio] + label {
   border-left: solid 3px #332f35;
 }
-.radio-group {
+form.create .radio-group {
   border: solid 3px #332f35;
   display: inline-block;
   margin: 20px;
@@ -78,7 +78,8 @@ label + input[type=radio] + label {
   overflow: hidden;
 }
 
-input[type=submit], input[type=reset]{
+form.create input[type=submit],
+form.create input[type=reset]{
   margin-left: auto;
   margin-right: auto;
   background-color: DimGrey;
@@ -93,11 +94,12 @@ input[type=submit], input[type=reset]{
   font-weight: bold;
 }
 
-input[type=submit]:hover, input[type=reset]:hover{
+form.create input[type=submit]:hover,
+form.create input[type=reset]:hover{
   background-color: #5FE6BD;
 }
 
-select {
+form.create select {
   margin-left: auto;
   margin-right: auto;
   background-color: DimGrey;
@@ -109,11 +111,13 @@ select {
   border-radius: 5px;
   font-weight: bold;
 }
-select:hover {
+form.create select:hover {
   background-color: #5FE6BD;
 }
 
-input[type=text],input[type=number],textarea{
+form.create input[type=text],
+form.create input[type=number],
+form.create textarea{
   border: solid 3px #332f35;
   border-radius: 5px;
   background-color: white;
@@ -124,7 +128,3 @@ input[type=text],input[type=number],textarea{
   padding-left: 5px;
   padding-right: 5px;
 }
-
-
-
-

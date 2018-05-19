@@ -17,7 +17,7 @@ function header_t($titre) {
     print "    <link rel=\"stylesheet\" href=\"css/header.css\">\n";
     print "    <link rel=\"stylesheet\" href=\"css/annonce.css\">\n";
     print "    <link rel=\"stylesheet\" href=\"css/sidebar.css\">\n";
-    print "    <link rel=\"stylesheet\" href=\"css/annoncestyle.css\">\n";
+    //print "    <link rel=\"stylesheet\" href=\"css/annoncestyle.css\">\n";
 
     print "<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>";
     print "  </head>\n";
@@ -27,7 +27,7 @@ function header_t($titre) {
     print "    <nav class=\"menu\" role=\"navigation\">\n";
     print "    <div class=\"inner\">\n";
     print "    <div class=\"m-left\">\n";
-    print "    <h1 class=\"logo\">$titre</h1>\n";
+    print "    <h1 class=\"logo\">Les Bons Bails</h1>\n";
     print "    </div>\n";
     print "    <div class=\"m-right\">\n";
     print "    <a href=\"main.php\" class=\"m-link\"><i class=\"fa fa-home\" aria-hidden=\"true\"></i> Accueil</a>\n";
