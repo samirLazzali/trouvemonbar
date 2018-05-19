@@ -6,26 +6,30 @@ function sqlquery($requete, $number)
 	$dbUser = getenv('DB_USER');
 	$dbPassword = getenv('DB_PASSWORD');
 	$query = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-	$results = $query->query("$requete");
 	queries();
-	
-	if($number == 1)
-	{
-		$results->setFetchMode(PDO::FETCH_OBJ);
-		$results->fetch();
-		$results->closeCursor();
-		return $results;
-	}
-	
-	else if($number == 2)
-	{
-		$results->setFetchMode(PDO::FETCH_OBJ);
-		while($rows = $results->fetch())
+	if($results = $query->query("$requete") {
+		if($number == 1)
 		{
-			$query2[] = $rows;
+			$results->setFetchMode(PDO::FETCH_OBJ);
+			$results->fetch();
+			$results->closeCursor();
+			return $results;
 		}
-		$results->closeCursor();
-		return $query2;
+	
+		else if($number == 2)
+		{
+			$results->setFetchMode(PDO::FETCH_OBJ);
+			while($rows = $results->fetch())
+			{
+				$query2[] = $rows;
+			}
+			$results->closeCursor();
+			return $query2;
+		
+		else
+		{
+		exit('Argument de sqlquery non renseigné ou incorrect.');
+		}
 	}
 	
 	else
