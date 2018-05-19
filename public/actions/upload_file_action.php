@@ -15,7 +15,7 @@ if (!Auth::logged())
 header("content-type:text/html;charset:utf-8");
 $fileInfo = $_FILES["myfile"];
 
-$filename = $fileInfo["name"];
+$filename = htmlspecialchars($fileInfo["name"]);
 $type = $fileInfo["type"];
 $error = $fileInfo["error"];
 $size = $fileInfo["size"];

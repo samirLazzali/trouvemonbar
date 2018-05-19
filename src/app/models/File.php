@@ -64,11 +64,11 @@ class File
      */
     public static function upload_file()
     {
-        echo '<form action="upload_file.php" method="post" enctype="multipart/form-data" target="myIframe">
-              <label for="file">Filename:</label>
+        echo '<form action="action/upload_file_action.php" method="post" enctype="multipart/form-data" target="myIframe">
+              <label for="file" >Filename:</label>
               <input type="file" name="myfile" id="myfile" />
               <br />
-              <input type="submit" name="submit" value="Submit" />
+              <input type="submit" name="submit" value="Submit"/>
               </form>
               <iframe id="myIframe" name="myIframe" frameborder="0" style=""></iframe> <br/>';
     }
@@ -79,7 +79,7 @@ class File
      */
     public static function download($filename,$fileid)
     {
-        echo "<a href=\"download_file.php?filename=".$fileid.$filename."\" >$filename</a>";
+        echo "<a href=\"actions/download_file_action.php?filename=".$fileid.$filename."\" >$filename</a>";
     }
 
 

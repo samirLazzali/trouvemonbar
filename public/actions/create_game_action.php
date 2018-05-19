@@ -8,11 +8,11 @@
 //add the game to the db
 require "../../src/app/helpers.php";
 
-$gamename = $_POST["gamename"];
-$gamedesc = $_POST["gamedesc"];
-$duration = $_POST["duration"];
-$gamesystemid = $_POST["gamesystem"];
-$creator = $_POST["creator"];
+$gamename = htmlspecialchars($_POST["gamename"]);
+$gamedesc = htmlspecialchars($_POST["gamedesc"]);
+$duration = htmlspecialchars($_POST["duration"]);
+$gamesystemid = htmlspecialchars($_POST["gamesystem"]);
+$creator = htmlspecialchars($_POST["creator"]);
 
 if(isset($_POST["oneshots"]))
     $oneshots = $_POST["oneshots"];

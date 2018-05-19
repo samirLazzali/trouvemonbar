@@ -7,8 +7,8 @@
  */
 require "../../src/app/helpers.php";
 
-$mail=$_POST['mail'];
-$password=$_POST['password'];
+$mail= htmlspecialchars($_POST['mail']);
+$password= htmlspecialchars($_POST['password']);
 
 try {
     $user = new User($_GET['userid']);

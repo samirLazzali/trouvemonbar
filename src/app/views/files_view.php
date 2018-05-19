@@ -6,7 +6,7 @@
  * Time: 15:30
  */
         $flag=false;
-        echo "<h2>Vos fichiers:</h2> </br>";
+        echo "<h3>Les fichiers:</h3> </br>";
         foreach ($filelist as $file) {
             if ($file->userid == $userid) {
                 \User\File::download($file->filename, $file->fileid);
@@ -17,10 +17,10 @@
         }
 
         if(!$flag)
-            echo "<h3>IL N'Y A PAS DE FICHIER!</h3>";
+            echo "<p>IL N'Y A PAS DE FICHIER!</p>";
 
         if($userid==$myid) {
-            echo "<h4>Choisir votre fichier:</h4></br>";
+            echo "<h5>Choisir votre fichier:</h5></br>";
             \User\File::upload_file();
         }
 
