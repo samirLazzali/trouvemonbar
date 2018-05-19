@@ -25,11 +25,6 @@ function sqlquery($requete, $number)
 			}
 			$results->closeCursor();
 			return $query2;
-		
-		else
-		{
-		exit('Argument de sqlquery non renseigné ou incorrect.');
-		}
 	}
 	
 	else
