@@ -1,0 +1,59 @@
+
+<div>
+
+<form id="recherche">
+	<script>
+		function getmatieres(str) {
+		var select = document.getElementById("mat");
+		select.options.length = 0;
+		if(str =="1"){
+			select.options[select.options.length] = new Option('MPR', '1');
+			select.options[select.options.length] = new Option( 'IPI', '2');
+		}
+		if(str == "2"){
+			select.options[select.options.length] = new Option('IPFL','3');
+			select.options[select.options.length] = new Option('ILO', '4');
+		}
+	}
+
+	</script>
+
+	<script>
+		function getmodules(str) {
+		   if (str == "") {
+		    return;
+		  }
+		var select = document.getElementById("modules");
+		select.options.length = 0;
+		if(str =="1"){
+			select.options[select.options.length] = new Option('Probas', '1');
+		}
+		if(str == "2"){
+			select.options[select.options.length] = new Option('IPI','2');
+		}
+		if(str == "3"){
+			select.options[select.options.length] = new Option('IPF','2');
+			select.options[select.options.length] = new Option('MLO', '2');
+		}
+		if(str == "4"){
+			select.options[select.options.length] = new Option('ILO', '2');
+		}
+		}
+	</script>
+	Semestre:
+	<select name="semestre" onChange="getmatieres(this.value)">
+		<option value="">Semestre</option>
+		<option value="1">S1</option>
+		<option value="2">S2</option>
+	</select>
+	Matière:
+	<select  id="mat" name="matiere" onChange="getmodules(this.value)">
+	</select>
+	Module:
+	<select id="modules" name="module">
+	</select>
+
+	<input type="submit">
+</form>
+
+</div>
