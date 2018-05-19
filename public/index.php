@@ -8,7 +8,7 @@
 	   <meta name="keywords" content="">
 	   <meta name="description" content="">
        <link rel="stylesheet" href="css/vegas.min.css">
-	   <link rel="stylesheet" href="css/style1.css">
+	   <link rel="stylesheet" href="css/index.css">
 	   <link href='https://fonts.googleapis.com/css?family=Rajdhani:400,500,700' rel='stylesheet' type='text/css'>
     </head>
 <body>
