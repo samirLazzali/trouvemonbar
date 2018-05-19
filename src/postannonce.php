@@ -1,4 +1,5 @@
-<?php
+<?php require '../src/accessdb.php';
+
 $SIZEREQUETE= "SELECT COUNT(*) FROM annonce";
 $CONNEXION = dbConnect();
 $SIZE = dbQuery($CONNEXION, $SIZEREQUETE)+1;
