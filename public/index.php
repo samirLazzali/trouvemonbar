@@ -12,7 +12,7 @@
                     array("oenologie.php","Oenologie : A quand la prochaine réu ?"),
                     array("contact.php","Nous contacter")
                     );
-        body($connecte,$liens);
+        body($connecte,$liens,"index.php");
         _footer();
     ?>
 </html>

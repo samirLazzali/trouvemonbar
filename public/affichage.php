@@ -65,14 +65,14 @@ function head($mp,$titre){
 
 /**
  * @brief genère le corps d'une page web
- * @param $connecte un entier indiquant si l'utilisateur est connecté
+ * @param $connecte un entier indiquant si l'utilisateur est connecté,$page ndiquant la page sur laquelle on se trouve
  */
-function body($connecte,$liens){
+function body($connecte,$liens,$page){
     echo "<body>";
     _header();
     echo "<dib id=\"corps\">";
     _nav($connecte,$liens);
-    _main();
+    _main($page);
     echo "</div>";
     echo "</body>";
 }
@@ -111,7 +111,7 @@ function profil(){
 }
 
 /**
- * @affiche une liste de liens pour la barre de navigation
+ * @brief affiche une liste de liens pour la barre de navigation
  *  @param $liens un tableau de tableaux contenant les liens et leurs intitulés
  */
 function menu($liens){
@@ -129,25 +129,100 @@ function menu($liens){
 }
 
 /**
- *
+ * @brief génére le contenu principale d'une page
+ * @param $page une page dont l'on veut générer le contenu
  */
-function _main() {
+function _main($page) {
     echo "<div id=\"main\">";
-    _article();
+    if ($page == "index.php"){
+        article_index();
+    }
+    if ($page == "course.php") {
+        article_course();
+    }
+    if ($page == "myth.php") {
+        article_myth();
+    }
+    if ($page == "recette.php") {
+        article_recette();
+    }
+    if ($page == "contact.php") {
+        article_contact();
+    }
+    if ($page == "stats.php") {
+        article_stats();
+    }
+    if ($page == "oenologie.php") {
+        article_oenologie();
+    }
     echo "</div>";
 }
 
 /**
- *
+ * @brief affiche l'article de index.php
  */
-function _article(){
+function article_index(){
     echo "<div id=\"article\">";
     echo "<h1>Bienvenu sur le nouveau site d'Aperal</h1>";
     echo "</div>";
 }
 
 /**
- *
+ * @brief affiche l'article de course.php
+ */
+function article_course(){
+    echo "<div id=\"article\">";
+    echo "<h1>Liste de course</h1>";
+    echo "</div>";
+}
+
+/**
+ * @brief affiche l'article de myth.php
+ */
+function article_myth(){
+    echo "<div id=\"article\">";
+    echo "<h1>Mythologie</h1>";
+    echo "</div>";
+}
+
+/**
+ * @brief affiche l'article de contact.php
+ */
+function article_contact(){
+    echo "<div id=\"article\">";
+    echo "<h1>Nous contacter</h1>";
+    echo "</div>";
+}
+
+/**
+ * @brief affiche l'article de recette.php
+ */
+function article_recette(){
+    echo "<div id=\"article\">";
+    echo "<h1>Recettes</h1>";
+    echo "</div>";
+}
+
+/**
+ * @brief affiche l'article de stats.php
+ */
+function article_stats(){
+    echo "<div id=\"article\">";
+    echo "<h1>Statistiques et trésorerie</h1>";
+    echo "</div>";
+}
+
+/**
+ * @brief affiche l'article de oenologie.php
+ */
+function article_oenologie(){
+    echo "<div id=\"article\">";
+    echo "<h1>Oenologie : A quand la prochaine réunion ?</h1>";
+    echo "</div>";
+}
+
+/**
+ * @brief génére le pied de page
  */
 function _footer(){
     echo"<div id=\"footer\">14/05/2018</div>";
