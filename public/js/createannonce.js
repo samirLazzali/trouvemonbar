@@ -1,22 +1,22 @@
 function toggletextepayant(){
   Objp=document.getElementById('zonetextepaying');
 	Objs=document.getElementById('zonetexteswap');
-	Objp.style.visibility="visible";
-	Objs.style.visibility="hidden";
+	Objp.style.display="block";
+	Objs.style.display="none";
 }
 
 function toggletexteswap(){
   Objp=document.getElementById('zonetextepaying');
 	Objs=document.getElementById('zonetexteswap');
-	Objp.style.visibility="hidden";
-	Objs.style.visibility="visible";
+	Objp.style.display="none";
+	Objs.style.display="block";
 }
 
 function togglecacher(){
   Objp=document.getElementById('zonetextepaying');
 	Objs=document.getElementById('zonetexteswap');
-	Objp.style.visibility="hidden";
-	Objs.style.visibility="hidden";
+	Objp.style.display="none";
+	Objs.style.display="";
 }
 
 //var modules = [document.getElementById("selectmodule1"), document.getElementById("selectmodule2"), document.getElementById("selectmodule3"), document.getElementById("selectmodule4"), document.getElementById("selectmodule5"), document.getElementById("selectmodule6")];
