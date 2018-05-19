@@ -1,42 +1,5 @@
 <?php
 
-function sqlquery($requete, $number)
-{
-	$dbName = getenv('DB_NAME');
-	$dbUser = getenv('DB_USER');
-	$dbPassword = getenv('DB_PASSWORD');
-	$query = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-	queries();
-	if($results = $query->query("$requete")) {
-		if($number == 1)
-		{
-			$results->setFetchMode(PDO::FETCH_OBJ);
-			$results->fetch();
-			$results->closeCursor();
-			return $results;
-		}
-	
-		else 
-		{
-			if($number == 2)
-			{
-				$results->setFetchMode(PDO::FETCH_OBJ);
-				while($rows = $results->fetch())
-				{
-					$query2[] = $rows;
-				}
-				$results->closeCursor();
-				return $query2;
-			}
-		}
-	}
-	
-	else
-	{
-		exit('Argument de sqlquery non renseigné ou incorrect.');
-	}
-}
-
 function queries($num = 1)
 {
 	global $queries;
@@ -47,7 +10,15 @@ function actualiser_session()
 {
 	if(isset($_SESSION['id_user']) && intval($_SESSION['id_user']) != 0)
 	{
-		$retour = sqlquery("SELECT id_user, login, password FROM Utilisateur WHERE id_user = ".intval($_SESSION['id_user']), 1);
+		$dbName = getenv('DB_NAME');
+		$dbUser = getenv('DB_USER');
+		$dbPassword = getenv('DB_PASSWORD');
+		$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
+		$retour = $connexion->query("SELECT id_user, login, password FROM Utilisateur WHERE id_user = ".intval($_SESSION['id_user']));
+		$retour -> setFetchMode(PDO::FETCH_OBJ);
+		$retour -> fetch();
+		global $queries;
+		$queries++;
 		if(isset($retour['login']) && $retour['login'] != '')
 		{
 			if($_SESSION['password'] != $retour['password'])
@@ -81,7 +52,15 @@ function actualiser_session()
 		{
 			if(intval($_COOKIE['id_user']) != 0)
 			{
-				$retour = sqlquery("SELECT id_user, login, password	FROM Utilisateur WHERE id_user = ".intval($_COOKIE['id_user']), 1);
+				$dbName = getenv('DB_NAME');
+				$dbUser = getenv('DB_USER');
+				$dbPassword = getenv('DB_PASSWORD');
+				$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
+				$retour = $connexion->query("SELECT id_user, login, password	FROM Utilisateur WHERE id_user = ".intval($_COOKIE['id_user']));
+				$retour -> setFetchMode(PDO::FETCH_OBJ);
+				$retour -> fetch();
+				global $queries;
+				$queries++;
 				
 				if(isset($retour['login']) && $retour['login'] != '')
 				{
@@ -162,7 +141,9 @@ function checklogin($login)
 		$dbUser = getenv('DB_USER');
 		$dbPassword = getenv('DB_PASSWORD');
 		$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-		$result = sqlquery("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE login = '".$connexion->quote($login)."'", 1);
+		$result = $connexion->query("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE login = '".$connexion->quote($login)."'");
+		$retour -> setFetchMode(PDO::FETCH_OBJ);
+		$retour -> fetch();
 		global $queries;
 		$queries++;
 		
@@ -202,7 +183,9 @@ function checkmail($email)
 		$dbUser = getenv('DB_USER');
 		$dbPassword = getenv('DB_PASSWORD');
 		$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-		$result = sqlquery("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE mail = '".$connexion->quote($email)."'", 1);
+		$result = $connexion->query("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE mail = '".$connexion->quote($email)."'");
+		$retour -> setFetchMode(PDO::FETCH_OBJ);
+		$retour -> fetch();
 		global $queries;
 		$queries++;
 		
@@ -229,7 +212,9 @@ function checkphone($phone_number)
 		$dbUser = getenv('DB_USER');
 		$dbPassword = getenv('DB_PASSWORD');
 		$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-		$result = sqlquery("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE phone_number = '".$connexion->quote($phone_number)."'", 1);
+		$result = $connexion->query("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE phone_number = '".$connexion->quote($phone_number)."'");
+		$retour -> setFetchMode(PDO::FETCH_OBJ);
+		$retour -> fetch()
 		global $queries;
 		$queries++;
 		
