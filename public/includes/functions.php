@@ -7,7 +7,7 @@ function sqlquery($requete, $number)
 	$dbPassword = getenv('DB_PASSWORD');
 	$query = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 	queries();
-	if($results = $query->query("$requete") {
+	if($results = $query->query("$requete")) {
 		if($number == 1)
 		{
 			$results->setFetchMode(PDO::FETCH_OBJ);
