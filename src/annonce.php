@@ -16,21 +16,23 @@ class Annonce {
     public function display() {
 	print "<div class=annonce id=a$this->id>";
 	print "<div class=title>";
-	print "$this->title";
+	print "$this->title ";
+	print "<a class=\"toggleAnnonce\"><i class=\"fas fa-angle-up\"></i></a>";
 	print "</div>";
 
+	print "<div class=more>";
 	print "<div class=info>";
-	print "$this->genre - $this->op - S$this->semestre";
+	print "$this->genre</br>$this->op</br>S$this->semestre";
 	print "</div>";
 
 	print "<div class=desc>";
 	print "$this->content";
 	print "</div>";
+	print "</div>";
 
 	print "<div class=logi>";
 	print "$this->paiement kebabs";
 	print "</div>";
-
 	print "</div>";
     }
 
@@ -107,8 +109,4 @@ class Annonce {
 	return $annonces;
     }
 }
-
-
-    
-
 ?>

@@ -54,5 +54,8 @@ document.getElementById("connect").onclick = function(e) {
     }
 };
 
+document.getElementById("toggleAnnonce").onclick = function(e) {
+    console.log("Hey");
+};
 
 

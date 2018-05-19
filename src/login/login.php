@@ -26,6 +26,7 @@ function login() {
 
     if (isset($_GET['logout'])) {
 	session_destroy();
+	header("Refresh:0; url=main.php");
     } else {
 	if (empty($_POST['email']) || empty($_POST['password'])) {
 	    return "Username or Password is invalid";
@@ -87,14 +88,14 @@ function verif_authent() {
 
 function buttonLogin() {
     //echo "<button class=\"button button-block\" id=\"connect\">Connect</button>";
-    echo "<a href=\"#\" class=\"m-link\" id=\"connect\"><i class=\"fa\" aria-hidden=\"true\"></i> Log In</a>";
+    echo "<a class=\"m-link\" id=\"connect\"><i class=\"fa\" aria-hidden=\"true\"></i> Log In</a>";
 }
 
 function buttonLogout() {
    // print "<form align=\"right\" name=\"form1\" method=\"post\" action=\"\">";
    // print "<input name=\"logout\" type=\"submit\" id=\"logout\" value=\"log out\">";
    // print "</form>";
-    echo "<a href=\"main.php?logout\" class=\"m-link\" id=\"connect\"><i class=\"fa\" aria-hidden=\"true\"></i> Log Out</a>";
+    echo "<a href=\"main.php?logout\" class=\"m-link\" id=\"logout\"><i class=\"fa\" aria-hidden=\"true\"></i> Log Out</a>";
 }
 
 function displayLogin() {
@@ -144,8 +145,6 @@ function displayLogin() {
     echo "</div><!-- tab-content -->";
     echo "</div><!-- /form -->";
 
-    echo "<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>";
-
-    echo "<script src=\"js/index.js\"></script>";
+    echo "<script src=\"js/login.js\"></script>";
 }
 ?>

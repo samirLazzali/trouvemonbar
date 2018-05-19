@@ -2,10 +2,15 @@
 //include("authentication.php");
 include("viewfunctions.php");
 include("annonce.php");
+include("sidebar.php");
 login();
 
 header_t("Les Bons Bails");
-displayLogin();
+if(!verif_authent()) { // si le gars est authentified ==>  acces aux offres
+    displayLogin();
+}
+
+dispSidebar();
 ?>
 
 <div class="main">

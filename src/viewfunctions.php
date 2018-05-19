@@ -10,9 +10,14 @@ function header_t($titre) {
     print "    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>";
     //print "    <link href=\"https://www.stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\" rel=\"stylesheet\" integrity=\"sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN\" crossorigin=\"anonymous\">\n";
     print "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css\">";
+    //print "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">";
+    print "    <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.0.13/css/all.css\" integrity=\"sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp\" crossorigin=\"anonymous\">";
     print "    <link rel=\"stylesheet\" href=\"css/style.css\">";
     print "    <link rel=\"stylesheet\" href=\"css/normalize.css\">\n";
     print "    <link rel=\"stylesheet\" href=\"css/header.css\">\n";
+    print "    <link rel=\"stylesheet\" href=\"css/annonce.css\">\n";
+    print "    <link rel=\"stylesheet\" href=\"css/sidebar.css\">\n";
+    print "<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>";
     print "  </head>\n";
   
     print "  <body>\n";
@@ -45,8 +50,9 @@ function footer(){
     //print "<div id=\"footer\">";
     print "<footer>";
     print "<link rel=\"stylesheet\" href=\"public/css/normalize.css\">\n";
-    print "<p>&copy; <b> 2018 ENSIIE </b> | Skutnik . Chekour . Trachino . Meas - All Rights Reserved  </p> </br>";
-    print "<p> <b> Contact </b> : 06 59 42 47 94 | lesbonsbails@gmail.com | </p>";
+    print "<p>&copy; <b>2018 ENSIIE</b> | Skutnik . Chekour . Trachino . Meas | All Rights Reserved</p>";
+    print "<p><b>Contact</b>: 06 59 42 47 94 | lesbonsbails@gmail.com</p>";
+    print "    <script src=\"js/global.js\"></script>";
     print "</footer>";
     print "</html>";
 

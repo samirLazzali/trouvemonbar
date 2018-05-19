@@ -8,8 +8,8 @@
   float: left;
 }
 .logo{
+  padding-left: 10px;
   margin: 0;
-  padding: 0;
   color: #fff;
   text-transform: uppercase;
   /*font-family: 'Segoe UI';*/
