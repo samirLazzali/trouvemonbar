@@ -260,7 +260,7 @@ class Post implements JsonSerializable
         $statement = $db->prepare($SQL);
         $statement->bindValue(":appre", $like);
         $statement->bindValue(":limit", $limit);
-        $statement->bindValue(":timelimit", $timelimit);
+        $statement->bindValue(":timelimit", $timelimit == 0 ? 0 : time() - $timelimit);
         $statement->execute();
 
         $rows = $statement->fetchAll();
@@ -279,20 +279,27 @@ class Post implements JsonSerializable
     static function topRt($limit=10, $timelimit=7200)
     {
         $db = connect();
-        $SQL = "SELECT repost, count(repost) AS nbrt
-                FROM (SELECT * FROM ". TABLE_Posts ." WHERE timestamp >= :timelimit) as toto
+        $SQL = "SELECT repost, count(id) AS nbrt
+                FROM (SELECT * FROM ". TABLE_Posts ." WHERE repost <> '' AND timestamp >= :timelimit) as toto
                 GROUP BY repost
                 ORDER BY nbrt DESC
                 LIMIT :limit";
 
+        /*SELECT repost, count(repost) AS nbrt
+                FROM (SELECT * FROM post WHERE repost <> '' AND timestamp >= 0) as toto
+                GROUP BY repost
+                ORDER BY nbrt DESC
+                LIMIT 5;
+        */
+
+
         $statement = $db->prepare($SQL);
         $statement->bindValue(":limit", $limit);
-        $statement->bindValue(":timelimit", $timelimit);
+        $statement->bindValue(":timelimit", $timelimit == 0 ? 0 : time() - $timelimit);
         $statement->execute();
 
         $rows = $statement->fetchAll();
         $result = array();
-
         foreach ($rows as $row) {
             $p = Post::fromID($row['repost']);
             $p->getAuthor();
@@ -301,6 +308,8 @@ class Post implements JsonSerializable
         }
 
         return $result;
+
+        /*return self::topLikes();*/
     }
 
     /**

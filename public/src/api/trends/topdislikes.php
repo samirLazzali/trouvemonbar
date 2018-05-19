@@ -6,7 +6,7 @@ $getOriginals = false;
 if (isset($_GET['getoriginals']))
     $getOriginals = $_GET['getoriginals'] == "true" ? true : false;
 
-$posts = Post::topRt();
+$posts = Post::topLikes(Appreciation::DISLIKE);
 
 if ($getOriginals)
     foreach($posts as $post) {
