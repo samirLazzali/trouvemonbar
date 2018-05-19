@@ -123,7 +123,13 @@ class User
      */
     public function updateUser($passwd, $mail)
     {
+        $query = db()->prepare("UPDATE users SET mail=?,password=? WHERE userid=?");
+        $success = $query->execute([$mail, password_hash( $passwd, PASSWORD_DEFAULT),$this->userid]);
+        if($success)
+            return true;
 
+        else
+            return false;
     }
 
     /**

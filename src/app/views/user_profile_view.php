@@ -48,7 +48,7 @@
     <?php
         if($isOwner)
             echo "<div class='container-fluid m-1'>
-                    <button class='btn btn-primary' href='edit_profile.php'> Editer mon profil </button>
+                    <a class='btn btn-primary' href='edit_profile.php'> Editer mon prolile </a>
                     </div>";
     ?>
 

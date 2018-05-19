@@ -1,6 +1,8 @@
 <?php
 require "../src/app/helpers.php";
 
+if(!Auth::logged())
+    redirect("index.php");
 
 $wherelist=array();
 

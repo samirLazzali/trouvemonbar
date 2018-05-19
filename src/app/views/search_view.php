@@ -1,7 +1,7 @@
 
 <!--search bar -->
 <div align="center">
-<form id="form_search" action="search_user.php" method="get">
+    <form id="form_search" action="search_user.php" method="get">
     nom：<input type="text" name="lastname" value="" size="8">
     pseudo:<input type="text" name="nick" value="" size="8">
     jeu de rôle：<input type="text" name="gamename" value="" size="8">
