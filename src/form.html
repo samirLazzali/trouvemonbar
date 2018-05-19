@@ -1,14 +1,14 @@
 <script>
 		function getmatieres(str) {
-		var select = document.getElementById("mat");
+		var select = document.getElementById("matieres");
 		select.options.length = 0;
 		if(str =="1"){
-			select.options[select.options.length] = new Option('MPR', '1');
-			select.options[select.options.length] = new Option( 'IPI', '2');
+			select.options[select.options.length] = new Option('MPR', 'MPR');
+			select.options[select.options.length] = new Option( 'IPI', 'IPI');
 		}
 		if(str == "2"){
-			select.options[select.options.length] = new Option('IPFL','3');
-			select.options[select.options.length] = new Option('ILO', '4');
+			select.options[select.options.length] = new Option('IPFL','IPFL');
+			select.options[select.options.length] = new Option('ILO', 'ILO');
 		}
 	}
 
@@ -22,23 +22,23 @@
 		var select = document.getElementById("modules");
 		select.options.length = 0;
 		if(str =="1"){
-			select.options[select.options.length] = new Option('Probas', '1');
+			select.options[select.options.length] = new Option('MPR', 'MPR');
 		}
 		if(str == "2"){
-			select.options[select.options.length] = new Option('IPI','2');
+			select.options[select.options.length] = new Option('IPI','IPI');
 		}
 		if(str == "3"){
-			select.options[select.options.length] = new Option('IPF','2');
-			select.options[select.options.length] = new Option('MLO', '2');
+			select.options[select.options.length] = new Option('IPF','IPF');
+			select.options[select.options.length] = new Option('MLO', 'MLO');
 		}
 		if(str == "4"){
-			select.options[select.options.length] = new Option('ILO', '2');
+			select.options[select.options.length] = new Option('ILO', 'ILO');
 		}
 		}
 	</script>
-<div id="formspace">
+<div >
 
-<form id="recherche">
+<form>
 	
 	<div class="searchselect">
 		Semestre:
@@ -50,16 +50,16 @@
 	</div>
 	<div class="searchselect">
 	Matière:
-	<select   id="mat" name="matiere" onChange="getmodules(this.value)">
+	<select id="matieres"  name="matiere" onChange="getmodules(this.value)">
 	</select>
 	</div>
 	<div class="searchselect">
 	Module:
-	<select  id="modules" name="module">
+	<select id="modules" name="module">
 	</select>
 	</div>
 
-	<input id="validateResearch" type="submit">
+	<input class="button button-block" name="RECHERCHER" type="submit" style="background-color: #1ab188; margin-top: 25%">
 </form>
 
 </div>

@@ -16,10 +16,11 @@
   font-weight: 900;
   font-size: 28px;
 }
-/*.m-right{
+.m-right{
   float: right;
-}*/
+}
 .m-link{
+  float: right;
   text-decoration: none;
   color: #fff;
   text-transform: uppercase;
@@ -41,4 +42,24 @@
   .m-right{
     display: none;
   }
+}
+
+.formresearch{
+    background: rgba(19, 35, 47, 0.9);
+    padding: 40px;
+    max-width: 600px;
+    max-height: 1000px;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+    opacity:0.92;
+
+    width: 700px;
+    height: 480px;
+
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 }
