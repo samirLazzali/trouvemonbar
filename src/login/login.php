@@ -88,7 +88,7 @@ function verif_authent() {
 
 function buttonLogin() {
     //echo "<button class=\"button button-block\" id=\"connect\">Connect</button>";
-    echo "<a class=\"m-link\" id=\"connect\"><i class=\"fa\" aria-hidden=\"true\"></i> Log In</a>";
+    echo "<a class=\"m-link\" id=\"connect\"><i class=\"fas fa-sign-in-alt\" aria-hidden=\"true\"></i> Log In</a>";
 }
 
 function buttonLogout() {
