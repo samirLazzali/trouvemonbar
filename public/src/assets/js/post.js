@@ -409,7 +409,6 @@ function postToHtml(author, content, date, id, likecount = -1, dislikecount = -1
 
 function refreshFeed(lastRefresh, filter = "")
 {
-    var feed = document.getElementById("post-feed");
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200)
@@ -419,20 +418,11 @@ function refreshFeed(lastRefresh, filter = "")
             {
                 lastRefresh = result["timestamp"] - 1;
                 result = result["result"];
-                var html;
                 if (result.length > 0) {
                     Array.from(result).forEach(function(elt, idx, arr) {
-                        var currentReport = document.getElementById("report-form-" + elt["id"]);
-                        if (currentReport != undefined)
-                            return;
-
-                        if (elt["repostOf"] != null)
-                            html = rawRepostToHtml(elt);
-                        else
-                            html = rawPostToHtml(elt);
-
-                        feed.innerHTML = html + feed.innerHTML;
+                        postsWaiting.push(elt);
                     });
+                    document.getElementById("link-posts-waiting").style.display = "block";
                 }
                 // On rappelle refreshFeed dans cinq secondes
                 setTimeout(function () {
@@ -449,6 +439,24 @@ function refreshFeed(lastRefresh, filter = "")
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("after=" + lastRefresh + "&limit=25&filter=" + filter);
     return false;
+}
+
+function showWaitingPosts()
+{
+    var feed = document.getElementById("post-feed");
+    var html;
+    postsWaiting.forEach(function(elt, index, arr) {
+        var currentReport = document.getElementById("report-form-" + elt["id"]);
+        if (currentReport != undefined)
+            return;
+
+        if (elt["repostOf"] != null)
+            html = rawRepostToHtml(elt);
+        else
+            html = rawPostToHtml(elt);
+    });
+    feed.innerHTML = html + feed.innerHTML;
+    toggleBlock("link-posts-waiting");
 }
 
 function getPostsBefore(before, filter = "")
@@ -480,13 +488,6 @@ function getPostsBefore(before, filter = "")
                         _before = elt["timestamp"];
                     });
                 }
-                document.getElementById("link-more-posts-wrapper").remove();
-                feed.innerHTML +=
-                    '<a id="link-more-posts" class="link-more-posts" href="#" onClick="return getPostsBefore(_before, filter);">' +
-                    '   <div class="post-in-feed" id="link-more-posts-wrapper">' +
-                    '       Plus anciens' +
-                    '    </div>' +
-                    '</a>';
             }
             else
             {

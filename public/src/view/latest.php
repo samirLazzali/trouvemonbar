@@ -26,6 +26,7 @@ $posts = Post::findPosts(array(), $limit);
         var lastRefresh = <?= time(); ?>;
         var filter = "";
         var _before = <?= end($posts)->getTimestamp(); ?>;
+        var postsWaiting = [];
     </script>
 </head>
 <body onload="refreshFeed(lastRefresh, filter)">
@@ -34,6 +35,11 @@ $posts = Post::findPosts(array(), $limit);
     <h1>
         - Dernières Publications -
     </h1>
+    <a id="link-posts-waiting" class="link-posts-waiting display-none" href="#" onClick="return showWaitingPosts();">
+        <div class="post-in-feed" id="link-more-posts-wrapper">
+            Nouvelles publications
+        </div>
+    </a>
     <div class="post-feed" id="post-feed">
         <?php
         foreach ($posts as $post) {
@@ -44,12 +50,12 @@ $posts = Post::findPosts(array(), $limit);
             $before = $post->getTimestamp();
         }
         ?>
-        <a id="link-more-posts" class="link-more-posts" href="#" onClick="return getPostsBefore(_before, filter);">
-            <div class="post-in-feed" id="link-more-posts-wrapper">
-                Plus anciens
-            </div>
-        </a>
     </div>
+    <a id="link-more-posts" class="link-more-posts" href="#" onClick="return getPostsBefore(_before, filter);">
+        <div class="post-in-feed" id="link-more-posts-wrapper">
+            Plus anciens
+        </div>
+    </a>
 </div>
 </body>
 </html>
