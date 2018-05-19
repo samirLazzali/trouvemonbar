@@ -9,9 +9,7 @@ else
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>
-            Vitz
-        </title>
+        <title>Vitz</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" type="text/css" href="/assets/styles/login-signup.css"/>
         <script src="/assets/js/forms.js"></script>

@@ -13,9 +13,7 @@ if ($user == null)
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>
-        Vitz - Compte
-    </title>
+    <title>Vitz - Compte</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="/assets/styles/compte.css" />
     <script src="/assets/js/compte.js"></script>

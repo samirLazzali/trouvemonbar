@@ -34,9 +34,7 @@ else
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>
-            Vitz - Profil
-        </title>
+        <title>Vitz - Profil</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="/assets/styles/profile.css" />
         <script src="/assets/js/post.js" ></script>

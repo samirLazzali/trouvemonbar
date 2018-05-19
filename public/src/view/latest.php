@@ -15,9 +15,7 @@ $posts = Post::findPosts(array(), $limit);
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>
-        Vitz # Fil
-    </title>
+    <title>Vitz - Fil</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="assets/styles/feed.css" />
     <script src="/assets/js/general.js"><</script>

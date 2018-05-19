@@ -17,9 +17,7 @@ $posts = Post::findPosts($people, $limit);
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>
-        Dernières publications
-    </title>
+    <title>Vitz - Dernières publications</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="assets/styles/feed.css" />
     <script src="/assets/js/general.js"></script>

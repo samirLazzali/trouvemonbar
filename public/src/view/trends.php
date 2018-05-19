@@ -11,6 +11,7 @@ $tags = array_keys($trends);
 <html>
     <head>
         <meta charset="utf-8" />
+        <title>Vitz - Tendances</title>
         <link rel="stylesheet" href="/assets/styles/trends.css" />
         <script src="/assets/js/trends.js"></script>
         <script src="/assets/js/general.js"></script>

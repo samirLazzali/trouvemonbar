@@ -31,7 +31,7 @@ if(!$notFound) {
 <html>
 <head>
     <?php if(!$notFound): ?>
-        <title>Publication de <?=$author?></title>
+        <title>Vitz - Publication de <?=$author?></title>
     <?php else: ?>
         <title>Vitz</title>
     <?php endif ?>
