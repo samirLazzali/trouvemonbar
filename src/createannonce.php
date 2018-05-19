@@ -7,15 +7,19 @@ header_t("Hey");
 
 <div class="main">
     <h1>CREATE ANNOUNCEMENT</h1>
+  </br>
+  <img src="https://s3.amazonaws.com/cdn.viewpointcs.com/www/images/products/icons/legacy-productBenefitIcon-hostingDB.png" class="center"/>
+</br>
+<div id="form_border">
     <form name="annonce" method="post" action="create.php">
 	<div class="radio-group">
-	    <input type="radio" id="option-one" name="annoncetype">
-	    <label for="option-one">
-		Offer
+	    <input type="radio" id="offer" name="annoncetype">
+	    <label for="offer">
+		OFFER
 	    </label>
-	    <input type="radio" id="option-two" name="annoncetype">
-	    <label for="option-two">
-		Query
+	    <input type="radio" id="query" name="annoncetype">
+	    <label for="query">
+		QUERY
 	    </label>
       </div> </br>
 
@@ -34,12 +38,12 @@ header_t("Hey");
 	    </label>
 	</div>
 	<div id="zonetextepaying">
-	    AMOUNT (€): <input type="number" name="annoncepayamount"/>
-	</div>
-	<div id="zonetexteswap">NATURE OF SWAP: <input type="text" name="annonceswapnature"/></div>
-	TITLE: <input type="text" name="annoncetitle"/> <br/>
-	GENRE: <input type="text" name="annoncegenre" placeholder="Projet, TP, etc."/> <br/>
-	<textarea name="annoncedesc" cols="40" rows="3" placeholder="Enter short description here"></textarea><br/>
+	    AMOUNT (€): <input type="number" name="annoncepayamount" class="textcenter"/>
+  </div> </br>
+	<div id="zonetexteswap">NATURE OF SWAP: <input type="text" name="annonceswapnature" class="textcenter"/></div> </br>
+	TITLE: <input type="text" name="annoncetitle" class="textcenter"/> <br/>
+	GENRE: <input type="text" name="annoncegenre" placeholder="Projet, TP, etc." class="textcenter"/> <br/>
+	<textarea name="annoncedesc" cols="30" rows="3" maxlength="240" placeholder="Enter short description here" class="textcenter"></textarea><br/>
 	SEMESTER: <select name=”annoncesemester” class="styled-select black rounded">
 	    <option value="S1" class="toggle">1</option>
 	    <option value="S2" class="toggle">2</option>
@@ -127,11 +131,32 @@ header_t("Hey");
 		<option value=”SSI”>SSI</option>
 	    </select> <br/>
 	</div>
+  
+	<div id="selectmodule5" style="display: none">MODULE: <select name=”annoncemodule”>
+		<option value=”AEBI”>AEBI</option>
+		<option value=”GPA”>GPA</option>
+		<option value=”ISA”>ISA</option>
+		<option value=”MAF”>MAF</option>
+		<option value=”MAL”>MAL</option>
+		<option value=”MQF”>MQF</option>
+		<option value=”MSA”>MSA</option>
+		<option value=”NTOE”>NTOE</option>
+		<option value=”OPTI”>OPTI</option>
+    <option value=”PMGD”>PMGD</option>
+    <option value=”PROG”>PROG</option>
+    <option value=”RESO”>RESO</option>
+    <option value=”SEC”>SEC</option>
+    <option value=”SIBD”>SIBD</option>
+    <option value=”WIA”>WIA</option>
+	    </select> <br/>
+	</div>
 
 	<input type="submit" name="submit" value="CREATE"/>
 	<input type="reset" name="startover" value="ERASE"/>
+  </br>
     </form>
     <script src="js/createannonce.js"></script>
+</div>
 </div>
 
 <script type="text/javascript">

@@ -6,6 +6,20 @@
 	  height: 150px;
 }
 
+.textcenter{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#form_border{
+  width: 500px;
+	height:550px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 html, body {
     background-color: #c1bdba;
 	  color: white;
@@ -21,6 +35,7 @@ h1{
 	text-align: center;
   margin: 0 auto;
   height: 50px;
+  padding-top: 10px;
 }
 
 form{
@@ -37,15 +52,14 @@ input[type=radio] {
 }
 
 label {
-  color: lighten(DimGrey,40%);
   display: inline-block;
   cursor: pointer;
   font-weight: bold;
   padding: 5px 20px;
+  width: 60px;
 }
 
 input[type=radio]:checked + label{
-  color: lighten(#5FE6BD,60%);
   background: #5FE6BD;
 }
 input[type=radio]:not(:checked)+ label{
@@ -83,6 +97,34 @@ input[type=submit]:hover, input[type=reset]:hover{
   background-color: #5FE6BD;
 }
 
+select {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: DimGrey;
+  color: white;
+  text-align: center;
+  font-size: 13px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+}
+select:hover {
+  background-color: #5FE6BD;
+}
 
-/*---POUR SELECT----*/
+input[type=text],input[type=number],textarea{
+  border: solid 3px #332f35;
+  border-radius: 5px;
+  background-color: white;
+  font-family:'Titillium Web', sans-serif;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+
+
 
