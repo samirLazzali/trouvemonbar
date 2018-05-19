@@ -38,8 +38,8 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE public.annonce (
-    id integer NOT NULL,
-    postDate date,
+    id SERIAL,
+    postDate timestamp,
     op integer,
     semestre integer,
     module character varying(20),
@@ -91,36 +91,36 @@ ALTER TABLE public.tags OWNER TO ensiie;
 -- Name: user; Type: TABLE; Schema: public; Owner: ensiie
 --
 
-CREATE TABLE public."user" (
-    id integer NOT NULL,
-    firstname character varying NOT NULL,
-    lastname character varying NOT NULL,
-    birthday date
-);
-
-
-ALTER TABLE public."user" OWNER TO ensiie;
-
+--CREATE TABLE public."user" (
+--    id integer NOT NULL,
+--    firstname character varying NOT NULL,
+--    lastname character varying NOT NULL,
+--    birthday date
+--);
 --
--- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: ensiie
 --
-
-CREATE SEQUENCE public.user_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.user_id_seq OWNER TO ensiie;
-
+--ALTER TABLE public."user" OWNER TO ensiie;
 --
--- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ensiie
+----
+---- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: ensiie
+----
 --
-
-ALTER SEQUENCE public.user_id_seq OWNED BY public."user".id;
+--CREATE SEQUENCE public.user_id_seq
+--    AS integer
+--    START WITH 1
+--    INCREMENT BY 1
+--    NO MINVALUE
+--    NO MAXVALUE
+--    CACHE 1;
+--
+--
+--ALTER TABLE public.user_id_seq OWNER TO ensiie;
+--
+----
+---- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ensiie
+----
+--
+--ALTER SEQUENCE public.user_id_seq OWNED BY public."user".id;
 
 
 --
@@ -164,7 +164,7 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 -- Name: user id; Type: DEFAULT; Schema: public; Owner: ensiie
 --
 
-ALTER TABLE ONLY public."user" ALTER COLUMN id SET DEFAULT nextval('public.user_id_seq'::regclass);
+--ALTER TABLE ONLY public."user" ALTER COLUMN id SET DEFAULT nextval('public.user_id_seq'::regclass);
 
 
 --
@@ -194,23 +194,23 @@ COPY public.tags (name) FROM stdin;
 --
 -- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: ensiie
 --
-
-COPY public."user" (id, firstname, lastname, birthday) FROM stdin;
-1	John	Doe	1967-11-22
-2	Yvette	Angel	1932-01-24
-3	Amelia	Waters	1981-12-01
-4	Manuel	Holloway	1979-07-25
-5	Alonzo	Erickson	1947-11-13
-6	Otis	Roberson	1995-01-09
-7	Jaime	King	1924-05-30
-8	Vicky	Pearson	1982-12-12
-9	Silvia	Mcguire	1971-03-02
-10	Brendan	Pena	1950-02-17
-11	Jackie	Cohen	1967-01-27
-12	Delores	Williamson	1961-07-19
-\.
-
-
+--
+--COPY public."user" (id, firstname, lastname, birthday) FROM stdin;
+--1	John	Doe	1967-11-22
+--2	Yvette	Angel	1932-01-24
+--3	Amelia	Waters	1981-12-01
+--4	Manuel	Holloway	1979-07-25
+--5	Alonzo	Erickson	1947-11-13
+--6	Otis	Roberson	1995-01-09
+--7	Jaime	King	1924-05-30
+--8	Vicky	Pearson	1982-12-12
+--9	Silvia	Mcguire	1971-03-02
+--10	Brendan	Pena	1950-02-17
+--11	Jackie	Cohen	1967-01-27
+--12	Delores	Williamson	1961-07-19
+--\.
+--
+--
 --
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: ensiie
 --
@@ -238,7 +238,7 @@ SELECT pg_catalog.setval('public.annonce_id_seq', 1, false);
 -- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ensiie
 --
 
-SELECT pg_catalog.setval('public.user_id_seq', 12, true);
+--SELECT pg_catalog.setval('public.user_id_seq', 12, true);
 
 
 --
@@ -260,8 +260,8 @@ ALTER TABLE ONLY public.tags
 -- Name: user user_pkey; Type: CONSTRAINT; Schema: public; Owner: ensiie
 --
 
-ALTER TABLE ONLY public."user"
-    ADD CONSTRAINT user_pkey PRIMARY KEY (id);
+--ALTER TABLE ONLY public."user"
+    --ADD CONSTRAINT user_pkey PRIMARY KEY (id);
 
 
 --

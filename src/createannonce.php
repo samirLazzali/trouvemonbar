@@ -3,15 +3,11 @@ include("annonce.php");
 include("viewfunctions.php");
 
 header_t("Hey");
-
-if (isset($_POST['submit']) && ($annonce = Annonce::annonceFromPost()) != null) {
-    $annonce->sendToDb();
-}
-
 ?>
+
 <div class="main">
     <h1>CREATE ANNOUNCEMENT</h1>
-    <form name="annonce" method="post" action="annonce.php">
+    <form name="annonce" method="post" action="create.php">
 	<div class="radio-group">
 	    <input type="radio" id="option-one" name="annoncetype">
 	    <label for="option-one">
@@ -132,7 +128,7 @@ if (isset($_POST['submit']) && ($annonce = Annonce::annonceFromPost()) != null) 
 	    </select> <br/>
 	</div>
 
-	<input type="submit" name="send" value="CREATE"/>
+	<input type="submit" name="submit" value="CREATE"/>
 	<input type="reset" name="startover" value="ERASE"/>
     </form>
     <script src="js/createannonce.js"></script>

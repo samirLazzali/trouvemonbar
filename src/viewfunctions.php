@@ -12,11 +12,13 @@ function header_t($titre) {
     print "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css\">";
     //print "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">";
     print "    <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.0.13/css/all.css\" integrity=\"sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp\" crossorigin=\"anonymous\">";
+
     print "    <link rel=\"stylesheet\" href=\"css/style.css\">";
-    //print "    <link rel=\"stylesheet\" href=\"css/normalize.css\">\n";
     print "    <link rel=\"stylesheet\" href=\"css/header.css\">\n";
     print "    <link rel=\"stylesheet\" href=\"css/annonce.css\">\n";
     print "    <link rel=\"stylesheet\" href=\"css/sidebar.css\">\n";
+    print "    <link rel=\"stylesheet\" href=\"css/annoncestyle.css\">\n";
+
     print "<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>";
     print "  </head>\n";
   
@@ -29,7 +31,7 @@ function header_t($titre) {
     print "    </div>\n";
     print "    <div class=\"m-right\">\n";
     print "    <a href=\"#\" class=\"m-link\"><i class=\"fa fa-home\" aria-hidden=\"true\"></i> Accueil</a>\n";
-    print "    <a href=\"#\" class=\"m-link\"><i class=\"fa fa-newspaper-o\" aria-hidden=\"true\"></i> Annonces</a>\n";
+    print "    <a href=\"createannonce.php\" class=\"m-link\"><i class=\"fa fa-newspaper-o\" aria-hidden=\"true\"></i> Annonces</a>\n";
     print "    <a href=\"#\" class=\"m-link\"><i class=\"fa fa-question-circle-o\" aria-hidden=\"true\"></i> A propos</a>\n";
     print "    <a href=\"#\" class=\"m-link\"><i class=\"fa fa-paper-plane-o\" aria-hidden=\"true\"></i> Contact</a>\n";
 
