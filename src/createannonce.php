@@ -5,10 +5,14 @@ include("viewfunctions.php");
 header_t("Hey");
 ?>
 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+
 <div class="main">
-    <h1>CREATE ANNOUNCEMENT</h1>
+	<div class="annonce">
+    <div class="title"> <i class="fas fa-arrow-circle-down"></i> CREATE ANNOUNCEMENT
+    </div>
   </br>
-  <img src="https://s3.amazonaws.com/cdn.viewpointcs.com/www/images/products/icons/legacy-productBenefitIcon-hostingDB.png" class="center"/>
 </br>
 <div id="form_border">
     <form name="annonce" class="create" method="post" action="create.php">
@@ -156,6 +160,7 @@ header_t("Hey");
   </br>
     </form>
     <script src="js/createannonce.js"></script>
+</div>
 </div>
 </div>
 
