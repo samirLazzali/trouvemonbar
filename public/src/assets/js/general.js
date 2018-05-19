@@ -25,14 +25,20 @@ function toggleBlock(id)
 
 function timeConverter(UNIX_timestamp){
     var a = new Date(UNIX_timestamp * 1000);
-    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     var year = a.getFullYear();
-    var month = months[a.getMonth()];
+    var month = a.getMonth() + 1;
+    if (month < 10)
+        month = '0' + month;
     var date = a.getDate();
-    var hour = a.getHours();
+    if (date < 10)
+        date = '0' + date;
+    var hour = a.getHours() - 2;
+    if (hour < 10)
+        hour = '0' + hour;
     var min = a.getMinutes();
-    var sec = a.getSeconds();
-    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+    if (min < 10)
+        min = '0' + min;
+    var time = date + '/' + month + '/' + year + ' ' + hour + ':' + min;
     return time;
 }
 
