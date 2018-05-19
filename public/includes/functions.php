@@ -155,7 +155,7 @@ function checklogin($login)
 	
 	else
 	{
-		$result = sqlquery("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE login = '"$login"'", 1);
+		$result = sqlquery("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE login = '".$connexion->quote($login)."'", 1);
 		global $queries;
 		$queries++;
 		
@@ -191,7 +191,7 @@ function checkmail($email)
 	
 	else
 	{
-		$result = sqlquery("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE mail = '"$email"'", 1);
+		$result = sqlquery("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE mail = '".$connexion->quote($email)."'", 1);
 		global $queries;
 		$queries++;
 		
@@ -214,7 +214,7 @@ function checkphone($phone_number)
 	
 	else
 	{
-		$result = sqlquery("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE phone_number = '"$phone_number"'", 1);
+		$result = sqlquery("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE phone_number = '".$connexion->quote($phone_number)."'", 1);
 		global $queries;
 		$queries++;
 		
