@@ -16,15 +16,19 @@ function sqlquery($requete, $number)
 			return $results;
 		}
 	
-		else if($number == 2)
+		else 
 		{
-			$results->setFetchMode(PDO::FETCH_OBJ);
-			while($rows = $results->fetch())
+			if($number == 2)
 			{
-				$query2[] = $rows;
+				$results->setFetchMode(PDO::FETCH_OBJ);
+				while($rows = $results->fetch())
+				{
+					$query2[] = $rows;
+				}
+				$results->closeCursor();
+				return $query2;
 			}
-			$results->closeCursor();
-			return $query2;
+		}
 	}
 	
 	else
