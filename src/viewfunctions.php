@@ -66,7 +66,7 @@ function getoffers($semestre, $module, $matiere){
     if($semestre){ //on ajoute des parametres en fonction de la recherche
     if($module){
         if($matiere){
-        $requete = $requete . " WHERE semestre" . $semestre . " AND  module = " . $module." AND matiere = " . $matiere;
+        $requete = $requete . " WHERE semestre = " . $semestre . " AND  module = " . $module." AND matiere = " . $matiere;
         }
         else
         $requete = $requete."  WHERE semestre = ".$semestre." AND  module = ".$module;
@@ -84,7 +84,8 @@ function getoffers($semestre, $module, $matiere){
     else if($matiere){
     $requete = $requete." WHERE matiere = ".$matiere;
     }
-    $reponse = Annonces::getAnnonceRequete($semestre, $module, $matiere);
+    print $requete;
+    $reponse = Annonce::getAnnonces($requete);
     return $reponse;
 }
 
