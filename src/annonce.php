@@ -125,6 +125,7 @@ class Annonce {
 		'$this->service'
 	    );";
 	dbExec($connection, $query);
+    }
     
     public static function getAnnoncesRequete($requete) {
 	$connection = dbConnect();
