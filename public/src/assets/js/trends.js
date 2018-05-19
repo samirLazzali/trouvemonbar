@@ -76,6 +76,7 @@ function getTopLikes()
 {
     addClass(document.getElementById("trend-selector-likes"), "selected");
     removeClass(document.getElementById("trend-selector-hashtags"), "selected");
+    removeClass(document.getElementById("trend-selector-retweets"), "selected");
     document.getElementById("hashtag-list").style.display = "none";
     var request =  new XMLHttpRequest();
     request.onreadystatechange = function()
@@ -88,6 +89,27 @@ function getTopLikes()
         }
     };
     request.open("GET", "/api/trends/toplikes?limit=$trendLimit&getoriginals=true", true);
+    request.send();
+    return false;
+}
+
+function getTopRt()
+{
+    addClass(document.getElementById("trend-selector-retweets"), "selected");
+    removeClass(document.getElementById("trend-selector-hashtags"), "selected");
+    removeClass(document.getElementById("trend-selector-likes"), "selected");
+    document.getElementById("hashtag-list").style.display = "none";
+    var request =  new XMLHttpRequest();
+    request.onreadystatechange = function()
+    {
+        if (this.readyState == 4 && this.status == 200)
+        {
+            var result = JSON.parse(request.responseText)["result"];
+            var text = getContent(result);
+            document.getElementById('post-feed').innerHTML = text;
+        }
+    };
+    request.open("GET", "/api/trends/topRt?limit=$trendLimit&getoriginals=true", true);
     request.send();
     return false;
 }
