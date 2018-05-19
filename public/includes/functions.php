@@ -155,6 +155,10 @@ function checklogin($login)
 	
 	else
 	{
+		$dbName = getenv('DB_NAME');
+		$dbUser = getenv('DB_USER');
+		$dbPassword = getenv('DB_PASSWORD');
+		$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 		$result = sqlquery("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE login = '".$connexion->quote($login)."'", 1);
 		global $queries;
 		$queries++;
@@ -191,6 +195,10 @@ function checkmail($email)
 	
 	else
 	{
+		$dbName = getenv('DB_NAME');
+		$dbUser = getenv('DB_USER');
+		$dbPassword = getenv('DB_PASSWORD');
+		$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 		$result = sqlquery("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE mail = '".$connexion->quote($email)."'", 1);
 		global $queries;
 		$queries++;
@@ -214,6 +222,10 @@ function checkphone($phone_number)
 	
 	else
 	{
+		$dbName = getenv('DB_NAME');
+		$dbUser = getenv('DB_USER');
+		$dbPassword = getenv('DB_PASSWORD');
+		$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 		$result = sqlquery("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE phone_number = '".$connexion->quote($phone_number)."'", 1);
 		global $queries;
 		$queries++;
