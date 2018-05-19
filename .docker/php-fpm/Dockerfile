@@ -33,5 +33,14 @@ RUN useradd --shell /bin/bash -u ${DOCKER_USER_ID} -o -c "" -m ${DOCKER_USER} \
     && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
     && export HOME=/home/${DOCKER_USER}
 
+# add sendmail
+
+RUN apt-get update && apt-get install -q -y ssmtp mailutils && rm -rf /var/lib/apt/lists/*
+
+RUN echo "hostname=localhost.localdomain" > /etc/ssmtp/ssmtp.conf
+RUN echo "root=root@example.com" >> /etc/ssmtp/ssmtp.conf
+RUN echo "mailhub=maildev" >> /etc/ssmtp/ssmtp.conf
+
+RUN echo "sendmail_path=sendmail -i -t" >> /usr/local/etc/php/conf.d/php-sendmail.ini
 ENTRYPOINT ["/bin/bash", "/docker/entrypoint.sh"]
 CMD ["php-fpm"]

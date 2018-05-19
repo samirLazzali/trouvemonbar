@@ -101,11 +101,17 @@
                 }
                 ?>
             </ul>
-            <form id="add_comment" name="add_comment" action="actions/add_comment_action.php" method="post">
+            <form id="add_comment" name="add_comment" action="actions/add_comment_action.php" method="post"
+                  <?= Auth::logged() ? "" : "hidden"?>>
                 <input type="hidden" value="<?=$gameid?>" name="gameid"/>
                 <textarea form="add_comment" placeholder="Mon commentaire..." name="content" class="form-control"></textarea>
-                <input type="submit" value="Ajouter un commentaire" class="btn btn-primary"/>
+                <input type="submit" value="Ajouter un commentaire"  class="btn btn-primary"/>
             </form>
+
+            <?=Auth::logged() ? "" : "<span class='font-weight-bold'> 
+                                          <a href='authentication.php'>  Connectez vous </a> pour répondre ! 
+                                          
+                                      </span>"; ?>
     </div>
 
 </div>

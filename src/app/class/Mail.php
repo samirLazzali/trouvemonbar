@@ -13,22 +13,23 @@ class Mail
     /**
      * @brief template and send mail in case of game creation
      * @param $game Game
+     * @return bool
      */
     public static function game_created($game)
     {
         $systemname = Gamesystem::id_to_name($game->getGamesystemid());
         $creator = null;
-        $subject = wordwrap( getenv('SUBJECT_HEADER')." ".$game->getName()." (".$systemname.")", 70);
+        $subject = "un sujet";
         try {
             $creator = new User($game->getCreator());
         }catch (Exception $e)
         {
             error("500");
         }
-        $body = wordwrap($game->getName(), 70);
-        flash(getenv('MAILING_LIST'));
+        $body = "un contenu";
+        $to = "josephine.barthel@free.fr";
 
-        mail(getenv('MAILING_LIST'), $subject, $body);
+         return mail($to, $subject, $body);
 
     }
 }
