@@ -37,16 +37,28 @@ $users = $userRepository->fetchAll();
         <td>Compte Rendu</td>
         </thead>
         <?php /** @var \User\User $user */
-        $tu=$connection->query("SELECT * FROM public.reunion")->fetch();
+        $participants='';
+        $tu=$connection->query("SELECT * FROM public.reunion")->fetchAll();
+        $part=$connection->query('SELECT * FROM public.Participants Where ');
+        if (!empty($part)){
+            $part=$part->fetchAll();
+            foreach ($part as $p){
+                $participants=$participant."</br>".$p['pseudo'];
+            }
+        }
+        else{
+            $participant='aucun';
+        }
+        foreach ($tu as $reu){
         ?>
             <tr>
                 <td><?php ?></td>
-                <td><?php echo $tu['soiree'] ?></td>
-                <td><?php echo $tu['datee'] ?></td>
-                <td><?php echo $tu['participant'] ?></td>
-                <td><?php echo $tu['cr'] ?> </td>
+                <td><?php echo $reu['soiree'] ?></td>
+                <td><?php echo $reu['datee'] ?></td>
+                <td><?php echo $participants ?></td>
+                <td><?php echo $reu['cr'] ?> </td>
             </tr>
-        
+        <?php } ?>
     </table>
 
 
