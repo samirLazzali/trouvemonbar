@@ -62,9 +62,9 @@ function actualiser_session()
 				global $queries;
 				$queries++;
 				
-				if(isset($retour['login']) && $retour['login'] != '')
+				if(isset($retour->login) && $retour->login != '')
 				{
-					if($_COOKIE['password'] != $retour['password'])
+					if($_COOKIE['password'] != $retour->password)
 					{
 						$informations = Array(
 											true,
@@ -82,9 +82,9 @@ function actualiser_session()
 					
 					else
 					{
-						$_SESSION['id_user'] = $retour['id_user'];
-						$_SESSION['login'] = $retour['login'];
-						$_SESSION['password'] = $retour['password'];
+						$_SESSION['id_user'] = $retour->id_user;
+						$_SESSION['login'] = $retour->login;
+						$_SESSION['password'] = $retour->password;
 					}
 				}
 			}
@@ -141,13 +141,13 @@ function checklogin($login)
 		$dbUser = getenv('DB_USER');
 		$dbPassword = getenv('DB_PASSWORD');
 		$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-		$retour = $connexion->query("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE login = '".$connexion->quote($login)."'");
+		$retour = $connexion->query("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE login = '$login'");
 		$retour -> setFetchMode(PDO::FETCH_OBJ);
 		$retour -> fetch();
 		global $queries;
 		$queries++;
 		
-		if($result['nbr'] > 0) return 'pris';
+		if($retour->nbr > 0) return 'pris';
 		else return 'Ok';
 	}
 }
@@ -183,13 +183,13 @@ function checkmail($email)
 		$dbUser = getenv('DB_USER');
 		$dbPassword = getenv('DB_PASSWORD');
 		$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-		$retour = $connexion->query("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE mail = '".$connexion->quote($email)."'");
+		$retour = $connexion->query("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE mail = '$email'");
 		$retour -> setFetchMode(PDO::FETCH_OBJ);
 		$retour -> fetch();
 		global $queries;
 		$queries++;
 		
-		if($result['nbr'] > 0) return 'pris';
+		if($retour->nbr > 0) return 'pris';
 		else return 'Ok';
 	}
 }
@@ -212,13 +212,13 @@ function checkphone($phone_number)
 		$dbUser = getenv('DB_USER');
 		$dbPassword = getenv('DB_PASSWORD');
 		$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-		$retour = $connexion->query("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE phone_number = '".$connexion->quote($phone_number)."'");
+		$retour = $connexion->query("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE phone_number = '$phone_number'");
 		$retour -> setFetchMode(PDO::FETCH_OBJ);
 		$retour -> fetch();
 		global $queries;
 		$queries++;
 		
-		if($result['nbr'] > 0) return 'pris';
+		if($retour->nbr > 0) return 'pris';
 		else return 'Ok';
 	}
 }
