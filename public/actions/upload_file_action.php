@@ -6,8 +6,8 @@
  * Time: 10:01
  *
  */
-require "../src/app/helpers.php";
-include "../src/app/models/File.php";
+require "../../src/app/helpers.php";
+include "../../src/app/models/File.php";
 
 if (!Auth::logged())
     redirect("index.php");

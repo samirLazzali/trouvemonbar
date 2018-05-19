@@ -6,7 +6,9 @@
  * Time: 15:30
  */
         $flag=false;
-        echo "<h3>Les fichiers:</h3> </br>";
+        echo "<h3>Les fichiers:</h3> </br>
+               <div class=\"container-fluid filelist\">";
+
         foreach ($filelist as $file) {
             if ($file->userid == $userid) {
                 \User\File::download($file->filename, $file->fileid);
@@ -15,7 +17,7 @@
             }
 
         }
-
+        echo "</div>";
         if(!$flag)
             echo "<p>IL N'Y A PAS DE FICHIER!</p>";
 

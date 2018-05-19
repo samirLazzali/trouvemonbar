@@ -64,7 +64,7 @@ class File
      */
     public static function upload_file()
     {
-        echo '<form action="action/upload_file_action.php" method="post" enctype="multipart/form-data" target="myIframe">
+        echo '<form action="actions/upload_file_action.php" method="post" enctype="multipart/form-data" target="myIframe">
               <label for="file" >Filename:</label>
               <input type="file" name="myfile" id="myfile" />
               <br />
