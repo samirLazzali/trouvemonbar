@@ -266,13 +266,15 @@ include('../includes/top.php');?>
 			<?php
 			if($_SESSION['erreurs'] == 0)
 			{
-				$insertion = "INSERT INTO Utilisateur VALUES(NULL, '"$login"',
-				'"$mail"','".md5($password)."','"$phone_number"')";
-				
 				$dbName = getenv('DB_NAME');
 				$dbUser = getenv('DB_USER');
 				$dbPassword = getenv('DB_PASSWORD');
 				$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
+				
+				$insertion = "INSERT INTO Utilisateur VALUES(NULL, '"$connexion->quote($login)"',
+				'"$connexion->quote($mail)"','".md5($password)."','"$connexion->quote($phone_number)"')";
+				
+				
 				
 				if($connexion->exec($insertion))
 				{

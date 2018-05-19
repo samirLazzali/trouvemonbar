@@ -52,7 +52,7 @@ include('../includes/top.php');
 			else
 			{
 				$result = sqlquery("SELECT COUNT(id_user) AS nbr, id_user, login, password FROM Utilisateur WHERE
-				login = '"$_POST['login']"' GROUP BY id_user", 1);
+				login = '".$_POST['login']."' GROUP BY id_user", 1);
 				
 				if($result['nbr'] == 1)
 				{
@@ -130,5 +130,4 @@ include('../includes/top.php');
 
 		<?php
 		include('../includes/bottom.php');
-		mysqli_close($connexion);
 		?>
