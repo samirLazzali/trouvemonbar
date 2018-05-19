@@ -6,7 +6,9 @@ header_t("Hey");
 ?>
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-
+<div id="imageannonce">
+    <img src="https://s3.amazonaws.com/cdn.viewpointcs.com/www/images/products/icons/legacy-productBenefitIcon-hostingDB.png" height="42" width="42" align="middle"/>
+</div>
 
 <div class="main">
 	<div class="annonce">
