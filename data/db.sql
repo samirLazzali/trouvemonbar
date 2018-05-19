@@ -6,54 +6,54 @@ CREATE TYPE type_pattern AS ENUM ('Solide','Tabby','Colourpoint','Bicolore','Eca
 
 DROP TABLE IF EXISTS Utilisateur;
 CREATE TABLE IF NOT EXISTS Utilisateur(
-	id_user INTEGER(4) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-	login VARCHAR(100) NOT NULL,
-	mail VARCHAR(255) NOT NULL,
-	password VARCHAR(50) NOT NULL,
-	phone_number INTEGER(10) NOT NULL
+	id_user SERIAL PRIMARY KEY NOT NULL,
+	login VARCHAR NOT NULL,
+	mail VARCHAR NOT NULL,
+	password VARCHAR NOT NULL,
+	phone_number INTEGER NOT NULL
 	/* user_type type_user */
 	);
 	
 DROP TABLE IF EXISTS Connected;
 CREATE TABLE IF NOT EXISTS Connected(
-	id_connected INTEGER(4) UNIQUE KEY NOT NULL
+	id_connected INTEGER UNIQUE KEY NOT NULL
 	);
 	   
 DROP TABLE IF EXISTS Cats;
 CREATE TABLE IF NOT EXISTS Cats(
-       id_cat INTEGER(4) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-       name_cat VARCHAR(100) NOT NULL,
+       id_cat SERIAL PRIMARY KEY NOT NULL,
+       name_cat VARCHAR NOT NULL,
        /*sex type_sex NOT NULL, */
        birthday_cat DATE,
        purety BOOLEAN,
 	   /* size type_size,
        coat type_coat,
        pattern type_pattern, */
-       weight FLOAT(10) 
+       weight FLOAT 
 	   );
 
 DROP TABLE IF EXISTS Breeds;
 CREATE TABLE IF NOT EXISTS Breeds(
-       id_breed INTEGER(4) AUTO_INCREMENT PRIMARY KEY,
-       name_breed VARCHAR(100) NOT NULL
+       id_breed SERIAL PRIMARY KEY NOT NULL,
+       name_breed VARCHAR NOT NULL
 	   );
 	   
 DROP TABLE IF EXISTS Colors;   
 CREATE TABLE IF NOT EXISTS Colors(
-       id_color INTEGER(4) AUTO_INCREMENT PRIMARY KEY,
-       name_color VARCHAR(100) NOT NULL
+       id_color SERIAL PRIMARY KEY NOT NULL,
+       name_color VARCHAR NOT NULL
        );
 
 DROP TABLE IF EXISTS Personality_traits;	   
 CREATE TABLE IF NOT EXISTS Personality_traits(
-       id_trait INTEGER(4) AUTO_INCREMENT PRIMARY KEY,
-       name_trait VARCHAR(100) NOT NULL
+       id_trait SERIAL PRIMARY KEY NOT NULL,
+       name_trait VARCHAR NOT NULL
        );
 
 DROP TABLE IF EXISTS Cat_color;	   
 CREATE TABLE IF NOT EXISTS Cat_colors(
-		cat INTEGER(4),
-		color INTEGER(4),
+		cat INTEGER,
+		color INTEGER,
 		FOREIGN KEY (cat) REFERENCES Cats(id_cat),
 		FOREIGN KEY (color) REFERENCES Colors(id_color),
 		PRIMARY KEY (cat,color)
@@ -61,8 +61,8 @@ CREATE TABLE IF NOT EXISTS Cat_colors(
 
 DROP TABLE IF EXISTS Cat_breed;		
 CREATE TABLE IF NOT EXISTS Cat_breed(
-		cat INTEGER(4),
-		breed INTEGER(4),
+		cat INTEGER,
+		breed INTEGER,
 		FOREIGN KEY (cat) REFERENCES Cats(id_cat),
 		FOREIGN KEY (breed) REFERENCES Breeds(id_breed),
 		PRIMARY KEY (cat,breed)
@@ -70,8 +70,8 @@ CREATE TABLE IF NOT EXISTS Cat_breed(
 
 DROP TABLE IF EXISTS Cat_personality;
 CREATE TABLE IF NOT EXISTS Cat_personality(
-		cat INTEGER(4),
-		trait INTEGER(4),
+		cat INTEGER,
+		trait INTEGER,
 		FOREIGN KEY (cat) REFERENCES Cats(id_cat),
 		FOREIGN KEY (trait) REFERENCES Personality_traits(id_trait),
 		PRIMARY KEY(cat,trait)
@@ -79,8 +79,8 @@ CREATE TABLE IF NOT EXISTS Cat_personality(
 
 DROP TABLE IF EXISTS Searched_traits;
 CREATE TABLE IF NOT EXISTS Searched_traits(
-		cat INTEGER(4),
-		trait INTEGER(4),
+		cat INTEGER,
+		trait INTEGER,
 		FOREIGN KEY (cat) REFERENCES Cats(id_cat),
 		FOREIGN KEY (trait) REFERENCES Personality_traits(id_trait),
 		PRIMARY KEY(cat,trait)
@@ -88,8 +88,8 @@ CREATE TABLE IF NOT EXISTS Searched_traits(
 
 DROP TABLE IF EXISTS Searched_breeds;	   
 CREATE TABLE IF NOT EXISTS Searched_breeds(
-		cat INTEGER(4),
-		breed INTEGER(4),
+		cat INTEGER,
+		breed INTEGER,
 		FOREIGN KEY (cat) REFERENCES Cats(id_cat),
 		FOREIGN KEY (breed) REFERENCES Breeds(id_breed),
 		PRIMARY KEY(cat,breed)
@@ -97,8 +97,8 @@ CREATE TABLE IF NOT EXISTS Searched_breeds(
 
 DROP TABLE IF EXISTS Searched_colors;	   
 CREATE TABLE IF NOT EXISTS Searched_colors(
-		cat INTEGER(4),
-		color INTEGER(4),
+		cat INTEGER,
+		color INTEGER,
 		FOREIGN KEY (cat) REFERENCES Cats(id_cat),
 		FOREIGN KEY (color) REFERENCES Colors(id_color),
 		PRIMARY KEY(cat,color)
