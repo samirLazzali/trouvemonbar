@@ -11,14 +11,14 @@ function sqlquery($requete, $number)
 	
 	if($number == 1)
 	{
-		$result = $query->fetchAll();
+		$result = $query->fetchAll(PDO::FETCH_OBJ);
 		$query->closeCursor();
 		return $result;
 	}
 	
 	else if($number == 2)
 	{
-		while($query1 = $query->fetch())
+		while($query1 = $query->fetch(PDO::FETCH_OBJ))
 		{
 			$query2[] = $query1;
 		}
