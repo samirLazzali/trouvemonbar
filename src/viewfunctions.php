@@ -41,9 +41,10 @@ function header_t($titre) {
     } else {
 	buttonLogin();
     }
-    
     print "    </div>\n";
     print "    </div>\n";
+        include("form.html");
+
     print "    </nav>\n";
     print "    </header>\n";
 }
@@ -59,34 +60,35 @@ function footer(){
 
 }
 
+
 function getoffers($semestre, $module, $matiere){
     $requete = "SELECT * FROM annonce"; //default
     if($semestre){ //on ajoute des parametres en fonction de la recherche
-	if($module){
-	    if($matiere){
-		$requete = $requete." WHERE semestre = $semestre AND  module = $module AND matiere = $matiere";
-	    }
-	    else
-		$requete = $requete."  WHERE semestre = $semestre AND  module = $module";
-	}
-	else
-	    $requete = $requete." WHERE semestre = $semestre";
+    if($module){
+        if($matiere){
+        $requete = $requete . " WHERE semestre" . $semestre . " AND  module = " . $module." AND matiere = " . $matiere;
+        }
+        else
+        $requete = $requete."  WHERE semestre = ".$semestre." AND  module = ".$module;
+    }
+    else
+        $requete = $requete." WHERE semestre = ".$semestre;
     }
     else if($module){
-	if($matiere){
-	    $requete = $requete." WHERE module = $module AND matiere = $matiere";
-	}
-	else
-	    $requete = $requete." WHERE module = $module";
+    if($matiere){
+        $requete = $requete." WHERE module = ".$module."AND matiere = ".$matiere;
+    }
+    else
+        $requete = $requete." WHERE module = ".$module;
     }
     else if($matiere){
-	$requete = $requete." WHERE matiere = $matiere";
+    $requete = $requete." WHERE matiere = ".$matiere;
     }
-    $connexion = dbConnect();
-    $reponse = dbQuery($connexion, $requete);
-	db_close($connexion);
-	return $reponse;
+    $reponse = Annonces::getAnnonceRequete($semestre, $module, $matiere);
+    return $reponse;
 }
+
+
 function print_offer($offer){
 	print "<div class=\"offer\">";
 	print "<span class =\"offertitle\" onclick=\"document.getElementById($offer.getid()).style.display='block'\">$offer.gettitre()</span>";//on click fait aparaitre le reste.

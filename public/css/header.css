@@ -2,7 +2,7 @@
   background: #5FE6BD;
   width: 100%;
   height: 66px;
-  line-height: 66px;
+  line-height: 55px;
 }
 .m-left{
   float: left;
@@ -16,9 +16,9 @@
   font-weight: 900;
   font-size: 28px;
 }
-.m-right{
+/*.m-right{
   float: right;
-}
+}*/
 .m-link{
   text-decoration: none;
   color: #fff;
