@@ -15,12 +15,4 @@ if ($limit > 250)
     $limit = 250;
 
 $posts = Post::topLikes();
-
-if ($getOriginals)
-    foreach($posts as $post) {
-        $post->getRepostOf();
-        if ($post->getRepostID() != null)
-            $post->getRepostOf()->getAuthor();
-    }
-
 success_die($posts);
