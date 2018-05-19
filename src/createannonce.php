@@ -9,10 +9,9 @@ if (isset($_POST['submit']) && ($annonce = Annonce::annonceFromPost()) != null) 
 }
 
 ?>
-
 <div class="main">
     <h1>CREATE ANNOUNCEMENT</h1>
-    <form name="annonce" method="post" action="postannonce.php">
+    <form name="annonce" method="post" action="annonce.php">
 	<div class="radio-group">
 	    <input type="radio" id="option-one" name="annoncetype">
 	    <label for="option-one">
@@ -22,7 +21,7 @@ if (isset($_POST['submit']) && ($annonce = Annonce::annonceFromPost()) != null) 
 	    <label for="option-two">
 		Query
 	    </label>
-	</div>
+      </div> </br>
 
 	<div class="radio-group">
 	    <input type="radio" id="paying" name="annoncereturn" onClick="toggletextepayant()"/>
@@ -33,7 +32,7 @@ if (isset($_POST['submit']) && ($annonce = Annonce::annonceFromPost()) != null) 
 	    <label for="exchange">
 		SWAP
 	    </label>
-	    <input type="radio" id="free" name="annoncereturn">
+	    <input type="radio" id="free" name="annoncereturn" onClick="togglecacher();"/>
 	    <label for="free">
 		FREE
 	    </label>
@@ -45,7 +44,7 @@ if (isset($_POST['submit']) && ($annonce = Annonce::annonceFromPost()) != null) 
 	TITLE: <input type="text" name="annoncetitle"/> <br/>
 	GENRE: <input type="text" name="annoncegenre" placeholder="Projet, TP, etc."/> <br/>
 	<textarea name="annoncedesc" cols="40" rows="3" placeholder="Enter short description here"></textarea><br/>
-	SEMESTER: <select name="annoncesemester">
+	SEMESTER: <select name=”annoncesemester” class="styled-select black rounded">
 	    <option value="S1" class="toggle">1</option>
 	    <option value="S2" class="toggle">2</option>
 	    <option value="S3" class="toggle">3</option>
@@ -53,83 +52,83 @@ if (isset($_POST['submit']) && ($annonce = Annonce::annonceFromPost()) != null) 
 	    <option value="S5" class="toggle">5</option>
 	</select> <br/>
 
-	<div id="selectmodule1" style="display: none">MODULE: <select name="annoncemodule">
-		<option value="ECO1">ECO1</option>
-		<option value="IBD">IBD</option>
-		<option value="IPI">IPI</option>
-		<option value="LVFH1">LVFH1</option>
-		<option value="MAN">MAN</option>
-		<option value="MCI">MCI</option>
-		<option value="MPR">MPR</option>
-		<option value="MTG">MTG</option>
-		<option value="OSS">OSS</option>
+	<div id="selectmodule1" style="display: none">MODULE: <select name=”annoncemodule”>
+		<option value=”ECO1”>ECO1</option>
+		<option value=”IBD”>IBD</option>
+		<option value=”IPI”>IPI</option>
+		<option value=”LVFH1”>LVFH1</option>
+		<option value=”MAN”>MAN</option>
+		<option value=”MCI”>MCI</option>
+		<option value=”MPR”>MPR</option>
+		<option value=”MTG”>MTG</option>
+		<option value=”OSS”>OSS</option>
 	    </select>
 	</div>
 
-	<div id="selectmodule2" style="display: none">MODULE: <select name="annoncemodule">
-		<option value="ECO2">ECO2</option>
-		<option value="ILO">ILO</option>
-		<option value="IPFL">IPFL</option>
-		<option value="LVFH2">LVFH2</option>
-		<option value="MST">MST</option>
-		<option value="MTEF">MTEF</option>
-		<option value="OPTI">OPTI</option>
-		<option value="PROJ">PROJ</option>
-		<option value="PWR">PWR</option>
+	<div id="selectmodule2" style="display: none">MODULE: <select name=”annoncemodule”>
+		<option value=”ECO2”>ECO2</option>
+		<option value=”ILO”>ILO</option>
+		<option value=”IPFL”>IPFL</option>
+		<option value=”LVFH2”>LVFH2</option>
+		<option value=”MST”>MST</option>
+		<option value=”MTEF”>MTEF</option>
+		<option value=”OPTI”>OPTI</option>
+		<option value=”PROJ”>PROJ</option>
+		<option value=”PWR”>PWR</option>
 	    </select> <br/>
 	</div>
 
-	<div id="selectmodule3" style="display: none">MODULE: <select name="annoncemodule">
-		<option value="ECO3">ECO3</option>
-		<option value="ASE">ASE</option>
-		<option value="IAC">IAC</option>
-		<option value="IGL">IGL</option>
-		<option value="IPF">IPF</option>
-		<option value="IPS">IPS</option>
-		<option value="LSF-VVL">LSF-VVL</option>
-		<option value="LVFH3">LVFH3</option>
-		<option value="MICRO-ARCHI">MICRO-ARCHI</option>
-		<option value="MRO">MRO</option>
-		<option value="MRR">MRR</option>
-		<option value="PIMA">PAP</option>
-		<option value="PP">PST</option>
-		<option value="SE1">SE1</option>
-		<option value="SRM">SRM</option>
+	<div id="selectmodule3" style="display: none">MODULE: <select name=”annoncemodule”>
+		<option value=”ECO3”>ECO3</option>
+		<option value=”ASE”>ASE</option>
+		<option value=”IAC”>IAC</option>
+		<option value=”IGL”>IGL</option>
+		<option value=”IPF”>IPF</option>
+		<option value=”IPS”>IPS</option>
+		<option value=”LSF-VVL”>LSF-VVL</option>
+		<option value=”LVFH3”>LVFH3</option>
+		<option value=”MICRO-ARCHI”>MICRO-ARCHI</option>
+		<option value=”MRO”>MRO</option>
+		<option value=”MRR”>MRR</option>
+		<option value=”PIMA”>PAP</option>
+		<option value=”PP”>PST</option>
+		<option value=”SE1”>SE1</option>
+		<option value=”SRM”>SRM</option>
 	    </select> <br/>
 	</div>
 
-	<div id="selectmodule4" style="display: none">MODULE: <select name="annoncemodule">
-		<option value="ANEDP">ANEDP</option>
-		<option value="ANU">ANU</option>
-		<option value="ARMA">ARMA</option>
-		<option value="ASN">ASN</option>
-		<option value="AUTO">AUTO</option>
-		<option value="CAL">CAL</option>
-		<option value="CC">CC</option>
-		<option value="CORO">CORO</option>
-		<option value="ECO4">ECO4</option>
-		<option value="IA">IA</option>
-		<option value="IMF">IMF</option>
-		<option value="IRA">IRA</option>
-		<option value="LC">LC</option>
-		<option value="LOA">LOA</option>
-		<option value="LVFH4">LVFH4</option>
-		<option value="MCS">MCS</option>
-		<option value="MESIM">MESIM</option>
-		<option value="MFDLS">MFDLS</option>
-		<option value="MOST">MOST</option>
-		<option value="PBT">PBT</option>
-		<option value="PRB">PRB</option>
-		<option value="PRR">PRR</option>
-		<option value="PSA">PSA</option>
-		<option value="RDH">RDH</option>
-		<option value="RIAL">RIAL</option>
-		<option value="RVIG">RVIG</option>
-		<option value="SE2">SE2</option>
-		<option value="SEC-CEA">SEC-CEA</option>
-		<option value="SFP">SFP</option>
-		<option value="SIP1-SIP2">SIP1-SIP2</option>
-		<option value="SSI">SSI</option>
+	<div id="selectmodule4" style="display: none">MODULE: <select name=”annoncemodule”>
+		<option value=”ANEDP”>ANEDP</option>
+		<option value=”ANU”>ANU</option>
+		<option value=”ARMA”>ARMA</option>
+		<option value=”ASN”>ASN</option>
+		<option value=”AUTO”>AUTO</option>
+		<option value=”CAL”>CAL</option>
+		<option value=”CC”>CC</option>
+		<option value=”CORO”>CORO</option>
+		<option value=”ECO4”>ECO4</option>
+		<option value=”IA”>IA</option>
+		<option value=”IMF”>IMF</option>
+		<option value=”IRA”>IRA</option>
+		<option value=”LC”>LC</option>
+		<option value=”LOA”>LOA</option>
+		<option value=”LVFH4”>LVFH4</option>
+		<option value=”MCS”>MCS</option>
+		<option value=”MESIM”>MESIM</option>
+		<option value=”MFDLS”>MFDLS</option>
+		<option value=”MOST”>MOST</option>
+		<option value=”PBT”>PBT</option>
+		<option value=”PRB”>PRB</option>
+		<option value=”PRR”>PRR</option>
+		<option value=”PSA”>PSA</option>
+		<option value=”RDH”>RDH</option>
+		<option value=”RIAL”>RIAL</option>
+		<option value=”RVIG”>RVIG</option>
+		<option value=”SE2”>SE2</option>
+		<option value=”SEC-CEA”>SEC-CEA</option>
+		<option value=”SFP”>SFP</option>
+		<option value=”SIP1-SIP2”>SIP1-SIP2</option>
+		<option value=”SSI”>SSI</option>
 	    </select> <br/>
 	</div>
 
@@ -139,6 +138,10 @@ if (isset($_POST['submit']) && ($annonce = Annonce::annonceFromPost()) != null) 
     <script src="js/createannonce.js"></script>
 </div>
 
+<script type="text/javascript">
+  togglecacher();
+</script>
+
 <?php
-footer();
-?>
+	    footer();
+	    ?>
