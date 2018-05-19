@@ -15,6 +15,7 @@
     <script src="/assets/js/post.js"></script>
     <script src="/assets/js/general.js"></script>
     <link rel="stylesheet" href="/assets/styles/notifications.css" />
+    <link rel="stylesheet" href="/assets/styles/moderation.css" />
 </head>
 <body>
 <?php
@@ -22,11 +23,23 @@
     $appreciations = $notifications[0];
     $mentions = $notifications[1];
     $reposts = $notifications[2];
+    $count = count($reposts) + count($mentions) + count($appreciations);
 ?>
     <?php require "menu.php"; ?>
 
     <div class="column-wrapper">
         <h1>- Notifications -</h1>
+        <?php if ($count == 0): ?>
+            <h2 class="all-done-message">
+                Désolé.
+            </h2>
+            <h2 class="smiley">
+                :(
+            </h2>
+            <h2 class="no-reports-message">
+                Vous n'avez pas d'amis.
+            </h2>
+        <?php endif; ?>
         <div class="post-feed">
             <?php
                 foreach($mentions as $mention)

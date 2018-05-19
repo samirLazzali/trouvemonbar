@@ -43,17 +43,6 @@ else
             <h1>
                 - Modération -
             </h1>
-            <?php if ($noReports): ?>
-                <h2 class="all-done-message">
-                    Terminé !
-                </h2>
-                <h2 class="smiley">
-                    :)
-                </h2>
-                <h2 class="no-reports-message">
-                    Aucun signalement à l'heure actuelle.
-                </h2>
-            <?php endif ?>
             <div id="user-reports">
                 <?php
                 if ($userReports)
@@ -72,9 +61,9 @@ else
             <div id="post-reports" class="post-reports">
                 <?php
                 $seen = array();
+                $count = 0;
                 if ($postReports)
-                    foreach($postReports as $report)
-                    {
+                    foreach($postReports as $report):
                         // On vérifie qu'on n'a pas déjà affiché les signalements pour ce post
                         if (in_array($report->getPostId(), $seen))
                             continue;
@@ -83,6 +72,7 @@ else
                         // Si le post n'existe pas (par exemple, il a été supprimé depuis son signalement)
                         if ($report->getPost() == null)
                             continue;
+                        $count += 1;
 
                         // On trouve tous les signalements relatifs à ce post
                         $samePostReports = $report->getSamePostReports();
@@ -115,9 +105,20 @@ else
                             </div>
                         </div>
                     <?php
-                }
+                endforeach;
                 ?>
             </div>
+            <?php if ($noReports || $count == 0): ?>
+                <h2 class="all-done-message">
+                    Terminé !
+                </h2>
+                <h2 class="smiley">
+                    :)
+                </h2>
+                <h2 class="no-reports-message">
+                    Aucun signalement à l'heure actuelle.
+                </h2>
+            <?php endif ?>
         </div>
     </body>
 </html>

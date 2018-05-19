@@ -11,7 +11,6 @@
  */
 
 require_once("../../config.php");
-require_once("Report.php");
 
 if (isset($_POST['post']))
     $post = $_POST['post'];

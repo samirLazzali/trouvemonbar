@@ -23,5 +23,8 @@ if (isset($_GET['limit']))
 else
     $limit = 10;
 
+if ($limit > 25)
+    $limit = 25;
+
 $trends = Trend::getTrends($limit, $timespan);
 success_die($trends);

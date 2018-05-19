@@ -23,7 +23,7 @@ if(!$notFound) {
     $reposts = $p->getReposts();
     $likes = $p->getLikers();
     $dislikes = $p->getDislikers();
-    $responses = $p->getResponsesTo();
+    $threads = $p->getThreadsFrom();
 }
 
 ?>
@@ -31,7 +31,7 @@ if(!$notFound) {
 <html>
 <head>
     <?php if(!$notFound): ?>
-        <title>Publication de <?=$author?></title>
+        <title>Vitz - Publication de <?=$author?></title>
     <?php else: ?>
         <title>Vitz</title>
     <?php endif ?>
@@ -61,12 +61,10 @@ if(!$notFound) {
             <?php
             affichePost($p);
             ?>
-            <div class="splitter">
-            </div>
             <div class="post-interactions">
                 <div class="post-interaction interaction-type-selected" id="linkDetailsResponses">
                     <a href="#" onclick="return showResponses();">
-                        <?= formatter_nombre(count($responses), "réponse", true) ?>
+                        <?= formatter_nombre(count($threads), "réponse", true) ?>
                     </a>
                 </div>
                 <div class="post-interaction" id="linkDetailsReposts">
@@ -100,9 +98,24 @@ if(!$notFound) {
                         </a>
                     </div>
                 <?php endforeach; ?>            </div>
-            <div class="post-feed displa-none" id="details-responses">
-                <?php foreach ($responses as $item)
-                    affichePost($item);
+            <div class="post-feed" id="details-responses">
+                <?php
+                foreach($threads as $thread):
+                    ?>
+                    <div class="response-thread">
+                        <?php
+                    $seen = array();
+                    foreach($thread as $post):
+                        if (in_array($post->getID(), $seen))
+                            continue;
+
+                        array_push($seen, $post->getID());
+                        affichePost($post);
+                    endforeach;
+                    ?>
+                    </div>
+                <?php
+                endforeach;
                 ?>
             </div>
         </div>

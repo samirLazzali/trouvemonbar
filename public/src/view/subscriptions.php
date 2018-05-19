@@ -40,9 +40,7 @@ function formatter_nombre_abonnements($n)
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>
-            Vitz - Abonnements
-        </title>
+        <title>Vitz - Abonnements</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="/assets/styles/subscriptions.css" />
         <script src="/assets/js/post.js" ></script>

@@ -407,9 +407,9 @@ function postToHtml(author, content, date, id, likecount = -1, dislikecount = -1
     return text;
 }
 
+var postsWaiting = [];
 function refreshFeed(lastRefresh, filter = "")
 {
-    var feed = document.getElementById("post-feed");
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200)
@@ -419,19 +419,14 @@ function refreshFeed(lastRefresh, filter = "")
             {
                 lastRefresh = result["timestamp"] - 1;
                 result = result["result"];
-                var html;
                 if (result.length > 0) {
                     Array.from(result).forEach(function(elt, idx, arr) {
                         var currentReport = document.getElementById("report-form-" + elt["id"]);
                         if (currentReport != undefined)
                             return;
 
-                        if (elt["repostOf"] != null)
-                            html = rawRepostToHtml(elt);
-                        else
-                            html = rawPostToHtml(elt);
-
-                        feed.innerHTML = html + feed.innerHTML;
+                        postsWaiting.push(elt);
+                        document.getElementById("link-posts-waiting").style.display = "block";
                     });
                 }
                 // On rappelle refreshFeed dans cinq secondes
@@ -448,5 +443,68 @@ function refreshFeed(lastRefresh, filter = "")
     xhttp.open("POST", "/api/post/latest");
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("after=" + lastRefresh + "&limit=25&filter=" + filter);
+    return false;
+}
+
+function showWaitingPosts()
+{
+    var feed = document.getElementById("post-feed");
+    var html = "";
+    postsWaiting.forEach(function(elt, index, arr) {
+        if (elt["repostOf"] != null)
+            html = rawRepostToHtml(elt);
+        else
+            html = rawPostToHtml(elt);
+    });
+    feed.innerHTML = html + feed.innerHTML;
+    document.getElementById("link-posts-waiting").style.display = "none";
+}
+
+function getPostsBefore(before, filter = "")
+{
+    console.log("Before : " + before);
+    var feed = document.getElementById("post-feed");
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200)
+        {
+            var result = JSON.parse(xhttp.responseText);
+            if (result["status"] == 200)
+            {
+                result = result["result"];
+                var html;
+                var newPostFound = false;
+                if (result.length > 0) {
+                    document.getElementById("link-more-posts-wrapper").innerHTML = "Plus anciens";
+                    Array.from(result).forEach(function(elt, idx, arr) {
+                        var currentReport = document.getElementById("report-form-" + elt["id"]);
+                        if (currentReport != undefined)
+                            return;
+                        else
+                            newPostFound = true;
+
+                        if (elt["repostOf"] != null)
+                            html = rawRepostToHtml(elt);
+                        else
+                            html = rawPostToHtml(elt);
+
+                        feed.innerHTML += html;
+
+                        _before = elt["timestamp"];
+                    });
+                }
+                if (!newPostFound)
+                    document.getElementById("link-more-posts-wrapper").innerHTML = "Vous etes arrivé à la fin !";
+            }
+            else
+            {
+                console.log("Error while refreshing feed: status = " + result["status"] + " (" + result["description"] + ")");
+            }
+        }
+    };
+    document.getElementById("link-more-posts-wrapper").innerHTML = "Chargement...";
+    xhttp.open("POST", "/api/post/latest");
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("before=" + before+ "&limit=25&filter=" + filter);
     return false;
 }

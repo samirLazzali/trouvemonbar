@@ -24,5 +24,8 @@ if (isset($_GET['limit']))
 else
     $limit = 50;
 
+if ($limit > 250)
+    $limit = 250;
+
 $results = Search::post($term, $limit);
 success_die($results);

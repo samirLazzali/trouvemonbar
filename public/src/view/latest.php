@@ -10,13 +10,12 @@ if ($u == null)
 }
 
 $limit = 50;
+$posts = Post::findPosts(array(), $limit);
 ?>
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>
-        Vitz # Fil
-    </title>
+    <title>Vitz - Fil</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="assets/styles/feed.css" />
     <script src="/assets/js/general.js"><</script>
@@ -24,6 +23,7 @@ $limit = 50;
     <script>
         var lastRefresh = <?= time(); ?>;
         var filter = "";
+        var _before = <?= end($posts)->getTimestamp(); ?>;
     </script>
 </head>
 <body onload="refreshFeed(lastRefresh, filter)">
@@ -32,20 +32,27 @@ $limit = 50;
     <h1>
         - Dernières Publications -
     </h1>
-
-    <?php
-    $posts = Post::findPosts(array(), $limit);
-    ?>
+    <a id="link-posts-waiting" class="link-posts-waiting display-none" href="#" onClick="return showWaitingPosts();">
+        <div class="post-in-feed" id="link-posts-waiting-wrapper">
+            Nouvelles publications
+        </div>
+    </a>
     <div class="post-feed" id="post-feed">
         <?php
-        foreach ($posts as $post){
+        foreach ($posts as $post) {
             if ($post->getRepostID() == null)
                 affichePost($post);
             else
                 afficheRepost($post);
+            $before = $post->getTimestamp();
         }
         ?>
     </div>
+    <a id="link-more-posts" class="link-more-posts" href="#" onClick="return getPostsBefore(_before, filter);">
+        <div class="post-in-feed" id="link-more-posts-wrapper">
+            Plus anciens
+        </div>
+    </a>
 </div>
 </body>
 </html>

@@ -27,9 +27,7 @@ if ($tag == "")
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>
-        Vitz - #<?= $tag ?>
-    </title>
+    <title>Vitz - #<?= $tag ?></title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="/assets/styles/feed.css" />
     <script src="/assets/js/general.js"><</script>

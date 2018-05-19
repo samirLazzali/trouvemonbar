@@ -241,11 +241,10 @@ class Post implements JsonSerializable
 
     /**
      * Construction d'un post* qui contient les $limit publications les plus aimées/détestées selon la valeur de $like (1 : les top likes, 0 ...)
-     * @param int $like
+     * @param string $like
      * @param int $limit
      * @param int $timelimit
      * @return array post
-     * @throws PostNotFoundException
      */
     // @TODO
     static function topLikes($like = Appreciation::LIKE, $limit=10, $timelimit=7200)
@@ -267,10 +266,16 @@ class Post implements JsonSerializable
         $result = array();
         
         foreach ($rows as $row) {
-            $p = Post::fromID($row['post']);
-            $p->getAuthor();
-            $p->content = $p->toHtml();
-            $result[] = $p;
+            try {
+                $p = Post::fromID($row['post']);
+                $p->getAuthor();
+                $p->content = $p->toHtml();
+                $result[] = $p;
+            }
+            catch (PostNotFoundException $e)
+            {
+
+            }
         }
 
         return $result;
@@ -583,10 +588,13 @@ class Post implements JsonSerializable
      * @return array un tableau de Post
      * @throws UserNotFoundException si un des utilisateurs de $people n'existe pas.
      */
-    static function findPosts($people, $limit = 50, $after = 0)
+    static function findPosts($people, $limit = 50, $after = 0, $before = -1)
     {
+        if ($before == -1)
+            $before = time();
+
         if (count($people) == 0)
-            $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE Timestamp > :after ORDER BY Timestamp DESC LIMIT $limit";
+            $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE Timestamp >= :after AND Timestamp <= :before ORDER BY Timestamp DESC LIMIT $limit";
         else
         {
             $IDs = array();
@@ -600,7 +608,7 @@ class Post implements JsonSerializable
                     array_push($IDs, $p->getID());
                 }
 
-            $SQL = "SELECT * FROM Post WHERE Timestamp > :after AND Author IN (";
+            $SQL = "SELECT * FROM Post WHERE Timestamp >= :after AND Timestamp <= :before AND Author IN (";
 
             foreach ($IDs as $ID) {
                 $SQL .= "'" . $ID . "', ";
@@ -612,6 +620,7 @@ class Post implements JsonSerializable
         $db = connect();
         $statement = $db->prepare($SQL);
         $statement->bindValue(":after", $after);
+        $statement->bindValue(":before", $before);
         $statement->execute();
         $rows = $statement->fetchAll();
 
@@ -710,8 +719,56 @@ class Post implements JsonSerializable
         if (!$rows)
             return $result;
 
-        foreach($rows as $row)
+        foreach($rows as $row) {
             $result[] = Post::fromRow($row);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Fonction qui renvoie un tableau avec tout les post qui répondent au post courant (faite par yéti donc à check)
+     * @return array (post*)
+     */
+    public function getThreadsFrom()
+    {
+        $db = connect();
+        $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE ResponseTo = :id";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":id", $this->getID());
+        $statement->execute();
+
+        $rows = $statement->fetchAll();
+        $threads = array();
+
+        if (!$rows)
+            return $threads;
+
+        foreach($rows as $row) {
+            $post = Post::fromRow($row);
+            $thread = $post->getThread($this->getAuthor(), $post->getAuthor(), $db);
+            $threads[] = $thread;
+        }
+
+        return $threads;
+    }
+
+    public function getThread($u1, $u2, $db)
+    {
+        $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE ResponseTo = :id AND (Author = :u1 OR Author = :u2)";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":id", $this->ID);
+        $statement->bindValue(":u1", $u1->getID());
+        $statement->bindValue(":u2", $u2->getID());
+        $statement->execute();
+
+        $rows = $statement->fetchAll();
+        $result = array($this);
+
+        foreach($rows as $row) {
+            $result[] = Post::fromRow($row);
+            $result = array_merge($result, end($result)->getThread($u1, $u2, $db));
+        }
 
         return $result;
     }

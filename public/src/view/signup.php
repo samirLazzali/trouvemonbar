@@ -8,9 +8,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>
-            Vitz # Création de compte
-        </title>
+        <title>Vitz - Création de compte</title>
         <meta charset="UTF-8" />
         <link rel="stylesheet" type="text/css" href="/assets/styles/login-signup.css" />
         <script src="/assets/js/forms.js"></script>

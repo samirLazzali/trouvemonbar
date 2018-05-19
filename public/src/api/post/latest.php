@@ -19,10 +19,18 @@ elseif(isset($_GET['limit']))
 else
     $limit = 15;
 
+if ($limit > 250)
+    $limit = 250;
+
 if (isset($_POST['after']))
     $after = $_POST['after'];
 else
     $after = 0;
+
+if (isset($_POST['before']))
+    $before = $_POST['before'];
+else
+    $before = time();
 
 if (isset($_POST['filter']) && trim($_POST['filter']) != '') {
     $filter = $_POST['filter'];
@@ -37,7 +45,7 @@ else
 
 try
 {
-    $p = Post::findPosts($people, $limit, $after);
+    $p = Post::findPosts($people, $limit, $after, $before);
     foreach($p as $post) {
         $post->getAuthor();
         $post->getRepostOf();
