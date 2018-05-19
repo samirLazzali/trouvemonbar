@@ -111,10 +111,18 @@ ALTER TABLE ONLY public."user"
 --
 -- PostgreSQL database dump complete
 --
+DROP TABLE public."Participants";
+DROP TABLE public."reunion";
 
 CREATE TABLE public."reunion"(
+id_reu INTEGER PRIMARY KEY,
 soiree varchar(100) NOT NULL,
 cr varchar(1000) NOT NULL,
-datee integer NOT NULL,
-participant varchar(40) NOT NULL
+datee DATE NOT NULL
+);
+
+
+CREATE TABLE public."Participants"(
+id_reu INTEGER NOT NULL, FOREIGN KEY (id_reu) REFERENCES public.reunion(id_reu),
+pseudo VARCHAR(40) NOT NULL
 );
