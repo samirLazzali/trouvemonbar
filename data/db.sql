@@ -4,9 +4,6 @@ CREATE TYPE type_size AS ENUM ('Miniscule','Petite','Moyenne','Grande','Géante'
 CREATE TYPE type_coat AS ENUM ('Nu','Court','Mi-long','Long');
 CREATE TYPE type_pattern AS ENUM ('Solide','Tabby','Colourpoint','Bicolore','Ecaille de tortue','Calico','Mink','Sepia'); */
 
-DROP DATABASE IF EXISTS Catisfaction;
-CREATE DATABASE IF NOT EXISTS Catisfaction;
-
 DROP TABLE IF EXISTS Utilisateur;
 CREATE TABLE IF NOT EXISTS Utilisateur(
 	id_user INTEGER(4) AUTO_INCREMENT PRIMARY KEY NOT NULL,
