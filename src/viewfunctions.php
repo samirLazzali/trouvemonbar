@@ -33,7 +33,7 @@ function header_t($titre) {
     print "    <a href=\"main.php\" class=\"m-link\"><i class=\"fa fa-home\" aria-hidden=\"true\"></i> Accueil</a>\n";
     print "    <a href=\"createannonce.php\" class=\"m-link\"><i class=\"fa fa-newspaper-o\" aria-hidden=\"true\"></i> Annonces</a>\n";
     print "    <a href=\"apropos.php\" class=\"m-link\"><i class=\"fa fa-question-circle-o\" aria-hidden=\"true\"></i> A propos</a>\n";
-    print "    <a href=\"#\" class=\"m-link\"><i class=\"fa fa-paper-plane-o\" aria-hidden=\"true\"></i> Contact</a>\n";
+    print "    <a href=\"contact.php\" class=\"m-link\"><i class=\"fa fa-paper-plane-o\" aria-hidden=\"true\"></i> Contact</a>\n";
 
     if (verif_authent()) {
 	buttonLogout();
@@ -51,7 +51,6 @@ function footer(){
     print "<footer>";
     print "<link rel=\"stylesheet\" href=\"public/css/normalize.css\">\n";
     print "<p>&copy; <b>2018 ENSIIE</b> | Skutnik . Chekour . Trachino . Meas | All Rights Reserved</p>";
-    print "<p><b>Contact</b>: 06 59 42 47 94 | lesbonsbails@gmail.com</p>";
     print "    <script src=\"js/global.js\"></script>";
     print "</footer>";
     print "  </body>\n";
@@ -115,6 +114,24 @@ function indexnotco() {
 			</div>";
 	print "<p class='connexion'> Connectez-Vous! </p>"; // dans les styles mettre que class connexion ouvre onclick() auth()
 
+}
+
+function contactsuccess() {
+    print "<div class=\"main\">";
+    print "<div class=annonce>";
+    print "<div class=title> Contact </div>";
+    print "<div> <br> <br> <br> <br> <br> Pour prendre contact avec nos équipes, n'hésitez pas à nous faire signe par telephone <br> au <strong> 06 59 42 47 94 </strong> ou par mail à <strong>lesbonsbails@gmail.com</strong> <br> <br> <br> <br> <br> <br> </div>";
+    print "</div>";
+    print "</div>";
+}
+
+function contactfailure() {
+    print "<div class=\"main\">";
+    print "<div class=annonce>";
+    print "<div class=title> Contact </div>";
+    print "<div> <br> <br> <br> <br> <br> Connectez vous pour accéder a cette page. <br> <br> <br> <br> <br> <br> </div>";
+    print "</div>";
+    print "</div>";
 }
 
 function affiche($str) {
