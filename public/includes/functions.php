@@ -214,7 +214,7 @@ function checkphone($phone_number)
 		$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 		$result = $connexion->query("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE phone_number = '".$connexion->quote($phone_number)."'");
 		$retour -> setFetchMode(PDO::FETCH_OBJ);
-		$retour -> fetch()
+		$retour -> fetch();
 		global $queries;
 		$queries++;
 		
