@@ -1,6 +1,6 @@
 CREATE TABLE evenements(
-  id int(11) NOT NULL,
-  organisateur int(11) NOT NULL,
+  id int NOT NULL,
+  organisateur int NOT NULL,
   nom varchar(100) NOT NULL,
   description text,
   lieu varchar(100) NOT NULL,
@@ -8,9 +8,9 @@ CREATE TABLE evenements(
   date_creation date NOT NULL,
   date_modif date DEFAULT NULL,
   before varchar(100) DEFAULT NULL,
-  prix float NOT NULL,
-  musique int(11) DEFAULT NULL,
-  categorie int(11) DEFAULT NULL,
+  prix double precision NOT NULL,
+  musique int DEFAULT NULL,
+  categorie int DEFAULT NULL,
   table_participants varchar(100) NOT NULL
 );
 
@@ -20,14 +20,14 @@ INSERT INTO evenements (id, organisateur, nom, description, lieu, date, date_cre
 
 
 CREATE TABLE musiques (
-  id int(11) NOT NULL,
+  id int NOT NULL,
   musique varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ;
 
 
 CREATE TABLE p2411932048 (
-  id int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  id int NOT NULL
+) ;
 
 
 INSERT INTO p2411932048 (id) VALUES
@@ -35,20 +35,20 @@ INSERT INTO p2411932048 (id) VALUES
 
 
 CREATE TABLE participants3897910314 (
-  id int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  id int NOT NULL
+) ;
 
 
 CREATE TABLE users (
-  id int(11) NOT NULL,
+  id int NOT NULL,
   firstname varchar(100) NOT NULL,
   lastname varchar(100) NOT NULL,
   birthday date NOT NULL,
   nickname varchar(100) NOT NULL,
   domicile varchar(100) NOT NULL,
   mdp varchar(100) NOT NULL,
-  id_groupe int(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  id_groupe int NOT NULL
+) ;
 
 INSERT INTO users (id, firstname, lastname, birthday, nickname, domicile, mdp, id_groupe) VALUES
 (1, 'Martin', 'Dufour', '1997-08-27', 'Feuj', 'maison', 'martin', 2);
@@ -99,22 +99,22 @@ ALTER TABLE users
 -- AUTO_INCREMENT pour la table categories
 --
 ALTER TABLE categories
-  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY id cast(11 as int) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table evenements
 --
 ALTER TABLE evenements
-  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY id cast(11 as int) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table musiques
 --
 ALTER TABLE musiques
-  MODIFY id int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY id cast(11 as int) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table users
 --
 ALTER TABLE users
-  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY id cast(11 as int) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
