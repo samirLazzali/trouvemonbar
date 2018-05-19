@@ -1,29 +1,11 @@
 <?php
-//require_once '/var/www/html/src/Message/Message.php';
-//require_once '/var/www/html/src/Message/MessageManager.php';
-require '../../vendor/autoload.php';
+session_start();
 
-//postgres
-$dbName = getenv('DB_NAME');
-$dbUser = getenv('DB_USER');
-$dbPassword = getenv('DB_PASSWORD');
-$connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
+require_once '../../vendor/autoload.php';
+require_once '../Modele.php';
 
-
-$msgManager = new \Message\MessageManager($connection);
-
-
-$msg = new \Message\Message();
-
-
-
-$msg->setEmetteur($_GET['emetteur']);
-$msg->setRecepteur($_GET['recepteur']);
-$msg->setDate(new DateTime);
-$msg->setContenu($_GET['m']);
-
-$msgManager->add($msg);
-
+ajoutMessage($_GET['m'], $_GET['recepteur'], $_SESSION['id'])
 
 ?>
+
 

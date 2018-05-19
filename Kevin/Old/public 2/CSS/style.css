@@ -8,6 +8,8 @@
 
 * {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, Arial;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.2);
+
 }
 
 
@@ -85,6 +87,12 @@ form{
 	 font-size : 18px;
 }
 
+#menu img{
+    width:20px;
+    height:20px;
+    vertical-align:middle;
+}
+
 #err{
       color: red;
       font-size: 11px;
@@ -95,11 +103,14 @@ form{
    top : 20% ;left: 40%;*/
   text-align: center;
     /*border: 1px solid #600 ;  A ENLEVER */
+    background: white;
+    width: 40%;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.2);
 
 }
 
 .tweets{
-	border : 1px solid var(--primary);
+	border : 1px solid whitesmoke;
 	padding: 10px 20px;
 }
 
@@ -119,18 +130,27 @@ form{
     color : white;
 }
 
+.tweets a{
+    text-decoration: none;
+}
+
+.tweets a:hover {
+    color: orangered;
+}
+
+
 .amis{
     /*position: absolute;  postulat de départ
   top: 20%; left: 80%;*/
     text-align: center;
-    width: 100px;
+    width: 200px;
+    background: white;
     /*border: 1px solid #600 ;  A ENLEVER */
 }
 
 .amis a{
 	color: var(--primary);
-	text-decoration: none;
-	
+
 	line-height: 50px;
 	text-shadow: 0 1px 0 rgba(0,0,0,0.2);
 }
@@ -213,7 +233,7 @@ form{
 footer{
     background-color: var(--tertiary);
     margin-bottom: 0px;
-    height: 100px;
+    height: 10%;
     border: 1px solid #600 ; /* A ENLEVER */
 
 }
@@ -250,7 +270,7 @@ h1{
 .conteneur_chat {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
     /*border: 1px solid #600 ;  A ENLEVER */
@@ -351,7 +371,16 @@ h1{
 }
 
 
+/*************** Profil **************/
 
+.conteneurProfil{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    /*border: 1px solid #600 ;  A ENLEVER */
+}
 
 
 

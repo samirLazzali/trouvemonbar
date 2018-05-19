@@ -63,24 +63,32 @@ function afficheMenu(){
     print "<nav id=\"fontmenu\">\n";
     print "<ul id=\"menu\">\n";
     print "    <li>\n";
-    print "        <span class=\"nomsite\">Twitiie</span>\n";
+    print "        <span class=\"nomsite\">twitIIE</span>\n";
     print "    </li>\n";
     print "    <li>\n";
-    print "        <a href=\"accueil.php\">Accueil</a>\n";
+    print "        <a href=\"accueil.php\">\n";
+    print "         Accueil <img src=\"icones/home.png\" alt=\"accueil\"/>\n";
+    print "        </a>\n";
     print "    </li>\n";
     print "    <li>\n";
-    print "        <a href=\"profil.php?pseudo=".prenom_user($_SESSION['id'])."&id=".$_SESSION['id']."\">Mon Profil</a><br/>\n";
+    print "        <a href=\"profil.php?pseudo=".prenom_user($_SESSION['id'])."&id=".$_SESSION['id']."\">\n";
+    print "        Mon Profil <img src=\"icones/profil.png\" alt=\"profil\"/>\n";
+    print "         </a>\n";
     print "    </li>\n";
     print "    <li>\n";
-    print "        <a href=\"edition.php?pseudo=$prenom\">Edition profil</a>\n";
+    print "        <a href=\"edition.php?pseudo=$prenom\">\n";
+    print "        Edition profil <img src=\"icones/editionprofil.png\" alt=\"edition_profil\"/>\n";
+    print "        </a>\n";
     print "    </li>\n";
     print "    <li>\n";
-    print "         <a href=\"Msg_Ecrire.php\">Message</a></br>\n";
+    print "         <a href=\"Msg_Ecrire.php\">\n";
+    print "        Message <img src=\"icones/message.png\" alt=\"message\"/>\n";
+    print "        </a>\n";
     print "    </li>\n";
     print "    <li>\n";
     print "        <a href=\"deconnexion.php\">\n";
-    print "        Déconnexion <img src=\"logout.png\" alt=\"bouton de déconnexion\">\n";
-    print "        </a>";
+    print "        Déconnexion <img src=\"icones/logout.png\" alt=\"bouton de déconnexion\"/>\n";
+    print "        </a>\n";
     print "    </li>\n";
     print "</ul>\n";
     print "</nav>\n";
@@ -137,7 +145,15 @@ function afficheListeTweets($listeTweets){
         echo "    <div class=\"tweets\">";
         echo afficheTweet($listeTweets[$i][1]);
         print "\n";
-        echo "        <button id=\"".$listeTweets[$i][1]->getId()."\" onclick=\"Liker(".$listeTweets[$i][1]->getId().")\">J'aime</button> Likes : ".$listeTweets[$i][0];
+        echo "        <button id=\"".$listeTweets[$i][1]->getId()."\" onclick=\"Liker(".$listeTweets[$i][1]->getId().")\">";
+
+        if (dejaLiker($listeTweets[$i][1]->getId())) {
+            echo "Je n'aime plus";
+        }
+        else {
+            echo "J'aime";
+        }
+        echo "</button> Likes : ".$listeTweets[$i][0];
         print "\n";
         echo "        <button id=\"Comment\" onclick=\"afficherCommentaire(".$listeTweets[$i][1]->getId().")\">Commenter</button>";
         print "\n    </div>\n";
@@ -175,7 +191,7 @@ function ajoutHashtagLien($text){
     for ($i=0; $i<count($T); $i++){
         if (isset($T[$i][0])) {
             if ('#' == $T[$i][0]) {
-                $T[$i] = "<a href=\"hashtag.php?hashtag=" . substr($T[$i], 1) . "\">$T[$i]</a>";
+                $T[$i] = "<a href=\"hashtagTweet.php?hashtag=".substr($T[$i], 1)."\">$T[$i]</a>";
             }
         }
     }

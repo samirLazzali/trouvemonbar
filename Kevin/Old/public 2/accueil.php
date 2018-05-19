@@ -69,13 +69,12 @@ enTete("Accueil", "CSS/style.css");
             xhttp.send();
         }*/
 
-        var Tweets =  <?php
+      /*  var Tweets =  /*php
                     $sth = $connection->prepare('SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne1=auteur WHERE personne2=\''.$_SESSION['id'].'\' UNION SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne2=auteur WHERE personne1=\''.$_SESSION['id'].'\'  ');
                     $sth->execute();
                     $result = $sth->fetch(PDO::FETCH_OBJ);
                     echo '[';
                     while($result){
-                        /********************** AJOUT POUR RECUPERER NB DE LIKES *******************************/
                         $likes_res = $connection->prepare('SELECT count(tweet_id) AS nb FROM "like" WHERE tweet_id='.$result->id);
                         $likes_res->execute();
                         $likes = $likes_res->fetch(PDO::FETCH_OBJ);
@@ -87,9 +86,8 @@ enTete("Accueil", "CSS/style.css");
                         }
                        
                      }
-                    echo ']';
+                    echo ']';*/
 
-                    ?> ;
 
       /*  var FriendList = </*?php
                     $sth = $connection->prepare('SELECT * FROM "amis" WHERE personne1=\''.$_SESSION['id'].'\' OR personne2=\''.$_SESSION['id'].'\' ');
@@ -132,8 +130,8 @@ enTete("Accueil", "CSS/style.css");
                     ?> ;
 
 
-                /************************** AJOUT DE KEVIN ****************************/
-
+</script>
+<script>
     function Liker(T_id){
         document.location.href = 'Likes/Liker.php?T_id='+T_id;
     }
@@ -151,8 +149,8 @@ enTete("Accueil", "CSS/style.css");
     function tweets(){
         document.write("<div class=\"alltweets\">Derniers Tweets :<br/><br/>");
         for(var i=0; i<Tweets.length;i++){
-             document.write("<div class=\"tweets\">" + Tweets[i][0] + " a tweeté à " + Tweets[i][2] +" : <br/>"+ Tweets[i][1]+"<br/>" );
-             document.write("<button id=\""+ Tweets[i][3] + "\" onclick=\"Liker("+Tweets[i][3]+")\">J'aime</button> Nb de J'aimes :"+ Tweets[i][4] +"</br>");
+            document.write("<div class=\"tweets\">" + Tweets[i][0] + " a tweeté à " + Tweets[i][2] +" : <br/>"+ Tweets[i][1]+"<br/>" );
+            document.write("<button id=\""+ Tweets[i][3] + "\" onclick=\"Liker("+Tweets[i][3]+")\">J'aime</button> Nb de J'aimes :"+ Tweets[i][4] +"</br>");
             document.write("<button id=\"Comment\" onclick=\"afficherCommentaire("+Tweets[i][3]+")\">Afficher les commentaires</button></div><br/><br/>");
 
         }
@@ -160,14 +158,14 @@ enTete("Accueil", "CSS/style.css");
 
     }
 
-        /**************************************** FIN AJOUT *************************************/
+    /**************************************** FIN AJOUT *************************************/
 
 
     function EcrireTweet(){
-       var ok = document.getElementById("ok");
-       ok.type="submit";
-       var textarea = document.getElementById("textarea");
-       textarea.style="display";
+        var ok = document.getElementById("ok");
+        ok.type="submit";
+        var textarea = document.getElementById("textarea");
+        textarea.style="display";
     }
 
     function ConfirmationTweet(){
@@ -219,19 +217,15 @@ enTete("Accueil", "CSS/style.css");
             return true;
         }
     }
-    
-   /* function suggestionHashtag(){
 
-    }
-    function suggestionUser(){
+    /* function suggestionHashtag(){
 
-    }*/
+     }
+     function suggestionUser(){
 
-
-
+     }*/
 
 </script>
-
 
 
 
@@ -257,7 +251,7 @@ afficheMenu();
             <form method='post' action="profil.php">
               <input list="pseudos" name="pseudo" onblur="verifPseudo(this)">
               <datalist id="pseudos">
-              <script >//liste_pseudos()</script>
+              <script>liste_pseudos()</script>
               </datalist>
               <input type="hidden" id="visite" name="visite" value="Visiter le profil">
             </form>

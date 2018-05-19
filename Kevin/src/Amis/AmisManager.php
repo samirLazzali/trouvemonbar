@@ -59,7 +59,7 @@ class AmisManager
 
         $relation
             ->setPersonne1($res['personne1'])
-            ->setPersonne2($res['personne2'])
+            ->setPersonne2($res['personne2']);
         return $relation;
     }
 }

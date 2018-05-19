@@ -64,16 +64,34 @@ A faire :
 
 + FAIRE MESSAGE EN MODE POST ???
 
++ NOMS d'utilisateur cliquable 
 
 
 
 
+### 17/05
+
++ Hashtag cliquables puis affiche page avec tous les autres tweets contenants hashtag similaire
++ getTweetId
++ getTweetLikes
++ Deconnexion??? Ok
 
 
 
++ Hashtag -> Marche pas encore
+
+pb dans ecrire tweet !!!
 
 
 
+### 19/05
++ AJout suggestion hashtag
++ ajout des hashtags cliquables
++ Recherche d'hashtag 
++ Ajout Je n'aime pas
+
+
++ AJOUT Du travail de Julien sur profil : ajout et suppression de d'amis
 
 
 

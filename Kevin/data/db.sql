@@ -53,9 +53,9 @@ CREATE TABLE "tweet" (
   contenu VARCHAR(300)
 );
 INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('1', '1999-12-23 12:45:23', '****');
-INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('2', '1999-12-23 12:45:23', '****');
-INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('3', '1999-12-23 12:45:23', '****');
-INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('5', '1999-12-23 12:45:23', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('2', '1999-12-23 12:45:24', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('3', '1999-12-23 12:45:25', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('5', '1999-12-23 12:45:26', '****');
 
 CREATE TABLE "like" (
   tweet_id int references "tweet"(id) ,
@@ -85,6 +85,20 @@ INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, 
 INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('1','7', '1999-12-23 12:45:23', 'bonjour', '1', 'commentaire');
 INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('1','7', '1999-12-23 12:45:23', 'aurevoir', '1', 'commentaire');
 
+
+CREATE TABLE "hashtag" (
+  id SERIAL PRIMARY KEY ,
+  mot VARCHAR UNIQUE
+);
+INSERT INTO "hashtag"(mot) VALUES ('paris');
+INSERT INTO "hashtag"(mot) VALUES ('tt');
+
+
+CREATE TABLE "hashtagEtTweet" (
+  id_hashtag int REFERENCES "hashtag"(id) ,
+  id_tweet int REFERENCES "tweet"(id)
+);
+INSERT INTO "hashtagEtTweet"(id_hashtag, id_tweet) VALUES (1, 2);
 
 
 
