@@ -73,14 +73,15 @@ services:
       - "ensiie"
 
 
-
-
-  maildev:
-    image: djfarrelly/maildev
+  exim:
+    image: elsdoerfer/exim-sender
     ports:
-      - "8282:25"
+      - "4444:26"
+    environment:
+      - "ALLOWED_HOSTS=127.0.0.1"
     networks:
       - "ensiie"
+
 networks:
     ensiie:
         driver: bridge

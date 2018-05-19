@@ -1,37 +1,32 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: apple
- * Date: 18/05/2018
- * Time: 15:34
- */
-echo "<table id='userlist'>
-        <tr><th>Pseudo</th><th>Prénom</th><th>Nom</th></tr>";
+<div class="container">
+    <table id='userlist' class="table">
 
 
-foreach ($userlist as $user)
-{
+        <thead class="thead-dark">
+            <th scope="col">Pseudo</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Nom</th>
+        </thead>
+        <tbody>
+        <?php
+            foreach ($userlist as $user)
+            {
 
-    echo "<tr>";
-    echo "<th>";
-    echo "<a href=\"user_profile.php?user=$user->userid\"> $user->nick </a> ";
-    echo "</th>";
-    echo "<th>";
-    echo "$user->firstname ";
-    echo "</th>";
-    echo "<th>";
-    echo "$user->lastname";
-    echo "</th>";
-    echo "</tr>";
-}
-
-echo "</table>";
-?>
-<!--search bar -->
-<form id="form_search" action="search_user.php" method="get">
-    nom：<input type="text" name="lastname" value="" size="8">
-    pseudo:<input type="text" name="nick" value="" size="8">
-    jeu de rôle：<input type="text" name="gamename" value="" size="8">
-    <input type="submit" value="search">
-</form>
-<br/>
+                echo "<tr>";
+                echo "    <th scope='row'> <a href=\"user_profile.php?user=$user->userid\"> $user->nick </a> </th>";
+                echo "    <td> $user->firstname </td>";
+                echo "    <td> $user->lastname </td>";
+                echo "</tr>";
+            }
+    ?>
+        </tbody>
+    </table>
+    <!--search bar -->
+    <label for="form_search" class="font-weight-bold"> Rechercher par : </label>
+    <form id="form_search" action="search_user.php" method="get">
+        <label for=""> Nom : </label> <input id="name" type="text" name="lastname" value="" size="8"/>
+        <label for=""> Pseudo: </label> <input id="nick" type="text" name="nick" value="" size="8"/>
+        <label for=""> Table： </label> <input id="gamename"type="text" name="gamename" value="" size="8"/>
+        <input type="submit" value="Rechercher" class="btn btn-primary">
+    </form>
+</div>
