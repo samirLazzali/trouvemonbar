@@ -233,3 +233,26 @@ textarea {
 .errorDisp {
     color: red;
 }
+
+.searchselect {
+    display:inline;
+    margin-right: 5%
+}
+#validateResearch {
+    width: auto;
+    display: inline;
+    background-color: #c1bdba;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-bottom: 3px;
+}
+#recherche {
+    margin: 0 auto;
+    color:white;
+    width: 70%;
+}
+#formspace{
+    width:100%;
+    background-color: #5FE6BD;
+    line-height:normal;
+}

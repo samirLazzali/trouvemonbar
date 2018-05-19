@@ -1,4 +1,16 @@
-<script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>HTML5 Doctor | Element Index</title>
+
+<link rel="stylesheet" type="text/css" href="media/css/style.css" />
+</head>
+<body id="home">
+<p>
+
+<form id="recherche">
+	<script>
 		function getmatieres(str) {
 		var select = document.getElementById("mat");
 		select.options.length = 0;
@@ -36,30 +48,22 @@
 		}
 		}
 	</script>
-<div id="formspace">
-
-<form id="recherche">
-	
-	<div class="searchselect">
-		Semestre:
+	Semestre:
 	<select name="semestre" onChange="getmatieres(this.value)">
 		<option value="">Semestre</option>
 		<option value="1">S1</option>
 		<option value="2">S2</option>
 	</select>
-	</div>
-	<div class="searchselect">
 	Matière:
-	<select   id="mat" name="matiere" onChange="getmodules(this.value)">
+	<select  id="mat" name="matiere" onChange="getmodules(this.value)">
 	</select>
-	</div>
-	<div class="searchselect">
 	Module:
-	<select  id="modules" name="module">
+	<select id="modules" name="module">
 	</select>
-	</div>
 
-	<input id="validateResearch" type="submit">
+	<input type="submit">
 </form>
 
-</div>
+</p>
+</body>
+</html>
