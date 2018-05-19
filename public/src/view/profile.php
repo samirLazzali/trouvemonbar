@@ -40,8 +40,13 @@ else
         <script src="/assets/js/post.js" ></script>
         <script src="/assets/js/general.js"></script>
         <script src="/assets/js/user.js"></script>
+        <script>
+            var lastRefresh = <?= time(); ?>;
+            var filter = "<?php $user; ?>";
+            var _before = <?= end($posts)->getTimestamp(); ?>;
+        </script>
     </head>
-    <body>
+    <body onload="refreshFeed(lastRefresh, filter)">
         <?php require "menu.php"; ?>
         <?php
         // On regarde si l'utilisateur est connecté (on ne veut pas que les gens pas connectés accèdent au profil)
@@ -122,8 +127,13 @@ else
             <h2 class="section-title">
                 Dernières publications
             </h2>
+            <a id="link-posts-waiting" class="link-posts-waiting display-none" href="#" onClick="return showWaitingPosts();">
+                <div class="post-in-feed" id="link-posts-waiting-wrapper">
+                    Nouvelles publications
+                </div>
+            </a>
 
-            <div class="post-feed">
+            <div class="post-feed" id="post-feed">
                 <?php
                 $posts = $user->findPosts();
                 foreach($posts as $post) {
@@ -134,6 +144,11 @@ else
                 }
                 ?>
             </div>
+            <a id="link-more-posts" class="link-more-posts" href="#" onClick="return getPostsBefore(_before, filter);">
+                <div class="post-in-feed" id=""link-more-posts-wrapper">
+                Plus Anciens
+        </div>
+        </a>
 
         </div>
     </body>
