@@ -2,10 +2,10 @@ function toggleSubscription(username)
 {
     // First, we need to verify if the user currently follows username
     var currentFollowing = false;
-    Array.from(document.getElementsByClassName("user-follow-link-" + username)).forEach(
+    Array.from(document.getElementsByClassName("follow-link-" + username)).forEach(
         function(element, index, array)
         {
-            if (element.classList.contains("user-follow-link-following"))
+            if (element.classList.contains("follow-link-following"))
             {
                 currentFollowing = true;
                 return;
@@ -18,22 +18,23 @@ function toggleSubscription(username)
         if (this.readyState == 4 && this.status == 200)
         {
             var result = JSON.parse(this.responseText);
-            Array.from(document.getElementsByClassName("user-follow-link-" + username)).forEach(
+            Array.from(document.getElementsByClassName("follow-link-" + username)).forEach(
                 function(element, index, array)
                 {
                     if (!currentFollowing) {
                         element.innerHTML = "Abonné !";
-                        addClass(element, "user-follow-link-following");
+                        addClass(element, "follow-link-following");
                     }
                     else
                     {
                         element.innerHTML = "S'abonner";
-                        removeClass(element, "user-follow-link-following");
+                        removeClass(element, "follow-link-following");
                     }
                 }
             )
         }
     }
+    console.log(currentFollowing);
     if (currentFollowing)
         xhttp.open("GET", "/api/user/unfollow?identifier=" + username, true);
     else

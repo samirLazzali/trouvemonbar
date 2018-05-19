@@ -12,6 +12,8 @@ if ($u == null)
 
 $limit = 50;
 $people = $u->getSubscriptions();
+if (count($people) == 0)
+    $people = array($u);
 $posts = Post::findPosts($people, $limit);
 ?>
 <!DOCTYPE HTML>
@@ -25,8 +27,12 @@ $posts = Post::findPosts($people, $limit);
     <script>
         var lastRefresh = <?= time(); ?>;
         var filter = "<?php
-            foreach($u->getSubscriptions() as $sub)
-                echo $sub->getUsername() . ";";
+                $subscriptions = $u->getSubscriptions();
+                if (count($subscriptions) > 0)
+                    foreach($subscriptions as $sub)
+                        echo $sub->getUsername() . ";";
+                else
+                    echo $u->getUsername();
             ?>";
         var _before = <?= end($posts)->getTimestamp(); ?>;
     </script>
