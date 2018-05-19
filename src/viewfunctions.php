@@ -28,7 +28,7 @@ function header_t($titre) {
     print "    <h1 class=\"logo\">$titre</h1>\n";
     print "    </div>\n";
     print "    <div class=\"m-right\">\n";
-    print "    <a href=\"#\" class=\"m-link\"><i class=\"fa fa-home\" aria-hidden=\"true\"></i> Accueil</a>\n";
+    print "    <a href=\"main.php\" class=\"m-link\"><i class=\"fa fa-home\" aria-hidden=\"true\"></i> Accueil</a>\n";
     print "    <a href=\"#\" class=\"m-link\"><i class=\"fa fa-newspaper-o\" aria-hidden=\"true\"></i> Annonces</a>\n";
     print "    <a href=\"apropos.php\" class=\"m-link\"><i class=\"fa fa-question-circle-o\" aria-hidden=\"true\"></i> A propos</a>\n";
     print "    <a href=\"#\" class=\"m-link\"><i class=\"fa fa-paper-plane-o\" aria-hidden=\"true\"></i> Contact</a>\n";
@@ -106,10 +106,11 @@ function indexco() {
 }
 
 function indexnotco() {
-	print "<h1> Bienvenue chez les bons bails! </h1>";
-	print "<p> lorem ipsum .... </br>
-				Connectez vous pour accéder aux offres 
-			</p>";
+	print "<div class=\"main\">";
+    print "<div class=annonce>";
+    print "<div class=title> Bienvenue sur Les Bons Bails </div>";
+	print "<div> <br> Connectez vous pour accéder aux offres 
+			</div>";
 	print "<p class='connexion'> Connectez-Vous! </p>"; // dans les styles mettre que class connexion ouvre onclick() auth()
 
 }
