@@ -52,31 +52,33 @@ function affiche_erreur($str) {
 }
 
 /**
- * @param $mp
+ * @brief crée l'entête html d'un fichier
+ * @param $mp une feuille de style css, $titre une chaîne de caractère
  */
-function head($mp){
+function head($mp,$titre){
     echo "<head>";
     echo "<meta charset=\"UTF−8\"/>";
-    echo "<title>Aperal</title>";
+    echo "<title>$titre</title>";
     echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$mp\"/>";
     echo "</head>";
 }
 
 /**
- * @param $connecte
+ * @brief genère le corps d'une page web
+ * @param $connecte un entier indiquant si l'utilisateur est connecté
  */
-function body($connecte){
+function body($connecte,$liens){
     echo "<body>";
     _header();
     echo "<dib id=\"corps\">";
-    _nav($connecte);
+    _nav($connecte,$liens);
     _main();
     echo "</div>";
     echo "</body>";
 }
 
 /**
- *
+ * @brief génére l'entête d'une page web
  */
 function _header(){
     echo "<div id=\"header\">";
@@ -85,11 +87,12 @@ function _header(){
 }
 
 /**
- * @param $connecte
+ * @brief génére une barre de navigation
+ * @param $connecte un entier indiquant si l'utilisateur est conneté, $liens un tableau de tableaux contenant les liens et leurs intitulés
  */
-function _nav($connecte){
+function _nav($connecte,$liens){
     echo  "<div id=\"nav\">";
-    menu();
+    menu($liens);
     if ($connecte==1) {
         profil();
     }
@@ -108,18 +111,19 @@ function profil(){
 }
 
 /**
- *
+ * @affiche une liste de liens pour la barre de navigation
+ *  @param $liens un tableau de tableaux contenant les liens et leurs intitulés
  */
-function menu(){
+function menu($liens){
+    $n=count($liens);
     echo "<div id=\"menu\">";
     echo "<h3>Aperal</h3>";
     echo "<p>";
-    echo "<a href=\"stats.php\">Statistiques et trésorerie</a></br>";
-    echo "<a href=\"myth.php\">Mythologie</a></br>";
-    echo "<a href=\"recette.php\">Recettes</a></br>";
-    echo "<a href=\"course.php\">Liste de course</a></br>";
-    echo "<a href=\"oenologie.php\">Oenologie : A quand la prochaine réu ?</a></br>";
-    echo "<a href=\"course.php\">Nous contacter</a></br>";
+    for($i=0;$i<$n;$i++){
+        $lien=$liens[$i][0];
+        $texte=$liens[$i][1];
+        echo "<a href='$lien'>$texte</a></br>";
+    }
     echo "</p>";
     echo "</div>";
 }
