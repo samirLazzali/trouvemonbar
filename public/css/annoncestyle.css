@@ -44,40 +44,6 @@ form.create form{
 }
 
 
-form.create input[type=radio] {
-  visibility: hidden;
-  display: none;
-  margin: 0 auto;
-  background-color: DimGrey;
-}
-
-form.create label {
-  display: inline-block;
-  cursor: pointer;
-  font-weight: bold;
-  padding: 5px 20px;
-  width: 60px;
-}
-
-form.create input[type=radio]:checked + label{
-  background: #5FE6BD;
-}
-form.create input[type=radio]:not(:checked)+ label{
-  color: lighten(#5FE6BD,60%);
-  background: DimGrey;
-}
-
-form.create label + input[type=radio] + label {
-  border-left: solid 3px #332f35;
-}
-form.create .radio-group {
-  border: solid 3px #332f35;
-  display: inline-block;
-  margin: 20px;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
 form.create input[type=submit],
 form.create input[type=reset]{
   margin-left: auto;
