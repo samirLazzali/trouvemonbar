@@ -32,18 +32,18 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
     echo '<form method="post" action="#">';
     echo '    <fieldset><legend>Soirée </legend><input type ="text" name="soiree" /></fieldset>';
     echo '    <fieldset><legend>Date </legend><input type="text" name="date" /></fieldset>';
-    echo '    <fieldset><legend>Participant </legend><input type="text" name="participant" /></fieldset>';
     echo '    <fieldset><legend>Compte Rendu</legend><input type="text" name="cr" /></fieldset>';
-    echo '   <input type ="submit" name="submit" value="Modifier"/>';
+    echo '   <input type ="submit" name="submit" value="Ajouter"/>';
     echo '</form>';
 
-
-   $req = $connection->prepare('INSERT INTO public.reunion(soiree,cr,datee,participant) VALUES(:soiree,:cr,:datee,:participant)');
-    $test = $req->execute(['soiree' => $_POST['soiree'], 
-        'cr' => $_POST['cr'],
-        'datee' => $_POST['date'],
-        'participant' => $_POST['participant'],  
-    ]);
+    if (isset($_POST['soiree']) && isset($_POST['date']) && isset($_POST['cr'])) {
+        $req = $connection->prepare('INSERT INTO public.reunion(soiree,cr,datee,participant) VALUES(:soiree,:cr,:datee,:participant)');
+        $test = $req->execute(['soiree' => $_POST['soiree'],
+            'cr' => $_POST['cr'],
+            'datee' => $_POST['date'],
+            'participant' => "",
+        ]);
+    }
 }
 else {
     echo '<link rel="stylesheet" href="css/style.css">';

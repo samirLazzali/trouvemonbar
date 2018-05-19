@@ -12,6 +12,7 @@ $userRepository = new \User\UserRepository($connection);
 $users = $userRepository->fetchAll();
 ?>
 
+
 <html>
 <head>
     <title> Accueil  </title>
@@ -56,10 +57,19 @@ menu_navigation();
 
 
 <h3>Prochaine réunion</h3>
-<form action id="prochaine_réunion">
-    <?php echo $date_reunion ?>
-    <input type="submit" value="Participer">
-</form>
+    <?php
+    $req = $connection->query('SELECT * FROM public.reunion WHERE datee= (SELECT MAX(datee) FROM public.reunion)');
+    $res=$req->fetchAll();
+    foreach ($res as $reu){
+        echo "soirée: {$reu['soiree']} </br>
+         date: {$reu['datee']} </br>
+         compt renude: {$reu['cr']} </br>
+         liste des participant: {$reu['participant']} </br> ";
+    }
+    ?>
+                        <form action="#" method="post">
+                            <input type="submit" name="participer" value="Participer">
+                        </form>
 </body>
 </html>
 
@@ -69,3 +79,14 @@ menu_navigation();
 </div>
 
 
+<?php
+if (isset ($_POST['participer'])) {
+    $req2 = $connection->query('SELECT participant FROM public.reunion WHERE datee = (SELECT MAX(datee) FROM public.reunion)');
+    $participants = $req2->fetchAll();
+    foreach ($participants as $part) {
+        $req = $connection->prepare('UPDATE public.reunion SET participant=:participant');
+        $test = $req->execute([':participant' => $part."</br>".$_SESSION['prenom']." ".$_SESSION['nom']]);
+    }
+}
+
+?>

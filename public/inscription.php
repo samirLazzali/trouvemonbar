@@ -40,10 +40,7 @@ menu_navigation()
 </form>
 
 <?php
-if (isset($_POST['nominsc']) && $_POST!=null) {   //améliorer la condition
-    foreach ($users as $user) {
-        echo $user->getPrenom();
-    }
+if (isset($_POST['prenominsc']) && isset($_POST['nominsc']) && isset($_POST['pseudoinsc']) && isset($_POST['mailinsc']) && isset($_POST['mdpinsc']) && $_POST!=null) {   //améliorer la condition
     $iid=$connection->query("SELECT 'id' FROM public.user")->fetchAll();
     $i=1;
     foreach($iid as $id){
@@ -52,15 +49,18 @@ if (isset($_POST['nominsc']) && $_POST!=null) {   //améliorer la condition
     echo $i;
 
     $req = $connection->prepare('INSERT INTO public.user(id,prenom,nom,score,pseudo,mdp,mail,inscription) VALUES(:id,:prenom,:nom,:score,:pseudo,:mdp,:mail,:inscription)');
-    $test = $req->execute(['id' => $i, // A CHANGER
+    $test = $req->execute(['id' => $i,
         'prenom' => $_POST['prenominsc'],
         'nom' => $_POST['nominsc'],
         'score' => 0,
         'pseudo' => $_POST['pseudoinsc'],
         'mdp' => $_POST['mdpinsc'],
         'mail' => $_POST['mailinsc'],
-        'inscription' => 1,   //je ne sais pas ce que c'est
+        'inscription' => 1,
     ]); 
     
+}
+else{
+    echo '<p>veuillez remplir tout les champs</p>';
 }
 ?>
