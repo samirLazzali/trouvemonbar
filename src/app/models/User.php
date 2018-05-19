@@ -123,7 +123,13 @@ class User
      */
     public function updateUser($passwd, $mail)
     {
+        $query = db()->prepare("UPDATE users SET mail=?,password=? WHERE userid=?");
+        $success = $query->execute([$mail, password_hash( $passwd, PASSWORD_DEFAULT),$this->userid]);
+        if($success)
+            return true;
 
+        else
+            return false;
     }
 
     /**
@@ -205,6 +211,42 @@ class User
         $this->$nick = $nick;
         return $this;
     }
+
+    /**
+     * @return array list of all users and game created  in the database
+     */
+    public static function usergamelist()
+    {
+
+        $query = db()->prepare("SELECT userid,nick,firstname,lastname,gamename,gameid FROM users left join game on userid=creator");
+        $query->execute();
+
+        return $query->fetchAll();
+    }
+
+    public static function searchlist($arr)
+    {
+        $query = db()->prepare($arr);
+        $query->execute();
+
+        return $query->fetchAll();
+    }
+
+
+    /**
+     * @return array list of all users  in the database
+     */
+    public static function userlist()
+    {
+
+        $query = db()->prepare("SELECT userid,nick,firstname,lastname FROM users ");
+        $query->execute();
+
+        return $query->fetchAll();
+    }
+
+
+
 
 }
 

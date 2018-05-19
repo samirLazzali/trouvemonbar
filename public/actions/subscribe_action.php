@@ -11,9 +11,9 @@
 require "../../src/app/helpers.php";
 
 
-$password = $_POST["password"];
-$nick = $_POST["nick"];
-$mail = $_POST["mail"];
+$password = htmlspecialchars($_POST["password"]);
+$nick = htmlspecialchars($_POST["nick"]);
+$mail = htmlspecialchars($_POST["mail"]);
 
 //cas où l'insertion échoué
 if( ($id = User::insertUser($nick, $password, $mail)) !== false)

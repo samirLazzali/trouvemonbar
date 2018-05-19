@@ -2,8 +2,8 @@
 
 require "../../src/app/helpers.php";
 
-$passwd = $_POST['password'];
-$mail = $_POST['email'];
+$passwd = htmlspecialchars($_POST['password']);
+$mail = htmlspecialchars($_POST['email']);
 
 if( !($id = User::check( $mail, $passwd )) )
 {
