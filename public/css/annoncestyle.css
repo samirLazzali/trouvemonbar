@@ -1,39 +1,43 @@
-
 .center {
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 150px;
-	height: 150px;
+	  height: 150px;
 }
-
-
 
 html, body {
-    background-color: black;
-	color: white;
-	font-family:"Segoe UI";
+    background-color: #c1bdba;
+	  color: white;
+    font-weight: bold;
+	  font-family:'Titillium Web', sans-serif;
 }
 
-header,h1{
-    background-color: black;
+
+h1{
+  background-color: #5FE6BD;
 	color: white;
-	font-family:"Segoe UI";
+	font-family:'Titillium Web', sans-serif;
 	text-align: center;
+  margin: 0 auto;
+  height: 50px;
 }
 
 form{
 	text-align: center;
 }
 
+
 input[type=radio] {
   position: absolute;
   visibility: hidden;
   display: none;
+  margin: 0 auto;
+  background-color: DimGrey;
 }
 
 label {
-  color: lighten(#5FE6BD,40%);
+  color: lighten(DimGrey,40%);
   display: inline-block;
   cursor: pointer;
   font-weight: bold;
@@ -42,7 +46,11 @@ label {
 
 input[type=radio]:checked + label{
   color: lighten(#5FE6BD,60%);
-  background: #332f35;
+  background: #5FE6BD;
+}
+input[type=radio]:not(:checked)+ label{
+  color: lighten(#5FE6BD,60%);
+  background: DimGrey;
 }
 
 label + input[type=radio] + label {
@@ -55,3 +63,26 @@ label + input[type=radio] + label {
   border-radius: 10px;
   overflow: hidden;
 }
+
+input[type=submit], input[type=reset]{
+  margin-left: auto;
+  margin-right: auto;
+  background-color: DimGrey;
+  border: 3px solid #332f35;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 25px;
+  font-weight: bold;
+}
+
+input[type=submit]:hover, input[type=reset]:hover{
+  background-color: #5FE6BD;
+}
+
+
+/*---POUR SELECT----*/
+
