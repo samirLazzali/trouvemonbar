@@ -19,10 +19,7 @@ function sqlquery($requete, $number)
 	else if($number == 2)
 	{
 		$query1 = $query->fetchAll(\PDO::FETCH_OBJ)
-		foreach($query1 as $query2)
-		{
-			$query2[] = $query1;
-		}
+		$query2[]=$query1
 		$query->closeCursor();
 		return $query2;
 	}
