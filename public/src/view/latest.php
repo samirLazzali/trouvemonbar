@@ -26,7 +26,6 @@ $posts = Post::findPosts(array(), $limit);
         var lastRefresh = <?= time(); ?>;
         var filter = "";
         var _before = <?= end($posts)->getTimestamp(); ?>;
-        var postsWaiting = [];
     </script>
 </head>
 <body onload="refreshFeed(lastRefresh, filter)">
@@ -36,7 +35,7 @@ $posts = Post::findPosts(array(), $limit);
         - Dernières Publications -
     </h1>
     <a id="link-posts-waiting" class="link-posts-waiting display-none" href="#" onClick="return showWaitingPosts();">
-        <div class="post-in-feed" id="link-more-posts-wrapper">
+        <div class="post-in-feed" id="link-posts-waiting-wrapper">
             Nouvelles publications
         </div>
     </a>

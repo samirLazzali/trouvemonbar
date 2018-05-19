@@ -10,8 +10,10 @@ if ($u == null)
     die();
 }
 
+$limit = 50;
+$people = $u->getSubscriptions();
+$posts = Post::findPosts($people, $limit);
 ?>
-
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -28,6 +30,7 @@ if ($u == null)
             foreach($u->getSubscriptions() as $sub)
                 echo $sub->getUsername() . ";";
             ?>";
+        var _before = <?= end($posts)->getTimestamp(); ?>;
     </script>
 </head>
 <body onload="refreshFeed(lastRefresh, filter)">
@@ -36,12 +39,11 @@ if ($u == null)
     <h1>
         - Dernières publications -
     </h1>
-
-    <?php
-    $limit = 50;
-    $people = $u->getSubscriptions();
-    $posts = Post::findPosts($people, $limit);
-        ?>
+    <a id="link-posts-waiting" class="link-posts-waiting display-none" href="#" onClick="return showWaitingPosts();">
+        <div class="post-in-feed" id="link-posts-waiting-wrapper">
+            Nouvelles publications
+        </div>
+    </a>
     <div class="post-feed" id="post-feed">
         <?php
         foreach ($posts as $post){
@@ -52,6 +54,11 @@ if ($u == null)
         }
         ?>
     </div>
+    <a id="link-more-posts" class="link-more-posts" href="#" onClick="return getPostsBefore(_before, filter);">
+        <div class="post-in-feed" id="link-more-posts-wrapper">
+            Plus anciens
+        </div>
+    </a>
 </div>
 </body>
 </html>

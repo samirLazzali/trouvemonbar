@@ -30,7 +30,7 @@
     text-decoration: none;
 }
 
-#link-more-posts-wrapper {
+#link-more-posts-wrapper, #link-posts-waiting-wrapper {
     display: block;
     text-align: center;
     padding: 15px 15px 15px 15px;

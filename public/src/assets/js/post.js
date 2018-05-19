@@ -407,6 +407,7 @@ function postToHtml(author, content, date, id, likecount = -1, dislikecount = -1
     return text;
 }
 
+var postsWaiting = [];
 function refreshFeed(lastRefresh, filter = "")
 {
     var xhttp = new XMLHttpRequest();
@@ -420,9 +421,13 @@ function refreshFeed(lastRefresh, filter = "")
                 result = result["result"];
                 if (result.length > 0) {
                     Array.from(result).forEach(function(elt, idx, arr) {
+                        var currentReport = document.getElementById("report-form-" + elt["id"]);
+                        if (currentReport != undefined)
+                            return;
+
                         postsWaiting.push(elt);
+                        document.getElementById("link-posts-waiting").style.display = "block";
                     });
-                    document.getElementById("link-posts-waiting").style.display = "block";
                 }
                 // On rappelle refreshFeed dans cinq secondes
                 setTimeout(function () {
@@ -444,19 +449,15 @@ function refreshFeed(lastRefresh, filter = "")
 function showWaitingPosts()
 {
     var feed = document.getElementById("post-feed");
-    var html;
+    var html = "";
     postsWaiting.forEach(function(elt, index, arr) {
-        var currentReport = document.getElementById("report-form-" + elt["id"]);
-        if (currentReport != undefined)
-            return;
-
         if (elt["repostOf"] != null)
             html = rawRepostToHtml(elt);
         else
             html = rawPostToHtml(elt);
     });
     feed.innerHTML = html + feed.innerHTML;
-    toggleBlock("link-posts-waiting");
+    document.getElementById("link-posts-waiting").style.display = "none";
 }
 
 function getPostsBefore(before, filter = "")
@@ -472,11 +473,15 @@ function getPostsBefore(before, filter = "")
             {
                 result = result["result"];
                 var html;
+                var newPostFound = false;
                 if (result.length > 0) {
+                    document.getElementById("link-more-posts-wrapper").innerHTML = "Plus anciens";
                     Array.from(result).forEach(function(elt, idx, arr) {
                         var currentReport = document.getElementById("report-form-" + elt["id"]);
                         if (currentReport != undefined)
                             return;
+                        else
+                            newPostFound = true;
 
                         if (elt["repostOf"] != null)
                             html = rawRepostToHtml(elt);
@@ -488,6 +493,8 @@ function getPostsBefore(before, filter = "")
                         _before = elt["timestamp"];
                     });
                 }
+                if (!newPostFound)
+                    document.getElementById("link-more-posts-wrapper").innerHTML = "Vous etes arrivé à la fin !";
             }
             else
             {
