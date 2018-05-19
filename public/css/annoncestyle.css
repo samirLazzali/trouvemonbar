@@ -20,30 +20,6 @@ form.create #form_border{
   margin-right: auto;
 }
 
-form.create html, 
-form.create body {
-    background-color: #c1bdba;
-	  color: white;
-    font-weight: bold;
-	  font-family:'Titillium Web', sans-serif;
-}
-
-
-form.create h1{
-  background-color: #5FE6BD;
-	color: white;
-	font-family:'Titillium Web', sans-serif;
-	text-align: center;
-  margin: 0 auto;
-  height: 50px;
-  padding-top: 10px;
-}
-
-form.create form{
-	text-align: center;
-}
-
-
 form.create input[type=submit],
 form.create input[type=reset]{
   margin-left: auto;
@@ -65,7 +41,7 @@ form.create input[type=reset]:hover{
   background-color: #5FE6BD;
 }
 
-form.create select {
+/*form.create select {
   margin-left: auto;
   margin-right: auto;
   background-color: DimGrey;
@@ -79,9 +55,9 @@ form.create select {
 }
 form.create select:hover {
   background-color: #5FE6BD;
-}
+}*/
 
-form.create input[type=text],
+/*form.create input[type=text],
 form.create input[type=number],
 form.create textarea{
   border: solid 3px #332f35;
@@ -93,4 +69,4 @@ form.create textarea{
   padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
-}
+}*/

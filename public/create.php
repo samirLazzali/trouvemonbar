@@ -4,14 +4,14 @@ include("../src/annonce.php");
 
 session_start();
 
-if (isset($_POST['submit']) && ($annonce = Annonce::annonceFromPost($_SESSION['username'])) != null) {
-    if ($annonce->sendToDb()) {
-	print "Sent !";
-    } else {
-	print "Returned false";
-    }
-} else {
-    print "Nothing to do.";
+$res = false;
+
+if (isset($_SESSION['username']) && isset($_POST['submit']) && ($annonce = Annonce::annonceFromPost($_SESSION['username'])) != null) {
+    $res = $annonce->sendToDb();
 }
 
+$_POST = array();
+$_POST['done'] = $res;
+
+header("Refresh:0; url=createannonce.php");
 ?>

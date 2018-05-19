@@ -85,26 +85,26 @@ h1 {
     font-size: 22px;
 }
 
-label .req {
+.form label .req {
     margin: 2px;
     color: #1ab188;
 }
 
-label.active {
+.form label.active {
     -webkit-transform: translateY(50px);
     transform: translateY(50px);
     left: 2px;
     font-size: 14px;
 }
-label.active .req {
+.form label.active .req {
     opacity: 0;
 }
 
-label.highlight {
+.form label.highlight {
     color: #ffffff;
 }
 
-input, textarea {
+.form input, textarea {
     font-size: 22px;
     display: block;
     width: 100%;

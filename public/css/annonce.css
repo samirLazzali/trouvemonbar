@@ -8,22 +8,29 @@ div.annonce {
     margin-bottom: 20px
 }
 
-.toggleAnnonce {
-    color: white;
-}
-
 div.title {
+    text-align: left;
     text-decoration: none;
     color: #fff;
     /*font-family: 'Roboto';*/
     font-weight: 900;
     font-size: 28px;
     /*margin-top: 20px;*/
-    padding-top: 5px;
+    padding: 5px;
     /*width:600px;*/
     height:40px;
     background-color:#5FE6BD;
 }
+div.title a {
+    float: right;
+    margin-right: 5px;
+    color: white;
+}
+
+div.title a:hover {
+    color: #179b77;
+}
+
 div.info {
     padding-top: 20px;
     float:left;

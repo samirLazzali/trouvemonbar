@@ -17,7 +17,8 @@ function header_t($titre) {
     print "    <link rel=\"stylesheet\" href=\"css/header.css\">\n";
     print "    <link rel=\"stylesheet\" href=\"css/annonce.css\">\n";
     print "    <link rel=\"stylesheet\" href=\"css/sidebar.css\">\n";
-    //print "    <link rel=\"stylesheet\" href=\"css/annoncestyle.css\">\n";
+    print "    <link rel=\"stylesheet\" href=\"css/login.css\">\n";
+    print "    <link rel=\"stylesheet\" href=\"css/annoncestyle.css\">\n";
 
     print "<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>";
     print "  </head>\n";

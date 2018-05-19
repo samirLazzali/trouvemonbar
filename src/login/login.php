@@ -38,6 +38,7 @@ function login() {
 	    if (($row = lookUp($email, $password)) != null) {
 		$_SESSION['email'] = $row->email;
 		$_SESSION['username'] = $row->username;
+		$_SESSION['admin'] = $row->admin;
 	    } else {
 		return "Invalid credentials: '$email', '$password'";
 	    }
@@ -95,7 +96,7 @@ function buttonLogout() {
    // print "<form align=\"right\" name=\"form1\" method=\"post\" action=\"\">";
    // print "<input name=\"logout\" type=\"submit\" id=\"logout\" value=\"log out\">";
    // print "</form>";
-    echo "<a href=\"main.php?logout\" class=\"m-link\" id=\"logout\"><i class=\"fa\" aria-hidden=\"true\"></i> Log Out</a>";
+    echo "<a href=\"main.php?logout\" class=\"m-link\" id=\"logout\"><i class=\"fas fa-times-circle\"></i> Log Out</a>";
 }
 
 function displayLogin() {

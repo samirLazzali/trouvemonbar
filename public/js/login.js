@@ -53,9 +53,3 @@ document.getElementById("connect").onclick = function(e) {
 	document.getElementById("connect").innerHTML = "<i class=\"fas fa-sign-in-alt\" aria-hidden=\"true\"></i> Log In";
     }
 };
-
-document.getElementById("toggleAnnonce").onclick = function(e) {
-    console.log("Hey");
-};
-
-

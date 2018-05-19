@@ -129,17 +129,6 @@ h1 {
     margin: 0 0 40px;
 }
 
-label {
-    position: absolute;
-    -webkit-transform: translateY(6px);
-    transform: translateY(6px);
-    left: 13px;
-    color: rgba(255, 255, 255, 0.5);
-    transition: all 0.25s ease;
-    -webkit-backface-visibility: hidden;
-    pointer-events: none;
-    font-size: 22px;
-}
 label .req {
     margin: 2px;
     color: #1ab188;
@@ -159,7 +148,7 @@ label.highlight {
     color: #ffffff;
 }
 
-input, textarea {
+/*input, textarea {
     font-size: 22px;
     display: block;
     width: 100%;
@@ -172,7 +161,8 @@ input, textarea {
     color: #ffffff;
     border-radius: 0;
     transition: border-color .25s ease, box-shadow .25s ease;
-}
+}*/
+
 input:focus, textarea:focus {
     outline: 0;
     border-color: #1ab188;
@@ -188,6 +178,7 @@ textarea {
     margin-bottom: 40px;
 }
 
+/*
 .top-row:after {
     content: "";
     display: table;
@@ -200,7 +191,7 @@ textarea {
 }
 .top-row > div:last-child {
     margin: 0;
-}
+}*/
 
 .button {
     border: 0;
