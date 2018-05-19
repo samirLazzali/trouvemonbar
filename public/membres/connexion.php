@@ -21,9 +21,11 @@ if(isset($_SESSION['id_user']))
 	exit();
 }
 
-if($_POST['validate'] != 'ok') {
+
 $titre = 'Connexion';
 include('../includes/top.php');
+
+if($_POST['validate'] != 'ok') {
 ?>	
 		<div id="contenu">
 					
@@ -49,24 +51,29 @@ include('../includes/top.php');
 			</p>
 			<?php
 }
-			else
-			{
-				$result = sqlquery("SELECT COUNT(id_user) AS nbr, id_user, login, password FROM Utilisateur WHERE
-				login = '".$_POST['login']."' GROUP BY id_user", 1);
-				
-				if($result['nbr'] == 1)
+
+else	{
+				$dbName = getenv('DB_NAME');
+				$dbUser = getenv('DB_USER');
+				$dbPassword = getenv('DB_PASSWORD');
+				$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
+				$result = $connexion->query("SELECT COUNT(id_user) AS nbr, id_user, login, password FROM Utilisateur WHERE
+				login = '".$_POST['login']."' GROUP BY id_user");
+				global $queries;
+				$queries++;
+				if($result->nbr == 1)
 				{
-					if(md5($_POST['password']) == $result['password'])
+					if(md5($_POST['password']) == $result->password)
 					{
-						$_SESSION['id_user'] = $result['id_user'];
-						$_SESSION['login'] = $result['login'];
-						$_SESSION['password'] = $result['password'];
+						$_SESSION['id_user'] = $result->id_user;
+						$_SESSION['login'] = $result->login;
+						$_SESSION['password'] = $result->password;
 						unset($_SESSION['connexion_login']);
 						
 						if(isset($_POST['cookie']) && $_POST['cookie'] == 'on')
 						{
-							setcookie('id_user', $result['id_user'], time()+365*24*3600);
-							setcookie('password', $result['password'], time()+365*24*3600);
+							setcookie('id_user', $result->id_user, time()+365*24*3600);
+							setcookie('password', $result->password, time()+365*24*3600);
 						}
 						
 						$informations = Array(
@@ -97,7 +104,7 @@ include('../includes/top.php');
 					}
 				}
 				
-				else if($result['nbr'] > 1)
+				else if($result->nbr > 1)
 				{
 					$informations = Array(
 									true,
