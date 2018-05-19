@@ -19,7 +19,7 @@
         }
         echo "</div>";
         if(!$flag)
-            echo "<p>IL N'Y A PAS DE FICHIER!</p>";
+            echo "<p>Pas de fichiers pour le moment</p>";
 
         if($userid==$myid) {
             echo "<h5>Choisir votre fichier:</h5></br>";

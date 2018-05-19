@@ -65,10 +65,10 @@ class File
     public static function upload_file()
     {
         echo '<form action="actions/upload_file_action.php" method="post" enctype="multipart/form-data" target="myIframe">
-              <label for="file" >Filename:</label>
+              <label for="file" > Nom du fichier:</label>
               <input type="file" name="myfile" id="myfile" />
               <br />
-              <input type="submit" name="submit" value="Submit"/>
+              <input class="btn btn-primary" type="submit" name="submit" value="Valider"/>
               </form>
               <iframe id="myIframe" name="myIframe" frameborder="0" style=""></iframe> <br/>';
     }
