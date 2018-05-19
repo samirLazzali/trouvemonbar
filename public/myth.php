@@ -6,9 +6,9 @@
         head("mp.css","Aperal : Mythologie");
         $liens = array(
             array("index.php","Page d'accueil"),
-            array("index.php","Page d'accueil"),
             array("stats.php","Statistiques et trésorerie"),
             array("recette.php","Recettes"),
+            array("course.php","Liste de course"),
             array("oenologie.php","Oenologie : A quand la prochaine réu ?"),
             array("contact.php","Nous contacter")
             );
