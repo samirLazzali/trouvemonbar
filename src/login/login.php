@@ -142,6 +142,7 @@ function handleLogin() {
     if (isset($_GET['logout'])) {
 	session_destroy();
 	header("Refresh:0; url=main.php");
+	exit();
     }
 
     if (isset($_GET['login'])) {

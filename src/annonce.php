@@ -20,6 +20,7 @@ class Annonce {
     public function display() {
 	print "<div class=annonce id=a$this->id>";
 	print "<div class=title>";
+	print ($this->isOffer?"Offre: ":"Recherche: ");
 	print "$this->title ";
 	print "<a class=\"toggleAnnonce\"><i class=\"fas fa-angle-up\"></i></a>";
 
@@ -45,6 +46,7 @@ class Annonce {
 	print "<b>Reward: </b>";
 	if ($this->paiement != 0) {
 	    print "$this->paiement euros";
+	    if ($this->service != null) print " + $this->service";
 	} else if ($this->service != null) {
 	    print "$this->service";
 	} else {
