@@ -31,10 +31,10 @@ function header_t($titre) {
     print "    <div class=\"m-right\">\n";
 
     print "    <a href=\"main.php\" class=\"m-link\"><i class=\"fa fa-home\" aria-hidden=\"true\"></i> Accueil</a>\n";
-    print "    <a href=\"apropos.php\" class=\"m-link\"><i class=\"fas fa-question-circle\" aria-hidden=\"true\"></i> A propos</a>\n";
+    //print "    <a href=\"apropos.php\" class=\"m-link\"><i class=\"fas fa-question-circle\" aria-hidden=\"true\"></i> A propos</a>\n";
     if (verif_authent()) {
-	print "    <a href=\"createForm.php\" class=\"m-link\"><i class=\"far fa-newspaper\" aria-hidden=\"true\"></i> Annonces</a>\n";
-	print "    <a href=\"contact.php\" class=\"m-link\"><i class=\"fas fa-paper-plane\" aria-hidden=\"true\"></i> Contact</a>\n";
+	//print "    <a href=\"createForm.php\" class=\"m-link\"><i class=\"far fa-newspaper\" aria-hidden=\"true\"></i> Annonces</a>\n";
+	//print "    <a href=\"contact.php\" class=\"m-link\"><i class=\"fas fa-paper-plane\" aria-hidden=\"true\"></i> Contact</a>\n";
 	buttonResearch();
 	buttonLogout();
     } else {
@@ -114,9 +114,12 @@ function indexnotco() {
 	print "<div class=\"main\">";
     print "<div class=annonce>";
     print "<div class=title> Bienvenue sur Les Bons Bails </div>";
+    print "<br>";
 	print "<div> <br> Connectez vous pour accéder aux offres 
 			</div>";
-	print "<p class='connexion'> Connectez-Vous! </p>"; // dans les styles mettre que class connexion ouvre onclick() auth()
+    print "<br>";
+    print "<br>";
+	// print "<p class='connexion'> Connectez-Vous! </p>"; // dans les styles mettre que class connexion ouvre onclick() auth()
 
 }
 
