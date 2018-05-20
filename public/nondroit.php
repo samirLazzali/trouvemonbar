@@ -28,9 +28,9 @@ if(verif_authent())
 		Le contenu que vous essayez de visualiser n'est pas disponible.
 		<br>
 		<br>
-		Vous n'y avez pas droit d'accès.
 		<br>
 		<a href="main.php"><strong> Retour </strong></a>
+		<br>
 		<br>
 	</div>
 </div>
