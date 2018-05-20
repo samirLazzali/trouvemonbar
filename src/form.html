@@ -1,65 +1,63 @@
 <script>
-		function getmatieres(str) {
-		var select = document.getElementById("matieres");
-		select.options.length = 0;
-		if(str =="1"){
-			select.options[select.options.length] = new Option('MPR', 'MPR');
-			select.options[select.options.length] = new Option( 'IPI', 'IPI');
-		}
-		if(str == "2"){
-			select.options[select.options.length] = new Option('IPFL','IPFL');
-			select.options[select.options.length] = new Option('ILO', 'ILO');
-		}
+    function getmatieres(str) {
+	var select = document.getElementById("matieres");
+	select.options.length = 0;
+	if(str =="1"){
+	    select.options[select.options.length] = new Option('MPR', 'MPR');
+	    select.options[select.options.length] = new Option( 'IPI', 'IPI');
 	}
+	if(str == "2"){
+	    select.options[select.options.length] = new Option('IPFL','IPFL');
+	    select.options[select.options.length] = new Option('ILO', 'ILO');
+	}
+    }
 
-	</script>
+</script>
 
-	<script>
-		function getmodules(str) {
-		   if (str == "") {
-		    return;
-		  }
-		var select = document.getElementById("modules");
-		select.options.length = 0;
-		if(str =="MPR"){
-			select.options[select.options.length] = new Option('MPR', 'MPR');
-		}
-		if(str == "IPI"){
-			select.options[select.options.length] = new Option('IPI','IPI');
-		}
-		if(str == "IPFL"){
-			select.options[select.options.length] = new Option('IPF','IPF');
-			select.options[select.options.length] = new Option('MLO', 'MLO');
-		}
-		if(str == "ILO"){
-			select.options[select.options.length] = new Option('ILO', 'ILO');
-		}
-		}
-	</script>
+<script>
+    function getmodules(str) {
+	if (str == "") {
+	    return;
+	}
+	var select = document.getElementById("modules");
+	select.options.length = 0;
+	if(str =="MPR"){
+	    select.options[select.options.length] = new Option('MPR', 'MPR');
+	}
+	if(str == "IPI"){
+	    select.options[select.options.length] = new Option('IPI','IPI');
+	}
+	if(str == "IPFL"){
+	    select.options[select.options.length] = new Option('IPF','IPF');
+	    select.options[select.options.length] = new Option('MLO', 'MLO');
+	}
+	if(str == "ILO"){
+	    select.options[select.options.length] = new Option('ILO', 'ILO');
+	}
+    }
+</script>
 <div >
-
-<form>
-	
+    <form action="recherche.php">
 	<div class="searchselect">
-		Semestre:
-	<select name="semestre" onChange="getmatieres(this.value)">
+	    Semestre:
+	    <select name="semestre" onChange="getmatieres(this.value)">
 		<option value="">Semestre</option>
 		<option value="1">S1</option>
 		<option value="2">S2</option>
-	</select>
+	    </select>
 	</div>
 	<div class="searchselect">
-	Matière:
-	<select id="matieres"  name="matiere" onChange="getmodules(this.value)">
-	</select>
+	    Matière:
+	    <select id="matieres"  name="matiere" onChange="getmodules(this.value)">
+	    </select>
 	</div>
 	<div class="searchselect">
-	Module:
-	<select id="modules" name="module">
-	</select>
+	    Module:
+	    <select id="modules" name="module">
+	    </select>
 	</div>
 
 	<input class="button button-block" type="submit" style="background-color: #1ab188; margin-top: 25%">
-</form>
+    </form>
 
 </div>
