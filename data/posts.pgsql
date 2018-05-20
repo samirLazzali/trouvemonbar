@@ -20,9 +20,9 @@ INSERT INTO Post(ID, Author, Content, Timestamp, Repost, ResponseTo)
 INSERT INTO Post(ID, Author, Content, Timestamp, Repost, ResponseTo)
     VALUES ('pae', 'a', 'Ceci est un hashtag qui va être #trendy', 1523818915, NULL, NULL);
 INSERT INTO Post(ID, Author, Content, Timestamp, Repost, ResponseTo)
-    VALUES ('pab', 'b', 'Vous savez ce qui est #trendy en ce moment ?', 1523818495, NULL, NULL);
+    VALUES ('paf', 'b', 'Vous savez ce qui est #trendy en ce moment ?', 1523818495, NULL, NULL);
 INSERT INTO Post(ID, Author, Content, Timestamp, Repost, ResponseTo)
-    VALUES ('pab', 'c', 'Bon je sais pas moi voilà un mot random : #trendy', 1523818569, NULL, NULL);
+    VALUES ('pag', 'c', 'Bon je sais pas moi voilà un mot random : #trendy', 1523818569, NULL, NULL);
 
 /* Avec une réponse */
 INSERT INTO Post(ID, Author, Content, Timestamp, Repost, ResponseTo)

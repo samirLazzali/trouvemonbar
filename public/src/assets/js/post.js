@@ -449,12 +449,14 @@ function showWaitingPosts()
     var feed = document.getElementById("post-feed");
     var html = "";
     postsWaiting.forEach(function(elt, index, arr) {
+        console.log(elt);
         if (elt["original"] != null)
             html += rawRepostToHtml(elt);
         else
             html += rawPostToHtml(elt);
     });
     feed.innerHTML = html + feed.innerHTML;
+    postsWaiting = [];
     document.getElementById("link-posts-waiting").style.display = "none";
 }
 

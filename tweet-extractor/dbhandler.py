@@ -25,17 +25,13 @@ class DBHandler():
         else:
             repost = ''
 
-        repost = "'" + repost + "'"
-
         if t['in_reply_to_status_id'] != None:
             responseTo = str(t['in_reply_to_status_id'])[-12:]
         else:
             responseTo = ''
 
-        responseTo = "'" + repost + "'"
-
         
-        SQL = "INSERT INTO Post (ID, Author, Content, Timestamp, Repost, ResponseTo) VALUES ('{id}', '{author}', '{content}', '{timestamp}', {repost}, {responseto})".format(id = _id, author = userId, content = content.replace("'", "''"), timestamp = int(time.time()), repost = repost, responseto = responseTo)
+        SQL = "INSERT INTO Post (ID, Author, Content, Timestamp, Repost, ResponseTo) VALUES ('{id}', '{author}', '{content}', '{timestamp}', '{repost}', '{responseto}')".format(id = _id, author = userId, content = content.replace("'", "''"), timestamp = int(time.time()), repost = repost, responseto = responseTo)
         self.execute(SQL)
         
 
