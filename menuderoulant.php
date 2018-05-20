@@ -15,19 +15,20 @@
     </script>
 </head>
 <body>
+    <?php $variable='index.php'.$_SESSION["id"]; ?>
     <button onclick="affiche('menu')"><img class="affichemenu" src="img/menu.png" alt="img menu deroulant"></button>
     <ul id="menu">
         <li class="optionmenu">
-            <a href="">home</a>
+            <a href="index.php">Home</a>
         </li>
         <li class="optionmenu">
-            <a href="">posts</a>
+            <a href="">Posts</a>
         </li>
         <li class="optionmenu">
-            <a href="">profil</a>
+            <a href="<?php $variable?>">Mon profil</a>
         </li>
         <li class="optionmenu">
-            <a href="">déconnexion</a>
+            <a href="déconnexion.php">Déconnexion</a>
         </li>
     </ul>
 </body>
