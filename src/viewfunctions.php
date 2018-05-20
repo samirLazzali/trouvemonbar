@@ -151,14 +151,13 @@ function affiche_erreur($str) {
     echo '<p class="erreur">'.$str.'</p>';
 }
 function displayResearch() {
-   // echo "<div id=\"form\" class=\"form\" style=\"display: none\">";
     echo "<div id=\"formresearch\" class=\"formresearch\" style=display:none>";
     echo "<div class=\"tab-content\">";
     echo "<h1>Recherchez votre solution</h1>";
     include("form.html");
     echo "<div id=\"signup\">";
     echo "<h1>Sign Up for Free</h1>";
-    echo "<form action=\"main.php\" method=\"post\">";
+    echo "<form action=\"recherche.php\" method=\"post\">";
     echo "<div class=\"field-wrap\">";
     echo "<label>Email Address<span class=\"req\">*</span></label>";
     echo "<input type=\"email\" name=\"email\" required=\"\" autocomplete=\"off\">";
@@ -175,7 +174,7 @@ function displayResearch() {
     echo "<script src=\"js/research.js\"></script>";
 }
 function buttonResearch() {
-    echo "<a class=\"m-link\" id=\"research\"><i class=\"fas fa-sign-in-alt\" aria-hidden=\"true\"></i> Research</a>";
+    echo "<a href=\"#research\" class=\"m-link\" id=\"research\"><i class=\"fas fa-sign-in-alt\" aria-hidden=\"true\"></i> Research</a>";
 }
 
 

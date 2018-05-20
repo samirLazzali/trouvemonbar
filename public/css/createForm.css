@@ -1,9 +1,11 @@
-#form_border .create {
-    padding: 10px;
+#form_border .tab-content {
+    margin-top: 20px;
 }
 
 #form_border select {
     margin: auto;
+    margin-right: 5px;
+    margin-left: 5px;
     width: 150px;
 }
 

@@ -3,6 +3,7 @@
 include("../src/viewfunctions.php");
 include("../src/annonce.php");
 include("../src/sidebar.php");
+session_start();
 login();
 
 header_t("Les Bons Bails");

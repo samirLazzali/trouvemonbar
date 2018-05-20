@@ -40,6 +40,7 @@ SET default_with_oids = false;
 CREATE TABLE public.annonce (
     id integer NOT NULL,
     postdate timestamp without time zone,
+    offer boolean,
     op integer,
     semestre integer,
     module character varying(20),

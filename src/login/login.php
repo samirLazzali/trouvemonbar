@@ -28,6 +28,7 @@ function login() {
 	$password=md5($_POST['password']);
 
 	if (($row = lookUp($email, $password)) != null) {
+	    $_SESSION['id'] = $row->id;
 	    $_SESSION['email'] = $row->email;
 	    $_SESSION['username'] = $row->username;
 	    $_SESSION['admin'] = $row->admin;
