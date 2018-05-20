@@ -1,8 +1,8 @@
 <?php
-session_start();
 include("../src/annonce.php"); 
 include("../src/sidebar.php"); 
 include("../src/viewfunctions.php");
+session_start();
 
 header_t("Create Annonce");
 

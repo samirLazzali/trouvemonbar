@@ -1,0 +1,182 @@
+<link rel="stylesheet" href="css/createForm.css">
+<div id="form_border">
+    <ul class="tab-group nature">
+	<li class="tab active">
+	    <a href="#offer">Offer</a>
+	</li>
+	<li class="tab">
+	    <a href="#query">Query</a>
+	</li>
+    </ul>
+
+    <ul class="tab-group">
+	<li class="tab active">
+	    <a href="#money">Pay with money</a>
+	</li>
+	<li class="tab">
+	    <a href="#service">Pay with service</a>
+	</li>
+	<li class="tab">
+	    <a href="#free">Free</a>
+	</li>
+    </ul>
+
+    <form name="annonce" class="create" method="post" action="create.php">
+	<div class="tab-content">
+	    <div id="money">
+		<div class="field-wrap">
+		    <label> Amount (€)<span class="req">*</span></label>
+		    <input type="number" name="annoncepayamount"/>
+		</div>
+	    </div>
+	    <div id="service">
+		<div class="field-wrap">
+		    <label> Nature of swap<span class="req">*</span></label>
+		    <input type="text" name="annonceswapnature"/>
+		</div>
+	    </div>
+	</div>
+
+	<div class="field-wrap">
+	    <label> Title<span class="req">*</span></label>
+	    <input name="annoncetitle" required="" type="text"/>
+	</div>
+
+	<div class="field-wrap">
+	    <label> Genre<span class="req">*</span></label>
+	    <input type="text" name="annoncegenre"/>
+	</div>
+
+	<div class="field-wrap">
+	    <label class="big"> Description<span class="req">*</span></label>
+	    <textarea name="annoncedesc" cols="30" rows="3" maxlength="240" class="textcenter"></textarea>
+	</div>
+
+	<div class="smselect">
+	    <select name="annoncesemester" class="styled-select black rounded">
+		<option value="" disabled selected>Semestre</option>
+		<option value="1" class="toggle">S1</option>
+		<option value="2" class="toggle">S2</option>
+		<option value="3" class="toggle">S3</option>
+		<option value="4" class="toggle">S4</option>
+		<option value="5" class="toggle">S5</option>
+	    </select> 
+
+	    <div class="smodule" id="selectmodule1" style="display: none">
+		<select name="annoncemodule1">
+		    <option value="" disabled selected>Module</option>
+		    <option value="ECO1">ECO1</option>
+		    <option value="IBD">IBD</option>
+		    <option value="IPI">IPI</option>
+		    <option value="LVFH1">LVFH1</option>
+		    <option value="MAN">MAN</option>
+		    <option value="MCI">MCI</option>
+		    <option value="MPR">MPR</option>
+		    <option value="MTG">MTG</option>
+		    <option value="OSS">OSS</option>
+		</select>
+	    </div>
+
+	    <div class="smodule" id="selectmodule2" style="display: none">
+		<select name="annoncemodule2">
+		    <option value="" disabled selected>Module</option>
+		    <option value="ECO2">ECO2</option>
+		    <option value="ILO">ILO</option>
+		    <option value="IPFL">IPFL</option>
+		    <option value="LVFH2">LVFH2</option>
+		    <option value="MST">MST</option>
+		    <option value="MTEF">MTEF</option>
+		    <option value="OPTI">OPTI</option>
+		    <option value="PROJ">PROJ</option>
+		    <option value="PWR">PWR</option>
+		</select> 
+	    </div>
+
+	    <div class="smodule" id="selectmodule3" style="display: none">
+		<select name="annoncemodule3">
+		    <option value="" disabled selected>Module</option>
+		    <option value="ECO3">ECO3</option>
+		    <option value="ASE">ASE</option>
+		    <option value="IAC">IAC</option>
+		    <option value="IGL">IGL</option>
+		    <option value="IPF">IPF</option>
+		    <option value="IPS">IPS</option>
+		    <option value="LSF-VVL">LSF-VVL</option>
+		    <option value="LVFH3">LVFH3</option>
+		    <option value="MICRO-ARCHI">MICRO-ARCHI</option>
+		    <option value="MRO">MRO</option>
+		    <option value="MRR">MRR</option>
+		    <option value="PIMA">PAP</option>
+		    <option value="PP">PST</option>
+		    <option value="SE1">SE1</option>
+		    <option value="SRM">SRM</option>
+		</select> 
+	    </div>
+
+	    <div class="smodule" id="selectmodule4" style="display: none">
+		<select name="annoncemodule4">
+		    <option value="" disabled selected>Module</option>
+		    <option value="ANEDP">ANEDP</option>
+		    <option value="ANU">ANU</option>
+		    <option value="ARMA">ARMA</option>
+		    <option value="ASN">ASN</option>
+		    <option value="AUTO">AUTO</option>
+		    <option value="CAL">CAL</option>
+		    <option value="CC">CC</option>
+		    <option value="CORO">CORO</option>
+		    <option value="ECO4">ECO4</option>
+		    <option value="IA">IA</option>
+		    <option value="IMF">IMF</option>
+		    <option value="IRA">IRA</option>
+		    <option value="LC">LC</option>
+		    <option value="LOA">LOA</option>
+		    <option value="LVFH4">LVFH4</option>
+		    <option value="MCS">MCS</option>
+		    <option value="MESIM">MESIM</option>
+		    <option value="MFDLS">MFDLS</option>
+		    <option value="MOST">MOST</option>
+		    <option value="PBT">PBT</option>
+		    <option value="PRB">PRB</option>
+		    <option value="PRR">PRR</option>
+		    <option value="PSA">PSA</option>
+		    <option value="RDH">RDH</option>
+		    <option value="RIAL">RIAL</option>
+		    <option value="RVIG">RVIG</option>
+		    <option value="SE2">SE2</option>
+		    <option value="SEC-CEA">SEC-CEA</option>
+		    <option value="SFP">SFP</option>
+		    <option value="SIP1-SIP2">SIP1-SIP2</option>
+		    <option value="SSI">SSI</option>
+		</select> 
+	    </div>
+
+	    <div class="smodule" id="selectmodule5" style="display: none">
+		<select name="annoncemodule5">
+		    <option value="" disabled selected>Module</option>
+		    <option value="AEBI">AEBI</option>
+		    <option value="GPA">GPA</option>
+		    <option value="ISA">ISA</option>
+		    <option value="MAF">MAF</option>
+		    <option value="MAL">MAL</option>
+		    <option value="MQF">MQF</option>
+		    <option value="MSA">MSA</option>
+		    <option value="NTOE">NTOE</option>
+		    <option value="OPTI">OPTI</option>
+		    <option value="PMGD">PMGD</option>
+		    <option value="PROG">PROG</option>
+		    <option value="RESO">RESO</option>
+		    <option value="SEC">SEC</option>
+		    <option value="SIBD">SIBD</option>
+		    <option value="WIA">WIA</option>
+		</select> 
+	    </div>
+	</div>
+
+	<div class="choice">
+	    <input type="submit" name="submit" value="Create"/>
+	    <input type="reset" name="startover" value="Erase"/>
+	</div>
+    </form>
+</div>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src="js/createForm.js"></script>

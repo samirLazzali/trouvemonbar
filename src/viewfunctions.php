@@ -8,9 +8,7 @@ function header_t($titre) {
     print "    <meta charset=\"utf-8\" />\n";
     print "    <title>$titre</title>\n";
     print "    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>";
-    //print "    <link href=\"https://www.stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\" rel=\"stylesheet\" integrity=\"sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN\" crossorigin=\"anonymous\">\n";
     print "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css\">";
-    //print "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">";
     print "    <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.0.13/css/all.css\" integrity=\"sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp\" crossorigin=\"anonymous\">";
 
     print "    <link rel=\"stylesheet\" href=\"css/style.css\">";
@@ -18,7 +16,7 @@ function header_t($titre) {
     print "    <link rel=\"stylesheet\" href=\"css/annonce.css\">\n";
     print "    <link rel=\"stylesheet\" href=\"css/sidebar.css\">\n";
     print "    <link rel=\"stylesheet\" href=\"css/login.css\">\n";
-    print "    <link rel=\"stylesheet\" href=\"css/annoncestyle.css\">\n";
+    print "    <link rel=\"stylesheet\" href=\"css/createForm.css\">\n";
 
     print "<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>";
     print "  </head>\n";
@@ -33,13 +31,12 @@ function header_t($titre) {
     print "    <div class=\"m-right\">\n";
 
     print "    <a href=\"main.php\" class=\"m-link\"><i class=\"fa fa-home\" aria-hidden=\"true\"></i> Accueil</a>\n";
-    print "    <a href=\"createannonce.php\" class=\"m-link\"><i class=\"far fa-newspaper\" aria-hidden=\"true\"></i> Annonces</a>\n";
     print "    <a href=\"apropos.php\" class=\"m-link\"><i class=\"fas fa-question-circle\" aria-hidden=\"true\"></i> A propos</a>\n";
-    print "    <a href=\"contact.php\" class=\"m-link\"><i class=\"fas fa-paper-plane\" aria-hidden=\"true\"></i> Contact</a>\n";
-    buttonResearch();
     if (verif_authent()) {
+	print "    <a href=\"createannonce.php\" class=\"m-link\"><i class=\"far fa-newspaper\" aria-hidden=\"true\"></i> Annonces</a>\n";
+	print "    <a href=\"contact.php\" class=\"m-link\"><i class=\"fas fa-paper-plane\" aria-hidden=\"true\"></i> Contact</a>\n";
+	buttonResearch();
 	buttonLogout();
-    buttonResearch();
     } else {
 	buttonLogin();
     }
@@ -50,16 +47,15 @@ function header_t($titre) {
 */
     print "    </nav>\n";
     print "    </header>\n";
-
 }
 
 function footer(){
     print "<footer>";
-    print "<link rel=\"stylesheet\" href=\"public/css/normalize.css\">\n";
+    print "<link rel=\"stylesheet\" href=\"public/css/normalize.css\">";
     print "<p>&copy; <b>2018 ENSIIE</b> | Skutnik . Chekour . Trachino . Meas | All Rights Reserved</p>";
-    print "    <script src=\"js/global.js\"></script>";
+    print "<script src=\"js/global.js\"></script>";
     print "</footer>";
-    print "  </body>\n";
+    print "</body>";
     print "</html>";
 
 }
@@ -179,7 +175,6 @@ function displayResearch() {
     echo "<script src=\"js/research.js\"></script>";
 }
 function buttonResearch() {
-    //echo "<button class=\"button button-block\" id=\"connect\">Connect</button>";
     echo "<a class=\"m-link\" id=\"research\"><i class=\"fas fa-sign-in-alt\" aria-hidden=\"true\"></i> Research</a>";
 }
 

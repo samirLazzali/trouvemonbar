@@ -55,14 +55,13 @@ document.getElementById("research").onclick = function(e) {
    
 };*/
 
-document.getElementById("research").onclick = function(){
-	var form = document.getElementById("formresearch");
-	if (form.style.display == 'none') {
-		form.style.display = "block";
-
-	}
-	else {
-		form.style.display = "none";
-	}
-
+document.getElementById("research").onclick = function(e){
+    var target = document.getElementById("formresearch").style;
+    target.display = (target.display == 'none' ? "block" : "none");
+   // if (form.style.display == 'none') {
+   //     form.style.display = "block";
+   // }
+   // else {
+   //     form.style.display = "none";
+   // }
 }

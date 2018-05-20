@@ -136,6 +136,8 @@ function displayLogin() {
 }
 
 function handleLogin() {
+    session_start();
+
     if (isset($_GET['logout'])) {
 	session_destroy();
 	header("Refresh:0; url=main.php");

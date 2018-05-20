@@ -12,14 +12,13 @@ div.title {
     text-align: left;
     text-decoration: none;
     color: #fff;
-    /*font-family: 'Roboto';*/
     font-weight: 900;
     font-size: 28px;
-    /*margin-top: 20px;*/
     padding: 5px;
-    /*width:600px;*/
     height:40px;
     background-color:#5FE6BD;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
 div.title a {
     float: right;
@@ -43,7 +42,6 @@ div.info {
 }
 div.desc {
     padding-top: 20px;
-    /*font-family: 'Roboto';*/
     font-weight: 400;
     font-size: 15px;
     float:right;
@@ -57,7 +55,8 @@ div.logi {
     font-family:'IBM Plex Mono';
     font-size: 17px;
     clear:both;
-    /*width:600px;*/
     height:30px;
     background-color:#FF5722;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
