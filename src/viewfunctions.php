@@ -33,7 +33,7 @@ function header_t($titre) {
     print "    <a href=\"main.php\" class=\"m-link\"><i class=\"fa fa-home\" aria-hidden=\"true\"></i> Accueil</a>\n";
     //print "    <a href=\"apropos.php\" class=\"m-link\"><i class=\"fas fa-question-circle\" aria-hidden=\"true\"></i> A propos</a>\n";
     if (verif_authent()) {
-	print "    <a href=\"createForm.php\" class=\"m-link\"><i class=\"far fa-newspaper\" aria-hidden=\"true\"></i> Annonces</a>\n";
+	//print "    <a href=\"createForm.php\" class=\"m-link\"><i class=\"far fa-newspaper\" aria-hidden=\"true\"></i> Annonces</a>\n";
 	//print "    <a href=\"contact.php\" class=\"m-link\"><i class=\"fas fa-paper-plane\" aria-hidden=\"true\"></i> Contact</a>\n";
 	buttonResearch();
 	buttonLogout();
