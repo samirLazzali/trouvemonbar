@@ -1,8 +1,8 @@
-/* CREATE TYPE type_user AS ENUM ('Administrateur', 'Humain', 'Chat');
-CREATE TYPE type_sex AS ENUM ('Male','Femelle','Attack helicopter');
-CREATE TYPE type_size AS ENUM ('Miniscule','Petite','Moyenne','Grande','Géante','Ur momma');
-CREATE TYPE type_coat AS ENUM ('Nu','Court','Mi-long','Long');
-CREATE TYPE type_pattern AS ENUM ('Solide','Tabby','Colourpoint','Bicolore','Ecaille de tortue','Calico','Mink','Sepia'); */
+/* CREATE TYPE type_user AS ENUM ('Administrateur', 'Humain', 'Chat'); remplacés par 0 1 2 */
+/* CREATE TYPE type_sex AS ENUM ('Male','Femelle','Attack helicopter'); remplacés par 0 1 2 */
+/* CREATE TYPE type_size AS ENUM ('Miniscule','Petite','Moyenne','Grande','Géante','Ur momma'); remplacés par 0-5*/
+/* CREATE TYPE type_coat AS ENUM ('Nu','Court','Mi-long','Long'); remplacés par 0-3 */
+CREATE TYPE type_pattern AS ENUM ('Solide','Tabby','Colourpoint','Bicolore','Ecaille de tortue','Calico','Mink','Sepia');
 
 DROP TABLE IF EXISTS Utilisateur;
 CREATE TABLE IF NOT EXISTS Utilisateur(
@@ -10,8 +10,8 @@ CREATE TABLE IF NOT EXISTS Utilisateur(
 	login VARCHAR NOT NULL,
 	mail VARCHAR NOT NULL,
 	password VARCHAR NOT NULL,
-	phone_number INTEGER NOT NULL
-	/* user_type type_user */
+	phone_number INTEGER NOT NULL,
+	user_type INTEGER NOT NULL CHECK(0 <= user_type AND user_type < 3),
 	);
 	
 DROP TABLE IF EXISTS Connected;
@@ -23,13 +23,28 @@ DROP TABLE IF EXISTS Cats;
 CREATE TABLE IF NOT EXISTS Cats(
        id_cat SERIAL PRIMARY KEY NOT NULL,
        name_cat VARCHAR NOT NULL,
-       /*sex type_sex NOT NULL, */
        birthday_cat DATE,
        purety BOOLEAN,
-	   /* size type_size,
-       coat type_coat,
-       pattern type_pattern, */
-       weight FLOAT 
+       pattern type_pattern, /* NULL s'il n'y en a pas */
+
+       sex INTEGER NOT NULL CHECK (0 <= sex AND sex < 3),
+       ssex INTEGER NOT NULL CHECK (0 <= sex AND sex < 3),
+
+       csize INTEGER CHECK (0 <= csize AND csize < 3),
+       scsize_min INTEGER CHECK (0 <= csize AND csize < 3),
+       scsize_max INTEGER CHECK (0 <= csize AND csize < 3),
+
+       coat INTEGER CHECK (0<=coat AND coat < 4),
+       scoat_min INTEGER CHECK (0<=coat AND coat < 4),
+       scoat_max INTEGER CHECK (0<=coat AND coat < 4),
+
+       weight FLOAT CHECK (0<weight),
+       sweight_min FLOAT CHECK (0<weight),
+       sweight_max FLOAT CHECK (0<weight),
+
+
+        /* contient aussi une race (Cat_breed), une ou plusieurs couleurs (Cat_color) et traits de caractères (cat_personnality)
+            + les critères de recherche correspondants */
 	   );
 
 DROP TABLE IF EXISTS Breeds;
