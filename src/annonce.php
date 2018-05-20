@@ -35,6 +35,9 @@ class Annonce {
 	print "$this->genre</br>$this->op</br>S$this->semestre";
 	if ($this->module != 'NULL') print " - $this->module";
 	print "</div>";
+	print "<div class=tag>";
+	print "TAG1 TAG2 TAG3 TAG4 TAG5";
+	print "</div>";
 
 	print "<div class=desc>";
 	print "$this->content";
