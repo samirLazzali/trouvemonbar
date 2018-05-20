@@ -15,7 +15,7 @@ if (isset($_GET['edit']) && $_GET['edit']) {
     }
 }
 
-header_t("Create Annonce");
+header_t("Créer une annonce");
 
 dispSidebar();
 ?>

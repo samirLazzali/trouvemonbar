@@ -1,27 +1,27 @@
 <div id="form_border">
    <ul class="tab-group">
-   <li class="nature <?php print (isset($annonce) && $annonce->isOffer?"active":"none"); ?>"><a href=#offer>Offer</a>
-      <li class="nature <?php print (isset($annonce) && $annonce->isOffer?"none":"active"); ?>"><a href=#query>Query</a>
+   <li class="nature <?php print (isset($annonce) && $annonce->isOffer?"active":"none"); ?>"><a href=#offer>Offre</a>
+      <li class="nature <?php print (isset($annonce) && $annonce->isOffer?"none":"active"); ?>"><a href=#query>Demande</a>
    </ul>
    <ul class=tab-group>
-      <li class="tab active"><a href=#money>Pay with money</a>
-      <li class=tab><a href=#service>Pay with service</a>
-      <li class=tab><a href=#free>Free</a>
+      <li class="tab active"><a href=#money>Payer</a>
+      <li class=tab><a href=#service>Echanger</a>
+      <li class=tab><a href=#free>Gratuit</a>
    </ul>
    <form name=annonce class=create method=post action=create.php>
       <div class=tab-content>
          <div id=money>
-            <div class=field-wrap><label>Amount (€)</label>
+            <div class=field-wrap><label>Montant (€)</label>
 		<input type=number name=annoncepayamount <?php print (isset($annonce)?"value=\"$annonce->paiement\"":"");?>>
             </div>
          </div>
          <div id=service>
-            <div class=field-wrap><label>Nature of swap</label>
+            <div class=field-wrap><label>Nature de l'échange</label>
                <input name=annonceswapnature <?php print (isset($annonce)?"value=\"$annonce->service\"":"");?>>
             </div>
          </div>
       </div>
-      <div class=field-wrap><label>Title<span class=req>*</span></label>
+      <div class=field-wrap><label>Titre<span class=req>*</span></label>
          <input name=annoncetitle required <?php print (isset($annonce)?"value=\"$annonce->title\"":"");?>>
       </div>
       <div class=field-wrap><label>Genre<span class=req>*</span></label>
@@ -145,8 +145,8 @@
             </select>
          </div>
       </div>
-      <div class=choice><input type=submit name=submit value=Create>
-         <input type=reset name=startover value=Erase>
+      <div class=choice><input type=submit name=submit value=Créer>
+         <input type=reset name=startover value=Supprimer>
       </div>
    </form>
 </div>
