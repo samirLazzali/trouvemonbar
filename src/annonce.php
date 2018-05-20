@@ -244,12 +244,12 @@ class Annonce {
 }
 
 function displayFormCreate() {
-    print "<link rel=stylesheet href=css/createForm.css><div id=form_border><ul class=\"tab-group nature\"><li class=\"tab active\"><a href=#offer>Offer</a><li class=tab><a href=#query>Query</a></ul><ul class=tab-group><li class=\"tab active\"><a href=#money>Pay with money</a><li class=tab><a href=#service>Pay with service</a><li class=tab><a href=#free>Free</a></ul><form name=annonce class=create method=post action=create.php><div class=tab-content><div id=money><div class=field-wrap><label>Amount (€)<span class=req>*</span></label>";
-    print "<input type=number name=annoncepayamount></div></div><div id=service><div class=field-wrap><label>Nature of swap<span class=req>*</span></label>";
+    print "<link rel=stylesheet href=css/createForm.css><div id=form_border><ul class=\"tab-group\"><li class=\"nature active\"><a href=#offer>Offer</a><li class=nature><a href=#query>Query</a></ul><ul class=tab-group><li class=\"tab active\"><a href=#money>Pay with money</a><li class=tab><a href=#service>Pay with service</a><li class=tab><a href=#free>Free</a></ul><form name=annonce class=create method=post action=create.php><div class=tab-content><div id=money><div class=field-wrap><label>Amount (€)</label>";
+    print "<input type=number name=annoncepayamount></div></div><div id=service><div class=field-wrap><label>Nature of swap</label>";
     print "<input name=annonceswapnature></div></div></div><div class=field-wrap><label>Title<span class=req>*</span></label>";
     print "<input name=annoncetitle required></div><div class=field-wrap><label>Genre<span class=req>*</span></label>";
-    print "<input name=annoncegenre></div><div class=field-wrap><label class=big>Description<span class=req>*</span></label>";
-    print "<textarea name=annoncedesc cols=30 rows=3 maxlength=240 class=textcenter></textarea></div><div class=smselect><select name=annoncesemester class=\"styled-select black rounded\">";
+    print "<input name=annoncegenre required></div><div class=field-wrap><label class=big>Description<span class=req>*</span></label>";
+    print "<textarea name=annoncedesc cols=30 rows=3 maxlength=240 required></textarea></div><input type=radio id=isoffer value=offer visibility=hidden checked><div class=smselect><select name=annoncesemester class=\"styled-select black rounded\">";
     print "<option value disabled selected>Semestre";
     print "<option value=1 class=toggle>S1";
     print "<option value=2 class=toggle>S2";

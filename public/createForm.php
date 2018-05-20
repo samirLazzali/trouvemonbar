@@ -10,10 +10,8 @@ dispSidebar();
 ?>
 
 <div class="main">
+    <h2>Créer une annonce</h2>
     <div class="annonce">
-	<div class="title">
-	    <i class="fas fa-arrow-circle-down"></i> CREATE ANNOUNCEMENT
-	</div>
 <?php displayFormCreate(); ?>
     </div>
 </div>

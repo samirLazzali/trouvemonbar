@@ -13,5 +13,5 @@ if (isset($_SESSION['username']) && isset($_POST['submit']) && ($annonce = Annon
 $_POST = array();
 $_POST['done'] = $res;
 
-header("Refresh:0; url=createannonce.php");
+header("Refresh:0; url=createForm.php");
 ?>

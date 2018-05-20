@@ -1,3 +1,6 @@
+radiobtn = document.getElementById("isoffer");
+radiobtn.style.display = 'none';
+
 var modules = [document.getElementById("selectmodule1"), document.getElementById("selectmodule2"), document.getElementById("selectmodule3"), document.getElementById("selectmodule4"), document.getElementById("selectmodule5")];
 
 function disappear(item, index) {
@@ -22,6 +25,21 @@ $('.tab a').on('click', function (e) {
     $('.tab-content > div').not(target).hide();
 
     $(target).fadeIn(400);
+
+});
+
+$('.nature a').on('click', function (e) {
+    e.preventDefault();
+
+    $(this).parent().addClass('active');
+    $(this).parent().siblings().removeClass('active');
+
+    target = $(this).attr('href');
+    if (target == '#query')
+	radiobtn.checked = false;
+    else 
+	radiobtn.checked = true;
+    console.log(target);
 
 });
 
@@ -53,3 +71,4 @@ $('.create').find('input, textarea').on('keyup blur focus', function (e) {
     }
 
 });
+
