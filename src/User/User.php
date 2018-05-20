@@ -1,6 +1,5 @@
 <?php
 namespace User;
-
 class User
 {
     /**
@@ -95,4 +94,3 @@ class User
         return $this;
     }
 }
-
