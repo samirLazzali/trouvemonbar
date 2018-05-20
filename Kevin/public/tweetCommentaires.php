@@ -77,7 +77,7 @@ titreH1("Tweet de ".prenom_user($tweet->getAuteur()));
         //AFFICHE BOUTON SUPPRESSION*/
         echo '<form method="POST" action="Tweet/deleteTweet.php">'."\n";
         echo '<input type="hidden" name="idTweet" value="'.$tweet->getId().'">'."\n";
-        echo '<input type="button" value="Supprimer le tweet" onclick="if(confirm(\'Commentaire Envoyé\')){this.form.submit();}" class="inputbutton">'."\n";
+        echo '<input type="button" value="Supprimer le tweet" onclick="if(confirm(\'Voulez-vous vraiment supprimer ce tweet ?\')){this.form.submit();}" class="inputbutton">'."\n";
         echo "</form>\n";
     }
     ?>

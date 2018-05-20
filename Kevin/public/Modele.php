@@ -188,7 +188,8 @@ function ecrireCommentaire($idParent, $type, $contenu, $TargetOwner){
 function deleteTweet($id){
     global $tweetManager;
 
-    $tweet = $tweetManager->get($id);
+    $tweet = new Tweet\Tweet();
+    $tweet->setId($id);
     $tweetManager->delete($tweet);
 }
 

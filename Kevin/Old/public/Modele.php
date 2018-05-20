@@ -277,35 +277,6 @@ function getCommentaires($T_id, $type) {
 }
 
 
-/*
- * Affiche tous les commentaires d'un tweet
- */
-function afficherCommentaires($T) {
-    print "<ul>\n";
-    foreach ($T as $res) :
-        echo '        <li>'.prenom_user($res->getOwnerId()).' ';
-        echo 'a commenté à '.($res->getDate())->format('H:i:s')." le ".($res->getDate())->format('Y-m-d').' : ';
-        echo $res->getContenu().' '."\n";
-
-
-        /* Ajout bouton pour ecrire commentaire */
-        echo '      <button onclick="afficherChampId('.$res->getId().');">Répondre</button></br>'."\n";
-
-        echo '      <form method="POST" action="Commentaire/envoiCommentaire.php" class="champCommentaire" id="'.$res->getId().'">'."\n";
-        echo '        <input type="hidden" name="type_parent" value="commentaire">'."\n";
-        echo '      <input type="hidden" name="id_parent" value="'.$res->getId().'">'."\n";
-        echo '      <input type="hidden" name="TargetOwner" value="'.$res->getTargetId().'">'."\n";
-        echo '        <input type="text" size=50 name="contenu" placeholder="Veuillez saisir votre commentaire ...">'."\n";
-        echo '        <input type="submit" value="Envoyer" onclick="alert(\'Commentaire Envoyé\')">'."\n";
-        echo "</form>\n";
-
-        afficherCommentaires(getCommentaires($res->getId(), "commentaire"));
-        print "</li>\n";
-    endforeach;
-    echo '</ul>';
-}
-
-
 
 /********************* HASHTAG *********************/
 

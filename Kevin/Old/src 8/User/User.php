@@ -24,16 +24,6 @@ class User
     private $birthday;
 
     /**
-     * @var string
-     */
-    private $password;
-
-    /**
-     * @var boolean
-     */
-    private $administrateur;
-
-    /**
      * @return int
      */
     public function getId()
@@ -119,44 +109,6 @@ class User
         }
 
         return $now->diff($this->getBirthday())->y;
-    }
-
-
-    /**
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * @param string $password
-     * @return User
-     */
-    public function setPassword(string $password)
-    {
-        $this->password = $password;
-        return $this;
-    }
-
-
-    /**
-     * @return boolean
-     */
-    public function getAdministrateur()
-    {
-        return $this->administrateur;
-    }
-
-    /**
-     * @param string $administrateur
-     * @return User
-     */
-    public function setAdministrateur(string $administrateur)
-    {
-        $this->administrateur = $administrateur;
-        return $this;
     }
 }
 

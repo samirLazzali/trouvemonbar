@@ -10,43 +10,22 @@ namespace Commentaire;
 
 class Commentaire
 {
-    /**
-     * @var int
-     */
     private $id;
 
-    /**
-     * @var int
-     */
     private $owner_id;
 
-    /**
-     * @var int
-     */
     private $target_id;
 
-    /**
-     * @var \DateTimeInterface
-     */
     private $date;
 
-    /**
-     * @var string
-     */
     private $contenu;
 
-    /**
-     * @var int
-     */
     private $parent_id;
 
-    /**
-     * @var string
-     */
     private $parent_type;
 
     /**
-     * @return int
+     * @return mixed
      */
     public function getId()
     {
@@ -54,8 +33,7 @@ class Commentaire
     }
 
     /**
-     * @param int $id
-     * @return Commentaire
+     * @param mixed $id
      */
     public function setId($id)
     {
@@ -64,7 +42,7 @@ class Commentaire
     }
 
     /**
-     * @return int
+     * @return mixed
      */
     public function getOwnerId()
     {
@@ -72,8 +50,7 @@ class Commentaire
     }
 
     /**
-     * @param int $owner_id
-     * @return Commentaire
+     * @param mixed $owener_id
      */
     public function setOwnerId($owner_id)
     {
@@ -83,7 +60,7 @@ class Commentaire
     }
 
     /**
-     * @return int
+     * @return mixed
      */
     public function getTargetId()
     {
@@ -91,8 +68,7 @@ class Commentaire
     }
 
     /**
-     * @param int $target_id
-     * @return Commentaire
+     * @param mixed $target_id
      */
     public function setTargetId($target_id)
     {
@@ -102,7 +78,7 @@ class Commentaire
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return mixed
      */
     public function getDate()
     {
@@ -110,8 +86,7 @@ class Commentaire
     }
 
     /**
-     * @param \DateTimeInterface $date
-     * @return Commentaire
+     * @param mixed $date
      */
     public function setDate($date)
     {
@@ -120,7 +95,7 @@ class Commentaire
     }
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getContenu()
     {
@@ -128,8 +103,7 @@ class Commentaire
     }
 
     /**
-     * @param string $contenu
-     * @return Commentaire
+     * @param mixed $contenu
      */
     public function setContenu($contenu)
     {
@@ -138,7 +112,7 @@ class Commentaire
     }
 
     /**
-     * @return int
+     * @return mixed
      */
     public function getParentId()
     {
@@ -146,8 +120,7 @@ class Commentaire
     }
 
     /**
-     * @param int $parent_id
-     * @return Commentaire
+     * @param mixed $parent_id
      */
     public function setParentId($parent_id)
     {
@@ -155,8 +128,8 @@ class Commentaire
         return $this;
     }
 
-    /**
-     * @return string
+        /**
+     * @return mixed
      */
     public function getParentType()
     {
@@ -164,8 +137,7 @@ class Commentaire
     }
 
     /**
-     * @param string $parent_type
-     * @return Commentaire
+     * @param mixed $parent_type
      */
     public function setParentType($parent_type)
     {

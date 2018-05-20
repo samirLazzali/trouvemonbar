@@ -6,7 +6,7 @@
  * Time: 13:36
  */
 namespace Tweet;
-//require '../vendor/autoload.php';
+require '../vendor/autoload.php';
 
 class TweetManager{
     private $db;
@@ -21,30 +21,19 @@ class TweetManager{
                     VALUES (:auteur,:date_envoie,:contenu)');
 
         $req->bindValue(':auteur', $tweet->getAuteur());
-        $req->bindValue(':date_envoie',  date_format($tweet->getDate(),"Y-m-d H:i:s"));
-        $req->bindValue(':contenu', addslashes($tweet->getContenu()));
+        $req->bindValue(':date_envoie', $tweet->getDate());
+        $req->bindValue(':contenu', $tweet->getContenu());
         $req->execute();
     }
 
     public function delete(Tweet $tweet){
-        $req = 'DELETE FROM "like" WHERE tweet_id=\''.$tweet->getId().'\'';
-        $this->db->exec($req);
-
-        $req = 'DELETE FROM "hashtagEtTweet" WHERE id_tweet=\''.$tweet->getId().'\'';
-        $this->db->exec($req);
-
-        $req = 'DELETE FROM "commentaire" WHERE parent_id=\''.$tweet->getId().'\' AND parent_type=\'tweet\'';
-        $this->db->exec($req);
-
-        $req = 'DELETE FROM "tweet" WHERE id=\''.$tweet->getId().'\'';
-        $this->db->exec($req);
-        return $req;
+        $this->db->exec('DELETE FROM "tweet" WHERE id = '.$tweet->getId());
     }
 
     public function update(Tweet $twe){
         $req = $this->db->prepare('UPDATE "tweet" 
-                                    SET auteur=:auteur, date_envoie=:date_envoie, contenu=:contenu 
-                                    WHERE id=:id');
+                                    SET auteur = :auteur, date_envoie = :date_envoie, contenu = :contenu 
+                                    WHERE id = :id');
 
         $req->bindValue(':auteur', $twe->getAuteur());
         $req->bindValue(':date_envoie', date_format($twe->getDate(),"Y-m-d H:i:s"));

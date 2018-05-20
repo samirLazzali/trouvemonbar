@@ -11,8 +11,6 @@ require_once "../Modele.php";
 
 $T_id = $_POST['idTweet'];
 
-echo $T_id;
-
 deleteTweet($T_id);
 
 header("Location: ../accueil.php");

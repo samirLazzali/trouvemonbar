@@ -26,12 +26,12 @@ class User
     /**
      * @var string
      */
-    private $password;
+    private $password
 
     /**
      * @var boolean
      */
-    private $administrateur;
+    private $administrateur
 
     /**
      * @return int

@@ -31,7 +31,7 @@ class MessageManager
         $req->bindValue(':emetteur', $msg->getEmetteur());
         $req->bindValue(':recepteur', $msg->getRecepteur());
         $req->bindValue(':date_envoie', date_format($msg->getDate(),"Y-m-d H:i:s"));
-        $req->bindValue(':contenu', addslashes($msg->getContenu()));
+        $req->bindValue(':contenu', $msg->getContenu());
 
         $req->execute();
     }

@@ -23,8 +23,9 @@ if($hashtag[0]=='#'){
 
 $hashtag_id = getHashtagId($hashtag);
 
-
-
+?>
+<script src="fonctionsJS.js"></script>
+<?php
 
 enTete("Tweet", "CSS/style.css");
 afficheMenu();

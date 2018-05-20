@@ -6,7 +6,7 @@
  * Time: 13:36
  */
 namespace Tweet;
-require '../vendor/autoload.php';
+//require '../vendor/autoload.php';
 
 class TweetManager{
     private $db;
@@ -21,8 +21,8 @@ class TweetManager{
                     VALUES (:auteur,:date_envoie,:contenu)');
 
         $req->bindValue(':auteur', $tweet->getAuteur());
-        $req->bindValue(':date_envoie', $tweet->getDate());
-        $req->bindValue(':contenu', $tweet->getContenu());
+        $req->bindValue(':date_envoie',  date_format($tweet->getDate(),"Y-m-d H:i:s"));
+        $req->bindValue(':contenu', addslashes($tweet->getContenu()));
         $req->execute();
     }
 
