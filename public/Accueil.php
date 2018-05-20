@@ -1,10 +1,4 @@
-<?php include "Config.php";
-function chargerClasse($classe)
-{
-  require $classe . '.php'; // On inclut la classe correspondante au paramètre passé.
-}
-spl_autoload_register('chargerClasse'); 
-?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +14,12 @@ spl_autoload_register('chargerClasse');
 </head>
 <body style="margin= 0">
 
-	<?php include "upperBar.php" ?>
+	<?php include "upperBar.php"
+	$dbName = getenv('DB_NAME'); 
+	$dbUser = getenv('DB_USER'); 
+	$dbPassword = getenv('DB_PASSWORD'); 
+	$DB = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword"); 
+	?>
 
 	<div class="container">
 		<div class="row">
