@@ -137,7 +137,27 @@ La problématique à laquelle il répond.
 
 Nous avons essayé de respecter au maximum le modèle MVC durant le développement de l'application.
 
-\section{L'inscription}	
+\section{La connexion}	
+L'application web TwitIIE est basée sur le fait meme d'avoir un compte par personne, éventuellement un compte pour un groupe ou une association. Il est donc nécessaire de créer cette page de connexion, d'une part pour pouvoir acceder aux fonctionnalités de l'application mais également pour pouvoir authentifier les tweets envoyés.
+La page de connexion est donc la première page présentée à l'utilisateur. Pour pouvoir acceder à son compte il est nécessaire de remplir un formulaire contenant : 
+\begin{description}
+\item[Login :] Un login, propre à chacun et unique qui permet l'authentification de chaque personne.
+\item[Mot de passe :] Un mot de passe qui permet à l'utilisateur de proteger son compte.
+\end{description}
+Après la soumission de ce formulaire, une recherche dans la base de données est faite afin de trouver s'il existe une personne correspondant au couple (login, mot de passe) donnée par l'utilisateur.
+Dans le cas contraire, un message d'erreur lui est transmi. Nous restons tout de meme vague sur la nature de l'erreur afin de proteger le compte d'une personne mal intentionnée.
+Si la personne n'a pas de compte, elle est alors invitée à s'inscrire via le lien disponible sur cette meme page. 
+
+\section{Inscription}
+L'inscription va permettre à tout utilisateur de créer un compte TiwtIIE. Il aura alors ensuite accès a toutes les fonctionnalités de l'application.
+Pour cela, quelques informations lui sont demandé via un formulaire de type POST. Les informations suivantes lui seront demandées : 
+\begin{description}
+\item[Login :] Un login, qui est unique et qui permettra à l'utilisateur de se connecter. Si le login choisi n'est pas disponible, un message d'erreur lui est envoyé afin q'il puisse le modifier.
+\item[Mot de passe :] Afin de garantir de la sécurité de son compte, un mot de passe est requis.
+\item[Confirmation de mot de passe :] Une confirmation du mot de passe précedemment entré est demandé afin d'éviter toute faute de frappe.
+\item[Nom :] Afin de renseigner son compte le nom de famille est demandé.
+\item[Prenom :] De meme, le prénom est demandé.
+\item[Date de naissance :] Permet également de renseigner le profil de l'utilisateur. On pourrait également faire un test de majorité, mais l'application TwitIIE ne présente pour le momment aucun danger pour les personne mineures, l'accès leur est donc autorisé.
 
 
 \section{Les Abonnements}	
