@@ -24,6 +24,7 @@ if(!$notFound) {
     $likes = $p->getLikers();
     $dislikes = $p->getDislikers();
     $threads = $p->getThreadsFrom();
+    $before = $p->getThreadTo();
 }
 
 ?>
@@ -58,6 +59,14 @@ if(!$notFound) {
             - Discussion -
         </h1>
         <div class="post-feed">
+            <?php if (count($before) > 0): ?>
+            <div class="post-feed" id="details-thread-before">
+                <?php foreach($before as $post)
+                        if ($post->ID != $p->ID)
+                            affichePost($post);
+                endif;
+                ?>
+            </div>
             <?php
             affichePost($p);
             ?>

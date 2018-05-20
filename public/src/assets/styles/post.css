@@ -226,3 +226,7 @@
 .response-thread {
     border-top: 3px black solid;
 }
+
+#details-thread-before {
+    border-bottom: 2px solid black;
+}

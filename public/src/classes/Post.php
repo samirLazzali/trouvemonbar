@@ -753,6 +753,27 @@ class Post implements JsonSerializable
         return $threads;
     }
 
+    public function getThreadTo($db = null)
+    {
+        if ($db == null)
+            $db = connect();
+
+        if ($this->responseTo == null)
+            return array($this);
+
+        $postBefore = $this->getResponseTo();
+        $threadBefore = $postBefore->getThreadTo($db);
+        array_push($threadBefore, $this);
+        return $threadBefore;
+    }
+
+    /**
+     * Trouve la conversation qui commence à ce thread (ie les tweets de l'utilisateur à qui ce post répond et ceux de son auteur)
+     * @param $u1 User le premier utilisateur
+     * @param $u2 User le second utilisateur
+     * @param $db une connexion PDO
+     * @return array de Post représentant la conversation
+     */
     public function getThread($u1, $u2, $db)
     {
         $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE ResponseTo = :id AND (Author = :u1 OR Author = :u2)";

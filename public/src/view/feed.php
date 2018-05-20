@@ -40,6 +40,7 @@ $posts = Post::findPosts($people, $limit);
 </head>
 <body onload="refreshFeed(lastRefresh, filter)">
 <?php require "menu.php"; ?>
+<img src="/assets/media/enlarge.jpg" style="float: left; margin-top: 100px;" />
 <div class="column-wrapper">
     <h1>
         - Dernières publications -
@@ -64,6 +65,9 @@ $posts = Post::findPosts($people, $limit);
             Plus anciens
         </div>
     </a>
+</div>
+<div style="display: block; margin-left: auto; margin-right: auto;">
+<img src="/assets/media/copine.jpg" style="max-width: 30%;" />
 </div>
 </body>
 </html>

@@ -452,9 +452,9 @@ function showWaitingPosts()
     var html = "";
     postsWaiting.forEach(function(elt, index, arr) {
         if (elt["repostOf"] != null)
-            html = rawRepostToHtml(elt);
+            html += rawRepostToHtml(elt);
         else
-            html = rawPostToHtml(elt);
+            html += rawPostToHtml(elt);
     });
     feed.innerHTML = html + feed.innerHTML;
     document.getElementById("link-posts-waiting").style.display = "none";

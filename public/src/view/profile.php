@@ -29,6 +29,7 @@ if (isset($_GET['user']))
 }
 else
     $user = getUserFromCookie();
+$posts = $user->findPosts();
 ?>
 
 <!DOCTYPE HTML>
