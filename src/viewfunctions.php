@@ -36,11 +36,11 @@ function header_t($titre) {
     if (verif_authent()) {
 	//print "    <a href=\"createForm.php\" class=\"m-link\"><i class=\"far fa-newspaper\" aria-hidden=\"true\"></i> Annonces</a>\n";
 	//print "    <a href=\"contact.php\" class=\"m-link\"><i class=\"fas fa-paper-plane\" aria-hidden=\"true\"></i> Contact</a>\n";
+	buttonResearch();
 	buttonLogout();
     } else {
 	buttonLogin();
     }
-    buttonResearch();
 
     print "    </div>\n";
     print "    </div>\n";
@@ -175,6 +175,7 @@ function displayResearch() {
     echo "</div>";
     echo "</div><!-- tab-content -->";
     echo "</div><!-- /form -->";
+    echo "<script src=\"js/research.js\"></script>";
 }
 function buttonResearch() {
     echo "<a href=\"#research\" class=\"m-link\" id=\"research\"><i class=\"fas fa-sign-in-alt\" aria-hidden=\"true\"></i> Research</a>";
