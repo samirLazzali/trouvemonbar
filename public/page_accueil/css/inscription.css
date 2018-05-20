@@ -1,0 +1,503 @@
+body {
+  background-color: rgb(255, 255, 255);
+  font: 400 1em/1.38 Ubuntu;
+  color: rgb(255, 255, 255);
+}
+
+.accueil .accueil {
+  width: 40.5%;
+  min-height: 31px;
+  margin: 11px auto 0;
+  font-family: Montserrat;
+  font-size: 1.25em;
+  color: rgb(255, 255, 255);
+}
+
+.adresse {
+  position: absolute;
+  top: 90px;
+  left: 0;
+  right: 0;
+  z-index: 39;
+  width: 16.3333333333%;
+  min-height: 45px;
+  margin: 0 auto;
+  font-family: Helvetica;
+  font-style: italic;
+  font-size: 1em;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.caddie {
+  position: absolute;
+  top: 44px;
+  left: 30.25%;
+  z-index: 28;
+  width: 8.75%;
+  height: 95px;
+  background-image: url('../images/caddielogo.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+}
+
+.catalogue .catalogue {
+  width: 58.3844750373%;
+  min-height: 31px;
+  margin: 11px auto 0;
+  font-family: Montserrat;
+  font-size: 1.25em;
+  color: rgb(255, 255, 255);
+}
+
+.confirmationmail {
+  position: relative;
+  float: left;
+  clear: both;
+  z-index: 4;
+  width: 24.6794871794%;
+  min-height: 32px;
+  margin: 14px 0 0 9.23478%;
+  font-size: 1em;
+  text-decoration: underline;
+  color: rgb(128, 128, 128);
+}
+
+.confirmationmdp {
+  position: relative;
+  float: left;
+  clear: both;
+  z-index: 11;
+  width: 33.3333333333%;
+  min-height: 32px;
+  margin: 8px 0 0 9.1997199999%;
+  font-size: 1em;
+  text-decoration: underline;
+  color: rgb(128, 128, 128);
+}
+
+.connexion .connexion {
+  width: 100.8849557522%;
+  min-height: 16px;
+  margin: 7px 0 0 -0.88496%;
+  font-family: Montserrat;
+  font-size: 1em;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.contact {
+  position: relative;
+  float: left;
+  width: 100%;
+  height: 154px;
+  background-color: rgb(66, 204, 71);
+}
+
+.container {
+  position: relative;
+  float: left;
+  width: 100%;
+  height: 309px;
+  background-image: url('../images/image_accroche.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.discord {
+  float: right;
+  clear: both;
+  width: 13.5646687697%;
+  height: 40px;
+  margin: -40px -0.15773% 0 0;
+  background: url('../images/discord.png') rgb(222, 222, 222);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left top;
+}
+
+.element {
+  float: left;
+  clear: both;
+  width: 52.2776246554%;
+  height: 159px;
+  margin: 107px 0 0 9.1997199999%;
+  background: url('../images/alimentation-saine.jpg'), url('../images/alimentation-saine.jpg') rgb(222, 222, 222);
+  background-repeat: no-repeat, no-repeat;
+  background-size: cover, contain;
+  background-position: left top, left top;
+  background-attachment: scroll, scroll;
+}
+
+.email {
+  position: relative;
+  float: left;
+  z-index: 5;
+  width: 23.0919471153%;
+  min-height: 32px;
+  margin: 101px 0 0 9.23478%;
+  font-size: 1em;
+  text-decoration: underline;
+  color: rgb(128, 128, 128);
+}
+
+.erreur {
+  position: relative;
+  float: left;
+  clear: both;
+  z-index: 16;
+  width: 34%;
+  min-height: 70px;
+  margin: -235px 0 0 32.8138%;
+  font-size: 1em;
+  color: rgb(255, 0, 0);
+}
+
+.facebook {
+  float: left;
+  width: 13.56%;
+  height: 40px;
+  margin-left: 0.15773%;
+  border-radius: 6px;
+  background: url('../images/facebook.png') rgb(222, 222, 222);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left top;
+}
+
+.hasard .hasard {
+  width: 115.1766462099%;
+  margin: 23px auto 0;
+  font: 1.25em/0.2 Montserrat;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.inscripion {
+  position: relative;
+  float: left;
+  z-index: 42;
+  width: 27.25%;
+  min-height: 27px;
+  margin: -684px 0 0 37.19921875%;
+  border: 3px solid rgb(56, 183, 55);
+  background-color: rgba(255, 255, 255, 0.99);
+  font-size: 1.563em;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgb(128, 128, 128);
+}
+
+.connexion,
+.inscription {
+  float: left;
+}
+
+.inscription .inscription {
+  width: 99.1071428571%;
+  min-height: 15px;
+  margin-top: 7px;
+  font-family: Montserrat;
+  font-size: 1em;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.log {
+  position: relative;
+  float: left;
+  z-index: 15;
+  width: 52.8333333333%;
+  height: 671px;
+  margin: 76px 0 0 23.58073%;
+  border: 5px solid rgb(56, 183, 55);
+  border-radius: 100px;
+  background-color: rgb(255, 255, 255);
+}
+
+.mdp {
+  position: relative;
+  float: left;
+  clear: both;
+  z-index: 3;
+  width: 23.091956903%;
+  min-height: 32px;
+  margin: 12px 0 0 9.23478%;
+  font-size: 1em;
+  text-decoration: underline;
+  color: rgb(128, 128, 128);
+}
+
+.menu {
+  float: left;
+  clear: both;
+  width: 66.0416666666%;
+  height: 56px;
+  margin: 44px 0 0 16.97526%;
+  border-radius: 34px;
+  background-color: rgba(52, 203, 58, 0.9);
+}
+
+.naissance {
+  position: relative;
+  float: left;
+  clear: both;
+  z-index: 10;
+  width: 23.0919471153%;
+  min-height: 32px;
+  margin: 9px 0 0 9.23478%;
+  font-size: 1em;
+  text-decoration: underline;
+  color: rgb(128, 128, 128);
+}
+
+.nom {
+  position: relative;
+  float: left;
+  clear: both;
+  z-index: 9;
+  width: 23.0919471153%;
+  min-height: 32px;
+  margin: 14px 0 0 9.23478%;
+  font-size: 1em;
+  text-decoration: underline;
+  color: rgb(128, 128, 128);
+}
+
+.prenom {
+  position: relative;
+  float: left;
+  clear: both;
+  z-index: 8;
+  width: 23.0919471153%;
+  min-height: 32px;
+  margin: 12px 0 0 9.1997199999%;
+  font-size: 1em;
+  text-decoration: underline;
+  color: rgb(128, 128, 128);
+}
+
+.profil .profil {
+  width: 63.6363636363%;
+  min-height: 26px;
+  margin: 11px auto 0;
+  font-family: Montserrat;
+  font-size: 1.25em;
+  color: rgb(255, 255, 255);
+}
+
+.accueil .accueil:hover,
+.catalogue .catalogue:hover,
+.connexion .connexion:hover,
+.hasard .hasard:hover,
+.inscription .inscription:hover,
+.profil .profil:hover {
+  color: rgb(128, 128, 128);
+}
+
+.reseau {
+  float: left;
+  width: 26.4166666666%;
+  height: 39px;
+  margin: 25px 0 0 36.79167%;
+}
+
+.titre {
+  position: absolute;
+  top: 50px;
+  left: 36.4%;
+  z-index: 27;
+  width: 36.9166666666%;
+  min-height: 38px;
+  padding-right: 16px;
+  padding-left: 16px;
+  font-family: Montserrat;
+  font-size: 2.5em;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+}
+
+.twitter {
+  float: right;
+  width: 13.56%;
+  height: 40px;
+  margin-right: 43.37047%;
+  background: url('../images/twitter.jpg') rgb(222, 222, 222);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left top;
+}
+
+._button {
+  display: block;
+  position: relative;
+  float: left;
+  z-index: 34;
+  width: 9.0833333333%;
+  height: 42px;
+  margin: -180px 0 0 57.59896%;
+  border: 2px solid rgb(56, 183, 55);
+  border-radius: 3px;
+  background-color: rgb(222, 222, 222);
+  font-size: 1.563em;
+  font-weight: 300;
+  text-align: center;
+  color: rgb(128, 128, 128);
+}
+
+._input {
+  display: block;
+  position: relative;
+  float: left;
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid rgb(151, 151, 151);
+  background-color: rgb(242, 242, 242);
+  font-family: Helvetica;
+  font-style: italic;
+  font-size: 0.813em;
+  color: rgb(0, 0, 0);
+}
+
+.accueil-1 {
+  float: left;
+  width: 22.2082018927%;
+  height: 54px;
+  margin: 1px 0 0 2.81349%;
+  background-color: rgba(60, 187, 59, 0);
+}
+
+.catalogue-1 {
+  float: left;
+  width: 23.7736593059%;
+  height: 54px;
+  margin: 1px 0 0 1.21254%;
+  background-color: rgba(60, 187, 59, 0);
+}
+
+.connexion-1 {
+  position: relative;
+  clear: both;
+  z-index: 32;
+  width: 9.4166666666%;
+  height: 32px;
+  margin: 12px 0 0 84.83203%;
+  border-radius: 21px;
+  background-color: rgb(67, 188, 67);
+}
+
+.hasard-1 {
+  float: left;
+  width: 23.7736593059%;
+  height: 54px;
+  margin: 1px 0 0 1.2085999999%;
+  background-color: rgba(60, 187, 59, 0);
+}
+
+.inscription-1 {
+  position: relative;
+  z-index: 30;
+  width: 9.3333333333%;
+  height: 32px;
+  margin: 26px 0 0 84.82552%;
+  border-radius: 21px;
+  background-color: rgb(57, 194, 52);
+}
+
+.inscription-3 {
+  position: relative;
+  clear: both;
+  z-index: 17;
+  width: 100%;
+  height: 800px;
+  background-color: rgb(245, 233, 192);
+}
+
+.inscription-4 {
+  position: relative;
+  clear: both;
+  z-index: 41;
+  width: 27.2%;
+  height: 36px;
+  margin: -684px 0 0 37.1992199999%;
+  background-color: rgb(222, 222, 222);
+}
+
+.profil-1 {
+  float: right;
+  width: 20.8201892744%;
+  height: 54px;
+  margin: 1px 2.61041% 0 0;
+  background-color: rgba(60, 187, 59, 0);
+}
+
+.log ._input-1 {
+  z-index: 2;
+  width: 45.35%;
+  margin: 101px 0 0 13.0308499999%;
+}
+
+.log ._input-2 {
+  z-index: 1;
+  width: 45.35%;
+  margin: 14px 0 0 11.44081%;
+}
+
+.log ._input-3 {
+  z-index: 6;
+  width: 45.35%;
+  margin: 12px 0 0 13.0609%;
+}
+
+.log ._input-4 {
+  z-index: 12;
+  width: 45.3475560897%;
+  margin: 14px 0 0 13.02334%;
+}
+
+.log ._input-5 {
+  z-index: 13;
+  width: 45.3475560897%;
+  margin: 9px 0 0 13.0308499999%;
+}
+
+.log ._input-6 {
+  z-index: 14;
+  width: 45.3525641025%;
+  margin: 12px 0 0 13.0308499999%;
+}
+
+.log ._input-7 {
+  z-index: 7;
+  width: 45.3525641025%;
+  margin: 8px 0 0 2.82202%;
+}
+
+.titre span {
+  border-top-width: 0;
+  border-right-width: 0;
+  border-bottom-width: 0;
+  border-left-width: 0;
+  border-color: transparent;
+  border-style: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: transparent;
+  font-family: 'Broadway Copyist Text Ext';
+  font-style: inherit;
+  font-size: 1.75em;
+  font-weight: Roman;
+  text-transform: inherit;
+  text-decoration: inherit;
+  letter-spacing: inherit;
+  word-spacing: inherit;
+  color: #2d1818;
+  opacity: 1;
+  word-break: normal;
+  word-wrap: normal;
+  white-space: normal;
+}

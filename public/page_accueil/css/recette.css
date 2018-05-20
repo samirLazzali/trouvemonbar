@@ -1,0 +1,449 @@
+body {
+  background-color: rgb(255, 255, 255);
+  font: 400 1em/1.38 Ubuntu;
+  color: rgb(128, 128, 128);
+}
+
+.liste p,
+.text-4 p {
+  margin-bottom: 1em;
+}
+
+.accueil .accueil {
+  width: 40.5%;
+  min-height: 31px;
+  margin: 11px auto 0;
+  font-family: Montserrat;
+  font-size: 1.25em;
+  color: rgb(255, 255, 255);
+}
+
+.adresse {
+  position: absolute;
+  top: 90px;
+  left: 0;
+  right: 0;
+  z-index: 36;
+  width: 16.3333333333%;
+  min-height: 45px;
+  margin: 0 auto;
+  font-family: Helvetica;
+  font-style: italic;
+  font-size: 1em;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.caddie {
+  position: absolute;
+  top: 44px;
+  left: 30.25%;
+  z-index: 26;
+  width: 8.75%;
+  height: 95px;
+  background-image: url('../images/caddielogo.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+}
+
+.catalogue .catalogue {
+  width: 58.3844750373%;
+  min-height: 31px;
+  margin: 11px auto 0;
+  font-family: Montserrat;
+  font-size: 1.25em;
+  color: rgb(255, 255, 255);
+}
+
+.connexion {
+  float: left;
+}
+
+.connexion .connexion {
+  width: 100.8849557522%;
+  min-height: 16px;
+  margin: 7px 0 0 -0.88496%;
+  font-family: Montserrat;
+  font-size: 1em;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.contact {
+  position: relative;
+  float: left;
+  width: 100%;
+  height: 154px;
+  background-color: rgb(66, 204, 71);
+}
+
+.container {
+  position: relative;
+  float: left;
+  width: 100%;
+  height: 309px;
+  background-image: url('../images/image_accroche.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.course {
+  width: 49.1381502008%;
+  min-height: 38px;
+  margin: 29px auto 0;
+  font-size: 1.25em;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.cout {
+  position: relative;
+  float: left;
+  z-index: 4;
+  width: 6.8%;
+  min-height: 30px;
+  margin: -59px 0 0 71.19922%;
+  font-size: 1em;
+  text-decoration: underline;
+  color: rgb(255, 255, 255);
+}
+
+.difficulte {
+  position: relative;
+  float: left;
+  clear: both;
+  z-index: 1;
+  width: 6.8333333333%;
+  min-height: 30px;
+  margin: -59px 0 0 44%;
+  font-size: 1em;
+  text-decoration: underline;
+  color: rgb(255, 255, 255);
+}
+
+.discord {
+  float: right;
+  clear: both;
+  width: 13.5646687697%;
+  height: 40px;
+  margin: -40px -0.15773% 0 0;
+  background: url('../images/discord.png') rgb(222, 222, 222);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left top;
+}
+
+.facebook {
+  float: left;
+  width: 13.56%;
+  height: 40px;
+  margin-left: 0.15773%;
+  border-radius: 6px;
+  background: url('../images/facebook.png') rgb(222, 222, 222);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left top;
+}
+
+.hasard .hasard {
+  width: 115.1766462099%;
+  margin: 23px auto 0;
+  font: 1.25em/0.2 Montserrat;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.ingredients {
+  position: relative;
+  float: left;
+  z-index: 12;
+  width: 89.7006962654%;
+  height: 424px;
+  margin: 19px 0 0 4.9074158533%;
+}
+
+.inscription {
+  float: left;
+}
+
+.inscription .inscription {
+  width: 99.1071428571%;
+  min-height: 15px;
+  margin-top: 7px;
+  font-family: Montserrat;
+  font-size: 1em;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.liste {
+  position: relative;
+  float: left;
+  z-index: 9;
+  width: 89.7006962654%;
+  height: 326px;
+  margin: -328px 0 0 4.91198%;
+  border: 3px dashed rgb(55, 173, 54);
+}
+
+.liste .text {
+  width: 87.3972039473%;
+  min-height: 287px;
+  margin: 14px 0 0 5.25852%;
+  color: rgb(128, 128, 128);
+}
+
+.menu {
+  float: left;
+  clear: both;
+  width: 66.0416666666%;
+  height: 56px;
+  margin: 44px 0 0 16.97526%;
+  border-radius: 34px;
+  background-color: rgba(52, 203, 58, 0.9);
+}
+
+.necessaire {
+  position: relative;
+  float: left;
+  clear: both;
+  z-index: 13;
+  width: 28.7994791666%;
+  height: 860px;
+  border-right: 3px solid rgb(128, 128, 128);
+}
+
+.nom {
+  position: relative;
+  float: left;
+  z-index: 3;
+  width: 46%;
+  min-height: 63px;
+  margin: 39px 0 0 15.19922%;
+  font-size: 1.875em;
+  color: rgb(255, 255, 255);
+}
+
+.nom_ingredients {
+  position: relative;
+  float: left;
+  clear: both;
+  z-index: 11;
+  width: 89.7006962654%;
+  height: 96px;
+  margin: -424px 0 0 4.91198%;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  background-color: rgb(55, 173, 54);
+}
+
+.photo {
+  float: left;
+  width: 18.7994791666%;
+  height: 192px;
+  margin: 27px 0 0 10%;
+  background: url('../images/Tiramisu.jpg') rgb(222, 222, 222);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left top;
+}
+
+.presentation {
+  float: left;
+  width: 100%;
+  height: 252px;
+  background-color: rgb(55, 173, 54);
+}
+
+.presentation .text {
+  position: relative;
+  margin-top: -59px;
+  font-style: italic;
+}
+
+.profil .profil {
+  width: 63.6363636363%;
+  min-height: 26px;
+  margin: 11px auto 0;
+  font-family: Montserrat;
+  font-size: 1.25em;
+  color: rgb(255, 255, 255);
+}
+
+.accueil .accueil:hover,
+.catalogue .catalogue:hover,
+.connexion .connexion:hover,
+.hasard .hasard:hover,
+.inscription .inscription:hover,
+.profil .profil:hover {
+  color: rgb(128, 128, 128);
+}
+
+.recette {
+  position: relative;
+  float: left;
+  clear: both;
+  z-index: 14;
+  width: 100%;
+  height: 1112px;
+}
+
+.recette .description {
+  position: relative;
+  float: left;
+  z-index: 0;
+  width: 71.2005208333%;
+  height: 860px;
+}
+
+.reseau {
+  float: left;
+  width: 26.4166666666%;
+  height: 39px;
+  margin: 25px 0 0 36.79167%;
+}
+
+.text {
+  float: left;
+  font-size: 1em;
+}
+
+.titre {
+  position: absolute;
+  top: 50px;
+  left: 36.4%;
+  z-index: 25;
+  width: 36.9166666666%;
+  min-height: 38px;
+  padding-right: 16px;
+  padding-left: 16px;
+  font-family: Montserrat;
+  font-size: 2.5em;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+}
+
+.twitter {
+  float: right;
+  width: 13.56%;
+  height: 40px;
+  margin-right: 43.37047%;
+  background: url('../images/twitter.jpg') rgb(222, 222, 222);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left top;
+}
+
+.accueil-1 {
+  float: left;
+  width: 22.2082018927%;
+  height: 54px;
+  margin: 1px 0 0 2.81349%;
+  background-color: rgba(60, 187, 59, 0);
+}
+
+.catalogue-1 {
+  float: left;
+  width: 23.7736593059%;
+  height: 54px;
+  margin: 1px 0 0 1.21254%;
+  background-color: rgba(60, 187, 59, 0);
+}
+
+.connexion-1 {
+  position: relative;
+  clear: both;
+  z-index: 30;
+  width: 9.4166666666%;
+  height: 32px;
+  margin: 12px 0 0 84.83203%;
+  border-radius: 21px;
+  background-color: rgb(67, 188, 67);
+}
+
+.description-2 {
+  position: absolute;
+  top: 590px;
+  left: 35.5989583333%;
+  z-index: 15;
+  width: 54.3997395833%;
+  min-height: 739px;
+  font-size: 1em;
+  text-decoration: underline;
+  color: rgb(128, 128, 128);
+}
+
+.hasard-1 {
+  float: left;
+  width: 23.7736593059%;
+  height: 54px;
+  margin: 1px 0 0 1.2085999999%;
+  background-color: rgba(60, 187, 59, 0);
+}
+
+.inscription-1 {
+  position: relative;
+  z-index: 28;
+  width: 9.3333333333%;
+  height: 32px;
+  margin: 26px 0 0 84.82552%;
+  border-radius: 21px;
+  background-color: rgb(57, 194, 52);
+}
+
+.profil-1 {
+  float: right;
+  width: 20.8201892744%;
+  height: 54px;
+  margin: 1px 2.61041% 0 0;
+  background-color: rgba(60, 187, 59, 0);
+}
+
+.text-1 {
+  z-index: 5;
+  margin-left: 51.83203%;
+  color: rgb(255, 255, 247);
+}
+
+.text-2 {
+  z-index: 6;
+  margin-left: 76.39974%;
+  color: rgb(255, 251, 224);
+}
+
+.text-4 {
+  position: relative;
+  clear: both;
+  z-index: 38;
+  margin: -786px 0 0 35.59896%;
+  color: rgb(128, 128, 128);
+}
+
+.titre span {
+  border-top-width: 0;
+  border-right-width: 0;
+  border-bottom-width: 0;
+  border-left-width: 0;
+  border-color: transparent;
+  border-style: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: transparent;
+  font-family: 'Broadway Copyist Text Ext';
+  font-style: inherit;
+  font-size: 1.75em;
+  font-weight: Roman;
+  text-transform: inherit;
+  text-decoration: inherit;
+  letter-spacing: inherit;
+  word-spacing: inherit;
+  color: #2d1818;
+  opacity: 1;
+  word-break: normal;
+  word-wrap: normal;
+  white-space: normal;
+}
