@@ -10,8 +10,9 @@ $pass = md5($_POST['p1']);
 
 if ($_POST['p1'] == $_POST['p2']) {
     $connection = dbConnect();
-    dbExec($connection, "DELETE FROM users WHERE id=$id;");
-    dbExec($connection, "INSERT INTO users VALUES (" . $connection->quote($id) . ", " . $connection->quote($email) . ", " . $connection->quote($username) . ", " . $connection->quote($pass) . ", 'FALSE');");
+    dbExec($connection, "UPDATE users SET email = " . $connection->quote($email) . ", username = " . $connection->quote($username) . ", password = " . $connection->quote($pass) . ", admin = 'FALSE' WHERE id=$id;");
+
+    //print "UPDATE users SET email = " . $connection->quote($email) . ", username = " . $connection->quote($username) . ", password = " . $connection->quote($pass) . ", admin = 'FALSE' WHERE id=$id;";
     $_SESSION['username'] = $username;
     $_SESSION['email'] = $email;
 }
