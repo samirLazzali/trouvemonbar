@@ -14,13 +14,13 @@ $users = $userRepository->fetchAll();
 
 <html>
 <head>
-    <title> Classement </title>
+    <title> Connexion </title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"  href="style_index.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
-
+    <link rel="stylesheet" href="css/form.css">
 </head>
 
 <body>
@@ -31,10 +31,13 @@ menu_navigation()
 <br />
 <br />
 <br />
-<h1>Se connecter</h1>
-<br />
-<form method="post" action="connect.php">
-<fieldset><legend>Pseudo : </legend><input type="text" name="pseudo"/></fieldset>
-<fieldset><legend>Mot de passe : </legend><input type="password" name="mdp"/></fieldset>
-<input type="submit" name="submit" value="Se connecter"/>
+<div class="form-c">
+<div class="form-c-head">Veuillez remplir les informations :</div>
+<form method = "post" action="#" >
+<label for="pseudo"><span class="txt">Pseudo <span class="required">*</span></span><input type="text" class="input-field" name="pseudo" value="" /></label>
+<label for="mdp"><span class="txt">Mot de passe <span class="required">*</span></span><input type="text" class="input-field" name="mdp" value="" /></label>
+<input type ="submit" name="submit" value="Se connecter"/>
 </form>
+</div>
+</div>
+

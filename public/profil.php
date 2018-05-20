@@ -14,11 +14,12 @@ $users = $userRepository->fetchAll();
 
     <html>
         <head>
-            <title> profil  </title>
+            <title> Profil  </title>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	    <link rel="stylesheet" type="text/css"  href="style_index.css">
 	    <link rel="stylesheet" href="css/bootstrap.css">
 	    <link rel="stylesheet" href="css/style.css">
+	    <link rel="stylesheet" href="css/form.css">
 
         </head>
 
@@ -26,22 +27,25 @@ $users = $userRepository->fetchAll();
     if (isset($_SESSION['connect']) && $_SESSION['connect']>=1) {
     echo '<body>';
 
-    echo '<div class="banniere">';
     menu_navigation();
-    echo '</div>';
     echo '<br />';
     echo '<br />';
     echo '<br />';
-    echo '<h1>Modifier son profil</h1>';
-    echo '<form method="post" action="#">';
-    echo '    <fieldset><legend>Prénom : </legend><input type ="text" name="prenommodif" /></fieldset>';
-    echo '    <fieldset><legend>Nom : </legend><input type="text" name="nommodif" /></fieldset>';
-    echo '    <fieldset><legend>E-mail : </legend><input type="text" name="mailmodif" /></fieldset>';
-    echo '    <fieldset><legend>Pseudo : </legend><input type="text" name="pseudomodif" /></fieldset>';
-    echo '    <fieldset><legend>Nouveau mot de passe : </legend><input type ="text" name="mdpmodif" /></fieldset>';
-    echo '   <fieldset><legend>Confirmer le mot de passe : </legend><input type ="text" name="mdpmodif2" /></fieldset>';
-    echo '   <input type ="submit" name="submit" value="Modifier"/>';
+
+    echo '<div class="form-c">';
+    echo '<div class="form-c-head">Modifier son profil :</div>';
+    echo '<form method = "post" action="#">';
+    echo '<label for="prenommodif"><span class="txt">Prénom</span><input type="text" class="input-field" name="prenommodif" value="" /></label>';
+    echo '<label for="nommodif"><span class="txt">Nom </span><input type="text" class="input-field" name="nommodif" value="" /></label>';
+    echo '<label for="mailmodif"><span>E-mail </span><input type="text" class="input-field" name="mailmodif" value="" /></label>';
+    echo '<label for="pseudomodif"><span>Pseudo </span><input type="text" class="input-field" name="pseudomodif" value="" /></label>';
+    echo '<label for="mdpmodif"><span>Nouveau mot de passe</span><input type="text" class="input-field" name="mdpmodif" value="" /></label>';
+    echo '<label for="mdpmodif2"><span>Confirmer le mot de passe <span class="required">*</span></span><input type="text" class="input-field" name="mdpmodif2" value="" /></label>';
+    echo '<input type ="submit" name="submit" value="Modifier"/>';
     echo '</form>';
+    echo '</div>';
+    echo '</div>';
+
     echo '</body>';
 
 

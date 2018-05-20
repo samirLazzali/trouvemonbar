@@ -15,11 +15,12 @@ $users = $userRepository->fetchAll();
 if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
     echo '<html>';
     echo '<head>';
-    echo '<title> profil  </title>';
+    echo '<title> Administration  </title>';
     echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">';
     echo '<link rel="stylesheet" type="text/css"  href="style_index.css">';
     echo '<link rel="stylesheet" href="css/bootstrap.css">';
     echo '<link rel="stylesheet" href="css/style.css">';
+    echo '<link rel="stylesheet" href="css/form.css">';
 
     echo '</head>';
     echo '<body>';
@@ -28,20 +29,34 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
     menu_navigation();
     echo '</div>';
 
-    echo '<h1>Réunions</h1>';
-    echo '<form method="post" action="#">';
-    echo '    <fieldset><legend>Soirée </legend><input type ="text" name="soiree" /></fieldset>';
-    echo '    <fieldset><legend>Date </legend><input type="date" name="date" /></fieldset>';
-    echo '    <fieldset><legend>Compte Rendu</legend><input type="text" name="cr" /></fieldset>';
-    echo '   <input type ="submit" name="submit" value="Ajouter"/>';
+    echo '<br />';
+    echo '<br />';
+    echo '<br />';
+
+    echo '<div class="form-c">';
+    echo '<div class="form-c-head">Planifier une réunion :</div>';
+    echo '<form method = "post" action="#">';
+    echo '<label for="soiree"><span class="txt">Soirée</span><input type="text" class="input-field" name="soiree" value="" /></label>';
+    echo '<label for="date"><span class="txt">Date <span class="required">*</span></span><input type="date" class="input-field" name="date" value="" /></label>';
+    echo '<label for="cr"><span>Compte Rendu <span class="required">*</span></span><input type="text" class="input-field" name="cr" value="" /></label>';
+    echo '<input type ="submit" name="submit" value="Ajouter"/>';
     echo '</form>';
-    echo '</br>';
-    echo '<h1>Réunions</h1>';
-    echo '<form method="post" action="#">';
-    echo '    <fieldset><legend>Recette </legend><input type ="text" name="recette" /></fieldset>';
-    echo '    <fieldset><legend>Note </legend><input type ="number" name="note" min=0 max=5 /></fieldset>';
-    echo '   <input type ="submit" name="submit" value="Ajouter"/>';
+    echo '</div>';
+    echo '</div>';
+
+    echo '<br />';
+    echo '<br />';
+    echo '<div class="form-c">';
+    echo '<div class="form-c-head">Ajouter une recette :</div>';
+    echo '<form method = "post" action="#">';
+    echo '<label for="recette"><span class="txt">Recette <span class="required">*</span></span><input type="text" class="input-field" name="recette" value="" /></label>';
+    echo '<label for="note"><span class="txt">Note <span class="required">*</span></span><input type="number" class="input-field" name="note" min=0 max=5 value="" /></label>';
+    echo '<input type ="submit" name="submit" value="Ajouter"/>';
     echo '</form>';
+    echo '</div>';
+    echo '</div>';
+
+
 
     $iid=$connection->query("SELECT 'id' FROM public.reunion")->fetchAll();
     $irec=$connection->query("SELECT * FROM public.recette")->fetchAll();

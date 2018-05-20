@@ -13,12 +13,13 @@ $users = $userRepository->fetchAll();
 
     <html>
     <head>
-        <title> inscription  </title>
+        <title> Inscription  </title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css"  href="style_index.css">
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/form.css">
     </head>
     <body>
 
@@ -28,16 +29,18 @@ menu_navigation()
 <br />
 <br />
 <br />
-<h1>S'inscrire</h1>
-<br />
+<div class="form-c">
+<div class="form-c-head">Veuillez remplir les informations :</div>
 <form method = "post" action="#" >
-    <fieldset><legend>Prénom : </legend><input type ="text" name="prenominsc" /></fieldset>
-    <fieldset><legend>Nom : </legend><input type="text" name="nominsc" /></fieldset>
-    <fieldset><legend>E-mail : </legend><input type="text" name="mailinsc" /></fieldset>
-    <fieldset><legend>Pseudo : </legend><input type="text" name="pseudoinsc" /></fieldset>
-    <fieldset><legend>Mot de passe : </legend><input type ="text" name="mdpinsc" /></fieldset>
-    <input type ="submit" name="submit" value="S'inscrire"/>
+<label for="prenominsc"><span class="txt">Prénom <span class="required">*</span></span><input type="text" class="input-field" name="prenominsc" value="" /></label>
+<label for="nominsc"><span class="txt">Nom <span class="required">*</span></span><input type="text" class="input-field" name="nominsc" value="" /></label>
+<label for="mailinsc"><span class="txt">Mail <span class="required">*</span></span><input type="text" class="input-field" name="mailinsc" value="" /></label>
+<label for="pseudoinsc"><span class="txt">Pseudo <span class="required">*</span></span><input type="text" class="input-field" name="pseudoinsc" value="" /></label>
+<label for="mdpinsc"><span class="txt">Mot de passe <span class="required">*</span></span><input type="text" class="input-field" name="mdpinsc" value="" /></label>
+<input type ="submit" name="submit" value="S'inscrire"/>
 </form>
+</div>
+</div>
 
 <?php
 if (isset($_POST['prenominsc']) && isset($_POST['nominsc']) && isset($_POST['pseudoinsc']) && isset($_POST['mailinsc']) && isset($_POST['mdpinsc']) && $_POST!=null) {   //améliorer la condition

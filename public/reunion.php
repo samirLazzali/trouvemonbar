@@ -13,7 +13,7 @@ $users = $userRepository->fetchAll();
 
 <html>
 <head>
-    <title> réunion </title>
+    <title> Réunions </title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"  href="style_index.css">
@@ -21,11 +21,12 @@ $users = $userRepository->fetchAll();
     <link rel="stylesheet" href="css/style.css">
 
 </head>
-<div class="banniere">
     <?php
     menu_navigation();
     ?>
-</div>
+<br />
+<br />
+<br />
 <h3><?php echo 'Réunions' ?></h3>
 
     <table class="table table-bordered table-hover table-striped">
