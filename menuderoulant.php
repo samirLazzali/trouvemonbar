@@ -28,7 +28,7 @@
             <a href="<?php echo $variable; ?>">Mon profil</a>
         </li>
         <li class="optionmenu">
-            <a href="includes/deconnexion.php">Déconnexion</a>
+            <a href="deconnexion.php">Déconnexion</a>
         </li>
     </ul>
 </body>
