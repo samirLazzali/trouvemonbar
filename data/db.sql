@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS Utilisateur(
 	mail VARCHAR NOT NULL,
 	password VARCHAR NOT NULL,
 	phone_number INTEGER NOT NULL,
-	user_type INTEGER NOT NULL CHECK(0 <= user_type AND user_type < 3),
+	user_type INTEGER NOT NULL CHECK (0 <= user_type AND user_type < 3),
 	);
 	
 DROP TABLE IF EXISTS Connected;
@@ -23,9 +23,12 @@ DROP TABLE IF EXISTS Cats;
 CREATE TABLE IF NOT EXISTS Cats(
        id_cat SERIAL PRIMARY KEY NOT NULL,
        name_cat VARCHAR NOT NULL,
-       birthday_cat DATE,
        purety BOOLEAN,
        pattern type_pattern, /* NULL s'il n'y en a pas */
+
+       birthday_cat DATE,
+       sage_min INTEGER,
+       sage_max INTEGER,
 
        sex INTEGER NOT NULL CHECK (0 <= sex AND sex < 3),
        ssex INTEGER NOT NULL CHECK (0 <= sex AND sex < 3),
@@ -44,7 +47,7 @@ CREATE TABLE IF NOT EXISTS Cats(
 
 
         /* contient aussi une race (Cat_breed), une ou plusieurs couleurs (Cat_color) et traits de caractères (cat_personnality)
-            + les critères de recherche correspondants */
+            + les critères de recherche correspondants + pattern recherchés */
 	   );
 
 DROP TABLE IF EXISTS Breeds;
@@ -119,6 +122,13 @@ CREATE TABLE IF NOT EXISTS Searched_colors(
 		PRIMARY KEY(cat,color)
 		);
 
+DROP TABLE IF EXISTS Searched_patterns;
+CREATE TABLE IF NOT EXISTS Searched_patterns(
+		cat INTEGER NOT NULL,
+		pattern type_pattern NOT NULL,
+		FOREIGN KEY (cat) REFERENCES Cats(id_cat),
+		PRIMARY KEY(cat,type_pattern)
+		);
 
 INSERT INTO Colors VALUES ('1','Noir');
 INSERT INTO Colors VALUES ('2','Bleu');

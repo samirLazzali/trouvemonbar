@@ -32,15 +32,15 @@ function affCompat($id_the_cat) {
                                           WHERE sexe=" . $sexCh . " 
                                             AND breed=" . $breedCh);
     else
-        $listeChats = $connexion->query("SELECT * 
-                                          FROM Cats 
-                                          JOIN Cat_breed ON cat=id_cat 
-                                          WHERE sexe=" . $sexCh);
+        $listeChats = $connexion->query("select * 
+                                          from cats 
+                                          join cat_breed on cat=id_cat 
+                                          where sexe=" . $sexCh);
     $chatPot=$listeChats->fetch(PDO::FETCH_OBJ);
     while($chatPot){
         $chatsPot[] = $chatPot->id_cat;
         $scoreChatsPot[] = 0;
-        if
+        if()
     }
 
 
