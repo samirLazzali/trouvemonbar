@@ -12,7 +12,7 @@
       <div class=tab-content>
          <div id=money>
             <div class=field-wrap><label>Prix proposé</label>
-		<input type=number name=annoncepayamount <?php print (isset($annonce)?"value=\"$annonce->paiement\"":"");?>>
+      <input type=number name=annoncepayamount <?php print (isset($annonce)?"value=\"$annonce->paiement\"":"");?>>
             </div>
          </div>
          <div id=service>
@@ -33,14 +33,14 @@
       <input type="radio" class="radio" name="offer" id="isoffer" value="true">
       <div class=smselect>
          <select name=annoncesemester class=styled-select black rounded>
-	 <option value disabled <?php print (isset($annonce)?"":"selected"); ?>>Semestre
+    <option value disabled <?php print (isset($annonce)?"":"selected"); ?>>Semestre
             <option value=1 class=toggle <?php print (isset($annonce) && $annonce->semestre == 1?"selected":""); ?>>S1
             <option value=2 class=toggle <?php print (isset($annonce) && $annonce->semestre == 2?"selected":""); ?>>S2
             <option value=3 class=toggle <?php print (isset($annonce) && $annonce->semestre == 3?"selected":""); ?>>S3
             <option value=4 class=toggle <?php print (isset($annonce) && $annonce->semestre == 4?"selected":""); ?>>S4
             <option value=5 class=toggle <?php print (isset($annonce) && $annonce->semestre == 5?"selected":""); ?>>S5
          </select>
-	 <div class=smodule id=selectmodule1 style=display:<?php print (!(isset($annonce) && $annonce->semestre == 1)?"none":"inline"); ?>>
+    <div class=smodule id=selectmodule1 style=display:<?php print (!(isset($annonce) && $annonce->semestre == 1)?"none":"inline"); ?>>
             <select name=annoncemodule1>
                <option value disabled selected>Module
                <option value=ECO1 <?php print (isset($annonce) && $annonce->module == 'ECO1'?"selected":""); ?>>ECO1

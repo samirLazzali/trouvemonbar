@@ -49,6 +49,26 @@ div.info {
     height: 150px;
     background-color: #FFF;
 }
+div.tags {
+    padding-top: 20px;
+    float:left;
+    font-family: 'IBM Plex Mono';
+    font-weight: 900;
+    font-size: 18px;
+    width: 30%;
+    height: 150px;
+    background-color: #FFF;
+}
+div.tag {
+    padding-top: 1px;
+    float:left;
+    font-family: 'IBM Plex Mono';
+    font-weight: 400;
+    font-size: 14px;
+    width: 70%;
+    height: 20px;
+    background-color: #FFF;
+}
 div.desc {
     padding-top: 20px;
     font-weight: 400;
