@@ -35,8 +35,30 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
     echo '    <fieldset><legend>Compte Rendu</legend><input type="text" name="cr" /></fieldset>';
     echo '   <input type ="submit" name="submit" value="Ajouter"/>';
     echo '</form>';
+    echo '</br>';
+    echo '<h1>Réunions</h1>';
+    echo '<form method="post" action="#">';
+    echo '    <fieldset><legend>Recette </legend><input type ="text" name="recette" /></fieldset>';
+    echo '    <fieldset><legend>Note </legend><input type ="number" name="note" min=0 max=5 /></fieldset>';
+    echo '   <input type ="submit" name="submit" value="Ajouter"/>';
+    echo '</form>';
 
     $iid=$connection->query("SELECT 'id' FROM public.reunion")->fetchAll();
+    $irec=$connection->query("SELECT * FROM public.recette")->fetchAll();
+    $j=1;
+    foreach($irec as $id){
+        $j++;
+    }  
+    echo $j;
+    if(isset($_POST['recette'])){
+        $req=$connection->prepare('INSERT INTO public.recette(id_rec,recettes,note,id_usr) VALUES(:id_rec,:recettes,:note,:id_usr)');
+        $req->execute(['id_rec' => 2,
+            'recettes'=>$_POST['recette'],
+            'note'=>$_POST['note'],
+            'id_usr' => $_SESSION['id'],
+            ]);
+    }
+
     $i=1;
     foreach($iid as $id){
         $i++;
@@ -49,6 +71,9 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
             'cr' => $_POST['cr'],
         ]);
     }
+
+        
+    
 }
 else {
     echo '<link rel="stylesheet" href="css/style.css">';
@@ -59,3 +84,5 @@ else {
     echo '</body>';
     echo '</html>';
 }
+
+
