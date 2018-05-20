@@ -6,29 +6,28 @@ if(!Auth::logged())
 
 $wherelist=array();
 
-
 if(!empty($_GET['lastname']))
 {
 
-    $wherelist[]=" lastname like '%".htmlspecialchars($_GET['lastname'])."%'";
+    $wherelist[]=" upper(lastname) like upper('%".htmlspecialchars($_GET['lastname'])."%')";
 
 
 }
 if(!empty($_GET['nick']))
 {
     $nick = $_GET['nick'];
-    $wherelist[]=" nick like '%".htmlspecialchars($nick)."%'";
+    $wherelist[]="upper(nick) like upper('%".htmlspecialchars($nick)."%')";
 
 }if(!empty(htmlspecialchars($_GET['gamename'])))
 {
     $gamename=$_GET['gamename'];
-    $wherelist[]=" gamename like '%".htmlspecialchars($_GET['gamename'])."%'";
+    $wherelist[]=" upper(gamename) like upper('%".htmlspecialchars($_GET['gamename'])."%')";
 }
 
 if(!empty($_GET['gamesystem']))
 {
     $gamesystem=$_GET['gamesystem'];
-    $wherelist[]=" systemname like '%".htmlspecialchars($_GET['gamesystem'])."%'";
+    $wherelist[]=" upper(systemname) like upper('%".htmlspecialchars($_GET['gamesystem'])."%')";
 }
 
 $where="";
