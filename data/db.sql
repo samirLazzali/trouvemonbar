@@ -6,6 +6,7 @@
 -- Dumped by pg_dump version 10.3
 DROP TABLE "user";
 DROP TABLE "reunion";
+DROP TABLE "recette";
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -125,4 +126,11 @@ datee DATE NOT NULL
 CREATE TABLE public."Participants"(
 id_reu INTEGER NOT NULL, FOREIGN KEY (id_reu) REFERENCES public.reunion(id_reu),
 pseudo VARCHAR(40) NOT NULL
+);
+
+
+CREATE TABLE public."recette"(
+recettes varchar(100),
+note INTEGER,
+id INTEGER
 );
