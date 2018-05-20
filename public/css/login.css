@@ -155,12 +155,10 @@ h1 {
     padding: 15px 0;
     font-size: 2rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .1em;
+    font-family: 'Titillium Web';
     background: #1ab188;
     color: #ffffff;
     transition: all 0.5s ease;
-    -webkit-appearance: none;
 }
 .form .button:hover, .button:focus {
     background: #179b77;

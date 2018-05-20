@@ -178,49 +178,6 @@ textarea {
     margin-bottom: 40px;
 }
 
-/*
-.top-row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-.top-row > div {
-    float: left;
-    width: 48%;
-    margin-right: 4%;
-}
-.top-row > div:last-child {
-    margin: 0;
-}*/
-
-.button {
-    border: 0;
-    outline: none;
-    border-radius: 0;
-    padding: 15px 0;
-    font-size: 2rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .1em;
-    background: #1ab188;
-    color: #ffffff;
-    transition: all 0.5s ease;
-    -webkit-appearance: none;
-}
-.button:hover, .button:focus {
-    background: #179b77;
-}
-
-.button-block {
-    display: block;
-    width: 100%;
-}
-
-.forgot {
-    margin-top: -20px;
-    text-align: right;
-}
-
 .errorDisp {
     color: red;
 }
@@ -235,7 +192,8 @@ textarea {
 .searchselect select{
     min-width: 90px;
     float: right;
-}/*
+}
+/*
 #validateResearch {
     width: auto;
     display: inline;

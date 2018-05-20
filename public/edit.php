@@ -11,13 +11,9 @@ if (isset($_POST['submit'])) {
 }
 
 Annonce::delAnnonceById($oldAnnonce->id);
-if (isset($_POST['submit'])) {
-    $res = $newAnnonce->sendToDbFull();
-    print_r($res);
-}
+if (isset($_POST['submit'])) $res = $newAnnonce->sendToDbFull();
 
-print("</br>");
-print_r($_POST);
+$_POST = array();
 
-//header("Refresh:0; url=createForm.php?done=$value");
+header("Refresh:0; url=main.php");
 ?>

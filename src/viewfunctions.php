@@ -153,6 +153,7 @@ function affiche_info($str) {
 function affiche_erreur($str) {
     echo '<p class="erreur">'.$str.'</p>';
 }
+
 function displayResearch() {
     echo "<div id=\"formresearch\" class=\"formresearch\" style=display:none>";
     echo "<div class=\"tab-content\">";
@@ -176,8 +177,9 @@ function displayResearch() {
     echo "</div><!-- /form -->";
     echo "<script src=\"js/research.js\"></script>";
 }
+
 function buttonResearch() {
-    echo "<a href=\"#research\" class=\"m-link\" id=\"research\"><i class=\"fas fa-sign-in-alt\" aria-hidden=\"true\"></i> Research</a>";
+    echo "<a href=\"#research\" class=\"m-link\" id=\"research\"><i class=\"fas fa-search\" aria-hidden=\"true\"></i> Rechercher</a>";
 }
 
 

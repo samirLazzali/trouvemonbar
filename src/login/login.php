@@ -80,60 +80,60 @@ function verif_authent() {
 }
 
 function buttonLogin() {
-    //echo "<button class=\"button button-block\" id=\"connect\">Connect</button>";
-    echo "<a class=\"m-link\" id=\"connect\"><i class=\"fas fa-sign-in-alt\" aria-hidden=\"true\"></i> Log In</a>";
+    echo "<a class=\"m-link\" id=\"connect\"><i class=\"fas fa-sign-in-alt\" aria-hidden=\"true\"></i> Se connecter</a>";
 }
 
 function buttonLogout() {
-    echo "<a href=\"main.php?logout\" class=\"m-link\" id=\"logout\"><i class=\"fas fa-times-circle\"></i> Log Out</a>";
+    echo "<a href=\"main.php?logout\" class=\"m-link\" id=\"logout\"><i class=\"fas fa-times-circle\"></i> Se déconnecter</a>";
 }
 
 function displayLogin() {
-    echo "<div id=\"form\" class=\"form\" style=\"display: none\">";
-    echo "<ul class=\"tab-group\">";
-    echo "<li class=\"tab active\">";
-    echo "<a href=\"#login\">Log In</a>";
-    echo "</li>";
-    echo "<li class=\"tab\">";
-    echo "<a href=\"#signup\">Sign Up</a>";
-    echo "</li>";
-    echo "</ul>";
-    echo "<div class=\"tab-content\">";
-    echo "<div id=\"login\">";
-    echo "<h1>Welcome Back!</h1>";
-    echo "<form action=\"main.php?login\" method=\"post\">";
-    echo "<div class=\"field-wrap\">";
-    echo "<label>Email Address<span class=\"req\">*</span></label>";
-    echo "<input type=\"email\" name=\"email\" required=\"\" autocomplete=\"off\">";
-    echo "</div>";
-    echo "<div class=\"field-wrap\">";
-    echo "<label>Password<span class=\"req\">*</span></label>";
-    echo "<input type=\"password\" name=\"password\" required=\"\" autocomplete=\"off\">";
-    echo "</div>";
-    echo "<p class=\"forgot\"><a href=\"#\">Forgot Password?</a></p><span class=\"errorDisp\"><?php echo \"Error: \$error\"; ?></span> <button class=\"button button-block\" name=\"login\">Log In</button>";
-    echo "</form>";
-    echo "</div>";
-    echo "<div id=\"signup\">";
-    echo "<h1>Sign Up for Free</h1>";
-    echo "<form action=\"main.php?create\" method=\"post\">";
-    echo "<div class=\"field-wrap\">";
-    echo "<label>Email Address<span class=\"req\">*</span></label>";
-    echo "<input type=\"email\" name=\"email\" required=\"\" autocomplete=\"off\">";
-    echo "</div>";
-    echo "<div class=\"field-wrap\">";
-    echo "<label>Username</label> <input type=\"text\" name=\"username\" autocomplete=\"off\">";
-    echo "</div>";
-    echo "<div class=\"field-wrap\">";
-    echo "<label>Set A Password<span class=\"req\">*</span></label>";
-    echo "<input type=\"password\" name=\"password\" required=\"\" autocomplete=\"off\">";
-    echo "</div><span class=\"errorDisp\"><?php echo \"Error: \$error\"; ?></span>";
-    echo "<button type=\"signup\" class=\"button button-block\" name=\"signup\">Get Started</button>";
-    echo "</form>";
-    echo "</div>";
-    echo "</div><!-- tab-content -->";
-    echo "</div><!-- /form -->";
+    //echo "<div id=\"form\" class=\"form\" style=\"display: none\">";
+    //echo "<ul class=\"tab-group\">";
+    //echo "<li class=\"tab active\">";
+    //echo "<a href=\"#login\">Log In</a>";
+    //echo "</li>";
+    //echo "<li class=\"tab\">";
+    //echo "<a href=\"#signup\">Sign Up</a>";
+    //echo "</li>";
+    //echo "</ul>";
+    //echo "<div class=\"tab-content\">";
+    //echo "<div id=\"login\">";
+    //echo "<h1>Welcome Back!</h1>";
+    //echo "<form action=\"main.php?login\" method=\"post\">";
+    //echo "<div class=\"field-wrap\">";
+    //echo "<label>Email Address<span class=\"req\">*</span></label>";
+    //echo "<input type=\"email\" name=\"email\" required=\"\" autocomplete=\"off\">";
+    //echo "</div>";
+    //echo "<div class=\"field-wrap\">";
+    //echo "<label>Password<span class=\"req\">*</span></label>";
+    //echo "<input type=\"password\" name=\"password\" required=\"\" autocomplete=\"off\">";
+    //echo "</div>";
+    //echo "<p class=\"forgot\"><a href=\"#\">Forgot Password?</a></p><button class=\"button button-block\" name=\"login\">Log In</button>";
+    //echo "</form>";
+    //echo "</div>";
+    //echo "<div id=\"signup\">";
+    //echo "<h1>Sign Up for Free</h1>";
+    //echo "<form action=\"main.php?create\" method=\"post\">";
+    //echo "<div class=\"field-wrap\">";
+    //echo "<label>Email Address<span class=\"req\">*</span></label>";
+    //echo "<input type=\"email\" name=\"email\" required=\"\" autocomplete=\"off\">";
+    //echo "</div>";
+    //echo "<div class=\"field-wrap\">";
+    //echo "<label>Username</label> <input type=\"text\" name=\"username\" autocomplete=\"off\">";
+    //echo "</div>";
+    //echo "<div class=\"field-wrap\">";
+    //echo "<label>Set A Password<span class=\"req\">*</span></label>";
+    //echo "<input type=\"password\" name=\"password\" required=\"\" autocomplete=\"off\">";
+    //echo "</div>";
+    //echo "<button type=\"signup\" class=\"button button-block\" name=\"signup\">Get Started</button>";
+    //echo "</form>";
+    //echo "</div>";
+    //echo "</div><!-- tab-content -->";
+    //echo "</div><!-- /form -->";
 
-    echo "<script src=\"js/login.js\"></script>";
+    //echo "<script src=\"js/login.js\"></script>";
+    include("login.html");
 }
 
 function handleLogin() {
