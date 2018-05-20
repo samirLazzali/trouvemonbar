@@ -32,6 +32,8 @@ $users = $userRepository->fetchAll();
     echo '<br />';
     echo '<br />';
 
+    echo '<div class="gtco-container">';
+
     echo '<div class="form-c">';
     echo '<div class="form-c-head">Modifier son profil :</div>';
     echo '<form method = "post" action="#">';
@@ -41,11 +43,13 @@ $users = $userRepository->fetchAll();
     echo '<label for="pseudomodif"><span>Pseudo </span><input type="text" class="input-field" name="pseudomodif" value="" /></label>';
     echo '<label for="mdpmodif"><span>Nouveau mot de passe</span><input type="text" class="input-field" name="mdpmodif" value="" /></label>';
     echo '<label for="mdpmodif2"><span>Confirmer le mot de passe <span class="required">*</span></span><input type="text" class="input-field" name="mdpmodif2" value="" /></label>';
+    echo '<br />';
     echo '<input type ="submit" name="submit" value="Modifier"/>';
     echo '</form>';
     echo '</div>';
     echo '</div>';
 
+    echo '</div>';
     echo '</body>';
 
 

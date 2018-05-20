@@ -41,7 +41,6 @@ menu_navigation();
 
 
 <header id="gtco-header" class="gtco-cover" role="banner" style="background-image: url(images/img_4.jpg)">
-                <div class="overlay"></div>
                 <div class="gtco-container">
                         <div class="row">
                                 <div class="col-md-12 col-md-offset-0 text-left">

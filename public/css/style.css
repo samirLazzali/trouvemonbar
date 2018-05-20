@@ -162,7 +162,7 @@ h1, h2, h3, h4, h5, h6, figure {
   color: #fff;
   display: -moz-inline-stack;
   display: inline-block;
-  zoom: 1;
+  zoom: 4;
   *display: inline;
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;

@@ -25,13 +25,12 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
     echo '</head>';
     echo '<body>';
 
-    echo '<div class="banniere">';
     menu_navigation();
-    echo '</div>';
-
     echo '<br />';
     echo '<br />';
     echo '<br />';
+    
+    echo '<div class="gtco-container">';
 
     echo '<div class="form-c">';
     echo '<div class="form-c-head">Planifier une réunion :</div>';
@@ -43,7 +42,9 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
     echo '</form>';
     echo '</div>';
     echo '</div>';
+    echo '</div>';
 
+    echo '<div class="gtco-container">';
     echo '<br />';
     echo '<br />';
     echo '<div class="form-c">';
@@ -56,7 +57,7 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
     echo '</div>';
     echo '</div>';
 
-
+    echo '</div>';
 
     $iid=$connection->query("SELECT 'id' FROM public.reunion")->fetchAll();
     $irec=$connection->query("SELECT * FROM public.recette")->fetchAll();

@@ -4,7 +4,7 @@
     font: 13px Arial, Helvetica, sans-serif;
 }
 .form-c-head{
-    color: black;
+    color: white;
     font-weight: bold;
     font-style: italic;
     border-bottom: 2px solid #ddd;
@@ -18,7 +18,7 @@
 }
 .form-c label > span{
     width: 120px;
-    color: black;
+    color: white;
     font-weight: bold;
     float: left;
     padding-top: 8px;
@@ -28,7 +28,7 @@
     color:red;
 }
 .form-c span.txt{
-    color:black;
+    color:white;
 }
 .form-c input.input-field, .form-c .select-field{
     width: 48%;

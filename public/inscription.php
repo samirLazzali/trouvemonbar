@@ -29,6 +29,9 @@ menu_navigation()
 <br />
 <br />
 <br />
+
+<div class="gtco-container">';
+
 <div class="form-c">
 <div class="form-c-head">Veuillez remplir les informations :</div>
 <form method = "post" action="#" >
@@ -42,6 +45,7 @@ menu_navigation()
 </div>
 </div>
 
+</div>
 <?php
 if (isset($_POST['prenominsc']) && isset($_POST['nominsc']) && isset($_POST['pseudoinsc']) && isset($_POST['mailinsc']) && isset($_POST['mdpinsc']) && $_POST!=null) {   //améliorer la condition
     $iid=$connection->query("SELECT 'id' FROM public.user")->fetchAll();

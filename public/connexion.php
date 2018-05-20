@@ -31,6 +31,9 @@ menu_navigation()
 <br />
 <br />
 <br />
+
+<div class="gtco-container">';
+
 <div class="form-c">
 <div class="form-c-head">Veuillez remplir les informations :</div>
 <form method = "post" action="#" >
@@ -41,3 +44,4 @@ menu_navigation()
 </div>
 </div>
 
+</div>
