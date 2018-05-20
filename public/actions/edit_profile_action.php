@@ -7,6 +7,8 @@
  */
 require "../../src/app/helpers.php";
 
+if(!Auth::logged()) redirect("../edit_profile.php");
+
 $mail= htmlspecialchars($_POST['mail']);
 $password= htmlspecialchars($_POST['password']);
 

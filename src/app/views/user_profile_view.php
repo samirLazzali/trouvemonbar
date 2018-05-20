@@ -1,6 +1,11 @@
 
-<h2> <?php echo $user->getNick() ; ?></h2>
-
+<h2> <?php echo $user->getNick() ; ?>
+    <!--OPTION TO EDIT PROFILE FOR THE OWNER -->
+        <?php
+        if($isOwner)
+            echo "<a class='m-md-auto btn-sm btn btn-primary' href='edit_profile.php'> Éditer mon profil </a>";
+        ?>
+</h2>
     <?php echo $user->getFirstname()." ".$user->getLastname(); ?><br/>
 
     <div>
@@ -45,17 +50,11 @@
     </div>
 
     <div class="container-fluid">
-     <a class="btn-primary btn" href="user_files.php?user=<?=$user->getId()?>" > Ses fichiers </a>
+     <a class="btn-primary btn" href="user_files.php?user=<?=$user->getId()?>" > <?=$isOwner ? "M" : "S"?>es fichiers </a>
     </div>
 
-    <!--OPTION TO EDIT PROFILE FOR THE OWNER -->
-    <?php
-        if($isOwner)
-            echo "<div class='container-fluid' >
-                    <br/>
-                  <a class='btn btn-primary' href='edit_profile.php'> Editer mon profile </a>
-                  </div>";
-    ?>
+
+
 
 
 

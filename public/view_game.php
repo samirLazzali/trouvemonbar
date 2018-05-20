@@ -35,7 +35,7 @@ if(Auth::logged()) {
         $comments = $game->comments();
         $players = $game->players();
         $isOwner = $game->getCreator() == $_SESSION['user'];
-
+        $files = $game->files();
         $layout = new Layout("users");
         include view("game_view.php");
         $layout->show($game->getName());
@@ -62,6 +62,7 @@ else {
         $reccurrents = $game->reccurrent_schedules();
         $comments = $game->comments();
         $players = $game->players();
+        $files = $game->files();
         $isOwner = false;
 
         $layout = new Layout("visitors");
@@ -69,4 +70,6 @@ else {
         $layout->show($game->getName());
     }
 }
+
+
 

@@ -232,6 +232,13 @@ class User
         return $query->fetchAll();
     }
 
+    public function hisfiles()
+    {
+        $query = db()->prepare("SELECT * from file WHERE userid = ?");
+        $query->execute([$this->userid]);
+
+        return $query->fetchAll();
+    }
 
     /**
      * @return array list of all users  in the database
