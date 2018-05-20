@@ -132,6 +132,25 @@ class User
             return false;
     }
 
+    public function updateUser_profile($nick, $firstname, $lastname, $mail,$passwd)
+    {
+        if($passwd == null)
+        {
+            $query = db()->prepare("UPDATE users SET nick=?,firstname=?,lastname=?,mail=? WHERE userid=?");
+            $success = $query->execute([$nick,$firstname,$lastname,$mail,$this->userid]);
+        }
+        else
+        {
+            $query = db()->prepare("UPDATE users SET nick=?,firstname=?,lastname=?,mail=? ,password=? WHERE userid=?");
+            $success = $query->execute([$nick,$firstname,$lastname, $mail, password_hash( $passwd, PASSWORD_DEFAULT),$this->userid]);
+        }
+
+        if($success)
+            return true;
+
+        else
+            return false;
+    }
     /**
      * Add a new user in the database
      * @param $nick
@@ -150,6 +169,47 @@ class User
 
         else
             return false;
+    }
+
+    /**
+     * @param $gamesystemid
+     * @param $userid
+     * @return bool|string
+     */
+    public static function insertMastery($gamesystemid, $userid)
+    {
+
+        $query = db()->prepare("INSERT INTO mastery (gamesystemid, userid) VALUES( ?, ?)");
+        $success = $query->execute([$gamesystemid, $userid]);
+        if($success)
+            return true;
+
+        else
+            return false;
+    }
+
+    /**
+     * @param $userid
+     * @return array all gamesystemids of user
+     */
+    public static function masterylist($userid)
+    {
+
+        $query = db()->prepare("SELECT gamesystemid FROM mastery WHERE userid=?");
+        $query->execute([$userid]);
+
+        return $query->fetchAll();
+    }
+
+    public static function deleteMastery($userid){
+        $query = db()->prepare("DELETE FROM mastery WHERE userid=?");
+        $success=$query->execute([$userid]);
+        if($success)
+            return true;
+
+        else
+            return false;
+
     }
 
     /**
@@ -251,6 +311,8 @@ class User
 
         return $query->fetchAll();
     }
+
+
 
 
 
