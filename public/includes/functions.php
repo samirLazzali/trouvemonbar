@@ -147,7 +147,7 @@ function checklogin($login)
 		global $queries;
 		$queries++;
 		
-		if($retour->nbr > 0) return 'pris';
+		if($retour > 0) return 'pris';
 		else return 'Ok';
 	}
 }
@@ -189,7 +189,7 @@ function checkmail($email)
 		global $queries;
 		$queries++;
 		
-		if($retour->nbr > 0) return 'pris';
+		if($retour > 0) return 'pris';
 		else return 'Ok';
 	}
 }
@@ -218,7 +218,7 @@ function checkphone($phone_number)
 		global $queries;
 		$queries++;
 		
-		if($retour->nbr > 0) return 'pris';
+		if($retour > 0) return 'pris';
 		else return 'Ok';
 	}
 }
