@@ -31,22 +31,26 @@ function header_t($titre) {
     print "    <h1 class=\"logo\">Les Bons Bails</h1>\n";
     print "    </div>\n";
     print "    <div class=\"m-right\">\n";
+
     print "    <a href=\"main.php\" class=\"m-link\"><i class=\"fa fa-home\" aria-hidden=\"true\"></i> Accueil</a>\n";
     print "    <a href=\"createannonce.php\" class=\"m-link\"><i class=\"far fa-newspaper\" aria-hidden=\"true\"></i> Annonces</a>\n";
     print "    <a href=\"apropos.php\" class=\"m-link\"><i class=\"fas fa-question-circle\" aria-hidden=\"true\"></i> A propos</a>\n";
     print "    <a href=\"contact.php\" class=\"m-link\"><i class=\"fas fa-paper-plane\" aria-hidden=\"true\"></i> Contact</a>\n";
-
+    buttonResearch();
     if (verif_authent()) {
 	buttonLogout();
+    buttonResearch();
     } else {
 	buttonLogin();
     }
-    print "    </div>\n";
-    print "    </div>\n";
-        include("form.html");
 
+    print "    </div>\n";
+    print "    </div>\n";
+/*        include("form.html");
+*/
     print "    </nav>\n";
     print "    </header>\n";
+
 }
 
 function footer(){
@@ -150,5 +154,34 @@ function affiche_info($str) {
 function affiche_erreur($str) {
     echo '<p class="erreur">'.$str.'</p>';
 }
+function displayResearch() {
+   // echo "<div id=\"form\" class=\"form\" style=\"display: none\">";
+    echo "<div id=\"formresearch\" class=\"formresearch\" style=display:none>";
+    echo "<div class=\"tab-content\">";
+    echo "<h1>Recherchez votre solution</h1>";
+    include("form.html");
+    echo "<div id=\"signup\">";
+    echo "<h1>Sign Up for Free</h1>";
+    echo "<form action=\"main.php\" method=\"post\">";
+    echo "<div class=\"field-wrap\">";
+    echo "<label>Email Address<span class=\"req\">*</span></label>";
+    echo "<input type=\"email\" name=\"email\" required=\"\" autocomplete=\"off\">";
+    echo "</div>";
+    echo "<div class=\"field-wrap\">";
+    echo "<label>Set A Password<span class=\"req\">*</span></label>";
+    echo "<input type=\"password\" name=\"password\" required=\"\" autocomplete=\"off\">";
+    echo "</div><span class=\"errorDisp\"><?php echo \"Error: \$error\"; ?></span>";
+    echo "<button type=\"signup\" class=\"button button-block\" name=\"signup\">Get Started</button>";
+    echo "</form>";
+    echo "</div>";
+    echo "</div><!-- tab-content -->";
+    echo "</div><!-- /form -->";
+    echo "<script src=\"js/research.js\"></script>";
+}
+function buttonResearch() {
+    //echo "<button class=\"button button-block\" id=\"connect\">Connect</button>";
+    echo "<a class=\"m-link\" id=\"research\"><i class=\"fas fa-sign-in-alt\" aria-hidden=\"true\"></i> Research</a>";
+}
+
 
 ?>

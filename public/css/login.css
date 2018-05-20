@@ -7,7 +7,7 @@ a:hover {
     color: #179b77;
 }
 
-.form {
+.form{
     background: rgba(19, 35, 47, 0.9);
     padding: 40px;
     max-width: 600px;
@@ -26,6 +26,8 @@ a:hover {
     top: 0;
     bottom: 0;
 }
+
+
 
 .tab-group {
     list-style: none;

@@ -9,6 +9,7 @@ session_start();
 handleLogin();
 
 header_t("Les Bons Bails");
+displayResearch();
 if(!verif_authent()) { // si le gars est authentified ==>  acces aux offres
     displayLogin();
 }

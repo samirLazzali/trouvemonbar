@@ -226,9 +226,16 @@ textarea {
 }
 
 .searchselect {
-    display:inline;
-    margin-right: 5%
+    display:block;
+    margin: 5% auto;
+    width: 70%  ;
+    color: white;
 }
+
+.searchselect select{
+    min-width: 90px;
+    float: right;
+}/*
 #validateResearch {
     width: auto;
     display: inline;
@@ -246,4 +253,4 @@ textarea {
     width:100%;
     background-color: #5FE6BD;
     line-height:normal;
-}
+}*/
