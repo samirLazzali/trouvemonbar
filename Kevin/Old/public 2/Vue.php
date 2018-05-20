@@ -63,24 +63,32 @@ function afficheMenu(){
     print "<nav id=\"fontmenu\">\n";
     print "<ul id=\"menu\">\n";
     print "    <li>\n";
-    print "        <span class=\"nomsite\">Twitiie</span>\n";
+    print "        <span class=\"nomsite\">twitIIE</span>\n";
     print "    </li>\n";
     print "    <li>\n";
-    print "        <a href=\"accueil.php\">Accueil</a>\n";
+    print "        <a href=\"accueil.php\">\n";
+    print "         Accueil <img src=\"icones/home.png\" alt=\"accueil\"/>\n";
+    print "        </a>\n";
     print "    </li>\n";
     print "    <li>\n";
-    print "        <a href=\"profil.php?pseudo=".prenom_user($_SESSION['id'])."&id=".$_SESSION['id']."\">Mon Profil</a><br/>\n";
+    print "        <a href=\"profil.php?pseudo=".prenom_user($_SESSION['id'])."&id=".$_SESSION['id']."\">\n";
+    print "        Mon Profil <img src=\"icones/profil.png\" alt=\"profil\"/>\n";
+    print "         </a>\n";
     print "    </li>\n";
     print "    <li>\n";
-    print "        <a href=\"edition.php?pseudo=$prenom\">Edition profil</a>\n";
+    print "        <a href=\"edition.php?pseudo=$prenom\">\n";
+    print "        Edition profil <img src=\"icones/editionprofil.png\" alt=\"edition_profil\"/>\n";
+    print "        </a>\n";
     print "    </li>\n";
     print "    <li>\n";
-    print "         <a href=\"Msg_Ecrire.php\">Message</a></br>\n";
+    print "         <a href=\"Msg_Ecrire.php\">\n";
+    print "        Message <img src=\"icones/message.png\" alt=\"message\"/>\n";
+    print "        </a>\n";
     print "    </li>\n";
     print "    <li>\n";
     print "        <a href=\"deconnexion.php\">\n";
-    print "        Déconnexion <img src=\"logout.png\" alt=\"bouton de déconnexion\">\n";
-    print "        </a>";
+    print "        Déconnexion <img src=\"icones/logout.png\" alt=\"bouton de déconnexion\"/>\n";
+    print "        </a>\n";
     print "    </li>\n";
     print "</ul>\n";
     print "</nav>\n";
@@ -122,10 +130,21 @@ function afficheListeAmis($listeAmis){
 }
 
 
-function afficheTweet($tweet){
+function afficheTweet($tweet, $likes){
     echo ajoutNomLien('@'.prenom_user($tweet->getAuteur()))." a tweeté à ".
         ($tweet->getDate())->format('H:i:s')." le ".($tweet->getDate())->format('Y-m-d').
         "</br><br/> ".ajoutNomLien(ajoutHashtagLien($tweet->getContenu()))."<br/></br>";
+    print "\n";
+    echo "        <button id=\"".$tweet->getId()."\" onclick=\"Liker(".$tweet->getId().")\">";
+
+    if (dejaLiker($tweet->getId())) {
+        echo "Je n'aime plus";
+    }
+    else {
+        echo "J'aime";
+    }
+    echo "</button> Likes : ".$likes;
+    print "\n";
 }
 
 /*
@@ -135,14 +154,52 @@ function afficheListeTweets($listeTweets){
     print "<div class=\"alltweets\">Derniers Tweets :<br/><br/>\n";
     for($i=0; $i<sizeof($listeTweets); $i++){
         echo "    <div class=\"tweets\">";
-        echo afficheTweet($listeTweets[$i][1]);
-        print "\n";
-        echo "        <button id=\"".$listeTweets[$i][1]->getId()."\" onclick=\"Liker(".$listeTweets[$i][1]->getId().")\">J'aime</button> Likes : ".$listeTweets[$i][0];
+        echo afficheTweet($listeTweets[$i][1], $listeTweets[$i][0]);
+       /* print "\n";
+        echo "        <button id=\"".$listeTweets[$i][1]->getId()."\" onclick=\"Liker(".$listeTweets[$i][1]->getId().")\">";
+
+        if (dejaLiker($listeTweets[$i][1]->getId())) {
+            echo "Je n'aime plus";
+        }
+        else {
+            echo "J'aime";
+        }
+        echo "</button> Likes : ".$listeTweets[$i][0];*/
         print "\n";
         echo "        <button id=\"Comment\" onclick=\"afficherCommentaire(".$listeTweets[$i][1]->getId().")\">Commenter</button>";
         print "\n    </div>\n";
     }
     print "</div>\n";
+}
+
+
+
+/*
+ * Affiche tous les commentaires d'un tweet
+ */
+function afficherCommentaires($T) {
+    print "<ul>\n";
+    foreach ($T as $res) :
+        echo '        <li>'.prenom_user($res->getOwnerId()).' ';
+        echo 'a commenté à '.($res->getDate())->format('H:i:s')." le ".($res->getDate())->format('Y-m-d').' : ';
+        echo $res->getContenu().' '."\n";
+
+
+        /* Ajout bouton pour ecrire commentaire */
+        echo '      <button onclick="afficherChampId('.$res->getId().');" class="inputbutton">Répondre</button></br>'."\n";
+
+        echo '      <form method="POST" action="Commentaire/envoiCommentaire.php" class="champCommentaire" id="'.$res->getId().'">'."\n";
+        echo '        <input type="hidden" name="type_parent" value="commentaire">'."\n";
+        echo '      <input type="hidden" name="id_parent" value="'.$res->getId().'">'."\n";
+        echo '      <input type="hidden" name="TargetOwner" value="'.$res->getTargetId().'">'."\n";
+        echo '        <input type="text" size=50 name="contenu" placeholder="Veuillez saisir votre commentaire ...">'."\n";
+        echo '        <input type="submit" value="Envoyer" onclick="alert(\'Commentaire Envoyé\')" class="inputbutton">'."\n";
+        echo "</form>\n";
+
+        afficherCommentaires(getCommentaires($res->getId(), "commentaire"));
+        print "</li>\n";
+    endforeach;
+    echo '</ul>';
 }
 
 
@@ -175,7 +232,7 @@ function ajoutHashtagLien($text){
     for ($i=0; $i<count($T); $i++){
         if (isset($T[$i][0])) {
             if ('#' == $T[$i][0]) {
-                $T[$i] = "<a href=\"hashtag.php?hashtag=" . substr($T[$i], 1) . "\">$T[$i]</a>";
+                $T[$i] = "<a href=\"hashtagTweet.php?hashtag=".substr($T[$i], 1)."\">$T[$i]</a>";
             }
         }
     }
@@ -189,6 +246,8 @@ function ajoutHashtagLien($text){
 function ajoutLienNH($text){
     return ajoutNomLien(ajoutHashtagLien($text));
 }
+
+
 
 
 

@@ -28,5 +28,5 @@ else{
 liker($_GET['T_id'], $_SESSION['id']);
 
 header("Location: ".$_SERVER['HTTP_REFERER']."");
-?>
+
 

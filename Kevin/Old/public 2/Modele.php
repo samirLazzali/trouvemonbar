@@ -21,12 +21,19 @@ $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=
 $tweetManager = new Tweet\TweetManager($connection);
 $commentaireManager = new Commentaire\CommentaireManager($connection);
 $messageManager = new Message\MessageManager($connection);
-
+$hashtagManager = new Hashtag\HashtagManager($connection);
 /*$userRepository = new \User\UserRepository($connection);
 $users = $userRepository->fetchAll();
 
 $messageRepository = new \Message\MessageRepository($connection);
 $messages = $messageRepository->fetchAll();*/
+
+
+
+
+date_default_timezone_set('Europe/Paris');
+
+
 
 
 /* Fonction pour recuperer le prenom de quelqu'un */
@@ -52,7 +59,7 @@ function idUser($pseudo){
 
 function get_friendList($id){
     global $connection;
-    $sth = $connection->prepare('SELECT * FROM "amis" WHERE personne1=\''.$id.'\' OR personne2=\''.$id.'\' ');
+    $sth = $connection->prepare('SELECT * FROM "amis" WHERE personne1=\''.$id.'\' ');
     $sth->execute();
     $result = $sth->fetch(PDO::FETCH_OBJ);
 
@@ -75,10 +82,26 @@ function get_friendList($id){
     return $Res;
 }
 
-/* echo '<pre>';                     POUR AFFICHER ARRAY
-    echo '</pre>';*/
+/*
+ * Test si on a déjà liké un tweet
+ * Renvoie TRUE si c'est le cas, FALSE sinon
+ */
+function dejaLiker($T_id){
+    global $connection;
+    $req = $connection->prepare("SELECT * FROM \"like\" WHERE tweet_id = $T_id AND user_id=".$_SESSION['id']);
+    $req->execute();
 
+    if ($req->rowCount() == 1){
+        return TRUE;
+    }
+    else{
+        return FALSE;
+    }
+}
 
+/*
+ * Ajout d'un like
+ */
 function liker($T_id, $id){
     global $connection;
     /*
@@ -99,6 +122,10 @@ function liker($T_id, $id){
 
 }
 
+
+
+/********************** TWEET ************************/
+
 /*
  * Renvoie le nombre de likes du tweet $T_id
  */
@@ -115,7 +142,7 @@ function getTweetLikes($T_id){
  */
 function getTweetAmis($id){
     global $connection;
-    $sth = $connection->prepare('SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne1=auteur WHERE personne2=\''.$id.'\' UNION SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne2=auteur WHERE personne1=\''.$id.'\'');
+    $sth = $connection->prepare('SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne2=auteur WHERE personne1=\''.$id.'\' ');
     $sth->execute();
     $result = $sth->fetch(PDO::FETCH_OBJ);
     $res = array();
@@ -132,13 +159,12 @@ function getTweetAmis($id){
 
         $res[$i][] = $tweet;
         $i++;
-       /* echo "[\"".prenom_user($result->auteur)."\",\"$result->contenu\",\"$result->date_envoie\",\"$result->id\",\"".$likes->nb."\"]";
-        $result = $sth->fetch(PDO::FETCH_OBJ);*/
+        /* echo "[\"".prenom_user($result->auteur)."\",\"$result->contenu\",\"$result->date_envoie\",\"$result->id\",\"".$likes->nb."\"]";
+         $result = $sth->fetch(PDO::FETCH_OBJ);*/
         $result = $sth->fetch(PDO::FETCH_OBJ);
-     }
-     return $res;
+    }
+    return $res;
 }
-
 
 
 function ecrireCommentaire($idParent, $type, $contenu, $TargetOwner){
@@ -196,13 +222,225 @@ function getTweetId($id){
 }
 
 
+/*
+ * ajoute un tweet
+ * Renvoie le tweet qui vient d'être ajouter
+ */
+function ajoutTweet($content)
+{
+    global $tweetManager;
+    $date = new DateTime();
+    $tweet = new Tweet\Tweet();
+
+    $tweet
+        ->setAuteur($_SESSION['id'])
+        ->setDate($date)
+        ->setContenu($content);
+
+    $tweetManager->add($tweet);
+
+    return $tweet;
+}
+
+
+/********************** COMMENTAIRE ***************************/
+
+/*
+ * Renvoie les commentaires d'un tweet ou d'un commentaire
+ *
+ * $type = 'tweet' ou 'commentaire
+ */
+function getCommentaires($T_id, $type) {
+    global $connection;
+    $sth = $connection->prepare('SELECT * FROM "commentaire" WHERE parent_id = \''.$T_id.'\' AND parent_type =\''.$type.'\' ORDER BY date_envoie DESC');
+    $sth->execute();
+    $result = $sth->fetch(PDO::FETCH_OBJ);
+
+    $Res = array();
+
+    while ($result) {
+        $com = new Commentaire\Commentaire();
+
+        $com->setId($result->id)
+            ->setOwnerId($result->owner_id)
+            ->setTargetId($result->target_id)
+            ->setDate(new \DateTime($result->date_envoie))
+            ->setContenu($result->contenu)
+            ->setParentId($result->parent_id)
+            ->setParentType($result->parent_type);
+
+        $Res[] = $com;
+        $result = $sth->fetch(PDO::FETCH_OBJ);
+    }
+
+    return $Res;
+}
+
+
+
 /********************* HASHTAG *********************/
 
 /*
- * Renvoie la liste des hashtags présent d'un tweet
- *//*
-function ($text){
+ * Renvoie la liste des hashtags présents dans un tweet
+ */
+function listeHashtags($text){
+    $text = str_replace("\n","",$text);
+    $text = str_replace("\r","",$text);
+    $text = str_replace("\t","",$text);
 
+    $T = explode(" ", $text);
+    $res = array();
+    for ($i=0; $i<count($T); $i++){
+        if (isset($T[$i][0])) {
+            if ('#' == $T[$i][0]) {
+                $res[] = addslashes(strtolower(substr($T[$i], 1)));
+            }
+        }
+    }
+    return $res;
 }
-*/
+
+/*
+ * ajoute tous les hashtags présents dans un tweet
+ */
+function ajoutHashtag($tweet)
+{
+    global $connection;
+    global $hashtagManager;
+    $res = listeHashtags($tweet->getContenu());
+    $i = 0;
+    while ($i < count($res)) {
+        $sth = $connection->prepare('SELECT * FROM "hashtag" WHERE mot = \''.$res[$i].'\'');
+        $sth->execute();
+        $result = $sth->fetch(PDO::FETCH_ASSOC);
+        if (!$result) {
+            /* Ajout du nouveau Hashtag */
+            $hashtag = new \Hashtag\Hashtag();
+            $hashtag->setMot($res[$i]);
+            $hashtagManager->add($hashtag);
+            /* Ajout dans hashtagEtTweet */
+            $sth = $connection->prepare('SELECT * FROM "hashtag" WHERE mot =\''.$res[$i].'\'');
+            $sth->execute();
+            $result = $sth->fetch(PDO::FETCH_ASSOC);
+        }
+
+        $sth2 = $connection->prepare('INSERT INTO "hashtagEtTweet"(id_hashtag, id_tweet) VALUES (:id_hashtag, :id_tweet)');
+        $sth2->bindValue(':id_hashtag', $result['id']);
+        $sth2->bindValue(':id_tweet', $tweet->getId());
+        $sth2->execute();
+        $i++;
+      //  echo "id TWEET =".$tweet->getId();
+    }
+}
+
+/*
+ * Renvoie l'id d'un hashtag, -1 sinon
+ */
+function getHashtagId($mot){
+    global $connection;
+    $sth = $connection->prepare('SELECT * FROM "hashtag" WHERE mot = \''.strtolower($mot).'\'');
+    $sth->execute();
+    $result = $sth->fetch(PDO::FETCH_ASSOC);
+    if ($result) {
+        return $result['id'];
+    }
+    return -1;
+}
+
+/*
+ * renvoie la liste des tweets contenant l'hashtag d'id $idH
+ */
+function getTweetsHashtag($idH){
+    global $connection;
+    $req = $connection->prepare('SELECT * FROM "hashtagEtTweet" JOIN "tweet" ON id_tweet=id WHERE id_hashtag = \''.$idH.'\'');
+    $req->execute();
+    $result = $req->fetch(PDO::FETCH_OBJ);
+    $T = array();
+    $i=0;
+    while($result) {
+        $T[$i][0] = getTweetLikes($result->id);
+
+        $tweet = new Tweet\Tweet();
+        $tweet->setAuteur($result->auteur)
+            ->setContenu($result->contenu)
+            ->setDate(new \DateTime($result->date_envoie))
+            ->setId($result->id);
+
+        $T[$i][1] = $tweet;
+        $result = $req->fetch(PDO::FETCH_OBJ);
+
+        $i++;
+    }
+    return $T;
+}
+
+
+/****************** MESSAGE ********************/
+/*
+ * ajoute un tweet
+ * Renvoie le tweet qui vient d'être ajouter
+ */
+function ajoutMessage($content, $recepteur, $emetteur)
+{
+    global $messageManager;
+    $date = new DateTime();
+    $msg = new \Message\Message();
+
+    $msg->setEmetteur($emetteur)
+        ->setRecepteur($recepteur)
+        ->setDate($date)
+        ->setContenu($content);
+
+    $messageManager->add($msg);
+
+    return $msg;
+}
+
+
+/******************* Profil *****************/
+
+function getNbAmis($id){
+    global $connection;
+    $nbamis_res = $connection->prepare('SELECT count(id) AS nb FROM "amis" WHERE personne2='.$id);
+    $nbamis_res->execute();
+    $nbamis = $nbamis_res->fetch(PDO::FETCH_OBJ);
+    return $nbamis->nb;
+}
+
+
+function getNbTweet($id){
+    global $connection;
+    $nbtweet_res = $connection->prepare('SELECT count(id) AS nb FROM "tweet" WHERE auteur='.$id);
+    $nbtweet_res->execute();
+    $nbtweet = $nbtweet_res->fetch(PDO::FETCH_OBJ);
+    return $nbtweet->nb;
+}
+
+function is_ami($id1,$id2){
+    global $connection;
+    $req = $connection->prepare("SELECT count(id) as nb FROM \"amis\" WHERE personne1 = $id1 AND personne2=$id2");
+    $req->execute();
+    $req = $req->fetch(PDO::FETCH_OBJ);
+    return ($req->nb!=0);
+}
+
+function ajouteramis($id1,$id2){
+    global $connection;
+    $sth = $connection->prepare('INSERT INTO "amis"(personne1, personne2) VALUES (:id1, :id2)');
+    $sth->bindValue(':id1', $id1);
+    $sth->bindValue(':id2', $id2);
+    $sth->execute();
+}
+
+function supprimeramis($id1,$id2){
+    global $connection;
+    $connection->exec("DELETE FROM \"amis\" WHERE personne1 = $id1 AND personne2=$id2");
+}
+
+
+
+
+
+
+
 

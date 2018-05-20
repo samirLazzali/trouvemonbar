@@ -1,0 +1,13 @@
+\select@language {french}
+\contentsline {part}{Pr\IeC {\'e}ambule}{1}{section*.1}
+\contentsline {paragraph}{\relax \fontsize {24.88}{30}\selectfont {Pr\IeC {\'e}ambule}}{2}{section*.2}
+\contentsline {paragraph}{}{2}{section*.3}
+\contentsline {section}{\numberline {1}Probl\IeC {\'e}matique}{3}{section.1}
+\contentsline {section}{\numberline {2}L'inscription}{3}{section.2}
+\contentsline {section}{\numberline {3}Les Abonnements}{3}{section.3}
+\contentsline {section}{\numberline {4}Les Tweets}{3}{section.4}
+\contentsline {section}{\numberline {5}Les Commentaires}{3}{section.5}
+\contentsline {section}{\numberline {6}Les Hashtags}{3}{section.6}
+\contentsline {section}{\numberline {7}Les Messages Priv\IeC {\'e}s}{4}{section.7}
+\contentsline {section}{\numberline {8}R\IeC {\'e}partition des t\IeC {\^a}ches}{5}{section.8}
+\contentsline {section}{\numberline {9}Conclusion}{5}{section.9}
