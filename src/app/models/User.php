@@ -43,7 +43,7 @@ class User
     ///
     /// Object part
     ///
-    public $userid, $password,$nick, $mail, $firstname, $lastname;
+    public $userid, $password,$nick, $mail, $firstname, $lastname, $isAdmin;
     /**
      * User constructor.
      * @param $idUser int
@@ -60,11 +60,16 @@ class User
         $user = $query->fetch();
 
         //inject results from database columns into the object
-        foreach (['userid', 'password', 'nick', 'mail', 'firstname', 'lastname'] as $attr)
+        foreach (['userid', 'password', 'nick', 'mail', 'firstname', 'lastname', 'isAdmin'] as $attr)
         {
             $this->$attr = $user->$attr;
         }
 
+    }
+
+    public function isAdmin()
+    {
+        return $this->isAdmin;
     }
 
     /**
@@ -180,12 +185,8 @@ class User
     {
 
         $query = db()->prepare("INSERT INTO mastery (gamesystemid, userid) VALUES( ?, ?)");
-        $success = $query->execute([$gamesystemid, $userid]);
-        if($success)
-            return true;
+        return $query->execute([$gamesystemid, $userid]);
 
-        else
-            return false;
     }
 
     /**
@@ -213,6 +214,17 @@ class User
     }
 
     /**
+     * @param system test
+     * @return bool true id the user gm's this system.
+     */
+    public function masters($gamesystemid)
+    {
+        $query = db()->prepare("SELECT * FROM mastery WHERE userid = ? AND gamesystemid = ?");
+        $query->execute([$this->userid, $gamesystemid]);
+        return $query->rowCount() > 0;
+
+    }
+    /**
      * @return array list of the games for which the user is GM
      */
     public function gm_for()
@@ -233,11 +245,15 @@ class User
     }
 
     /**
-     * todo idem with systems
+     * idem with systems
      */
     public function hisSystems()
     {
 
+        $query = db()->prepare("SELECT * FROM user NATURAL JOIN mastery NATURAL JOIN gamesystem WHERE userid= ?");
+        $query->execute([$this->userid]);
+
+        return $query->fetchAll();
     }
 
     ///

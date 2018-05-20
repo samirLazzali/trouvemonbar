@@ -17,17 +17,20 @@
 require "../src/app/helpers.php";
 $gamelist = Game::gamelist();
 
-
-//the create game button is disabled if the user is not logged in
-$disabled = Auth::logged() ? "" : "disabled";
-
 if(Auth::logged())
 {
+    $disabled="";
+
+    Auth::get_user();
+    $isAdmin=Auth::user()->isAdmin();
+
     $layout = new Layout("users");
     include view("game_list_view.php");
     $layout->show('Tables');
 }
 else {
+    $disabled="disabled";
+    $isAdmin = false;
     $layout = new Layout("visitors");
     include view("game_list_view.php");
     $layout->show('Tables');

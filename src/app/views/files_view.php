@@ -15,8 +15,12 @@
         $flag=false;
         foreach ($filelist as $file) {
             if ($file->userid == $userid) {
+                echo "<div>";
                 File::download($file->filename, $file->fileid);
-                echo "</br>";
+
+                //the admin can remove file
+                if($isAdmin) echo "<a href='actions/remove_file.php?file=$file->fileid' class='btn btn-danger btn-sm'> X </a>";
+                echo "</div>";
                 $flag = true;
             }
 

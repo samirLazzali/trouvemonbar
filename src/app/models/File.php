@@ -8,13 +8,34 @@
 
 class File
 {
+    private $fileid, $filename, $filehash, $private, $extension, $userid;
 
-
-    public function __construct()
+    public function __construct($fileid)
     {
+        //query
+        $query = db()->prepare("SELECT * FROM file WHERE fileid = ?");
+        $query->execute([$fileid]);
 
+        if($query->rowCount() != 1) throw  new  Exception("File can't be found :".$fileid );
+
+        $file = $query->fetch();
+
+        //inject results from database columns into the object
+        foreach (['fileid', 'filename', 'filehash', 'private', 'extension', 'userid'] as $attr)
+        {
+            $this->$attr = $file->$attr;
+        }
     }
 
+    /**
+     * @return bool was the deletion succesful
+     */
+    public function remove()
+    {
+        unlink("../../documents/".$this->fileid.$this->filename);
+        $query = db()->prepare("DELETE FROM file WHERE fileid = ?");
+        return $query->execute([$this->fileid]);
+    }
     /**
      * @param $filename
      * @param $filehash
@@ -84,3 +105,17 @@ class File
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

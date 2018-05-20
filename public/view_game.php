@@ -35,6 +35,9 @@ if(Auth::logged()) {
         $comments = $game->comments();
         $players = $game->players();
         $isOwner = $game->getCreator() == $_SESSION['user'];
+
+        Auth::get_user();
+        $isAdmin = Auth::user()->isAdmin();
         $files = $game->files();
         $layout = new Layout("users");
         include view("game_view.php");
@@ -64,12 +67,24 @@ else {
         $players = $game->players();
         $files = $game->files();
         $isOwner = false;
+        $isAdmin = false;
 
         $layout = new Layout("visitors");
         include view("game_view.php");
         $layout->show($game->getName());
     }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-
+<div class="container">
 <!--search bar -->
 <div align="center">
     <form id="form_search" action="search_user.php" method="get" class="mt-2">
@@ -29,11 +29,11 @@
     <?php foreach ($result as $u){?>
         <tr>
             <td scope="row"><a href="user_profile.php?user=<?php echo $u->userid ?>"> <?php echo $u->nick ?></a> </td>
-            <!--<td><a href="view_game.php?id=<?=$u->gameid ?>"> <?=$u->gamename ?></a> </td>-->
 
         </tr>
     <?php }?>
     </tbody>
 
 </table>
+</div>
 </div>

@@ -36,7 +36,6 @@ function add_file()
     input.setAttribute("value", JSON.stringify(new_file));
 
     fd.appendChild(input);
-
     files.push(new_file);
     update_files_display();
 

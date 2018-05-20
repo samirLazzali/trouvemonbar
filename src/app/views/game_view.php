@@ -90,13 +90,14 @@
 
             $userid = $comment->userid;
             $gameid = $comment->gameid;
+            $commentid = $comment->commentid;
             echo "<li class='list-group-item'>  
                                 <div>
-                                    <a href='user_profile.php?user=$userid'> ". Comment::author($comment->commentid)."</a><span>, le ". date("d/m/Y", strtotime($comment->commentdate)) ." : </span> ";
+                                    <a href='user_profile.php?user=$userid'> ". Comment::author($commentid)."</a><span>, le ". date("d/m/Y", strtotime($comment->commentdate)) ." : </span> ";
+
             //the owner can add players WHO ARE NOT YET PARTICIPATNG to the game with this button
             if($isOwner  && !Participation::is_participating($userid, $gameid))
-                echo "<a    
-                                            class='btn-primary btn btn-sm' 
+                echo "<a class='btn-primary btn btn-sm' 
                                             href='actions/add_player.php?user=$userid&game=$gameid'
                                             data-toggle='tooltip'
                                             title='Ajouter ce joueur à cette table'
@@ -104,10 +105,20 @@
                                 + </a>";
 
             echo" </div>
-                                 <div>
-                                      $comment->content
-                                </div>
-                                </li>";
+                  <div>
+                  $comment->content
+                  </div>";
+                              
+
+            //an admin can remove the comment
+            if($isAdmin)
+            {
+                echo "<a class='btn-danger btn btn-sm float-right'
+                          href='actions/remove_comment_action.php?comment=$commentid&game=$gameid'>
+                          Effacer
+                      </a>";
+            }
+            echo "  </li>";
         }
         ?>
     </ul>

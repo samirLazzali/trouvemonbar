@@ -14,10 +14,11 @@ if(isset($_POST["password"]))
 else
     $password = false;
 
-if(isset($_POST["gamesystem"]))
-    $gamesystemid = $_POST["gamesystem"];
+if(isset($_POST["gamesystems"]))
+    $gamesystems = $_POST["gamesystems"];
 else
-    $gamesystemid = false;
+    $gamesystems = false;
+
 
 $mail= htmlspecialchars($_POST["mail"]);
 $nick= htmlspecialchars($_POST["nick"]);
@@ -35,35 +36,36 @@ catch(Exception $e)
 
 if($nick == null)
 {
-    flash(" Pseudo ne peut pas être vide!!!");
+    flash(" Pseudo ne peut pas être vide.");
     redirect("../edit_profile.php");
 }
 if($mail == null)
 {
-    flash(" E-mail ne peut pas être vide!!!");
+    flash(" E-mail ne peut pas être vide.");
     redirect("../edit_profile.php");
 }
 
+//insert each new game system
+if($gamesystems !== false) {
+    foreach ($gamesystems as $gamesystem) {
+        $data = json_decode($gamesystem, true);
 
-$masterylist=User::masterylist($user->getId());
+        //insert only the ones not already in the db
+        if(!$user->masters($data['id'])) {
 
-if($gamesystemid == false)
-    User::deleteMastery($user->getId());
-else
-{
-    if(count($masterylist) !== count($gamesystemid))
-        User::deleteMastery($user->getId());
-    foreach ($gamesystemid as $gamesystem)
-    {
-        $user::insertMastery($gamesystem,$user->getId());
+            if(!User::insertMastery($data['id'], $user->getId()))
+                flash("Erreur : un de vos sytème n'a pas pu être ajouté");
+        }
+        else
+            flash("Système : ".$data['name']." est déjà enregistré");
     }
 }
 
+//update profile
 if($user->updateUser_profile($nick,$firstname,$lastname,$mail,$password))
 {
-        flash(" réussir à changer votre profile ");
-        Auth::logout();
-        redirect("../authentication.php");
+        flash("Profil modifié");
+        redirect("../user_profile.php?user=$user->userid");
 }
 else {
     flash("Erreur : le profile n'a pas pu être changé");
@@ -71,6 +73,15 @@ else {
 
 
 }
+
+
+
+
+
+
+
+
+
 
 
 

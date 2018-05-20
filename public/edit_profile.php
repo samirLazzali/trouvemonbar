@@ -21,5 +21,5 @@ $gamesystems = Gamesystem::make_list();
 //display view
 $layout = new Layout("users");
 include view("edit_profile_view.php");
-$layout->show("edit profile ");
+$layout->show("Modifier mon profil");
 

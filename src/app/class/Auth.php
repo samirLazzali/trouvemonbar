@@ -55,6 +55,7 @@ class Auth
          return self::$user;
     }
 
+
     /**
      * @return true if user is logged in
      */

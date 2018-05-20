@@ -7,7 +7,6 @@
  *
  */
 require "../../src/app/helpers.php";
-include "../../src/app/models/File.php";
 
 if (!Auth::logged())
     redirect("index.php");
@@ -38,7 +37,7 @@ if($error == 0){
     }
     
     //create the path
-    $path = "../documents/";
+    $path = "../../documents/";
     if(!file_exists($path)){
         mkdir($path,0777,true);
         chmod($path,0777);
@@ -48,9 +47,9 @@ if($error == 0){
 
     if(@move_uploaded_file($tmp_name,$destination)){
 
-        $filehash=User\File::filehash($destination);
+        $filehash=File::filehash($destination);
 
-        if($id=User\File::insert_file($filename,$filehash,$_SESSION['user']))
+        if($id=File::insert_file($filename,$filehash,$_SESSION['user']))
         {
             $newname=$path.$id.$filename;
             rename($destination,$newname);

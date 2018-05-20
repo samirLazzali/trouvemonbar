@@ -199,6 +199,15 @@ class Game
         return $query->fetchAll();
     }
 
+    /**
+     * @return bool was the game properly removed
+     */
+    public function remove()
+    {
+        $query = db()->prepare("DELETE FROM game WHERE gameid = ?");
+        return $query->execute([$this->gameid]);
+    }
+
 }
 
 

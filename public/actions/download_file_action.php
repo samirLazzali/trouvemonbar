@@ -7,7 +7,7 @@
  */
 
 $file_name=$_GET['filename'];
-$path = "../documents/";
+$path = "../../documents/";
 $file_name=iconv("utf-8","gb2312",$file_name);
 $file_name=$path.$file_name;
 

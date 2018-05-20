@@ -21,6 +21,7 @@ catch(Exception $e)
 }
 $games = $user->gm_for();
 $participations = $user->pc_for();
+$systems = $user->hisSystems();
 $isOwner = $user->getId() == $_SESSION['user'];
 
 $layout = new Layout("users");

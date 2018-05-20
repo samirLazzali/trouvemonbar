@@ -79,6 +79,17 @@ class Comment
             return db()->lastInsertId("comment_commentid_seq");
     }
 
+    /**
+     * @brief remove the comment corresponsing to the id passsed as parameters
+     * @param $commentid int id of the comment
+     * @return bool was the deletion successful
+     */
+    public static function remove_comment($commentid)
+    {
+        $query = db()->prepare("DELETE FROM comment WHERE commentid = ?");
+        return $query->execute([$commentid]);
+    }
+
 
 
 
