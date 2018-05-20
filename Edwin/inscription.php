@@ -51,7 +51,7 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription') {
 <head>
 <title>Inscription</title>
 </head>
-<h1>BIENVENU SUR TWITIIE </h1>
+<h1>BIENVENUE SUR TWITIIE </h1>
 <body>
 Inscription à l'espace membre :<br/>
 <form action="inscription.php" method="post">

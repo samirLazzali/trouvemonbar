@@ -15,7 +15,8 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
     if ($data[0] == 1) {
         session_start();
         $_SESSION['login'] = $_POST['login'];
-        header('Location: acceuil.php');
+        //$_SESSION['admin'] = 
+        header('Location: accueil.php');
         exit();
     }
     // si on ne trouve aucune réponse, le visiteur s'est trompé soit dans son login, soit dans son mot de passe
@@ -24,7 +25,7 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
     }
     // sinon, alors la, il y a un autre problème
     else {
-        $erreur = 'Probème dans la base de données : plusieurs membres ont les mêmes identifiants de connexion.';
+        $erreur = 'Problème dans la base de données : plusieurs membres ont les mêmes identifiants de connexion.';
     }
     }
     else {

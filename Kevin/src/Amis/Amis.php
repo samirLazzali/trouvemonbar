@@ -19,7 +19,6 @@ class Amis
     private $personne2;
 
 
-
     //Liste des setters et getters
 
     /**
@@ -32,6 +31,7 @@ class Amis
 
     /**
      * @param int $id
+     * @return Amis
      */
     public function setId($id)
     {
@@ -49,7 +49,8 @@ class Amis
     }
 
     /**
-     * @param string $emetteur
+     * @param string $personne1
+     * @return Amis
      */
     public function setPersonne1($personne1)
     {
@@ -67,7 +68,8 @@ class Amis
     }
 
     /**
-     * @param string $recepteur
+     * @param string $personne2
+     * @return Amis
      */
     public function setPersonne2($personne2)
     {

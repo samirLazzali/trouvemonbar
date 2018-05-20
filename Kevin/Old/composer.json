@@ -8,7 +8,8 @@
             "Message\\": "src/Message/",
             "Amis\\": "src/Amis/",
             "Tweet\\": "src/Tweet/",
-            "Commentaire\\": "src/Commentaire/"
+            "Commentaire\\": "src/Commentaire/",
+            "Hashtag\\": "src/Hashtag/"
         }
     },
     "autoload-dev": {

@@ -38,6 +38,7 @@ class tweet{
 
     /**
      * @param int $id
+     * @return Tweet
      */
     public function setId($id)
     {
@@ -55,6 +56,7 @@ class tweet{
 
     /**
      * @param string $emetteur
+     * @return Tweet
      */
     public function setAuteur($auteur)
     {
@@ -72,6 +74,7 @@ class tweet{
 
     /**
      * @param \DateTimeInterface $date
+     * @return Tweet
      */
     public function setDate($date)
     {
@@ -89,6 +92,7 @@ class tweet{
 
     /**
      * @param string $contenu
+     * @return Tweet
      */
     public function setContenu($contenu)
     {

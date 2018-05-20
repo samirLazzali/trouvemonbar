@@ -47,6 +47,7 @@ class Message
 
     /**
      * @param int $id
+     * @return Message
      */
     public function setId($id)
     {
@@ -64,6 +65,7 @@ class Message
 
     /**
      * @param string $emetteur
+     * @return Message
      */
     public function setEmetteur($emetteur)
     {
@@ -81,6 +83,7 @@ class Message
 
     /**
      * @param string $recepteur
+     * @return Message
      */
     public function setRecepteur($recepteur)
     {
@@ -98,6 +101,7 @@ class Message
 
     /**
      * @param \DateTimeInterface $date
+     * @return Message
      */
     public function setDate($date)
     {
@@ -115,6 +119,7 @@ class Message
 
     /**
      * @param string $contenu
+     * @return Message
      */
     public function setContenu($contenu)
     {

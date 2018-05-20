@@ -42,7 +42,7 @@ enTete("Tweet", "CSS/style.css");
 afficheMenu();
 titreH1("Tweet de ".prenom_user($tweet->getAuteur()));
 ?>
-
+<script src="fonctionsJS.js"></script>
 <script>
     function afficherChampId(ID){
         document.getElementById(ID).style.display = "inline";
@@ -63,22 +63,21 @@ titreH1("Tweet de ".prenom_user($tweet->getAuteur()));
 <div class="tweet">
     <div class="tweettext">
     <?php
-        afficheTweet($tweet);
-     //   echo '<button onclick="afficherChampId('.$tweet->getId().');">Répondre</button></br>';
-
+        afficheTweet($tweet, getTweetLikes($tweet->getId()));
+        print "</br></br>";
         echo '<form method="POST" action="Commentaire/envoiCommentaire.php">'."\n";
         echo '<input type="hidden" name="type_parent" value="tweet">'."\n";
         echo '<input type="hidden" name="id_parent" value="'.$tweet->getId().'">'."\n";
         echo '<input type="hidden" name="TargetOwner" value="'.$tweet->getAuteur().'">'."\n";
         echo '<input type="text" size=50 name="contenu" placeholder="Veuillez saisir votre commentaire ...">'."\n";
-        echo '<input type="submit" value="Envoyer" onclick="alert(\'Commentaire Envoyé\')">'."\n";
+        echo '<input type="submit" value="Envoyer" onclick="alert(\'Commentaire Envoyé\')" class="inputbutton">'."\n";
         echo "</form>\n";
 
     if (isset($_SESSION['admin'])) {
         //AFFICHE BOUTON SUPPRESSION*/
         echo '<form method="POST" action="Tweet/deleteTweet.php">'."\n";
         echo '<input type="hidden" name="idTweet" value="'.$tweet->getId().'">'."\n";
-        echo '<input type="button" value="Supprimer le tweet" onclick="if(confirm(\'Commentaire Envoyé\')){this.form.submit();}">'."\n";
+        echo '<input type="button" value="Supprimer le tweet" onclick="if(confirm(\'Commentaire Envoyé\')){this.form.submit();}" class="inputbutton">'."\n";
         echo "</form>\n";
     }
     ?>
