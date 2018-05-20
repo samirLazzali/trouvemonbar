@@ -1,0 +1,46 @@
+<div id=form class="form" style="display: none;">
+   <ul class="tab-group">
+      <li class="tab active">
+         <a href=#login>Connexion</a>
+      </li>
+      <li class="tab">
+         <a href=#signup>Inscription</a>
+      </li>
+   </ul>
+   <div class="tab-content">
+      <div id=login>
+         <h1>Ravi de vous revoir !</h1>
+         <form action=main.php?login method=post>
+            <div class="field-wrap">
+               <label>Adresse Email<span class="req">*</span></label>
+               <input type=email name=email required= autocomplete=off>
+            </div>
+            <div class="field-wrap">
+               <label>Mot de passe<span class="req">*</span></label>
+               <input type=password name=password required= autocomplete=off>
+            </div>
+            <p class="forgot"><a href=#>Oublié son mot de passe ?</a></p>
+            <button class="button button-block" name=login>Se connecter</button>
+         </form>
+      </div>
+      <div id=signup>
+         <h1>C'est gratuit !</h1>
+         <form action=main.php?create method=post>
+            <div class="field-wrap">
+               <label>Adresse Email<span class="req">*</span></label>
+               <input type=email name=email required= autocomplete=off>
+            </div>
+            <div class="field-wrap">
+               <label>Surnom</label> <input type=text name=username autocomplete=off>
+            </div>
+            <div class="field-wrap">
+               <label>Créer un mot de passe<span class="req">*</span></label>
+               <input type=password name=password required= autocomplete=off>
+            </div>
+            <span class="errorDisp"></span>
+            <button type=signup class="button button-block" name=signup>Créer un compte</button>
+         </form>
+      </div>
+   </div>
+</div>
+<script src=js/login.js></script>
