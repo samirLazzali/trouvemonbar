@@ -1,46 +1,46 @@
 <div id="form_border">
    <ul class="tab-group">
    <li class="nature <?php print (isset($annonce) && $annonce->isOffer?"active":"none"); ?>"><a href=#offer>Offre</a>
-      <li class="nature <?php print (isset($annonce) && $annonce->isOffer?"none":"active"); ?>"><a href=#query>Demande</a>
+      <li class="nature <?php print (isset($annonce) && $annonce->isOffer?"none":"active"); ?>"><a href=#query>Recherche</a>
    </ul>
    <ul class=tab-group>
-      <li class="tab active"><a href=#money>Payer</a>
-      <li class=tab><a href=#service>Echanger</a>
+      <li class="tab active"><a href=#money>Argent</a>
+      <li class=tab><a href=#service>Service</a>
       <li class=tab><a href=#free>Gratuit</a>
    </ul>
-   <form name=annonce class=create method=post action=create.php>
+   <form name=annonce class=create method=post action=<?php print (isset($annonce)?"edit.php?edit=$annonce->id":"create.php"); ?>>
       <div class=tab-content>
          <div id=money>
-            <div class=field-wrap><label>Montant (€)</label>
-		<input type=number name=annoncepayamount <?php print (isset($annonce)?"value=\"$annonce->paiement\"":"");?>>
+            <div class=field-wrap><label>Prix proposé</label>
+      <input type=number name=annoncepayamount <?php print (isset($annonce)?"value=\"$annonce->paiement\"":"");?>>
             </div>
          </div>
          <div id=service>
-            <div class=field-wrap><label>Nature de l'échange</label>
+            <div class=field-wrap><label>Service proposé</label>
                <input name=annonceswapnature <?php print (isset($annonce)?"value=\"$annonce->service\"":"");?>>
             </div>
          </div>
       </div>
-      <div class=field-wrap><label>Titre<span class=req>*</span></label>
+      <div class=field-wrap><label>Titre de l'annonce<span class=req>*</span></label>
          <input name=annoncetitle required <?php print (isset($annonce)?"value=\"$annonce->title\"":"");?>>
       </div>
-      <div class=field-wrap><label>Genre<span class=req>*</span></label>
+      <div class=field-wrap><label>Mots clé<span class=req>*</span></label>
          <input name=annoncegenre required <?php print (isset($annonce)?"value=\"$annonce->genre\"":"");?>>
       </div>
       <div class=field-wrap><label class=big>Description<span class=req>*</span></label>
          <textarea name=annoncedesc cols=30 rows=3 maxlength=240 required><?php print (isset($annonce)?$annonce->content:"");?></textarea>
       </div>
-      <input type="radio" class="radio" name="offer" id="isoffer" value="true" checked>
+      <input type="radio" class="radio" name="offer" id="isoffer" value="true">
       <div class=smselect>
          <select name=annoncesemester class=styled-select black rounded>
-	 <option value disabled <?php print (isset($annonce)?"":"selected"); ?>>Semestre
+    <option value disabled <?php print (isset($annonce)?"":"selected"); ?>>Semestre
             <option value=1 class=toggle <?php print (isset($annonce) && $annonce->semestre == 1?"selected":""); ?>>S1
             <option value=2 class=toggle <?php print (isset($annonce) && $annonce->semestre == 2?"selected":""); ?>>S2
             <option value=3 class=toggle <?php print (isset($annonce) && $annonce->semestre == 3?"selected":""); ?>>S3
             <option value=4 class=toggle <?php print (isset($annonce) && $annonce->semestre == 4?"selected":""); ?>>S4
             <option value=5 class=toggle <?php print (isset($annonce) && $annonce->semestre == 5?"selected":""); ?>>S5
          </select>
-	 <div class=smodule id=selectmodule1 style=display:<?php print (!(isset($annonce) && $annonce->semestre == 1)?"none":"inline"); ?>>
+    <div class=smodule id=selectmodule1 style=display:<?php print (!(isset($annonce) && $annonce->semestre == 1)?"none":"inline"); ?>>
             <select name=annoncemodule1>
                <option value disabled selected>Module
                <option value=ECO1 <?php print (isset($annonce) && $annonce->module == 'ECO1'?"selected":""); ?>>ECO1
@@ -145,8 +145,8 @@
             </select>
          </div>
       </div>
-      <div class=choice><input type=submit name=submit value=Créer>
-         <input type=reset name=startover value=Supprimer>
+      <div class=choice><input type=submit name=submit value=<?php print (isset($annonce)?"Modifier":"Poster"); ?>>
+         <input type=<?php print (isset($annonce)?"submit":"reset"); ?> name=startover value=Effacer>
       </div>
    </form>
 </div>

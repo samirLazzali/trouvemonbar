@@ -9,13 +9,13 @@ if (isset($_GET['edit']) && $_GET['edit']) {
     $idToGet = $_GET['edit'];
     $annonce = Annonce::getAnnonceById($idToGet);
 
-    if ($_SESSION['username'] != $annonce->op && !$_SESSION['admin']) {
+    if ($annonce == null || ($_SESSION['username'] != $annonce->op && !$_SESSION['admin'])) {
 	header("Refresh:0; url=createForm.php");
 	exit();
     }
 }
 
-header_t("Créer une annonce");
+header_t("Create Annonce");
 
 dispSidebar();
 ?>
