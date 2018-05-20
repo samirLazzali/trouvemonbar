@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -18,5 +17,6 @@
     <li><a href="posts.php">My posts</a></li>
     <li><a href="profile.php">Profile</a></li>
 </ul>
+<?php include("includes/voirprofile.php"); ?>
 </body>
 </html>

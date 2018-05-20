@@ -20,7 +20,7 @@ if (empty($_POST['pseudo'])) // Si on la variable est vide, on peut considérer 
 	<label for="email">* Votre adresse Mail :</label><input type="text" name="email" id="email" /><br />
 	</fieldset>
 	<fieldset><legend>Profil sur le forum</legend>
-	<label for="avatar">Choisissez votre avatar :</label><input type="file" name="avatar" id="avatar" />(Taille max : 10Ko<br />
+	<label for="avatar">Choisissez votre avatar : </label><input type="file" name="avatar" id="avatar" />(Taille max : 10Ko)<br />
 	</fieldset>
 	<p><i>Les champs précédés d un * sont obligatoires</i></p>
 	<p><input type="submit" value="S\'inscrire" /></p></form>
