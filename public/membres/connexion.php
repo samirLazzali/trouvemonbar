@@ -50,12 +50,9 @@ if($_POST['validate'] != 'ok') {
 					<td><input type="hidden" name="validate" id="validate" value="ok"/></td>
 					<td></td>
 					</tr>
-					<tr>
-					<td><input type="submit" value="Connexion" /></td>
-					<td><input type="checkbox" name="cookie" id="cookie"/> <label for="cookie">Me connecter automatiquement à mon prochain passage.</label></td>
-
-					</tr>
 				</table>
+					<input type="submit" value="Connexion" /><br/>
+					<input type="checkbox" name="cookie" id="cookie"/> <label for="cookie">Me connecter automatiquement à mon prochain passage.</label>
 				</fieldset>
 			</form>
 			

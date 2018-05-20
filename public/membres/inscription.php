@@ -55,12 +55,8 @@ include('../includes/top.php');
 					<td><input type="integer" name="phone_number" id="phone_number" size="30" /></td>
 					<td></td>
 					</tr>
-					<tr>
-					<td><input type="submit" value="Valider" /></td>
-					<td></td>
-					<td></td>
-					</tr>
 				</table>
+					<input type="submit" value="Valider" />
 				</fieldset>
 			</form>
 		</div>

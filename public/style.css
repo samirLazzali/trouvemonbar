@@ -4,26 +4,29 @@ html {
 
 body {
     min-height:100%;
-    background-color: LightCyan;
+    background-color: LightSalmon;
     maring :0;
     padding:0;
     position:relative;
     cursor :url("img/paw.png"), pointer;
 }
+
 #bandeau{
     text-align :center;
-    color : White;
+    color : White ;
     font-size: 105px;
     background-image:url("img/BandeauChats.png");
     background-repeat:repeat-x;
-    background-color : OrangeRed;
+    background-color : DeepPink;
 }
+
 #menu{
-    background-color:Aqua;
+    background-color:Orchid;
     padding: 10px 0px;
 }
 
 #menu a {
+    color : Navy;
     float :center left;
     padding: 10px 16px;
     text-align:center;
@@ -41,8 +44,13 @@ body {
     text-align:center;
 }
 #contenu {
-    background-image:url("img/paw_bckgrnd.png");
-    background-repeat : repeat;
+    margin : auto;
+    width : 1000px;
+    background-color: LightSkyBlue;
+    padding : 5px 50px;
+    padding-bottom: 60px;
+    border-radius :50px;
+    
 }
 
 #contenu h1{
@@ -53,5 +61,14 @@ body {
 #contenu a:hover{
     color : red;
 }
-
-
+tr > td:first-child {
+    text-align : right;
+}
+td input {
+    width : 250px;
+    height : 25px;
+}
+input#cookie{
+    width : 5px;
+    height :5px;
+}
