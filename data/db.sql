@@ -22,6 +22,8 @@ CREATE TABLE IF NOT EXISTS Connected(
 DROP TABLE IF EXISTS Cats;
 CREATE TABLE IF NOT EXISTS Cats(
        id_cat SERIAL PRIMARY KEY NOT NULL,
+       id_user SERIAL NOT NULL,
+       FOREIGN KEY (id_user) REFERENCES Utilisateur.id_user,
        name_cat VARCHAR NOT NULL,
        purety BOOLEAN,
        pattern type_pattern, /* NULL s'il n'y en a pas */
