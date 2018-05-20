@@ -6,9 +6,6 @@
  * Time: 18:17
  */
 
-namespace User;
-
-
 class File
 {
 
@@ -51,7 +48,7 @@ class File
 
     /**
      * @param $filepath
-     * @return file hashcode
+     * @return string hashcode
      */
     public static function filehash($filepath)
     {
@@ -64,22 +61,22 @@ class File
      */
     public static function upload_file()
     {
-        echo '<form action="actions/upload_file_action.php" method="post" enctype="multipart/form-data" target="myIframe">
-              <label for="file" >Filename:</label>
+        echo '<form class="" action="actions/upload_file_action.php" method="post" enctype="multipart/form-data" target="myIframe">
+              <label for="file" > Nom du fichier:</label>
               <input type="file" name="myfile" id="myfile" />
               <br />
-              <input type="submit" name="submit" value="Submit"/>
+              <input class="btn btn-primary" type="submit" name="submit" value="Valider"/>
               </form>
               <iframe id="myIframe" name="myIframe" frameborder="0" style=""></iframe> <br/>';
     }
 
     /**
-     * @param $filename file name
+     * @param $filename string
      * @param $fileid
      */
     public static function download($filename,$fileid)
     {
-        echo "<a href=\"actions/download_file_action.php?filename=".$fileid.$filename."\" >$filename</a>";
+        echo "<a href='actions/download_file_action.php?filename=$fileid$filename'>$filename</a>";
     }
 
 

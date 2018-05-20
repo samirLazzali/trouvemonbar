@@ -1,37 +1,33 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: apple
- * Date: 18/05/2018
- * Time: 15:34
- */
-echo "<table id='userlist'>
-        <tr><th>Pseudo</th><th>Prénom</th><th>Nom</th></tr>";
+<div class="container">
+
+    <!--search bar -->
+    <label for="form_search" class="font-weight-bold"> Rechercher par : </label>
+    <form id="form_search" action="search_user.php" method="get">
+        <label for="name"> Nom : </label> <input id="name" type="text" name="lastname" size="10"/>
+        <label for="nick"> Pseudo: </label> <input id="nick" type="text" name="nick" size="10"/>
+        <label for="gamename"> Table： </label> <input id="gamename"type="text" name="gamename" size="10" />
+        <label for"system"> Système meujeuté :</label> <input type="text" id="system" name="gamesystem" size="10"/>
+        <input type="submit" value="Rechercher" class="btn btn-primary  ml-3">
+    </form>
+
+    <!-- userlist -->
+    <table id='userlist' class="table mt-2">
 
 
-foreach ($userlist as $user)
-{
+        <thead class="">
+            <th scope="col">Pseudo</th>
+        </thead>
+        <tbody>
+        <?php
+            foreach ($userlist as $user)
+            {
 
-    echo "<tr>";
-    echo "<th>";
-    echo "<a href=\"user_profile.php?user=$user->userid\"> $user->nick </a> ";
-    echo "</th>";
-    echo "<th>";
-    echo "$user->firstname ";
-    echo "</th>";
-    echo "<th>";
-    echo "$user->lastname";
-    echo "</th>";
-    echo "</tr>";
-}
+                echo "<tr>";
+                echo "    <th scope='row'> <a href=\"user_profile.php?user=$user->userid\"> $user->nick </a> </th>";
+                echo "</tr>";
+            }
+    ?>
+        </tbody>
+    </table>
 
-echo "</table>";
-?>
-<!--search bar -->
-<form id="form_search" action="search_user.php" method="get">
-    nom：<input type="text" name="lastname" value="" size="8">
-    pseudo:<input type="text" name="nick" value="" size="8">
-    jeu de rôle：<input type="text" name="gamename" value="" size="8">
-    <input type="submit" value="search">
-</form>
-<br/>
+</div>

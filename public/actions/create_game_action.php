@@ -8,6 +8,8 @@
 //add the game to the db
 require "../../src/app/helpers.php";
 
+if(!Auth::logged()) redirect("../index.php");
+
 $gamename = htmlspecialchars($_POST["gamename"]);
 $gamedesc = htmlspecialchars($_POST["gamedesc"]);
 $duration = htmlspecialchars($_POST["duration"]);
@@ -24,9 +26,17 @@ if(isset($_POST["reccurents"]))
 else
     $reccurents = false;
 
+if(isset($_POST["files"]))
+    $files = $_POST["files"];
+else
+    $files = false;
+
 //try to insert the game : store the $id if successful
 if( ($id = Game::insert_game( $gamename, $gamedesc, $duration, $gamesystemid, $creator )) !== false )
 {
+    //game just inserted
+    $game = new Game($id);
+
     //for each schedule in the hidden field, get this schedule info
 
     if($oneshots !== false) {
@@ -50,8 +60,16 @@ if( ($id = Game::insert_game( $gamename, $gamedesc, $duration, $gamesystemid, $c
         }
     }
 
+    //insert each files
+    if($files !== false) {
+       foreach($files as $file) {
+           $data  =json_decode($file, true);
+           if(!($game->add_file($data['id'])))
+            flash("Erreur : un fichier n'a pas pu être ajouté");
+       }
+    }
     //send the mail notification
-   if(! (Mail::game_created(new Game($id))) )
+   if(! (Mail::game_created($game)) )
        flash("Erreur : le mail n'a pas pu être envoye");
 
 }

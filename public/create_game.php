@@ -20,6 +20,8 @@ if(!Auth::logged())
 //query options for scrolling lists
 $gamesystems = Gamesystem::make_list();
 $reccurrences = Reccurrence::makelist();
+$user = new User($_SESSION['user']);
+$userfiles = $user->hisfiles();
 
 $layout = new Layout("users");
 include view("create_game_view.php");

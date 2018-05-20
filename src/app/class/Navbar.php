@@ -28,11 +28,11 @@ class Navbar
     public function __construct($buttons_left, $buttons_right)
     {
         $this->html =
-            '<nav class = "navbar navbar-expand-lg navbar-light bg-light" > 
-                <a class="navbar-brand" href="index.php" width="30%"> <img class="navbar-brand" src="logo.png" width="200px"/></a>
+            '<nav class = "navbar navbar-expand-lg navbar-light flex-column flex-md-row bg-dark bd-navbar" > 
+                <a class="navbar-brand" href="index.php" width="10%"> <img class="navbar-brand" src="logos/logo.png" width="160px"/></a>
                 <button class="navbar-toggler" type = "button" data-toggle="collapse" 
                 data-target="navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="nabar-toggler-icon"> </span>
+                    <span class="navbar-toggler-icon"> </span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">';
@@ -72,7 +72,7 @@ class Navbar
     {
         $li = '<li class="nav-item active';
         $li .= '">
-                <a class="nav-link" href="'.$action.'">
+                <a class="nav-link text-light" href="'.$action.'">
                     '.$name.'
                 </a>
              </li> ';

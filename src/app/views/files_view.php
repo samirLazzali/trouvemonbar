@@ -1,3 +1,8 @@
+
+
+
+<div class="container-fluid ml-2">
+    <h3 class='font-weight-bold mt-2'>Fichiers de l'utilisateur</h3>
 <?php
 /**
  * Created by PhpStorm.
@@ -5,25 +10,24 @@
  * Date: 24/04/18
  * Time: 15:30
  */
-        $flag=false;
-        echo "<h3>Les fichiers:</h3> </br>
-               <div class=\"container-fluid filelist\">";
 
+
+        $flag=false;
         foreach ($filelist as $file) {
             if ($file->userid == $userid) {
-                \User\File::download($file->filename, $file->fileid);
+                File::download($file->filename, $file->fileid);
                 echo "</br>";
-                $flag=true;
+                $flag = true;
             }
 
         }
-        echo "</div>";
         if(!$flag)
-            echo "<p>IL N'Y A PAS DE FICHIER!</p>";
+            echo "<p>Pas de fichiers pour le moment</p>";
 
         if($userid==$myid) {
-            echo "<h5>Choisir votre fichier:</h5></br>";
-            \User\File::upload_file();
+            echo "<h3 class='font-weight-bold mb-2'> Ajouter un fichier</h3>";
+            File::upload_file();
         }
 
 ?>
+</div>

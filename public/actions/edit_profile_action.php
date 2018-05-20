@@ -7,6 +7,8 @@
  */
 require "../../src/app/helpers.php";
 
+if(!Auth::logged()) redirect("../edit_profile.php");
+
 if(isset($_POST["password"]))
     $password = htmlspecialchars($_POST["password"]);
 else
@@ -21,9 +23,7 @@ $mail= htmlspecialchars($_POST["mail"]);
 $nick= htmlspecialchars($_POST["nick"]);
 $lastname= htmlspecialchars($_POST["lastname"]);
 $firstname= htmlspecialchars($_POST["firstname"]);
-
-
-
+$password= htmlspecialchars($_POST['password']);
 
 try {
     $user = new User($_GET['userid']);

@@ -181,7 +181,39 @@ class Game
         return $query->fetchAll();
     }
 
+    /**
+     * @brief insert a tuple (file, game) in attached file
+     * @param $fileid int id of the file
+     * @return bool was the insertion successful
+     */
+    public function add_file($fileid)
+    {
+        $query = db()->prepare("INSERT INTO attachedfile (fileid, gameid) VALUES (?, ?)");
+        return $query->execute([$fileid, $this->gameid]);
+    }
+
+    public function files()
+    {
+        $query = db()->prepare("SELECT * FROM attachedfile natural join file WHERE gameid = ?");
+        $query->execute([$this->gameid]);
+        return $query->fetchAll();
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

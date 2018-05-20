@@ -12,13 +12,13 @@
         <input type="hidden" name="creator" value="<?=$_SESSION['user']?> "/>
 
         <div class="form-group">
-            <label for="gamename"> Nom: </label>
+            <label for="gamename" class="font-weight-bold"> Nom: </label>
             <input type="text" id="gamename" name="gamename" placeholder="Nom de la table" /> <br>
         </div>
 
         <!-- GAME SYSTEM SELECTION -->
         <div class="form-group">
-            <label for="gamesystem"> Système: </label>
+            <label for="gamesystem"class="font-weight-bold"> Système: </label>
             <select id="gamesystem" name="gamesystem" class="">
                 <?php
                 if(!$gamesystems) echo "<option value='0' disabled selected> No options found </option>";
@@ -36,28 +36,29 @@
 
         <!-- ESTIMATED DURAION-->
         <div class="form-group">
-            <label for="duration"> Nombre de séances estimé : </label>
+            <label for="duration" class="font-weight-bold"> Nombre de séances estimé : </label>
             <input type="number" id="duration" name="duration"/>
         </div>
-        <!--SCHEDULE SELECTION -->
-        <div class="form-group">
-            <label for="schedule"> Horaires proposés : </label> <br>
 
+
+        <!--SCHEDULE SELECTION -->
+        <label for="oneshot" class="font-weight-bold"> Ajouter un horaire: </label>
+        <div class="form-group">
             <!-- ADD A SCHEDULE -->
 
 
             <!-- ADD A ONE-TIME SESSION -->
 
             <div id="oneshot">
-                <label for="dateoneshot"> Date:</label>
+                <label for="dateoneshot"> Date</label>
                 <input id="dateoneshot" type="date" name="date"/>
 
 
-                <label for="starttimeoneshor"> Début:</label>
+                <label for="starttimeoneshor"> Début</label>
                 <input type="time" name="starttimeoneshot" id="starttimeoneshot" value="20:00"/>
 
 
-                <label for="endtimeoneshot"> Fin: </label>
+                <label for="endtimeoneshot"> Fin </label>
                 <input type="time" name="endtime" id="endtimeoneshot" value="00:00"/>
 
                 <button type="button" class="btn btn-primary btn-sm" onclick="add_one_shot()"> Ajouter une date</button>
@@ -70,6 +71,7 @@
 
 
             <!-- day of week -->
+            <label for="dayofweek"> Jour</label>
             <select class="" id="dayofweek">
                 <option value="1" selected> Lundi</option>
                 <option value="2"> Mardi</option>
@@ -82,6 +84,7 @@
 
 
             <!-- reccurence -->
+            <label for="reccurence"> Réccurrence </label>
             <select id="reccurence">
                 <?php
                 if(!$reccurrences) echo "<option value='0' disabled selected> No options found </option>";
@@ -95,11 +98,11 @@
             </select>
 
             <!-- starting hour todo: use timepicker library instead -->
-            <label for="starttimereccurence"> Début: </label>
+            <label for="starttimereccurence"> Début </label>
             <input type="time" id="starttimereccurence" name="starttime" value="20:00"/>
 
             <!-- ending hour -->
-            <label for="endtimereccurence"> Fin: </label>
+            <label for="endtimereccurence"> Fin</label>
             <input type="time" id="endtimereccurence" name="endtime" value="00:00"/>
 
             <!-- submit -->
@@ -109,21 +112,44 @@
 
 
             <!-- list of schedules added so far -->
+            <div class="form-group">
+            <label for="schedule" class="font-weight-bold"> Horaires proposés : </label>
             <!-- todo : option pour supprimer les horaires errones -->
-            <ul id="listSchedules">
+                <ul id="listSchedules">
 
-            </ul>
-
+                </ul>
+            </div>
 
         </div>
 
         <!-- DESCRIPTION -->
         <div class="form-group">
-            <label for="gamedesc"> Description: </label>
+            <label for="gamedesc" class="font-weight-bold"> Description: </label>
             <textarea form="form_game" class="form-control" rows="3" id="gamedesc" name="gamedesc" placeholder="Description de la table"></textarea>
         </div>
 
         <!-- todo : add functionality : link a file from user's collection to this game -->
+
+        <!-- LIST OF FILES SO FAR -->
+        <div class="form-group">
+            <label for="listfiles" class="font-weight-bold"> Fichiers de la table : </label>
+            <ul id="listfiles">
+            </ul>
+        </div>
+        <!-- ADD FILE -->
+        <div class="form-group">
+            <label for="userfiles" class="font-weight-bold"> Sélectionner un fichier </label>
+            <select id="userfiles" onchange="updateselect()">
+                <?php
+                if(empty($userfiles)) echo "<option disabled > Pas de fichiers </option>";
+                foreach ($userfiles as $userfile) {
+                        echo "<option value='$userfile->fileid'> $userfile->filename </option>  ";
+                    }
+                ?>
+            </select>
+            <input type="button" onclick="add_file()" class="btn btn-primary btn-sm" value="Ajouter">
+        </div>
+
 
         <!-- SUBMIT -->
         <!-- todo : add functionality ; send a mail to guiile mailing list when submitted -->
@@ -133,5 +159,6 @@
     </form>
 
     <script src="js/add_schedule_script.js"></script>
+    <script src="js/add_file.js"></script>
 
 </div>
