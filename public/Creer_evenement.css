@@ -1,5 +1,13 @@
 
 body { font-family: Arial, Helvetica, sans-serif; }
+form#event {
+  background: #9cbc2c;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  padding: 20px;
+  width: 400px;
+}
 
 form#event text {
   background: #1f3954;
@@ -18,4 +26,34 @@ form#event label{
     border-radius: 3px;
     padding: 5 px;
     
+}
+form#event file{
+    width:85px;
+    height:85px;
+    background:#fafafa;
+    box-shadow:2px 2px 8px #aaa;
+    font:bold 13px Arial;
+    border-radius:50%;
+    color:#555;
+}
+
+form#event submit{
+    width:85px;
+    height:85px;
+    background:#fafafa;
+    box-shadow:2px 2px 8px #aaa;
+    font:bold 13px Arial;
+    border-radius:50%;
+    color:#555;
+    
+}
+
+form#retour_accueil {
+    width:85px;
+    height:85px;
+    background:#fafafa;
+    box-shadow:2px 2px 8px #aaa;
+    font:bold 13px Arial;
+    border-radius:50%;
+    color:#555;
 }

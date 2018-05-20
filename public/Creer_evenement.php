@@ -43,13 +43,13 @@
 		   <br/>
 		   <br/>
 		   <input type="submit" value="Validez vos informations">
-		   </form>
-		   
-		   
-		   
-	
-	     
-	     
-</center>
+	     </form>
+	     </center>
 </body>
+<end>
+  <form id="retour_accueil">
+    <a href="./Accueil.php"/>
+    <input type="button" value="Revenir à l'accueil">
+  </form>
+</end>
 </html>
