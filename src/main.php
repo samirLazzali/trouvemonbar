@@ -13,8 +13,9 @@ if(!verif_authent()) { // si le gars est authentified ==>  acces aux offres
 } else {
     displayResearch();
 }
-
-dispSidebar();
+if(verif_authent()) {
+    dispSidebar();
+}
 ?>
 
 <div class="main">
