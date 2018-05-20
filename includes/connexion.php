@@ -40,15 +40,16 @@ else{
         $message = '<p>	Vous devez remplir tous les champs</p> <p>Cliquez <a href="./login.php">ici</a> pour revenir</p>';
     }
     else{
-        $query=$db->prepare('SELECT id,pseudo,mdp,rang FROM membres WHERE pseudo=$_POST["pseudo"]');
+        $query=$db->prepare('SELECT id,pseudo,mdp,rang FROM membres WHERE pseudo=:pseudo');
+        $query->bindValue(':pseudo',$_POST['pseudo'], PDO::PARAM_STR);
         $query->execute();
         $data=$query->fetch();
-        if(password_verify($_POST['password'],$data["mdp"]) || strcmp($data["mdp"],$_POST['password'])){
+        if(password_verify($_POST['password'],$data["mdp"])){
             $_SESSION['pseudo'] = $data['pseudo'];
             $_SESSION['level'] = $data['rang'];
             $_SESSION['id'] = $data['id'];
             header("Location: index.php");
-            exit();
+            //exit();
         }
         else
             {

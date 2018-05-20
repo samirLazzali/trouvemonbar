@@ -77,7 +77,7 @@ else{
         $nb_erreur++;
     }
 
-    $query=$db->prepare('SELECT COUNT(*) AS nbr FROM membres WHERE email =:mail');
+    $query=$db->prepare('SELECT COUNT(*) AS nbr FROM membres WHERE mail =:mail');
     $query->bindValue(':mail',$email, PDO::PARAM_STR);
     $query->execute();
     $used=($query->fetchColumn()==0)?1:0;
@@ -126,7 +126,6 @@ else{
         }
     }
     if ($nb_erreur==0) {
-        $pass=password_hash($pass,PASSWORD_DEFAULT);
         echo '<h1>Inscription terminée</h1>';
         echo '<p>Bienvenue sur GolrIIE</p>
 	    <p>Cliquez <a href="./index.php">ici</a> pour revenir à la page d accueil</p>';
@@ -135,7 +134,7 @@ else{
         $query=$db->prepare('INSERT INTO membres (pseudo, mdp,mail,avatar)
         VALUES (:pseudo, :pass, :email,:nomavatar)');
         $query->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
-        $query->bindValue(':pass', $pass, PDO::PARAM_INT);
+        $query->bindValue(':pass', password_hash($pass,PASSWORD_BCRYPT), PDO::PARAM_STR);
         $query->bindValue(':email', $email, PDO::PARAM_STR);
         $query->bindValue(':nomavatar', $nomavatar, PDO::PARAM_STR);
         $query->execute();
