@@ -19,6 +19,7 @@ function header_t($titre) {
     print "    <link rel=\"stylesheet\" href=\"css/createForm.css\">\n";
 
     print "<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>";
+    print "<script src=\"js/research.js\"></script>";
     print "  </head>\n";
   
     print "  <body>\n";

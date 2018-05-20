@@ -2,91 +2,95 @@
     function getmatieres(str) {
 	var select = document.getElementById("matieres");
 	select.options.length = 0;
+	if(str ==""){
+		select.options[select.options.length] = new Option("Matiere", null);
+	}
 	if(str =="1"){
-	    select.options[select.options.length] = new Option('MPR', 'MPR');
-	    select.options[select.options.length] = new Option( 'IPI', 'IPI');
-	    select.options[select.options.length] = new Option('IBD', 'IBD');
-	    select.options[select.options.length] = new Option( 'ISE', 'ISE');
-	    select.options[select.options.length] = new Option('MTG', 'MTG');
-	    select.options[select.options.length] = new Option( 'MAN', 'MAN');
-	}
-	if(str == "2"){
-	    select.options[select.options.length] = new Option('IPFL','IPFL');
-	    select.options[select.options.length] = new Option('ILO', 'ILO');
-	    select.options[select.options.length] = new Option('MST', 'MST');
-	    select.options[select.options.length] = new Option( 'PROJ', 'PROJ');
-	    select.options[select.options.length] = new Option('PWR', 'PWR');
-	    select.options[select.options.length] = new Option( 'OPTI', 'OPTI');
-	}
-	if(str == "4"){
-	    select.options[select.options.length] = new Option('ANEDP','ANEDP');
-	    select.options[select.options.length] = new Option('ANU', 'ANU');
-	    select.options[select.options.length] = new Option('ARMA', 'ARMA');
-	    select.options[select.options.length] = new Option( 'ASN', 'ASN');
-	    select.options[select.options.length] = new Option('AUTO', 'AUTO');
-	    select.options[select.options.length] = new Option( 'CAL', 'CAL');
-	    select.options[select.options.length] = new Option('CC','CC');
-	    select.options[select.options.length] = new Option('CORO', 'CORO');
-	    select.options[select.options.length] = new Option('IA', 'IA');
-	    select.options[select.options.length] = new Option( 'IMF', 'IMF');
-	    select.options[select.options.length] = new Option('IRA', 'IRA');
-	    select.options[select.options.length] = new Option( 'LC', 'LC');
-		select.options[select.options.length] = new Option('LOA','LOA');
-	    select.options[select.options.length] = new Option('MCS', 'MCS');
-	    select.options[select.options.length] = new Option('MESIM', 'MESIM');
-	    select.options[select.options.length] = new Option( 'MFDLS', 'MFDLS');
-	    select.options[select.options.length] = new Option('MOST', 'MOST');
-	    select.options[select.options.length] = new Option( 'PBT', 'PBT');
-	    select.options[select.options.length] = new Option('PRB','PRB');
-	    select.options[select.options.length] = new Option('PRR', 'PRR');
-	    select.options[select.options.length] = new Option('PSA', 'PSA');
-	    select.options[select.options.length] = new Option( 'RDH', 'RDH');
-	    select.options[select.options.length] = new Option('RIAL', 'RIAL');
-	    select.options[select.options.length] = new Option( 'RVIG', 'RVIG');
-	    select.options[select.options.length] = new Option('SE2','SE2');
-	    select.options[select.options.length] = new Option('SFP', 'SFP');
-	    select.options[select.options.length] = new Option('SIP', 'SIP');
-	    select.options[select.options.length] = new Option( 'SSI', 'SSI');
+	    select.options[select.options.length] = new Option("MPR", "MPR");
+	    select.options[select.options.length] = new Option( "IPI", "IPI");
+	    select.options[select.options.length] = new Option("IBD", "IBD");
+	    select.options[select.options.length] = new Option( "ISE", "ISE");
+	    select.options[select.options.length] = new Option("MTG", "MTG");
+	    select.options[select.options.length] = new Option( "MAN", "MAN");
 	}
 	
+	if(str == "2"){
+	    select.options[select.options.length] = new Option("IPFL","IPFL");
+	    select.options[select.options.length] = new Option("ILO", "ILO");
+	    select.options[select.options.length] = new Option("MST", "MST");
+	    select.options[select.options.length] = new Option( "PROJ", "PROJ");
+	    select.options[select.options.length] = new Option("PWR", "PWR");
+	    select.options[select.options.length] = new Option( "OPTI", "OPTI");
+	}
+
+	if(str == "4"){
+	    select.options[select.options.length] = new Option("ANEDP","ANEDP");
+	    select.options[select.options.length] = new Option("ANU", "ANU");
+	    select.options[select.options.length] = new Option("ARMA", "ARMA");
+	    select.options[select.options.length] = new Option( "ASN", "ASN");
+	    select.options[select.options.length] = new Option("AUTO", "AUTO");
+	    select.options[select.options.length] = new Option( "CAL", "CAL");
+	    select.options[select.options.length] = new Option("CC","CC");
+	    select.options[select.options.length] = new Option("CORO", "CORO");
+	    select.options[select.options.length] = new Option("IA", "IA");
+	    select.options[select.options.length] = new Option( "IMF", "IMF");
+	    select.options[select.options.length] = new Option("IRA", "IRA");
+	    select.options[select.options.length] = new Option( "LC", "LC");
+		select.options[select.options.length] = new Option("LOA","LOA");
+	    select.options[select.options.length] = new Option("MCS", "MCS");
+	    select.options[select.options.length] = new Option("MESIM", "MESIM");
+	    select.options[select.options.length] = new Option( "MFDLS", "MFDLS");
+	    select.options[select.options.length] = new Option("MOST", "MOST");
+	    select.options[select.options.length] = new Option( "PBT", "PBT");
+	    select.options[select.options.length] = new Option("PRB","PRB");
+	    select.options[select.options.length] = new Option("PRR", "PRR");
+	    select.options[select.options.length] = new Option("PSA", "PSA");
+	    select.options[select.options.length] = new Option( "RDH", "RDH");
+	    select.options[select.options.length] = new Option("RIAL", "RIAL");
+	    select.options[select.options.length] = new Option( "RVIG", "RVIG");
+	    select.options[select.options.length] = new Option("SE2","SE2");
+	    select.options[select.options.length] = new Option("SFP", "SFP");
+	    select.options[select.options.length] = new Option("SIP", "SIP");
+	    select.options[select.options.length] = new Option( "SSI", "SSI");
 	}
 	if(str == "3"){
-		select.options[select.options.length] = new Option( 'ASE', 'ASE');
-	    select.options[select.options.length] = new Option('IAC','IAC');
-	    select.options[select.options.length] = new Option('IGL', 'IGL');
-	    select.options[select.options.length] = new Option('IPS', 'IPS');
-	    select.options[select.options.length] = new Option( 'IPF', 'IPF');
-	    select.options[select.options.length] = new Option('LSF-VVL', 'LSF-VVL');
-	    select.options[select.options.length] = new Option( 'MAD', 'MAD');
-	    select.options[select.options.length] = new Option('MICRO','MICRO');
-	    select.options[select.options.length] = new Option('MRO', 'MRO');
-	    select.options[select.options.length] = new Option('MRR', 'MRR');
-	    select.options[select.options.length] = new Option( 'PAP', 'PAP');
-	    select.options[select.options.length] = new Option('PIMA','PIMA');
-	    select.options[select.options.length] = new Option('PP', 'PP');
-	    select.options[select.options.length] = new Option('PST', 'PST');
-	    select.options[select.options.length] = new Option( 'SE1', 'SE1');
-	   	select.options[select.options.length] = new Option( 'SRM', 'SRM');
+		select.options[select.options.length] = new Option( "ASE", "ASE");
+	    select.options[select.options.length] = new Option("IAC","IAC");
+	    select.options[select.options.length] = new Option("IGL", "IGL");
+	    select.options[select.options.length] = new Option("IPS", "IPS");
+	    select.options[select.options.length] = new Option( "IPF", "IPF");
+	    select.options[select.options.length] = new Option("LSF-VVL", "LSF-VVL");
+	    select.options[select.options.length] = new Option( "MAD", "MAD");
+	    select.options[select.options.length] = new Option("MICRO","MICRO");
+	    select.options[select.options.length] = new Option("MRO", "MRO");
+	    select.options[select.options.length] = new Option("MRR", "MRR");
+	    select.options[select.options.length] = new Option( "PAP", "PAP");
+	    select.options[select.options.length] = new Option("PIMA","PIMA");
+	    select.options[select.options.length] = new Option("PP", "PP");
+	    select.options[select.options.length] = new Option("PST", "PST");
+	    select.options[select.options.length] = new Option( "SE1", "SE1");
+	   	select.options[select.options.length] = new Option( "SRM", "SRM");
 
 	}
 	if(str == "5"){
-	    select.options[select.options.length] = new Option('AEBI','AEBI');
-	    select.options[select.options.length] = new Option('GPA', 'GPA');
-	    select.options[select.options.length] = new Option('ISA', 'ISA');
-	    select.options[select.options.length] = new Option( 'MAL', 'MAL');
-	    select.options[select.options.length] = new Option('MAF', 'MAF');
-	    select.options[select.options.length] = new Option( 'MQF', 'MQF');
-	    select.options[select.options.length] = new Option('MSA','MSA');
-	    select.options[select.options.length] = new Option('NTOE', 'NTOE');
-	    select.options[select.options.length] = new Option('OPTI', 'OPTI');
-	    select.options[select.options.length] = new Option( 'PMGD', 'PMGD');
-	    select.options[select.options.length] = new Option('PROG', 'PROG');
-	    select.options[select.options.length] = new Option( 'RESO', 'RESO');
-	    select.options[select.options.length] = new Option('SEC','SEC');
-	    select.options[select.options.length] = new Option('WIA', 'WIA');
-	    select.options[select.options.length] = new Option('SIBD', 'SIBD');
+	    select.options[select.options.length] = new Option("AEBI","AEBI");
+	    select.options[select.options.length] = new Option("GPA", "GPA");
+	    select.options[select.options.length] = new Option("ISA", "ISA");
+	    select.options[select.options.length] = new Option( "MAL", "MAL");
+	    select.options[select.options.length] = new Option("MAF", "MAF");
+	    select.options[select.options.length] = new Option( "MQF", "MQF");
+	    select.options[select.options.length] = new Option("MSA","MSA");
+	    select.options[select.options.length] = new Option("NTOE", "NTOE");
+	    select.options[select.options.length] = new Option("OPTI", "OPTI");
+	    select.options[select.options.length] = new Option( "PMGD", "PMGD");
+	    select.options[select.options.length] = new Option("PROG", "PROG");
+	    select.options[select.options.length] = new Option( "RESO", "RESO");
+	    select.options[select.options.length] = new Option("SEC","SEC");
+	    select.options[select.options.length] = new Option("WIA", "WIA");
+	    select.options[select.options.length] = new Option("SIBD", "SIBD");
 	}
-    }
+}
+    
 
 </script>
 
@@ -97,41 +101,51 @@
 	}
 	var select = document.getElementById("modules");
 	select.options.length = 0;
-	if(str == "IPFL"){
-	    select.options[select.options.length] = new Option('IPF','IPF');
-	    select.options[select.options.length] = new Option('MLO', 'MLO');
+	if(str == ""){
+		select.options[select.options.length] = new Option("Module", null);
 	}
-	if(str == "PROJ"){
-	    select.options[select.options.length] = new Option('PROJMaths','PROJMaths');
-	    select.options[select.options.length] = new Option('PROJInfo', 'PROJInfo');
+	else if(str == "IPFL"){
+	    select.options[select.options.length] = new Option("IPF","IPF");
+	    select.options[select.options.length] = new Option("MLO", "MLO");
 	}
-	if(str == "PWR"){
-	    select.options[select.options.length] = new Option('WEB','WEB');
-	    select.options[select.options.length] = new Option('RESO', 'RESO');
+
+	else if(str == "PROJ"){
+	    select.options[select.options.length] = new Option("PROJMaths", "PROJMaths");
+	    select.options[select.options.length] = new Option("PROJInfo", "PROJInfo");
 	}
-	if(str == "IAC"){
-	    select.options[select.options.length] = new Option('ASS','ASS');
-	    select.options[select.options.length] = new Option('COM', 'COM');
+
+	else if(str == "PWR"){
+	    select.options[select.options.length] = new Option("WEB", "WEB");
+	    select.options[select.options.length] = new Option("RESO", "RESO");
 	}
-	if(str == "LSF-VVL"){
-	    select.options[select.options.length] = new Option('LSF','LSF');
-	    select.options[select.options.length] = new Option('VVL', 'VVL');
+	
+	else if(str == "IAC"){
+	    select.options[select.options.length] = new Option("ASS", "ASS");
+	    select.options[select.options.length] = new Option("COM", "COM");
 	}
-	if(str == "SRM"){
-	    select.options[select.options.length] = new Option('SECU','SECU');
-	    select.options[select.options.length] = new Option('MID', 'MID');
+
+	
+	else if(str == "LSF-VVL"){
+	    select.options[select.options.length] = new Option("LSF","LSF");
+	    select.options[select.options.length] = new Option("VVL", "VVL");
 	}
-	if(str == "RIAL"){
-	    select.options[select.options.length] = new Option('RI','RI');
-	    select.options[select.options.length] = new Option('AL', 'AL');
+
+	else if(str == "SRM"){
+	    select.options[select.options.length] = new Option("SECU","SECU");
+	    select.options[select.options.length] = new Option("MID", "MID");
 	}
-	if(str == "RVIG"){
-	    select.options[select.options.length] = new Option('RV','RV');
-	    select.options[select.options.length] = new Option('IG', 'IG');
+
+	else if(str == "RIAL"){
+	    select.options[select.options.length] = new Option("RI","RI");
+	    select.options[select.options.length] = new Option("AL", "AL");
 	}
-	if(str == "NTOE"){
-	    select.options[select.options.length] = new Option('NT','NT');
-	    select.options[select.options.length] = new Option('OE', 'OE');
+	else if(str == "RVIG"){
+	    select.options[select.options.length] = new Option("RV","RV");
+	    select.options[select.options.length] = new Option("IG", "IG");
+	}
+	else if(str == "NTOE"){
+	    select.options[select.options.length] = new Option("NT","NT");
+	    select.options[select.options.length] = new Option("OE", "OE");
 	}
     }
 </script>
