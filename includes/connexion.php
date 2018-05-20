@@ -1,20 +1,24 @@
+<input type="hidden" name="page" value="<?php echo $_SERVER['HTTP_REFERER']; ?>" />
+
 <?php
 session_start();
 $titre="Connexion";
-//include("./id.php");
-include("./includes/debut.php");
+include("includes/id.php");
+include("includes/debut.php");
 ?>
 
-//On verifie si l'utilisateur est déjà connecté
+
 <?php
+//On verifie si l'utilisateur est déjà connecté
 echo '<h1>Connexion</h1>';
 if ($id!=0) erreur(ERR_IS_CO);
 ?>
-//Formulaire d'inscription
+
 <?php
+//Formulaire d'inscription
 if (!isset($_POST['pseudo'])) //On est dans la page de formulaire
 {
-    echo ("<form method=\"post\" action=\"./connexion.php\">
+    echo ("<form method=\"post\" action=\"login.php\">
 	<fieldset>
 	<legend>Connexion</legend>
 	<p>
@@ -23,12 +27,38 @@ if (!isset($_POST['pseudo'])) //On est dans la page de formulaire
 	</p>
 	</fieldset>
 	<p><input type=\"submit\" value=\"Connexion\" /></p></form>
-		<a href=\"../inscription.php\">Pas encore inscrit ?</a>
+		<a href=\"register.php\">Pas encore inscrit ?</a>
 	 
 	</div>
 	</body>
 	</html>");
 }
+else{
+    $message='';
+    if (empty($_POST['pseudo']) || empty($_POST['password']) ) //Oublie d'un champ
+    {
+        $message = '<p>	Vous devez remplir tous les champs</p> <p>Cliquez <a href="./login.php">ici</a> pour revenir</p>';
+    }
+    else{
+        $query=$db->prepare('SELECT id,pseudo,mdp,rang FROM membres WHERE pseudo=$_POST["pseudo"]');
+        $query->execute();
+        $data=$query->fetch();
+        if(password_verify($_POST['password'],$data["mdp"]) || strcmp($data["mdp"],$_POST['password'])){
+            $_SESSION['pseudo'] = $data['pseudo'];
+            $_SESSION['level'] = $data['rang'];
+            $_SESSION['id'] = $data['id'];
+            header("Location: index.php");
+            exit();
+        }
+        else
+            {
+            $message = '<p>	Le pseudo ou le mot de passe entré est erroné</p> <p>Cliquez <a href="./login.php">ici</a> pour revenir</p>';
+        }
+        $query->CloseCursor();
+    }
+    echo $message.'</div></body></html>';
+}
+
 ?>
 
 
