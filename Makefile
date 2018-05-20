@@ -49,6 +49,9 @@ db.connect:
 db.save:
 	docker-compose exec postgres /bin/bash -c 'pg_dump -U $$POSTGRES_USER ensiie > data/db.sql; chmod 666 data/db.sql'
 
+db.drop:
+	docker-compose exec postgres /bin/bash -c 'psql -U $$POSTGRES_USER -h localhost -f data/drop.sql'
+
 db.install:
 	docker-compose exec postgres /bin/bash -c 'psql -U $$POSTGRES_USER -h localhost -f data/db.sql'
 
