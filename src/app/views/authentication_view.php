@@ -1,5 +1,4 @@
 
-
 <!-- todo : les champs sont entièrement sélectionnés au 1er focus
             Les valeurs par défaut sont écrites en grisé
             le formulaire est centré
@@ -18,4 +17,5 @@
         <input type="password" name="password" placeholder="Password"/> </br>
         <input class="btn bg-success text-white" type="submit" value="Se connecter"/>
     </form>
+    <a href = "forget_mdp_view.php"> Mot de passe oublié?</a>
 </div>
