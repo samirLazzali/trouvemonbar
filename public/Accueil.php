@@ -14,7 +14,7 @@
 </head>
 <body style="margin= 0">
 
-	<?php include "upperBar.php"
+	<?php include "upperBar.php";
 	$dbName = getenv('DB_NAME'); 
 	$dbUser = getenv('DB_USER'); 
 	$dbPassword = getenv('DB_PASSWORD'); 
