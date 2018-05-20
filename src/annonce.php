@@ -147,8 +147,20 @@ class Annonce {
 	return $annonces;
     }
 
+    public static function modAnnonces($query) {
+	$connection = dbConnect();
+	dbExec($connection, $query);
+    }
+
     public static function getAnnonceById($id) {
-	return Annonce::getAnnonces("SELECT * FROM annonce WHERE id=$id")[0];
+	$res = Annonce::getAnnonces("SELECT * FROM annonce WHERE id=$id");
+	if (sizeof($res) != 0) 
+	    return $res[0];
+	return null;
+    }
+
+    public static function delAnnonceById($id) {
+	Annonce::modAnnonces("DELETE FROM annonce WHERE id=$id");
     }
 
     public function sendToDb() {
@@ -156,6 +168,27 @@ class Annonce {
 	$opId = Annonce::usernameToUid($connection, $this->op);
 	$query = "INSERT INTO annonce (postdate, offer, op, semestre, module, genre, titre, description, paiement, service) 
 	    VALUES ('$this->date',
+		$this->isOffer,
+		$opId,
+		$this->semestre, 
+		'$this->module',
+		" . $connection->quote($this->genre) . ", 
+		" . $connection->quote($this->title) . ", 
+		" . $connection->quote($this->content) . ", 
+		$this->paiement, 
+		'$this->service'
+
+	    );";
+
+	return dbExec($connection, $query);
+    }
+
+    public function sendToDbFull() {
+	$connection = dbConnect();
+	$opId = Annonce::usernameToUid($connection, $this->op);
+	$date = $this->date->format("Y-m-d H:i:s");
+	$query = "INSERT INTO annonce (id, postdate, offer, op, semestre, module, genre, titre, description, paiement, service) VALUES ($this->id,
+		'$date',
 		$this->isOffer,
 		$opId,
 		$this->semestre, 
