@@ -24,7 +24,7 @@ class Annonce {
 	print "<a class=\"toggleAnnonce\"><i class=\"fas fa-angle-up\"></i></a>";
 
 	if ($_SESSION['username'] == $this->op || $_SESSION['admin'] == true) {
-	    print "<a class=\"edit\"><i class=\"far fa-edit\"></i></a>";
+	    print "<a class=\"edit\" href=\"createForm.php?edit=$this->id\"><i class=\"far fa-edit\"></i></a>";
 	}
 
 	print "</div>";
@@ -145,6 +145,10 @@ class Annonce {
 	return $annonces;
     }
 
+    public static function getAnnonceById($id) {
+	return Annonce::getAnnonces("SELECT * FROM annonce WHERE id=$id")[0];
+    }
+
     public function sendToDb() {
 	$connection = dbConnect();
 	$opId = Annonce::usernameToUid($connection, $this->op);
@@ -154,15 +158,14 @@ class Annonce {
 		$opId,
 		$this->semestre, 
 		'$this->module',
-		'$this->genre', 
-		'$this->title', 
-		'$this->content', 
+		" . $connection->quote($this->genre) . ", 
+		" . $connection->quote($this->title) . ", 
+		" . $connection->quote($this->content) . ", 
 		$this->paiement, 
 		'$this->service'
 
 	    );";
 
-	print $query;
 	return dbExec($connection, $query);
     }
 
@@ -224,11 +227,11 @@ class Annonce {
     }
 
     public static function status() {
-	if (isset($_POST['done'])) {
-	    if ($_POST['done']) {
-		print "Posted !";
+	if (isset($_GET['done'])) {
+	    if ($_GET['done']) {
+		print "L'annonce a été postée !";
 	    } else {
-		print "An error has occured";
+		print "Une erreur s'est produite, veuillez réessayer.";
 	    }
 	}
     }
@@ -257,6 +260,6 @@ class Annonce {
     }
 }
 
-function displayFormCreate() {
-    include("modules/createForm.html");
+function displayFormCreate($annonce = null) {
+    include("modules/createForm.php");
 }
