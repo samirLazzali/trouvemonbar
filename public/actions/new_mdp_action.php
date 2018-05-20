@@ -37,14 +37,16 @@ $mail = htmlspecialchars($_POST['email']);
             $sujet = 'Oublie du mot de passe';
             $body = 'Bonjour, vous avez oublié votre mot de passe, voici votre code de réinitialisation' . $token . '';
             if(mail($mail, $sujet, $body, $additional_parameters = null));
-                echo"true";
+                flash("Un mail a été envoyé à l'adresse : ".$mail);
 
         }
         else
         {
-            echo "<p id='mauvais'>Adresse mail non inscrite.</p></center><br>";
+            flash("Mail inconnu");
         }
     }
 
+    redirect("../authentication.php");
 
-?>
+
+

@@ -16,6 +16,7 @@ function update_systems_display()
     }
 
     document.getElementById("list_systems").innerHTML = text;
+
 }
 
 function add_system()

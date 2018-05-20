@@ -11,7 +11,7 @@
     </form>
 
     <!-- userlist -->
-    <table id='userlist' class="table mt-2">
+    <table  width="500"  id='userlist' class="table mt-2">
 
 
         <thead class="">

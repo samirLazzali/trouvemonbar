@@ -21,7 +21,7 @@
         echo implode(',', $list);
         ?>
     </label>
-<table border="1" width="500" class="table" id="search_result" >
+<table width="500" class="table" id="search_result" >
     <thead>
         <th scope="col">Pseudo</th>
     </thead>

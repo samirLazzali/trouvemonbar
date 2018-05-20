@@ -17,5 +17,5 @@
         <input type="password" name="password" placeholder="Password"/> </br>
         <input class="btn bg-success text-white" type="submit" value="Se connecter"/>
     </form>
-    <a href = "forget_mdp_view.php"> Mot de passe oublié?</a>
+    <a href = "forget_mdp.php"> Mot de passe oublié?</a>
 </div>
