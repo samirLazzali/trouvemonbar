@@ -6,12 +6,10 @@ include("../src/sidebar.php");
 session_start();
 $username=$_SESSION['username'];
 $email=$_SESSION['email'];
-//$id=$_SESSION["id"]
-login();
+$id=$_SESSION['id'];
 
 $connection = dbConnect();
-//$id=getId();
-$rows = dbQuery($connection,"SELECT id FROM users WHERE username='$username'");
+$rows = dbQuery($connection,"SELECT COUNT(*) AS nb FROM annonce WHERE op='$id'");
 
 header_t("Les Bons Bails");
 if(!verif_authent()) { // si le gars est authentified ==>  acces aux offres
@@ -28,10 +26,6 @@ dispSidebar();
 	<div class=title style="text-align:center;"> Mon Profil
 	</div>
 	<div> 
-		<!-- <br>
-		Id : <strong> <?php foreach ($rows as $row) {echo $row->id; }?> </strong>
-		<br>
-		<br> -->
 		<br>
 
 		Username : <strong> <?php echo $username?> </strong>
@@ -40,6 +34,10 @@ dispSidebar();
 		<br>
 
 		Email : <strong> <?php echo $email?> </strong>
+		<br>
+		<br>
+
+		Annonces Publiées : <strong>  <?php foreach ($rows as $row) {echo $row->nb; }?> </strong>
 		<br>
 		<br>
 		
