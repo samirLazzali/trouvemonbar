@@ -8,8 +8,6 @@
 -- Version de PHP :  7.2.1
 
 /* SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO"; */
-time_zone := "+00:00";
-
 --
 -- Base de données :  `projetWeb`
 --
@@ -103,16 +101,16 @@ CREATE TABLE participants3897910314 (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Structure de la table `user`
 --
 
-CREATE TABLE users (
+CREATE TABLE "user" (
   id int NOT NULL,
-  firstname varchar(100) NOT NULL,
-  lastname varchar(100) NOT NULL,
-  birthday date NOT NULL,
+  firstname varchar(100) ,
+  lastname varchar(100) ,
+  birthday date ,
   nickname varchar(100) NOT NULL,
-  domicile varchar(100) NOT NULL,
+  domicile varchar(100) ,
   mdp varchar(100) NOT NULL,
   id_groupe int NOT NULL
 ) ;
@@ -121,5 +119,9 @@ CREATE TABLE users (
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO users (id, firstname, lastname, birthday, nickname, domicile, mdp, id_groupe) VALUES
+INSERT INTO "user" (id, firstname, lastname, birthday, nickname, domicile, mdp, id_groupe) VALUES
 (1, 'Martin', 'Dufour', '1997-08-27', 'Feuj', 'maison', 'martin', 2);
+INSERT INTO "user" (id, firstname, lastname, birthday, nickname, domicile, mdp, id_groupe) VALUES
+(2, 'Quentin', 'Pichollet', '1997-08-19', 'Pichet', 'Orléans', '2f3497b77103fbaa8794550ed1c2c75b', 2);
+
+

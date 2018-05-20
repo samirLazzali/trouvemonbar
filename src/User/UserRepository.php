@@ -53,8 +53,9 @@ class UserRepository
 			    ->setLastname($row->lastname)	 
 			    ->setBirthday(new \DateTimeImmutable($row->birthday))
 			    ->setNickname($row->nickname)
+			    ->setDomicile($row->domicile)
 			    ->setMdp($row->mdp);
-
+		    
 		    $users[] = $user;
 	    }
 	    foreach ($users as $user) {
@@ -65,10 +66,13 @@ class UserRepository
 			    $pass = $user->getMdp();
 			    if ($pass == $mdp )
 			    {
-				    session_start(); 
-				    $_SESSION['id'] = $user->getId();	      
-				    $_SESSION['pseudo'] = $pseudo;	       
-				    echo 'Vous êtes connecté !';
+				   $_SESSION['id'] = $user->getId();	      
+				   $_SESSION['pseudo'] = $pseudo;
+				   $_SESSION['firstname'] = $user->getFirstname();
+				   $_SESSION['lastname'] = $user->getLastName();
+				   $_SESSION['domicile'] = $user->getDomicile();
+				   $_SESSION['birthday'] = $user->getBirthday()->format('d/m/Y');
+				   header('Location:Accueil.php');
 			    }
 			    else 
 			    {

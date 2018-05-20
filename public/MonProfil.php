@@ -1,0 +1,77 @@
+<?php
+session_start();
+?>
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Mon Profil</title>
+	<meta charset="utf-8">	
+
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	
+
+</head>	
+<body>
+<script>
+	function affiche_form_mdp(){
+		var x = document.getElementById('modif_mdp');
+		if (x.style.display === 'none') {
+			x.style.display = 'block';
+		}	
+	       	else {
+			x.style.display = 'none';      
+		}
+	}
+
+</script>
+
+<?php include "upperBar.php" ?>
+
+<center><h2>Gestion des informations du compte</h2></br>
+
+<?php
+echo '<p><b>Votre pseudo :&nbsp;&nbsp; '.$_SESSION['pseudo']. '</b></p>'
+?>
+
+
+    <span id="modif_infos" style="display:block;"><b>Changez votre mot de passe : </b><button onclick="affiche_form_mdp()">Modifiez votre mot de passe</button></br></br></span>
+
+
+<form action="MonProfil.php" method="post">
+    
+    <span id ="modif_mdp" style="display:none;">
+
+    <label for="old_mdp"><b>Votre mot de passe :</b></label>
+    <input type="password" name="old_mdp">
+    <br/><br/>
+    <label for="new_mdp"><b>Nouveau mot de passe :</b></label>
+    <input type="password" name="new_mdp">
+    <br/><br/>
+    <label for="new_mdp_verif"><b>Verification nouveau mot de passe :</b></label>
+    <input type="password" name="new_mdp_verif">
+    <br/><br/>
+
+    </span>
+
+  <div class="container">
+    <label for="firstname"><b>Prénom :</b></label>
+    <input type="text" name="firstname" value=<?php echo $_SESSION['firstname'] ?> >
+	<br/>
+    <br/>
+    <label for="lastname"><b>Nom :</b></label>
+    <input type="text" name="lastname" value=<?php echo $_SESSION['lastname'] ?> >
+    <br/><br/>
+    <label for="domicile"><b>Domicile :</b></label>
+    <input type="text" name="domicile" value=<?php echo $_SESSION['domicile'] ?> >
+    <br/><br/>
+    <label for="bd"><b>Date de naissance :</b></label>
+    <input type="date" name="bd" value=<?php echo $_SESSION['birthday'] ?> >
+    <br/><br/>
+
+    <button type="submit">Changez vos informations</button>
+  </div>
+</form>
+</center>
+

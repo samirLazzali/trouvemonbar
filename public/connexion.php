@@ -1,28 +1,26 @@
-<!DOCTYPE html>
-
-<html>
-<head>
-<link rel="stylesheet" href="connexion.css" type="text/css">
-
-
-</head>
-<body>
-
-<?php 
+<?php
+session_start();
 require '../vendor/autoload.php'; 
 //postgres 
 $dbName = getenv('DB_NAME'); 
 $dbUser = getenv('DB_USER'); 
 $dbPassword = getenv('DB_PASSWORD'); 
 $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-
 $userRepository = new \User\UserRepository($connection);
-
 if (!empty($_POST)){
 	$userRepository->connect($_POST['uname'],$_POST['psw']);
 }
-
 ?>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<link rel="stylesheet" href="connexion.css" type="text/css">
+<title>Connexion</title>
+
+</head>
+<body>
 
 <h2>Connexion</h2>
 
