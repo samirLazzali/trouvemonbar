@@ -38,7 +38,7 @@
     transition: .5s ease;
 }
 
-#form_border .nature li a {
+#form_border .tab-group li.nature a {
     width: 50%;
 }
 
@@ -58,7 +58,7 @@
 
 #form_border label {
     position: absolute;
-    transform: translateY(6px);
+    transform: translateY(4px);
     left: 13px;
     color: rgba(42, 04, 20, 0.5);
     transition: all 0.25s ease;
