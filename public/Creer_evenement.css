@@ -1,0 +1,21 @@
+
+body { font-family: Arial, Helvetica, sans-serif; }
+
+form#event text {
+  background: #1f3954;
+  border: none;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+  font: italic 13px Georgia, "Times New Roman", Times, serif;
+  outline: none;
+  padding: 5px;
+  width: 200px;
+}
+form#event label{
+
+    border-radius: 3px;
+    padding: 5 px;
+    
+}
