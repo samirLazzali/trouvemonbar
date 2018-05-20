@@ -151,7 +151,6 @@ class Annonce {
 		'$this->service'
 	    );";
 
-	print $query;
 	return dbExec($connection, $query);
     }
     
@@ -221,33 +220,33 @@ function displayFormCreate() {
     print "<div id=\"form_border\">";
     print "    <form name=\"annonce\" class=\"create\" method=\"post\" action=\"create.php\">";
     print "	<div class=\"radio-group\">";
-    print "	    <label for=\"offer\">OFFER</label>";
+    print "	    <label for=\"offer\">Offer</label>";
     print "	    <input type=\"radio\" id=\"offer\" name=\"annoncetype\">";
-    print "	    <label for=\"query\">QUERY</label>";
+    print "	    <label for=\"query\">Query</label>";
     print "	    <input type=\"radio\" id=\"query\" name=\"annoncetype\">";
     print "      </div>";
     print "";
     print "	<div class=\"radio-group\">";
     print "	    <input type=\"radio\" id=\"paying\" name=\"annoncereturn\" onClick=\"toggletextepayant()\"/>";
     print "	    <label for=\"paying\">";
-    print "		PAY";
+    print "		Pay";
     print "	    </label>";
     print "	    <input type=\"radio\" id=\"exchange\" name=\"annoncereturn\" onClick=\"toggletexteswap()\"/>";
     print "	    <label for=\"exchange\">";
-    print "		SWAP";
+    print "		Swap";
     print "	    </label>";
     print "	    <input type=\"radio\" id=\"free\" name=\"annoncereturn\" onClick=\"togglecacher();\"/>";
     print "	    <label for=\"free\">";
-    print "		FREE";
+    print "		Free";
     print "	    </label>";
     print "	</div>";
     print "	<div id=\"zonetextepaying\">";
-    print "	    AMOUNT (€): <input type=\"number\" name=\"annoncepayamount\" class=\"textcenter\"/>";
+    print "	    Amount (€): <input type=\"number\" name=\"annoncepayamount\" class=\"textcenter\"/>";
     print "  </div>";
-    print "	<div id=\"zonetexteswap\">NATURE OF SWAP: <input type=\"text\" name=\"annonceswapnature\" class=\"textcenter\"/></div>";
-    print "	TITLE: <input type=\"text\" name=\"annoncetitle\" class=\"textcenter\"/>";
-    print "	GENRE: <input type=\"text\" name=\"annoncegenre\" placeholder=\"Projet, TP, etc.\" class=\"textcenter\"/>";
-    print "	<textarea name=\"annoncedesc\" cols=\"30\" rows=\"3\" maxlength=\"240\" placeholder=\"Enter short description here\" class=\"textcenter\"></textarea>";
+    print "	<div id=\"zonetexteswap\">Nature of swap: <input type=\"text\" name=\"annonceswapnature\" class=\"textcenter\"/></div>";
+    print "	Title: <input type=\"text\" name=\"annoncetitle\" class=\"textcenter\"/>";
+    print "	Genre: <input type=\"text\" name=\"annoncegenre\" placeholder=\"Projet, TP, etc.\" class=\"textcenter\"/>";
+    print "	Description: <textarea name=\"annoncedesc\" cols=\"30\" rows=\"3\" maxlength=\"240\" placeholder=\"Enter short description here\" class=\"textcenter\"></textarea>";
     print "	SEMESTER: <select name=\"annoncesemester\" class=\"styled-select black rounded\">";
     print "	    <option value=\"1\" class=\"toggle\">1</option>";
     print "	    <option value=\"2\" class=\"toggle\">2</option>";

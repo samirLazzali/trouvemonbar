@@ -3,7 +3,10 @@
 include("annonce.php");
 include("viewfunctions.php");
 include("sidebar.php");
-login();
+
+session_start();
+
+handleLogin();
 
 header_t("Les Bons Bails");
 if(!verif_authent()) { // si le gars est authentified ==>  acces aux offres
@@ -19,8 +22,8 @@ dispSidebar();
 
 if(verif_authent()) { // si le gars est authentified ==>  acces aux offres
     //indexco();
-    //$annonces = Annonce::getAnnonces();
-    $annonces = getoffers($_GET["semestre"], $_GET["module"], $_GET["matiere"]);
+    $annonces = Annonce::getAnnonces();
+    //$annonces = getoffers($_GET["semestre"], $_GET["module"], $_GET["matiere"]);
     echo "<h2>Dernières Annonces</h2>";
     foreach ($annonces as $an) {
 	$an->display();

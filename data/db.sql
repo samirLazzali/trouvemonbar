@@ -164,10 +164,6 @@ COPY public.users (id, email, username, password, admin) FROM stdin;
 2	yassir.chekour@ensiie.fr	Yassir	098f6bcd4621d373cade4e832627b4f6	t
 3	victor.meas@ensiie.fr	Vicky	098f6bcd4621d373cade4e832627b4f6	t
 4	hugo.trachino@ensiie.fr	Nuja	098f6bcd4621d373cade4e832627b4f6	t
-5	teste	testu	testp	f
-6	maria.clara@ensiie.fr	MC	098f6bcd4621d373cade4e832627b4f6	f
-7	paul.thibaud@ensiie.fr		098f6bcd4621d373cade4e832627b4f6	f
-8	martin.dufour@ensiie.fr	Martin Dufour	098f6bcd4621d373cade4e832627b4f6	f
 \.
 
 

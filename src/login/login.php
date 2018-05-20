@@ -20,28 +20,19 @@ function getUsername($email) {
 }
 
 function login() {
-    if (session_status() == PHP_SESSION_NONE) {
-	session_start();
-    }
-
-    if (isset($_GET['logout'])) {
-	session_destroy();
-	header("Refresh:0; url=main.php");
+    if (empty($_POST['email']) || empty($_POST['password'])) {
+	return "Username or Password is invalid";
     } else {
-	if (empty($_POST['email']) || empty($_POST['password'])) {
-	    return "Username or Password is invalid";
-	} else {
-	    // Define $username and $password
-	    $email=$_POST['email'];
-	    $password=md5($_POST['password']);
+	// Define $username and $password
+	$email=$_POST['email'];
+	$password=md5($_POST['password']);
 
-	    if (($row = lookUp($email, $password)) != null) {
-		$_SESSION['email'] = $row->email;
-		$_SESSION['username'] = $row->username;
-		$_SESSION['admin'] = $row->admin;
-	    } else {
-		return "Invalid credentials: '$email', '$password'";
-	    }
+	if (($row = lookUp($email, $password)) != null) {
+	    $_SESSION['email'] = $row->email;
+	    $_SESSION['username'] = $row->username;
+	    $_SESSION['admin'] = $row->admin;
+	} else {
+	    return "Invalid credentials: '$email', '$password'";
 	}
     }
 }
@@ -93,9 +84,6 @@ function buttonLogin() {
 }
 
 function buttonLogout() {
-   // print "<form align=\"right\" name=\"form1\" method=\"post\" action=\"\">";
-   // print "<input name=\"logout\" type=\"submit\" id=\"logout\" value=\"log out\">";
-   // print "</form>";
     echo "<a href=\"main.php?logout\" class=\"m-link\" id=\"logout\"><i class=\"fas fa-times-circle\"></i> Log Out</a>";
 }
 
@@ -112,8 +100,7 @@ function displayLogin() {
     echo "<div class=\"tab-content\">";
     echo "<div id=\"login\">";
     echo "<h1>Welcome Back!</h1>";
-    echo "<!-- <form action=\"status.php\" method=\"post\"> -->";
-    echo "<form action=\"main.php\" method=\"post\">";
+    echo "<form action=\"main.php?login\" method=\"post\">";
     echo "<div class=\"field-wrap\">";
     echo "<label>Email Address<span class=\"req\">*</span></label>";
     echo "<input type=\"email\" name=\"email\" required=\"\" autocomplete=\"off\">";
@@ -123,12 +110,11 @@ function displayLogin() {
     echo "<input type=\"password\" name=\"password\" required=\"\" autocomplete=\"off\">";
     echo "</div>";
     echo "<p class=\"forgot\"><a href=\"#\">Forgot Password?</a></p><span class=\"errorDisp\"><?php echo \"Error: \$error\"; ?></span> <button class=\"button button-block\" name=\"login\">Log In</button>";
-    echo "<!-- <input name=\"submit\" type=\"submit\" value=\" Log In\"> -->";
     echo "</form>";
     echo "</div>";
     echo "<div id=\"signup\">";
     echo "<h1>Sign Up for Free</h1>";
-    echo "<form action=\"main.php\" method=\"post\">";
+    echo "<form action=\"main.php?create\" method=\"post\">";
     echo "<div class=\"field-wrap\">";
     echo "<label>Email Address<span class=\"req\">*</span></label>";
     echo "<input type=\"email\" name=\"email\" required=\"\" autocomplete=\"off\">";
@@ -147,5 +133,20 @@ function displayLogin() {
     echo "</div><!-- /form -->";
 
     echo "<script src=\"js/login.js\"></script>";
+}
+
+function handleLogin() {
+    if (isset($_GET['logout'])) {
+	session_destroy();
+	header("Refresh:0; url=main.php");
+    }
+
+    if (isset($_GET['login'])) {
+	login();
+    }
+
+    if (isset($_GET['create'])) {
+	create();
+    }
 }
 ?>

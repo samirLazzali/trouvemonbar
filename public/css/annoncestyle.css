@@ -20,7 +20,7 @@ form.create #form_border{
   margin-right: auto;
 }
 
-form.create input[type=submit],
+/*form.create input[type=submit],
 form.create input[type=reset]{
   margin-left: auto;
   margin-right: auto;
@@ -39,7 +39,7 @@ form.create input[type=reset]{
 form.create input[type=submit]:hover,
 form.create input[type=reset]:hover{
   background-color: #5FE6BD;
-}
+}*/
 
 /*form.create select {
   margin-left: auto;

@@ -1,9 +1,12 @@
 <?php
 session_start();
 include("../src/annonce.php"); 
+include("../src/sidebar.php"); 
 include("../src/viewfunctions.php");
 
 header_t("Create Annonce");
+
+dispSidebar();
 ?>
 
 <div class="main">
@@ -14,11 +17,10 @@ header_t("Create Annonce");
 <?php displayFormCreate(); ?>
     </div>
 </div>
+</div>
 
 <script type="text/javascript">
-  togglecacher();
+togglecacher();
 </script>
 
-<?php
-	    footer();
-	    ?>
+<?php footer(); ?>

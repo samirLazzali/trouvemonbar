@@ -104,7 +104,7 @@ h1 {
     color: #ffffff;
 }
 
-.form input, textarea {
+.form input, .form textarea {
     font-size: 22px;
     display: block;
     width: 100%;
@@ -119,36 +119,36 @@ h1 {
     transition: border-color .25s ease, box-shadow .25s ease;
 }
 
-input:focus, textarea:focus {
+.form input:focus, .form textarea:focus {
     outline: 0;
     border-color: #1ab188;
 }
 
-textarea {
+.form textarea {
     border: 2px solid #a0b3b0;
     resize: vertical;
 }
 
-.field-wrap {
+.form .field-wrap {
     position: relative;
     margin-bottom: 40px;
 }
 
-.top-row:after {
+.form .top-row:after {
     content: "";
     display: table;
     clear: both;
 }
-.top-row > div {
+.form .top-row > div {
     float: left;
     width: 48%;
     margin-right: 4%;
 }
-.top-row > div:last-child {
+.form .top-row > div:last-child {
     margin: 0;
 }
 
-.button {
+.form .button {
     border: 0;
     outline: none;
     border-radius: 0;
@@ -162,20 +162,20 @@ textarea {
     transition: all 0.5s ease;
     -webkit-appearance: none;
 }
-.button:hover, .button:focus {
+.form .button:hover, .button:focus {
     background: #179b77;
 }
 
-.button-block {
+.form .button-block {
     display: block;
     width: 100%;
 }
 
-.forgot {
+.form .forgot {
     margin-top: -20px;
     text-align: right;
 }
 
-.errorDisp {
+.form .errorDisp {
     color: red;
 }
