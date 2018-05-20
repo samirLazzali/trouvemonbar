@@ -17,6 +17,7 @@
 --
 -- Structure de la table `categories`
 --
+DROP TABLE IF EXISTS "user","Evenements","Musique","Type","Groupe";
 
 CREATE TABLE categories (
   id int NOT NULL,
@@ -105,7 +106,7 @@ CREATE TABLE participants3897910314 (
 --
 
 CREATE TABLE "user" (
-  id int NOT NULL,
+  id int,
   firstname varchar(100) ,
   lastname varchar(100) ,
   birthday date ,

@@ -123,5 +123,56 @@ class UserRepository
     
     }
 
+    public function modif($postfirstname,$postlastname,$postdomicile,$postoldmdp,$postnewmdp,$postnewmdpverif){
+	    if ($postfirstname != null)
+	    {
+		    $firstname = htmlspecialchars($postfirstname) ;
+		    if ($firstname != $_SESSION['firstname'])
+		    {
+			    $req=$this->connection->prepare('UPDATE "user" SET firstname = :new WHERE nickname = :old');
+			    $req->execute(array(':new' => $firstname,':old' => $_SESSION['pseudo']));
+
+
+			    $_SESSION['firstname']=$firstname;
+				
+		    }
+
+
+	    }
+	    if ($postlastname != null)
+	    {
+		    $lastname = htmlspecialchars($postlastname) ;
+		    if ($lastname != $_SESSION['lastname'])
+		    {
+			    $req=$this->connection->prepare('UPDATE "user" SET lastname = :new WHERE nickname = :old');
+			    $req->execute(array(':new' => $lastname,':old' => $_SESSION['pseudo']));
+
+
+			    $_SESSION['lastname']=$lastname;
+				
+		    }
+
+
+	    }
+	    if ($postdomicile != null)
+	    {
+		    $domicile = htmlspecialchars($postdomicile) ;
+		    if ($domicile != $_SESSION['domicile'])
+		    {
+			    $req=$this->connection->prepare('UPDATE "user" SET domicile = :new WHERE nickname = :old');
+			    $req->execute(array(':new' => $domicile,':old' => $_SESSION['pseudo']));
+
+
+			    $_SESSION['domicile']=$domicile;
+				
+		    }
+
+
+	    }
+
+
+
+
+    }
 
 }
