@@ -7,5 +7,3 @@ include("includes/debut.php");
 $action = isset($_GET['action'])?htmlspecialchars($_GET['action']):'consulter';
 $membre = isset($_GET['m'])?(int) $_GET['m']:'';
 
-echo $membre;
-echo $action;
