@@ -21,7 +21,7 @@ if(verif_authent())
 <div class="main">
 
 <div class=annonce>
-	<div class=title> A propos
+	<div class=title style="text-align:center;"> A propos
 	</div>
 	<div> 
 		<br>
