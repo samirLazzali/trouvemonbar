@@ -1,0 +1,57 @@
+html {
+    height:100%;
+}
+
+body {
+    min-height:100%;
+    background-color: LightCyan;
+    maring :0;
+    padding:0;
+    position:relative;
+    cursor :url("img/paw.png"), pointer;
+}
+#bandeau{
+    text-align :center;
+    color : White;
+    font-size: 105px;
+    background-image:url("img/BandeauChats.png");
+    background-repeat:repeat-x;
+    background-color : OrangeRed;
+}
+#menu{
+    background-color:Aqua;
+    padding: 10px 0px;
+}
+
+#menu a {
+    float :center left;
+    padding: 10px 16px;
+    text-align:center;
+    text-decoration : none;
+    
+}
+#menu a:hover{
+    color : red;
+    background-color: DeepSkyBlue;
+}
+
+#footer {
+    color :red;
+    bottom:0;
+    text-align:center;
+}
+#contenu {
+    background-image:url("img/paw_bckgrnd.png");
+    background-repeat : repeat;
+}
+
+#contenu h1{
+    text-align: center;
+    font-size : 50px;
+    
+}
+#contenu a:hover{
+    color : red;
+}
+
+
