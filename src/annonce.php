@@ -133,7 +133,12 @@ class Annonce {
 	    $annonce->setTitle($row->titre);
 	    $annonce->setNature($row->offer);
 	    $annonce->setDate(new \DateTimeImmutable($row->postdate));
-	    $annonce->setOp(Annonce::uidToUsername($connection, $row->op));
+
+	    if (isset($row->username))
+		$annonce->setOp($row->username);
+	    else
+		$annonce->setOp(Annonce::uidToUsername($connection, $row->op));
+
 	    $annonce->setContent($row->description);
 	    $annonce->setGenre($row->genre);
 	    $annonce->setSemestre($row->semestre);
@@ -147,9 +152,12 @@ class Annonce {
 	return $annonces;
     }
 
-    public static function modAnnonces($query) {
+    public static function modAnnonces($requete) {
+	if ($requete == null || $requete == "")
+	    return array();
+
 	$connection = dbConnect();
-	dbExec($connection, $query);
+	dbExec($connection, $requete);
     }
 
     public static function getAnnonceById($id) {

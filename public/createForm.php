@@ -2,7 +2,8 @@
 include("../src/annonce.php"); 
 include("../src/sidebar.php"); 
 include("../src/viewfunctions.php");
-session_start();
+
+protectAccess();
 
 $idToGet = -1;
 if (isset($_GET['edit']) && $_GET['edit']) {

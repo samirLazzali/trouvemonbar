@@ -74,13 +74,13 @@
 }
 
 #form_border label.active {
-    transform: translateY(50px);
+    transform: translateY(40px);
     left: 2px;
     font-size: 14px;
 }
 
 #form_border label.big.active {
-    transform: translateY(110px);
+    transform: translateY(101px);
     left: 2px;
     font-size: 14px;
 }

@@ -1,5 +1,5 @@
 <?php
-require '../src/accessdb.php';
+require 'accessdb.php';
 
 if (isset($_POST['submit'])) {
     if (empty($_POST['email']) || empty($_POST['password'])) {
@@ -30,4 +30,4 @@ if (isset($_POST['submit'])) {
     }
 
     dbQuery($connection, "INSERT INTO users (email, username, passowrd) VALUES ('$email','$username','$password');");
-}
+}?>

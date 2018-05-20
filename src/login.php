@@ -79,6 +79,14 @@ function verif_authent() {
     return isset($_SESSION['email']);
 }
 
+function protectAccess() {
+    session_start();
+    if (!isset($_SESSION['username'])) {
+	header("Refresh:0; url=nondroit.php");
+	exit();
+    }
+}
+
 function buttonLogin() {
     echo "<a class=\"m-link\" id=\"connect\"><i class=\"fas fa-sign-in-alt\" aria-hidden=\"true\"></i> Se connecter</a>";
 }
@@ -133,7 +141,7 @@ function displayLogin() {
     //echo "</div><!-- /form -->";
 
     //echo "<script src=\"js/login.js\"></script>";
-    include("login.html");
+    include("modules/login.html");
 }
 
 function handleLogin() {

@@ -1,5 +1,5 @@
 <?php
-include ("login/login.php");
+include ("login.php");
 
 function header_t($titre) {
     print "<!DOCTYPE html>\n";
@@ -32,13 +32,13 @@ function header_t($titre) {
     print "    <div class=\"m-right\">\n";
 
     print "    <a href=\"main.php\" class=\"m-link\"><i class=\"fa fa-home\" aria-hidden=\"true\"></i> Accueil</a>\n";
-    //print "    <a href=\"apropos.php\" class=\"m-link\"><i class=\"fas fa-question-circle\" aria-hidden=\"true\"></i> A propos</a>\n";
     if (verif_authent()) {
 	//print "    <a href=\"createForm.php\" class=\"m-link\"><i class=\"far fa-newspaper\" aria-hidden=\"true\"></i> Annonces</a>\n";
 	//print "    <a href=\"contact.php\" class=\"m-link\"><i class=\"fas fa-paper-plane\" aria-hidden=\"true\"></i> Contact</a>\n";
 	buttonResearch();
 	buttonLogout();
     } else {
+	print "    <a href=\"apropos.php\" class=\"m-link\"><i class=\"fas fa-question-circle\" aria-hidden=\"true\"></i> A propos</a>\n";
 	buttonLogin();
     }
 
@@ -120,7 +120,6 @@ function indexnotco() {
 			</div>";
     print "<br>";
     print "<br>";
-	// print "<p class='connexion'> Connectez-Vous! </p>"; // dans les styles mettre que class connexion ouvre onclick() auth()
 
 }
 
