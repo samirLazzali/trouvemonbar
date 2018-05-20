@@ -22,6 +22,7 @@ $posts = Post::findPosts($people, $limit);
     <title>Vitz - Dernières publications</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="assets/styles/feed.css" />
+    <link rel="stylesheet" type="text/css" href="assets/styles/moderation.css" />
     <script src="/assets/js/general.js"></script>
     <script src="/assets/js/post.js"></script>
     <script>
@@ -35,7 +36,7 @@ $posts = Post::findPosts($people, $limit);
                 else
                     echo $u->getUsername();
             ?>";
-        var _before = <?= end($posts)->getTimestamp(); ?>;
+        var _before = <?= count($posts) > 0 ? end($posts)->getTimestamp() : time(); ?>;
     </script>
 </head>
 <body onload="refreshFeed(lastRefresh, filter)">
@@ -45,6 +46,19 @@ $posts = Post::findPosts($people, $limit);
     <h1>
         - Dernières publications -
     </h1>
+    <?php if (count($posts) == 0): ?>
+        <div>
+            <h2 class="all-done-message">
+                Rien ici
+            </h2>
+            <h2 class="smiley">
+                :|
+            </h2>
+            <h2 class="no-reports-message">
+                Aucune publication disponible dans votre fil.
+            </h2>
+        </div>
+    <?php die(); endif; ?>
     <a id="link-posts-waiting" class="link-posts-waiting display-none" href="#" onClick="return showWaitingPosts();">
         <div class="post-in-feed" id="link-posts-waiting-wrapper">
             Nouvelles publications

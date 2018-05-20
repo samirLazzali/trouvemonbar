@@ -29,6 +29,7 @@ if (isset($_GET['user']))
 }
 else
     $user = getUserFromCookie();
+
 $posts = $user->findPosts();
 ?>
 
@@ -43,8 +44,8 @@ $posts = $user->findPosts();
         <script src="/assets/js/user.js"></script>
         <script>
             var lastRefresh = <?= time(); ?>;
-            var filter = "<?php $user; ?>";
-            var _before = <?= end($posts)->getTimestamp(); ?>;
+            var filter = "<?= $user->getUsername(); ?>";
+            var _before = <?= count($posts) > 0 ? end($posts)->getTimestamp() : time(); ?>;
         </script>
     </head>
     <body onload="refreshFeed(lastRefresh, filter)">
@@ -146,11 +147,10 @@ $posts = $user->findPosts();
                 ?>
             </div>
             <a id="link-more-posts" class="link-more-posts" href="#" onClick="return getPostsBefore(_before, filter);">
-                <div class="post-in-feed" id=""link-more-posts-wrapper">
+                <div class="post-in-feed" id="link-more-posts-wrapper">
                 Plus Anciens
-        </div>
-        </a>
-
+                </div>
+            </a>
         </div>
     </body>
 </html>

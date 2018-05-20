@@ -23,18 +23,16 @@ class DBHandler():
             repost = str(t['retweeted_status']['id'])[-12:]
             self.addTweet(t['retweeted_status'])
         else:
-            repost = 'NULL'
+            repost = ''
 
-        if repost != 'NULL':
-            repost = "'" + repost + "'"
+        repost = "'" + repost + "'"
 
         if t['in_reply_to_status_id'] != None:
             responseTo = str(t['in_reply_to_status_id'])[-12:]
         else:
-            responseTo = 'NULL'
+            responseTo = ''
 
-        if responseTo != 'NULL':
-            responseTo = "'" + repost + "'"
+        responseTo = "'" + repost + "'"
 
         
         SQL = "INSERT INTO Post (ID, Author, Content, Timestamp, Repost, ResponseTo) VALUES ('{id}', '{author}', '{content}', '{timestamp}', {repost}, {responseto})".format(id = _id, author = userId, content = content.replace("'", "''"), timestamp = int(time.time()), repost = repost, responseto = responseTo)

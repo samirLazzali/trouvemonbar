@@ -10,9 +10,7 @@ function getHashtags()
     {
         if (this.readyState == 4 && this.status == 200)
         {
-            console.log(request.responseText);
             var result = JSON.parse(request.responseText)['result'];
-            console.log(result);
             var text = '';
             for(var tag in result) {
                 text += "<div class='hashtag-in-list' title='Afficher les publications liées à ce hashtag'><a href='#' class='hashtag-link' onclick='getPostsFromHashtag(\"" + tag + "\")'>" + tag + "</a></div>";
@@ -61,12 +59,11 @@ function getContent(result)
     var id;
     result.forEach(
         function (r) {
-            console.log(r);
             author = r['author']['username'];
             content = r['content'];
             date = timeConverter(r['timestamp']);
             id = r['id'];
-            if (r['repostOf'] != null)
+            if (r['original'] != null)
                 text += rawRepostToHtml(r)
             else
                 text += postToHtml(author, content, date, id);
@@ -133,7 +130,6 @@ function getTopRt()
     {
         if (this.readyState == 4 && this.status == 200)
         {
-            console.log(request)
             var result = JSON.parse(request.responseText)["result"];
             var text = getContent(result);
             document.getElementById('post-feed').innerHTML = text;

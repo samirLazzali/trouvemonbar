@@ -118,8 +118,6 @@ function repost(id)
 function reportPost(id)
 {
     var reason = document.getElementById("report-reason-" + id).value;
-    console.log(reason);
-
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200)
@@ -451,7 +449,7 @@ function showWaitingPosts()
     var feed = document.getElementById("post-feed");
     var html = "";
     postsWaiting.forEach(function(elt, index, arr) {
-        if (elt["repostOf"] != null)
+        if (elt["original"] != null)
             html += rawRepostToHtml(elt);
         else
             html += rawPostToHtml(elt);
@@ -483,7 +481,7 @@ function getPostsBefore(before, filter = "")
                         else
                             newPostFound = true;
 
-                        if (elt["repostOf"] != null)
+                        if (elt["original"] != null)
                             html = rawRepostToHtml(elt);
                         else
                             html = rawPostToHtml(elt);

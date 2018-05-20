@@ -72,6 +72,7 @@ class Post implements JsonSerializable
     /**
      * @param $post
      * @param $author
+     * @return Post une republication de ce Post
      */
     static function findRepost($post, $author)
     {

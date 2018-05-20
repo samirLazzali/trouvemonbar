@@ -23,7 +23,7 @@ $posts = Post::findPosts(array(), $limit);
     <script>
         var lastRefresh = <?= time(); ?>;
         var filter = "";
-        var _before = <?= end($posts)->getTimestamp(); ?>;
+        var _before = <?= count($posts) > 0 ? end($posts)->getTimestamp() : time(); ?>;
     </script>
 </head>
 <body onload="refreshFeed(lastRefresh, filter)">
