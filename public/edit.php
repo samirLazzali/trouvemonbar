@@ -10,8 +10,10 @@ if (isset($_POST['submit'])) {
     $newAnnonce->date = $oldAnnonce->date;
 }
 
-Annonce::delAnnonceById($oldAnnonce->id);
-if (isset($_POST['submit'])) $res = $newAnnonce->sendToDbFull();
+if (isset($_POST['submit']))
+    $res = $newAnnonce->updateDb();
+else
+    Annonce::delAnnonceById($oldAnnonce->id);
 
 $_POST = array();
 

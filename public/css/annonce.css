@@ -50,14 +50,14 @@ div.info {
     background-color: #FFF;
 }
 div.tags {
-    padding-top: 20px;
+    padding: 5px;
     float:left;
     font-family: 'IBM Plex Mono';
     font-weight: 900;
     font-size: 18px;
-    width: 30%;
-    height: 150px;
-    background-color: #FFF;
+    width: 100%;
+    /*height: 150px;*/
+    background-color: #9999FF;
 }
 div.tag {
     padding-top: 1px;

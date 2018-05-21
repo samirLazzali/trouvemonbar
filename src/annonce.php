@@ -33,15 +33,19 @@ class Annonce {
 	print "<div class=more>";
 	print "<div class=info>";
 	print "$this->genre</br>$this->op</br>S$this->semestre";
-	if ($this->module != 'NULL') print " - $this->module";
-	print "</div>";
-	print "<div class=tag>";
-	print "$this->tagArray";        
+	if ($this->module != 'NULL') print " - $this->module</br>";
 	print "</div>";
 
 	print "<div class=desc>";
 	print "$this->content";
 	print "</div>";
+
+	if (sizeof($this->tagArray) != 0) {
+	    print "<div class=\"tags\">";
+	    print $this->tagsToString();
+	    print "</div>";
+	}
+
 	print "</div>";
 
 	print "<div class=logi>";
@@ -86,6 +90,10 @@ class Annonce {
 
     public function setGenre($genre) {
 	$this->genre = $genre;
+    }
+
+    public function setTags($array) {
+	$this->tagArray = $array;
     }
 
     public function setSemestre($semestre) {
@@ -137,10 +145,13 @@ class Annonce {
 	    $annonce->setNature($row->offer);
 	    $annonce->setDate(new \DateTimeImmutable($row->postdate));
 
-	    if (isset($row->username))
+	    if (isset($row->username)) {
+		$op = Annonce::usernameToUid($connection, $row->username);
 		$annonce->setOp($row->username);
-	    else
+	    } else {
+		$op = $row->op;
 		$annonce->setOp(Annonce::uidToUsername($connection, $row->op));
+	    }
 
 	    $annonce->setContent($row->description);
 	    $annonce->setGenre($row->genre);
@@ -148,6 +159,14 @@ class Annonce {
 	    $annonce->setModule($row->module);
 	    $annonce->setPaiement($row->paiement);
 	    $annonce->setService($row->service);
+	    $annonce->setTags(array());
+
+	    $rows = dbQuery($connection, "SELECT name FROM ((annonce JOIN links ON annonce.id = links.aid) JOIN tags ON links.tid = tags.id) WHERE annonce.id = $row->id;");
+
+	    foreach ($rows as $tag)
+		$annonce->tagArray[] = $tag->name;
+
+	    //print_r($annonce->tagArray);
 
 	    $annonces[] = $annonce;
 	}
@@ -194,24 +213,22 @@ class Annonce {
 	return dbExec($connection, $query);
     }
 
-    public function sendToDbFull() {
+    public function updateDb() {
 	$connection = dbConnect();
 	$opId = Annonce::usernameToUid($connection, $this->op);
 	$date = $this->date->format("Y-m-d H:i:s");
-	$query = "INSERT INTO annonce (id, postdate, offer, op, semestre, module, genre, titre, description, paiement, service) VALUES ($this->id,
-		'$date',
-		$this->isOffer,
-		$opId,
-		$this->semestre, 
-		'$this->module',
-		" . $connection->quote($this->genre) . ", 
-		" . $connection->quote($this->title) . ", 
-		" . $connection->quote($this->content) . ", 
-		$this->paiement, 
-		'$this->service'
+	$query = "UPDATE annonce SET postdate = " . $connection->quote($date) . ",
+	    offer = $this->isOffer, 
+	    op = $opId, 
+	    semestre = $this->semestre, 
+	    module = " . $connection->quote($this->module) . ",
+	    genre = " . $connection->quote($this->genre) . ",
+	    titre = " . $connection->quote($this->title) . ",
+	    description = " . $connection->quote($this->content) . ",
+	    paiement = $this->paiement,
+	    service = " . $connection->quote($this->service) . " WHERE id=$this->id; ";
 
-	    );";
-
+	//print $query;
 	return dbExec($connection, $query);
     }
 
@@ -303,6 +320,17 @@ class Annonce {
 	$query = substr($query, 0, -4);
 
 	return $query." ORDER BY postdate DESC";
+    }
+
+    public function tagsToString() {
+	$str = "";
+	foreach ($this->tagArray as $tag)
+	    $str = $str . $tag . " ";
+
+	if (sizeof($str > 0))
+	    $str = substr($str, 0, -1);
+
+	return $str;
     }
 }
 

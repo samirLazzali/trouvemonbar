@@ -61,8 +61,7 @@ dispSidebar();
 	    <span class="choice"><input type="submit" name="submit" value="Modifier"></span>
 	    </form>
 	</div>
-    <h2>Mes annonces</h2>
-	Annonces Publiées : <strong>  <?php print sizeof($annonces); ?> </strong>
+    <h2>Mes annonces: <strong><?php print sizeof($annonces); ?></strong> annonce<?php print (sizeof($annonces) == 1?"":"s"); ?> publiée<?php print (sizeof($annonces) == 1?"":"s"); ?></h2>
 <?php
 
 foreach ($annonces as $an)
