@@ -27,3 +27,8 @@ $users = $userRepository->fetchAll();
 <?php
     menu_oeno();
 ?>
+<br />
+<br />
+<br />
+<img src="images/oenologie.png" alt="Logo Apéral" height="200" width="200">
+

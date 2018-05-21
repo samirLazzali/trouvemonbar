@@ -34,5 +34,6 @@ menu_aperal();
 <br />
 <br />
 <h4>Aperal depuis la nuit des temps est considéré comme LA référence dans l'apéritif de compétition avec notamment 3 coupe du monde à son actif</h4>
+<img src="images/aperal.png" alt="Logo Apéral" height="500" width="500">
 </body>
 </html>
