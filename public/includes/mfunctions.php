@@ -1,5 +1,5 @@
 <?php
-
+/* Suiite à une erreur de manipulation, toutes les majuscules du fichier ont été perdues... */
 
 function age($date_naissance)
 {
@@ -12,7 +12,7 @@ function age($date_naissance)
     return $an[2] - $am[2] - 1;
 }
 
-function affcompat($id_the_cat) {
+function affCompat($id_the_cat) {
     $prodbreed = 5;
     $prodcolor = 3;
     $prodtraits = 1;
@@ -26,32 +26,34 @@ function affcompat($id_the_cat) {
     $prodagemin = 7;
     $prodagemax = 4;
 
-    $dbname = getenv('db_name'); /* la connexion n'a pas déjà été faite avant ?*/
-    $dbuser = getenv('db_user');
-    $dbpassword = getenv('db_password');
-    $connexion = new pdo("pgsql:host=postgres user=$dbuser dbname=$dbname password=$dbpassword");
+    $res = "";
+
+    $dbName = getenv('DB_NAME');
+    $dbUser = getenv('DB_USER');
+    $dbPassword = getenv('DB_PASSWORD');
+    $connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 
     $the_cat = $connexion->query("select *
-                                            from cats
-                                            where id_cat=".$id_the_cat)->fetch(pdo::fetch_obj);
+                                            from Cats
+                                            where id_cat=".$id_the_cat)->fetch(PDO::FETCH_OBJ);
     $sexch = $the_cat->sex;
     $breedch = query("select breed
-                      from cat_breed
-                      where cat=".$id_the_cat)->fetch(pdo::fetch_obj)->breed;
+                      from Cat_breed
+                      where cat=".$id_the_cat)->fetch(PDO::FETCH_OBJ)->breed;
     $purerace = $the_cat->purety;
 
     if($purerace==1)
         $listechats = $connexion->query("select * 
-                                          from cats 
-                                          join cat_breed on cat=id_cat 
+                                          from Cats 
+                                          join Cat_breed on cat=id_cat 
                                           where sexe=" . $sexch . " 
                                             and breed=" . $breedch);
     else
         $listechats = $connexion->query("select * 
-                                          from cats 
-                                          join cat_breed on cat=id_cat 
+                                          from Cats 
+                                          join Cat_breed on cat=id_cat 
                                           where sexe=" . $sexch);
-    $chatpot=$listechats->fetch(pdo::fetch_obj);
+    $chatpot=$listechats->fetch(PDO::FETCH_OBJ);
     while($chatpot){
         $chatspot[] = $chatpot->id_cat;
         $score = 0;
@@ -72,63 +74,63 @@ function affcompat($id_the_cat) {
         if (!is_null($the_cat->sweight_max) && $the_cat->sweight_max <= $chatpot->weight)
             $score += $prodweightmax;
         $score += $prodbreed * $connexion->query("select count(*)
-                                                            from cat_breed 
-                                                            join searched_breeds on cat_breed.breed = searched_breeds.breed
-                                                            where searched_breeds.cat=" . $id_the_cat ."
-                                                              and cat_breed.cat=" . $chatpot->id_cat); /*->fetch ?? */
+                                                            from Cat_breed 
+                                                            join Searched_breeds on Cat_breed.breed = Searched_breeds.breed
+                                                            where Searched_breeds.cat=" . $id_the_cat ."
+                                                              and Cat_breed.cat=" . $chatpot->id_cat); /*->fetch ?? */
         $score += $prodcolor * $connexion->query("select count(*)
-                                                            from cat_color 
-                                                            join searched_colors on cat_color.color = searched_colors.color
-                                                            where searched_colors.cat=" . $id_the_cat ."
-                                                              and cat_color.cat=" . $chatpot->id_cat);
+                                                            from Cat_color 
+                                                            join Searched_colors on Cat_color.color = Searched_colors.color
+                                                            where Searched_colors.cat=" . $id_the_cat ."
+                                                              and Cat_color.cat=" . $chatpot->id_cat);
         $score += $prodtraits * $connexion->query("select count(*)
-                                                            from cat_trait 
-                                                            join searched_traits on cat_trait.trait = searched_traits.trait
-                                                            where searched_traits.cat=" . $id_the_cat ."
-                                                              and cat_trait.cat=" . $chatpot->id_cat);
+                                                            from Cat_trait 
+                                                            join Searched_traits on Cat_trait.trait = Searched_traits.trait
+                                                            where Searched_traits.cat=" . $id_the_cat ."
+                                                              and Cat_trait.cat=" . $chatpot->id_cat);
         $score += $prodpattern * $connexion->query("select count(*)
-                                                            from searched_pattern 
+                                                            from Searched_pattern 
                                                             where cat=" . $id_the_cat .
                                                             "and pattern =" . $chatpot->pattern);
         $scorechatspot[] = $score;
     }
     if (empty($chatspot)) {
-        print "<h3> malheureusement, il ne semble qu'aucun chat ne corresponde à vos attentes </h3>";
-        print "<p> nous vous invitons à soit attendre que le chat donc vous rêvez la nuit apparaisse sur le site, soit à revoir vos critères de recherche </p>";
+        $res .= "<h3> malheureusement, il ne semble qu'aucun chat ne corresponde à vos attentes </h3>";
+        $res .= "<p> nous vous invitons à soit attendre que le chat donc vous rêvez la nuit apparaisse sur le site, soit à revoir vos critères de recherche </p>";
     }
     else {
         array_multisort($scorechatspot, $chatspot);
-        print "<table>";
         foreach($chatpot as $elu) {
             $infoelu = $connexion->query("select phone_number, name_cat, 
-                                                from utilisateurs
-                                                natural join cats 
-                                                where cat=" . $chatpot)->fetch(pdo::fetch_obj);
-            print "<tr> <td>".$infoelu->name_cat."</td><td>".$infoelu->phone_number."</td> </tr>";
+                                                from Utilisateur
+                                                natural join Cats 
+                                                where cat=" . $chatpot)->fetch(PDO::FETCH_OBJ);
+            $res.= "<tr> <td>".$infoelu->name_cat."</td><td>".$infoelu->phone_number."</td> </tr>";
         }
-        print "</table>";
     }
+    return $res;
 }
 
+/*
 function affmenu(){
-    $dbname = getenv('db_name'); /* la connexion n'a pas déjà été faite avant ?*/
+    $dbname = getenv('db_name');
     $dbuser = getenv('db_user');
     $dbpassword = getenv('db_password');
     $connexion = new pdo("pgsql:host=postgres user=$dbuser dbname=$dbname password=$dbpassword");
-    $chatsPossédés = $connexion->query("SELECT id_cat,cat_name
+    $chatsPossédés = $connexion->query("SELECT id_cat,Cat_name
                                                   FROM cats
                                                   NATURAL JOIN utilisateur
-                                                  WHERE id_user=".XXXXX); /* à compléter */
+                                                  WHERE id_user=".$_SESSION['id_user']);
     print "<script>
-            <form name="choix">
+            <form name=\"choix\">
                 <select name=\"liste\" onchange=\"document.getElementById('matchables').value\">'. foreach().'
                 </select>
            </form>'
         </script>
     <table style='display:none;' id='matchables'>
-    </table>"
+    </table>";
 }
-
+*/
 
 
 ?>

@@ -47,10 +47,10 @@ CREATE TABLE IF NOT EXISTS Cats(
        sweight_min FLOAT CHECK (0<weight),
        sweight_max FLOAT CHECK (0<weight),
 
-
-        /* contient aussi une race (Cat_breed), une ou plusieurs couleurs (Cat_color) et traits de caractères (cat_personnality)
-            + les critères de recherche correspondants + pattern recherchés */
 	   );
+
+        # contient aussi une race (Cat_breed), une ou plusieurs couleurs (Cat_color) et traits de caractères (cat_personnality)
+        #    + les critères de recherche correspondants + pattern recherchés 
 
 DROP TABLE IF EXISTS Breeds;
 CREATE TABLE IF NOT EXISTS Breeds(
@@ -155,6 +155,7 @@ INSERT INTO Personality_traits VALUES('6','Tonique');
 INSERT INTO Personality_traits VALUES('7','Emotif');
 INSERT INTO Personality_traits VALUES('8','Chasseur');
 
+
 INSERT INTO Breeds VALUES ('1','Siamois');
 INSERT INTO Breeds VALUES ('2','Persan');
 INSERT INTO Breeds VALUES ('3','Ragdoll');
@@ -175,3 +176,15 @@ INSERT INTO Breeds VALUES ('17','Manx');
 INSERT INTO Breeds VALUES ('18','Angora Turc');
 INSERT INTO Breeds VALUES ('19','Savannah');
 INSERT INTO Breeds VALUES ('20','Himalayen');
+
+
+INSERT INTO Utilisateur VALUES ('1','Jesus','Jesus@paradise.net','406fcef6cb90b615f5e4c5239f05d4dc','0001001001','0'); #mdp Amen0
+INSERT INTO Utilisateur VALUES ('2','Alphabet','boss@google.net','0c4ea8bb1bd4ef54defc54a73d5c9612','0008008008','1'); #mdp Ch1en
+INSERT INTO Utilisateur VALUES ('3','Clochard','mauvais@rue.com','483a6adfa09079059fd9eb3849932724','9876543210','1'); #mdp SNCF2merde
+INSERT INTO Utilisateur VALUES ('4','Jean-Eudes','je.dieseman@diese.org','42f66f9ed55f43a0eb4bd560e7cf87a5','0154879632','1'); #mdp D1eseRecherche
+
+INSERT INTO Cats VALUES ('1','1','Pierre',TRUE,NULL,'0001-12-25',NULL,NULL, '0','1', '1',NULL,NULL, '1',NULL,NULL, 5,NULL,NULL);
+INSERT INTO Cat_color VALUES ('1','9');
+INSERT INTO Cat_breed VALUES ('1','14');
+INSERT INTO Cat_personnality VALUES ('1','2');
+
