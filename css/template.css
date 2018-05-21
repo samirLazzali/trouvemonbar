@@ -87,3 +87,7 @@ li a{
     padding: auto;
     display: inline;
 }
+
+#cadre{
+    border: solid black 1px;
+}
