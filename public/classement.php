@@ -38,13 +38,13 @@ $users = $userRepository->fetchAll();
     <br />
     <h3><?php echo 'Classement des apériiens' ?></h3>
 
-    <table class="table table-bordered table-hover table-striped">
-        <thead style="font-weight: bold">
-        <td>#</td>
-        <td>Prénom</td>
-        <td>Nom</td>
-        <td>Score</td>
-        </thead>
+    <table>
+        <tr>
+        <th>#</th>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Score</th>
+	</tr>
         <?php /** @var \User\User $user */
         foreach ($users as $user) : ?>
             <tr>
