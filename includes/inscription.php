@@ -20,7 +20,7 @@ if (empty($_POST['pseudo'])) // Si on la variable est vide, on peut considérer 
 	<label for="email">* Votre adresse Mail :</label><input type="text" name="email" id="email" /><br />
 	</fieldset>
 	<fieldset><legend>Profil sur le forum</legend>
-	<label for="avatars">Choisissez votre avatars : </label><input type="file" name="avatars" id="avatars" />(Taille max : 10Ko)<br />
+	<label for="avatars">Choisissez votre avatars : </label><input type="file" name="avatars" id="avatars" /><br />
 	</fieldset>
 	<p><i>Les champs précédés d un * sont obligatoires</i></p>
 	<p><input type="submit" value="S\'inscrire" /></p></form>
@@ -134,7 +134,6 @@ else{
         echo '<p>Bienvenue sur GolrIIE</p>
 	    <p>Cliquez <a href="./index.php">ici</a> pour revenir à la page d accueil</p>';
         $nomavatar=(!empty($_FILES['avatars']['size']))?move_avatar($_FILES['avatars']):'';
-        echo $nomavatar;
         $query=$db->prepare('INSERT INTO membres (pseudo, mdp,mail,avatar)
         VALUES (:pseudo, :pass, :email,:nomavatar)');
         $query->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
