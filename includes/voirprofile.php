@@ -204,7 +204,14 @@ $membre = isset($_GET['m'])?(int) $_GET['m']:'';
                         }
                     }
                     else {
-
+                        echo'<p>'.$mdp_erreur.'</p>';
+                        echo'<p>'.$email_erreur1.'</p>';
+                        echo'<p>'.$email_erreur2.'</p>';
+                        echo'<p>'.$avatar_erreur.'</p>';
+                        echo'<p>'.$avatar_erreur1.'</p>';
+                        echo'<p>'.$avatar_erreur2.'</p>';
+                        echo'<p>'.$avatar_erreur3.'</p>';
+                        echo'<p>Cliquez <a href="profile.php?m='.$membre.'&action=modifier">ici</a> pour recommencer</p>';
 
 
                     }
