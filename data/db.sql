@@ -43,9 +43,9 @@ CREATE TABLE IF NOT EXISTS Cats(
        scoat_min INTEGER CHECK (0<=coat AND coat < 4),
        scoat_max INTEGER CHECK (0<=coat AND coat < 4),
 
-       weight FLOAT CHECK (0<weight),
-       sweight_min FLOAT CHECK (0<weight),
-       sweight_max FLOAT CHECK (0<weight)
+       weight INTEGER CHECK (0<weight),
+       sweight_min INTEGER CHECK (0<weight),
+       sweight_max INTEGER CHECK (0<weight)
 	   );
 
 		/* contient aussi une race (Cat_breed), une ou plusieurs couleurs (Cat_color) et traits de caractères (cat_personnality) 
