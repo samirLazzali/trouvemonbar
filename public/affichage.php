@@ -130,6 +130,7 @@ function profil(){
     if ($id==3){
         echo "rang : administrateur";
     }
+    echo "<br/><a href='gestion.php'>Gérer</a>";
     echo "</p>";
     echo "<button type=\"button\" ONCLICK=\"window.location.href='deconnection.php'\">Deconnection</button>";
     echo "</div>";
