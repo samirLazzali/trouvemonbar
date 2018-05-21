@@ -1,4 +1,3 @@
-
 <?php
 require '../vendor/autoload.php';
 require_once 'Modele.php';
@@ -25,13 +24,7 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
     // si on obtient une réponse, alors l'utilisateur est un membre
     if ($data->nb == 1) {
         $userManager = new User\UserManager($connection);
-        $user = new User\User();
-        $user->setLogin($_POST['login'])
-            ->setFirstname($_POST['firstname'])
-            ->setLastname($_POST['lastname'])
-            ->setBirthday(new \Datetime($_POST['bday']))
-            ->setPassword($_POST['password'])
-            ->setAdministrateur(false);
+        $user = loginUser($_POST['login']);
 
         $userManager->add($user);
         session_start();
