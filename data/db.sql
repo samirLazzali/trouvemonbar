@@ -42,10 +42,10 @@ CREATE TABLE "Soirees" (
   FOREIGN KEY (nom_soiree) REFERENCES "Statistiques"(soiree)
 );
 
-INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Source','Corentin','Leloup',1,'2fbb9a3365cb1d4f024d189ff33e1b62');
-INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Patou','Clément','Gavoille',1,'2fbb9a3365cb1d4f024d189ff33e1b62');
-INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Felps','Arnaud','Kopp',1,'2fbb9a3365cb1d4f024d189ff33e1b62');
-INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Pruneau','Valentin','Bruneau',1,'2fbb9a3365cb1d4f024d189ff33e1b62');
+INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Source','Corentin','Leloup',3,'2fbb9a3365cb1d4f024d189ff33e1b62');
+INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Patou','Clément','Gavoille',3,'2fbb9a3365cb1d4f024d189ff33e1b62');
+INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Felps','Arnaud','Kopp',3,'2fbb9a3365cb1d4f024d189ff33e1b62');
+INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Pruneau','Valentin','Bruneau',3,'2fbb9a3365cb1d4f024d189ff33e1b62');
 INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Pichet','Quentin','Pichollet',2,'2fbb9a3365cb1d4f024d189ff33e1b62');
 INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Derien','Dorian','Laugier',2,'2fbb9a3365cb1d4f024d189ff33e1b62');
 

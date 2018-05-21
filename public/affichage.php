@@ -108,7 +108,30 @@ function _nav($connecte,$liens){
 function profil(){
     echo "<div id=\"menu\">";
     echo "<h3>Profil</h3>";
-    echo "<p>Afficher les détails du profil à l'aide de la bd</p>";
+    echo "<p>";
+    $pseudo=$_SESSION['pseudo'];
+    $connection=db_connect();
+    $requete="SELECT surname,firstname,lastname,id FROM \"user\" WHERE surname='$pseudo'";
+    $reponse=$connection->query($requete);
+    $tuple=$reponse->fetch();
+    $prenom=$tuple['firstname'];
+    $surnom=$tuple['surname'];
+    $nom=$tuple['lastname'];
+    $id=$tuple['id'];
+    $reponse=null;
+    db_close($connection);
+    echo "$prenom \"$surnom\" $nom<br/>";
+    if ($id==1){
+        echo "rang : visiteur";
+    }
+    if ($id==2){
+        echo "rang : membre";
+    }
+    if ($id==3){
+        echo "rang : administrateur";
+    }
+    echo "</p>";
+    echo "<button type=\"button\" ONCLICK=\"window.location.href='deconnection.php'\">Deconnection</button>";
     echo "</div>";
 }
 
