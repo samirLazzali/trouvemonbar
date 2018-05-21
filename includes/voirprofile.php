@@ -20,9 +20,14 @@ $membre = isset($_GET['m'])?(int) $_GET['m']:'';
 
             echo'<h1>Profil de '.stripslashes(htmlspecialchars($data['pseudo'])).'</h1>';
 
-            echo'<img src="./images/avatars/'.$data['avatar'].'"alt="Ce membre n a pas d avatar" />';
+            echo'<img src="./avatars/'.$data['avatar'].'"alt="Ce membre n a pas d avatars" />';
 
             echo'<p><strong>Adresse E-Mail : </strong> <a href="mailto:'.stripslashes($data['mail']).'">'.stripslashes(htmlspecialchars($data['mail'])).'</a><br />';
             $query->CloseCursor();
+            if ($membre==$_SESSION["id"]) {
+                echo '<a href="<?php echo $_SERVER.\'?modifier"" >"Cliquez ici pour modifier votre profil </a>';
+            }
             break;
+        case "modifier":
+
     }

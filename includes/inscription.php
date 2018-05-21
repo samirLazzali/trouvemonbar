@@ -10,7 +10,7 @@ if ($id!=0) erreur(ERR_IS_CO);
 if (empty($_POST['pseudo'])) // Si on la variable est vide, on peut considérer qu'on est sur la page de formulaire
 {
     echo '<h1>Inscription</h1>';
-    echo '<form method="post" action="register.php"">
+    echo '<form method="post" action="register.php" enctype="multipart/form-data">
 	<fieldset><legend>Identifiants</legend>
 	<label for="pseudo">* Pseudo :</label>  <input name="pseudo" type="text" id="pseudo" /> (le pseudo doit contenir entre 3 et 15 caractères)<br />
 	<label for="password">* Mot de Passe :</label><input type="password" name="password" id="password" /><br />
@@ -20,7 +20,7 @@ if (empty($_POST['pseudo'])) // Si on la variable est vide, on peut considérer 
 	<label for="email">* Votre adresse Mail :</label><input type="text" name="email" id="email" /><br />
 	</fieldset>
 	<fieldset><legend>Profil sur le forum</legend>
-	<label for="avatar">Choisissez votre avatar : </label><input type="file" name="avatar" id="avatar" />(Taille max : 10Ko)<br />
+	<label for="avatars">Choisissez votre avatars : </label><input type="file" name="avatars" id="avatars" />(Taille max : 10Ko)<br />
 	</fieldset>
 	<p><i>Les champs précédés d un * sont obligatoires</i></p>
 	<p><input type="submit" value="S\'inscrire" /></p></form>
@@ -82,7 +82,6 @@ else{
     $query->execute();
     $used=($query->fetchColumn()==0)?1:0;
     $query->CloseCursor();
-
     if(!$used)
     {
         $email_erreur1 = "Adresse email est déjà utilisée par un membre";
@@ -95,42 +94,47 @@ else{
         $nb_erreur++;
     }
 
-    if (!empty($_FILES['avatar']['size']))
+    //Vérification de l'avatars :
+    if (!empty($_FILES['avatars']['size']))
     {
-        $maxsize = 10024;
-        $maxwidth = 100;
-        $maxheight = 100;
-        $extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png', 'bmp' );
-        if ($_FILES['avatar']['error'] > 0)
+        //On définit les variables :
+        $maxsize = 10000024; //Poid de l'image
+        $maxwidth = 1000; //Largeur de l'image
+        $maxheight = 1000; //Longueur de l'image
+        $extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png', 'bmp' ); //Liste des extensions valides
+
+        if ($_FILES['avatars']['error'] > 0)
         {
-            $avatar_erreur = "Erreur lors du transfert de l'avatar : ";
-            $nb_erreur++;
+            $avatar_erreur = "Erreur lors du transfert de l'avatars : ";
         }
-        if ($_FILES['avatar']['size'] > $maxsize)
+        if ($_FILES['avatars']['size'] > $maxsize)
         {
             $nb_erreur++;
-            $avatar_erreur1 = "Le fichier est trop gros : (<strong>".$_FILES['avatar']['size']." Octets</strong>    contre <strong>".$maxsize." Octets</strong>)";
+            $avatar_erreur1 = "Le fichier est trop gros : (<strong>".$_FILES['avatars']['size']." Octets</strong>    contre <strong>".$maxsize." Octets</strong>)";
         }
-        $image_sizes = getimagesize($_FILES['avatar']['tmp_name']);
+
+        $image_sizes = getimagesize($_FILES['avatars']['tmp_name']);
         if ($image_sizes[0] > $maxwidth OR $image_sizes[1] > $maxheight)
         {
             $nb_erreur++;
             $avatar_erreur2 = "Image trop large ou trop longue : 
                 (<strong>".$image_sizes[0]."x".$image_sizes[1]."</strong> contre <strong>".$maxwidth."x".$maxheight."</strong>)";
         }
-        $extension_upload = strtolower(substr(  strrchr($_FILES['avatar']['name'], '.')  ,1));
+
+        $extension_upload = strtolower(substr(  strrchr($_FILES['avatars']['name'], '.')  ,1));
         if (!in_array($extension_upload,$extensions_valides) )
         {
             $nb_erreur++;
-            $avatar_erreur3 = "Extension de l'avatar incorrecte";
+            $avatar_erreur3 = "Extension de l'avatars incorrecte";
         }
     }
+
     if ($nb_erreur==0) {
         echo '<h1>Inscription terminée</h1>';
         echo '<p>Bienvenue sur GolrIIE</p>
 	    <p>Cliquez <a href="./index.php">ici</a> pour revenir à la page d accueil</p>';
-        $nomavatar = (!empty($_FILES['avatar']['size'])) ? move_avatar($_FILES['avatar']) : '';
-
+        $nomavatar=(!empty($_FILES['avatars']['size']))?move_avatar($_FILES['avatars']):'';
+        echo $nomavatar;
         $query=$db->prepare('INSERT INTO membres (pseudo, mdp,mail,avatar)
         VALUES (:pseudo, :pass, :email,:nomavatar)');
         $query->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
