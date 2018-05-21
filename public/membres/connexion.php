@@ -37,15 +37,26 @@ if($_POST['validate'] != 'ok') {
 			
 			<form name="connexion" id="connexion" method="post" action="connexion.php">
 				<fieldset><legend>Connexion</legend>
-					<label for="login" class="float">Nom d'utilisateur :</label> <input type="text" name="login" id="login" value="<?php if(isset($_SESSION['connexion_login'])) echo $_SESSION['connexion_login']; ?>"/><br/>
-					<label for="password" class="float">Mot de passe :</label> <input type="password" name="password" id="password"/><br/>
-					<input type="hidden" name="validate" id="validate" value="ok"/>
-					<input type="checkbox" name="cookie" id="cookie"/> <label for="cookie">Me connecter automatiquement à mon prochain passage.</label><br/>
-					<div class="center"><input type="submit" value="Connexion" /></div>
+				<table>
+					<tr>
+					<td><label for="login" class="float">Nom d'utilisateur :</label></td>
+					<td><input type="text" name="login" id="login" value="<?php if(isset($_SESSION['connexion_login'])) echo $_SESSION['connexion_login']; ?>"/></td>
+					</tr>
+					<tr>
+					<td><label for="password" class="float">Mot de passe :</label></td>
+					<td><input type="password" name="password" id="password"/></td>
+					</tr>
+					<tr>
+					<td><input type="hidden" name="validate" id="validate" value="ok"/></td>
+					<td></td>
+					</tr>
+				</table>
+					<input type="submit" value="Connexion" /><br/>
+					<input type="checkbox" name="cookie" id="cookie"/> <label for="cookie">Me connecter automatiquement à mon prochain passage.</label>
 				</fieldset>
 			</form>
 			
-			<h1>Options</h1>
+			<h2>Options</h2>
 			<p><a href="inscription.php">Je ne suis pas inscrit.</a><br/>
 			</p>
 			<?php
