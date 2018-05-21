@@ -38,10 +38,11 @@ $users = $userRepository->fetchAll();
         <td>Compte Rendu</td>
         </thead>
         <?php /** @var \User\User $user */
-        $tu=$connection->query("SELECT * FROM public.reunion")->fetchAll();
+        $tu=$connection->query("SELECT * FROM public.reunion ORDER BY id_reu DESC")->fetchAll();
         foreach ($tu as $reu){
             $participants='';
-            $part=$connection->query('SELECT * FROM public.Participants Where ');
+            $id=$reu['id_reu'];
+            $part=$connection->query("SELECT * FROM public.Participants Where id_reu=$id");
             if (!empty($part)){
                 $part=$part->fetchAll();
                 foreach ($part as $p){
@@ -50,7 +51,7 @@ $users = $userRepository->fetchAll();
             }
         ?>
             <tr>
-                <td><?php ?></td>
+                <td><?php echo $id?></td>
                 <td><?php echo $reu['soiree'] ?></td>
                 <td><?php echo $reu['datee'] ?></td>
                 <td><?php echo $participants ?></td>

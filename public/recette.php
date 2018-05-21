@@ -81,5 +81,7 @@ menu_aperal();
     echo '    <fieldset><legend>Note </legend><input type ="number" name="note" min=0 max=5 /></fieldset>';
     echo '   <input type ="submit" name="submit" value="Votez"/>';
     echo '</form>';
-  
+    ?>
+  </body>
+
 

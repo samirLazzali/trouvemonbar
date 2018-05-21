@@ -57,7 +57,7 @@ menu_navigation();
 
 <h3>Prochaine réunion</h3>
     <?php
-    $req = $connection->query('SELECT * FROM public.reunion WHERE id= (SELECT MAX(id) FROM public.reunion)');
+    $req = $connection->query('SELECT * FROM public.reunion WHERE id_reu= (SELECT MAX(id_reu) FROM public.reunion)');
     if (!$req) {
         $res = $req->fetchAll();
         foreach ($res as $reu) {
