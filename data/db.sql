@@ -2,7 +2,8 @@ CREATE TABLE "user" (
   surname VARCHAR(20) NOT NULL PRIMARY KEY ,
   firstname VARCHAR(20) NOT NULL ,
   lastname VARCHAR(20) NOT NULL ,
-  id INTEGER CHECK (id between 1 and 3)
+  id INTEGER CHECK (id between 1 and 3) ,
+  password VARCHAR(200)
 );
 
 CREATE TABLE "Ingredients" (
@@ -41,12 +42,12 @@ CREATE TABLE "Soirees" (
   FOREIGN KEY (nom_soiree) REFERENCES "Statistiques"(soiree)
 );
 
-INSERT INTO "user"(surname, firstname, lastname, id) VALUES ('Source','Corentin','Leloup',1);
-INSERT INTO "user"(surname, firstname, lastname, id) VALUES ('Patou','Clément','Gavoille',1);
-INSERT INTO "user"(surname, firstname, lastname, id) VALUES ('Felps','Arnaud','Kopp',1);
-INSERT INTO "user"(surname, firstname, lastname, id) VALUES ('Pruneau','Valentin','Bruneau',1);
-INSERT INTO "user"(surname, firstname, lastname, id) VALUES ('Pichet','Quentin','Pichollet',2);
-INSERT INTO "user"(surname, firstname, lastname, id) VALUES ('Derien','Dorian','Laugier',2);
+INSERT INTO "user"(surname, firstname, lastname, id, password) VALUES ('Source','Corentin','Leloup',1,'2fbb9a3365cb1d4f024d189ff33e1b62');
+INSERT INTO "user"(surname, firstname, lastname, id, password) VALUES ('Patou','Clément','Gavoille',1,'2fbb9a3365cb1d4f024d189ff33e1b62');
+INSERT INTO "user"(surname, firstname, lastname, id, password) VALUES ('Felps','Arnaud','Kopp',1,'2fbb9a3365cb1d4f024d189ff33e1b62');
+INSERT INTO "user"(surname, firstname, lastname, id, password) VALUES ('Pruneau','Valentin','Bruneau',1,'2fbb9a3365cb1d4f024d189ff33e1b62');
+INSERT INTO "user"(surname, firstname, lastname, id, password) VALUES ('Pichet','Quentin','Pichollet',2,'2fbb9a3365cb1d4f024d189ff33e1b62');
+INSERT INTO "user"(surname, firstname, lastname, id, password) VALUES ('Derien','Dorian','Laugier',2,'2fbb9a3365cb1d4f024d189ff33e1b62');
 
 
 INSERT INTO "Ingredients"(nom_ing, prix) VALUES ('Chips',0.62);
