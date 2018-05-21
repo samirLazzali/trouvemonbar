@@ -104,7 +104,7 @@ function affCompat($id_the_cat) {
         $res .= "<p> nous vous invitons à soit attendre que le chat donc vous rêvez la nuit apparaisse sur le site, soit à revoir vos critères de recherche </p>";
     }
     else {
-        $res ="";
+        $res ="<tr><th>Nom</th><th>Numéro de téléphone</th></tr>";
         array_multisort($scorechatspot,SORT_DESC, $chatspot);
         foreach($chatspot as $elu) {
             $infoelu = $connexion->query("select phone_number, name_cat
