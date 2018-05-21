@@ -58,7 +58,6 @@ if($_POST['validate'] != 'ok') {
 			
 			<h2>Options</h2>
 			<p><a href="inscription.php">Je ne suis pas inscrit.</a><br/>
-			<a href="moncompte.php?action=reset">J'ai oublié mon mot de passe.</a>
 			</p>
 			<?php
 }
@@ -69,7 +68,7 @@ else	{
 				$dbPassword = getenv('DB_PASSWORD');
 				$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 				$result = $connexion->query("SELECT COUNT(id_user) AS nbr, id_user, login, password FROM Utilisateur WHERE
-				login = '".$_POST['login']."' GROUP BY id_user");
+											login = '".$_POST['login']."' GROUP BY id_user");
 				global $queries;
 				$queries++;
 				if($result->nbr == 1)

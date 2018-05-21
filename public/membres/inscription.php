@@ -16,7 +16,18 @@ if(isset($_SESSION['id_user']))
 $titre = 'Inscription';
 include('../includes/top.php');
 ?>
-
+		<script> 
+		function verifNum(valeur){
+			for (var i=0; i<valeur.length; i++){
+				var caractere=valeur.substring(i,i+1);
+				if (caractere < ”0” || caractere > ”9”) {
+					return false; 
+				}
+			}
+			return true;
+		}
+		</script>
+		
 		<div id="contenu">
 			
 			<h1>Formulaire d'inscription</h1>
