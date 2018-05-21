@@ -206,7 +206,7 @@ if(isset($_POST['mail_verif']))
 		
 		else
 		{
-			$_SESSION['mail_verif_info'] = str_replace(' mail', ' mail de vérification', $_SESSION['mail_info']);
+			$_SESSION['mail_verif_info'] = '';
 			$_SESSION['form_mail_verif'] = '';
 			$_SESSION['erreurs']++;
 		}

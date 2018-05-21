@@ -11,24 +11,25 @@ $titre = 'Gestion de mon compte';
 include('../includes/top.php');
 ?>
 
-<div id="contenu">
-	<h1>Profil de <?php .htmlspecialchars($_SESSION['login'], ENT_QUOTES). ?></h1>
-	<p>
-	<?php
+<div id="contenu"><?php
 	$dbName = getenv('DB_NAME');
 	$dbUser = getenv('DB_USER');
-	dbPassword = getenv('DB_PASSWORD');
+	$dbPassword = getenv('DB_PASSWORD');
 	
 	$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-	$result = $connexion -> query("SELECT login, phone_number FROM Utilisateur WHERE id_user = ".intval($_SESSION['id_user']));
+	$result = $connexion -> query("SELECT login, phone_number,mail FROM Utilisateur WHERE id_user = ".intval($_SESSION['id_user']));
 	$result -> setFetchMode(PDO::FETCH_OBJ);
-	$result -> fetch();
+	$fetch = $result -> fetch();
 	
 	global $queries;
-	$queries++;
+	$queries++;?>
+	<h1>Profil de <?php echo $fetch->login ;?></h1>
+	<p>
+	<?php
 	
-	echo $result -> login ?> </br>
-	<?php echo $result -> phone_number ?></br>
+	
+	?> Mail : <?php echo $fetch -> mail; ?><br/>
+	Numéro de téléphone : <?php echo $fetch -> phone_number; ?></br>
 	
 	<form name="modif_mdp" id="modif_mdp" method="post" action="champs_compte.php">
 				<fieldset><legend>Changer son mot de passe</legend>

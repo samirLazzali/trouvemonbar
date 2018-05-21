@@ -11,23 +11,25 @@ $dbName = getenv('DB_NAME');
 $dbUser = getenv('DB_USER');
 $dbPassword = getenv('DB_PASSWORD');
 $connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-$result = $connexion->query("SELECT COUNT(id_user) AS nbr, id_user, login, password FROM Utilisateur WHERE
+$result = $connexion->query("SELECT COUNT(*) AS nbr, id_user, login, password FROM Utilisateur WHERE
 							login = '".$_POST['login']."' GROUP BY id_user");
+$result -> setFetchMode(PDO::FETCH_OBJ);
+$fetch = $result->fetch();
 global $queries;
 $queries++;
-if($result->nbr == 1)
+if(($fetch->nbr) == 1)
 {
-	if(md5($_POST['password']) == $result->password)
+	if(md5($_POST['password']) == $fetch->password)
 	{
-		$_SESSION['id_user'] = $result->id_user;
-		$_SESSION['login'] = $result->login;
-		$_SESSION['password'] = $result->password;
+		$_SESSION['id_user'] = $fetch->id_user;
+		$_SESSION['login'] = $fetch->login;
+		$_SESSION['password'] = $fetch->password;
 		unset($_SESSION['connexion_login']);
 						
 		if(isset($_POST['cookie']) && $_POST['cookie'] == 'on')
 		{
-			setcookie('id_user', $result->id_user, time()+365*24*3600);
-			setcookie('password', $result->password, time()+365*24*3600);
+			setcookie('id_user', $fetch->id_user, time()+365*24*3600);
+			setcookie('password', $fetch->password, time()+365*24*3600);
 		}
 						
 		$informations = Array(
@@ -57,7 +59,7 @@ if($result->nbr == 1)
 	}
 }
 				
-else if($result->nbr > 1)
+else if($fetch->nbr > 1)
 {
 	$informations = Array(
 					true,
