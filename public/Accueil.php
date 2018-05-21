@@ -1,7 +1,13 @@
 <?php
+session_start();
 function chargerClasse($classe) {
-  require $classe . '.php';
+	require $classe . '.php';
 }
+if (empty($_SESSION['id']))
+{
+	header("Location: connexion.php");
+}
+
 spl_autoload_register('chargerClasse');
 ?>
 <!DOCTYPE html>
