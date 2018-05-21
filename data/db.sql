@@ -186,7 +186,6 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 --
 
 COPY public.annonce (id, postdate, offer, op, semestre, module, genre, titre, description, paiement, service, answered) FROM stdin;
-1	2018-05-19 17:01:06	\N	2	2	MST	Statistiques	Projet Math	Besoin de partenaire urgent !!!	400		f
 \.
 
 
@@ -203,7 +202,6 @@ COPY public.links (aid, tid) FROM stdin;
 --
 
 COPY public.tags (id, name) FROM stdin;
-1	test
 \.
 
 

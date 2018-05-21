@@ -4,8 +4,8 @@
 
 #form_border select {
     margin: auto;
-    margin-right: 5px;
-    margin-left: 5px;
+    margin-right: 10px;
+    margin-left: 10px;
     width: 150px;
 }
 
@@ -16,7 +16,7 @@
 #form_border .tab-group {
     list-style: none;
     padding: 0;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 
 #form_border .tab-group:after {
@@ -112,6 +112,10 @@
     transition: border-color .25s ease, box-shadow .25s ease;
 }
 
+#form_border input, textarea {
+    margin-bottom: 20px;
+}
+
 #form_border input:focus, textarea:focus {
     outline: 0;
     border-color: #1ab188;
@@ -119,11 +123,12 @@
 
 #form_border .field-wrap {
     position: relative;
-    margin-bottom: 40px;
+    margin-bottom: 0px;
+    margin-top: 40px;
 }
 #form_border .smselect {
     text-align: center;
-    padding: 10px;
+    padding: 20px;
 }
 
 #form_border .choice {

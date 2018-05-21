@@ -10,12 +10,12 @@ function capitalise($name) {
 function getUsername($email) {
     list($data, $domain) = explode("@", $email);
     if ($domain == "ensiie.fr" && strpos($data, '.') !== false) {
-	    list($name, $surname) = explode(".", $data);
-	    $name = capitalise($name);
-	    $surname = capitalise($surname);
-	    return "$name $surname";
+	list($name, $surname) = explode(".", $data);
+	$name = capitalise($name);
+	$surname = capitalise($surname);
+	return "$name $surname";
     } else {
-	    return -1;
+	return -1;
     }
 }
 
@@ -40,38 +40,38 @@ function login() {
 
 function create() {
     if (empty($_POST['email']) || empty($_POST['password'])) {
-	    return "Veuillez entrer un email et un mot de passe";
+	return "Veuillez entrer un email et un mot de passe";
     }
-    
+
     $email = $_POST['email'];
     $password = md5($_POST['password']);
     $username = getUsername($email);
 
     if ($username == -1) {
-	    return "Email invalide: seuls les emails ENSIIE sont acceptés";
+	return "Email invalide: seuls les emails ENSIIE sont acceptés";
     }
-    
+
     $connection = dbConnect();
-    
-    $rows = dbQuery($connection, "SELECT * FROM users WHERE email='$email';");
-    
+
+    $rows = dbQuery($connection, "SELECT * FROM users WHERE email=" . $connection->quote($email) . ";");
+
     foreach($rows as $entry) {
-	    return "L'email existe déjà";
+	return "L'email existe déjà";
     }
-    
+
     if (isset($_POST['username']) && $_POST['username'] != '') {
-	    $username = $_POST['username'];
-	    $rows = dbQuery($connection, "SELECT * FROM users WHERE username='$username';");
-    
-	    foreach($rows as $entry) {
-	        return "Le surnom est déjà pris";
-	    }
+	$username = $_POST['username'];
+	$rows = dbQuery($connection, "SELECT * FROM users WHERE username='$username';");
+
+	foreach($rows as $entry) {
+	    return "Le surnom est déjà pris";
+	}
     }
-    
+
     if (dbExec($connection, "INSERT INTO users (email, username, password) VALUES ('$email','$username','$password');")) {
-	    return "Le compte à été créé, veuillez vous connecter";
+	login();
     } else {
-	    return "Erreur de BDD";
+	return "Erreur de BDD";
     }
 }
 
@@ -85,7 +85,7 @@ function protectAccess($adminOnly = false) {
 	header("Refresh:0; url=nondroit.php");
 	exit();
     }
-    
+
     if ($adminOnly && !$_SESSION['admin']) {
 	header("Refresh:0; url=nondroit.php");
 	exit();

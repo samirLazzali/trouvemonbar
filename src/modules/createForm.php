@@ -3,12 +3,20 @@
    <li class="nature <?php print (isset($annonce) && $annonce->isOffer?"active":"none"); ?>"><a href=#offer>Offre</a>
       <li class="nature <?php print (isset($annonce) && $annonce->isOffer?"none":"active"); ?>"><a href=#query>Recherche</a>
    </ul>
-   <ul class="tab-group">
-      <li class="tab active"><a href=#money>Argent</a>
-      <li class="tab"><a href=#service>Service</a>
-      <li class="tab"><a href=#free>Gratuit</a>
-   </ul>
    <form name=annonce class="create" method=post action=<?php print (isset($annonce)?"edit.php?edit=$annonce->id":"create.php"); ?>>
+      <div class="field-wrap"><label>Titre de l'annonce<span class="req">*</span></label>
+         <input name=annoncetitle required <?php print (isset($annonce)?"value=\"$annonce->title\"":"");?>>
+      </div>
+      <div class="field-wrap"><label>Mots clés<span class="req">*</span></label>
+         <input name=annoncegenre required <?php print (isset($annonce)?"value=\"$annonce->genre\"":"");?>>
+      </div>
+      <div class="field-wrap"><label>Tags</label>
+         <input name=annoncetags <?php print (isset($annonce)?"value=\"{$annonce->tagsToString()}\"":"");?>>
+      </div>
+      <div class="field-wrap"><label class="big">Description<span class="req">*</span></label>
+         <textarea name=annoncedesc cols=30 rows=3 maxlength=240 required><?php print (isset($annonce)?$annonce->content:"");?></textarea>
+      </div>
+      <input type="radio" class="radio" name="offer" id="isoffer" value="true">
       <div class="tab-content">
          <div id=money>
             <div class="field-wrap"><label>Prix proposé</label>
@@ -21,19 +29,11 @@
             </div>
          </div>
       </div>
-      <div class="field-wrap"><label>Titre de l'annonce<span class="req">*</span></label>
-         <input name=annoncetitle required <?php print (isset($annonce)?"value=\"$annonce->title\"":"");?>>
-      </div>
-      <div class="field-wrap"><label>Mots clé<span class="req">*</span></label>
-         <input name=annoncegenre required <?php print (isset($annonce)?"value=\"$annonce->genre\"":"");?>>
-      </div>
-      <div class="field-wrap"><label class="big">Description<span class="req">*</span></label>
-         <textarea name=annoncedesc cols=30 rows=3 maxlength=240 required><?php print (isset($annonce)?$annonce->content:"");?></textarea>
-      </div>
-      <div class="field-wrap"><label>Tags</label>
-         <input name=annoncetags <?php print (isset($annonce)?"value=\"{$annonce->tagsToString()}\"":"");?>>
-      </div>
-      <input type="radio" class="radio" name="offer" id="isoffer" value="true">
+   <ul class="tab-group">
+      <li class="tab active"><a href=#money>Argent</a>
+      <li class="tab"><a href=#service>Service</a>
+      <li class="tab"><a href=#free>Gratuit</a>
+   </ul>
       <div class="smselect">
          <select name=annoncesemester class="styled-select" black rounded required>
     <option value disabled <?php print (isset($annonce)?"":"selected"); ?>>Semestre
