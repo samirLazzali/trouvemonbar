@@ -38,7 +38,8 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription') {
 
 			$userManager->add($user);
 		session_start();
-		$_SESSION['login'] = $_POST['login'];
+		   $user = loginUser($_POST['login']);
+        config($user->getLogin(),$user->getLastname(),$user->getFirstname(),$user->getId(),$user->getAdministrateur());
 		header('Location: accueil.php');
 		exit();
 		}
