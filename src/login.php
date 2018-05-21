@@ -79,9 +79,14 @@ function verif_authent() {
     return isset($_SESSION['email']);
 }
 
-function protectAccess() {
+function protectAccess($adminOnly = false) {
     session_start();
     if (!isset($_SESSION['username'])) {
+	header("Refresh:0; url=nondroit.php");
+	exit();
+    }
+    
+    if ($adminOnly && !$_SESSION['admin']) {
 	header("Refresh:0; url=nondroit.php");
 	exit();
     }
@@ -96,51 +101,6 @@ function buttonLogout() {
 }
 
 function displayLogin() {
-    //echo "<div id=\"form\" class=\"form\" style=\"display: none\">";
-    //echo "<ul class=\"tab-group\">";
-    //echo "<li class=\"tab active\">";
-    //echo "<a href=\"#login\">Log In</a>";
-    //echo "</li>";
-    //echo "<li class=\"tab\">";
-    //echo "<a href=\"#signup\">Sign Up</a>";
-    //echo "</li>";
-    //echo "</ul>";
-    //echo "<div class=\"tab-content\">";
-    //echo "<div id=\"login\">";
-    //echo "<h1>Welcome Back!</h1>";
-    //echo "<form action=\"main.php?login\" method=\"post\">";
-    //echo "<div class=\"field-wrap\">";
-    //echo "<label>Email Address<span class=\"req\">*</span></label>";
-    //echo "<input type=\"email\" name=\"email\" required=\"\" autocomplete=\"off\">";
-    //echo "</div>";
-    //echo "<div class=\"field-wrap\">";
-    //echo "<label>Password<span class=\"req\">*</span></label>";
-    //echo "<input type=\"password\" name=\"password\" required=\"\" autocomplete=\"off\">";
-    //echo "</div>";
-    //echo "<p class=\"forgot\"><a href=\"#\">Forgot Password?</a></p><button class=\"button button-block\" name=\"login\">Log In</button>";
-    //echo "</form>";
-    //echo "</div>";
-    //echo "<div id=\"signup\">";
-    //echo "<h1>Sign Up for Free</h1>";
-    //echo "<form action=\"main.php?create\" method=\"post\">";
-    //echo "<div class=\"field-wrap\">";
-    //echo "<label>Email Address<span class=\"req\">*</span></label>";
-    //echo "<input type=\"email\" name=\"email\" required=\"\" autocomplete=\"off\">";
-    //echo "</div>";
-    //echo "<div class=\"field-wrap\">";
-    //echo "<label>Username</label> <input type=\"text\" name=\"username\" autocomplete=\"off\">";
-    //echo "</div>";
-    //echo "<div class=\"field-wrap\">";
-    //echo "<label>Set A Password<span class=\"req\">*</span></label>";
-    //echo "<input type=\"password\" name=\"password\" required=\"\" autocomplete=\"off\">";
-    //echo "</div>";
-    //echo "<button type=\"signup\" class=\"button button-block\" name=\"signup\">Get Started</button>";
-    //echo "</form>";
-    //echo "</div>";
-    //echo "</div><!-- tab-content -->";
-    //echo "</div><!-- /form -->";
-
-    //echo "<script src=\"js/login.js\"></script>";
     include("modules/login.html");
 }
 

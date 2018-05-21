@@ -45,5 +45,24 @@ class User {
     public static function displayUserForm($user, $adminView) {
 	include("modules/userForm.php");
     }
+
+    public static function displayTableLine($user) {
+	require "modules/userTableLine.php";
+    }
+
+    public static function displayAsTable() {
+	$users = User::getUsers();
+
+	require "modules/userTableHead.html";
+
+	foreach ($users as $user)
+	    User::displayTableLine($user);
+
+	print "</table>";
+    }
+
+    public static function editLink($id) {
+	return "<a href=\"perso.php?edit=$id\"><i class=\"fas fa-user-edit\"></i></a>";
+    }
 }
 ?>

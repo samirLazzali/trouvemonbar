@@ -13,6 +13,8 @@ function dispSidebar() {
     print "<br>";
     print "<a class=m-link href=\"contact.php\">Contact</a></br>";
     print "<br>";
+    if (isset($_SESSION['admin']) && $_SESSION['admin'])
+	print "<a class=m-link href=\"admin.php\">Administration</a></br></br>";
     print "</div>";
     print "</div>";
 }

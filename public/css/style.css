@@ -212,3 +212,7 @@ textarea {
     background-color: #5FE6BD;
     line-height:normal;
 }*/
+
+table {
+    width: 100%;
+}
