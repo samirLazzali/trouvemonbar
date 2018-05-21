@@ -54,8 +54,6 @@ function menu_aperal(){
     echo '<li><a href="a_propos_aperal.php">A propos</a></li>';
     echo '<li><a href="preparatif_aperal.php">Préparatifs</a></li>';
     echo '<li><a href="recette.php">Recettes</a></li>';
-    echo '<li><a href="intendance.php">Intendance</a></li>';
-    echo '<li><a href="avis_aperal.php">Avis</a></li>';
     echo '</ul>';
     echo '</div>';
     echo '</div>';
@@ -91,8 +89,6 @@ function menu_oeno(){
     echo '<div class="col-xs-8 text-right menu-1">';
     echo '<ul>';
     echo '<li><a href="a_propos_oeno.php">A propos</a></li>';
-    echo '<li><a href="preparatif_oeno.php">Préparatifs</a></li>';
-    echo '<li><a href="avis_oeno.php">Avis</a></li>';
     echo '<li><a href="liste_des_vins.php">Liste des vins</a></li>';
     echo '</ul>';
     echo '</div>';
