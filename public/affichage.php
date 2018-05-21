@@ -169,8 +169,19 @@ function _main($page) {
 function article_index(){
     echo "<div id=\"article\">";
     echo "<h1>Bienvenue sur le nouveau site d'Aperal</h1>";
+
+    echo"<body><img src='images/logo.png' alt='logo' />
+    <p>Aaah! Un petit verre, un peu de saucisson et quelques chips entre
+    amis, quoi de mieux pour se détendre ?</p>
+    <p>A Aperal, on s’occupe de donner à tout le monde un peu de bonne
+ humeur, avec du saucisson bien sûr. Un bon moment de convivialité à
+    consommer sans modération.</p>
+    <p>Avant chaque soirée, place à la préparation, et pour nous, c’est faire l’apéro de l’apéro !
+ Parce que préparer plein de bonnes choses, c’est bien, mais vérifier la qualité c’est essentiel.    </p>
+    <p>L’apéro est un art, viens nous faire profiter de tes connaissances ! </p></body>";
     echo "</div>";
 }
+
 
 /**
  * @brief affiche l'article de course.php
