@@ -142,6 +142,9 @@ function _main($page) {
     if ($page == "course.php") {
         article_course();
     }
+    if ($page == "liste.php") {
+        article_liste();
+    }
     if ($page == "myth.php") {
         article_myth();
     }
@@ -165,7 +168,7 @@ function _main($page) {
  */
 function article_index(){
     echo "<div id=\"article\">";
-    echo "<h1>Bienvenu sur le nouveau site d'Aperal</h1>";
+    echo "<h1>Bienvenue sur le nouveau site d'Aperal</h1>";
     echo "</div>";
 }
 
@@ -174,9 +177,35 @@ function article_index(){
  */
 function article_course(){
     echo "<div id=\"article\">";
-    echo "<h1>Liste de course</h1>";
+    echo "<h1>Quelle recette voulez vous preparez?</h1>";
+    echo "<form action='liste.php' method='post'>";
+    echo "<p> <input type='text' size='50' name='recette' value='' /> </p>";
+    echo "<p> <input type='submit' value='Valider' /> <input type='reset' value='Annuler' />";
+    echo "</p>";
+    echo "</form>";
     echo "</div>";
 }
+
+
+/**
+ * @brief affiche l'article de liste.php
+ */
+function article_liste(){
+    $recette = $_POST["recette"];
+    $connexion = db_connect();
+    $liste_ingredients_recettes = ingredients_recettes($connexion,$recette);
+    db_close($connexion);
+    echo "<div id=\"article\">";
+    echo "<h1>Ingrédients pour réaliser la recette $recette : </h1>";
+    echo "<ul>";
+    foreach ($liste_ingredients_recettes as $ing){
+        echo "<li> $ing </li>";
+    }
+    echo "</ul>";
+    echo "</select>";
+    echo "</div>";
+}
+
 
 /**
  * @brief affiche l'article de myth.php

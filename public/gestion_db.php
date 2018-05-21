@@ -43,6 +43,23 @@ function recettes($connexion){
 }
 
 /**
+ * @brief permet de récupérer le nom des ingredients necessaires pour une recette
+ * @param $connexion un pdo et $rec une recette
+ * @return un array avec tous les ingredients
+ */
+function ingredients_recettes($connexion,$rec){
+    $requete = "SELECT nom_ingredient FROM Ingredients_Recettes WHERE nom_recette=$rec";
+    $reponse = $connexion->query($requete);
+    $tab = array();
+    while ($tupleCourant = $reponse->fetch() ){
+        $tab[]=$tupleCourant['nom_ingredient'];
+    }
+    $reponse = null;
+    return $tab;
+}
+
+
+/**
  * @brief vérifit les données de connection en les comparant à celles dans la base de donnée
  * @param $pseudo et $pwd des chaines de caractères et $connexion un pdo
  * @return true si le mot de passe est correct, false sinon
