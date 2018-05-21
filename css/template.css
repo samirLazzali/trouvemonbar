@@ -88,6 +88,6 @@ li a{
     display: inline;
 }
 
-#cadre{
+.cadre{
     border: solid black 1px;
 }

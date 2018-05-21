@@ -16,8 +16,8 @@ include("includes/debut.php");?>
     if ($id!=0) {
         include("./includes/menuderoulant.php");
     }
-    else[
-            include("./includes/menuderoulant2.php"};
+    else{
+            include("./includes/menuderoulant2.php");
     }
 ?>
 </body>
