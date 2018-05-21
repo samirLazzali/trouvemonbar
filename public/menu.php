@@ -48,7 +48,6 @@ function menu_aperal(){
     echo '</div>';
     echo '</div>';
     echo '</div>';
-
     echo '<div class="row2">';
     echo '<div class="col-xs-8 text-right menu-1">';
     echo '<ul>';
