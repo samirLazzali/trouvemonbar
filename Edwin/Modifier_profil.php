@@ -21,27 +21,21 @@ if (isset($_POST['modifier_profil']) && $_POST['modifier_profil'] == 'Modifier')
 		die('Erreur : '.$e->getMessage());
 	}
 
-		// on regarde si le mot de passe correspond bien au mot de passe de l'utilisateur connecté
-		$sql = $connection->prepare('SELECT password FROM user WHERE login=?');
-		$sql->execute(array($_SESSION['login']));
-    	$result = $sql->fetch(PDO::FETCH_OBJ);
-		
+		$userManager = new User\userManager();
 
 		if ($result[0] == $_POST['old_password']) {
-			$user = new \User\User();
-			$user->setPassword($_POST['new_password']);
-			if(isset($_POST['lastname']) && !empty($_POST['lastname'])){
-				$user->setLastname($_POST['lastname']);
+			$user = new User\User();
+			if(!isset($_POST['new_password'])){
+				$user->setPassword($_POST['old_password']);
 			}
-			if(isset($_POST['firstname']) && !empty($_POST['fisrtname']))
-			{
-				$user->setFirstname($_POST['firstname']);
+			else{
+				$user->setPassword($_POST['new_password']);
 			}
-			if(isset($_POST['bday']) && !empty($_POST['bday']))
-			{
-				$user->setBirthday($_POST['bday']);
-			}
-
+			$user->setLastname($_POST['lastname'])
+				->setFirstname($_POST['firstname'])
+				->setBirthday($_POST['bday']);
+			
+			$userManager->update($user);
 		header('Location: profil.php');
 		exit();
 		}
