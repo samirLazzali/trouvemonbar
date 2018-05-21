@@ -126,7 +126,7 @@ datee DATE NOT NULL
 
 CREATE TABLE public."participants"(
 id_reu INTEGER NOT NULL,
-pseudo VARCHAR(40) NOT NULL
+pseudo VARCHAR(32) NOT NULL
 );
 
 

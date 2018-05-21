@@ -68,8 +68,9 @@ menu_navigation();
             $id = $reu['id_reu'];
         }
         $count_part=$connection->query('SELECT COUNT(*) AS nbr1 FROM public.participants')->fetch();
-        if ($count_part['nbr1']!=0) {
-            $req_part = $connection->query('SELECT * FROM public.participants ')->fetchAll();
+        $n=$count_part['nbr1'];
+        if ($n!=0) {
+            $req_part = $connection->query("SELECT pseudo FROM public.participants ")->fetchAll();
             echo 'participants:</br> ';
             foreach ($req_part as $reu) {
                 echo "{$reu['pseudo']} </br>";
