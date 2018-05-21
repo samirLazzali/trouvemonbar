@@ -94,7 +94,6 @@ class EvenementsManager
 	function getAll ($id_categorie = null) 
 	{
 		$query = $this->db->query('SELECT * FROM Evenements'. $this->queryCategorie($id_categorie, 'WHERE'));
-		echo 'SELECT * FROM Evenements'. $this->queryCategorie($id_categorie, 'WHERE');
 		$tableau_events = [];
 		while ($resultat = $query->fetch()) 
 		{
