@@ -50,7 +50,7 @@ menu_navigation();
                                         
 
 
-<h2>Prochaine réunion</h2>
+<h2>Prochaine réunion :</h2>
     <?php
     $req_count = $connection->query('SELECT COUNT(*) AS nbr FROM public.reunion')->fetch();
     if ($req_count['nbr']!=0) {
@@ -84,7 +84,9 @@ menu_navigation();
         }
     }
     else{
-         echo "Aucune réunion planifiée";
+	echo '<p>';
+	echo "Aucune réunion planifiée";
+	echo '</p>';
     }
     ?>
 </body>
