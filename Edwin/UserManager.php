@@ -68,7 +68,7 @@ class UserManager
                 ->setFirsname($res['firstname'])
                 ->setLastname($res['lastname'])
                 ->setBirthday(new \DateTime($res['birthday'])) 
-                ->setPassword($res['password']);
+                ->setPassword($res['password'])
                 ->setAdministrateur($res['administrateur']);
 
         return $user;
