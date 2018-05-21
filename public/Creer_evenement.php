@@ -11,6 +11,11 @@ if (!empty($_POST)){
 	$userRepository->creer_evenement($_POST['nom_event'],$_POST['date_event'],$_POST['lieu_event'],$_POST['before'],$_POST['prix'],$_POST['image'],$_POST['description']);
 }
 
+if (empty($_SESSION['id']))
+{
+	header("Location: connexion.php");
+}
+
 ?>
 
 

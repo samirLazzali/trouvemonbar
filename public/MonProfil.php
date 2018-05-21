@@ -11,6 +11,11 @@ if (!empty($_POST)){
 	$userRepository->modif($_POST['firstname'],$_POST['lastname'],$_POST['domicile'],$_POST['bd'],$_POST['old_mdp'],$_POST['new_mdp'],$_POST['new_mdp_verif']);
 }
 
+if (empty($_SESSION['id']))
+{
+	header("Location: connexion.php");
+}
+
 ?>
 <!DOCTYPE html>
 
@@ -47,7 +52,7 @@ if (!empty($_POST)){
 <a href="./deconnexion.php"/><button>Se déconnecter</button></a><br/></br>
 <?php
 
-echo '<p><b>Votre pseudo :&nbsp;&nbsp;'.$_SESSION['pseudo']. '</b></p>'
+echo '<p><b><h5>Votre pseudo :&nbsp;&nbsp;'.$_SESSION['pseudo']. '</h5></b></p>'
 ?>
 
 
