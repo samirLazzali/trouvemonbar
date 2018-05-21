@@ -43,18 +43,13 @@ include('../includes/top.php');
 					<tr>
 					<td><label for="pattern" class="float">Robe (Motifs) : </label></td>
 					<td><select name="pattern" id="pattern" size="1">
-						<?php 
-						$dbName = getenv('DB_NAME');
-						$dbUser = getenv('DB_USER');
-						$dbPassword = getenv('DB_PASSWORD');
-							
-						$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-						$patterns = $connexion -> query("SELECT name_pattern FROM Patterns");
-						$patterns -> setFetchMode(PDO::FETCH_OBJ);
-						while($pattern = $patterns->fetch()) { 
-							$name = $pattern->name_pattern;
-							?><option value="<?php $name ?>"><?php echo $name;?></option><?php
-						} ?>
+						<option value="Solide",name="size">Solide</option>
+						<option value="Colourpoint",name="size">Colourpoint</option>
+						<option value="Bicolore",name="size">Bicolore</option>
+						<option value="Ecaille de tortue",name="size">Ecaille de tortue</option>
+						<option value="Calico",name="size">Calico</option>
+						<option value="Mink",name="size">Mink</option>
+						<option value="Sepia",name="size">Sepia</option>
 						</select></td>
 					</tr>
 					
