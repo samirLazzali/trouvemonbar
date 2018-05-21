@@ -36,7 +36,7 @@ menu_navigation()
 
 <div class="form-c">
 <div class="form-c-head">Veuillez remplir les informations :</div>
-<form method = "post" action="#" >
+<form method = "post" action="connect.php" >
 <label for="pseudo"><span class="txt">Pseudo <span class="required">*</span></span><input type="text" class="input-field" name="pseudo" value="" /></label>
 <label for="mdp"><span class="txt">Mot de passe <span class="required">*</span></span><input type="text" class="input-field" name="mdp" value="" /></label>
 <input type ="submit" name="submit" value="Se connecter"/>

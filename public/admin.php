@@ -51,7 +51,6 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
     echo '<div class="form-c-head">Ajouter une recette :</div>';
     echo '<form method = "post" action="#">';
     echo '<label for="recette"><span class="txt">Recette <span class="required">*</span></span><input type="text" class="input-field" name="recette" value="" /></label>';
-    echo '<label for="note"><span class="txt">Note <span class="required">*</span></span><input type="number" class="input-field" name="note" min=0 max=5 value="" /></label>';
     echo '<input type ="submit" name="submit" value="Ajouter"/>';
     echo '</form>';
     echo '</div>';
@@ -67,11 +66,9 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
     }  
     echo $j;
     if(isset($_POST['recette'])){
-        $req=$connection->prepare('INSERT INTO public.recette(id_rec,recettes,note,id_usr) VALUES(:id_rec,:recettes,:note,:id_usr)');
-        $req->execute(['id_rec' => 2,
-            'recettes'=>$_POST['recette'],
-            'note'=>$_POST['note'],
-            'id_usr' => $_SESSION['id'],
+            $req=$connection->prepare('INSERT INTO public.recette(id_rec,recettes) VALUES(:id_rec,:recettes)');
+            $req->execute(['id_rec' => $j,
+            'recettes'=> $_POST['recette'],
             ]);
     }
 
