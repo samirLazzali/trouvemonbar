@@ -15,6 +15,7 @@ include('includes/top.php');
 			if(isset($_SESSION['id_user']))
 			{
 				include('includes/leftcol.php');
+			}
 		?>
 		<div id="contenu">
 			<p>Depuis 2018, la communauté CATisfaction vise à mettre en relation les différents amoureux des chats afin que leur compagnions
