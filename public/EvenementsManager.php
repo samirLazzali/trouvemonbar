@@ -89,6 +89,12 @@ class EvenementsManager
 		return $query->fetchAll();
 	}
 
+	function getAllMusiques () 
+	{
+		$query = $this->db->query('SELECT * FROM musiques');
+		return $query->fetchAll();
+	}
+
 
 
 	function getAll ($id_categorie = null) 

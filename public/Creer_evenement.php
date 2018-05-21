@@ -1,4 +1,14 @@
-<?php session_start(); ?>
+<?php 
+	session_start(); 
+	$dbName = getenv('DB_NAME'); 
+	$dbUser = getenv('DB_USER'); 
+	$dbPassword = getenv('DB_PASSWORD'); 
+	$DB = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
+function chargerClasse($classe) {
+require $classe . '.php';
+}
+spl_autoload_register('chargerClasse');
+?>
 
 
 <!DOCTYPE html>
@@ -26,6 +36,34 @@
 		   <label for="lieu_event" style="margin-left: 15px"><b>Où?</b></label>
 		   <br/>
 		   <input type="text" class="events form-control" name="lieu" style="width=100%;" required>
+		   <br/>
+
+		   <label for="categorie" style="margin-left: 15px"><b>Categorie</b></label>
+		   <br/>
+		   <select class="form-control" name="categorie">
+				<?php
+					$eMan = new EvenementsManager($DB);
+		   			$cats = $eMan->getAllCategories();
+		   			print_r($cats);
+		   			foreach ($cats as $cat) {
+		   				echo '<option value="' . $cat['id']  .'">'. $cat['categorie'] . '</option>';
+		   			}
+		   		?>
+	       </select>
+		   <br/>
+
+		   <label for="musique" style="margin-left: 15px"><b>Musique</b></label>
+		   <br/>
+		   <select class="form-control" name="musique">
+		   		<?php 
+		   			$eMan = new EvenementsManager($DB);
+		   			$musiques = $eMan->getAllMusiques();
+
+		   			foreach ($musiques as $m) {
+		   				echo '<option value="' . $m['id']  .'">'. $m['musique'] . '</option>';
+		   			}
+		   		?>
+	       </select>
 		   <br/>
 
 		   <label for="lieu_before" style="margin-left: 15px"><b>Quel before chacal?<br/></b></label>
