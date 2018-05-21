@@ -2,7 +2,8 @@
 /* CREATE TYPE type_sex AS ENUM ('Male','Femelle','Attack helicopter'); remplacés par 0 1 2 */
 /* CREATE TYPE type_size AS ENUM ('Miniscule','Petite','Moyenne','Grande','Géante','Ur momma'); remplacés par 0-5*/
 /* CREATE TYPE type_coat AS ENUM ('Nu','Court','Mi-long','Long'); remplacés par 0-3 */
-
+DROP TYPE IF EXISTS type_pattern CASCADE;
+CREATE TYPE type_pattern AS ENUM ('Solide','Tabby','Colourpoint','Bicolore','Ecaille de tortue','Calico','Mink','Sepia');
 
 DROP TABLE IF EXISTS Utilisateur CASCADE;
 CREATE TABLE IF NOT EXISTS Utilisateur(
@@ -123,14 +124,6 @@ CREATE TABLE IF NOT EXISTS Searched_colors(
 		PRIMARY KEY(cat,color)
 		);
 
-DROP TABLE IF EXISTS Searched_patterns CASCADE;
-CREATE TABLE IF NOT EXISTS Searched_patterns(
-		cat INTEGER NOT NULL,
-		pattern type_pattern NOT NULL,
-		FOREIGN KEY (cat) REFERENCES Cats(id_cat),
-		PRIMARY KEY(cat,pattern)
-		);
-
 INSERT INTO Colors VALUES ('1','Noir');
 INSERT INTO Colors VALUES ('2','Bleu');
 INSERT INTO Colors VALUES ('3','Chocolat');
@@ -143,17 +136,6 @@ INSERT INTO Colors VALUES ('9','Blanc');
 INSERT INTO Colors VALUES ('10','Ambre');
 INSERT INTO Colors VALUES ('11','Ambre clair');
 INSERT INTO Colors VALUES ('12','Abricot');
-
-DROP TYPE IF EXISTS type_pattern CASCADE;
-CREATE TYPE type_pattern AS ENUM ('Solide','Tabby','Colourpoint','Bicolore','Ecaille de tortue','Calico','Mink','Sepia');
-INSERT INTO Patterns VALUES ('1','Solide');
-INSERT INTO Patterns VALUES ('2','Tabby');
-INSERT INTO Patterns VALUES ('3','Colourpoint');
-INSERT INTO Patterns VALUES ('4','Bicolore');
-INSERT INTO Patterns VALUES ('5','Ecaille de tortue');
-INSERT INTO Patterns VALUES ('6','Calico');
-INSERT INTO Patterns VALUES ('7','Mink');
-INSERT INTO Patterns VALUES ('8','Sepia');
 
 
 INSERT INTO Personality_traits VALUES('1','Malicieux');
