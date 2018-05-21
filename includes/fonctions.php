@@ -53,7 +53,7 @@ function aff_posts($id_posts)
             <div class="vote"><form class="vote" method="post" action="vote.php?vp='.$id_posts.'"><input class=connexion type="submit" value="+" /></form> 
             <form class="vote" method="post" action="vote.php?vm='.$id_posts.'"><input class=connexion type="submit" value="-" /></form></div><br /> 
             
-            ---------------------<br />';
+           ________________________________________________________________________________________________________<br />';
 }
 
 ?>
