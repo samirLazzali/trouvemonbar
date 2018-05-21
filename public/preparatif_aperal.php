@@ -51,12 +51,21 @@ $users = $userRepository->fetchAll();
    			$tuple=$connection->query("SELECT * FROM public.participants_course WHERE id_par=0")->fetch();
 
     if(isset($_POST['part']) && $_SESSION['connect']>=1){
-        $req=$connection->prepare('INSERT INTO public.participants_course(id_par,soiree,pseudo,course) VALUES(:id_par,:soiree,:pseudo,:course)');
-        $req->execute(['id_par'=>$j,
-        	'soiree'=>$tuple['soiree'],
-        	'pseudo'=>$_SESSION['pseudo'],
-        	'course'=>$tuple['course'],
+        $check=0;
+        $req_check=$connection->query("SELECT pseudo FROM public.participants_course ")->fetchAll();
+        foreach ($req_check as $r){
+            if ($r['pseudo']==$_SESSION['pseudo']){
+                $check=1;
+            }
+        }
+        if ($check==0) {
+            $req = $connection->prepare('INSERT INTO public.participants_course(id_par,soiree,pseudo,course) VALUES(:id_par,:soiree,:pseudo,:course)');
+            $req->execute(['id_par' => $j,
+                'soiree' => $tuple['soiree'],
+                'pseudo' => $_SESSION['pseudo'],
+                'course' => $tuple['course'],
             ]);
+        }
     }
     	$soir=$tuple['soiree'];
         $turec=$connection->query("SELECT * FROM public.participants_course")->fetchAll();
@@ -70,7 +79,7 @@ $users = $userRepository->fetchAll();
                				  	echo $res['pseudo'].'<br/>';
                				  }
                				}?>
-               		></td>
+               		</td>
 
             		</tr>
         	<?php 
