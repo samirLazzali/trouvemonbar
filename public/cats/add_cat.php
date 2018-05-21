@@ -7,12 +7,6 @@ include('../includes/config.php');
 include('../includes/functions.php');
 actualiser_session();
 
-if(isset($_SESSION['id_user']))
-{
-	header('Location: '.ROOTPATH.'/index.php');
-	exit();
-}
-
 $titre = 'Ajout de chat';
 include('../includes/top.php');
 ?>
