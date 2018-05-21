@@ -17,7 +17,7 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
     
 
     // on teste si une entrée de la base contient ce couple login / pass
-    $sql = $connection->prepare('SELECT count(*) FROM user WHERE login="?" AND password="?"');
+    $sql = $connection->prepare('SELECT count(*) FROM "user" WHERE login="?" AND password="?"');
     $sql->execute(array($_POST['login'],$_POST['password']));
     $data = $sql->fetch(PDO::FETCH_OBJ);
 
@@ -25,7 +25,8 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
     // si on obtient une réponse, alors l'utilisateur est un membre
     if ($data[0] == 1) {
         session_start();
-        $_SESSION['login'] = $_POST['login'];
+        $user = loginUser($_POST['login']);
+        config($user->getLogin(),$user->getLastname(),$user->getFirstname(),$user->getId(),$user->getAdministrateur());
         header('Location: accueil.php');
         exit();
     }
