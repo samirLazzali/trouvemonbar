@@ -18,7 +18,7 @@
 	echo $infos -> phone_number; ?> 
 			
 			
-	<form name="infos_cat" id="infos_cat" >
+	<form name="infos_cat" id="infos_cat" actions="/functions.php" method="read_cat">
 		<fieldset><legend>Mes chats :</legend>
 		<?php
 		$chats = $connexion -> query("SELECT id_cat, name_cat FROM Cats WHERE owner = ".intval($_SESSION['id_user']));
@@ -26,10 +26,13 @@
 		$chat = $chats -> fetch();
 		$i = 1;
 		while ($chat != FALSE) { ?>
-			<input type ="button" name="cat" value="<?php $i ?>" id="<?php $i ?>" onClick = "read_cat(<?php $chat->id_cat ?>)"><label for "<?php $i ?>"><?php echo $chat->name_cat; ?></label></input><br/>
+			<input type ="radio" name="cat" value="<?php $i ?>" id="<?php $i ?>" ><label for "<?php $i ?>"><?php echo $chat->name_cat; ?></label></input><br/>
 			<?php $chat = $chats -> fetch();
 			$i ++;
-		} ?>
+		} 
+		?>
+		<input type="submit" value="Afficher les informations sur le chat en question" />
 		</fieldset>
 	</form>
+	<a href="<?php echo ROOTPATH; ?>/cats/ajouter.php">Ajouter un nouveau chat ++</a>
 </div>
