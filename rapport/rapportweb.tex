@@ -1,0 +1,235 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{verbatim}
+\usepackage{moreverb}
+\usepackage{algorithm, algpseudocode}
+\usepackage{listings}
+\usepackage{listingsutf8}
+
+\renewcommand{\lstlistingname}{Interface}
+
+\lstset{
+language=Caml,        % choix du langage de programmation 
+  frame=single,
+  basicstyle=\small\normalfont\sffamily,    % the size of the fonts that are used for the code
+  stepnumber=1,                           % the step between two line-numbers. If it is 1 each line will be numbered
+ % numbersep=10pt,                         % how far the line-numbers are from the code
+  tabsize=1,                              % tab size in blank spaces
+  breaklines=true,                        % sets automatic line breaking
+  captionpos=t,                           % sets the caption-position to top
+  mathescape=true,
+  %stringstyle=\color{white}\ttfamily, % Farbe der String
+  showspaces=false,           % Leerzeichen anzeigen ?
+  showtabs=false,             % Tabs anzeigen ?
+  xleftmargin=17pt,
+  framexleftmargin=17pt,
+  framexrightmargin=17pt,
+  framexbottommargin=5pt,
+  framextopmargin=5pt,
+  showstringspaces=false,
+  inputencoding=utf8,
+  extendedchars=true,
+  literate=%
+            {é}{{\'{e}}}1
+            {è}{{\`{e}}}1
+            {ê}{{\^{e}}}1
+            {ë}{{\¨{e}}}1
+            {û}{{\^{u}}}1
+            {ù}{{\`{u}}}1
+            {â}{{\^{a}}}1
+            {à}{{\`{a}}}1
+            {î}{{\^{i}}}1
+            {ô}{{\^{o}}}1
+            {ç}{{\c{c}}}1
+            {Ç}{{\c{C}}}1
+            {É}{{\'{E}}}1
+            {Ê}{{\^{E}}}1
+            {À}{{\`{A}}}1
+            {Â}{{\^{A}}}1
+            {Î}{{\^{I}}}1  
+ }
+
+\usepackage{graphicx}
+\usepackage{appendix}
+\usepackage{lmodern}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref} 
+\usepackage{url} 
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\renewcommand{\thesection}{\arabic{section}}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{1pt}
+\fancyhead[L,R]{}
+\fancyfoot[R]{\textbf{page \thepage}} 
+\fancyfoot[L]{Projet Web}
+\fancyfoot[C]{}  
+
+\begin{document}
+	\begin{titlepage}
+			\includegraphics[scale=0.25]{Logo_transparent.png} 
+			\begin{center}
+				\vspace*{6cm}
+				{ \huge Rapport \\
+				Projet Web ENSIIE 1A 2018 \\
+				\vspace*{1cm}
+				\textsc{twitIIE}}
+				%\vspace*{2cm}\textbf{}}
+			\vspace*{3cm}
+				\begin{center} \large
+					\textsc{Chamayou} \textsc{Julien}\\
+					\textsc{Mauillon} \textsc{Edwin}\\
+					\textsc{XU} \textsc{Jiahui}\\
+					\textsc{XU} \textsc{Kevin}		
+				\end{center}
+				\begin{minipage}{0.4\textwidth}
+				
+				\end{minipage}
+
+				{\large 22 mai 2018}
+			\end{center}
+	\end{titlepage}
+
+
+	\renewcommand{\contentsname}{Sommaire} 
+	{\setlength{\baselineskip}{1.2\baselineskip}
+\tableofcontents\par}
+	
+	\addcontentsline{toc}{part}{Préambule} %Ajouter un lien
+	\newpage
+	\vspace*{3cm}
+	\paragraph{\Huge{Préambule}}
+
+	\paragraph{}
+	\large{A COMPLETER}\\
+		L'objectif de notre projet est de réaliser une application Web qui va tout copier de twitter et qui va leur voler tout le marché. Nous devons alors intégrer dans notre application les fonctionnalités suivantes : 
+\begin{itemize}
+\item Inscription et Connexion d'utilisateur
+\item Publication de tweet 
+\item Hashtag et noms d'utilisateur cliquables
+\item Commentaires de tweet et de commentaires
+\item Possibilité de like des tweet
+\item Envoi de messages privés
+\end{itemize}
+	
+
+
+%\section{Présentation}	
+
+Le rapport du projet a un but complètement différent de la soutenance. La soutenance nous permet de voir le produit tel que vous avez imaginé son utilisation, le rapport nous permet de comprendre la partie interne du fonctionnement de votre groupe. Il est très important pour nous de bien comprendre quels ont été les enjeux de chaque groupe, quelles ont été les difficultés rencontrées et surtout quels ont été les solutions trouvées pour les contourner.
+
+
+Le rapport
+Faire 10 pages maximum pour refléter le monde de l’entreprise où la concision est une qualité
+Expliquer l’approche mise en place, les problématiques rencontrées (techniques comme méthodes) et les solutions apportées
+Expliquer la répartition des rôles au sein de l’équipe
+La problématique à laquelle il répond.
+
+\newpage
+\section{Problématique}	
+	\large{A COMPLETER}
+
+Nous avons essayé de respecter au maximum le modèle MVC durant le développement de l'application.
+
+\section{La connexion}	
+L'application web TwitIIE est basée sur le fait meme d'avoir un compte par personne, éventuellement un compte pour un groupe ou une association. Il est donc nécessaire de créer cette page de connexion, d'une part pour pouvoir acceder aux fonctionnalités de l'application mais également pour pouvoir authentifier les tweets envoyés.
+La page de connexion est donc la première page présentée à l'utilisateur. Pour pouvoir acceder à son compte il est nécessaire de remplir un formulaire contenant : 
+\begin{description}
+\item[Login :] Un login, propre à chacun et unique qui permet l'authentification de chaque personne.
+\item[Mot de passe :] Un mot de passe qui permet à l'utilisateur de proteger son compte.
+\end{description}
+Après la soumission de ce formulaire, une recherche dans la base de données est faite afin de trouver s'il existe une personne correspondant au couple (login, mot de passe) donnée par l'utilisateur.
+Dans le cas contraire, un message d'erreur lui est transmi. Nous restons tout de meme vague sur la nature de l'erreur afin de proteger le compte d'une personne mal intentionnée.
+Si la personne n'a pas de compte, elle est alors invitée à s'inscrire via le lien disponible sur cette meme page. 
+
+\section{Inscription}
+L'inscription va permettre à tout utilisateur de créer un compte TiwtIIE. Il aura alors ensuite accès a toutes les fonctionnalités de l'application.
+Pour cela, quelques informations lui sont demandé via un formulaire de type POST. Les informations suivantes lui seront demandées : 
+\begin{description}
+\item[Login :] Un login, qui est unique et qui permettra à l'utilisateur de se connecter. Si le login choisi n'est pas disponible, un message d'erreur lui est envoyé afin q'il puisse le modifier.
+\item[Mot de passe :] Afin de garantir de la sécurité de son compte, un mot de passe est requis.
+\item[Confirmation de mot de passe :] Une confirmation du mot de passe précedemment entré est demandé afin d'éviter toute faute de frappe.
+\item[Nom :] Afin de renseigner son compte le nom de famille est demandé.
+\item[Prenom :] De meme, le prénom est demandé.
+\item[Date de naissance :] Permet également de renseigner le profil de l'utilisateur. On pourrait également faire un test de majorité, mais l'application TwitIIE ne présente pour le momment aucun danger pour les personne mineures, l'accès leur est donc autorisé.
+\end{description}}
+
+\section{Les Abonnements}	
+
+Pour gérer les abonnements, on a crée la table \texttt{amis} composé de deux id, clés étrangères de la table \texttt{user} :
+\begin{description}
+\item[personne1 :] l’id de l’utilisateur qui s’abonne
+\item[personne2 :] l’id de l’utilisateur à qui personne1 va s’abonner
+\end{description}
+C’est à l’aide de cette table que l’on récupère la liste des abonnements de l’utilisateur connecté, utile pour gérer ses messages ainsi que son fil d’actualité.
+De plus, il est possible d’effectuer une recherche (via le formulaire \texttt{recherche @} pour accéder au profil d’un utilisateur inscrit. Un formulaire est alors proposé :
+\item  -si l’utilisateur n’est pas abonné à celui recherché, on lui propose d’ajouter celui ci dans sa liste d’abonnements
+\item -sinon, on lui propose de supprimer son abonnement 
+\section{Les Tweets}			
+Chaque utilisateur a possibilité d'écrire un tweet qui sera par la suite visible en allant sur son profil ou dans le fil d'actualité d'une personne abonnée. La table \texttt{tweet} est composée de :
+\begin{description}
+\item[auteur :] l’id de l’auteur du tweet
+\item[date\_envoie :] la date du tweet
+\item[contenu :] le contenu du tweet
+\end{description}
+Un formulaire sur la page \texttt{accueil} permet à l’utilisateur d’écrire un tweet.
+De plus, on récupère les tweets des abonnements sur le fil d’actualité à l’aide d'une  jointure $n…n$ sur la table \texttt{amis} et \texttt{tweet}.
+
+Il est aussi possible d'aimer un tweet. On crée une table \texttt{like} spécifique à cette fonctionnalité, prenant en compte les informations suivantes :
+\begin{description}
+\item[tweet \_id :] l’id du tweet aimé
+\item[user\_id:] l'id de l'utilisateur qui aime le tweet
+\end{description}
+On peut ainsi proposer à l'utilisateur d'aimer ou de ne plus aimer un tweet (méthode AJAX) et récupérer le nombre de j'aime associé à un tweet.
+
+
+
+\section{Les Commentaires}	
+Chaque utilisateur à la possibilité de commenter un tweet. Il peut aussi commenter un commentaire. Nous aurons alors plusieurs niveau de commentaires. La principale difficulté rencontrée ici était de gérer ces différents niveaux de commentaires.
+
+Voici comment nous avons décidé de créer notre table \texttt{commentaire}:
+\begin{description}
+\item[id :] l'id du commentaire;
+\item[owner\_id :] l'id de l'auteur du commentaire
+\item[target\_id :] l'id de l'auteur du tweet ou commentaire commenté
+\item[date\_envoie :] la date du commentaire
+\item[contenu :] le contenu du commentaire
+\item[parent\_id :] l'id du tweet ou commentaire commenté
+\item[parent\_type :] type du message commenté "tweet" ou "commentaire"
+\end{description}
+Nous avons aussi créer les classes \texttt{Commentaire} et \texttt{CommentaireManager} afin de manipuler plus facilement les commentaires.
+
+Pour l'affichage des commentaires avec les différents niveaux, il a fallu une récursion. En effet, pour chaque commentaire, on va exécuter une nouvelle fois la requête pour récupérer tous les commentaires du commentaire courant.
+
+\section{Les Hashtags}		
+
+\newpage
+\section{Les Messages Privés}	
+Nous avons décider d'ajouter une fonctionnalité d'envoi de messages privés entre chaque utilisateur. 
+Cette fonctionnalité est directement accessible depuis la barre de navigation. L'utilisateur peut alors à tout moment choisir un destinataire parmi ses amis afin de lui envoyer un message privé.
+
+Pour réaliser cela, nous avons dû créer une nouvelle table dans la base de données, voici ses attributs :
+
+ \texttt{message(id, emetteur, recepteur, date\_envoie, contenu)}\\		
+On a aussi décidé de créer une classe \texttt{Message} et une classe \texttt{MessageManager} afin de faciliter la manipulation des messages. 
+
+\vspace{2\baselineskip}
+
+Pour cette partie, on a principalement utilisé de l'AJAX pour envoyer des messages privés et pour charger les messages reçus automatiquement sans avoir besoin de réactualiser la page. Ces deux éléments sont les principales difficultés rencontrées pour réaliser cette fonctionnalité.
+
+
+\newpage		
+\section{Répartition des tâches}
+	
+			
+\section{Conclusion}			
+Malheureusement, nous n'avons pas réalisé la fonctionnalité de notifications par manque de temps.
+
+\end{document}
+ 
