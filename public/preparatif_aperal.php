@@ -94,5 +94,5 @@ $users = $userRepository->fetchAll();
     echo '    <fieldset><legend></legend><input type ="hidden" name="part" value=1 /></fieldset>';
     echo '   <input type ="submit" name="submit" value="Participer"/>';
     echo '</form>';
-  
-
+  ?>
+</body>
