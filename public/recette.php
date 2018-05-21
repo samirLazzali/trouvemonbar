@@ -43,7 +43,7 @@ menu_aperal();
     	  foreach($irec as $id){
        			 $j++;
    			 }  
-    if(isset($_POST['note'])){
+    if(isset($_POST['note']) && $_SESSION['connect']>=1){
     	echo $j;
         $req=$connection->prepare('INSERT INTO public.note(note,id_rec,id_vente,id_usr) VALUES(:note,:id_rec,:id_vente,:id_usr)');
         $req->execute(['note'=>$_POST['note'],

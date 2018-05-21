@@ -27,4 +27,22 @@ $users = $userRepository->fetchAll();
 menu_aperal();
 ?>
 
-ouiiii
+<h3><?php echo 'Intendance' ?></h3>
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead style="font-weight: bold">
+        <td>Soirée</td>
+        <td>Liste des Courses</td>
+        <td>Participants</td>
+        </thead>
+
+  <?php 
+    echo '</form>';
+    echo '</br>';
+    echo '<form method="post" action="#">';
+    echo '    <fieldset><legend></legend><input type ="hidden" name="participation" value=1/></fieldset>';
+    echo '   <input type ="submit" name="submit" value="Participer"/>';
+    echo '</form>';
+  
+
+
