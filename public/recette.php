@@ -49,7 +49,7 @@ menu_aperal();
     	echo $j;
         $req=$connection->prepare('INSERT INTO public.note(note,id_rec,id_vente,id_usr) VALUES(:note,:id_rec,:id_vente,:id_usr)');
         $req->execute(['note'=>$_POST['note'],
-            'id_rec'=>$_POST['recette'],
+            'id_rec'=>$_POST['id'],
             'id_vente' => $j,
             'id_usr' => $_SESSION['id'],
             ]);
