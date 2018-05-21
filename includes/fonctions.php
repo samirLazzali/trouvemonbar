@@ -28,19 +28,28 @@ function move_posts($avatar)
     return $nomavatar;
 }
 
-function aff_posts($id_posts){
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function aff_posts($id_posts)
+{
+    $db = new PDO('mysql:host=localhost;dbname=golriie', 'root', '');
+    $query = $db->prepare('SELECT titre,description,img,jaime,nul,author FROM posts WHERE id=:id');
+    $query->bindValue(':id', $id_posts, PDO::PARAM_INT);
+    $query->execute();
+    $data = $query->fetch();
+    $titre = $data["titre"];
+    $desc = $data["description"];
+    $jaime = $data["jaime"];
+    $nul = $data["nul"];
+    $img = $data["img"];
+    $author = $data["author"];
+    $query->CloseCursor();
+    $query = $db->prepare('SELECT pseudo FROM membres WHERE id=:id');
+    $query->bindValue(':id', $author, PDO::PARAM_INT);
+    $query->execute();
+    $data = $query->fetch();
+    $author = $data["pseudo"];
+    echo '<div> <h1>' . $titre . '</h1><br />
+            <img src="./posts/' . $img . '"alt="" /><br />' . $desc . '<br />' .
+        $jaime . '+ et ' . $nul . '-<br /> Par : ' . $author.'<br /> ---------------------<br />';
 }
+
+?>
