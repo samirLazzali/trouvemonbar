@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS Cats(
        FOREIGN KEY (owner) REFERENCES Utilisateur(id_user),
        name_cat VARCHAR NOT NULL,
        purety BOOLEAN,
+	   cpattern type_pattern NOT NULL,
 
        birthday_cat DATE,
        sage_min INTEGER,
@@ -61,12 +62,6 @@ CREATE TABLE IF NOT EXISTS Colors(
        id_color SERIAL PRIMARY KEY NOT NULL,
        name_color VARCHAR NOT NULL
        );
-	   
-DROP TABLE IF EXISTS Patterns CASCADE;
-CREATE TABLE IF NOT EXISTS Patterns(
-       id_pattern SERIAL PRIMARY KEY NOT NULL,
-       name_pattern VARCHAR NOT NULL
-       );
 
 DROP TABLE IF EXISTS Personality_traits CASCADE;
 CREATE TABLE IF NOT EXISTS Personality_traits(
@@ -81,15 +76,6 @@ CREATE TABLE IF NOT EXISTS Cat_colors(
 		FOREIGN KEY (cat) REFERENCES Cats(id_cat),
 		FOREIGN KEY (color) REFERENCES Colors(id_color),
 		PRIMARY KEY (cat,color)
-		);
-		
-DROP TABLE IF EXISTS Cat_patterns CASCADE;
-CREATE TABLE IF NOT EXISTS Cat_colors(
-		cat INTEGER,
-		pattern INTEGER,
-		FOREIGN KEY (cat) REFERENCES Cats(id_cat),
-		FOREIGN KEY (pattern) REFERENCES Patterns(id_pattern),
-		PRIMARY KEY (cat,pattern)
 		);
 
 DROP TABLE IF EXISTS Cat_breed CASCADE;
