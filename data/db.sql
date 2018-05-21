@@ -104,9 +104,9 @@ INSERT INTO "Ingredients_Recettes"(nom_recette, nom_ingredient) VALUES ('Jacquel
 INSERT INTO "Ingredients_Recettes"(nom_recette, nom_ingredient) VALUES ('Chips','Chips');
 INSERT INTO "Ingredients_Recettes"(nom_recette, nom_ingredient) VALUES ('Saucisson','Saucisson');
 INSERT INTO "Ingredients_Recettes"(nom_recette, nom_ingredient) VALUES ('Concombres','Concombre');
-INSERT INTO "Ingredients_Recettes"(nom_recette, nom_ingredient) VALUES ('Legumes','Carotte');
+INSERT INTO "Ingredients_Recettes"(nom_recette, nom_ingredient) VALUES ('Carottes','Carotte');
 INSERT INTO "Ingredients_Recettes"(nom_recette, nom_ingredient) VALUES ('Nems','Nem');
-INSERT INTO "Ingredients_Recettes"(nom_recette, nom_ingredient) VALUES ('Chips_crevette','Chips_crevette');
+INSERT INTO "Ingredients_Recettes"(nom_recette, nom_ingredient) VALUES ('Chips_crevettes','Chips_crevette');
 INSERT INTO "Ingredients_Recettes"(nom_recette, nom_ingredient) VALUES ('Pizza','Pâte_pizza');
 INSERT INTO "Ingredients_Recettes"(nom_recette, nom_ingredient) VALUES ('Pizza','Jambon');
 INSERT INTO "Ingredients_Recettes"(nom_recette, nom_ingredient) VALUES ('Pizza','Sauce_tomate');
