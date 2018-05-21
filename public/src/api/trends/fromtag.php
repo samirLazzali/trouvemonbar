@@ -16,7 +16,7 @@ else
 if ($limit > 250)
     $limit = 250;
 
-$posts = Post::fromHashtag($tag);
+$posts = Post::fromHashtag($tag, $limit);
 
 if ($getOriginals)
     foreach($posts as $post) {

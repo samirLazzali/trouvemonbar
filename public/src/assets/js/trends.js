@@ -18,7 +18,7 @@ function getHashtags()
             document.getElementById('hashtag-list').innerHTML = text;
         }
     };
-    request.open("GET", "/api/trends/hashtag", true);
+    request.open("GET", "/api/trends/hashtag?l", true);
     request.send();
     return false;
 }
@@ -36,6 +36,7 @@ function getPostsFromHashtag(hashtag)
         if (this.readyState == 4 && this.status == 200)
         {
             var text = '';
+            console.log(request.responseText);
             var result = JSON.parse(request.responseText)["result"];
             text += "<h2 class=\"selected-hashtag-name\">" +
                         "#" + hashtag +
@@ -45,6 +46,7 @@ function getPostsFromHashtag(hashtag)
         }
     };
     hashtag = hashtag.replace("#", "");
+    console.log(hashtag);
     request.open("GET", "/api/trends/fromtag?limit=$trendLimit&getoriginals=true&tag=" + hashtag, true);
     request.send();
     return false;

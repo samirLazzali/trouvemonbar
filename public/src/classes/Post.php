@@ -214,14 +214,15 @@ class Post implements JsonSerializable
      * @return array post
      */
 
-    static function fromHashtag($tag)
+    static function fromHashtag($tag, $limit)
     {
         $tag = str_replace("#", "", $tag);
         $db = connect();
         // JOIN " . TABLE_User . " ON " . TABLE_Posts . ".Author = " . TABLE_User . ".ID
-        $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE Content LIKE :hashtag ORDER BY Timestamp DESC";
+        $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE Content LIKE :hashtag ORDER BY Timestamp DESC LIMIT :limit";
         $statement = $db->prepare($SQL);
         $statement->bindValue(":hashtag", "%#$tag%");
+        $statement->bindValue(":limit", $limit);
         $statement->execute();
 
         $rows = $statement->fetchAll();
