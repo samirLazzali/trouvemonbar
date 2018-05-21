@@ -215,4 +215,25 @@ textarea {
 
 table {
     width: 100%;
+    border-collapse: collapse;
+}
+
+tr:first-child {
+    background-color: #5FE6BD;
+    color: #fff;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+
+th, td {
+    padding: 10px;
+    /*border-bottom: 1px solid #ddd;*/
+}
+
+tr {
+    border-bottom: 1px solid #ddd;
+}
+
+tr:last-child {
+    border-bottom: none;
 }
