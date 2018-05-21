@@ -30,7 +30,7 @@ class Annonce {
 
 	print "<div class=more>";
 	print "<div class=info>";
-	print "$this->genre</br>$this->op</br>S$this->semestre";
+	print "$this->op</br>$this->genre</br>S$this->semestre";
 	if ($this->module != 'NULL') print " - $this->module</br>";
 	print "</div>";
 
@@ -328,7 +328,6 @@ class Annonce {
 	}
     }
 
-
     public static function genQuery($criterium = []) {
 	$connection = dbConnect();
 	$authorized = array('titre','op', 'semestre', 'module');
@@ -357,7 +356,7 @@ class Annonce {
 	$query = substr($query, 0, -4); //On enleve le AND
 	$query = $query." ORDER BY postdate DESC";
 
-	if (!isset($criterium['tags']) || empty($criterium['tags']))
+	if (sizeof($tags) == 0)
 	    return $query;
 
 	//// SI IL Y A DES TAGS /////
