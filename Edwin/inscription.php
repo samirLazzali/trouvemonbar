@@ -1,6 +1,9 @@
+
 <?php
+
 require '../vendor/autoload.php';
 require_once 'Modele.php';
+
 // on teste si le visiteur a soumis le formulaire
 if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription') {
 	// on teste l'existence de nos variables. On teste également si elles ne sont pas vides
@@ -28,18 +31,17 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription') {
 		
 
 		if ($result->nb == 0) {
-			$userManager = new User\userManager($connection);
+			$userManager = new User\UserManager($connection);
 			$user = new User\User();
 			$user->setLogin($_POST['login'])
 				->setFirstname($_POST['firstname'])
 				->setLastname($_POST['lastname'])
 				->setBirthday(new \Datetime($_POST['bday']))
-				->setPassword($_POST['password'])
+                ->setPassword($_POST['password'])
 				->setAdministrateur(false);
 
 			$userManager->add($user);
-		session_start();
-		   $user = loginUser($_POST['login']);
+			session_start();
         config($user->getLogin(),$user->getLastname(),$user->getFirstname(),$user->getId(),$user->getAdministrateur());
 		header('Location: accueil.php');
 		exit();
