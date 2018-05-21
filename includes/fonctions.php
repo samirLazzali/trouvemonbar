@@ -5,7 +5,7 @@
 function erreur($err='')
 {
     $mess=($err!='')? $err:'Une erreur inconnue s\'est produite';
-    exit("<p>".$mess.'</p> <p>Cliquez <a href="./index.php">ici</a> pour revenir à la page d\'accueil</p></div></body></html>');
+    exit("<p>".$mess.'</p> <p <a href="./index.php">Cliquez ici pour revenir à la page d\'accueil</a></p></div></body></html>');
 }
 
 function move_avatar($avatar)
@@ -49,7 +49,11 @@ function aff_posts($id_posts)
     $author = $data["pseudo"];
     echo '<div class="posts"> <h1>' . $titre . '</h1><br />
             <img src="./posts/' . $img . '"alt="" /><br />' . $desc . '<br />' .
-        $jaime . '+ et ' . $nul . '-<br /> Par : ' . $author.'<br /> ---------------------<br />';
+        $jaime . '+ et ' . $nul . '-<br /> Par : ' . $author.'<br /> 
+            <div class="vote"><form class="vote" method="post" action="vote.php?vp='.$id_posts.'"><input class=connexion type="submit" value="+" /></form> 
+            <form class="vote" method="post" action="vote.php?vm='.$id_posts.'"><input class=connexion type="submit" value="-" /></form></div><br /> 
+            
+            ---------------------<br />';
 }
 
 ?>
