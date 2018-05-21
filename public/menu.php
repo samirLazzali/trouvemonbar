@@ -17,7 +17,14 @@ function menu_navigation()
     echo '<li><a href="profil.php">Profil</a></li>';
     echo '<li><a href="admin.php">Admin</a></li>';
     echo '<li class="btn-cta"><a href="inscription.php"><span>S\'inscrire</span></a></li>';
-    echo '<li class="btn-cta"><a href="connexion.php"><span>Se connecter</span></a></li>';
+    if($_SESSION["connect"] == 0)
+    {
+	echo '<li class="btn-cta"><a href="connexion.php"><span>Se connecter</span></a></li>';
+    }
+    else
+    {
+	echo '<li class="btn-cta"><a href="deconnexion.php"><span>Se déconnecter</span></a></li>';
+    }
     echo '</ul>';
     echo '</div>';
     echo '</div>';
@@ -43,7 +50,15 @@ function menu_aperal(){
     echo '<li><a href="profil.php">Profil</a></li>';
     echo '<li><a href="admin.php">Admin</a></li>';
     echo '<li class="btn-cta"><a href="inscription.php"><span>S\'inscrire</span></a></li>';
-    echo '<li class="btn-cta"><a href="connexion.php"><span>Se connecter</span></a></li>';
+    if($_SESSION["connect"] == 0)
+    {
+	echo '<li class="btn-cta"><a href="connexion.php"><span>Se connecter</span></a></li>';
+     }
+    else
+    {
+	echo '<li class="btn-cta"><a href="deconnexion.php"><span>Se déconnecter</span></a></li>';
+    }
+
     echo '</ul>';
     echo '</div>';
     echo '</div>';
@@ -79,7 +94,15 @@ function menu_oeno(){
     echo '<li><a href="profil.php">Profil</a></li>';
     echo '<li><a href="admin.php">Admin</a></li>';
     echo '<li class="btn-cta"><a href="inscription.php"><span>S\'inscrire</span></a></li>';
-    echo '<li class="btn-cta"><a href="connexion.php"><span>Se connecter</span></a></li>';
+    if($_SESSION["connect"] == 0)
+    {
+		        echo '<li class="btn-cta"><a href="connexion.php"><span>Se connecter</span></a></li>';
+    }
+    else
+    {
+	echo '<li class="btn-cta"><a href="deconnexion.php"><span>Se déconnecter</span></a></li>';
+    }
+
     echo '</ul>';
     echo '</div>';
     echo '</div>';

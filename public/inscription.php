@@ -9,6 +9,7 @@ $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=
 
 $userRepository = new \User\UserRepository($connection);
 $users = $userRepository->fetchAll();
+session_start();
 ?>
 
     <html>

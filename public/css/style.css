@@ -235,11 +235,6 @@ h1, h3, h4, h5, h6, figure {
   display: block;
   margin-bottom: 10px;
 }
-#gtco-header h1, #gtco-header h2 {
-  margin: 0;
-  padding: 0;
-  color: white;
-}
 #gtco-header h1 {
   margin-bottom: 0px;
   font-size: 59px;
@@ -252,12 +247,6 @@ h1, h3, h4, h5, h6, figure {
     line-height: 1.2;
     margin-bottom: 10px;
   }
-}
-#gtco-header h2 {
-  font-weight: 300;
-  font-size: 22px;
-  line-height: 1.5;
-  margin-bottom: 30px;
 }
 #gtco-header .form-wrap {
   position: relative;

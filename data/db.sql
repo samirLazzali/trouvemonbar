@@ -124,9 +124,9 @@ datee DATE NOT NULL
 );
 
 
-CREATE TABLE public."Participants"(
-id_reu INTEGER NOT NULL, FOREIGN KEY (id_reu) REFERENCES public.reunion(id_reu),
-pseudo VARCHAR(40) NOT NULL
+CREATE TABLE public."participants"(
+id_reu INTEGER NOT NULL,
+pseudo VARCHAR(32) NOT NULL
 );
 
 

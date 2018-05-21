@@ -9,6 +9,7 @@ $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=
 
 $userRepository = new \User\UserRepository($connection);
 $users = $userRepository->fetchAll();
+session_start();
 ?>
 
 <html>
@@ -27,16 +28,17 @@ $users = $userRepository->fetchAll();
 <br />
 <br />
 <br />
-<h3><?php echo 'Réunions' ?></h3>
+<div class="gtco-container">
+<h2><?php echo 'Réunions' ?></h2>
 
-    <table class="table table-bordered table-hover table-striped">
-        <thead style="font-weight: bold">
-        <td>#</td>
-        <td>Soirée</td>
-        <td>Date</td>
-        <td>Participants</td>
-        <td>Compte Rendu</td>
-        </thead>
+    <table>
+        <tr>
+        <th>#</th>
+        <th>Soirée</th>
+        <th>Date</th>
+        <th>Participants</th>
+        <th>Compte Rendu</th>
+        </tr>
         <?php /** @var \User\User $user */
         $tu=$connection->query("SELECT * FROM public.reunion ORDER BY id_reu DESC")->fetchAll();
         foreach ($tu as $reu){
@@ -57,7 +59,7 @@ $users = $userRepository->fetchAll();
                 <td><?php echo $participants ?></td>
                 <td><?php echo $reu['cr'] ?> </td>
             </tr>
-        <?php } ?>
+	<?php } ?>
     </table>
-
+    </div>
 
