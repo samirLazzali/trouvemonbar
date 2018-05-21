@@ -138,7 +138,7 @@ h1, h3, h4, h5, h6, figure {
   font-weight: bold;
 }
 .gtco-nav #gtco-logo em {
-  color: #f54c53;
+  color: Crimson;
 }
 .gtco-nav a {
   padding: 5px 10px;
@@ -192,7 +192,7 @@ h1, h3, h4, h5, h6, figure {
 }
 .gtco-nav ul li.btn-cta a:hover span {
   background: #fff;
-  color: #f54c53;
+  color: FireBrick;
 }
 .gtco-nav ul li.active > a {
   color: #fff !important;

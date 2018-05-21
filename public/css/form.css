@@ -62,7 +62,7 @@
 .form-c input[type=button]{
     border: none;
     padding: 8px 15px 8px 15px;
-    background: #FF8500;
+    background: FireBrick;
     color: #fff;
     box-shadow: 1px 1px 4px #DADADA;
     -moz-box-shadow: 1px 1px 4px #DADADA;
@@ -73,6 +73,6 @@
 }
 .form-c input[type=submit]:hover,
 .form-c input[type=button]:hover{
-    background: #EA7B00;
+    background: DarkRed;
     color: #fff;
 }
