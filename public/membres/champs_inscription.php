@@ -279,9 +279,8 @@ include('../includes/top.php');?>
 				?>
 				<h1>Inscription validée !</h1>
 				<p>Nous vous remercions de vous être inscrit sur notre site, votre inscription a été validée !<br/>
-			Vous pouvez vous connecter avec vos identifiants <a href="connexion.php">ici</a>.
-			</p>
-			<?php
+				Vous pouvez vous connecter avec vos identifiants <a href="connexion.php">ici</a>.</p>
+				<?php
 				}
 				
 				else

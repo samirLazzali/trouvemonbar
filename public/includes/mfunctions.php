@@ -33,24 +33,24 @@ function affCompat($id_the_cat) {
 
     $the_cat = $connexion->query("SELECT *
                                             FROM Cats
-                                            WHERE id_cat=".$id_the_cat)->fetch(PDO::FETCH_OBJ);
+                                            WHERE id_cat = ".$id_the_cat)->fetch(PDO::FETCH_OBJ);
     $sexCh = $the_cat->sex;
     $breedCh = query("SELECT breed
                       FROM Cat_breed
-                      WHERE cat=".$id_the_cat)->fetch(PDO::FETCH_OBJ)->breed;
+                      WHERE cat = ".$id_the_cat)->fetch(PDO::FETCH_OBJ)->breed;
     $pureRace = $the_cat->purety;
 
     if($pureRace==1)
         $listeChats = $connexion->query("SELECT * 
                                           FROM Cats 
                                           JOIN Cat_breed ON cat=id_cat 
-                                          WHERE sexe=" . $sexCh . " 
-                                            AND breed=" . $breedCh);
+                                          WHERE sexe = ".$sexCh." 
+                                            AND breed = ".$breedCh);
     else
-        $listeChats = $connexion->query("select * 
-                                          from cats 
-                                          join cat_breed ON cat=id_cat 
-                                          where sexe=" . $sexCh);
+        $listeChats = $connexion->query("SELECT * 
+                                          FROM Cats 
+                                          JOIN Cat_breed ON cat = id_cat 
+                                          where sexe = ".$sexCh);
     $chatPot=$listeChats->fetch(PDO::FETCH_OBJ);
     while($chatPot){
         $chatsPot[] = $chatPot->id_cat;
@@ -74,22 +74,22 @@ function affCompat($id_the_cat) {
         $score += $prodBreed * $connexion->query("SELECT COUNT(*)
                                                             FROM Cat_breed 
                                                             JOIN Searched_breeds ON Cat_breed.breed = Searched_breeds.breed
-                                                            WHERE Searched_breeds.cat=" . $id_the_cat ."
+                                                            WHERE Searched_breeds.cat = ".$id_the_cat."
                                                               AND Cat_breed.cat=" . $chatPot->id_cat); /*->fetch ?? */
         $score += $prodColor * $connexion->query("SELECT COUNT(*)
                                                             FROM Cat_color 
                                                             JOIN Searched_colors ON Cat_color.color = Searched_colors.color
-                                                            WHERE Searched_colors.cat=" . $id_the_cat ."
-                                                              AND Cat_color.cat=" . $chatPot->id_cat);
+                                                            WHERE Searched_colors.cat = ".$id_the_cat."
+                                                              AND Cat_color.cat = ".$chatPot->id_cat);
         $score += $prodTraits * $connexion->query("SELECT COUNT(*)
                                                             FROM Cat_trait 
                                                             JOIN Searched_traits ON Cat_trait.trait = Searched_traits.trait
-                                                            WHERE Searched_traits.cat=" . $id_the_cat ."
-                                                              AND Cat_trait.cat=" . $chatPot->id_cat);
+                                                            WHERE Searched_traits.cat = ". $id_the_cat ."
+                                                              AND Cat_trait.cat= ".$chatPot->id_cat);
         $score += $prodPattern * $connexion->query("SELECT COUNT(*)
                                                             FROM Searched_pattern 
-                                                            WHERE cat=" . $id_the_cat .
-                                                            "AND pattern =" . $chatPot->pattern);
+                                                            WHERE cat = ".$id_the_cat ."
+															AND pattern = ".$chatPot->pattern);
         $scoreChatsPot[] = $score;
     }
     if (empty($chatsPot)) {
@@ -100,8 +100,8 @@ function affCompat($id_the_cat) {
         array_multisort($scoreChatsPot, $chatsPot);
         foreach($chatPot as $elu) {
             $num = $connexion->query("SELECT phone_number
-                                                FROM Utilisateurs
-                                                WHERE cat=" . $id_the_cat .);
+									FROM Utilisateurs 
+									WHERE cat = ".$id_the_cat .);
         }
 
     }
