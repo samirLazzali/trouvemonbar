@@ -17,6 +17,8 @@
                         Mot de passe : <input type="password" size="20" maxlength="18" name="pwd"/>
                         <br/>
                         <input type="submit" value="Connection" name="bouton_connection"/>
+                        <br/>
+                        <a href="inscription.php">S'inscrire</a>
                     </p>
                 </form>
             </div>
