@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="fr">
+
 <?php
-include("header.php")?>
+include("includes/header.php");
+include ("includes/entete.php");?>
 <?php
 include("includes/inscription.php");
 ?>
-</body>
-</html>
