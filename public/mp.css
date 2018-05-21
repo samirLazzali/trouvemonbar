@@ -107,6 +107,11 @@ div#article_connection>form>p{
     line-height: 3em;
 }
 
+div#article_connection>p{
+    margin-top: 10%;
+    line-height: 3em;
+}
+
 div#article{
     padding-left: 2em;
 }
