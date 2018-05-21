@@ -12,11 +12,16 @@ $titre = '';
 include('includes/top.php'); 
 ?>
 		<?php
-			if(isset($_SESSION['id_user']))
-			{
-				include('includes/leftcol.php');
+		if(isset($_SESSION['id_user']))
+			{ ?>
+				<div id="contenu">
+					<?php include('includes/leftcol.php'); ?>
+				</div>
+				</p>
+				<?php
 			}
-		?>
+		
+		else { ?>
 		<div id="contenu">
 			<p>Depuis 2018, la communauté CATisfaction vise à mettre en relation les différents amoureux des chats afin que leur compagnions
 			préférés puisse eux aussi avoir droit à l'amour. Vous en avez marre des chaleurs de votre chatte, ou bien encore vous souhaitez que votre
@@ -26,7 +31,8 @@ include('includes/top.php');
 			CATisfaction : Le meilleur site de rencontre pour félins
 			N'hésitez pas à vous <a href="membres/inscription.php">inscrire</a>
 			</p>
-		</div>
-<?php  
+		</div><?php  
+		}
+
 include('includes/bottom.php');
 ?>
