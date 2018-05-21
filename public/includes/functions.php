@@ -26,7 +26,7 @@ function actualiser_session()
 				$informations = Array(/*Mot de passe de session incorrect*/
 									true,
 									'Session invalide',
-									'Le mot de passe de votre session est incorrect, vous devez vous reconnecter.',
+									'Le mot de passe ou le nom d\'utilisateur de votre session est incorrect, vous devez vous reconnecter.',
 									'',
 									'membres/connexion.php',
 									3
