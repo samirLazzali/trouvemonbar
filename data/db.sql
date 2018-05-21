@@ -26,7 +26,6 @@ CREATE TABLE IF NOT EXISTS Cats(
        FOREIGN KEY (owner) REFERENCES Utilisateur(id_user),
        name_cat VARCHAR NOT NULL,
        purety BOOLEAN,
-       pattern type_pattern NOT NULL,
 
        birthday_cat DATE,
        sage_min INTEGER,
