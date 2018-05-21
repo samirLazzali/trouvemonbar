@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS Utilisateur(
 	mail VARCHAR NOT NULL,
 	password VARCHAR NOT NULL,
 	phone_number INTEGER NOT NULL,
-	user_type INTEGER NOT NULL CHECK (0 <= user_type AND user_type < 3),
+	user_type INTEGER NOT NULL CHECK (0 <= user_type AND user_type < 3)
 	);
 	
 DROP TABLE IF EXISTS Connected;
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS Cats(
 
        weight FLOAT CHECK (0<weight),
        sweight_min FLOAT CHECK (0<weight),
-       sweight_max FLOAT CHECK (0<weight),
+       sweight_max FLOAT CHECK (0<weight)
 
 	   );
 
