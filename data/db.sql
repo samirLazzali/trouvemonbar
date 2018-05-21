@@ -2,8 +2,7 @@
 /* CREATE TYPE type_sex AS ENUM ('Male','Femelle','Attack helicopter'); remplacés par 0 1 2 */
 /* CREATE TYPE type_size AS ENUM ('Miniscule','Petite','Moyenne','Grande','Géante','Ur momma'); remplacés par 0-5*/
 /* CREATE TYPE type_coat AS ENUM ('Nu','Court','Mi-long','Long'); remplacés par 0-3 */
-DROP TYPE IF EXISTS type_pattern CASCADE;
-CREATE TYPE type_pattern AS ENUM ('Solide','Tabby','Colourpoint','Bicolore','Ecaille de tortue','Calico','Mink','Sepia');
+
 
 DROP TABLE IF EXISTS Utilisateur CASCADE;
 CREATE TABLE IF NOT EXISTS Utilisateur(
@@ -14,12 +13,12 @@ CREATE TABLE IF NOT EXISTS Utilisateur(
 	phone_number VARCHAR NOT NULL,
 	user_type INTEGER NOT NULL CHECK (0 <= user_type AND user_type < 3)
 	);
-	
+
 DROP TABLE IF EXISTS Connected CASCADE;
 CREATE TABLE IF NOT EXISTS Connected(
 	id_connected INTEGER UNIQUE NOT NULL
 	);
-	   
+
 DROP TABLE IF EXISTS Cats CASCADE;
 CREATE TABLE IF NOT EXISTS Cats(
        id_cat SERIAL PRIMARY KEY NOT NULL,
@@ -27,7 +26,6 @@ CREATE TABLE IF NOT EXISTS Cats(
        FOREIGN KEY (owner) REFERENCES Utilisateur(id_user),
        name_cat VARCHAR NOT NULL,
        purety BOOLEAN,
-	   cpattern type_pattern NOT NULL,
 
        birthday_cat DATE,
        sage_min INTEGER,
@@ -49,7 +47,7 @@ CREATE TABLE IF NOT EXISTS Cats(
        sweight_max INTEGER CHECK (0<weight)
 	   );
 
-		/* contient aussi une race (Cat_breed), une ou plusieurs couleurs (Cat_color) et traits de caractères (cat_personnality) 
+		/* contient aussi une race (Cat_breed), une ou plusieurs couleurs (Cat_color) et traits de caractères (cat_personnality)
 		et les critères de recherche correspondants + pattern recherchés */
 
 DROP TABLE IF EXISTS Breeds CASCADE;
@@ -57,11 +55,17 @@ CREATE TABLE IF NOT EXISTS Breeds(
        id_breed SERIAL PRIMARY KEY NOT NULL,
        name_breed VARCHAR NOT NULL
 	   );
-	   
+
 DROP TABLE IF EXISTS Colors CASCADE;
 CREATE TABLE IF NOT EXISTS Colors(
        id_color SERIAL PRIMARY KEY NOT NULL,
        name_color VARCHAR NOT NULL
+       );
+
+DROP TABLE IF EXISTS Patterns CASCADE;
+CREATE TABLE IF NOT EXISTS Patterns(
+       id_pattern SERIAL PRIMARY KEY NOT NULL,
+       name_pattern VARCHAR NOT NULL
        );
 
 DROP TABLE IF EXISTS Personality_traits CASCADE;
@@ -77,6 +81,15 @@ CREATE TABLE IF NOT EXISTS Cat_colors(
 		FOREIGN KEY (cat) REFERENCES Cats(id_cat),
 		FOREIGN KEY (color) REFERENCES Colors(id_color),
 		PRIMARY KEY (cat,color)
+		);
+
+DROP TABLE IF EXISTS Cat_patterns CASCADE;
+CREATE TABLE IF NOT EXISTS Cat_colors(
+		cat INTEGER,
+		pattern INTEGER,
+		FOREIGN KEY (cat) REFERENCES Cats(id_cat),
+		FOREIGN KEY (pattern) REFERENCES Patterns(id_pattern),
+		PRIMARY KEY (cat,pattern)
 		);
 
 DROP TABLE IF EXISTS Cat_breed CASCADE;
@@ -124,6 +137,14 @@ CREATE TABLE IF NOT EXISTS Searched_colors(
 		PRIMARY KEY(cat,color)
 		);
 
+DROP TABLE IF EXISTS Searched_patterns CASCADE;
+CREATE TABLE IF NOT EXISTS Searched_patterns(
+		cat INTEGER NOT NULL,
+		pattern type_pattern NOT NULL,
+		FOREIGN KEY (cat) REFERENCES Cats(id_cat),
+		PRIMARY KEY(cat,pattern)
+		);
+
 INSERT INTO Colors VALUES ('1','Noir');
 INSERT INTO Colors VALUES ('2','Bleu');
 INSERT INTO Colors VALUES ('3','Chocolat');
@@ -136,6 +157,17 @@ INSERT INTO Colors VALUES ('9','Blanc');
 INSERT INTO Colors VALUES ('10','Ambre');
 INSERT INTO Colors VALUES ('11','Ambre clair');
 INSERT INTO Colors VALUES ('12','Abricot');
+
+DROP TYPE IF EXISTS type_pattern CASCADE;
+CREATE TYPE type_pattern AS ENUM ('Solide','Tabby','Colourpoint','Bicolore','Ecaille de tortue','Calico','Mink','Sepia');
+INSERT INTO Patterns VALUES ('1','Solide');
+INSERT INTO Patterns VALUES ('2','Tabby');
+INSERT INTO Patterns VALUES ('3','Colourpoint');
+INSERT INTO Patterns VALUES ('4','Bicolore');
+INSERT INTO Patterns VALUES ('5','Ecaille de tortue');
+INSERT INTO Patterns VALUES ('6','Calico');
+INSERT INTO Patterns VALUES ('7','Mink');
+INSERT INTO Patterns VALUES ('8','Sepia');
 
 
 INSERT INTO Personality_traits VALUES('1','Malicieux');
@@ -196,6 +228,7 @@ INSERT INTO Searched_traits VALUES ('2','9');
 INSERT INTO Searched_breeds VALUES ('2','6');
 INSERT INTO Searched_breeds VALUES ('2','8');
 INSERT INTO Searched_colors VALUES ('2','1');
+INSERT INTO Searched_patterns VALUES ('2','Calico');
 
 INSERT INTO Cats VALUES ('3','3','Duchesse',FALSE,'Solide','2003-04-26','3',NULL, '1','0', '1','2',NULL, '2','1',NULL, '5','6','15');
 INSERT INTO Cat_colors VALUES ('3','9');
@@ -208,6 +241,7 @@ INSERT INTO Searched_breeds VALUES ('3','21');
 INSERT INTO Searched_breeds VALUES ('3','10');
 INSERT INTO Searched_colors VALUES ('3','3');
 INSERT INTO Searched_colors VALUES ('3','9');
+INSERT INTO Searched_patterns VALUES ('3','Colourpoint');
 
 INSERT INTO Cats VALUES ('4','1','Angel',FALSE,'Colourpoint','2009-05-16','7',NULL, '0','1', '4','1',NULL, '2','2',NULL, '5','6','15');
 INSERT INTO Cat_colors VALUES ('4','9');
@@ -216,6 +250,8 @@ INSERT INTO Cat_breed VALUES ('4','21');
 INSERT INTO Cat_personality VALUES ('4','1');
 INSERT INTO Cat_personality VALUES ('4','8');
 INSERT INTO Searched_traits VALUES ('4','2');
+INSERT INTO Searched_patterns VALUES ('4','Colourpoint');
+INSERT INTO Searched_patterns VALUES ('4','Solide');
 
 INSERT INTO Cats VALUES ('5','3','Marie',FALSE,'Ecaille de tortue','20013-07-27',NULL,'10', '1','0', '4',NULL,'3', '3','1',NULL, '15','4','12');
 INSERT INTO Cat_colors VALUES ('5','5');
@@ -226,6 +262,9 @@ INSERT INTO Cat_personality VALUES ('5','5');
 INSERT INTO Cat_personality VALUES ('5','4');
 INSERT INTO Cat_personality VALUES ('5','1');
 INSERT INTO Searched_traits VALUES ('5','9');
+INSERT INTO Searched_patterns VALUES ('5','Colourpoint');
+INSERT INTO Searched_patterns VALUES ('5','Solide');
+INSERT INTO Searched_patterns VALUES ('5','Bicolore');
 
 
 INSERT INTO Cats VALUES ('6','5','Winston',FALSE,'Tabby','2014-06-01',NULL,'3', '0','1', '2','0',2, '1','1',NULL, '4',NULL,'4');
@@ -237,3 +276,4 @@ INSERT INTO Cat_personality VALUES ('6','1');
 INSERT INTO Cat_personality VALUES ('6','2');
 INSERT INTO Cat_personality VALUES ('6','6');
 INSERT INTO Searched_traits VALUES ('6','7');
+INSERT INTO Searched_patterns VALUES ('6','Solide');
