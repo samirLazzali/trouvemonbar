@@ -7,6 +7,11 @@ class User
      * @var int
      */
     private $id;
+    
+   /**
+    * @var string
+    */
+    private $login;
 
     /**
      * @var string
@@ -26,12 +31,12 @@ class User
     /**
      * @var string
      */
-    private $password
+    private $password;
 
     /**
      * @var boolean
      */
-    private $administrateur
+    private $administrateur;
 
     /**
      * @return int
@@ -50,6 +55,24 @@ class User
         $this->id = $id;
         return $this;
     }
+    /**
+     * @return string
+     */
+    public function getLogin()
+    {
+        return $this->login;
+    }
+
+    /**
+     * @param string $login
+     * @return User
+     */
+    public function setFirstname($login)
+    {
+        $this->login = $login;
+        return $this;
+    }
+
 
     /**
      * @return string
