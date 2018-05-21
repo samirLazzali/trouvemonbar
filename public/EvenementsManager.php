@@ -80,9 +80,6 @@ class EvenementsManager
 				echo "EvenementsManager: categorie pas trouvée<br>";
 				return null;
 			}
-		}	
-		else {
-			echo "EvenementManager: getCategorie: pas de categorie<br>";
 		}
 	}
 
@@ -150,7 +147,7 @@ class EvenementsManager
 	function add (Evenement $e)
 	{
 		$table_participants = 'p'. random_int(0, 10000000000);
-		$all_attributs = ['organisateur', 'nom', 'description', 'lieu', 'date', 'before', 'prix', 'musique', 'categorie'];
+		$all_attributs = ['organisateur', 'nom', 'description', 'lieu', 'date', 'lieu_before', 'prix', 'musique', 'categorie'];
 		$liste_attributs;
 		$liste_valeurs;
 		foreach ($all_attributs as $attribut) {
@@ -172,30 +169,29 @@ class EvenementsManager
 			}
 		}
 
+
 		if ($valide) {
-			$r1 = $this->db->query('INSERT INTO Evenements (' . join(', ', $liste_attributs) . ") VALUES ('" . join("', '", $liste_valeurs) . "')");
-
+			$liste_attributs = join(', ', $liste_attributs);
+			$liste_valeurs = join("', '", $liste_valeurs);
+			$r1 = $this->db->query("INSERT INTO Evenements ($liste_attributs) VALUES ('$liste_valeurs')");
 			if ($r1){
-				echo "EvenementsManager: Evènement bien inséré <br>";
-			}
-			else {
-				echo "EvenementsManager: Erreur lors de l'insertion <br>";
-				echo "\nPDO::errorInfo():\n";
-				print_r($this->db->errorInfo());
-				echo "<br>";
-			}
 
-			$r2 = $this->db->query("CREATE TABLE $table_participants (id INT(10) PRIMARY KEY)");
+				$r2 = $this->db->query("CREATE TABLE $table_participants (id INT(10) PRIMARY KEY)");
 
-			
-			if ($r2){
-				echo "EvenementsManager: Table créée <br>";
+				if ($r2)
+					echo 	'<div class="alert alert-success">
+		  				<strong>Votre évènement a bien été créé ! </strong> 
+						</div>';
+				
+				else 
+					echo 	"<div class='alert alert-danger'>
+		  				<strong>Une erreur est survenue lors création de la table des participants</strong> 
+						$this->db->errorInfo())</div>";;
 			}
-			else {
-				echo "EvenementsManager: Erreur création table <br>";
-				echo "\nPDO::errorInfo():\n";
-				print_r($this->db->errorInfo());
-			}
+			else 
+				echo 	"<div class='alert alert-danger'>
+		  				<strong>Une erreur est survenue pendant la création de l'évènement</strong> 
+						$this->db->errorInfo())</div>";
 
 		}
 		else {

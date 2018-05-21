@@ -13,7 +13,7 @@ class Evenement
 	public $date;
 	public $date_creation;
 	public $date_modif;
-	public $before;
+	public $lieu_before;
 	public $prix;
 	public $musique;
 	public $categorie;
@@ -23,7 +23,8 @@ class Evenement
 	{
 		if ($donnees) {
 		foreach ($donnees as $attribut => $valeur) {
-			$this->$attribut = $valeur;
+			if (property_exists('Evenement', $attribut))
+				$this->$attribut = $valeur;
 		}
 	}
 	}

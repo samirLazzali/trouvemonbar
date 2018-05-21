@@ -1,4 +1,9 @@
-
+<?php
+function chargerClasse($classe) {
+  require $classe . '.php';
+}
+spl_autoload_register('chargerClasse');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,42 +18,25 @@
 	
 </head>
 <body style="margin= 0">
-
 	<?php include "upperBar.php";
-	$dbName = getenv('DB_NAME'); 
-	$dbUser = getenv('DB_USER'); 
-	$dbPassword = getenv('DB_PASSWORD'); 
-	$DB = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword"); 
+	$dbName = "projetWeb";
+	$dbUser = "root"; 
+	$dbPassword = "root"; 
+	$DB = new PDO("mysql:host=localhost;dbname=$dbName;charset=utf8", 'root', 'root');
 	?>
-
 	<div class="container">
+		<?php 
+			if (isset($_POST['creer_evenement'])) {
+				$eMan = new EvenementsManager($DB);
+				$eMan->add(new Evenement($_POST));
+			}
+		?>
 		<div class="row">
 
 			<div class="container col-md-9 col-xs-9">
-				<?php //include "Accueil_Contenu.php" ?>
-				<div>
-					<div class="float-right">11/03</div>
-					<h2 class="page-header"> Titre de l'évènement <br>
-						<small>le 13/05 à 15:00</small>
-					</h2>
-					
-					<p> Description sur qposdifjqpoisdjfpoqi dfpoiq dfopiqj dpfoiqj pdoifjq podifjq podifj qpoidfj qpoidjf qpoidfj qpoidjf qpodijf qpoidjf qpoidjf qdspoif jqpodifjmqzijmirj amoeirj ... </p>
-					
-					<p class="text-right text-primary" href="#">11 participants</p>
-
-				</div>
-				<hr>
-				<div>
-					<div class="float-right">11/03</div>
-					<h2 class="page-header"> Titre de l'évènement </h2>
-					
-					<p> Description sur qposdifjqpoisdjfpoqi dfpoiq dfopiqj dpfoiqj pdoifjq podifjq podifj qpoidfj qpoidjf qpoidfj qpoidjf qpodijf qpoidjf qpoidjf qdspoif jqpodifjmqzijmirj amoeirj ... </p>
-					<p class="text-right text-primary">11 participants</p>
-
-				</div>
-				<hr>
+				<?php include "Accueil_contenu.php" ?>
 			</div>
-
+				
 			<div class="container col-md-3 col-xs-3">
 				<?php include "Categories.php" ?>
 			</div>
