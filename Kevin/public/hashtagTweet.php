@@ -8,19 +8,21 @@ require_once 'Modele.php';
 
 if (isset($_POST['hashtag'])){
     $hashtag = $_POST['hashtag'];
+    $_SESSION['hashtag'] = $hashtag;
 }
 else if (isset($_GET['hashtag'])){
     $hashtag = $_GET['hashtag'];
+    $_SESSION['hashtag'] = $hashtag;
 }
 else {
-    affiche_erreur("Erreur");
+    $hashtag=$_SESSION['hashtag'];
 }
 
-
-if($hashtag[0]=='#'){
-    $hashtag = substr($hashtag, 1);
+if ($hashtag != ""){
+    if($hashtag[0]=='#'){
+        $hashtag = substr($hashtag, 1);
+    }
 }
-
 $hashtag_id = getHashtagId($hashtag);
 
 ?>

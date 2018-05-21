@@ -45,6 +45,31 @@ form{
 	border-radius: 0px 0px 10px 10px;
 }
 
+
+
+.styleButton{
+    padding : 5px 15px;
+    background-color: var(--primary);
+    border : 0px;
+    color : white;
+    border-radius: 20px 8px 20px 8px;
+    font-size : 18px;
+    cursor: pointer; /* Pour avoir un bouton cliquable (souris change de forme)*/
+}
+.styleButton:hover{
+    background-color: var(--secondary);
+    color : white;
+}
+
+
+
+/************ INSCRIPTION ****************/
+.inscription {
+    line-height: 200%;
+}
+
+
+
 #recherches{
 	display : table;
 }
@@ -161,8 +186,8 @@ form{
 
 .amis a:hover{
 	color: var(--secondary);
-	
 }
+
 .writetweetstext{
   
  /* position: absolute;  postulat de départ
@@ -259,8 +284,6 @@ footer{
 h1{
     text-align: center;
 }
-
-
 
 
 

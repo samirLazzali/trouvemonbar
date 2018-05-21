@@ -10,12 +10,18 @@ namespace Hashtag;
 
 class Hashtag
 {
+    /**
+     * @var int
+     */
     private $id;
 
+    /**
+     * @var string
+     */
     private $mot;
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -23,7 +29,8 @@ class Hashtag
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
+     * @return Hashtag
      */
     public function setId($id)
     {
@@ -32,7 +39,7 @@ class Hashtag
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getMot()
     {
@@ -41,7 +48,8 @@ class Hashtag
     }
 
     /**
-     * @param mixed $mot
+     * @param string $mot
+     * @return Hashtag
      */
     public function setMot($mot)
     {

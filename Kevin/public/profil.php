@@ -63,8 +63,15 @@ else if($id!=$_SESSION['id']){
     print "<input  type='submit' value='Supprimer' onclick='alert(\"Ami supprimé !\");'>";
     print "</form>";
     print "</div>";
-
-
+}
+else if ($id==$_SESSION['id']){
+    print "<div class=\"informations\">";
+    print "Nombre d'amis : ";
+    echo getNbAmis($id);
+    print " Nombre de tweets : ";
+    echo getNbTweet($id);
+    print "<br/>";
+    print "</div>";
 }
 
 if(!empty($pseudo)){

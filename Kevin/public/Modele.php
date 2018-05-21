@@ -34,6 +34,14 @@ $messages = $messageRepository->fetchAll();*/
 date_default_timezone_set('Europe/Paris');
 
 
+function config($login,$nom, $prenom, $id, $admin) {
+   // session_start();
+    $_SESSION['login'] = $login;
+    $_SESSION['admin'] = $admin;
+    $_SESSION['nom'] = $nom;
+    $_SESSION['prénom'] = $prenom;
+    $_SESSION['id'] = $id;
+}
 
 
 /* Fonction pour recuperer le prenom de quelqu'un */
@@ -56,6 +64,19 @@ function idUser($pseudo){
     $result = $sth->fetch(PDO::FETCH_OBJ);
     return $result->id;
 }
+
+
+function idUserLogin($login){
+    global $connection;
+    $sth = $connection->prepare('SELECT * FROM "user" WHERE login=\''.$login.'\';');
+    $sth->execute();
+    if ($sth->rowCount() == 0){
+        return FALSE;
+    }
+    $result = $sth->fetch(PDO::FETCH_OBJ);
+    return $result->id;
+}
+
 
 function get_friendList($id){
     global $connection;

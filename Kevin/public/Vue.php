@@ -2,12 +2,41 @@
 
 //session_start();
 
-$prenom = $_SESSION['prénom'];
-$id = $_SESSION['id'];
 
 /* Recupération des users*/
 //require_once '../vendor/autoload.php';
 require_once 'Modele.php';
+
+function enTeteConnexion($titre, $style){
+    print "<!DOCTYPE html>\n";
+    print "<html>\n";
+    print "  <head>\n";
+    print "    <meta charset=\"utf-8\" />\n";
+    print "    <title>$titre</title>\n";
+    print "    <link rel=\"stylesheet\" href=\"$style\"/>\n";
+    print "  </head>\n";
+
+    print "  <body>\n";
+
+    print "<nav id=\"fontmenu\">\n";
+    print "<ul id=\"menu\">\n";
+    print "    <li>\n";
+    print "        <span class=\"nomsite\">twitIIE</span>\n";
+    print "    </li>\n";
+    print "    <li>\n";
+    print "        <a href=\"Connexion.php\">\n";
+    print "         Connexion\n";
+    print "        </a>\n";
+    print "    </li>\n";
+    print "    <li>\n";
+    print "        <a href=\"Inscription.php\">\n";
+    print "         Inscription\n";
+    print "        </a>\n";
+    print "    </li>\n";
+    print "</nav>\n";
+    print "<h1>$titre</h1>\n";
+
+}
 
 function enTete($titre, $style)
 {
@@ -59,7 +88,8 @@ function titreH1($titre){
  *  Affiche le menu navigation
  */
 function afficheMenu(){
-    global $prenom;
+
+    $prenom = $_SESSION['prénom'];
     print "<nav id=\"fontmenu\">\n";
     print "<ul id=\"menu\">\n";
     print "    <li>\n";
@@ -76,7 +106,7 @@ function afficheMenu(){
     print "         </a>\n";
     print "    </li>\n";
     print "    <li>\n";
-    print "        <a href=\"edition.php?pseudo=$prenom\">\n";
+    print "        <a href=\"Modifier_profil.php\">\n";
     print "        Edition profil <img src=\"icones/editionprofil.png\" alt=\"edition_profil\"/>\n";
     print "        </a>\n";
     print "    </li>\n";
@@ -93,8 +123,6 @@ function afficheMenu(){
     print "</ul>\n";
     print "</nav>\n";
 }
-
-
 
 
 /* Fonctions pour messages */

@@ -27,13 +27,24 @@ class TweetManager{
     }
 
     public function delete(Tweet $tweet){
-        $this->db->exec('DELETE FROM "tweet" WHERE id = '.$tweet->getId());
+        $req = 'DELETE FROM "like" WHERE tweet_id=\''.$tweet->getId().'\'';
+        $this->db->exec($req);
+
+        $req = 'DELETE FROM "hashtagEtTweet" WHERE id_tweet=\''.$tweet->getId().'\'';
+        $this->db->exec($req);
+
+        $req = 'DELETE FROM "commentaire" WHERE parent_id=\''.$tweet->getId().'\' AND parent_type=\'tweet\'';
+        $this->db->exec($req);
+
+        $req = 'DELETE FROM "tweet" WHERE id=\''.$tweet->getId().'\'';
+        $this->db->exec($req);
+        return $req;
     }
 
     public function update(Tweet $twe){
         $req = $this->db->prepare('UPDATE "tweet" 
-                                    SET auteur = :auteur, date_envoie = :date_envoie, contenu = :contenu 
-                                    WHERE id = :id');
+                                    SET auteur=:auteur, date_envoie=:date_envoie, contenu=:contenu 
+                                    WHERE id=:id');
 
         $req->bindValue(':auteur', $twe->getAuteur());
         $req->bindValue(':date_envoie', date_format($twe->getDate(),"Y-m-d H:i:s"));

@@ -1,21 +1,6 @@
 <?php
 session_start();
 
-
-
-
-function config() {
-    $_SESSION['admin'] = "TRUE";
-
-    $_SESSION['nom'] = "King";
-    $_SESSION['prénom'] = "Jaime";
-    $_SESSION['id'] = 7;
-    $_SESSION['birthday'] = "1967-11-22";
-    $_SESSION['mdp'] = '123';
-}
-
-config();
-
 require '../vendor/autoload.php';
 require_once 'Vue.php';
 

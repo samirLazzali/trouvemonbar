@@ -33,47 +33,10 @@ $msg1->setRecepteur($users['1']->getFirstname());
 $msg1->setDate(new DateTime);
 $msg1->setContenu("Bonjour, comment tu vas?");
 
-
-
-/*foreach ($users as $user) :
-	echo '<p>'.$user->getId().' ';
-	echo $user->getFirstname().' ';
-	echo $user->getLastname().' ';
-	echo $user->getAge().' years'.'</p>';
-endforeach;*/
-
-/*
-foreach ($messages as $message) :
-	affiche_message($message);
-endforeach;
-
-*/
-
-//affiche_message($msg1);
-
-
-
-
-//$msgManager->add($msg1);
-
-/* MESSAGE MANAGER */
-//$msgManager = new \Message\MessageManager($connection);
-
-
-
-
-/************** VUE *****************/
-
-
-
-
-
-
-
 ?>
 
 <script>
-	function Conversation(){ /* PAS BON : FAIRE avec AJAX */
+	function Conversation(){
 		var xhttp;
 		xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
@@ -99,7 +62,6 @@ endforeach;
 	function EnvoiMessage(){
 		var Champ = document.getElementById("sendField");
 		var Msg = Champ.value;
-//console.log("test");
 
 		var xhttp;
 		if (Msg.length == 0) { 
@@ -121,39 +83,14 @@ endforeach;
 </script>
 
 
-<!-- <nav id="fontmenu">
-    <ul id="menu">
-        <li>
-            <span class="nomsite">Twitiie</span>
-        </li>
-        <li>
-            <a href="../accueil.php">Accueil</a>
-        </li>
-        <li>
-            <a href=<?php //echo "../edition.php?pseudo=".$_SESSION['prénom'] ?>>Mon Profil</a>
-        </li>
-        <li>
-            <a href="Msg_Ecrire.php">Message</a></br>
-
-        </li>
-    </ul>
-</nav>
--->
-
 <?php
     enTete("Mes messages", "../CSS/style.css");
-
     afficheMenu();
     titreH1("Mes messages privés");
-
 ?>
 
 
-
 <div class="conteneur_chat">
-
-
-
 <div class="chat_liste_amis">
     <?php
         listeDiscussion(get_friendList($id));
@@ -179,10 +116,7 @@ endforeach;
 </div>
 
 
-
-<!-- <a href="../accueil.php?idLike=2">Retour à l'accueil</a><br> -->
 <?php
-
 pied();
 ?>
 
