@@ -169,6 +169,49 @@ class UserRepository
 
 
 	    }
+	    if ($postoldmdp!=null || $postnewmdp!=null || $postnewmdpverif!=null)
+	    {
+		    if ($postoldmdp!=null && $postnewmdp!=null  && $postnewmdpverif!=null)
+		    {
+			    //Acquisition des données
+
+			    $oldmdp = htmlspecialchars(md5($postoldmdp)) ;  
+			    $newmdp = htmlspecialchars(md5($postnewmdp)) ;  
+			    $newmdpverif = htmlspecialchars(md5($postnewmdpverif)) ;  
+			    $query=$this->connection->prepare('SELECT mdp FROM "user" WHERE nickname = :pseudo');
+			    $mdp=$query->execute(array(':pseudo'=> $_SESSION['pseudo']));
+
+
+			    //Vérif Mdp
+
+			    if ($oldmdp == $mdp)
+			    {
+				    if ($newmdp == $newmdpverif)
+				    {
+					    $req=$this->connection->prepare('UPDATE "user" SET mdp = :new WHERE nickname = :old');
+					    $req->execute(array(':new' => $newmdp,':old' => $_SESSION['pseudo']));
+					    echo "<center>Le mot de passe a bien été modifié ! </center>";
+
+				    }
+				    else
+				    {
+					    echo "<center><p class=\"alert\">Le mot de passe n'a pas pu être changé : Les mots de passe entrés sont différents !</p></center>";
+
+				    }
+			    }
+			    else
+			    {
+				    echo "<center><p class=\"alert\">Le mot de passe n'a pas pu être changé : Mauvais mot de passe !</p></center>";
+			    }
+			    
+
+		    }
+		    else
+		    {
+			     echo "<center><p class=\"alert\">Vous n'avez pas rempli tous les champs nécessaire à la modification du mot de passe !</p></center>";
+
+		    }
+	    }
 
 
 

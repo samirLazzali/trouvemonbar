@@ -17,7 +17,7 @@
 --
 -- Structure de la table `categories`
 --
-DROP TABLE IF EXISTS "user","Evenements","Musique","Type","Groupe";
+DROP TABLE IF EXISTS "user","evenements","musiques","Type","Groupe";
 
 CREATE TABLE categories (
   id int NOT NULL,

@@ -42,7 +42,9 @@ if (!empty($_POST)){
 
 <center><h2>Gestion des informations du compte</h2></br>
 
+<a href="./deconnexion.php"/><input type="button" value="Se deconnecter"></a><br/></br>
 <?php
+
 echo '<p><b>Votre pseudo :&nbsp;&nbsp; '.$_SESSION['pseudo']. '</b></p>'
 ?>
 

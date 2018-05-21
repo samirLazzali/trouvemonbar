@@ -16,28 +16,33 @@ if (!empty($_POST)){
 
 <html>
 <head>
+
 <link rel="stylesheet" href="connexion.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="main.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
 <title>Connexion</title>
 
 </head>
 <body>
+<?php include "upperBar.php" ?>
 
-<h2>Connexion</h2>
+<center><h2>Connexion</h2></center>
 
+<br/>
 <form action="connexion.php" method="post">
   <div class="container">
     <label for="uname"><b>Pseudo</b></label><br/>
-    <input type="text" placeholder="Entrez votre pseudo" name="uname" required>
-	<br/>
-    <br/>
+    <center><input type="text" placeholder="Entrez votre pseudo" name="uname" required></center>
+    
     <label for="psw"><b>Mot de passe</b></label><br/>
-    <input type="password" placeholder="Entrez votre mot de passe" name="psw" required>
+    <center><input type="password" placeholder="Entrez votre mot de passe" name="psw" required></center>
     <br/><br/>
-    <button type="submit">Login</button>
+    <center><button type="submit">Login</button></center>
   </div>
 </form>
 
-<center><p>Pas encore inscrit ? <a href="inscription.php" style=color:dodgerblue>Inscrivez-vous !</a></p></center>
+<br/><center><p>Pas encore inscrit ? <a href="inscription.php" style=color:dodgerblue>Inscrivez-vous !</a></p></center>
 
 </body>
 </html>

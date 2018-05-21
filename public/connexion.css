@@ -1,13 +1,13 @@
 body {font-family: Arial, Helvetica, sans-serif;}
 
-h2 { margin: 12px 45%;}
+h2 { margin: 12px ;}
 
 label { margin: 8px 33%;}
 
 input[type=text], input[type=password] {
     width: 33%;
 	padding: 12px 20px;
-	margin: 8px 33%;
+	margin: 0px 33%;
 	display: inline-block;
 	border: 1px solid #ccc;
 	box-sizing: border-box;
@@ -20,7 +20,7 @@ input[type=text]:focus, input[type=password]:focus {
 }
 
 button {
-    background-color: #1E90FF;
+    background-color: #333333 /*#1E90FF*/;
     color: white;
 	padding: 14px 20px;
     margin: 8px 33%;
