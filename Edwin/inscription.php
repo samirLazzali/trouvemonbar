@@ -1,5 +1,6 @@
 <?php
 require '../vendor/autoload.php';
+require_once 'Modele.php';
 // on teste si le visiteur a soumis le formulaire
 if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription') {
 	// on teste l'existence de nos variables. On teste également si elles ne sont pas vides
@@ -21,18 +22,18 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription') {
 	}
 
 		// on recherche si ce login est déjà utilisé par un autre membre
-		$sql = $connection->prepare('SELECT count(*) FROM "user" WHERE login=?');
+		$sql = $connection->prepare('SELECT count(*) as nb FROM "user" WHERE login=?');
 		$sql->execute(array($_POST['login']));
-    	$result = $sql->fetch_assoc(PDO::FETCH_OBJ);
+    	$result = $sql->fetch(\PDO::FETCH_OBJ);
 		
 
-		if ($result[0] == 0) {
+		if ($result->nb == 0) {
 			$userManager = new User\userManager($connection);
 			$user = new User\User();
 			$user->setLogin($_POST['login'])
 				->setFirstname($_POST['firstname'])
 				->setLastname($_POST['lastname'])
-				->setBirthday($_POST['bday'])
+				->setBirthday(new \Datetime($_POST['bday']))
 				->setPassword($_POST['password'])
 				->setAdministrateur(false);
 
