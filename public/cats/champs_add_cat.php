@@ -6,11 +6,6 @@ include('../includes/config.php');
 
 include('../includes/functions.php');
 actualiser_session();
-if(isset($_SESSION['id_user']))
-{
-	header('Location: '.ROOTPATH.'/index.php');
-	exit();
-}
 
 $_SESSION['erreurs'] = 0;
 if(isset($_POST['name']))
@@ -27,6 +22,7 @@ if(isset($_POST['name']))
 		$_SESSION['name_info'] = '';
 		$_SESSION['form_name'] = $name;
 	}
+	echo $name;
 }
 
 else
@@ -41,12 +37,24 @@ if(isset($_POST['pattern']))
 {
 	$password = trim($_POST['pattern']);
 	$_SESSION['form_pattern'] = $pattern;
+	echo $pattern;
 }
+
 
 else
 {
 	header('Location: ../index.php');
 	exit();
+}
+
+if(isset($_POST['purity']))
+{
+	$purity = trim($_POST['purity']);
+	if ($purity != true) {
+	   $purity = false;
+	   }
+	$_SESSION['form_purity']=$purity;
+	   
 }
 
 if(isset($_POST['birthdate']))
@@ -110,12 +118,19 @@ include('../includes/top.php');?>
 				$dbUser = getenv('DB_USER');
 				$dbPassword = getenv('DB_PASSWORD');
 				$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-				if($connexion->exec("INSERT INTO Cats VALUES(NULL,'$_SESSION['id_user']', '".$connexion->quote($name)."','".$connexion->quote($birthdate)."',NULL,NULL,
-				'".$connexion->quote($sexe)."','".$connexion->quote($ssexe)."','".$connexion->quote($coat)."',NULL,NULL,'".$connexion->quote($weight)."',NULL,NULL)"))
+				$retour = $connexion->query("SELECT max(id_cat) AS max_id FROM cats");
+				$fetch = $retour -> fetch(PDO::FETCH_OBJ);
+				
+				echo "INSERT INTO Cats VALUES(".$connexion->quote($fetch->max_id+1).",$_SESSION['id_user'],".$connexion->quote($name).",
+				".$connexion->quote($purity).",".$connexion->quote($birthdate).",NULL,NULL,,".$connexion->quote($size).",NULL,NULL,
+				".$connexion->quote($sexe).",".$connexion->quote($ssexe).",".$connexion->quote($coat).",NULL,NULL,".$connexion->quote($weight).",NULL,NULL)";
+				
+				if($connexion->exec("INSERT INTO Cats VALUES(".$connexion->quote($fetch->max_id+1).",'$_SESSION['id_user']',".$connexion->quote($name).",
+				".$connexion->quote($purity).",".$connexion->quote($birthdate).",NULL,NULL,,".$connexion->quote($size).",NULL,NULL,
+				".$connexion->quote($sexe).",".$connexion->quote($ssexe).",".$connexion->quote($coat).",NULL,NULL,".$connexion->quote($weight).",NULL,NULL)"))
 				{
 					$queries++;
 					empty_session();
-					$_SESSION['inscrit'] = $login;
 				?>
 				<h1>Chat enregistré !</h1>
 				<?php

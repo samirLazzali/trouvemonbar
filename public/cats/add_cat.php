@@ -37,7 +37,7 @@ include('../includes/top.php');
 					
 					<tr>
 					<td><label for="purity" class="float">Chat pur sang</label></td>
-					<td><input type="checkbox" name="purity" id="purity" /></td>
+					<td><input type="checkbox" name="purity" id="purity" value="true"/></td>
 					</tr>
 					
 					<tr>
