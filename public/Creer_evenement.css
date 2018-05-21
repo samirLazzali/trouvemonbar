@@ -13,7 +13,7 @@ form#event {
 form#event text{
     width:100%;
 }
-/*form#event text {
+form#event text {
   background: #1f3954;
   border: none;
   -moz-border-radius: 3px;
@@ -24,7 +24,8 @@ form#event text{
   outline: none;
   padding: 5px;
   width: 200px;
-}*/
+}
+
 form#event label{
 
     border-radius: 3px;
@@ -50,7 +51,7 @@ form#event submit{
     border-radius:50%;
     color:#555;
     
-}
+}*/
 /*
 form#retour_accueil {
     width:85px;
@@ -94,7 +95,7 @@ input[type=button]{
     margin: 8px ;
 	border: none;
     cursor: pointer;
-    width: 30%;
+    width: 15%;
     text-align:center;
     
 }
@@ -105,8 +106,8 @@ button:hover {
 
 h2{margin: 12px;}
 
-.alert {
-	color : red;
-	font-weight: bold;
-}
 
+
+.events{
+    width:100%;
+}
