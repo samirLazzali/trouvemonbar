@@ -235,7 +235,7 @@ class UserRepository
     }
 
 
-    public function creer_evenement($postnom,$postdate,$postlieu,$postbefore,$postprix,$postimage)
+    public function creer_evenement($postnom,$postdate,$postlieu,$postbefore,$postprix,$postimage,$postdescription)
     {
 	    $nom = htmlspecialchars($postnom) ; 
 	    $date = htmlspecialchars($postdate) ; 
@@ -243,15 +243,16 @@ class UserRepository
 	    $before = htmlspecialchars($postbefore) ; 
 	    $prix = htmlspecialchars($postprix) ; 
 	    $image = htmlspecialchars($postimage) ;
-	    echo "$image";
+	    $description = htmlspecialchars($postdescription) ;
 	    $organisateur = $_SESSION['pseudo'] ;
 	    $date_creation = date('Y-m-d');
 
-	    $req=$this->connection->prepare('INSERT INTO evenements(organisateur,nom,lieu,date,date_creation,before,prix) VALUES (:orga,:nom,:lieu,:date,:date_crea,:before,:prix)');
+	    $req=$this->connection->prepare('INSERT INTO evenements(organisateur,nom,description,lieu,date,date_creation,before,prix) VALUES (:orga,:nom,:description,:lieu,:date,:date_crea,:before,:prix)');
 				
             $req->execute(array(
                      ':orga' => $organisateur,
-                     ':nom' => $nom,
+		     ':nom' => $nom,
+		     ':description' => $description ,
 		     ':lieu' => $lieu,
 		     ':date' => $date,
 		     ':date_crea' => $date_creation,

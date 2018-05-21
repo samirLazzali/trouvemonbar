@@ -57,9 +57,9 @@ CREATE TABLE evenements (
 -- Déchargement des données de la table `evenements`
 --
 
-/*INSERT INTO evenements (id, organisateur, nom, description, lieu, date, date_creation, date_modif, before, prix, musique, categorie, table_participants) VALUES
-(4, 1, 'First Event', NULL, 'Chez moi', '2018-05-08', '2018-05-08', NULL, NULL, 0, NULL, 1, 'participants3897910314'),
-(5, 1, 'First Event', NULL, 'Chez moi', '2018-05-09', '2018-05-09', NULL, NULL, 0, NULL, 1, 'p2411932048');*/
+INSERT INTO evenements (id, organisateur, nom, description, lieu, date, date_creation, date_modif, before, prix, musique, categorie, table_participants) VALUES
+(4, 'Feuj', 'First Event', NULL, 'Chez moi', '2018-05-08', '2018-05-08', NULL, NULL, 0, NULL, 1, 'participants3897910314'),
+(5, 'Feuj', 'First Event', NULL, 'Chez moi', '2018-05-09', '2018-05-09', NULL, NULL, 0, NULL, 1, 'p2411932048');
 
 -- --------------------------------------------------------
 

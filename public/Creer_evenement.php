@@ -8,7 +8,7 @@ $dbPassword = getenv('DB_PASSWORD');
 $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 $userRepository = new \User\UserRepository($connection);
 if (!empty($_POST)){
-	$userRepository->creer_evenement($_POST['nom_event'],$_POST['date_event'],$_POST['lieu_event'],$_POST['before'],$_POST['prix'],$_POST['image']);
+	$userRepository->creer_evenement($_POST['nom_event'],$_POST['date_event'],$_POST['lieu_event'],$_POST['before'],$_POST['prix'],$_POST['image'],$_POST['description']);
 }
 
 ?>
@@ -34,6 +34,9 @@ if (!empty($_POST)){
 		   <br/>
 	     	   <input type="text" class="events" name="nom_event" style="width:100%;"required/>
 		   <br/>
+		   <br/>
+		   <label for="description"><b>Une petite description ?</b></label>
+		   <textarea name="description" cols="35" rows="3"></textarea>
 		   <br/>
 		   <label for="date_event"><b>Quand?</b></label>
 		   <br/>
