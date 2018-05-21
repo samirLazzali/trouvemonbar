@@ -113,7 +113,7 @@ class EvenementsManager
 	function getFirsts ($nb_evenements, $id_categorie = null) 
 	{
 		$query = $this->db->query('SELECT * FROM Evenements' . $this->queryCategorie($id_categorie, 'WHERE') . "ORDER BY date LIMIT $nb_evenements");
-		$tableau_evenements;
+		$tableau_evenements = [];
 		while ($resultat = $query->fetch()) 
 		{
 			$tableau_evenements[] = new Evenement($resultat);
@@ -192,12 +192,12 @@ class EvenementsManager
 				else 
 					echo 	"<div class='alert alert-danger'>
 		  				<strong>Une erreur est survenue lors création de la table des participants</strong> 
-						$this->db->errorInfo())</div>";;
+						</div>";;
 			}
 			else 
 				echo 	"<div class='alert alert-danger'>
 		  				<strong>Une erreur est survenue pendant la création de l'évènement</strong> 
-						$this->db->errorInfo())</div>";
+						</div>";
 
 		}
 		else {
