@@ -243,7 +243,8 @@ function article_recette(){
             echo "</br>";
         }
         if ($rec=="Pizza") {
-            echo "Dérouler la pâte à pizza puis disposer successivement sur celle-ci jambon, sauce tomate et gruyère." ;
+            echo "Dérouler la pâte à pizza puis disposer successivement sur celle-ci jambon, sauce tomate et gruyère. 
+            Puis enfournez 30 minutes à 210°" ;
             echo "</br>";
         }
         if ($rec=="feuillete_saucisse") {
@@ -258,7 +259,7 @@ function article_recette(){
             echo "</br>";
         }
         if ($rec=="Roules_jambon_StMoret") {
-            echo "Étaler le StMoret sur les tranches de jambon puis roulez celles-ci en formes de boudin. Coupez les enfin 
+            echo "Étaler le StMoret sur les tranches de jambon puis roulez celles-ci en formes de boudin. Coupez les enfin en
             6 afin de réaliser plusieurs bouchées.";
             echo "</br>";
         }
