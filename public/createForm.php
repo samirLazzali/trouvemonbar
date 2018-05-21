@@ -22,7 +22,7 @@ dispSidebar();
 ?>
 
 <div class="main">
-    <h2>Créer une annonce</h2>
+    <h2><?php print (isset($_GET['edit']) && $_GET['edit']?"Modifier":"Créer"); ?> une annonce</h2>
     <div class="annonce">
 <?php ($idToGet!=-1?displayFormCreate($annonce):displayFormCreate()); ?>
     </div>

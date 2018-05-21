@@ -1,4 +1,6 @@
 <?php
+include("tags.php");
+
 class Annonce {
     public $id;
     public $title;
@@ -12,10 +14,6 @@ class Annonce {
     public $paiement;
     public $service;
     public $isOffer;
-
-    public function getId() {
-	return $this->id;
-    }
 
     public function display() {
 	print "<div class=annonce id=a$this->id>";
@@ -193,6 +191,17 @@ class Annonce {
 	Annonce::modAnnonces("DELETE FROM annonce WHERE id=$id");
     }
 
+    public static function getId($annonce) {
+	if (isset($annonce->id))
+	    return $annonce->id;
+
+	$connection = dbConnect();
+	$query = "SELECT id FROM annonce WHERE postdate = " . $connection->quote($annonce->date) . ";";
+	$res = dbQuery($connection, $query);
+
+	return $res[0]->id;
+    }
+
     public function sendToDb() {
 	$connection = dbConnect();
 	$opId = Annonce::usernameToUid($connection, $this->op);
@@ -210,7 +219,14 @@ class Annonce {
 
 	    );";
 
-	return dbExec($connection, $query);
+	dbExec($connection, $query);
+
+	foreach ($this->tagArray as $tag) {
+	    $aid = Annonce::getId($this);
+	    $tid = Tags::getId($tag);
+	    $query = "INSERT INTO links VALUES ($aid, $tid);";
+	    dbExec($connection, $query);
+	}
     }
 
     public function updateDb() {
@@ -229,7 +245,15 @@ class Annonce {
 	    service = " . $connection->quote($this->service) . " WHERE id=$this->id; ";
 
 	//print $query;
-	return dbExec($connection, $query);
+	dbExec($connection, $query);
+	Tags::resetTags($this->id);
+
+	foreach ($this->tagArray as $tag) {
+	    $aid = Annonce::getId($this);
+	    $tid = Tags::getId($tag);
+	    $query = "INSERT INTO links VALUES ($aid, $tid);";
+	    dbExec($connection, $query);
+	}
     }
 
     public static function annonceFromPost($op) {
@@ -269,14 +293,11 @@ class Annonce {
 	    if (isset($_POST["annoncemodule".$sem])) $annonce->setModule($_POST["annoncemodule".$sem]);
 	    else $annonce->setModule('NULL');
 
-	} else {
+	} else
 	    $annonce->setSemestre('NULL');
-	}
 
-
-	if (isset($_POST['annoncepayamount']) && $_POST['annoncepayamount'] != "") {
-	    $annonce->setPaiement($_POST['annoncepayamount']);
-	} else {
+	if (isset($_POST['annoncepayamount']) && $_POST['annoncepayamount'] != "") $annonce->setPaiement($_POST['annoncepayamount']);
+	else {
 	    $annonce->setPaiement(0);
 	}
 
@@ -285,6 +306,11 @@ class Annonce {
 	} else {
 	    $annonce->setService('NULL');
 	}
+
+	if (isset($_POST['annoncetags']))
+	    $annonce->stringToTags($_POST['annoncetags']);
+	else
+	    $annonce->tagArray = array();
 
 	return $annonce;
     }
@@ -331,6 +357,15 @@ class Annonce {
 	    $str = substr($str, 0, -1);
 
 	return $str;
+    }
+
+    public function stringToTags($str) {
+	$li = explode(" ", $str);
+	$this->tagArray = array();
+
+	foreach ($li as $tag)
+	    if ($tag != "")
+		$this->tagArray[] = $tag;
     }
 }
 
