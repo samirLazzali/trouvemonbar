@@ -30,5 +30,13 @@ $users = $userRepository->fetchAll();
 <br />
 <br />
 <br />
+Avis à toi, futur soûlard, si jamais tu veux venir faire un petit tour à la maison, on t’a
+réservé du blanc, du rouge, et même du saucisson, tu pourras y croiser Gillou avec
+son p’tit accordéon, et on profitera des bouteilles, des copains et des chansons !
+Que tu aimes les vins soyeux, souples, moelleux, fruités ou gouleyants, obséquieux,
+nobles, rocambolesques, généreux, distingués, avec de la cuisse, volontaires,
+onctueux, rondelets, corrélés, bourrus, redondants, biaisés, binaires, fougueux, exotiques,
+astringents ou capiteux, tu trouveras forcément ton bonheur à OenologIIE,
+alors n’hésite pas à venir picoler un petit pinard avec nous entre deux cours !
 <img src="images/oenologie.png" alt="Logo Apéral" height="200" width="200">
 
