@@ -19,10 +19,10 @@ spl_autoload_register('chargerClasse');
 </head>
 <body style="margin= 0">
 	<?php include "upperBar.php";
-	$dbName = "projetWeb";
-	$dbUser = "root"; 
-	$dbPassword = "root"; 
-	$DB = new PDO("mysql:host=localhost;dbname=$dbName;charset=utf8", 'root', 'root');
+	$dbName = getenv('DB_NAME'); 
+	$dbUser = getenv('DB_USER'); 
+	$dbPassword = getenv('DB_PASSWORD'); 
+	$DB = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 	?>
 	<div class="container">
 		<?php 
