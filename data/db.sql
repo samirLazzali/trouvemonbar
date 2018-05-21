@@ -135,11 +135,23 @@ id_rec INTEGER PRIMARY KEY,
 recettes varchar(100)
 );
 
+CREATE TABLE public."liste_vins"(
+    id_vin INTEGER PRIMARY KEY,
+    nom varchar(100)
+);
+
 CREATE TABLE public."note"(
 note INTEGER,
 id_rec INTEGER,
 id_vente INTEGER PRIMARY KEY,
 id_usr INTEGER
+);
+
+CREATE TABLE public."note_vins"(
+    note_vins INTEGER,
+    id_vin INTEGER,
+    id_vote INTEGER PRIMARY KEY,
+    id_usr INTEGER
 );
 
 CREATE TABLE public."participants_course"(

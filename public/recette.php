@@ -20,7 +20,7 @@ $users = $userRepository->fetchAll();
     <link rel="stylesheet" type="text/css"  href="style_index.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
-
+    <link rel="stylesheet" href="css/form.css">
 </head>
 <body>
 
@@ -28,7 +28,9 @@ $users = $userRepository->fetchAll();
 menu_aperal();
 ?>
 
-</div>
+<br />
+<br />
+<br />
 <h3><?php echo 'Recettes' ?></h3>
 
     <table class="table table-bordered table-hover table-striped">
@@ -73,13 +75,21 @@ menu_aperal();
 ?>
     </table>
     <?php 
+    echo '<div class="gtco-container">';
+
+    echo '<div class="form-c">';
+    echo '<div class="form-c-head">Noter une recette :</div>';
+    echo '<form method = "post" action="#">';
+    echo '<label for="recette"><span class="txt">ID de la Recette <span class="required">*</span></span><input type="text" class="input-field" name="id" /></label>';
+    echo '<label for="note"><span class="txt">Note <span class="required">*</span></span><input type="number" class="input-field" name="note" min=0 max=5 /></label>';
+    echo '<input type ="submit" name="submit" value="Noter"/>';
     echo '</form>';
-    echo '</br>';
-    echo '<h1>Donnez une note</h1>';
-    echo '<form method="post" action="#">';
-    echo '    <fieldset><legend>Id de la Recette </legend><input type ="number" name="recette" /></fieldset>';
-    echo '    <fieldset><legend>Note </legend><input type ="number" name="note" min=0 max=5 /></fieldset>';
-    echo '   <input type ="submit" name="submit" value="Votez"/>';
-    echo '</form>';
-  
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+
+
+    ?>
+  </body>
+
 

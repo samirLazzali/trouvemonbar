@@ -57,23 +57,18 @@ menu_navigation();
 
 <h3>Prochaine réunion</h3>
     <?php
-    $req = $connection->query('SELECT * FROM public.reunion WHERE id= (SELECT MAX(id) FROM public.reunion)');
-    if (!$req) {
+    $req_count = $connection->query('SELECT COUNT(*) AS nbr FROM public.reunion')->fetch();
+    if ($req_count['nbr']!=0) {
+        $req = $connection->query('SELECT * FROM public.reunion WHERE id_reu= (SELECT MAX(id_reu) FROM public.reunion)');
         $res = $req->fetchAll();
         foreach ($res as $reu) {
             echo "soirée: {$reu['soiree']} <br/>
              date: {$reu['datee']} <br/>
              compt rendue: {$reu['cr']} <br/>";
+            $id = $reu['id_reu'];
         }
-        if ($_SESSION['connect']>=1) {
-            ?>
-            <form action="#" method="post">
-                <input type="submit" name="participer" value="Participer">
-            </form>
-            <?php
-        }
-        $req_part = $connection->query('SELECT pseudo FROM public.Participants NATURAL JOIN public.reunion WHERE datee = (SELECT MAX(datee) FROM public.reunion)');
-        if ($req_part!=0) {
+        $req_part = $connection->query('SELECT pseudo FROM public.Participants JOIN public.reunion ON id_reu WHERE id_reu = (SELECT MAX(id_reu) FROM public.reunion)');
+        if (!empty($req_part)) {
             echo 'participants: ';
             $participant=$req_part->fetchAll();
             foreach ($req_part as $reu) {
@@ -81,11 +76,19 @@ menu_navigation();
             }
         }
         else{
-            echo 'aucun';
+            echo 'participant: aucun';
+        }
+        if (isset($_SESSION['connect']) && $_SESSION['connect']>=1) {
+            ?>
+            <form action="#" method="post">
+                <input type="hidden" value="1" name="caché">
+                <input type="submit" name="participer" value="Participer">
+            </form>
+            <?php
         }
     }
     else{
-         echo "pas de réunion plannifié";
+         echo "pas de réunion plannifiée";
     }
     ?>
 </body>
@@ -98,17 +101,17 @@ menu_navigation();
 
 
 <?php
-if (isset ($_POST['participer'])) {
-    if (isset($_SESSION['connect'])) {
-        $iid = $connection->query("SELECT 'id' FROM public.reunion")->fetchAll();
-        $i = 0;
-        foreach ($iid as $id) {
-            $i++;
-        }
-        $req = $connection->prepare('INSERT INTO public.reunion(id_reu,pseudo) VALUES :id_reu,:pseudo');
-        $req->execute(['id_reu' => $i,
+if (isset($_POST['caché']) && $_POST['caché']==1 ){
+    if (isset($_SESSION['connect']) && $_SESSION['connect']>=1) {
+        echo '1';
+        $iid = $connection->query("SELECT COUNT(*) AS nbr_reu FROM public.reunion")->fetch();
+        $nbr_reu=$iid['nbr_reu'];
+        $req = $connection->prepare('INSERT INTO public.Participants(id_reu,pseudo) VALUES :id_reu,:pseudo');
+        echo '3';
+        $req->execute(['id_reu' => $nbr_reu,
             'pseudo' => $_SESSION['pseudo'],
         ]);
+        echo '4';
     }
     else {
         echo 'veuillez vous connectez avant de participer';
