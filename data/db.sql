@@ -184,6 +184,7 @@ INSERT INTO Utilisateur VALUES ('1','Jesus','Jesus@paradise.net','406fcef6cb90b6
 INSERT INTO Utilisateur VALUES ('2','Alphabet','boss@google.net','0c4ea8bb1bd4ef54defc54a73d5c9612','0008008008','1'); /* mdp Ch1en */
 INSERT INTO Utilisateur VALUES ('3','Clochard','mauvais@rue.com','483a6adfa09079059fd9eb3849932724','9876543210','1'); /* mdp SNCF2merde */
 INSERT INTO Utilisateur VALUES ('4','Jean-Eudes','je.dieseman@diese.org','42f66f9ed55f43a0eb4bd560e7cf87a5','0154879632','1'); /* mdp D1eseRecherche */
+INSERT INTO Utilisateur VALUES ('5','Manu','manu@lolywood.lol','d2327508d0641a64591eaf5d6188de35','0147852369','1'); /* mdp L0lywood */
 
 INSERT INTO Cats VALUES ('1','1','Pierre',TRUE,'Solide','0001-12-25',NULL,NULL, '0','1', '1',NULL,NULL, '1',NULL,NULL, 5,NULL,NULL);
 INSERT INTO Cat_colors VALUES ('1','9');
@@ -240,3 +241,15 @@ INSERT INTO Searched_traits VALUES ('5','9');
 INSERT INTO Searched_patterns VALUES ('5','Colourpoint');
 INSERT INTO Searched_patterns VALUES ('5','Solide');
 INSERT INTO Searched_patterns VALUES ('5','Bicolore');
+
+
+INSERT INTO Cats VALUES ('6','5','Winston',FALSE,'Tabby','2014-06-01',NULL,'3', '0','1', '2','0',2, '1','1',NULL, '4',NULL,'4');
+INSERT INTO Cat_colors VALUES ('6','1');
+INSERT INTO Cat_colors VALUES ('6','6');
+INSERT INTO Cat_colors VALUES ('6','8');
+INSERT INTO Cat_breed VALUES ('6','21');
+INSERT INTO Cat_personality VALUES ('6','1');
+INSERT INTO Cat_personality VALUES ('6','2');
+INSERT INTO Cat_personality VALUES ('6','6');
+INSERT INTO Searched_traits VALUES ('6','7');
+INSERT INTO Searched_patterns VALUES ('6','Solide');
