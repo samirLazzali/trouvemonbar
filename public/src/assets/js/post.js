@@ -149,13 +149,13 @@ function reportPost(id)
     return false;
 }
 
-function respondPost_onFocus(id)
+function respondPost_onFocus(id, author)
 {
     var div = document.getElementById("respond-post-" + id);
     addClass(div, "post-content-active");
 
     if(!Responseactive)
-        div.innerHTML = "";
+        div.innerHTML = "@" + author + " ";
 }
 
 function respondPost_onBlur(id)
@@ -167,6 +167,41 @@ function respondPost_onBlur(id)
     if(!Responseactive) {
         div.innerHTML = "Réponse...";
     }
+}
+
+function toggleResponseForm(id)
+{
+    var f = document.getElementById("Response-div-" + id);
+    if (f.style.display == "block")
+    {
+        f.style.display = "none";
+        return false;
+    }
+    var els = document.getElementsByClassName("response-form-wrapper");
+    [].forEach.call(els, function(f) {
+        f.style.display = "none";
+    });
+
+    f.style.display = "block";
+    return false;
+}
+
+function toggleReportForm(id)
+{
+    var f = document.getElementById("report-form-" + id);
+    if (f.style.display == "block")
+    {
+        f.style.display = "none";
+        return false;
+    }
+
+    var els = document.getElementsByClassName("report-form-wrapper");
+    [].forEach.call(els, function(f) {
+        f.style.display = "none";
+    });
+
+    f.style.display = "block";
+    return false;
 }
 
 function verifyAndSendResponse(id){
@@ -326,16 +361,17 @@ function rawRepostToHtml(post) {
 
 function postToHtml(author, content, date, id, likecount = -1, dislikecount = -1, repostcount = -1, showActions = true)
 {
+    content = findLinks(content);
     if (likecount < 0 || dislikecount < 0 || repostcount < 0) {
-        likeText = "Like";
-        dislikeText = "Dislike";
-        repostText = "Recycler";
+        var likeText = "Like";
+        var dislikeText = "Dislike";
+        var repostText = "Recycler";
     }
     else
     {
-        likeText = formatterNombre(likecount, "like");
-        dislikeText = formatterNombre(dislikecount, "dislike");
-        repostText = formatterNombre(repostcount, "recyclage");
+        var likeText = formatterNombre(likecount, "like");
+        var dislikeText = formatterNombre(dislikecount, "dislike");
+        var repostText = formatterNombre(repostcount, "recyclage");
     }
 
     var text =
@@ -373,12 +409,12 @@ function postToHtml(author, content, date, id, likecount = -1, dislikecount = -1
             '                </a>\n' +
             '            </span>\n' +
             '            <span class="post-action">\n' +
-            '                <a onClick="return toggleBlock(\'Response-div-' + id + '\');"  href="#" class="action-respond-' + id + ' action-link" title="Répondre à cette publication">\n' +
+            '                <a onClick="return toggleResponseForm(\'' + id + '\');"  href="#" class="action-respond-' + id + ' action-link" title="Répondre à cette publication">\n' +
             '                    Riposter\n' +
             '                </a>\n' +
             '            </span>\n' +
             '            <span class="post-action">\n' +
-            '                <a onClick="toggleBlock(\'report-form-' + id + '\');"  href="#" class="action-report-' + id + ' action-link action-link-report" title="Cette publication pose un problème ?">\n' +
+            '                <a onClick="return toggleReportForm(\'' + id + '\');"  href="#" class="action-report-' + id + ' action-link action-link-report" title="Cette publication pose un problème ?">\n' +
             '                    Signaler\n' +
             '                </a>\n' +
             '            </span>\n' +
@@ -444,12 +480,31 @@ function refreshFeed(lastRefresh, filter = "")
     return false;
 }
 
+function findLinks(text) {
+    var mentionRegex = /(@[^\s]+)/g;
+    text = text.replace(mentionRegex, function(user) {
+        return '<a href="/profile/' + user.replace("@", "") + '">' + user + '</a>';
+    });
+
+    var hashtagRegex = /(#[^\s]+)/g;
+    text = text.replace(hashtagRegex, function(tag) {
+        return '<a href="/hashtag/' + tag.replace("#", "") + '">' + tag + '</a>';
+    });
+
+    var urlRegex = /(https?:\/\/[^\s]+)/g;
+    text = text.replace(urlRegex, function(url) {
+        return '<a href="' + url + '">' + url + '</a>';
+    });
+
+    console.log(text);
+    return text;
+}
+
 function showWaitingPosts()
 {
     var feed = document.getElementById("post-feed");
     var html = "";
     postsWaiting.forEach(function(elt, index, arr) {
-        console.log(elt);
         if (elt["original"] != null)
             html += rawRepostToHtml(elt);
         else
