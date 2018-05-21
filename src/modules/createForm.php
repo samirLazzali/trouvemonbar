@@ -35,7 +35,7 @@
       </div>
       <input type="radio" class="radio" name="offer" id="isoffer" value="true">
       <div class="smselect">
-         <select name=annoncesemester class="styled-select" black rounded>
+         <select name=annoncesemester class="styled-select" black rounded required>
     <option value disabled <?php print (isset($annonce)?"":"selected"); ?>>Semestre
             <option value=1 class="toggle" <?php print (isset($annonce) && $annonce->semestre == 1?"selected":""); ?>>S1
             <option value=2 class="toggle" <?php print (isset($annonce) && $annonce->semestre == 2?"selected":""); ?>>S2
