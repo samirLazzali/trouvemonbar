@@ -62,10 +62,24 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
     echo '<br />';
     echo '<br />';
     echo '<div class="form-c">';
+    echo '<div class="form-c-head">Ajouter un vin :</div>';
+    echo '<form method = "post" action="#">';
+    echo '<label for="nomvin"><span class="txt">Nom du vin <span class="required">*</span></span><input type="text" class="input-field" name="nomvin" value="" /></label>';
+    echo '<input type ="submit" name="submit" value="Ajouter"/>';
+    echo '</form>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+
+
+    echo '<div class="gtco-container">';
+    echo '<br />';
+    echo '<br />';
+    echo '<div class="form-c">';
     echo '<div class="form-c-head">Préparatif</div>';
     echo '<form method = "post" action="#">';
-    echo '<label for="recette"><span class="txt">Soirée<span class="required">*</span></span><input type="text" class="input-field" name="soiree"  /></label>';
-    echo '<label for="recette"><span class="txt">Ingrédients<span class="required">*</span></span><textarea rows="10" cols="59" class="input-field" name="ingredient" ></textarea></label>';
+    echo '<label for="recette"><span class="txt">Soirée <span class="required">*</span></span><input type="text" class="input-field" name="soiree"  /></label>';
+    echo '<label for="recette"><span class="txt">Ingrédients <span class="required">*</span></span><textarea rows="10" cols="59" class="input-field" name="ingredient" ></textarea></label>';
     echo '<input type ="submit" name="submit" value="Ajouter"/>';
     echo '</form>';
     echo '</div>';
@@ -74,6 +88,7 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
     echo '</div>';
 
     $iid=$connection->query("SELECT 'id' FROM public.reunion")->fetchAll();
+
      $irec=$connection->query("SELECT * FROM public.recette");
     $j=1;
     if (!$irec) {
@@ -88,6 +103,8 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
             'recettes'=> $_POST['recette'],
             ]);
     }
+
+
 
     $i=1;
     foreach($iid as $id){

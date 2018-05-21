@@ -44,7 +44,7 @@ $users = $userRepository->fetchAll();
         <?php /** @var \User\User $user */
     	  $irec=$connection->query("SELECT * FROM public.participants_course")->fetchAll();
     	  $j=1;
-    	          echo $j;
+    	          
     	  foreach($irec as $id){
        			 $j++;
    			 }  
@@ -59,7 +59,6 @@ $users = $userRepository->fetchAll();
             ]);
     }
     	$soir=$tuple['soiree'];
-    	echo $soir;
         $turec=$connection->query("SELECT * FROM public.participants_course")->fetchAll();
         if(!empty($turec)){
         	?>
