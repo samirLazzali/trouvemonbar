@@ -1,25 +1,22 @@
 <?php
 $eMan = new EvenementsManager($DB);
 $events;
-
 if (isset($_GET['categorie'])) 
 	$events = $eMan->getAll($_GET['categorie']);
 else 
 	$events = $eMan->getAll();
 
 
-
+if ($events)
 foreach ($events as $e) {
 	$pMan = new ParticipantsManager($DB);
 	$nbParticipants = count($pMan->getAll($e->table_participants));
-
 
 	echo "<div>";		
 	echo '<div class="float-right" style="color : gray ; font-style : italic">' . $e->date_creation . '</div>';
 	echo '<h2 class="page-header">' . $e->nom . '<br>';
 	echo '<small style="color : gray ; font-style : italic"> le ' . $e->date . '</small>';
-	if ($e->categorie)
-		echo '<a href="Accueil.php?categorie=' . $e->categorie .' " class="btn btn-outline-info float-right"">' . $eMan->getCategorie($e->categorie) . '</a>';
+	echo '<a href="Accueil.php?categorie=' . $e->categorie .' " class="btn btn-outline-info float-right"">' . $eMan->getCategorie($e->categorie) . '</a>';
 	echo '</h2>';
 	if (strlen($e->description) > 0)
 		echo '<br>';

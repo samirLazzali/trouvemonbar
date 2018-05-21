@@ -94,12 +94,13 @@ class EvenementsManager
 	function getAll ($id_categorie = null) 
 	{
 		$query = $this->db->query('SELECT * FROM Evenements'. $this->queryCategorie($id_categorie, 'WHERE'));
-		$tableau_evenements;
-		if ($query)
-			while ($resultat = $query->fetch()) {
-				$tableau_evenements[] = new Evenement($resultat);
-			}
-		return $tableau_evenements;
+		echo 'SELECT * FROM Evenements'. $this->queryCategorie($id_categorie, 'WHERE');
+		$tableau_events = [];
+		while ($resultat = $query->fetch()) 
+		{
+			$tableau_events[] = new Evenement($resultat);
+		}
+		return $tableau_events;
 	}
 
 
@@ -186,12 +187,12 @@ class EvenementsManager
 				else 
 					echo 	"<div class='alert alert-danger'>
 		  				<strong>Une erreur est survenue lors création de la table des participants</strong> 
-						</div>";; //$this->db->errorInfo())
+						$this->db->errorInfo())</div>";;
 			}
 			else 
 				echo 	"<div class='alert alert-danger'>
 		  				<strong>Une erreur est survenue pendant la création de l'évènement</strong> 
-						</div>";
+						$this->db->errorInfo())</div>";
 
 		}
 		else {
