@@ -48,7 +48,13 @@ class Annonce {
 
 	print "<div class=logi>";
 
-	print "<b>Reward: </b>";
+	print "<b>";
+	if ($this->isOffer)
+	    print "Demande: ";
+	else 
+	    print "Récompense: ";
+	print "</b>";
+
 	if ($this->paiement != 0) {
 	    print "$this->paiement euros";
 	    if ($this->service != null) print " + $this->service";

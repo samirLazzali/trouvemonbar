@@ -6,9 +6,12 @@ include("../src/user.php");
 
 protectAccess();
 
-if (isset($_GET['edit']) && $_GET['edit'])
+if (isset($_GET['edit']) && $_GET['edit']) {
+    if (!$_SESSION['admin'] && $_GET['edit'] != $_SESSION['id'])
+	header("Refresh:0; url=nondroit.php");
+
     $id=$_GET['edit'];
-else
+} else
     $id=$_SESSION['id'];
 
 if (($user = User::getUserById($id)) == null) {

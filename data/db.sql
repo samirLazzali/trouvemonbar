@@ -186,6 +186,11 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 --
 
 COPY public.annonce (id, postdate, offer, op, semestre, module, genre, titre, description, paiement, service, answered) FROM stdin;
+2	2018-05-21 17:20:02	f	5	2	PWR	PHP, CSS, HTML	Projet de Web	C'est trop dur j'ai besoin d'un site tout fait !	0	Un poste à Dièse	f
+4	2018-05-21 17:47:57	t	1	2	IPFL	Caml, Fonctionnel	Projet IPF	J'ai un projet sur les bras, quelqu'un en veut ?	0	4 Kebabs	f
+5	2018-05-21 17:55:27	f	3	2	LVFH2	Anglais, FH	Acteur	On cherche un acteur pour la vidéo d'anglais, quelqu'un est chaud ?	0		f
+6	2018-05-21 18:11:18	f	6	2	LVFH2	LV2, tacos	DM d'espagnol	Quelqu'un peut me faire le DM d'espagnol je sais pas parler :(	10		f
+3	2018-05-21 17:46:09	f	6	2	ILO	Objet, Java	Aide TP ILO	Comment on remplit ClientFrame2 ?	20		f
 \.
 
 
@@ -194,6 +199,12 @@ COPY public.annonce (id, postdate, offer, op, semestre, module, genre, titre, de
 --
 
 COPY public.links (aid, tid) FROM stdin;
+2	2
+2	3
+5	6
+5	7
+6	8
+6	9
 \.
 
 
@@ -202,6 +213,14 @@ COPY public.links (aid, tid) FROM stdin;
 --
 
 COPY public.tags (id, name) FROM stdin;
+2	#diese
+3	#pls
+4	#chat
+5	#cdur
+6	#video
+7	#MCU
+8	#real
+9	#spanish
 \.
 
 
@@ -210,10 +229,12 @@ COPY public.tags (id, name) FROM stdin;
 --
 
 COPY public.users (id, email, username, password, admin) FROM stdin;
-1	jean-baptiste.skutnik@ensiie.fr	Spoutnik	dacae7562117be083f8ec98f3e56f690	t
 2	yassir.chekour@ensiie.fr	Yassir	098f6bcd4621d373cade4e832627b4f6	t
 3	victor.meas@ensiie.fr	Vicky	098f6bcd4621d373cade4e832627b4f6	t
 4	hugo.trachino@ensiie.fr	Nuja	098f6bcd4621d373cade4e832627b4f6	t
+5	paul.thibaud@ensiie.fr	Paul Thibaud	098f6bcd4621d373cade4e832627b4f6	f
+6	thomas.gubeno@ensiie.fr	Thomas Gubeno	2c8d2ade2786f1b74106290e8425d8e6	f
+1	jean-baptiste.skutnik@ensiie.fr	Spoutnik	ad91e74f45b505957c676f7fc9410127	t
 \.
 
 
@@ -221,21 +242,21 @@ COPY public.users (id, email, username, password, admin) FROM stdin;
 -- Name: annonce_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ensiie
 --
 
-SELECT pg_catalog.setval('public.annonce_id_seq', 1, true);
+SELECT pg_catalog.setval('public.annonce_id_seq', 6, true);
 
 
 --
 -- Name: tags_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ensiie
 --
 
-SELECT pg_catalog.setval('public.tags_id_seq', 1, true);
+SELECT pg_catalog.setval('public.tags_id_seq', 9, true);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ensiie
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 8, true);
+SELECT pg_catalog.setval('public.users_id_seq', 10, true);
 
 
 --

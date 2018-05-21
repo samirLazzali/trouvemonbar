@@ -29,7 +29,7 @@
             </div>
          </div>
       </div>
-   <ul class="tab-group">
+   <ul class="tab-group" style="margin-top: 30px;">
       <li class="tab active"><a href=#money>Argent</a>
       <li class="tab"><a href=#service>Service</a>
       <li class="tab"><a href=#free>Gratuit</a>
