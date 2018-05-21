@@ -104,3 +104,14 @@ function modif_mp($mdp,$connexion,$pseudo){
     }
     return true;
 }
+
+function modif_droit($pseudo,$droit,$connexion){
+    $instruction = $connexion->prepare("UPDATE \"user\" SET id=:id WHERE surname=:pseudo");
+    $instruction->bindParam(':pseudo',$pseudo);
+    $instruction->bindParam(':id',$droit);
+    $reponse = $instruction->execute();
+    if ($reponse==false){
+        return false;
+    }
+    return true;
+}
