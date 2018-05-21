@@ -5,7 +5,8 @@ include("includes/debut.php");?>
 
 <!DOCTYPE html>
 <html lang="fr">
-<?php include("header.php");?>
+<link rel="stylesheet" type="text/css" href="./css/relo.css">
+<link rel="stylesheet" type="text/css" href="./css/template.css">
 <body>
 <h1 id="title">
     <a href="index.php"><img class="home" src="img/logo.png" alt="Logo" height ="88" width="94"></a>

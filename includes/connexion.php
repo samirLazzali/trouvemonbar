@@ -1,10 +1,7 @@
 <input type="hidden" name="page" value="<?php echo $_SERVER['HTTP_REFERER']; ?>" />
 
 <?php
-session_start();
 $titre="Connexion";
-include("includes/id.php");
-include("includes/debut.php");
 ?>
 
 
