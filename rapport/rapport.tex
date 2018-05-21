@@ -198,9 +198,9 @@ Il est aussi possible d'aimer un tweet. On crée une table \texttt{like} spécif
 On peut ainsi proposer à l'utilisateur d'aimer ou de ne plus aimer un tweet et récupérer le nombre de j'aime associé à un tweet.
 
 \subsection{Liens cliquables}		
-Pour chaque tweet, les noms d'utilisateurs @ et les hashtags # sont convertis en liens cliquables. En effet, on peut ainsi directement accéder au profil d'un utilisateur ou encore à l'ensemble des tweets qui contiennent un hashtags. 
+Pour chaque tweet, les noms d'utilisateurs @ et les hashtags \# sont convertis en liens cliquables. En effet, on peut ainsi directement accéder au profil d'un utilisateur ou encore à l'ensemble des tweets qui contiennent un hashtags. 
 
-Pour réaliser cela, lors de l'affichage d'un tweet, le contenu du tweet est analysé mot par mot afin de remplacer tous les noms et hashtags par des liens utilisant la méthode GET. Il suffit en effet juste de trouver les mots commençant par # ou @.
+Pour réaliser cela, lors de l'affichage d'un tweet, le contenu du tweet est analysé mot par mot afin de remplacer tous les noms et hashtags par des liens utilisant la méthode GET. Il suffit en effet juste de trouver les mots commençant par \# ou @ puis de trouver l'id correspondant afin de l'inclure dans le lien.
 
 
 
@@ -223,8 +223,25 @@ Pour l'affichage des commentaires avec les différents niveaux, il a fallu une r
 
 \newpage
 \section{Les Hashtags}		
+L'utilisateur a la possibilité d'écrire des hashtags dans ses tweets, c'est-à-dire, des mots commençant par un \#. 
 
-\newpage
+Voici comment est composée la table \texttt{hashtag}:
+\begin{description}
+\item[id :] l'id du hashtag;
+\item[mot :] le contenu du hashtag
+\end{description}
+Pour relier chaque hashtag à des tweets, on a utilisée une table \texttt{hashtagEtTweet} : 
+\begin{description}
+\item[id\_hashtag :] l'id du hashtag;
+\item[id\_tweet :] l'id du tweet;
+\end{description}
+
+L'ajout des hashtags dans la table est faite dès qu'un utilisateur envoie un tweet. Le contenu du tweet est analysé afin d'extraire tous les mots commençant par un \#. Ensuite, on regarde s'il existe déjà un hashtag similaire dans la table. S'il en existe un, le tweet est ajouté dans la table \texttt{hashtagEtTweet}, sinon on ajoute le hashtag dans la table \texttt{hashtag} dans un premier temps.
+\vspace{1\baselineskip}
+
+On a aussi la possibilité de rechercher tous les tweets contant un certain hashtag dans la barre de recherche \#. Il y a aussi des suggestions de hashtags lors de la recherche qu'on a réalisé grâce à AJAX.
+
+%\newpage
 \section{Les Messages Privés}	
 Nous avons décider d'ajouter une fonctionnalité d'envoi de messages privés entre chaque utilisateur. 
 Cette fonctionnalité est directement accessible depuis la barre de navigation. L'utilisateur peut alors choisir un destinataire parmi ses amis afin de lui envoyer un message privé.
@@ -239,7 +256,7 @@ On a aussi décidé de créer une classe \texttt{Message} et une classe \texttt{
 Pour cette partie, on a principalement utilisé de l'AJAX pour envoyer des messages privés et pour charger les messages reçus automatiquement sans avoir besoin de réactualiser la page. Ces deux éléments sont les principales difficultés rencontrées pour réaliser cette fonctionnalité.
 
 
-\newpage		
+%\newpage		
 \section{Répartition des tâches}
 	
 			
