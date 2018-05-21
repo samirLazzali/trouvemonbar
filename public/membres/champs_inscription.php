@@ -216,34 +216,34 @@ if(isset($_POST['phone_number']))
 {
 	$phone_number = trim($_POST['phone_number']);
 	$phone_number_result = checkphone($phone_number);
-	if($login_result == 'court')
+	if($phone_number_result == 'court')
 	{
 		$_SESSION['phone_number_info'] = '<span class="erreur">Le numéro de téléphone '.htmlspecialchars($phone_number, ENT_QUOTES).' est trop court.</span><br/>';
 		$_SESSION['form_phone_number'] = '';
 		$_SESSION['erreurs']++;
 	}
 	
-	else if($login_result == 'long')
+	else if($phone_number_result == 'long')
 	{
 		$_SESSION['phone_number_info'] = '<span class="erreur">Le numéro de téléphone '.htmlspecialchars($phone_number, ENT_QUOTES).' est trop long.</span><br/>';
 		$_SESSION['form_phone_number'] = '';
 		$_SESSION['erreurs']++;
 	}
 	
-	else if($login_result == 'pris')
+	else if($phone_number_result == 'pris')
 	{
 		$_SESSION['phone_number_info'] = '<span class="erreur">Le numéro de téléphone '.htmlspecialchars($phone_number, ENT_QUOTES).' est déjà pris.</span><br/>';
 		$_SESSION['form_phone_number'] = '';
 		$_SESSION['erreurs']++;
 	}
 		
-	else if($login_result == 'Ok')
+	else if($phone_number_result == 'Ok')
 	{
 		$_SESSION['phone_number_info'] = '';
 		$_SESSION['form_phone_number'] = $phone_number;
 	}
 	
-	else if($login_result == 'vide')
+	else if($phone_number_result == 'vide')
 	{
 		$_SESSION['phone_number_info'] = '<span class="erreur">Vous n\'avez pas entré de numéro de téléphone.</span><br/>';
 		$_SESSION['form_phone_number'] = '';
