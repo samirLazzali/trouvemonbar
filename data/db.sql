@@ -148,16 +148,6 @@ INSERT INTO Colors VALUES ('11','Ambre clair');
 INSERT INTO Colors VALUES ('12','Abricot');
 
 
-INSERT INTO Patterns VALUES ('1','Solide');
-INSERT INTO Patterns VALUES ('2','Tabby');
-INSERT INTO Patterns VALUES ('3','Colourpoint');
-INSERT INTO Patterns VALUES ('4','Bicolore');
-INSERT INTO Patterns VALUES ('5','Ecaille de tortue');
-INSERT INTO Patterns VALUES ('6','Calico');
-INSERT INTO Patterns VALUES ('7','Mink');
-INSERT INTO Patterns VALUES ('8','Sepia');
-
-
 INSERT INTO Personality_traits VALUES('1','Malicieux');
 INSERT INTO Personality_traits VALUES('2','Joueur');
 INSERT INTO Personality_traits VALUES('3','Calin');
