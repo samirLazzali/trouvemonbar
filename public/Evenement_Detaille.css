@@ -106,9 +106,10 @@ h1 {
 	font-size:50px;
 	margin : 12px;
 }
-h2{
+h4{
 	font-size:20px;
 	margin: 12px;
+	color : red;
 
 
 }

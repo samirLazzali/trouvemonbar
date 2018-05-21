@@ -13,28 +13,28 @@
 <?php include "upperBar.php" ?>
 <center><h1> Votre événement</h1>
      	    <br/><br/>
-	    	<h2>  Nom de l'événement  </h2>
+	    	<h4>  Nom de l'événement  </h4>
 	    	<br/>
-	    	<h2>  Organisateur :  </h2>
+	    	<h4>  Organisateur :  </h4>
 	    	<p> ??? </p>
 	    	<br/>
-	    	<h2>Nombre de participants : </h2>
+	    	<h4>Nombre de participants : </h4>
 	    	<p> ??? </p>
 	    	<br/>
-	    	<h2> Lieu de l'événement : </h2>
+	    	<h4> Lieu de l'événement : </h4>
 	    	<p> ??? </p>
 	    	<br/>
-	    	<h2> Prix de la participation :  </h2>
+	    	<h4> Prix de la participation :  </h4>
 	    	<p> ??? </p>
 	    	<br/>
-	    	<h2> Description  </h2>
+	    	<h4> Description  </h4>
 	    	<br/>
 	    	<p> <em> Exemple de description </em> </p>
 	    	<br/>
-	    	<h2> Catégorie : </h2>
+	    	<h4> Catégorie : </h4>
 	    	<p> ??? </p>
 	    	<br/>
-	    	<h2> Type de musique : </h2>
+	    	<h4> Type de musique : </h4>
 	    	<p> ??? </p>
 	    	<br/> <br/>
 	    	<img src="./images/Apartement.jpg" width="300" height="200" alt="Photo de l'événement">
