@@ -26,7 +26,7 @@ class UserRepository
                 ->setId($row->id)
                 ->setFirstname($row->firstname)
                 ->setLastname($row->lastname)
-                ->setBirthday(new \DateTimeImmutable($row->birthday));
+                ->setBirthday($row->birthday);
 
             $users[] = $user;
         }
@@ -51,7 +51,7 @@ class UserRepository
 			    ->setId($row->id)
 			    ->setFirstname($row->firstname)	
 			    ->setLastname($row->lastname)	 
-			    ->setBirthday(new \DateTimeImmutable($row->birthday))
+			    ->setBirthday($row->birthday)
 			    ->setNickname($row->nickname)
 			    ->setDomicile($row->domicile)
 			    ->setMdp($row->mdp);
@@ -71,7 +71,7 @@ class UserRepository
 				   $_SESSION['firstname'] = $user->getFirstname();
 				   $_SESSION['lastname'] = $user->getLastName();
 				   $_SESSION['domicile'] = $user->getDomicile();
-				   $_SESSION['birthday'] = $user->getBirthday()->format('d/m/Y');
+				   $_SESSION['birthday'] = $user->getBirthday();
 				   header('Location:Accueil.php');
 			    }
 			    else 
@@ -123,7 +123,7 @@ class UserRepository
     
     }
 
-    public function modif($postfirstname,$postlastname,$postdomicile,$postoldmdp,$postnewmdp,$postnewmdpverif){
+    public function modif($postfirstname,$postlastname,$postdomicile,$postbirthday,$postoldmdp,$postnewmdp,$postnewmdpverif){
 	    if ($postfirstname != null)
 	    {
 		    $firstname = htmlspecialchars($postfirstname) ;
@@ -169,18 +169,34 @@ class UserRepository
 
 
 	    }
+	    if ($postbirthday != null)
+	    {
+		    /* $domicile = htmlspecialchars($postdomicile) ;*/
+		    if ($postbirthday != $_SESSION['birthday'])
+		    {
+			    echo "$postbirthday";
+			    $req=$this->connection->prepare('UPDATE "user" SET birthday = :new WHERE nickname = :old');
+			    $req->execute(array(':new' => $postbirthday ,':old' => $_SESSION['pseudo']));
+
+
+			    $_SESSION['birthday']=$postbirthday;
+				
+		    }
+
+
+	    }
+
 	    if ($postoldmdp!=null || $postnewmdp!=null || $postnewmdpverif!=null)
 	    {
 		    if ($postoldmdp!=null && $postnewmdp!=null  && $postnewmdpverif!=null)
 		    {
 			    //Acquisition des données
-
-			    $oldmdp = htmlspecialchars(md5($postoldmdp)) ;  
+			    $oldmdp = htmlspecialchars(md5($postoldmdp)) ; 
 			    $newmdp = htmlspecialchars(md5($postnewmdp)) ;  
 			    $newmdpverif = htmlspecialchars(md5($postnewmdpverif)) ;  
 			    $query=$this->connection->prepare('SELECT mdp FROM "user" WHERE nickname = :pseudo');
-			    $mdp=$query->execute(array(':pseudo'=> $_SESSION['pseudo']));
-
+			    $query->execute(array(':pseudo'=> $_SESSION['pseudo']));
+			    $mdp = $query->fetchColumn();
 
 			    //Vérif Mdp
 

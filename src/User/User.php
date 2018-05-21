@@ -19,7 +19,7 @@ class User
     private $lastname;
 
     /**
-     * @var \DateTimeInterface
+     * @var string
      */
     private $birthday;
 
@@ -173,18 +173,18 @@ class User
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return string
      */
-    public function getBirthday(): \DateTimeInterface
+    public function getBirthday()
     {
         return $this->birthday;
     }
 
     /**
-     * @param \DateTimeInterface $birthday
+     * @param  string $birthday
      * @return User
      */
-    public function setBirthday(\DateTimeInterface $birthday)
+    public function setBirthday($birthday)
     {
         $this->birthday = $birthday;
         return $this;

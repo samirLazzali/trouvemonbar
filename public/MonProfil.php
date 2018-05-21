@@ -8,7 +8,7 @@ $dbPassword = getenv('DB_PASSWORD');
 $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 $userRepository = new \User\UserRepository($connection);
 if (!empty($_POST)){
-	$userRepository->modif($_POST['firstname'],$_POST['lastname'],$_POST['domicile'],$_POST['old_mdp'],$_POST['new_mdp'],$_POST['new_mdp_verif']);
+	$userRepository->modif($_POST['firstname'],$_POST['lastname'],$_POST['domicile'],$_POST['bd'],$_POST['old_mdp'],$_POST['new_mdp'],$_POST['new_mdp_verif']);
 }
 
 ?>
