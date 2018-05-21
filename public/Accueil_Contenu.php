@@ -1,5 +1,6 @@
 <?php
 $eMan = new EvenementsManager($DB);
+$events;
 
 if (isset($_GET['categorie'])) 
 	$events = $eMan->getAll($_GET['categorie']);

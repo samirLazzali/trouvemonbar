@@ -95,10 +95,10 @@ class EvenementsManager
 	{
 		$query = $this->db->query('SELECT * FROM Evenements'. $this->queryCategorie($id_categorie, 'WHERE'));
 		$tableau_evenements;
-		while ($resultat = $query->fetch()) 
-		{
-			$tableau_evenements[] = new Evenement($resultat);
-		}
+		if ($query)
+			while ($resultat = $query->fetch()) {
+				$tableau_evenements[] = new Evenement($resultat);
+			}
 		return $tableau_evenements;
 	}
 
