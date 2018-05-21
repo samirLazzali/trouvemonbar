@@ -59,12 +59,14 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
     echo '</div>';
 
     $iid=$connection->query("SELECT 'id' FROM public.reunion")->fetchAll();
-    $irec=$connection->query("SELECT * FROM public.recette")->fetchAll();
+    $irec=$connection->query("SELECT * FROM public.recette");
     $j=1;
-    foreach($irec as $id){
-        $j++;
-    }  
-    echo $j;
+    if (!$irec) {
+        $ids=$irec->fetchAll();
+        foreach ($irec as $id) {
+            $j++;
+        }
+    }
     if(isset($_POST['recette'])){
             $req=$connection->prepare('INSERT INTO public.recette(id_rec,recettes) VALUES(:id_rec,:recettes)');
             $req->execute(['id_rec' => $j,

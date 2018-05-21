@@ -40,7 +40,7 @@ menu_navigation();
 </div>
 
 
-<header id="gtco-header" class="gtco-cover" role="banner" style="background-image: url(images/img_4.jpg)">
+<header id="gtco-header" class="gtco-cover" role="banner" style="background-image: url(images/bg.jpg)">
                 <div class="gtco-container">
                         <div class="row">
                                 <div class="col-md-12 col-md-offset-0 text-left">
@@ -65,11 +65,13 @@ menu_navigation();
              date: {$reu['datee']} </br>
              compt rendue: {$reu['cr']} </br>";
         }
-        ?>
-        <form action="#" method="post">
-            <input type="submit" name="participer" value="Participer">
-        </form>
-        <?php
+        if ($_SESSION['connect']>=1) {
+            ?>
+            <form action="#" method="post">
+                <input type="submit" name="participer" value="Participer">
+            </form>
+            <?php
+        }
         $req_part = $connection->query('SELECT pseudo FROM public.Participants NATURAL JOIN public.reunion WHERE datee = (SELECT MAX(datee) FROM public.reunion)');
         if ($req_part!=0) {
             echo 'participants: ';
