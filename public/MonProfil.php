@@ -19,6 +19,7 @@ if (!empty($_POST)){
 	<title>Mon Profil</title>
 	<meta charset="utf-8">	
 
+	<link rel="stylesheet" href="MonProfil.css" type="text/css">
 	<link rel="stylesheet" type="text/css" href="main.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 	
@@ -41,19 +42,21 @@ if (!empty($_POST)){
 <?php include "upperBar.php" ?>
 
 <center><h2>Gestion des informations du compte</h2></br>
+<div class="container">
 
-<a href="./deconnexion.php"/><input type="button" value="Se deconnecter"></a><br/></br>
+<a href="./deconnexion.php"/><button>Se déconnecter</button></a><br/></br>
 <?php
 
-echo '<p><b>Votre pseudo :&nbsp;&nbsp; '.$_SESSION['pseudo']. '</b></p>'
+echo '<p><b>Votre pseudo :&nbsp;&nbsp;'.$_SESSION['pseudo']. '</b></p>'
 ?>
 
 
-    <span id="modif_infos" style="display:block;"><b>Changez votre mot de passe : </b><button onclick="affiche_form_mdp()">Modifiez votre mot de passe</button></br></br></span>
+
+    <span id="modif_infos" style="display:block;"><button onclick="affiche_form_mdp()">Modifiez votre mot de passe</button></br></br></span>
 
 
 <form action="MonProfil.php" method="post">
-    
+
     <span id ="modif_mdp" style="display:none;">
 
     <label for="old_mdp"><b>Votre mot de passe :</b></label>
@@ -68,7 +71,7 @@ echo '<p><b>Votre pseudo :&nbsp;&nbsp; '.$_SESSION['pseudo']. '</b></p>'
 
     </span>
 
-  <div class="container">
+
     <label for="firstname"><b>Prénom :</b></label>
     <input type="text" name="firstname" value=<?php echo $_SESSION['firstname'] ?> >
 	<br/>
