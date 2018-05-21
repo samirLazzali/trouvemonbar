@@ -36,6 +36,7 @@ if (!empty($_POST)){
 		   <br/>
 		   <br/>
 		   <label for="description"><b>Une petite description ?</b></label>
+		   
 		   <textarea name="description" cols="35" rows="3"></textarea>
 		   <br/>
 		   <label for="date_event"><b>Quand?</b></label>
