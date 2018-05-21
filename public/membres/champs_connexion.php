@@ -7,7 +7,6 @@ include('../includes/config.php');
 include('../includes/functions.php');
 actualiser_session();
 
-<?php
 $dbName = getenv('DB_NAME');
 $dbUser = getenv('DB_USER');
 $dbPassword = getenv('DB_PASSWORD');
