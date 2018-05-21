@@ -67,10 +67,10 @@ menu_navigation();
              compt rendue: {$reu['cr']} <br/>";
             $id = $reu['id_reu'];
         }
-        $req_part = $connection->query('SELECT pseudo FROM public.Participants JOIN public.reunion ON id_reu WHERE id_reu = (SELECT MAX(id_reu) FROM public.reunion)');
-        if (!empty($req_part)) {
-            echo 'participants: ';
-            $participant=$req_part->fetchAll();
+        $count_part=$connection->query('SELECT COUNT(*) AS nbr1 FROM public.participants')->fetch();
+        if ($count_part['nbr1']!=0) {
+            $req_part = $connection->query('SELECT * FROM public.participants ')->fetchAll();
+            echo 'participants:</br> ';
             foreach ($req_part as $reu) {
                 echo "{$reu['pseudo']} </br>";
             }
@@ -103,15 +103,22 @@ menu_navigation();
 <?php
 if (isset($_POST['caché']) && $_POST['caché']==1 ){
     if (isset($_SESSION['connect']) && $_SESSION['connect']>=1) {
-        echo '1';
         $iid = $connection->query("SELECT COUNT(*) AS nbr_reu FROM public.reunion")->fetch();
         $nbr_reu=$iid['nbr_reu'];
-        $req = $connection->prepare('INSERT INTO public.Participants(id_reu,pseudo) VALUES :id_reu,:pseudo');
-        echo '3';
-        $req->execute(['id_reu' => $nbr_reu,
-            'pseudo' => $_SESSION['pseudo'],
-        ]);
-        echo '4';
+        $check=0;
+        $req_check=$connection->query("SELECT pseudo FROM public.participants WHERE id_reu=$nbr_reu ")->fetchAll();
+        foreach ($req_check as $r){
+            if ($r['pseudo']==$_SESSION['pseudo']){
+                $check=1;
+            }
+        }
+        if ($check==0) {
+            echo "$nbr_reu";
+            $req = $connection->prepare('INSERT INTO public.participants(id_reu,pseudo) VALUES (:id_reu,:pseudo)');
+            $req->execute(['id_reu' => $nbr_reu,
+                'pseudo' => $_SESSION['pseudo'],
+            ]);
+        }
     }
     else {
         echo 'veuillez vous connectez avant de participer';
