@@ -15,7 +15,7 @@ include('includes/top.php');
 		if(isset($_SESSION['id_user']))
 			{ ?>
 				<div id="contenu">
-					<?php include('includes/leftcol.php'); ?>
+					<?php include('includes/connected_index.php'); ?>
 				</div>
 				</p>
 				<?php
