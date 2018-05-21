@@ -14,5 +14,5 @@
             }
         }
     </script>
-    <?php include("fonctions.php")?>
+    <?php include("fonctions.php");?>
 </head>
