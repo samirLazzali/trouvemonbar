@@ -13,10 +13,10 @@
 require_once("../../config.php");
 require_once("Trend.php");
 
-if (isset($_GET['timespan']))
-    $timespan = $_GET['timespan'];
+if (isset($_GET['timelimit']))
+    $timelimit = $_GET['timelimit'];
 else
-    $timespan = 0;
+    $timelimit = 0;
 
 if (isset($_GET['limit']))
     $limit = $_GET['limit'];
@@ -26,5 +26,5 @@ else
 if ($limit > 25)
     $limit = 25;
 
-$trends = Trend::getTrends($limit, $timespan);
+$trends = Trend::getTrends($limit,$timelimit);
 success_die($trends);

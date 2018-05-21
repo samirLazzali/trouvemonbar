@@ -214,7 +214,7 @@ class Post implements JsonSerializable
      * @return array post
      */
 
-    static function fromHashtag($tag, $limit)
+    static function fromHashtag($tag, $limit=10)
     {
         $tag = str_replace("#", "", $tag);
         $db = connect();
@@ -237,7 +237,6 @@ class Post implements JsonSerializable
             $p->content = $p->toHtml();
             $result[] = $p;
         }
-
         return $result;
     }
 
@@ -659,15 +658,15 @@ class Post implements JsonSerializable
             $firstChar = substr($term, 0, 1);
             if ($firstChar == '#') {
                 $hashtagName = substr($toAdd, 1, strlen($toAdd) - 1);
-                $content = str_replace($term, "<a class='inpost inpost-hashtag' href='/hashtag/$hashtagName'>$toAdd</a>", $content);
+                $content = str_replace($term, "<a class='inpost inpost-hashtag' href='/hashtag/$hashtagName'>$toAdd </a>", $content);
             }
             elseif ($firstChar == '@')
-                $content = str_replace($term, "<a class='inpost inpost-mention' href='/profile/$toAdd'>$toAdd</a>", $content);
+                $content = str_replace($term, "<a class='inpost inpost-mention' href='/profile/$toAdd'>$toAdd </a>", $content);
         }
 
         $regexUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
         if(preg_match($regexUrl, $content, $url)) {
-            $content = preg_replace($regexUrl, "<a href=" . $url[0] .">" . $url[0] . "</a> ", $content);
+            $content = preg_replace($regexUrl, "<a href=" . $url[0] .">" . $url[0] . "</a>", $content);
         }
 
             return $content;
