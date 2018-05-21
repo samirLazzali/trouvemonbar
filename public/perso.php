@@ -36,9 +36,9 @@ dispSidebar();
 ?>
 
 <div class="main">
-    <h2>Mon profil</h2>
+<h2>Profil de <?php print $user->username; ?></h2>
 <?php User::displayUserForm($user, $_SESSION['admin']); ?>
-    <h2>Mes annonces: <strong><?php print sizeof($annonces); ?></strong> annonce<?php print (sizeof($annonces) == 1?"":"s"); ?> publiée<?php print (sizeof($annonces) == 1?"":"s"); ?></h2>
+    <h2>Annonces de <?php print $user->username; ?>: <strong><?php print sizeof($annonces); ?></strong> annonce<?php print (sizeof($annonces) == 1?"":"s"); ?> publiée<?php print (sizeof($annonces) == 1?"":"s"); ?></h2>
 <?php
 
 foreach ($annonces as $an)

@@ -125,8 +125,9 @@ function indexnotco() {
 
 function contactsuccess() {
     print "<div class=\"main\">";
+    print "<h2>Nous contacter</h2>";
     print "<div class=annonce>";
-    print "<div class=title style=\"text-align:center;\"> Contact </div>";
+    //print "<div class=title style=\"text-align:center;\"> Contact </div>";
     print "<div> <br> <br> <br> <br> <br> Pour prendre contact avec nos équipes, n'hésitez pas à nous faire signe par telephone <br> au <strong> 06 59 42 47 94 </strong> ou par mail à <strong>lesbonsbails@gmail.com</strong> <br> <br> <br> <br> <br> <br> </div>";
     print "</div>";
     print "</div>";

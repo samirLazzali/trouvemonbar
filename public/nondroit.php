@@ -19,20 +19,16 @@ if(verif_authent())
 ?>
 
 <div class="main">
-
+<h2>Accès interdit</h2>
 <div class=annonce>
-	<div class=title style="text-align:center;"> <strong> Impossible d'acceder à votre demande </strong>
-	</div>
-	<div> 
-		<br>
-		Le contenu que vous essayez de visualiser n'est pas disponible.
-		<br>
-		<br>
-		<br>
-		<a href="main.php"><strong> Retour </strong></a>
-		<br>
-		<br>
-	</div>
+    <!--<div class=title style="text-align:center;"> <strong> Impossible d'acceder à votre demande </strong></div>-->
+    <div>
+	<br>
+	Le contenu que vous essayez de visualiser n'est pas disponible.
+	<br><br><br>
+	<a href="main.php"><strong> Retour </strong></a>
+	<br><br>
+    </div>
 </div>
 
 </div>

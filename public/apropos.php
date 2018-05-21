@@ -1,5 +1,4 @@
 <?php
-//include("authentication.php");
 include("../src/viewfunctions.php");
 include("../src/annonce.php");
 include("../src/sidebar.php");
@@ -7,22 +6,21 @@ session_start();
 login();
 
 header_t("Les Bons Bails");
+
 if(!verif_authent()) { // si le gars est authentified ==>  acces aux offres
     displayLogin();
+    print "<link rel=\"stylesheet\" href=\"css/full.css\">";
+} else {
+    dispSidebar();
 }
-if(verif_authent())
-{
-	dispSidebar();
-
-}
-//dispSidebar();
 ?>
 
 <div class="main">
 
+<h2>À propos</h2>
+
 <div class=annonce>
-	<div class=title style="text-align:center;"> A propos
-	</div>
+	<!--<div class=title style="text-align:center;">A propos</div>-->
 	<div> 
 		<br>
 		Fondé en 2018, <strong>Les Bons Bails</strong> est un <strong> site d'annonces intra-ENSIIE</strong>. Il s'adresse uniquement aux étudiants de l'ensiie. Dans un soucis de confidentialité, seuls nos membres sont autorisés à visualiser les annonces. 
