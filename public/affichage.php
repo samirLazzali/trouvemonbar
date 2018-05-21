@@ -1,5 +1,7 @@
 <?php
 
+include "gestion_db.php";
+
 /**
  * @brief génère l'entete, s'appelle au début du fichier
  * @param $titre une string
@@ -198,8 +200,16 @@ function article_contact(){
  * @brief affiche l'article de recette.php
  */
 function article_recette(){
+    $connexion = db_connect();
+    $liste_recettes = recettes($connexion);
+    db_close($connexion);
     echo "<div id=\"article\">";
     echo "<h1>Recettes</h1>";
+    echo "<select name=\"recette\">";
+    foreach ($liste_recettes as $rec){
+        echo "<option value=\"1\">$rec</option>";
+    }
+    echo "<select>";
     echo "</div>";
 }
 
