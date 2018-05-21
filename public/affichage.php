@@ -233,12 +233,39 @@ function article_recette(){
     $liste_recettes = recettes($connexion);
     db_close($connexion);
     echo "<div id=\"article\">";
-    echo "<h1>Recettes</h1>";
-    echo "<select name=\"recette\">";
+    echo "<h1>Différentes recettes proposées par Apéral :</h1>";
+    echo "<p>";
+    echo "<ul>";
     foreach ($liste_recettes as $rec){
-        echo "<option value=\"1\">$rec</option>";
+        echo "<li>$rec</li>";
+        if ($rec=="Jacqueline") {
+            echo "Mélanger le vin blanc avec de la limonade et du sirop de grenadine." ;
+            echo "</br>";
+        }
+        if ($rec=="Pizza") {
+            echo "Dérouler la pâte à pizza puis disposer successivement sur celle-ci jambon, sauce tomate et gruyère." ;
+            echo "</br>";
+        }
+        if ($rec=="feuillete_saucisse") {
+            echo "Dérouler la pâte feuilletée et étaler de la moutarde sur celle-ci. 
+            Couper la pâte en plusieurs morceaux et disposer sur chaue morceaux une saucisse cocktail.
+            Enrouler enfin la saucisse avec le morceau de pâte. Faire cuire 15 à 20 minutes au four à 180°. " ;
+            echo "</br>";
+        }
+        if ($rec=="Tartines_thon_StMoret") {
+            echo "Mélanger une boite de thon avec une boite de St_Moret puis ajouter du citron. 
+            Étaler enfin la préparation sur les toasts de pain que vous aurez dorés préalablement au four." ;
+            echo "</br>";
+        }
+        if ($rec=="Roules_jambon_StMoret") {
+            echo "Étaler le StMoret sur les tranches de jambon puis roulez celles-ci en formes de boudin. Coupez les enfin 
+            6 afin de réaliser plusieurs bouchées.";
+            echo "</br>";
+        }
+        echo "</br>";
     }
-    echo "<select>";
+    echo "</ul>";
+    echo "</p>";
     echo "</div>";
 }
 

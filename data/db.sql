@@ -88,9 +88,6 @@ INSERT INTO "Recettes"(nom_rec, temps, prix) VALUES ('Nems',0,3.18);
 INSERT INTO "Recettes"(nom_rec, temps, prix) VALUES ('Chips_crevettes',0,2.50);
 INSERT INTO "Recettes"(nom_rec, temps, prix) VALUES ('Pizza',15,3.2);
 
-/*Compléter les chiffres*/
-INSERT INTO "Recettes"(nom_rec, temps, prix) VALUES ('Legumes',0,0);
-INSERT INTO "Recettes"(nom_rec, temps, prix) VALUES ('Chips_crevette',0,0);
 
 
 INSERT INTO "Ingredients_Recettes"(nom_recette, nom_ingredient) VALUES ('feuillete_saucisse','Pâte');
