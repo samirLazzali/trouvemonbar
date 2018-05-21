@@ -12,10 +12,10 @@
     <h2> Se connecter à votre compte Guiilde </h2>
     <p> Ou <a href="subscribe.php"> créer votre compte </a> </p>
 
-    <form class="" action="actions/authentication_action.php" method="post">
+    <form class="x" action="actions/authentication_action.php" method="post">
         <input type="email" name="email" placeholder="Email"/> </br>
-        <input type="password" name="password" placeholder="Password"/> </br>
-        <input class="btn bg-success text-white" type="submit" value="Se connecter"/>
+        <input type="password" class="mt-2" name="password" placeholder="Password"/> </br>
+        <input class="mt-2 btn bg-success text-white" type="submit" value="Se connecter"/>
     </form>
-    <a href = "forget_mdp.php"> Mot de passe oublié?</a>
+    <a href = "forget_mdp.php" class="mt-4"> Mot de passe oublié?</a>
 </div>

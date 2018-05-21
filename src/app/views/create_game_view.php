@@ -1,19 +1,14 @@
 
-
-
 <div class="container-fluid">
     <h3> Créer une nouvelle table</h3>
-</div>
-
-<div class="container-fluid">
-
 
     <form id="form_game" action="actions/create_game_action.php" name="form_game" method="post">
         <input type="hidden" name="creator" value="<?=$_SESSION['user']?> "/>
 
         <div class="form-group">
             <label for="gamename" class="font-weight-bold"> Nom: </label>
-            <input type="text" id="gamename" name="gamename" placeholder="Nom de la table" /> <br>
+            <input type="text" id="gamename" name="gamename" onblur="check_title()" placeholder="Nom de la table" value=""/>
+            <label class="ml-2 alert-danger" id="warning_gamename"></label>
         </div>
 
         <!-- GAME SYSTEM SELECTION -->
@@ -37,7 +32,8 @@
         <!-- ESTIMATED DURAION-->
         <div class="form-group">
             <label for="duration" class="font-weight-bold"> Nombre de séances estimé : </label>
-            <input type="number" id="duration" name="duration"/>
+            <input type="number" id="duration" name="duration" onblur="check_duration()" />
+            <label class="alert-danger" id="warning_duration"> </label>
         </div>
 
 
@@ -61,7 +57,7 @@
                 <label for="endtimeoneshot"> Fin </label>
                 <input type="time" name="endtime" id="endtimeoneshot" value="00:00"/>
 
-                <button type="button" class="btn btn-primary btn-sm" onclick="add_one_shot()"> Ajouter une date</button>
+                <button type="button" class="btn btn-primary btn-sm" onclick="add_one_shot();check_schedule();"> Ajouter une date</button>
 
             </div>
             <br>
@@ -106,7 +102,7 @@
             <input type="time" id="endtimereccurence" name="endtime" value="00:00"/>
 
             <!-- submit -->
-            <button type="button" class="btn btn-primary btn-sm" onclick="add_reccurent()"> Ajouter un horaire
+            <button type="button" class="btn btn-primary btn-sm" onclick="add_reccurent();check_schedule();"> Ajouter un horaire
                 récurrent
             </button>
 
@@ -125,10 +121,9 @@
         <!-- DESCRIPTION -->
         <div class="form-group">
             <label for="gamedesc" class="font-weight-bold"> Description: </label>
-            <textarea form="form_game" class="form-control" rows="3" id="gamedesc" name="gamedesc" placeholder="Description de la table"></textarea>
+            <textarea form="form_game" class="form-control" rows="3" id="gamedesc" onblur="check_desc()" name="gamedesc" placeholder="Description de la table"></textarea>
+            <label id="warning_gamedesc" class="alert-danger"> </label>
         </div>
-
-        <!-- todo : add functionality : link a file from user's collection to this game -->
 
         <!-- LIST OF FILES SO FAR -->
         <div class="form-group">
@@ -152,13 +147,13 @@
 
 
         <!-- SUBMIT -->
-        <!-- todo : add functionality ; send a mail to guiile mailing list when submitted -->
         <div class="form-group">
-            <button type="submit" value="submit" class="btn btn-primary"> Créer la table </button>
+            <button type="submit" value="submit" id="submit" class="btn btn-primary" disabled> Créer la table </button>
         </div>
     </form>
 
     <script src="js/add_schedule_script.js"></script>
     <script src="js/add_file.js"></script>
+    <script src="js/verify_create_game.js"></script>
 
 </div>

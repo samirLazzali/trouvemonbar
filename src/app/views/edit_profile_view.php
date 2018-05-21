@@ -37,7 +37,7 @@
 
     Mot de passe: <input id="ps" type="hidden" name="password" placeholder="Password"/>
                 <button  type="button" class="btn btn-primary btn-sm" onclick='$("#ps").attr("type","password")'>Éditer</button></br>
-    <input class="btn bg-success text-white mt-2" type="submit" name="Changer mon profil" value="Validerl"/>
+    <input class="btn bg-success text-white mt-2" type="submit" name="Changer mon profil" value="Valider"/>
 </form>
 
 </div>

@@ -18,46 +18,24 @@ class Mail
     public static function game_created($game)
     {
 
-        /**
-         * $systemname = Gamesystem::id_to_name($game->getGamesystemid());
-         * $creator = null;
-         * $subject = "un sujet";
-         * try {
-         * $creator = new User($game->getCreator());
-         * }catch (Exception $e)
-         * {
-         * error("500");
-         * }
-         * $body = "un contenu";
-         * $to = "josephine.barthel@free.fr";
-         *
-         * return mail($to, $subject, $body);
-         */
 
+        $systemname = Gamesystem::id_to_name($game->getGamesystemid());
+        $creator = null;
+          $subject = getenv('SUBJECT_HEADER').$game->getName()."\r";
+          $subject = wordwrap($subject, 70);
+          try {
+          $creator = new User($game->getCreator());
+          }catch (Exception $e)
+          {
+              error("500");
+          }
+          $body = $creator->getNick()." propose une table de ".$systemname."\r";
+          $body .= $game->getDesc()."\r";
+          $body .= "Connectez vous à".getenv('ADRESS')." pour vous inscrire !";
+          $body = wordwrap($body, 70);
+          $to = getenv('MAILING_LIST');
 
-        $your_email = "josephine.barthel@free.fr"; // email address to which the form data will be sent
-        $subject = "Little Treasures Contact Form"; // subject of the email that is sent
-        $body = "test";
-        $name = "Guiilde";
-        $mail="no-reply@guiilde";
-        $error_msg = array();
-
-
-// Assuming there's an error, refresh the page with error list and repeat the form
-
-        if ($error_msg) {
-            //TODO fill
-        }
-
-        $email_body =
-            "Name: $body\
-                        \
-                        ";
-
-// Assuming there's no error, send the email and redirect to Thank You page
-
-       return mail($your_email, $subject, $email_body, "From: $name <$mail>" . "\\r\
-                                                            " . "Reply-To: $name <$mail>");
+          return mail($to, $subject, $body, $additional_parameters = null);
 
 
     }

@@ -8,13 +8,13 @@
 
 
 
-    <div class="mt-4">
+    <div class="mt-2 font-italic">
          <?php echo $game->getDesc() ; ?>
     </div>
 
 
-    <div>
-         <span class="font-weight-bold mt-4"> Nombre de séances : </span> <?php echo $game->getDuration(); ?>
+    <div class="mt-2">
+         <span class="font-weight-bold"> Nombre de séances : </span> <?php echo $game->getDuration(); ?>
     </div>
 
 

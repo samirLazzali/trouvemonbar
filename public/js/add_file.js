@@ -22,22 +22,24 @@ function update_files_display()
 //add a file to the form and update displau
 function add_file()
 {
-    //create a new object that holds the selected values
-    let new_file = {};
-    new_file.id = document.getElementById("userfiles").value
-    new_file.name = select;
+    if(select !== "") {
+        //create a new object that holds the selected values
+        let new_file = {};
+        new_file.id = document.getElementById("userfiles").value
+        new_file.name = select;
 
-    //add this to a hidden field in the html
-    let fd = document.forms['form_game'];
+        //add this to a hidden field in the html
+        let fd = document.forms['form_game'];
 
-    let input = document.createElement("input");
-    input.setAttribute("type", "hidden");
-    input.setAttribute("name", "files[]");
-    input.setAttribute("value", JSON.stringify(new_file));
+        let input = document.createElement("input");
+        input.setAttribute("type", "hidden");
+        input.setAttribute("name", "files[]");
+        input.setAttribute("value", JSON.stringify(new_file));
 
-    fd.appendChild(input);
-    files.push(new_file);
-    update_files_display();
+        fd.appendChild(input);
+        files.push(new_file);
+        update_files_display();
+    }
 
 }
 

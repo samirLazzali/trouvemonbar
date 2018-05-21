@@ -1,6 +1,6 @@
 
 
-<div class="container-fluid gamelist">
+<div class="container-fluid gamelist mt-2">
     <?php
     if(empty($gamelist)) echo "Il n'y a aucune table proposée pour le moment !";
     foreach($gamelist as $game) {

@@ -26,9 +26,9 @@
             if(empty($games)) echo "<div class='mt-2 font-weight-bold'> Cet utilisateur n'est MJ pour aucune table </div>";
             else {
                 echo "<div class='font-weight-bold mt-2'> MJ pour :  </div>";
-                echo "<ul class='list-group-flush'>";
+                echo "<ul class='list-group'>";
                 foreach($games as $game)
-                    echo "<li> <a href=view_game.php?id=$game->gameid> $game->gamename </a> </li>";
+                    echo "<li class='list-group-item'> <a href=view_game.php?id=$game->gameid> $game->gamename </a> </li>";
                 echo "</ul>";
             }
         ?>
