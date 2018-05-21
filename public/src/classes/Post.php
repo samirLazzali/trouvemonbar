@@ -658,10 +658,10 @@ class Post implements JsonSerializable
             $firstChar = substr($term, 0, 1);
             if ($firstChar == '#') {
                 $hashtagName = substr($toAdd, 1, strlen($toAdd) - 1);
-                $content = str_replace($term, "<a class='inpost inpost-hashtag' href='/hashtag/$hashtagName'>$toAdd </a>", $content);
+                $content = str_replace($term, "<a class='inpost inpost-hashtag' href='/hashtag/$hashtagName'>$toAdd</a>", $content);
             }
             elseif ($firstChar == '@')
-                $content = str_replace($term, "<a class='inpost inpost-mention' href='/profile/$toAdd'>$toAdd </a>", $content);
+                $content = str_replace($term, "<a class='inpost inpost-mention' href='/profile/$toAdd'>$toAdd</a>", $content);
         }
 
         $regexUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";

@@ -481,12 +481,12 @@ function refreshFeed(lastRefresh, filter = "")
 }
 
 function findLinks(text) {
-    var mentionRegex = /(@[^\s]+)/g;
+    var mentionRegex = /(@[^\s.]+)/g;
     text = text.replace(mentionRegex, function(user) {
         return '<a href="/profile/' + user.replace("@", "") + '">' + user + '</a>';
     });
 
-    var hashtagRegex = /(#[^\s]+)/g;
+    var hashtagRegex = /(#\w+)/g;
     text = text.replace(hashtagRegex, function(tag) {
         return '<a href="/hashtag/' + tag.replace("#", "") + '">' + tag + '</a>';
     });
