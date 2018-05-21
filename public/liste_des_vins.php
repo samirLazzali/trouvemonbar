@@ -52,8 +52,8 @@ menu_oeno();
     if(isset($_POST['note_vins']) && $_SESSION['connect']>=1){
     	echo $j;
         $req=$connection->prepare('INSERT INTO public.note_vins(note_vins,id_vin,id_vote,id_usr) VALUES(:note_vins,:id_vin,:id_vote,:id_usr)');
-        $req->execute(['note_vins'=>$_POST['note_vins'],
-            'id_vin'=>$_POST['liste_vins'],
+        $req->execute(['note_vins'=>$_POST['note'],
+            'id_vin'=>$_POST['id'],
             'id_vote' => $j,
             'id_usr' => $_SESSION['id'],
             ]);

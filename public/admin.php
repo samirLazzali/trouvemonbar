@@ -90,13 +90,13 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
     $iid=$connection->query("SELECT 'id' FROM public.reunion")->fetchAll();
 
      $irec=$connection->query("SELECT * FROM public.recette");
+    $ids=$irec->fetchAll();
     $j=1;
-    if (!$irec) {
-        $ids=$irec->fetchAll();
-        foreach ($ids as $id) {
+    foreach ($ids as $id) {
             $j++;
         }
-    }
+        echo $j;
+    
     if(isset($_POST['recette'])){
             $req=$connection->prepare('INSERT INTO public.recette(id_rec,recettes) VALUES(:id_rec,:recettes)');
             $req->execute(['id_rec' => $j,
@@ -105,17 +105,15 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
     }
     
     
-     $ivin=$connection->query("SELECT * FROM public.liste_vins");
-    $j=1;
-    if (!$ivin) {
-        $ids=$ivins->fetchAll();
-        foreach ($ids as $id) {
-            $j++;
+     $ivin=$connection->query("SELECT * FROM public.liste_vins")->fetchAll();
+     $c=1;
+        foreach ($ivin as $id) {
+            $c++;
         }
-    }
+    
     if(isset($_POST['nomvin'])){
             $req=$connection->prepare('INSERT INTO public.liste_vins(id_vin,nom) VALUES(:id_vin,:nom)');
-            $req->execute(['id_vin' => $j,
+            $req->execute(['id_vin' => $c,
             'nom'=> $_POST['nomvin'],
             ]);
     }
