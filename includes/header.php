@@ -12,7 +12,6 @@ include("includes/debut.php");?>
     <span id="title1">GolrIIE</span>
     <a href="index.php"><img class="dc" src="img/logo.png" alt="Logo" height ="88" width="94"></a>
 </h1>
-
 <?php if ($id!=0) include("menuderoulant.php"); ?>
 </body>
 </html>
