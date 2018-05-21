@@ -186,12 +186,12 @@ class EvenementsManager
 				else 
 					echo 	"<div class='alert alert-danger'>
 		  				<strong>Une erreur est survenue lors création de la table des participants</strong> 
-						$this->db->errorInfo())</div>";;
+						</div>";; //$this->db->errorInfo())
 			}
 			else 
 				echo 	"<div class='alert alert-danger'>
 		  				<strong>Une erreur est survenue pendant la création de l'évènement</strong> 
-						$this->db->errorInfo())</div>";
+						</div>";
 
 		}
 		else {
