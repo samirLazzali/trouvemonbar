@@ -40,7 +40,7 @@ menu_navigation();
 </div>
 
 
-<header id="gtco-header" class="gtco-cover" role="banner" style="background-image: url(images/img_4.jpg)">
+<header id="gtco-header" class="gtco-cover" role="banner" style="background-image: url(images/bg.jpg)">
                 <div class="gtco-container">
                         <div class="row">
                                 <div class="col-md-12 col-md-offset-0 text-left">
