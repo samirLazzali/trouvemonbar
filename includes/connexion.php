@@ -1,7 +1,10 @@
 <input type="hidden" name="page" value="<?php echo $_SERVER['HTTP_REFERER']; ?>" />
 
 <?php
+session_start();
 $titre="Connexion";
+include("includes/id.php");
+include("includes/debut.php");
 ?>
 
 
@@ -16,14 +19,14 @@ if ($id!=0) erreur(ERR_IS_CO);
 if (!isset($_POST['pseudo'])) //On est dans la page de formulaire
 {
     echo ("<form method=\"post\" action=\"login.php\">
-	<fieldset class=cadreinscription>
-	<legend class='legende'>Connexion</legend>
+	<fieldset>
+	<legend>Connexion</legend>
 	<p>
-	<input class=champinscription name=\"pseudo\" type=\"text\" placeholder='pseudo' id=\"pseudo\" /><br /><br/>
-	<input class='champinscription' type=\"password\" name=\"password\" placeholder='password' id=\"password\" />
+	<label for=\"pseudo\">Pseudo :</label><input name=\"pseudo\" type=\"text\" id=\"pseudo\" /><br />
+	<label for=\"password\">Mot de Passe :</label><input type=\"password\" name=\"password\" id=\"password\" />
 	</p>
 	</fieldset>
-	<p><input class=connexion type=\"submit\" value=\"Connexion\" /></p></form>
+	<p><input type=\"submit\" value=\"Connexion\" /></p></form>
 		<a href=\"register.php\">Pas encore inscrit ?</a>
 	 
 	</div>
