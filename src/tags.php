@@ -20,4 +20,27 @@ class Tags {
 	dbExec($connection, "DELETE FROM links WHERE aid = $annonceId;");
     }
 
+    public static function tagsToString($tagArray) {
+	$str = "";
+	foreach ($tagArray as $tag)
+	    $str = $str . $tag . " ";
+
+	if (sizeof($str > 0))
+	    $str = substr($str, 0, -1);
+
+	return $str;
+    }
+
+    public static function stringToTags($str) {
+	$li = explode(" ", $str);
+	$tagArray = array();
+
+	foreach ($li as $tag)
+	    if ($tag != "")
+		$tagArray[] = $tag;
+
+	return $tagArray;
+    }
+
+
 }

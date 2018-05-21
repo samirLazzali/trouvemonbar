@@ -11,7 +11,7 @@
          <input name=annoncegenre required <?php print (isset($annonce)?"value=\"$annonce->genre\"":"");?>>
       </div>
       <div class="field-wrap"><label>Tags</label>
-         <input name=annoncetags <?php print (isset($annonce)?"value=\"{$annonce->tagsToString()}\"":"");?>>
+         <input name=annoncetags <?php print (isset($annonce)?"value=\"" . Tags::tagsToString($annonce->tagArray) . "\"":"");?>>
       </div>
       <div class="field-wrap"><label class="big">Description<span class="req">*</span></label>
          <textarea name=annoncedesc cols=30 rows=3 maxlength=240 required><?php print (isset($annonce)?$annonce->content:"");?></textarea>

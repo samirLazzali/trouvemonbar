@@ -158,7 +158,7 @@ function affiche_erreur($str) {
 }
 
 function displayResearch() {
-    include("form.html");
+    include("modules/recherche.html");
 }
 
 function buttonResearch() {

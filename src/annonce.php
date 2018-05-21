@@ -40,7 +40,7 @@ class Annonce {
 
 	if (sizeof($this->tagArray) != 0) {
 	    print "<div class=\"tags\">";
-	    print $this->tagsToString();
+	    print Tags::tagsToString($this->tagArray);
 	    print "</div>";
 	}
 
@@ -128,6 +128,7 @@ class Annonce {
 	foreach ($rows as $row) {
 	    return $row->id;
 	}
+	return null;
     }
 
     public static function getAnnonces($requete = "SELECT * FROM annonce ORDER BY postdate DESC LIMIT 10") {
@@ -310,7 +311,7 @@ class Annonce {
 	}
 
 	if (isset($_POST['annoncetags']))
-	    $annonce->stringToTags($_POST['annoncetags']);
+	    $annonce->tagArray = Tags::stringToTags($_POST['annoncetags']);
 	else
 	    $annonce->tagArray = array();
 
@@ -329,50 +330,72 @@ class Annonce {
 
 
     public static function genQuery($criterium = []) {
-	$query = "SELECT * FROM annonce";
-	$authorized = array('tags', 'genre','op', 'semestre', 'module');
+	$connection = dbConnect();
+	$authorized = array('titre','op', 'semestre', 'module');
 	$toAdd = array();
+	$tags = array();
+
+	if (isset($criterium['tags']))
+	    $tags = Tags::stringToTags($criterium['tags']);
 
 	foreach ($criterium as $key => $value) {
-	    if (in_array($key, $authorized) && $value)
+	    if (in_array($key, $authorized) && !empty($value)) {
+		if ($key == 'op' && ($value = Annonce::usernameToUid($connection, $value)) == null)
+		    continue;
 		$toAdd[$key] = $value;
+	    }
 	}
 
-	if (count($toAdd) == 0)
+	if (count($toAdd) == 0 && sizeof($tags) == 0)
 	    return "";
 
-	$query = $query." WHERE ";
+	$query = "SELECT * FROM annonce WHERE ";
 
 	foreach ($toAdd as $key => $value)
-	    $query = $query."$key = $value AND ";
+	    $query = $query . "$key = " . $connection->quote($value) . " AND ";
 
-	$query = substr($query, 0, -4);
+	$query = substr($query, 0, -4); //On enleve le AND
+	$query = $query." ORDER BY postdate DESC";
 
-	print $query;
+	if (!isset($criterium['tags']) || empty($criterium['tags']))
+	    return $query;
 
-	return $query." ORDER BY postdate DESC";
+	//// SI IL Y A DES TAGS /////
+
+	$rows = dbQuery($connection, $query);
+	$toCheck = array();
+	$toAdd = array();
+
+	foreach($rows as $res)
+	    $toCheck[] = $res->id;
+
+	foreach ($toCheck as $aid) {
+	    $good = true;
+	    $affected = array();
+	    $rows = dbQuery($connection, "SELECT * FROM (links JOIN tags ON links.tid = tags.id) WHERE links.aid = $aid");
+
+	    foreach($rows as $res)
+		$affected[] = $res->name;
+
+	    foreach($tags as $tag)
+		if (!in_array($tag, $affected))
+		    $good = false;
+
+	    if ($good)
+		$toAdd[] = $aid;
+	}
+
+	$query = "SELECT * FROM annonce WHERE ";
+
+	foreach ($toAdd as $aid)
+	    $query = $query . "id = " . $connection->quote($aid) . " OR ";
+
+	$query = substr($query, 0, -3); //On enleve le OR
+	$query = $query." ORDER BY postdate DESC";
+
+	return $query;
     }
 
-
-    public function tagsToString() {
-	$str = "";
-	foreach ($this->tagArray as $tag)
-	    $str = $str . $tag . " ";
-
-	if (sizeof($str > 0))
-	    $str = substr($str, 0, -1);
-
-	return $str;
-    }
-
-    public function stringToTags($str) {
-	$li = explode(" ", $str);
-	$this->tagArray = array();
-
-	foreach ($li as $tag)
-	    if ($tag != "")
-		$this->tagArray[] = $tag;
-    }
 
     public static function reduceButton() {
 	print "<a style=\"display: inline;\" class=\"reduce\" href=\"#reduce\"><i class=\"fas fa-minus-square\"></i></a>";
