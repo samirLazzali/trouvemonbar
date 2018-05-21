@@ -38,3 +38,12 @@
 	 ?>
       
     </div>
+
+    
+    <div id="bande_g">
+      texte_g <br/>
+     
+    </div>
+    <div id="bande_d">
+      texte_d <br/>
+    </div>

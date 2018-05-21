@@ -3,8 +3,8 @@ html {
 }
 
 body {
-    min-height:100%;
-    background-color: LightSalmon;
+    height:100%;
+    background-color: white;
     maring :0;
     padding:0;
     position:relative;
@@ -38,16 +38,37 @@ body {
     background-color: DeepSkyBlue;
 }
 
+body div#bande_g{
+    float : left;
+    width : 150px;
+    padding: 100% 0;
+    background-image : url("img/Chat_verticaux.png");
+    background-repeat : repeat-y;
+    background-color : pink;
+}
+
+body div#bande_d{
+    float :right;
+    width : 150px;
+    padding: 100% 0;
+    background-image : url("img/Chat_verticaux.png");
+    background-repeat : repeat-y;
+    background-color : pink;
+}
+
 #footer {
     color :red;
     bottom:0;
     text-align:center;
 }
 #contenu {
+    border-style :solid;
+    border-color:fuchsia;
+    border-width :10px;
     margin : auto;
     margin-top:30px;
-    width : 1000px;
-    background-color: LightSkyBlue;
+    width : 66%;
+    background-color: White;
     padding : 5px 50px;
     padding-bottom: 60px;
     border-radius :50px;
