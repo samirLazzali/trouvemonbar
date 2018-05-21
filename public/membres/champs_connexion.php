@@ -49,7 +49,7 @@ if(($fetch->nbr) == 1)
 		$informations = Array(
 						true,
 						'Mauvais mot de passe',
-						'Vous avez fourni un mot de passe incorrect.',
+						'Vous avez fourni un mot de passe ou un nom d\'utilisateur incorrect.',
 						' - <a href="'.ROOTPATH.'/index.php">Index</a>',
 						ROOTPATH.'/membres/connexion.php',
 						3
