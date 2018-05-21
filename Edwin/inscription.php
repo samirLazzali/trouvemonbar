@@ -21,20 +21,25 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription') {
 	}
 
 		// on recherche si ce login est déjà utilisé par un autre membre
-		$sql = $connection->prepare('SELECT count(*) FROM user WHERE login=?');
+		$sql = $connection->prepare('SELECT count(*) FROM "user" WHERE login=?');
 		$sql->execute(array($_POST['login']));
-    	$result = $sql->fetch(PDO::FETCH_OBJ);
+    	$result = $sql->fetch_assoc(PDO::FETCH_OBJ);
 		
 
 		if ($result[0] == 0) {
-		$sql =  $connection->prepare('INSERT INTO user(login,firstname,lastname,password) VALUES(?,?,?,?)');
-		$sql->execute(array($_POST['login'],$_POST['firstname'],$_POST['lastname'],$_POST['password']));
-    	$result = $sql->fetch(PDO::FETCH_OBJ);
-		//mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+			$userManager = new User\userManager($connection);
+			$user = new User\User();
+			$user->setLogin($_POST['login'])
+				->setFirstname($_POST['firstname'])
+				->setLastname($_POST['lastname'])
+				->setBirthday($_POST['bday'])
+				->setPassword($_POST['password'])
+				->setAdministrateur(false);
 
+			$userManager->add($user);
 		session_start();
 		$_SESSION['login'] = $_POST['login'];
-		header('Location: succes.php');\
+		header('Location: accueil.php');
 		exit();
 		}
 		else {
@@ -49,23 +54,25 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription') {
 ?>
 
 <html>
-<head>
-<title>Inscription</title>
-</head>
-<h1>BIENVENUE SUR TWITIIE </h1>
-<body>
-Inscription à l'espace membre :<br/>
-<form action="inscription.php" method="post">
-<span class="formulaire"> Login : <input type="text" name="login"/><br/> </span>
-<span class="formulaire">Mot de passe : <input type="password" name="password"/><br/></span>
-<span class="formulaire">Confirmation du mot de passe : <input type="password" name="pass_confirm"/><br/> </span>
-<span class="formulaire">Nom : <input type="text" name="lastname"/><br/> </span>
-<span class="formulaire">Prenom : <input type="text" name="firstname"/><br/> </span>
-<span class="formulaire">Date de naissance : <input type="date(Y-m-d)" name="bday"/> <br/> </span>
-<input type="submit" name="inscription" value="Inscription">
-</form>
-<?php
-if (isset($erreur)) echo '<br />',$erreur;
-?>
-</body>
+	<head>
+		<link rel="stylesheet" href="CSS/style.css">
+		<title>Inscription</title>
+	</head>
+		
+	<body>
+		<h1>BIENVENU SUR TWITIIE </h1>
+		<p id="titre">Inscription à l'espace membre :</p>
+		<form action="inscription.php" method="post">
+		<p>Login : <input type="text" name="login"/><br/> 
+		Mot de passe : <input type="password" name="password"/><br/>
+		Confirmation du mot de passe : <input type="password" name="pass_confirm"/><br/> 
+		Nom : <input type="text" name="lastname"/><br/> 
+		Prenom : <input type="text" name="firstname"/><br/>
+		Date de naissance : <input type="date(Y-m-d)" name="bday"/> <br/> </p>
+		<input type="submit" name="inscription" value="Inscription">
+		</form>
+		<?php
+		if (isset($erreur)) echo '<br />',$erreur;
+		?>
+	</body>
 </html>
