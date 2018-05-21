@@ -192,7 +192,7 @@ function _main($page) {
  */
 function article_index(){
     echo "<div id=\"article\">";
-    echo "<h1>Bienvenue sur le nouveau site d'Aperal</h1>";
+    echo "<h1><p style=\"text-indent:7em\">Bienvenue sur le nouveau site d'Aperal!</h1></br>";
 
     echo"<body><img src='images/logo.png' alt='logo' />
     <p>Aaah! Un petit verre, un peu de saucisson et quelques chips entre
@@ -215,7 +215,7 @@ function article_course(){
     $recettes=recettes($connexion);
     db_close($connexion);
     echo "<div id ='article'>";
-    echo "<h1>Quelle recette voulez vous preparer ?</h1>";
+    echo "<h1><p style=\"text-indent:7em\">Quelle recette voulez vous preparer ?</h1>";
     echo "<p>";
     echo "<form action='liste.php' method='post'>";
     foreach ($recettes as $rec){
@@ -234,7 +234,7 @@ function article_course(){
  */
 function article_myth(){
     echo "<div id=\"article\">";
-    echo "<h1>Mythologie</h1>";
+    echo "<h1><p style=\"text-indent:12em\">Mythologie</h1>";
     echo "</br>";
     echo "</br>";
     echo "<p> <strong> Bureau 2017-2018 : </strong>";
@@ -292,7 +292,7 @@ function article_myth(){
  */
 function article_contact(){
     echo "<div id=\"article\">";
-    echo "<h1>Nous contacter</h1>";
+    echo "<h1><p style=\"text-indent:12em\">Nous contacter</h1>";
     echo "</div>";
 }
 
@@ -304,7 +304,7 @@ function article_recette(){
     $liste_recettes = recettes($connexion);
     db_close($connexion);
     echo "<div id=\"article\">";
-    echo "<h1>Différentes recettes proposées par Apéral :</h1>";
+    echo "<h1><p style=\"text-indent:7em\">Différentes recettes proposées par Apéral :</h1>";
     echo "<p>";
     echo "<ul>";
     foreach ($liste_recettes as $rec){
@@ -346,7 +346,7 @@ function article_recette(){
  */
 function article_stats(){
     echo "<div id=\"article\">";
-    echo "<h1>Statistiques et trésorerie</h1>";
+    echo "<h1><p style=\"text-indent:10em\">Statistiques et trésorerie</h1>";
     echo "</div>";
 }
 
@@ -355,7 +355,7 @@ function article_stats(){
  */
 function article_oenologie(){
     echo "<div id=\"article\">";
-    echo "<h1>Oenologie : A quand la prochaine réunion ?</h1>";
+    echo "<h1><p style=\"text-indent:6em\">Oenologie : A quand la prochaine réunion ?</h1>";
     echo "</div>";
 }
 
