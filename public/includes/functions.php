@@ -16,12 +16,12 @@ function actualiser_session()
 		$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 		$retour = $connexion->query("SELECT id_user, login, password FROM Utilisateur WHERE id_user = ".intval($_SESSION['id_user']));
 		$retour -> setFetchMode(PDO::FETCH_OBJ);
-		$retour -> fetch();
+		$fetch = $retour -> fetch();
 		global $queries;
 		$queries++;
-		if(isset($retour['login']) && $retour['login'] != '')
+		if(isset($fetch->login) && $fetch->login != '')
 		{
-			if($_SESSION['password'] != $retour['password'])
+			if($_SESSION['password'] != $fetch->password)
 			{
 				$informations = Array(/*Mot de passe de session incorrect*/
 									true,
@@ -39,9 +39,9 @@ function actualiser_session()
 			
 			else
 			{
-					$_SESSION['id_user'] = $retour['id_user'];
-					$_SESSION['login'] = $retour['login'];
-					$_SESSION['password'] = $retour['password'];
+					$_SESSION['id_user'] = $fetch->id_user;
+					$_SESSION['login'] = $fetch->login;
+					$_SESSION['password'] = $fetch->password;
 			}
 		}
 	}
@@ -58,11 +58,11 @@ function actualiser_session()
 				$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 				$retour = $connexion->query("SELECT id_user, login, password	FROM Utilisateur WHERE id_user = ".intval($_COOKIE['id_user']));
 				$retour -> setFetchMode(PDO::FETCH_OBJ);
-				$retour -> fetch();
+				$fetch = $retour -> fetch();
 				global $queries;
 				$queries++;
 				
-				if(isset($retour->login) && $retour->login != '')
+				if(isset($fetch->login) && $fetch->login != '')
 				{
 					if($_COOKIE['password'] != $retour->password)
 					{
@@ -82,9 +82,9 @@ function actualiser_session()
 					
 					else
 					{
-						$_SESSION['id_user'] = $retour->id_user;
-						$_SESSION['login'] = $retour->login;
-						$_SESSION['password'] = $retour->password;
+						$_SESSION['id_user'] = $fetch->id_user;
+						$_SESSION['login'] = $fetch->login;
+						$_SESSION['password'] = $fetch->password;
 					}
 				}
 			}
@@ -141,14 +141,15 @@ function checklogin($login)
 		$dbUser = getenv('DB_USER');
 		$dbPassword = getenv('DB_PASSWORD');
 		$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-		$retour = $connexion->query("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE login = '$login'");
+		$retour = $connexion->query("SELECT Count(*) AS nbr FROM Utilisateur WHERE login = '$login'");
 		$retour -> setFetchMode(PDO::FETCH_OBJ);
-		$retour -> fetch();
+		$fetch = $retour -> fetch();
 		global $queries;
 		$queries++;
 		
-		if($retour > 0) return 'pris';
-		else return 'Ok';
+		if(($fetch->nbr) > 0)
+		{return 'pris';}
+		else { return 'Ok';}
 	}
 }
 
@@ -174,7 +175,7 @@ function checkpasswordS($password, $password2)
 
 function checkmail($email)
 {
-	if($email == '') return 'Champ vide';
+	if($email == '') return 'vide';
 	else if(!preg_match('#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#is', $email)) return 'invalide';
 	
 	else
@@ -185,11 +186,11 @@ function checkmail($email)
 		$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 		$retour = $connexion->query("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE mail = '$email'");
 		$retour -> setFetchMode(PDO::FETCH_OBJ);
-		$retour -> fetch();
+		$fetch = $retour -> fetch();
 		global $queries;
 		$queries++;
 		
-		if($retour > 0) return 'pris';
+		if($fetch->nbr > 0) return 'pris';
 		else return 'Ok';
 	}
 }
@@ -214,11 +215,11 @@ function checkphone($phone_number)
 		$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 		$retour = $connexion->query("SELECT COUNT(*) AS nbr FROM Utilisateur WHERE phone_number = '$phone_number'");
 		$retour -> setFetchMode(PDO::FETCH_OBJ);
-		$retour -> fetch();
+		$fetch = $retour -> fetch();
 		global $queries;
 		$queries++;
 		
-		if($retour > 0) return 'pris';
+		if($fetch->nbr > 0) return 'pris';
 		else return 'Ok';
 	}
 }

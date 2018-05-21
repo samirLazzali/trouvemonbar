@@ -42,7 +42,7 @@ body div#bande_g{
     float : left;
     width : 150px;
     padding: 100% 0;
-    background-image : url("img/Chat_verticaux.png");
+    background-image : url("img/Chats_verticaux.png");
     background-repeat : repeat-y;
     background-color : pink;
 }
@@ -51,7 +51,7 @@ body div#bande_d{
     float :right;
     width : 150px;
     padding: 100% 0;
-    background-image : url("img/Chat_verticaux.png");
+    background-image : url("img/Chats_verticaux.png");
     background-repeat : repeat-y;
     background-color : pink;
 }
@@ -89,8 +89,4 @@ tr > td:first-child {
 td input {
     width : 250px;
     height : 25px;
-}
-input#cookie{
-    width : 5px;
-    height :5px;
 }
