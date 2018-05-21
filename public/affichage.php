@@ -108,7 +108,31 @@ function _nav($connecte,$liens){
 function profil(){
     echo "<div id=\"menu\">";
     echo "<h3>Profil</h3>";
-    echo "<p>Afficher les détails du profil à l'aide de la bd</p>";
+    echo "<p>";
+    $pseudo=$_SESSION['pseudo'];
+    $connection=db_connect();
+    $requete="SELECT surname,firstname,lastname,id FROM \"user\" WHERE surname='$pseudo'";
+    $reponse=$connection->query($requete);
+    $tuple=$reponse->fetch();
+    $prenom=$tuple['firstname'];
+    $surnom=$tuple['surname'];
+    $nom=$tuple['lastname'];
+    $id=$tuple['id'];
+    $reponse=null;
+    db_close($connection);
+    echo "$prenom \"$surnom\" $nom<br/>";
+    if ($id==1){
+        echo "rang : visiteur";
+    }
+    if ($id==2){
+        echo "rang : membre";
+    }
+    if ($id==3){
+        echo "rang : administrateur";
+    }
+    echo "<br/><a href='gestion.php'>Gérer</a>";
+    echo "</p>";
+    echo "<button type=\"button\" ONCLICK=\"window.location.href='deconnection.php'\">Deconnection</button>";
     echo "</div>";
 }
 
@@ -211,6 +235,55 @@ function article_course(){
 function article_myth(){
     echo "<div id=\"article\">";
     echo "<h1>Mythologie</h1>";
+    echo "</br>";
+    echo "</br>";
+    echo "<p> <strong> Bureau 2017-2018 : </strong>";
+    echo "<p style=\"text-indent:2em\"> Président : <em>Pichet</em> </br> ";
+    echo "<p style=\"text-indent:2em\">Vice-prez : <em>Patou & Derien</em> </br>";
+    echo "<p style=\"text-indent:2em\"> Sec-gen : <em>Vic</em>  </br>";
+    echo "<p style=\"text-indent:2em\">Trésorier : <em>Simsim</em> </br>";
+    echo "</br>";
+    echo "</br>";
+    echo "<p> <strong> Bureau 2016-2017 : </strong>";
+    echo "<p style=\"text-indent:2em\"> Président : <em>JM</em> </br> ";
+    echo "<p style=\"text-indent:2em\">Vice-prez : <em>Monaco & Boucher</em> </br>";
+    echo "<p style=\"text-indent:2em\"> Sec-gen : <em>Riner</em>  </br>";
+    echo "<p style=\"text-indent:2em\">Trésorier : <em>Jacqueline</em> </br>";
+    echo "</br>";
+    echo "</br>";
+    echo "<p> <strong> Bureau 2015-2016 : </strong>";
+    echo "<p style=\"text-indent:2em\"> Président : <em>Omega</em> </br> ";
+    echo "<p style=\"text-indent:2em\">Vice-prez : <em>Croustimoufle & Brick</em> </br>";
+    echo "<p style=\"text-indent:2em\"> Sec-gen : <em>Choucroute</em>  </br>";
+    echo "<p style=\"text-indent:2em\">Trésorier : <em>Onyx</em> </br>";
+    echo "</br>";
+    echo "</br>";
+    echo "<p> <strong> Bureau 2014-2015 : </strong>";
+    echo "<p style=\"text-indent:2em\"> Président : <em>Ashou</em> </br> ";
+    echo "<p style=\"text-indent:2em\">Vice-prez : <em>Corto & Fox</em> </br>";
+    echo "<p style=\"text-indent:2em\"> Sec-gen : <em>Omega</em>  </br>";
+    echo "<p style=\"text-indent:2em\">Trésorier : <em>Stif</em> </br>";
+    echo "</br>";
+    echo "</br>";
+    echo "<p> <strong> Bureau 2013-2014 : </strong>";
+    echo "<p style=\"text-indent:2em\"> Président : <em>Gamin</em> </br> ";
+    echo "<p style=\"text-indent:2em\">Vice-prez : <em>Vaiselle & frtoms</em> </br>";
+    echo "<p style=\"text-indent:2em\"> Sec-gen : <em>Inco</em>  </br>";
+    echo "<p style=\"text-indent:2em\">Trésorier : <em>Chuck</em> </br>";
+    echo "</br>";
+    echo "</br>";
+    echo "<p> <strong> Bureau 2012-2013 : </strong>";
+    echo "<p style=\"text-indent:2em\"> Président : <em>BN</em> </br> ";
+    echo "<p style=\"text-indent:2em\">Vice-prez : <em>Pichu & LeBelge</em> </br>";
+    echo "<p style=\"text-indent:2em\"> Sec-gen : <em>Booster</em>  </br>";
+    echo "<p style=\"text-indent:2em\">Trésorier : <em>Mosdef</em> </br>";
+    echo "</br>";
+    echo "</br>";
+    echo "<p> <strong> Bureau 2011-2012 : </strong>";
+    echo "<p style=\"text-indent:2em\"> Président et Fondateur : <em>Leni</em> </br> ";
+    echo "<p style=\"text-indent:2em\">Vice-prez : <em>Hippod & Eric</em> </br>";
+    echo "<p style=\"text-indent:2em\"> Sec-gen : <em>Prince Caramel</em>  </br>";
+    echo "<p style=\"text-indent:2em\">Trésorier : <em>Loki</em> </br>";
     echo "</div>";
 }
 

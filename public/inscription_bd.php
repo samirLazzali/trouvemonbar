@@ -6,7 +6,7 @@ session_start();
 <html>
 <?php
 include("affichage.php");
-head("mp.css","Aperal : Connection");
+head("mp.css","Aperal : Inscription");
 _header();
 ?>
 <body>

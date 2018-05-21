@@ -3,7 +3,7 @@
 <?php
 include("affichage.php");
 $connecte=0;
-head("mp.css","Aperal : Connection");
+head("mp.css","Aperal : Inscription");
 _header();
 ?>
 <body>
