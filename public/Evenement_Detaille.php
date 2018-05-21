@@ -3,6 +3,7 @@
 <head>
 	<title> Nom de l'événement </title>
 	<metac charset="utf-8">
+	<script src="Evenement_Detaille.js"> </script>
 	<link rel="stylesheet" type="text/css" href="Evenement_Detaille.css">
 	<link rel="stylesheet" type="text/css" href="main.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -38,12 +39,21 @@
 	    	<br/> <br/>
 	    	<img src="./images/Apartement.jpg" width="300" height="200" alt="Photo de l'événement">
 	    	<br/> <br/>
+
+	    	<form> 
+  				<input type="button" value="Je participe">
+			</form>
+			<p>Vous ne participez pas.</p>
 	    	
 	    	
 	    	
 	     </center>
 </body>
 <end>
+	<form id="modif_event">
+   		 <a href="./Creer_evenement.php"/>
+   		 <input type="button" value="Modifier événement">
+  	</form>
   <form id="retour_accueil">
     <a href="./Accueil.php"/>
     <input type="button" value="Revenir à l'accueil">
