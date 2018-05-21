@@ -54,6 +54,7 @@ if(isset($_POST['purity']))
 	   $purity = false;
 	   }
 	$_SESSION['form_purity']=$purity;
+	echo $purity;
 	   
 }
 
@@ -61,6 +62,8 @@ if(isset($_POST['birthdate']))
 {
 	$password = trim($_POST['birthdate']);
 	$_SESSION['form_birthdate'] = $birthdate;
+	echo $birthdate
+}
 	
 if(isset($_POST['sexe']))
 {
