@@ -1,5 +1,6 @@
 <?php 
 session_start();
+require '../vendor/autoload.php';
 // on teste si le visiteur a soumis le formulaire
 if (isset($_POST['modifier_profil']) && $_POST['modifier_profil'] == 'Modifier') {
 	// on teste l'existence de nos variables. On teste également si elles ne sont pas vides
