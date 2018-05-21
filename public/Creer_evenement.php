@@ -18,7 +18,7 @@
 	     <form action="Creer_evenement.php" method="post" id="event">
 	     	   <label for="nom_event"><b>Nom de l'évènement</b></label>
 		   <br/>
-	     	   <input type="text" name="nom_event" required/>
+	     	   <input type="text" name="nom_event" style="width:100%;"required/>
 		   <br/>
 		   <br/>
 		   <label for="date_event"><b>Quand?</b></label>
@@ -27,11 +27,11 @@
 		   <br/>
 		   <label for="lieu_event"><b>Où?</b></label>
 		   <br/>
-		   <input type="text" name="lieu_event" required>
+		   <input type="text" name="lieu_event" style="width=100%;" required>
 		   <br/>
 		   <br/>
 		   <label for="before"><b>Quel before chacal?<br/></b><label/>
-		   <input type="text" name="before" required>
+		   <input type="text" name="before" style="width:100%;" >
 		   <br></br>
 		   <label for="prix"><b>Et ça coûte combien?<br/></b><label/>
 		   <br/>

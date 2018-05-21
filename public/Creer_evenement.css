@@ -1,7 +1,8 @@
 
 body { font-family: Arial, Helvetica, sans-serif; }
+
 form#event {
-  background: #9cbc2c;
+  background: #f2f2f2f2;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
@@ -9,7 +10,10 @@ form#event {
   width: 400px;
 }
 
-form#event text {
+form#event text{
+    width:100%;
+}
+/*form#event text {
   background: #1f3954;
   border: none;
   -moz-border-radius: 3px;
@@ -20,7 +24,7 @@ form#event text {
   outline: none;
   padding: 5px;
   width: 200px;
-}
+}*/
 form#event label{
 
     border-radius: 3px;
@@ -47,7 +51,7 @@ form#event submit{
     color:#555;
     
 }
-
+/*
 form#retour_accueil {
     width:85px;
     height:85px;
@@ -56,4 +60,53 @@ form#retour_accueil {
     font:bold 13px Arial;
     border-radius:50%;
     color:#555;
+}*/
+input[type=text], input[type=password] {
+    width: 33%;
+	padding: 12px 20px;
+	margin: 0px;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+	background: #f1f1f1;
 }
+
+/*input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}*/
+
+input[type=submit] {
+    background-color: #333333 /*#1E90FF*/;
+    color: white;
+	padding: 14px 20px;
+    margin: 8px ;
+	border: none;
+    cursor: pointer;
+    width: 70%;
+    text-align:center;
+}
+
+input[type=button]{
+    background-color: #333333 /*#1E90FF*/;
+    color: white;
+	padding: 14px 20px;
+    margin: 8px ;
+	border: none;
+    cursor: pointer;
+    width: 30%;
+    text-align:center;
+    
+}
+
+button:hover {
+    opacity: 0.5;
+}
+
+h2{margin: 12px;}
+
+.alert {
+	color : red;
+	font-weight: bold;
+}
+
