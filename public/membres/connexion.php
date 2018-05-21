@@ -24,8 +24,6 @@ if(isset($_SESSION['id_user']))
 
 $titre = 'Connexion';
 include('../includes/top.php');
-
-if($_POST['validate'] != 'ok') {
 ?>	
 		<div id="contenu">
 					
@@ -49,7 +47,6 @@ if($_POST['validate'] != 'ok') {
 			<p><a href="inscription.php">Je ne suis pas inscrit.</a><br/>
 			</p>
 			<?php
-}
 
 else	{
 				$dbName = getenv('DB_NAME');
