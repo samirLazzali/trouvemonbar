@@ -3,3 +3,56 @@ label {
     width:150px;
     float:left;
 }
+
+.champinscription{
+    border: solid white 1px;
+    background: #c5c5c5;
+    color: white;
+    height: 30px;
+    width: 500px;
+    border-radius: 5px;
+    padding: 3px;
+    box-shadow: 4px 1px 8px #000000;
+}
+
+.intituleinscription{
+    font-family: serif;
+    font-variant: small-caps;
+    font-size: 20px;
+}
+
+.champinscription:focus{
+    border: solid white 1px;
+    border-radius: 5px;
+}
+
+#pasencoreinscrit{
+    font-family: serif;
+    font-variant: small-caps;
+}
+
+#inscrivezvous{
+    font-family: serif;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.connexion{
+    background: #32a124;
+    color: white;
+    border: solid black 1px;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 2px 1px 8px #000000;
+}
+
+.connexion:hover{
+    background: #56c74e;
+}
+
+.connexion:active{
+    background: #3b8936;
+    color: white;
+    border: solid white 1px;
+}
