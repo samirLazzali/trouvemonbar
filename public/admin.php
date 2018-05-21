@@ -152,8 +152,10 @@ else {
     echo '<link rel="stylesheet" href="css/style.css">';
     echo '<html>';
     echo '<body>';
+    echo '<div class="gtco-container">';
     echo "<h2>Vous n'avez pas les droits d'administration !</h2>";
     echo "<a href='index.php'>Accueil</a>";
+    echo '</div>';
     echo '</body>';
     echo '</html>';
 }

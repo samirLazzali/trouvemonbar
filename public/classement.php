@@ -26,17 +26,16 @@ $users = $userRepository->fetchAll();
 
 <body>
 
-<div class="banniere">
+
     <?php
     menu_navigation();
     ?>
-</div>
 
-<div class="container">
+<div class="gtco-container">
     <br />
     <br />
     <br />
-    <h3><?php echo 'Classement des apériiens' ?></h3>
+    <h2><?php echo 'Classement des apériiens' ?></h2>
 
     <table>
         <tr>

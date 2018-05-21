@@ -90,10 +90,12 @@ $users = $userRepository->fetchAll();
     ]);
 }
 else {
-        echo '<body>';
-        echo '<h2>veuillez vous connecter pour accéder à cette page</h2>';
+    echo '<body>';
+    echo '<div class="gtco-container">';
+        echo '<h2>Veuillez vous connecter pour accéder à cette page</h2>';
 	echo '<a href="connexion.php">Connexion</a>';
 	echo '</body>';
+	echo '</div>';
 }
 ?>
 </html>

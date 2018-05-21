@@ -28,16 +28,12 @@ $users = $userRepository->fetchAll();
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <script src="js/modernizr-2.6.2.min.js"></script>
-
 </head>
 <body>
 
-<div class="banniere">
 <?php
 menu_navigation();
 ?>
-</div>
 
 
 <header id="gtco-header" class="gtco-cover" role="banner" style="background-image: url(images/bg.jpg)">

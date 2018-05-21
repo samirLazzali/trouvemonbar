@@ -9,6 +9,7 @@ $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=
 
 $userRepository = new \User\UserRepository($connection);
 $users = $userRepository->fetchAll();
+session_start();
 ?>
 
 <html>
@@ -27,7 +28,8 @@ $users = $userRepository->fetchAll();
 <br />
 <br />
 <br />
-<h3><?php echo 'Réunions' ?></h3>
+<div class="gtco-container">
+<h2><?php echo 'Réunions' ?></h2>
 
     <table class="table table-bordered table-hover table-striped">
         <thead style="font-weight: bold">
@@ -57,7 +59,7 @@ $users = $userRepository->fetchAll();
                 <td><?php echo $participants ?></td>
                 <td><?php echo $reu['cr'] ?> </td>
             </tr>
-        <?php } ?>
+	<?php } ?>
     </table>
-
+    </div>
 
