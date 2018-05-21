@@ -35,13 +35,13 @@ enTete("Accueil", "CSS/style.css");
 <script>
         var AtList = 
                 <?php
-                    $sth = $connection->prepare('SELECT firstname FROM "user"');
+                    $sth = $connection->prepare('SELECT login FROM "user"');
                     $sth->execute();
                     $result = $sth->fetch(PDO::FETCH_OBJ);
                     echo '[';
                     while($result){
                         echo '"';
-                        echo "$result->firstname" ;
+                        echo "$result->login" ;
                         echo '"';
                         $result = $sth->fetch(PDO::FETCH_OBJ);
                         if($result){
@@ -146,7 +146,7 @@ afficheMenu();
 <div class="writetweets">
     <p class="writetweetstext">Ecrire un tweet</p>
     <form method='post' action="ecriretweet.php" id="ecriretweet">
-    <input type="hidden" name="pseudo" value="<?php echo $_SESSION['prénom'] ?>"></input><br/>
+    <input type="hidden" name="pseudo" value="<?php echo $_SESSION['login'] ?>"><br/>
     <textarea  name= "textarea" id="textarea"  placeholder="Exprimez vous..." onkeypress="if(event.keyCode==13){ConfirmationTweet();document.getElementById('ecriretweet').submit();}"></textarea>
     <input id="ok" onclick="ConfirmationTweet()" type="submit" value="Envoyer">
     </form>

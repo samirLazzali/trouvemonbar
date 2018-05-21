@@ -12,7 +12,6 @@ $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=
 
 
 $content = $_POST['textarea']; 
-$pseudo = $_POST['pseudo']; 
 
 $tweet = ajoutTweet($content);
 

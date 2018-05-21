@@ -1,0 +1,20 @@
+{
+    "require-dev": {
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "User\\": "src/User/",
+            "Message\\": "src/Message/",
+            "Amis\\": "src/Amis/",
+            "Tweet\\": "src/Tweet/",
+            "Commentaire\\": "src/Commentaire/",
+            "Hashtag\\": "src/Hashtag/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "User\\": "test/unit/User/"
+        }
+    }
+}

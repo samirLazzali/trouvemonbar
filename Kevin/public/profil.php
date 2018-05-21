@@ -17,7 +17,7 @@ else{
     $sth->execute();
     $result = $sth->fetch(PDO::FETCH_OBJ);*/
 
-$id = idUser($pseudo);
+$id = idUserLogin($pseudo);
 
 
 enTete("Profil de $pseudo", "CSS/style.css");
@@ -83,8 +83,6 @@ if(!empty($pseudo)){
 else{
     print "Champ Vide";
 }
-
-
 
 pied();
 ?>

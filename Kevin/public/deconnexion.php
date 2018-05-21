@@ -11,7 +11,7 @@ require '../vendor/autoload.php';
 require_once 'Vue.php';
 
 enTeteConnexion("Deconnexion","CSS/style.css");
-echo '<h1>Au revoir '.$_SESSION['prénom'].'</h1>';
+echo '<h1>Au revoir '.$_SESSION['login'].'</h1>';
 
 
 

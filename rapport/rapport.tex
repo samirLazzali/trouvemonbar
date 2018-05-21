@@ -138,32 +138,70 @@ La problématique à laquelle il répond.
 Nous avons essayé de respecter au maximum le modèle MVC durant le développement de l'application.
 
 \section{La connexion}	
-L'application web TwitIIE est basée sur le fait meme d'avoir un compte par personne, éventuellement un compte pour un groupe ou une association. Il est donc nécessaire de créer cette page de connexion, d'une part pour pouvoir acceder aux fonctionnalités de l'application mais également pour pouvoir authentifier les tweets envoyés.
-La page de connexion est donc la première page présentée à l'utilisateur. Pour pouvoir acceder à son compte il est nécessaire de remplir un formulaire contenant : 
+L'application web TwitIIE est basée sur le fait même d'avoir un compte par personne, éventuellement un compte pour un groupe ou une association. Il est donc nécessaire de créer cette page de connexion, d'une part pour pouvoir accéder aux fonctionnalités de l'application mais également pour pouvoir authentifier les tweets envoyés.
+La page de connexion est donc la première page présentée à l'utilisateur. Pour pouvoir accéder à son compte il est nécessaire de remplir un formulaire contenant : 
 \begin{description}
 \item[Login :] Un login, propre à chacun et unique qui permet l'authentification de chaque personne.
-\item[Mot de passe :] Un mot de passe qui permet à l'utilisateur de proteger son compte.
+\item[Mot de passe :] Un mot de passe qui permet à l'utilisateur de protéger son compte.
 \end{description}
 Après la soumission de ce formulaire, une recherche dans la base de données est faite afin de trouver s'il existe une personne correspondant au couple (login, mot de passe) donnée par l'utilisateur.
-Dans le cas contraire, un message d'erreur lui est transmi. Nous restons tout de meme vague sur la nature de l'erreur afin de proteger le compte d'une personne mal intentionnée.
-Si la personne n'a pas de compte, elle est alors invitée à s'inscrire via le lien disponible sur cette meme page. 
+Dans le cas contraire, un message d'erreur lui est transmis. Nous restons tout de même vague sur la nature de l'erreur afin de protéger le compte d'une personne mal intentionnée.
+Si la personne n'a pas de compte, elle est alors invitée à s'inscrire via le lien disponible sur cette même page. 
 
 \section{Inscription}
-L'inscription va permettre à tout utilisateur de créer un compte TiwtIIE. Il aura alors ensuite accès a toutes les fonctionnalités de l'application.
+L'inscription va permettre à tout utilisateur de créer un compte TwitIIE. Il aura alors ensuite accès a toutes les fonctionnalités de l'application.
 Pour cela, quelques informations lui sont demandé via un formulaire de type POST. Les informations suivantes lui seront demandées : 
 \begin{description}
 \item[Login :] Un login, qui est unique et qui permettra à l'utilisateur de se connecter. Si le login choisi n'est pas disponible, un message d'erreur lui est envoyé afin q'il puisse le modifier.
 \item[Mot de passe :] Afin de garantir de la sécurité de son compte, un mot de passe est requis.
-\item[Confirmation de mot de passe :] Une confirmation du mot de passe précedemment entré est demandé afin d'éviter toute faute de frappe.
+\item[Confirmation de mot de passe :] Une confirmation du mot de passe précedement entré est demandé afin d'éviter toute faute de frappe.
 \item[Nom :] Afin de renseigner son compte le nom de famille est demandé.
-\item[Prenom :] De meme, le prénom est demandé.
-\item[Date de naissance :] Permet également de renseigner le profil de l'utilisateur. On pourrait également faire un test de majorité, mais l'application TwitIIE ne présente pour le momment aucun danger pour les personne mineures, l'accès leur est donc autorisé.
+\item[Prenom :] De même, le prénom est demandé.
+\item[Date de naissance :] Permet également de renseigner le profil de l'utilisateur. On pourrait également faire un test de majorité, mais l'application TwitIIE ne présente pour le moment aucun danger pour les personne mineures, l'accès leur est donc autorisé.
+\end{description}
+
 
 
 \section{Les Abonnements}	
 
+Pour gérer les abonnements, on a crée la table \texttt{amis} composé de deux id, clés étrangères de la table \texttt{user} :
+\begin{description}
+\item[personne1 :] l’id de l’utilisateur qui s’abonne
+\item[personne2 :] l’id de l’utilisateur à qui personne1 va s’abonner
+\end{description}
+C’est à l’aide de cette table que l’on récupère la liste des abonnements de l’utilisateur connecté, utile pour gérer ses messages ainsi que son fil d’actualité.
+De plus, il est possible d’effectuer une recherche (via le formulaire \texttt{recherche @} pour accéder au profil d’un utilisateur inscrit. Un formulaire est alors proposé :
+\begin{description}
+\item  -si l’utilisateur n’est pas abonné à celui recherché, on lui propose d’ajouter celui ci dans sa liste d’abonnements
+\item -sinon, on lui propose de supprimer son abonnement.
+\end{description}
 
-\section{Les Tweets}			
+\section{Les Tweets}	
+
+\subsection{Tweet}
+Chaque utilisateur a possibilité d'écrire un tweet qui sera par la suite visible en allant sur son profil ou dans le fil d'actualité d'une personne abonnée. La table \texttt{tweet} est composée de :
+\begin{description}
+\item[id :] l'id du tweet
+\item[auteur :] l’id de l’auteur du tweet
+\item[date\_envoie :] la date du tweet
+\item[contenu :] le contenu du tweet
+\end{description}
+Un formulaire sur la page \texttt{accueil} permet à l’utilisateur d’écrire un tweet.
+De plus, on récupère les tweets des abonnements sur le fil d’actualité à l’aide d'une  jointure $n…n$ sur la table \texttt{amis} et \texttt{tweet}.
+
+\subsection{Likes}
+Il est aussi possible d'aimer un tweet. On crée une table \texttt{like} spécifique à cette fonctionnalité, prenant en compte les informations suivantes :
+\begin{description}
+\item[tweet \_id :] l’id du tweet aimé
+\item[user\_id:] l'id de l'utilisateur qui aime le tweet
+\end{description}
+On peut ainsi proposer à l'utilisateur d'aimer ou de ne plus aimer un tweet et récupérer le nombre de j'aime associé à un tweet.
+
+\subsection{Liens cliquables}		
+Pour chaque tweet, les noms d'utilisateurs @ et les hashtags # sont convertis en liens cliquables. En effet, on peut ainsi directement accéder au profil d'un utilisateur ou encore à l'ensemble des tweets qui contiennent un hashtags. 
+
+Pour réaliser cela, lors de l'affichage d'un tweet, le contenu du tweet est analysé mot par mot afin de remplacer tous les noms et hashtags par des liens utilisant la méthode GET. Il suffit en effet juste de trouver les mots commençant par # ou @.
+
 
 
 \section{Les Commentaires}	
@@ -183,12 +221,13 @@ Nous avons aussi créer les classes \texttt{Commentaire} et \texttt{CommentaireM
 
 Pour l'affichage des commentaires avec les différents niveaux, il a fallu une récursion. En effet, pour chaque commentaire, on va exécuter une nouvelle fois la requête pour récupérer tous les commentaires du commentaire courant.
 
+\newpage
 \section{Les Hashtags}		
 
 \newpage
 \section{Les Messages Privés}	
 Nous avons décider d'ajouter une fonctionnalité d'envoi de messages privés entre chaque utilisateur. 
-Cette fonctionnalité est directement accessible depuis la barre de navigation. L'utilisateur peut alors à tout moment choisir un destinataire parmi ses amis afin de lui envoyer un message privé.
+Cette fonctionnalité est directement accessible depuis la barre de navigation. L'utilisateur peut alors choisir un destinataire parmi ses amis afin de lui envoyer un message privé.
 
 Pour réaliser cela, nous avons dû créer une nouvelle table dans la base de données, voici ses attributs :
 
