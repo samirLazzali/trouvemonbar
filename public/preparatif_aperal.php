@@ -1,4 +1,5 @@
 <?php
+session_start();	
 require '../vendor/autoload.php';
 include('menu.php');
 //postgres
@@ -27,7 +28,9 @@ $users = $userRepository->fetchAll();
     menu_aperal();
     ?>
 
-
+<br/><br/><br/><br/>
+<br/>
+<br/>
 
 </div>
 <h3><?php echo 'Préparatifs' ?></h3>
@@ -41,30 +44,36 @@ $users = $userRepository->fetchAll();
         <?php /** @var \User\User $user */
     	  $irec=$connection->query("SELECT * FROM public.participants_course")->fetchAll();
     	  $j=1;
+    	          
     	  foreach($irec as $id){
        			 $j++;
    			 }  
-    if(isset($_POST['note']) && $_SESSION['connect']>=1){
+   			$tuple=$connection->query("SELECT * FROM public.participants_course WHERE id_par=0")->fetch();
+
+    if(isset($_POST['part']) && $_SESSION['connect']>=1){
         $req=$connection->prepare('INSERT INTO public.participants_course(id_par,soiree,pseudo,course) VALUES(:id_par,:soiree,:pseudo,:course)');
-        $req->execute(['id_par'=>j,
-        	'soiree'=>$_POST['soiree'],
+        $req->execute(['id_par'=>$j,
+        	'soiree'=>$tuple['soiree'],
         	'pseudo'=>$_SESSION['pseudo'],
-        	'course'=>$_POST['course']
+        	'course'=>$tuple['course'],
             ]);
     }
-
+    	$soir=$tuple['soiree'];
         $turec=$connection->query("SELECT * FROM public.participants_course")->fetchAll();
-
         if(!empty($turec)){
-        	foreach ($turec as $res){
         	?>
            		<tr>
-               		<td><?php echo $res[''] ?></td>
-               		<td><?php echo $res['recettes'] ?></td>
-               		<td><?php echo $tunote['moyenne'];?></td>
+               		<td><?php echo $tuple['soiree'] ?></td>
+               		<td><?php echo $tuple['course'] ?></td>
+               		<td><?php foreach ($turec as $res){
+               				  if($res['soiree']==$soir){
+               				  	echo $res['pseudo'].'<br/>';
+               				  }
+               				}?>
+               		></td>
 
             		</tr>
-        	<?php }	
+        	<?php 
         }
         
 ?>
@@ -72,11 +81,9 @@ $users = $userRepository->fetchAll();
     <?php 
     echo '</form>';
     echo '</br>';
-    echo '<h1>Donnez une note</h1>';
     echo '<form method="post" action="#">';
-    echo '    <fieldset><legend>Id de la Recette </legend><input type ="number" name="recette" /></fieldset>';
-    echo '    <fieldset><legend>Note </legend><input type ="number" name="note" min=0 max=5 /></fieldset>';
-    echo '   <input type ="submit" name="submit" value="Votez"/>';
+    echo '    <fieldset><legend></legend><input type ="hidden" name="part" value=1 /></fieldset>';
+    echo '   <input type ="submit" name="submit" value="Participer"/>';
     echo '</form>';
   
 

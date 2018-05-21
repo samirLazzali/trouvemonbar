@@ -58,12 +58,42 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
 
     echo '</div>';
 
+    echo '<div class="gtco-container">';
+    echo '<br />';
+    echo '<br />';
+    echo '<div class="form-c">';
+    echo '<div class="form-c-head">Ajouter un vin :</div>';
+    echo '<form method = "post" action="#">';
+    echo '<label for="nomvin"><span class="txt">Nom du vin <span class="required">*</span></span><input type="text" class="input-field" name="nomvin" value="" /></label>';
+    echo '<input type ="submit" name="submit" value="Ajouter"/>';
+    echo '</form>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+
+
+    echo '<div class="gtco-container">';
+    echo '<br />';
+    echo '<br />';
+    echo '<div class="form-c">';
+    echo '<div class="form-c-head">Préparatif</div>';
+    echo '<form method = "post" action="#">';
+    echo '<label for="recette"><span class="txt">Soirée <span class="required">*</span></span><input type="text" class="input-field" name="soiree"  /></label>';
+    echo '<label for="recette"><span class="txt">Ingrédients <span class="required">*</span></span><textarea rows="10" cols="59" class="input-field" name="ingredient" ></textarea></label>';
+    echo '<input type ="submit" name="submit" value="Ajouter"/>';
+    echo '</form>';
+    echo '</div>';
+    echo '</div>';
+
+    echo '</div>';
+
     $iid=$connection->query("SELECT 'id' FROM public.reunion")->fetchAll();
-    $irec=$connection->query("SELECT * FROM public.recette");
+
+     $irec=$connection->query("SELECT * FROM public.recette");
     $j=1;
     if (!$irec) {
         $ids=$irec->fetchAll();
-        foreach ($irec as $id) {
+        foreach ($ids as $id) {
             $j++;
         }
     }
@@ -73,6 +103,24 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
             'recettes'=> $_POST['recette'],
             ]);
     }
+    
+    
+     $ivin=$connection->query("SELECT * FROM public.liste_vins");
+    $j=1;
+    if (!$ivin) {
+        $ids=$ivins->fetchAll();
+        foreach ($ids as $id) {
+            $j++;
+        }
+    }
+    if(isset($_POST['nomvin'])){
+            $req=$connection->prepare('INSERT INTO public.liste_vins(id_vin,nom) VALUES(:id_vin,:nom)');
+            $req->execute(['id_vin' => $j,
+            'nom'=> $_POST['nomvin'],
+            ]);
+    }
+
+
 
     $i=1;
     foreach($iid as $id){
@@ -84,6 +132,16 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
             'soiree' => $_POST['soiree'],
             'datee' => $_POST['date'],
             'cr' => $_POST['cr'],
+        ]);
+    }
+
+    if(isset($_POST['soiree']) && $_POST['ingredient']){
+        $connection->exec('DELETE FROM public.participants_course');
+        $req=$connection->prepare('INSERT INTO public.participants_course(id_par,soiree,pseudo,course) VALUES(:id_par,:soiree,:pseudo,:course)');
+        $req->execute(['id_par' => '0',
+            'soiree' => $_POST['soiree'],
+            'pseudo' => $_SESSION['pseudo'],
+            'course' => $_POST['ingredient'],
         ]);
     }
 

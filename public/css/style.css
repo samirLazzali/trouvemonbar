@@ -65,10 +65,27 @@ a:hover, a:active, a:focus {
 }
 
 p {
+  color: white;
+  font-family: "Roboto", Arial, sans-serif;
   margin-bottom: 20px;
+  font-weight: 400;
+  font-size : 20px;
 }
-
-h1, h2, h3, h4, h5, h6, figure {
+h2 {
+    color: DarkRed;
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 400;
+    margin: 0 0 20px 0;
+    font-size : 50px;
+}
+.alinea {
+    margin-left: 2em;
+}
+.center {
+    float:left;
+    margin: 0 600px 0 600px;
+}
+h1, h3, h4, h5, h6, figure {
   color: #000;
   font-family: "Roboto", Arial, sans-serif;
   font-weight: 400;
@@ -121,7 +138,7 @@ h1, h2, h3, h4, h5, h6, figure {
   font-weight: bold;
 }
 .gtco-nav #gtco-logo em {
-  color: #f54c53;
+  color: Crimson;
 }
 .gtco-nav a {
   padding: 5px 10px;
@@ -175,7 +192,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 .gtco-nav ul li.btn-cta a:hover span {
   background: #fff;
-  color: #f54c53;
+  color: FireBrick;
 }
 .gtco-nav ul li.active > a {
   color: #fff !important;

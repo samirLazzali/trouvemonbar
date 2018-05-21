@@ -157,6 +157,6 @@ CREATE TABLE public."note_vins"(
 CREATE TABLE public."participants_course"(
 id_par INTEGER PRIMARY KEY,
 soiree VARCHAR(40),
-pseudo VARCHAR(40) NOT NULL,
+pseudo VARCHAR(40),
 course VARCHAR(200)
 );

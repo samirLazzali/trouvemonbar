@@ -32,8 +32,10 @@ menu_oeno();
 <br />
 <br />
 <br />
+<br />
 </div>
-<h3><?php echo 'Liste des vins' ?></h3>
+<div class="gtco-container">
+<h2><?php echo 'Liste des vins' ?></h2>
 
     <table class="table table-bordered table-hover table-striped">
         <thead style="font-weight: bold">
@@ -76,6 +78,7 @@ menu_oeno();
         
 ?>
     </table>
+</div>
     <?php 
     echo '<div class="gtco-container">';
 
