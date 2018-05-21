@@ -24,13 +24,6 @@ $messageManager = new Message\MessageManager($connection);
 $hashtagManager = new Hashtag\HashtagManager($connection);
 $userManager = new User\UserManager($connection);
 
-/*$userRepository = new \User\UserRepository($connection);
-$users = $userRepository->fetchAll();
-
-$messageRepository = new \Message\MessageRepository($connection);
-$messages = $messageRepository->fetchAll();*/
-
-
 
 
 date_default_timezone_set('Europe/Paris');
@@ -46,13 +39,16 @@ function config($login,$nom, $prenom, $id, $admin) {
 }
 
 
-/* Fonction pour recuperer le prenom de quelqu'un */
+/*
+ * Fonction pour recupérer le prenom d'un utilisateur en connaissant son id
+ */
 function prenom_user($id_user){
     global $userManager;
     $user = $userManager->get($id_user);
     return $user->getFirstname();
 }
 
+/*
 function idUser($pseudo){
     global $connection;
     $sth = $connection->prepare('SELECT * FROM "user" WHERE firstname=\''.$pseudo.'\';');
@@ -62,9 +58,32 @@ function idUser($pseudo){
     }
     $result = $sth->fetch(PDO::FETCH_OBJ);
     return $result->id;
+}*/
+
+
+/*On récupère l'user correspondant au login*/
+function loginUser($login){
+    global $connection;
+    $user = new User\User();
+    $sth = $connection->prepare('SELECT * FROM "user" WHERE login=\''.$login.'\';');
+    $sth->execute();
+    if ($sth->rowCount() == 0){
+        return FALSE;
+    }
+    $result = $sth->fetch(PDO::FETCH_OBJ);
+
+    $user->setLogin($result->login)
+        ->setFirstname($result->firstname)
+        ->setLastname($result->lastname)
+        ->setId($result->id)
+        ->setAdministrateur($result->administrateur);
+    return $user;
 }
 
 
+/*
+ * Renvoie l'id d'un utilisateur dont on connait le $login
+ */
 function idUserLogin($login){
     global $connection;
     $sth = $connection->prepare('SELECT * FROM "user" WHERE login=\''.$login.'\';');
@@ -76,26 +95,18 @@ function idUserLogin($login){
     return $result->id;
 }
 
+/*
+ * Renvoie le login d'un utilisateur sachant son $id
+ */
 function loginUserID($id){
     global $userManager;
     $user = $userManager->get($id);
     return $user->getLogin();
 }
 
-/*On récupère l'user correspondant au login*/
-function loginUser($login){
-    global $connection;
-    $sth = $connection->prepare('SELECT * FROM "user" WHERE login=\''.$login.'\';');
-    $sth->execute();
-    if ($sth->rowCount() == 0){
-        return FALSE;
-    }
-    $result = $sth->fetch(PDO::FETCH_OBJ);
-    return $result;
-}
-
-
-
+/*
+ * Recupére la liste des id des amis de l'utilisateur ayant pour id=$id
+ */
 function get_friendList($id){
     global $connection;
     $sth = $connection->prepare('SELECT * FROM "amis" WHERE personne1=\''.$id.'\' ');

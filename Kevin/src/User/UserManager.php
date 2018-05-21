@@ -30,7 +30,7 @@ class UserManager
 
         $req->bindValue(':login', $user->getLogin());
         $req->bindValue(':firstname', $user->getFirstname());
-        $req->bindValue(':lasttname', $user->getLastname());
+        $req->bindValue(':lastname', $user->getLastname());
         $req->bindValue(':birthday', date_format($user->getBirthday(),"Y-m-d"));
         $req->bindValue(':password', $user->getPassword());
         $req->bindValue(':administrateur', $user->getAdministrateur());
@@ -58,18 +58,19 @@ class UserManager
     public function get($id){
         $id = (int) $id;
 
-        $req = $this->db->query('SELECT login, firstname,lastname, birthday, password, administrateur FROM "user" WHERE id = '.$id);
+        $req = $this->db->query('SELECT * FROM "user" WHERE id = '.$id);
 
         $res = $req->fetch(\PDO::FETCH_ASSOC);
         $user = new User();
+        
         $user
-                ->setId($id)
-                ->setLogin($res['login'])
-                ->setFirstname($res['firstname'])
-                ->setLastname($res['lastname'])
-                ->setBirthday(new \DateTime($res['birthday'])) 
-                ->setPassword($res['password'])
-                ->setAdministrateur($res['administrateur']);
+            ->setId($id)
+            ->setLogin($res['login'])
+            ->setFirstname($res['firstname'])
+            ->setLastname($res['lastname'])
+            ->setBirthday(new \DateTime($res['birthday'])) 
+            ->setPassword($res['password'])
+            ->setAdministrateur($res['administrateur']);
 
         return $user;
 

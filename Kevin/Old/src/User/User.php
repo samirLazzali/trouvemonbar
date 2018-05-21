@@ -11,6 +11,11 @@ class User
     /**
      * @var string
      */
+    private $login;
+
+    /**
+     * @var string
+     */
     private $firstname;
 
     /**
@@ -26,12 +31,12 @@ class User
     /**
      * @var string
      */
-    private $password
+    private $password;
 
     /**
      * @var boolean
      */
-    private $administrateur
+    private $administrateur;
 
     /**
      * @return int
@@ -48,6 +53,24 @@ class User
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLogin()
+    {
+        return $this->login;
+    }
+
+    /**
+     * @param string $login
+     * @return User
+     */
+    public function setLogin($login)
+    {
+        $this->login = $login;
         return $this;
     }
 
@@ -90,7 +113,7 @@ class User
     /**
      * @return \DateTimeInterface
      */
-    public function getBirthday(): \DateTimeInterface
+    public function getBirthday()
     {
         return $this->birthday;
     }
@@ -110,7 +133,7 @@ class User
      * @return int
      * @throws \OutOfRangeException
      */
-    public function getAge(): int
+    public function getAge()
     {
         $now = new \DateTime();
 

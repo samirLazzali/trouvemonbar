@@ -30,7 +30,7 @@ class UserManager
 
         $req->bindValue(':login', $user->getLogin());
         $req->bindValue(':firstname', $user->getFirstname());
-        $req->bindValue(':lastname', $user->getLastname());
+        $req->bindValue(':lasttname', $user->getLastname());
         $req->bindValue(':birthday', date_format($user->getBirthday(),"Y-m-d"));
         $req->bindValue(':password', $user->getPassword());
         $req->bindValue(':administrateur', $user->getAdministrateur());
@@ -65,7 +65,7 @@ class UserManager
         $user
                 ->setId($id)
                 ->setLogin($res['login'])
-                ->setFirsname($res['firstname'])
+                ->setFirstname($res['firstname'])
                 ->setLastname($res['lastname'])
                 ->setBirthday(new \DateTime($res['birthday'])) 
                 ->setPassword($res['password'])

@@ -106,8 +106,8 @@ $msg1->setContenu("Bonjour, comment tu vas?");
         <div>
             <input type="text" id="sendField" placeholder="Votre message ..." onkeypress="if (event.keyCode==13){EnvoiMessage();}" ></input>
 
-            <button type="button" id="envoyer" onclick="EnvoiMessage()">Envoyer</button>
-            <button onclick="Conversation();">Recharger</button>
+            <button type="button" id="envoyer" onclick="EnvoiMessage()" class="styleButton">Envoyer</button>
+            <button onclick="Conversation();" class="styleButton">Recharger</button>
 
         </div>
     </div>

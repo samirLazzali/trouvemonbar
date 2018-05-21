@@ -30,20 +30,26 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription') {
 		$sql = $connection->prepare('SELECT count(*) as nb FROM "user" WHERE login=?');
 		$sql->execute(array($_POST['login']));
     	$result = $sql->fetch(PDO::FETCH_OBJ);
-		
-		if ($result->nb == 0) {
-		$sql =  $connection->prepare('INSERT INTO "user"(login,firstname,lastname,birthday,password, administrateur) VALUES(?,?,?,?,?,?)');
-		$sql->execute(array($_POST['login'],$_POST['firstname'],$_POST['lastname'],$_POST['bday'],$_POST['password'],'false'));
-    	$result = $sql->fetch(PDO::FETCH_OBJ);
-		//mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
 
+    	if ($result->nb == 0) {
 
-        session_start();
-		config($_POST['login'],$_POST['lastname'], $_POST['firstname'], idUser($_POST['firstname']), 'false');
+    		$userManager = new User\UserManager($connection);
+			$user = new User\User();
+			$user->setLogin($_POST['login'])
+				->setFirstname($_POST['firstname'])
+				->setLastname($_POST['lastname'])
+				->setBirthday(new \DateTime($_POST['bday']))
+                ->setPassword($_POST['password'])
+				->setAdministrateur("false");
 
-		header('Location: accueil.php');
-	//	exit();
-		}
+			$userManager->add($user);
+			
+
+			session_start();
+       		config($user->getLogin(),$user->getLastname(),$user->getFirstname(),idUserLogin($user->getLogin()),$user->getAdministrateur());
+			header('Location: accueil.php');
+			exit();
+    	}
 		else {
 		$erreur = 'Un membre possède déjà ce login.';
 		}

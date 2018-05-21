@@ -17,7 +17,7 @@ else{
     $sth->execute();
     $result = $sth->fetch(PDO::FETCH_OBJ);*/
 
-$id = idUser($pseudo);
+$id = idUserLogin($pseudo);
 
 
 enTete("Profil de $pseudo", "CSS/style.css");
@@ -63,8 +63,15 @@ else if($id!=$_SESSION['id']){
     print "<input  type='submit' value='Supprimer' onclick='alert(\"Ami supprimé !\");'>";
     print "</form>";
     print "</div>";
-
-
+}
+else if ($id==$_SESSION['id']){
+    print "<div class=\"informations\">";
+    print "Nombre d'amis : ";
+    echo getNbAmis($id);
+    print " Nombre de tweets : ";
+    echo getNbTweet($id);
+    print "<br/>";
+    print "</div>";
 }
 
 if(!empty($pseudo)){
@@ -76,8 +83,6 @@ if(!empty($pseudo)){
 else{
     print "Champ Vide";
 }
-
-
 
 pied();
 ?>

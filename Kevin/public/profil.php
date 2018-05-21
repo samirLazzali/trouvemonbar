@@ -9,9 +9,14 @@ require_once 'Modele.php';
 if(isset($_POST['visite'])){ // si formulaire soumis
     $pseudo = $_POST['pseudo'];
 }
-else{
+else if(isset($_GET['pseudo'])){
     $pseudo = $_GET['pseudo'];
 }
+else if(isset($_SESSION['lastProfil'])){
+    $pseudo = $_SESSION['lastProfil'];
+}    
+$_SESSION['lastProfil'] = $pseudo;
+
 
 /*$sth = $connection->prepare('SELECT id FROM "user" WHERE firstname=\''.$pseudo.'\'');
     $sth->execute();

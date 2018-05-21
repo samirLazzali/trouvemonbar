@@ -73,7 +73,7 @@ titreH1("Tweet de ".loginUserID($tweet->getAuteur()));
         echo '<input type="submit" value="Envoyer" onclick="alert(\'Commentaire Envoyé\')" class="inputbutton">'."\n";
         echo "</form>\n";
 
-    if (isset($_SESSION['admin'])) {
+    if ($_SESSION['admin'] == "true") {
         //AFFICHE BOUTON SUPPRESSION*/
         echo '<form method="POST" action="Tweet/deleteTweet.php">'."\n";
         echo '<input type="hidden" name="idTweet" value="'.$tweet->getId().'">'."\n";

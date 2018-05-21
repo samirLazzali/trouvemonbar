@@ -40,7 +40,7 @@ $listeCommentaire1 = getCommentaires($T_id, "tweet");
 
 enTete("Tweet", "CSS/style.css");
 afficheMenu();
-titreH1("Tweet de ".prenom_user($tweet->getAuteur()));
+titreH1("Tweet de ".loginUserID($tweet->getAuteur()));
 ?>
 <script src="fonctionsJS.js"></script>
 <script>

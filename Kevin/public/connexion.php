@@ -29,7 +29,7 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
     if ($data->nb ==1) {
         session_start();
         $idUser = idUserLogin($_POST['login']);
-        config($_POST['login'],"", prenom_user($idUser), $idUser, 'false');
+        config($_POST['login'],"", prenom_user($idUser), $idUser, 'true');
 
         header('Location: accueil.php');
         //exit();
@@ -57,13 +57,13 @@ echo '<div class="conteneur">';
 Login : <input type="text" name="login"/><br />
 Mot de passe : <input type="password" name="password"/><br />
 <input type="submit" name="connexion" value="Connexion" class="styleButton">
-    <br /><br /><br />
-    <a href="inscription.php" class="styleButton">Vous inscrire</a>
-
-</form>
 <?php
 if (isset($erreur)) echo '<br /><br />',$erreur;
 ?>
+<br /><br />
+    <a href="inscription.php" class="styleButton">Vous inscrire</a>
+
+</form>
 
 </div>
 

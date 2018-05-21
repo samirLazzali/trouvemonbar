@@ -1,5 +1,18 @@
 <?php
+
 require '../vendor/autoload.php';
+require_once 'Modele.php';
+require_once 'Vue.php';
+
+
+
+$dbName = getenv('DB_NAME');
+$dbUser = getenv('DB_USER');
+$dbPassword = getenv('DB_PASSWORD');
+$connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
+
+
+
 // on teste si le visiteur a soumis le formulaire de connexion
 if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
     if ((isset($_POST['login']) && !empty($_POST['login'])) && (isset($_POST['password']) && !empty($_POST['password']))) {
@@ -7,21 +20,22 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
     
 
     // on teste si une entrée de la base contient ce couple login / pass
-    $sql = $connection->prepare('SELECT count(*) FROM user WHERE login="?" AND password="?"');
-    $sql->execute(array($_POST[login]),$_POST[pass]);
+    $sql = $connection->prepare('SELECT count(*) as nb FROM "user" WHERE login=\''.$_POST['login'].'\' AND password=\''.$_POST['password'].'\';');
+    $sql->execute();
     $data = $sql->fetch(PDO::FETCH_OBJ);
 
 
     // si on obtient une réponse, alors l'utilisateur est un membre
-    if ($data[0] == 1) {
+    if ($data->nb ==1) {
         session_start();
-        $_SESSION['login'] = $_POST['login'];
-        //$_SESSION['admin'] = 
+        $idUser = idUserLogin($_POST['login']);
+        config($_POST['login'],"", prenom_user($idUser), $idUser, 'false');
+
         header('Location: accueil.php');
-        exit();
+        //exit();
     }
     // si on ne trouve aucune réponse, le visiteur s'est trompé soit dans son login, soit dans son mot de passe
-    elseif ($data[0] == 0) {
+    elseif ($data->nb == 0) {
         $erreur = 'Compte non reconnu.';
     }
     // sinon, alors la, il y a un autre problème
@@ -30,25 +44,29 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
     }
     }
     else {
-    $erreur = 'Au moins un des champs est vide.';
+        $erreur = 'Au moins un des champs est vide.';
     }
 }
-?>
-<html>
-<head>
-<title>Accueil</title>
-</head>
 
-<body>
-Connexion à l'espace membre :<br />
-<form action="connexion.php" method="post">
+enTeteConnexion("Connexion à l'espace membre","CSS/style.css");
+echo '<div class="conteneur">';
+?>
+
+
+<form action="connexion.php" method="post" class="inscription">
 Login : <input type="text" name="login"/><br />
 Mot de passe : <input type="password" name="password"/><br />
-<input type="submit" name="connexion" value="Connexion">
+<input type="submit" name="connexion" value="Connexion" class="styleButton">
+    <br /><br /><br />
+    <a href="inscription.php" class="styleButton">Vous inscrire</a>
+
 </form>
-<a href="inscription.php">Vous inscrire</a>
 <?php
 if (isset($erreur)) echo '<br /><br />',$erreur;
 ?>
-</body>
-</html>
+
+</div>
+
+<?php
+pied()
+?>

@@ -36,7 +36,7 @@ while($result){
         $msg->setEmetteur("Moi");
 	}
 	else{
-        $msg->setEmetteur(prenom_user($result->emetteur));
+        $msg->setEmetteur(loginUserID($result->emetteur));
     }
 	$msg->setDate(new \DateTime($result->date_envoie))
 		->setContenu($result->contenu);

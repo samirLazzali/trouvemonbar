@@ -1,4 +1,5 @@
 <?php
+require '../vendor/autoload.php';
 // on teste si le visiteur a soumis le formulaire de connexion
 if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
     if ((isset($_POST['login']) && !empty($_POST['login'])) && (isset($_POST['password']) && !empty($_POST['password']))) {
@@ -15,7 +16,8 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
     if ($data[0] == 1) {
         session_start();
         $_SESSION['login'] = $_POST['login'];
-        header('Location: acceuil.php');
+        //$_SESSION['admin'] = 
+        header('Location: accueil.php');
         exit();
     }
     // si on ne trouve aucune réponse, le visiteur s'est trompé soit dans son login, soit dans son mot de passe
@@ -39,7 +41,7 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
 
 <body>
 Connexion à l'espace membre :<br />
-<form action="index.php" method="post">
+<form action="connexion.php" method="post">
 Login : <input type="text" name="login"/><br />
 Mot de passe : <input type="password" name="password"/><br />
 <input type="submit" name="connexion" value="Connexion">
