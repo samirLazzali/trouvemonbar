@@ -203,6 +203,11 @@ $membre = isset($_GET['m'])?(int) $_GET['m']:'';
                             echo'<p>Cliquez <a href="./index.php">ici</a>  pour revenir à la page d accueil</p>';
                         }
                     }
+                    else {
+
+
+
+                    }
 
                 }
                 break;

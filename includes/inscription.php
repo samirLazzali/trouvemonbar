@@ -1,5 +1,4 @@
 <?php
-session_start();
 $titre="Inscription";
 include("includes/id.php");
 include("includes/debut.php");
