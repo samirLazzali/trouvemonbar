@@ -2,6 +2,10 @@
     float:right;
 }
 
+body{
+background-image:url("../img/bg1.jpg");
+background-repeat:repeat;
+}
 .home{
     float:left;
 }
@@ -25,9 +29,9 @@
 }
 
 #menu{
-    position: sticky;
-    left: 0px;
-    top: 30px;
+    position: absolute;
+    left: 8px;
+    top: 193px;
     margin: 0;
     display: none;
     padding: 0;
@@ -90,6 +94,7 @@ li a{
 
 .cadre{
     border: solid black 1px;
+    background-color: white;
 }
 
 

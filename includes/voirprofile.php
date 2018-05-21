@@ -1,9 +1,6 @@
 <?php
 $titre="Profil";
-include("includes/id.php");
-include("includes/debut.php");
 if ($id==0) erreur(ERR_IS_NOT_CO);
-//On récupère la valeur de nos variables passées par URL
 $action = isset($_GET['action'])?htmlspecialchars($_GET['action']):'consulter';
 $membre = isset($_GET['m'])?(int) $_GET['m']:'';
 ?>
@@ -20,9 +17,9 @@ $membre = isset($_GET['m'])?(int) $_GET['m']:'';
 
             echo'<h1>Profil de '.stripslashes(htmlspecialchars($data['pseudo'])).'</h1>';
 
-            echo'<img src="./avatars/'.$data['avatar'].'"alt="Ce membre n a pas d avatars" />';
+            echo'<img src="./avatars/'.$data['avatar'].'"alt="Ce membre n\'a pas d\'avatar" />';
 
-            echo'<p><strong>Adresse E-Mail : </strong> <a href="mailto:'.stripslashes($data['mail']).'">'.stripslashes(htmlspecialchars($data['mail'])).'</a><br />';
+            echo'<p class="adressmail"><strong>Adresse E-Mail : </strong> <a href="mailto:'.stripslashes($data['mail']).'">'.stripslashes(htmlspecialchars($data['mail'])).'</a><br /><br />';
             $query->CloseCursor();
             if ($membre==$_SESSION["id"]|| $_SESSION["level"]==3) {
                 echo '<a href="./profile.php?m='.$membre.'&action=modifier" >Cliquez ici pour modifier votre profil </a>';
@@ -35,7 +32,6 @@ $membre = isset($_GET['m'])?(int) $_GET['m']:'';
             else{
                 if (empty($_POST['sent']))
                 {
-
                     //On prend les infos du membre
                     $query=$db->prepare('SELECT pseudo, mail,avatar FROM membres WHERE id=:id');
                     $query->bindValue(':id',$membre,PDO::PARAM_INT);
@@ -44,25 +40,21 @@ $membre = isset($_GET['m'])?(int) $_GET['m']:'';
                     echo '<h1>Modifier le profil de '.$data["pseudo"].'</h1>';
 
                     echo '<form method="post" action="profile.php?m='.$membre.'&action=modifier" enctype="multipart/form-data">
-                            <fieldset><legend>Identifiants</legend>
-                            Pseudo : <strong>' . stripslashes(htmlspecialchars($data['pseudo'])) . '</strong><br />       
-                            <label for="password">Nouveau mot de Passe :</label>
-                            <input type="password" name="password" id="password" /><br />
-                            <label for="confirm">Confirmer le mot de passe :</label>
-                            <input type="password" name="confirm" id="confirm"  />
-                            </fieldset>
+                            <fieldset class=cadreinscription><legend class=\'legende\'>Identifiants</legend><br />
+                            Pseudo : <strong>' . stripslashes(htmlspecialchars($data['pseudo'])) . '</strong><br /><br />
+                            <input class=champinscription type="password" name="password" placeholder="nouveau mot de passe" id="password" /><br /><br />
+                            <input class=champinscription type="password" name="confirm" placeholder="confirmez le nouveau mot de passe" id="confirm"  /><br />
+                            </fieldset><br />
                      
-                            <fieldset><legend>Contacts</legend>
-                            <label for="email">Votre adresse E_Mail :</label>
-                            <input type="text" name="email" id="email"
+                            <fieldset class=cadreinscription><legend class=\'legende\'>Contacts</legend>
+                            <input class=champinscription type="text" name="email" placeholder="nouvel E-mail" id="email"
                             value="' . stripslashes($data['mail']) . '" /><br />
-                            </fieldset>
+                            </fieldset><br />
                                    
-                            <fieldset><legend>Profil sur GolrIIE</legend>
-                            <label for="avatar">Changer votre avatar :</label>
+                            <fieldset class=cadreinscription><legend class=\'legende\'>Profil sur GolrIIE</legend>
                             <input type="file" name="avatar" id="avatar" /><br /><br />
-                            <label><input type="checkbox" name="delete" value="Delete" />
-                            Supprimer l avatar</label>
+                            <input type="checkbox" name="delete" value="Delete" />
+                            Supprimer l avatar</>
                             Avatar actuel :
                             <img src="./avatars/' . $data['avatar'] . '"
                             alt="pas d avatar" />
@@ -71,7 +63,7 @@ $membre = isset($_GET['m'])?(int) $_GET['m']:'';
                          
                             </fieldset>
                             <p>
-                            <input type="submit" value="Modifier son profil" />
+                            <input class=connexion type="submit" value="Modifier son profil" />
                             <input type="hidden" id="sent" name="sent" value="1" />
                             </p></form>';
                     $query->CloseCursor();

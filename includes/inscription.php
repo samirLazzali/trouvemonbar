@@ -8,19 +8,19 @@ if (empty($_POST['pseudo'])) // Si on la variable est vide, on peut considérer 
 {
     echo '<h1>Inscription</h1>';
     echo '<form method="post" action="register.php" enctype="multipart/form-data">
-	<fieldset><legend>Identifiants</legend>
-	<label for="pseudo">* Pseudo :</label>  <input name="pseudo" type="text" id="pseudo" /> (le pseudo doit contenir entre 3 et 15 caractères)<br />
-	<label for="password">* Mot de Passe :</label><input type="password" name="password" id="password" /><br />
-	<label for="confirm">* Confirmer le mot de passe :</label><input type="password" name="confirm" id="confirm" />
-	</fieldset>
-	<fieldset><legend>Contacts</legend>
-	<label for="email">* Votre adresse Mail :</label><input type="text" name="email" id="email" /><br />
-	</fieldset>
-	<fieldset><legend>Profil sur le forum</legend>
+	<fieldset class=cadreinscription><legend class=legende>Identifiants</legend>
+	<input class="champinscription" name="pseudo" type="text" id="pseudo" placeholder="Pseudo (entre 3 et 15 caractères)"/><br /><br />
+	<input class="champinscription" type="password" name="password" placeholder="Password" id="password" /><br /><br />
+	<input class="champinscription" type="password" name="confirm" id="confirm" placeholder="Confirm password"/>
+	</fieldset><br/>
+	<fieldset class=cadreinscription><legend class=legende>Contacts</legend>
+	<input class="champinscription" type="text" name="email" id="email" placeholder="E-mail"/><br />
+	</fieldset><br/>
+	<fieldset class=cadreinscription><legend class=legende>Profil sur le forum</legend>
 	<label for="avatars">Choisissez votre avatars : </label><input type="file" name="avatars" id="avatars" /><br />
-	</fieldset>
+	</fieldset><br/>
 	<p><i>Les champs précédés d un * sont obligatoires</i></p>
-	<p><input type="submit" value="S\'inscrire" /></p></form>
+	<p><input class=connexion type="submit" value="S\'inscrire" /></p></form>
 	</div>
 	</body>
 	</html>';
