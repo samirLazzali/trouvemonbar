@@ -15,17 +15,16 @@
     </script>
 </head>
 <body>
-<?php $variable='profile.php?m='.$_SESSION["id"]; ?>
 <button onclick="affiche('menu')"><img class="affichemenu" src="img/menu.png" alt="img menu deroulant"></button>
 <ul id="menu">
     <li class="optionmenu">
         <a href="index.php">Home</a>
     </li>
     <li class="optionmenu">
-        <a href="">Connexion</a>
+        <a href="./login.php">Connexion</a>
     </li>
     <li class="optionmenu">
-        <a href="<?php echo $variable; ?>">Inscription</a>
+        <a href="./register.php">Inscription</a>
     </li>
 </ul>
 </body>
