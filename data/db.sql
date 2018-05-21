@@ -3,8 +3,7 @@ CREATE TABLE "user" (
   firstname VARCHAR(20) NOT NULL ,
   lastname VARCHAR(20) NOT NULL ,
   id INTEGER CHECK (id between 1 and 3) ,
-  pwd VARCHAR(200) NOT NULL ,
-  email VARCHAR(50) NOT NULL 
+  pwd VARCHAR(200) NOT NULL 
 );
 
 CREATE TABLE "Ingredients" (
@@ -43,12 +42,12 @@ CREATE TABLE "Soirees" (
   FOREIGN KEY (nom_soiree) REFERENCES "Statistiques"(soiree)
 );
 
-INSERT INTO "user"(surname, firstname, lastname, id, pwd, email) VALUES ('Source','Corentin','Leloup',1,'2fbb9a3365cb1d4f024d189ff33e1b62','corentin.leloup@ensiie.fr');
-INSERT INTO "user"(surname, firstname, lastname, id, pwd, email) VALUES ('Patou','Clément','Gavoille',1,'2fbb9a3365cb1d4f024d189ff33e1b62','clement.gavoille@ensiie.fr');
-INSERT INTO "user"(surname, firstname, lastname, id, pwd, email) VALUES ('Felps','Arnaud','Kopp',1,'2fbb9a3365cb1d4f024d189ff33e1b62','arnaud.kopp@ensiie.fr');
-INSERT INTO "user"(surname, firstname, lastname, id, pwd, email) VALUES ('Pruneau','Valentin','Bruneau',1,'2fbb9a3365cb1d4f024d189ff33e1b62','valentin.bruneau@ensiie.fr');
-INSERT INTO "user"(surname, firstname, lastname, id, pwd, email) VALUES ('Pichet','Quentin','Pichollet',2,'2fbb9a3365cb1d4f024d189ff33e1b62','quentin.pichollet@ensiie.fr');
-INSERT INTO "user"(surname, firstname, lastname, id, pwd, email) VALUES ('Derien','Dorian','Laugier',2,'2fbb9a3365cb1d4f024d189ff33e1b62','dorian.laugier@ensiie.fr');
+INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Source','Corentin','Leloup',1,'2fbb9a3365cb1d4f024d189ff33e1b62');
+INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Patou','Clément','Gavoille',1,'2fbb9a3365cb1d4f024d189ff33e1b62');
+INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Felps','Arnaud','Kopp',1,'2fbb9a3365cb1d4f024d189ff33e1b62');
+INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Pruneau','Valentin','Bruneau',1,'2fbb9a3365cb1d4f024d189ff33e1b62');
+INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Pichet','Quentin','Pichollet',2,'2fbb9a3365cb1d4f024d189ff33e1b62');
+INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Derien','Dorian','Laugier',2,'2fbb9a3365cb1d4f024d189ff33e1b62');
 
 
 INSERT INTO "Ingredients"(nom_ing, prix) VALUES ('Chips',0.62);

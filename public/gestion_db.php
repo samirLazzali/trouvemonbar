@@ -48,7 +48,7 @@ function recettes($connexion){
  * @return un array avec tous les ingredients
  */
 function ingredients_recettes($connexion,$rec){
-    $requete = "SELECT nom_ingredient FROM Ingredients_Recettes WHERE nom_recette=$rec";
+    $requete = "SELECT nom_ingredient FROM \"Ingredients_Recettes\" WHERE nom_recette='$rec'";
     $reponse = $connexion->query($requete);
     $tab = array();
     while ($tupleCourant = $reponse->fetch() ){
@@ -75,4 +75,19 @@ function verif($pseudo,$pwd,$connexion) {
     }
     $reponse = null;
     return false;
+}
+
+function inscript($surnom, $prenom,$nom,$mdp,$connexion){
+    $salt = "@|-°+==00001ddQ";
+    $pwd = md5($mdp.$salt);
+    $instruction = $connexion->prepare("INSERT INTO \"user\"(surname, firstname, lastname, id, pwd) VALUES (:surnom,:prenom,:nom,1,:pwd)");
+    $instruction->bindParam(':surnom',$surnom);
+    $instruction->bindParam(':prenom',$prenom);
+    $instruction->bindParam(':nom',$nom);
+    $instruction->bindParam(':pwd',$pwd);
+    $reponse = $instruction->execute();
+    if ($reponse==false){
+        return false;
+    }
+    return true;
 }

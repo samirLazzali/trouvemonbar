@@ -176,36 +176,23 @@ function article_index(){
  * @brief affiche l'article de course.php
  */
 function article_course(){
-    echo "<div id=\"article\">";
-    echo "<h1>Quelle recette voulez vous preparez?</h1>";
-    echo "<form action='liste.php' method='post'>";
-    echo "<p> <input type='text' size='50' name='recette' value='' /> </p>";
-    echo "<p> <input type='submit' value='Valider' /> <input type='reset' value='Annuler' />";
-    echo "</p>";
-    echo "</form>";
-    echo "</div>";
-}
-
-
-/**
- * @brief affiche l'article de liste.php
- */
-function article_liste(){
-    $recette = $_POST["recette"];
     $connexion = db_connect();
-    $liste_ingredients_recettes = ingredients_recettes($connexion,$recette);
+    $recettes=recettes($connexion);
     db_close($connexion);
-    echo "<div id=\"article\">";
-    echo "<h1>Ingrédients pour réaliser la recette $recette : </h1>";
-    echo "<ul>";
-    foreach ($liste_ingredients_recettes as $ing){
-        echo "<li> $ing </li>";
+    echo "<div id ='article'>";
+    echo "<h1>Quelle recette voulez vous preparer ?</h1>";
+    echo "<p>";
+    echo "<form action='liste.php' method='post'>";
+    foreach ($recettes as $rec){
+        echo "<input type=\"radio\" name='recette' value='$rec'/>$rec";
+        echo "<br/>";
     }
-    echo "</ul>";
-    echo "</select>";
+    echo "<br/>";
+    echo "<input type='submit' value='Valider' name='bouton_valider'/>";
+    echo "</form>";
+    echo "</p>";
     echo "</div>";
 }
-
 
 /**
  * @brief affiche l'article de myth.php
@@ -237,7 +224,7 @@ function article_recette(){
     echo "<p>";
     echo "<ul>";
     foreach ($liste_recettes as $rec){
-        echo "<li>$rec</li>";
+        echo "<li><strong><em>$rec</em></strong></li>";
         if ($rec=="Jacqueline") {
             echo "Mélanger le vin blanc avec de la limonade et du sirop de grenadine." ;
             echo "</br>";

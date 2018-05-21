@@ -1,9 +1,16 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
-    <?php
-        include("affichage.php");
-        $connecte=0;
-        head("mp.css","Aperal : Liste de course");
+<?php
+include("affichage.php");
+$connecte=0;
+if (isset($_SESSION['logged'])){
+    $connecte = 1;
+}
+head("mp.css","Aperal : Liste de course");
         $liens = array(
                     array("index.php","Page d'accueil"),
                     array("stats.php","Statistiques et trésorerie"),
@@ -12,7 +19,7 @@
                     array("oenologie.php","Oenologie : A quand la prochaine réu ?"),
                     array("contact.php","Nous contacter")
                     );
-        body($connecte,$liens,"course.php");
-        _footer();
-    ?>
+    body($connecte,$liens,"course.php");
+    _footer();
+   ?>
 </html>
