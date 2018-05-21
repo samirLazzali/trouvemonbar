@@ -6,5 +6,7 @@ $u = getUserFromCookie();
 
 if ($u == null)
     header("Location: /signup");
-else
+else {
+    $u->checkActive();
     header("Location: /main");
+}

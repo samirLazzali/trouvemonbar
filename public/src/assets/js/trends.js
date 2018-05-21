@@ -24,10 +24,10 @@ function getHashtags()
 }
 
 
-/*fonction qui affiche dans la page tout les posts cotentant un tag
-@param hashtag le tag à passer en entrée
+/**
+ * Fonction qui affiche tous les posts contenant un tag
+ * @param hashtag le tag à passer en entrée
  */
-
 function getPostsFromHashtag(hashtag)
 {
     var request = new XMLHttpRequest();

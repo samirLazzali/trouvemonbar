@@ -9,19 +9,19 @@ if (!$u->getModerator())
 if (isset($_GET['user']))
     $userId = $_GET['user'];
 else
-    error_die("post", ERROR_FieldMissing);
+    error_die("user", ERROR_FieldMissing);
 
-if (isset($_GET['delete'])) {
-    $deleteUser = $_GET['delete'];
-    if (strtolower($deleteUser) == "true")
-        $deleteUser = true;
-    elseif (strtolower($deleteUser) == "false")
-        $deleteUser = false;
+if (isset($_GET['deactivate'])) {
+    $deactivateUser = $_GET['deactivate'];
+    if (strtolower($deactivateUser) == "true")
+        $deactivateUser = true;
+    elseif (strtolower($deactivateUser) == "false")
+        $deactivateUser = false;
     else
-        error_die("delete should be true or false.", STATUS_ERROR);
+        error_die("deactivate should be true or false.", STATUS_ERROR);
 }
 else
-    error_die("delete", ERROR_FieldMissing);
+    error_die("deactivate", ERROR_FieldMissing);
 
 try
 {
@@ -32,9 +32,9 @@ catch (UserNotFoundException $e)
     error_die("User not found.", ERROR_NotFound);
 }
 
-$resolved = UserReport::resolveAll($p);
+$resolved = UserReport::resolveAll($u);
 
-if ($deleteUser)
-    $u->delete();
+if ($deactivateUser)
+    $u->deactivate();
 
 success_die("$resolved reports resolved.");

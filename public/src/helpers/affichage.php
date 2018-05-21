@@ -79,7 +79,7 @@ function affichePost($post, $show_actions = true, $text_after_name = "", $text_b
                 </a>
             </span>
         </div>
-        <div class="report-form-wrapper display-none" id="report-form-<?=$id?>">
+        <div class="report-form-wrapper" style="display: none;" id="report-form-<?=$id?>">
             <form onSubmit="return reportPost('<?=$id?>')" class="report-form">
                 <input type="text" id="report-reason-<?=$id?>" class="report-field" placeholder="Raison du signalement">
                 <button type="submit" class="report-submit" title="Confirmer le signalement">
@@ -87,7 +87,7 @@ function affichePost($post, $show_actions = true, $text_after_name = "", $text_b
                 </button>
             </form>
         </div>
-        <div class="response-form-wrapper display-none" id="Response-div-<?=$id?>">
+        <div class="response-form-wrapper" style="display: none;" id="Response-div-<?=$id?>">
             <div onBlur="respondPost_onBlur('<?=$id?>')" class="response-field" onFocus="respondPost_onFocus('<?=$id?>', '<?=$author->getUsername(); ?>')" id="respond-post-<?=$id?>" contenteditable="true">
                   Réponse...
             </div>

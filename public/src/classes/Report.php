@@ -239,7 +239,7 @@ class UserReport extends Report
     {
         $reportId = uniqid();
 
-        $SQL = "INSERT INTO " . TABLE_Report . " (ID, Type, Target, Reporter, Reason) VALUES (:id, :type, :target, :reporter, :reason, :resolved)";
+        $SQL = "INSERT INTO " . TABLE_Report . " (ID, Type, Target, Reporter, Reason, Resolved) VALUES (:id, :type, :target, :reporter, :reason, :resolved)";
         $db = connect();
         $statement = $db->prepare($SQL);
         $statement->bindValue(":id", $reportId);
@@ -247,10 +247,10 @@ class UserReport extends Report
         $statement->bindValue(":target", $user->getID());
         $statement->bindValue(":reporter", $reporter->getID());
         $statement->bindValue(":reason", $reason);
-        $statement->bindValue(":resolved", false);
+        $statement->bindValue(":resolved", "false");
         $statement->execute();
 
-        return new UserReport($reportId, $reason, $reporter, $user);
+        return new UserReport($reportId, $reason, $reporter, $user, false);
     }
 
     public function getUser()
@@ -266,21 +266,66 @@ class UserReport extends Report
         return $this->user;
     }
 
-    public static function getReports()
+    public static function getReports($getResolved = false)
     {
         $db = connect();
-        $SQL = "SELECT * FROM " . TABLE_Report . " WHERE Type = " . Report::Type_UserReport;
+        if ($getResolved)
+            $SQL = "SELECT * FROM " . TABLE_Report . " WHERE Type = :type";
+        else
+            $SQL = "SELECT * FROM " . TABLE_Report . " WHERE Type = :type AND Resolved = :resolved";
+
         $statement = $db->prepare($SQL);
+        $statement->bindValue(":type", Report::Type_UserReport);
+
+        if (!$getResolved)
+            $statement->bindValue(":resolved", "false");
+
         $statement->execute();
 
         $result = array();
         $rows = $statement->fetchAll();
+
         if (!$rows)
             return $result;
 
         foreach($rows as $row)
             array_push($result, UserReport::fromRow($row));
+
+        return $result;
     }
+
+    public static function resolveAll($user)
+    {
+        $SQL = "UPDATE " . TABLE_Report . " SET Resolved = true WHERE Type = :type AND Target = :target";
+        $db = connect();
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":type", Report::Type_UserReport);
+        $statement->bindValue(":target", $user->getID());
+        $statement->execute();
+
+        return $statement->rowCount();
+    }
+
+    public function getSameUserReports()
+    {
+        $SQL = "SELECT * FROM " . TABLE_Report . " WHERE Type = :type AND Target = :target";
+        $db = connect();
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":type", Report::Type_UserReport);
+        $statement->bindValue(":target", $this->getUserId());
+        $statement->execute();
+
+        $rows = $statement->fetchAll();
+        if(!$rows)
+            return array();
+
+        $results = array();
+        foreach($rows as $row)
+            $results[] = Report::fromRow($row);
+
+        return $results;
+    }
+
 
     public function jsonSerialize()
     {

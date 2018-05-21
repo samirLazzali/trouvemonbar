@@ -116,15 +116,21 @@ $posts = $user->findPosts();
                 <a class="section-title" href="/subscriptions/<?= $user->getUsername(); ?>">Liste des abonnements / abonnés</a>
             </h2>
             <h2 class="section-title">
-                <a onClick="return toggleSubscription('<?=$user->getUsername()?>');" class="user-follow-link user-follow-link-<?= $user->getUsername(); ?> <?= in_array($user->  getUsername(), $cu_subscriptions) ? " user-follow-link-following" : "" ?>" href="#">
+                <?php if($user->getID() != $currentUser->getID()): ?>
+                <a onClick="return toggleSubscription('<?=$user->getUsername()?>');" class="user-follow-link follow-link-<?= $user->getUsername(); ?> <?= in_array($user->  getUsername(), $cu_subscriptions) ? " follow-link-following" : "" ?>" href="#">
                     <?php
-                    if($user->getID() != $currentUser->getID()):
                         if(!in_array($user->getUsername(), $cu_subscriptions)): ?>
                             S'abonner
                         <?php else: ?>
                             Abonné
-                        <?php endif; endif; ?>
+                        <?php endif; ?>
                 </a>
+                <?php endif; ?>
+                <?php if($user->getID() != $currentUser->getID()): ?>
+                    <a title="Signaler cet utilisateur" onClick="return reportUser('<?=$user->getUsername()?>');" class="user-follow-link user-report-link-<?= $user->getUsername(); ?>" href="#">
+                        Signaler
+                    </a>
+                <?php endif; ?>
             </h2>
             <h2 class="section-title">
                 Dernières publications
@@ -142,7 +148,7 @@ $posts = $user->findPosts();
                     if ($post->getRepostID() == null)
                         affichePost($post);
                     else
-                        afficheRepost($post, " vous a recyclé");
+                        afficheRepost($post, " a recyclé");
                 }
                 ?>
             </div>

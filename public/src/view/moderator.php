@@ -15,14 +15,17 @@ elseif (!$u->getModerator())
     header("Location: /");
     die();
 }
+$u->checkActive();
 
-$userReports = UserReport::getReports();
+$userReports = UserReport::getReports(false);
 $postReports = PostReport::getReports(false);
 
 if (count($userReports) + count($postReports) == 0)
     $noReports = true;
 else
     $noReports = false;
+
+$count = 0;
 
 ?>
 <!DOCTYPE HTML>
@@ -45,13 +48,57 @@ else
             </h1>
             <div id="user-reports">
                 <?php
+                $seen = array();
                 if ($userReports)
+                    ?> <h1>Signalements utilisateurs</h1> <?php
                     foreach($userReports as $report)
                     {
-                        ?>
-                        <div class="user-report">
-                            <div class="user-report-list">
+                        // On vérifie qu'on n'a pas déjà affiché les signalements pour ce post
+                        if (in_array($report->getUserId(), $seen))
+                            continue;
+                        $seen[] = $report->getUserId();
 
+                        // Si le post n'existe pas (par exemple, il a été supprimé depuis son signalement)
+                        if ($report->getUser() == null)
+                            continue;
+                        $count += 1;
+
+                        // On trouve tous les signalements relatifs à ce post
+                        $sameUserReports = $report->getSameUserReports();
+                        ?>
+                        <div class="user-report" id="user-report-<?= $report->getUserId() ?>">
+                            <div class="user-report-user-wrapper">
+                                <h2 class="user-report-user-name">
+                                    <a href="/profile/<?= $report->getUser()->getUsername(); ?>">
+                                        <?= $report->getUser()->getUsername(); ?>
+                                    </a>
+                                </h2>
+                            </div>
+                            <?php foreach($report->getUser()->findPosts(5, false) as $p):
+                                affichePost($p);
+                            endforeach;
+                            ?>
+                            <div class="user-report-reports-wrapper">
+                                <?php foreach ($sameUserReports as $report): ?>
+                                    <div class="user-report-report">
+                                        <span class="user-report-reporter">
+                                            <a href="/profile/<?= $report->getUser()->getUsername() ?>">
+                                                <?= $report->getReporter()->getUsername() ?>
+                                            </a>
+                                        </span>
+                                        <span class="post-report-reason">
+                                            <?= $report->getReason() != "" ? $report->getReason() : "<span class='italic'>Aucune raison donnée.</span>" ?>
+                                        </span>
+                                    </div>
+                                <?php endforeach ?>
+                            </div>
+                            <div class="moderation-actions-wrapper">
+                                <a class="moderation-action" href="#" onClick="return resolveUserReport('<?= $report->getUserId(); ?>', true)" title="Désactiver ce compte".">
+                                    <i class="fa fa-trash"></i> <span>Désactiver le compte</span>
+                                </a>
+                                <a class="moderation-action" href="#" onClick="return resolveUserReport('<?= $report->getUserId(); ?>', false)" title="Ignorer les signalements associés à ce compte.">
+                                    <i class="fas fa-check"></i> <span>Ignorer</span>
+                                </a>
                             </div>
                         </div>
                         <?php
@@ -61,8 +108,8 @@ else
             <div id="post-reports" class="post-reports">
                 <?php
                 $seen = array();
-                $count = 0;
                 if ($postReports)
+                    ?> <h1>Signalements publications</h1> <?php
                     foreach($postReports as $report):
                         // On vérifie qu'on n'a pas déjà affiché les signalements pour ce post
                         if (in_array($report->getPostId(), $seen))

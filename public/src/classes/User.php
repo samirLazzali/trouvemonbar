@@ -9,9 +9,10 @@ class User implements JsonSerializable
     private $username;
     private $email;
     private $isModerator;
+    private $state;
 
     const AccountState_Active = "Active";
-    const AccountState_DisabledByModerators = "DisabledByModerators";
+    const AccountState_Deactivated = "Deactivated";
     const AccountState_Disabled = "Disabled";
     const AccountState_Inactive = "Inactive";
 
@@ -22,6 +23,15 @@ class User implements JsonSerializable
     public function getID()
     {
         return $this->ID;
+    }
+
+    /**
+     * Renvoie l'état du compte de l'utilisateur (Actif / Inactif / Désactivé)
+     * @return string l'état
+     */
+    public function getState()
+    {
+        return $this->state;
     }
 
     /**
@@ -48,6 +58,14 @@ class User implements JsonSerializable
     public function setModerator($newModerator)
     {
         $this->isModerator = $newModerator;
+    }
+
+    /**
+     * Définit la propriété state d'un utilisateur.
+     */
+    public function setState($newState)
+    {
+        $this->state = $newState;
     }
 
     /**
@@ -79,6 +97,7 @@ class User implements JsonSerializable
     {
         $u = new User(trim($row['id']), $row["username"], $row["email"]);
         $u->setModerator($row["moderator"] == "true" ? true : false);
+        $u->setState($row['state']);
 
         return $u;
     }
@@ -363,6 +382,16 @@ class User implements JsonSerializable
         return array($r_appreciations, $r_mentions, $r_reposts);
     }
 
+    public function checkActive()
+    {
+        if ($this->state == User::AccountState_Deactivated)
+        {
+            log_out();
+            header("Location: /signup?source=deactivated");
+            die();
+        }
+    }
+
     /**
      * Suit l'utilisateur donné en paramètre
      * @param User|string $user l'utilisateur à suivre
@@ -554,10 +583,14 @@ class User implements JsonSerializable
      * @param int $limit le nombre maximum de publications à renvoyer
      * @return array un tableau de Post
      */
-    function findPosts($limit = 50)
+    function findPosts($limit = 50, $getReposts = true)
     {
         $db = connect();
-        $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE Author = :id ORDER BY Timestamp DESC LIMIT $limit";
+        if (!$getReposts)
+            $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE Author = :id AND Content IS NOT NULL ORDER BY Timestamp DESC LIMIT $limit";
+        else
+            $SQL = "SELECT * FROM " . TABLE_Posts . " WHERE Author = :id ORDER BY Timestamp DESC LIMIT $limit";
+
         $statement = $db->prepare($SQL);
         $statement->bindValue(":id", $this->ID);
         $statement->execute();
@@ -640,6 +673,21 @@ class User implements JsonSerializable
         $statement->execute();
     }
 
+    function deactivate()
+    {
+        $db = connect();
+
+        $SQL = "UPDATE Users SET STATE = 'Deactivated' WHERE ID = :id";
+        $statement = $db->prepare($SQL);
+        $statement->bindValue(":id", $this->ID);
+        $statement->execute();
+
+        if ($statement->rowCount() == 1)
+            return true;
+        else
+            return false;
+    }
+
     /**
      * Supprime l'utilisateur.
      * @return bool
@@ -647,10 +695,10 @@ class User implements JsonSerializable
     function delete()
     {
         $db = connect();
-        
+
         $SQL = "DELETE FROM Users WHERE ID = :id";
         $statement = $db->prepare($SQL);
-        $statement->bindValue(":id", $this->id);
+        $statement->bindValue(":id", $this->ID);
         $statement->execute();
 
         if ($statement->rowCount() == 1)

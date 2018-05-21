@@ -66,3 +66,40 @@
 .report-resolved *, .report-resolved a {
     color: black;
 }
+
+/* REPORTS UTILISATEUR */
+.user-reports {
+    background-color: #34495e;
+}
+
+.user-report-reports-wrapper, .user-report-reports-wrapper a {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #c6d0d1;
+}
+
+.user-report-report {
+    padding-left: 50px;
+}
+
+.user-report-reporter {
+    font-weight: bold;
+}
+
+.user-report-reporter:after {
+    content: " : ";
+}
+
+.user-report-user-wrapper {
+    margin-left: 25px;
+}
+
+.user-report-user-name {
+    font-size: 1.5em;
+    color: var(--bluegray);
+}
+
+.user-report-user-name a {
+    color: var(--bluegray);
+    margin-top: 10px;
+}

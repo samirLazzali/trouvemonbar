@@ -6,10 +6,7 @@ function toggleSubscription(username)
         function(element, index, array)
         {
             if (element.classList.contains("follow-link-following"))
-            {
                 currentFollowing = true;
-                return;
-            }
         }
     );
 
@@ -40,5 +37,34 @@ function toggleSubscription(username)
     else
         xhttp.open("GET", "/api/user/follow?identifier=" + username, true);
     xhttp.send();
+    return false;
+}
+
+var reported = false;
+function reportUser(username)
+{
+    if (reported)
+        return false;
+
+    reported = true;
+
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200)
+        {
+            console.log(this.responseText);
+            var result = JSON.parse(this.responseText);
+            console.log(result);
+            Array.from(document.getElementsByClassName("user-report-link-" + username)).forEach(
+                function(element, index, array)
+                {
+                    element.innerHTML = "Signalé.";
+                }
+            );
+        }
+    }
+    xhttp.open("POST", "/api/user/report", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("user=" + username);
     return false;
 }

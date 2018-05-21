@@ -108,7 +108,6 @@ function login()
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200)
             {
-                console.log(xhttp.responseText);
                 var result = JSON.parse(xhttp.responseText);
                 if (result["status"] == STATUS_OK)
                     document.location.href = "/feed";
@@ -125,6 +124,9 @@ function login()
                             return false;
                         case (ERROR_NotFound):
                             infobox.innerHTML = "Aucun utilisateur trouvé avec ces informations.";
+                            return false;
+                        case (ERROR_Permissions):
+                            infobox.innerHTML = "Ce compte a été désactivé par un modérateur.";
                             return false;
                         default:
                             infobox.innerHTML("Une erreur s'est produite : " + result["description"] + " (Code " + result["status"] + ")");

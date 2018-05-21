@@ -10,6 +10,8 @@ if ($u == null)
     die();
 }
 
+$u->checkActive();
+
 if (isset($_GET['tag']))
     $tag = $_GET['tag'];
 else

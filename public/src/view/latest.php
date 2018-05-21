@@ -9,6 +9,8 @@ if ($u == null)
     die();
 }
 
+$u->checkActive();
+
 $limit = 50;
 $posts = Post::findPosts(array(), $limit);
 ?>

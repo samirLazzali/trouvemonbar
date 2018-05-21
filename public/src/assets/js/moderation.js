@@ -25,11 +25,37 @@ function resolvePostReport(postId, deletePost)
             }
             else
             {
-                console.log("Couldn't repost " + id + " : " + result);
+                console.log("Couldn't resolve reports for " + postId + " : " + result);
             }
         }
     };
     xhttp.open("GET", "/api/moderation/resolvepost?post=" + postId + "&delete=" + deletePost, true);
+    xhttp.send();
+    return false;
+}
+
+function resolveUserReport(userId, deactivate)
+{
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200)
+        {
+            console.log(xhttp.responseText);
+            var result = JSON.parse(xhttp.responseText);
+            if (result["status"] == STATUS_OK)
+            {
+                var div = document.getElementById("user-report-" + userId);
+                addClass(div, "report-resolved");
+                console.log("Resolved user report " + userId + " successfully.");
+            }
+            else
+            {
+                console.log("Couldn't resolve reports for " + userId + " : ");
+                console.log(result);
+            }
+        }
+    };
+    xhttp.open("GET", "/api/moderation/resolveuser?user=" + userId + "&deactivate=" + deactivate, true);
     xhttp.send();
     return false;
 }

@@ -9,6 +9,14 @@
     color: var(--bluegray);
 }
 
+.user-follow-link:after {
+    content: "-";
+}
+
+.user-follow-link:last-child:after {
+    content: "";
+}
+
 #link-more-posts-wrapper, #link-posts-waiting-wrapper {
     display:block;
     text-align: center;
