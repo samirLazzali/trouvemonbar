@@ -82,6 +82,19 @@ function loginUserID($id){
     return $user->getLogin();
 }
 
+/*On récupère l'user correspondant au login*/
+function loginUser($login){
+    global $connection;
+    $sth = $connection->prepare('SELECT * FROM "user" WHERE login=\''.$login.'\';');
+    $sth->execute();
+    if ($sth->rowCount() == 0){
+        return FALSE;
+    }
+    $result = $sth->fetch(PDO::FETCH_OBJ);
+    return $result;
+}
+
+
 
 function get_friendList($id){
     global $connection;
