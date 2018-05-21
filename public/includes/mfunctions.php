@@ -95,7 +95,7 @@ function affCompat($id_the_cat) {
         $score += $prodpattern * $connexion->query("select count(*) AS nbr
                                                             from Searched_patterns 
                                                             where cat=" . $id_the_cat .
-                                                            "and pattern ='" . $chatpot->pattern . "'")->fetch(PDO::FETCH_OBJ)->nbr;
+                                                            "and pattern ='" . $chatpot->cpattern . "'")->fetch(PDO::FETCH_OBJ)->nbr;
         $scorechatspot[] = $score;
         $chatpot=$listechats->fetch(PDO::FETCH_OBJ);
     }
