@@ -1,6 +1,9 @@
 <?php
 $titre="Profil";
+include("includes/id.php");
+include("includes/debut.php");
 if ($id==0) erreur(ERR_IS_NOT_CO);
+//On récupère la valeur de nos variables passées par URL
 $action = isset($_GET['action'])?htmlspecialchars($_GET['action']):'consulter';
 $membre = isset($_GET['m'])?(int) $_GET['m']:'';
 ?>
