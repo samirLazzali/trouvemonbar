@@ -55,32 +55,32 @@ if($result->nbr == 1)
 		require_once('../information.php');
 		exit();
 	}
+}
 				
-	else if($result->nbr > 1)
-	{
-		$informations = Array(
-						true,
-						'Doublon',
-						'Deux membres ou plus ont le même nom d\'utilisateur, contactez un administrateur pour régler le problème.',
-						' - <a href="'.ROOTPATH.'/index.php">Index</a>',
-						ROOTPATH.'/contact.php',
-						3
-						);
-		require_once('../information.php');
-		exit();
-	}
+else if($result->nbr > 1)
+{
+	$informations = Array(
+					true,
+					'Doublon',
+					'Deux membres ou plus ont le même nom d\'utilisateur, contactez un administrateur pour régler le problème.',
+					' - <a href="'.ROOTPATH.'/index.php">Index</a>',
+					ROOTPATH.'/contact.php',
+					3
+					);
+	require_once('../information.php');
+	exit();
+}
 				
-	else
-	{	$informations = Array(
-						true,
-						'Nom d\'utilisateur inconnu',
-						'Le nom d\'utilisateur <span class="login">'.htmlspecialchars($_POST['login'], ENT_QUOTES).'</span> n\'existe pas dans notre base de données. Vous avez probablement fait une erreur.',
-						' - <a href="'.ROOTPATH.'/index.php">Index</a>',
-						ROOTPATH.'/membres/connexion.php',
-						5
-						);
-		require_once('../information.php');
-		exit();
-	}
+else
+{	$informations = Array(
+					true,
+					'Nom d\'utilisateur inconnu',
+					'Le nom d\'utilisateur <span class="login">'.htmlspecialchars($_POST['login'], ENT_QUOTES).'</span> n\'existe pas dans notre base de données. Vous avez probablement fait une erreur.',
+					' - <a href="'.ROOTPATH.'/index.php">Index</a>',
+					ROOTPATH.'/membres/connexion.php',
+					5
+					);
+	require_once('../information.php');
+	exit();
 }
 ?>	
