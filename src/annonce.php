@@ -362,6 +362,7 @@ class Annonce {
 
 	//// SI IL Y A DES TAGS /////
 
+
 	$rows = dbQuery($connection, $query);
 	$toCheck = array();
 	$toAdd = array();
@@ -372,18 +373,24 @@ class Annonce {
 	foreach ($toCheck as $aid) {
 	    $good = true;
 	    $affected = array();
-	    $rows = dbQuery($connection, "SELECT * FROM (links JOIN tags ON links.tid = tags.id) WHERE links.aid = $aid");
+	    $rows = dbQuery($connection, "SELECT name FROM (links JOIN tags ON links.tid = tags.id) WHERE links.aid = $aid");
 
 	    foreach($rows as $res)
 		$affected[] = $res->name;
+
+	    if (sizeof($affected) == 0)
+		$good = false;
 
 	    foreach($tags as $tag)
 		if (!in_array($tag, $affected))
 		    $good = false;
 
-	    if ($good)
+	    if ($good == true)
 		$toAdd[] = $aid;
 	}
+
+	if (sizeof($toAdd) == 0)
+	    return "";
 
 	$query = "SELECT * FROM annonce WHERE ";
 
