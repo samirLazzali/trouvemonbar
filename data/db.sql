@@ -3,7 +3,7 @@ CREATE TABLE "user" (
   firstname VARCHAR(20) NOT NULL ,
   lastname VARCHAR(20) NOT NULL ,
   id INTEGER CHECK (id between 1 and 3) ,
-  password VARCHAR(200)
+  pwd VARCHAR(200)
 );
 
 CREATE TABLE "Ingredients" (
@@ -42,12 +42,12 @@ CREATE TABLE "Soirees" (
   FOREIGN KEY (nom_soiree) REFERENCES "Statistiques"(soiree)
 );
 
-INSERT INTO "user"(surname, firstname, lastname, id, password) VALUES ('Source','Corentin','Leloup',1,'2fbb9a3365cb1d4f024d189ff33e1b62');
-INSERT INTO "user"(surname, firstname, lastname, id, password) VALUES ('Patou','Clément','Gavoille',1,'2fbb9a3365cb1d4f024d189ff33e1b62');
-INSERT INTO "user"(surname, firstname, lastname, id, password) VALUES ('Felps','Arnaud','Kopp',1,'2fbb9a3365cb1d4f024d189ff33e1b62');
-INSERT INTO "user"(surname, firstname, lastname, id, password) VALUES ('Pruneau','Valentin','Bruneau',1,'2fbb9a3365cb1d4f024d189ff33e1b62');
-INSERT INTO "user"(surname, firstname, lastname, id, password) VALUES ('Pichet','Quentin','Pichollet',2,'2fbb9a3365cb1d4f024d189ff33e1b62');
-INSERT INTO "user"(surname, firstname, lastname, id, password) VALUES ('Derien','Dorian','Laugier',2,'2fbb9a3365cb1d4f024d189ff33e1b62');
+INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Source','Corentin','Leloup',1,'2fbb9a3365cb1d4f024d189ff33e1b62');
+INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Patou','Clément','Gavoille',1,'2fbb9a3365cb1d4f024d189ff33e1b62');
+INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Felps','Arnaud','Kopp',1,'2fbb9a3365cb1d4f024d189ff33e1b62');
+INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Pruneau','Valentin','Bruneau',1,'2fbb9a3365cb1d4f024d189ff33e1b62');
+INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Pichet','Quentin','Pichollet',2,'2fbb9a3365cb1d4f024d189ff33e1b62');
+INSERT INTO "user"(surname, firstname, lastname, id, pwd) VALUES ('Derien','Dorian','Laugier',2,'2fbb9a3365cb1d4f024d189ff33e1b62');
 
 
 INSERT INTO "Ingredients"(nom_ing, prix) VALUES ('Chips',0.62);

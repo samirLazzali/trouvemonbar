@@ -2,7 +2,7 @@
 
 /**
  * @brief permet de se connecter à db
- * @return un pdo
+ * @return pdo
  */
 function db_connect(){
     $dbName = getenv('DB_NAME');
@@ -12,7 +12,7 @@ function db_connect(){
         $connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
     }
     catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage() . "<br/>";
+        print "Erreur : " . $e->getMessage() . "<br/>";
         die();
     }
     return $connexion;
@@ -20,7 +20,7 @@ function db_connect(){
 
 /**
  * @brief ferme un pdo
- * @param $connexion un pdo
+ * @param $connexion  pdo
  */
 function db_close($connexion){
     $connexion = null;
@@ -40,4 +40,22 @@ function recettes($connexion){
     }
     $reponse = null;
     return $tab;
+}
+
+/**
+ * @brief vérifit les données de connection en les comparant à celles dans la base de donnée
+ * @param $pseudo et $pwd des chaines de caractères et $connexion un pdo
+ * @return true si le mot de passe est correct, false sinon
+ */
+function verif($pseudo,$pwd,$connexion) {
+    $salt = "@|-°+==00001ddQ";
+    $mdp = md5($pwd.$salt);
+    $requete = "SELECT pwd FROM \"user\" WHERE surname='$pseudo'";
+    $reponse = $connexion->query($requete);
+    $mot_de_passe = $reponse->fetch();
+    if ($mot_de_passe['pwd']=="$mdp"){
+        return true;
+    }
+    $reponse = null;
+    return false;
 }

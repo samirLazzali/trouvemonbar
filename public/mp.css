@@ -89,3 +89,20 @@ div#menu>p{
 div#nav>button{
     margin : 0.8em;
 }
+
+div#article_connection{
+    text-align: center;
+    background-color: blanchedalmond;
+    min-height: 100vh;
+    padding: 2em;
+    border-radius: 10px;
+}
+
+div#article_connection>h1{
+    font-size: 50px;
+}
+
+div#article_connection>form>p{
+    margin-top: 10%;
+    line-height: 3em;
+}
