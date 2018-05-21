@@ -47,7 +47,7 @@ function aff_posts($id_posts)
     $query->execute();
     $data = $query->fetch();
     $author = $data["pseudo"];
-    echo '<div> <h1>' . $titre . '</h1><br />
+    echo '<div class="posts"> <h1>' . $titre . '</h1><br />
             <img src="./posts/' . $img . '"alt="" /><br />' . $desc . '<br />' .
         $jaime . '+ et ' . $nul . '-<br /> Par : ' . $author.'<br /> ---------------------<br />';
 }
