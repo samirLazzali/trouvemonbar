@@ -58,28 +58,34 @@ menu_navigation();
 <h3>Prochaine réunion</h3>
     <?php
     $req = $connection->query('SELECT * FROM public.reunion WHERE datee= (SELECT MAX(datee) FROM public.reunion)');
-    $res=$req->fetchAll();
-    foreach ($res as $reu){
-        echo "soirée: {$reu['soiree']} </br>
-         date: {$reu['datee']} </br>
-         compt rendue: {$reu['cr']} </br>";
-    }
-    echo 'participants: ';
-    $req_count=$connection->query("SELECT 'pseudo' FROM public.participant")->fetchAll();
-    if (!empty($req_count)) {
+    if (!$req) {
+        $res = $req->fetchAll();
+        foreach ($res as $reu) {
+            echo "soirée: {$reu['soiree']} </br>
+             date: {$reu['datee']} </br>
+             compt rendue: {$reu['cr']} </br>";
+        }
+        ?>
+        <form action="#" method="post">
+            <input type="submit" name="participer" value="Participer">
+        </form>
+        <?php
         $req_part = $connection->query('SELECT pseudo FROM public.Participants NATURAL JOIN public.reunion WHERE datee = (SELECT MAX(datee) FROM public.reunion)');
-        $participants = $req_part->fetchAll();
-        foreach ($participants as $reu) {
-            echo "{$reu['pseudo']} </br>";
+        if ($req_part!=0) {
+            echo 'participants: ';
+            $participant=$req_part->fetchAll();
+            foreach ($req_part as $reu) {
+                echo "{$reu['pseudo']} </br>";
+            }
+        }
+        else{
+            echo 'aucun';
         }
     }
     else{
-        echo 'aucun';
+         echo "pas de réunion plannifié";
     }
     ?>
-                        <form action="#" method="post">
-                            <input type="submit" name="participer" value="Participer">
-                        </form>
 </body>
 </html>
 
@@ -102,7 +108,7 @@ if (isset ($_POST['participer'])) {
             'pseudo' => $_SESSION['pseudo'],
         ]);
     }
-else {
+    else {
         echo 'veuillez vous connectez avant de participer';
         echo '<a href="connexion.php"> Se connecter</a>';
     }
