@@ -93,7 +93,7 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
     $j=1;
     if (!$irec) {
         $ids=$irec->fetchAll();
-        foreach ($irec as $id) {
+        foreach ($ids as $id) {
             $j++;
         }
     }
@@ -101,6 +101,22 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
             $req=$connection->prepare('INSERT INTO public.recette(id_rec,recettes) VALUES(:id_rec,:recettes)');
             $req->execute(['id_rec' => $j,
             'recettes'=> $_POST['recette'],
+            ]);
+    }
+    
+    
+     $ivin=$connection->query("SELECT * FROM public.liste_vins");
+    $j=1;
+    if (!$ivin) {
+        $ids=$ivins->fetchAll();
+        foreach ($ids as $id) {
+            $j++;
+        }
+    }
+    if(isset($_POST['nomvin'])){
+            $req=$connection->prepare('INSERT INTO public.liste_vins(id_vin,nom) VALUES(:id_vin,:nom)');
+            $req->execute(['id_vin' => $j,
+            'nom'=> $_POST['nomvin'],
             ]);
     }
 
