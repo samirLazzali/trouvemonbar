@@ -17,7 +17,7 @@
 --
 -- Structure de la table `categories`
 --
-DROP TABLE IF EXISTS "user","evenements","musiques","Type","Groupe";
+DROP TABLE IF EXISTS "user","evenements","musiques","categories","Type","Groupe";
 
 CREATE TABLE categories (
   id int NOT NULL,
@@ -38,28 +38,28 @@ INSERT INTO categories (id, categorie) VALUES
 --
 
 CREATE TABLE evenements (
-  id int NOT NULL,
-  organisateur int NOT NULL,
+  id SERIAL PRIMARY KEY ,
+  organisateur varchar(100) NOT NULL,
   nom varchar(100) NOT NULL,
   description text,
-  lieu varchar(100) NOT NULL,
-  date date NOT NULL,
+  lieu varchar(100) ,
+  date date ,
   date_creation date NOT NULL,
   date_modif date DEFAULT NULL,
   before varchar(100) DEFAULT NULL,
-  prix double precision NOT NULL,
+  prix double precision ,
   musique int DEFAULT NULL,
   categorie int DEFAULT NULL,
-  table_participants varchar(100) NOT NULL
+  table_participants varchar(100) 
 ) ;
 
 --
 -- Déchargement des données de la table `evenements`
 --
 
-INSERT INTO evenements (id, organisateur, nom, description, lieu, date, date_creation, date_modif, before, prix, musique, categorie, table_participants) VALUES
+/*INSERT INTO evenements (id, organisateur, nom, description, lieu, date, date_creation, date_modif, before, prix, musique, categorie, table_participants) VALUES
 (4, 1, 'First Event', NULL, 'Chez moi', '2018-05-08', '2018-05-08', NULL, NULL, 0, NULL, 1, 'participants3897910314'),
-(5, 1, 'First Event', NULL, 'Chez moi', '2018-05-09', '2018-05-09', NULL, NULL, 0, NULL, 1, 'p2411932048');
+(5, 1, 'First Event', NULL, 'Chez moi', '2018-05-09', '2018-05-09', NULL, NULL, 0, NULL, 1, 'p2411932048');*/
 
 -- --------------------------------------------------------
 
@@ -106,7 +106,7 @@ CREATE TABLE participants3897910314 (
 --
 
 CREATE TABLE "user" (
-  id int,
+  id SERIAL PRIMARY KEY ,
   firstname varchar(100) ,
   lastname varchar(100) ,
   birthday date ,
