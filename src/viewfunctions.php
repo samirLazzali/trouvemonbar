@@ -29,6 +29,7 @@ function header_t($titre) {
     print "    <div class=\"m-left\">\n";
     print "    <h1 class=\"logo\">Les Bons Bails</h1>\n";
     print "    </div>\n";
+    print "    <img class=\"logoImg\" src=\"images/logoLBB.bmp\">";
     print "    <div class=\"m-right\">\n";
 
     print "    <a href=\"main.php\" class=\"m-link\"><i class=\"fa fa-home\" aria-hidden=\"true\"></i> Accueil</a>\n";
@@ -112,7 +113,6 @@ function indexco() {
 }
 
 function indexnotco($erreur = "") {
-    print "<div class=\"main\">";
     print "<div class=annonce>";
     print "<div class=title> Bienvenue sur Les Bons Bails </div>";
     print "<br>";
@@ -122,7 +122,7 @@ function indexnotco($erreur = "") {
     print "</div>";
     print "<br>";
     print "<br>";
-
+    print "</div>";
 }
 
 function contactsuccess() {

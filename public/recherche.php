@@ -3,12 +3,13 @@ include("../src/annonce.php");
 include("../src/viewfunctions.php");
 include("../src/sidebar.php");
 
-handleLogin();
+protectAccess();
 
 header_t("Les Bons Bails");
 
 if(!verif_authent()) { // si le gars est authentified ==>  acces aux offres
     displayLogin();
+    print "<link rel=\"stylesheet\" href=\"css/full.css\">";
 } else {
     displayResearch();
 }

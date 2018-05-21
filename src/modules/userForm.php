@@ -1,7 +1,7 @@
         <div class="annonce create" id="form_border">
             <form action="editUser.php" method="post">
             <input type="number" name="id" style="display: none;" value="<?php print $user->id; ?>">
-            <div class="field-wrap">
+            <div class="field-wrap" style="margin-top: 0px;">
                 <label class="active">
                     Surnom<span class="req">*</span>
                 </label>

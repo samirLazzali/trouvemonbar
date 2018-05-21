@@ -17,10 +17,10 @@ if(!verif_authent()) { // si le gars est authentified ==>  acces aux offres
 
 <div class="main">
 
-<h2>À propos</h2>
+<!--<h2>À propos</h2>-->
 
 <div class=annonce>
-	<!--<div class=title style="text-align:center;">A propos</div>-->
+	<div class=title>À propos</div>
 	<div> 
 		<br>
 		Fondé en 2018, <strong>Les Bons Bails</strong> est un <strong> site d'annonces intra-ENSIIE</strong>. Il s'adresse uniquement aux étudiants de l'ensiie. Dans un soucis de confidentialité, seuls nos membres sont autorisés à visualiser les annonces. 
