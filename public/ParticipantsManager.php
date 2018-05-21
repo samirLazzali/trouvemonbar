@@ -12,14 +12,15 @@ class ParticipantsManager
 		$query = $this->db->query('SELECT * FROM ' . $nom_table);
 		$resultat = [];
 		$userManager = new UserManager($this->db);
-		while ($participant = $query->fetch()) {
-			$resultat[] = $userManager->getId($participant['id']);
-		}
+		if ($query)
+			while ($participant = $query->fetch()) {
+				$resultat[] = $userManager->getId($participant['id']);
+			}
 		return $resultat;
 	}
 
 	function add($user, $nom_table) {
-		$resultat = $this->db->query("INSERT INTO $nom_table (id) VALUES ($user)");
+		$resultat = $this->db->query("IF TABLE EXISTS $nom_table INSERT INTO $nom_table (id) VALUES ($user)");
 		if ($resultat){
 			echo "ParticipantsManager: Participant ajouté ! <br>";
 		}
