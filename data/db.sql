@@ -7,6 +7,7 @@
 DROP TABLE "user";
 DROP TABLE "reunion";
 DROP TABLE "recette";
+DROP TABLE "note";
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -130,7 +131,13 @@ pseudo VARCHAR(40) NOT NULL
 
 
 CREATE TABLE public."recette"(
-recettes varchar(100),
+id_rec INTEGER PRIMARY KEY,
+recettes varchar(100)
+);
+
+CREATE TABLE public."note"(
 note INTEGER,
-id INTEGER
+id_rec INTEGER,
+id_vente INTEGER PRIMARY KEY,
+id_usr INTEGER
 );
