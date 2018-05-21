@@ -3,8 +3,8 @@
 
 function age($date_naissance)
 {
-    $am = explode('/', $date_naissance);
-    $an = explode('/', date('d/m/y'));
+    $am = explode('-', $date_naissance);
+    $an = explode('-', date('y-m-d'));
 
     if(($am[1] < $an[1]) || (($am[1] == $an[1]) && ($am[0] <= $an[0])))
         return $an[2] - $am[2];
@@ -35,29 +35,32 @@ function affCompat($id_the_cat) {
 
     $the_cat = $connexion->query("select *
                                             from Cats
-                                            where id_cat=".$id_the_cat)->fetch(PDO::FETCH_OBJ);
-    $sexch = $the_cat->sex;
-    $breedch = query("select breed
+                                            where id_cat=".intval($id_the_cat))->fetch(PDO::FETCH_OBJ);
+    $sexch = $the_cat->ssex;
+    $breedch = $connexion->query("select breed
                       from Cat_breed
-                      where cat=".$id_the_cat)->fetch(PDO::FETCH_OBJ)->breed;
+                      where cat=".intval($id_the_cat))->fetch(PDO::FETCH_OBJ);
+    $breed = $breedch->breed;
     $purerace = $the_cat->purety;
 
-    if($purerace==1)
+    if($purerace==1) {
         $listechats = $connexion->query("select * 
                                           from Cats 
-                                          join Cat_breed on cat=id_cat 
-                                          where sexe=" . $sexch . " 
-                                            and breed=" . $breedch);
-    else
+                                          join Cat_breed on Cat_breed.cat=Cats.id_cat 
+                                          where sex='$sexch' 
+                                          and breed=".intval($breed));
+    }
+    else {
         $listechats = $connexion->query("select * 
                                           from Cats 
-                                          join Cat_breed on cat=id_cat 
-                                          where sexe=" . $sexch);
+                                          join Cat_breed on Cat_breed.cat=Cats.id_cat 
+                                          where sex='$sexch'");
+    }
     $chatpot=$listechats->fetch(PDO::FETCH_OBJ);
     while($chatpot){
         $chatspot[] = $chatpot->id_cat;
         $score = 0;
-        if (!is_null($the_cat->sage_min) && $the_cat->sage_min <= age($chatpot->birthday_cat))
+        if (!is_null($the_cat->sage_min) && ($the_cat->sage_min <= age($chatpot->birthday_cat)))
             $score += $prodagemin;
         if (!is_null($the_cat->sage_max) && $the_cat->sage_max <= age($chatpot->birthday_cat))
             $score += $prodagemax;
@@ -73,64 +76,46 @@ function affCompat($id_the_cat) {
             $score += $prodweightmin;
         if (!is_null($the_cat->sweight_max) && $the_cat->sweight_max <= $chatpot->weight)
             $score += $prodweightmax;
-        $score += $prodbreed * $connexion->query("select count(*)
+        $score += $prodbreed * $connexion->query("select count(*) AS nbr
                                                             from Cat_breed 
                                                             join Searched_breeds on Cat_breed.breed = Searched_breeds.breed
                                                             where Searched_breeds.cat=" . $id_the_cat ."
-                                                              and Cat_breed.cat=" . $chatpot->id_cat); /*->fetch ?? */
-        $score += $prodcolor * $connexion->query("select count(*)
-                                                            from Cat_color 
-                                                            join Searched_colors on Cat_color.color = Searched_colors.color
+                                                              and Cat_breed.cat=" . $chatpot->id_cat)->fetch(PDO::FETCH_OBJ)->nbr; /*->fetch ?? */
+        $score += $prodcolor * $connexion->query("select count(*) AS nbr
+                                                            from Cat_colors 
+                                                            join Searched_colors on Cat_colors.color = Searched_colors.color
                                                             where Searched_colors.cat=" . $id_the_cat ."
-                                                              and Cat_color.cat=" . $chatpot->id_cat);
-        $score += $prodtraits * $connexion->query("select count(*)
-                                                            from Cat_trait 
-                                                            join Searched_traits on Cat_trait.trait = Searched_traits.trait
+                                                              and Cat_colors.cat=" . $chatpot->id_cat)->fetch(PDO::FETCH_OBJ)->nbr;
+        $score += $prodtraits * $connexion->query("select count(*) AS nbr
+                                                            from Cat_personality 
+                                                            join Searched_traits on Cat_personality.trait = Searched_traits.trait
                                                             where Searched_traits.cat=" . $id_the_cat ."
-                                                              and Cat_trait.cat=" . $chatpot->id_cat);
-        $score += $prodpattern * $connexion->query("select count(*)
-                                                            from Searched_pattern 
+                                                              and Cat_personality.cat=" . $chatpot->id_cat)->fetch(PDO::FETCH_OBJ)->nbr;
+
+        $score += $prodpattern * $connexion->query("select count(*) AS nbr
+                                                            from Searched_patterns 
                                                             where cat=" . $id_the_cat .
-                                                            "and pattern =" . $chatpot->pattern);
+                                                            "and pattern ='" . $chatpot->pattern . "'")->fetch(PDO::FETCH_OBJ)->nbr;
         $scorechatspot[] = $score;
+        $chatpot=$listechats->fetch(PDO::FETCH_OBJ);
     }
     if (empty($chatspot)) {
-        $res .= "<h3> malheureusement, il ne semble qu'aucun chat ne corresponde à vos attentes </h3>";
+        $res = "<h3> malheureusement, il ne semble qu'aucun chat ne corresponde à vos attentes </h3>";
         $res .= "<p> nous vous invitons à soit attendre que le chat donc vous rêvez la nuit apparaisse sur le site, soit à revoir vos critères de recherche </p>";
     }
     else {
-        array_multisort($scorechatspot, $chatspot);
-        foreach($chatpot as $elu) {
-            $infoelu = $connexion->query("select phone_number, name_cat, 
-                                                from Utilisateur
-                                                natural join Cats 
-                                                where cat=" . $chatpot)->fetch(PDO::FETCH_OBJ);
-            $res.= "<tr> <td>".$infoelu->name_cat."</td><td>".$infoelu->phone_number."</td> </tr>";
+        $res ="";
+        array_multisort($scorechatspot,SORT_DESC, $chatspot);
+        foreach($chatspot as $elu) {
+            $infoelu = $connexion->query("select phone_number, name_cat
+                                                    from Utilisateur
+                                                    join Cats ON owner = id_user 
+                                                    where id_cat=" . $elu)->fetch(PDO::FETCH_OBJ);
+            $res.= '<tr> <td>'.$infoelu->name_cat.'</td><td>'.$infoelu->phone_number.'</td> </tr>';
         }
     }
     return $res;
 }
-
-/*
-function affmenu(){
-    $dbname = getenv('db_name');
-    $dbuser = getenv('db_user');
-    $dbpassword = getenv('db_password');
-    $connexion = new pdo("pgsql:host=postgres user=$dbuser dbname=$dbname password=$dbpassword");
-    $chatsPossédés = $connexion->query("SELECT id_cat,Cat_name
-                                                  FROM cats
-                                                  NATURAL JOIN utilisateur
-                                                  WHERE id_user=".$_SESSION['id_user']);
-    print "<script>
-            <form name=\"choix\">
-                <select name=\"liste\" onchange=\"document.getElementById('matchables').value\">'. foreach().'
-                </select>
-           </form>'
-        </script>
-    <table style='display:none;' id='matchables'>
-    </table>";
-}
-*/
 
 
 ?>
