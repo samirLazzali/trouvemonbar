@@ -21,10 +21,14 @@
                         $mdp = $_POST['pwd'];
                         $connexion = db_connect();
                         $connect = verif($surnom, $mdp,$connexion);
+                        $rep = $connexion->query("SELECT id FROM \"user\" WHERE surname='$surnom'");
+                        $tuple = $rep->fetch();
+                        $rep=null;
                         db_close($connexion);
                         if ($connect == true) {
                             $_SESSION['logged']=true;
                             $_SESSION['pseudo']=$_POST['pseudo'];
+                            $_SESSION['id']=$tuple['id'];
                             echo "<a href=\"index.php\">succès</a>";
                         }
                         else {

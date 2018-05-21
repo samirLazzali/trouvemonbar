@@ -91,3 +91,16 @@ function inscript($surnom, $prenom,$nom,$mdp,$connexion){
     }
     return true;
 }
+
+function modif_mp($mdp,$connexion,$pseudo){
+    $salt = "@|-°+==00001ddQ";
+    $pwd = md5($mdp.$salt);
+    $instruction = $connexion->prepare("UPDATE \"user\" SET pwd=:pwd WHERE surname=:pseudo");
+    $instruction->bindParam(':pseudo',$pseudo);
+    $instruction->bindParam(':pwd',$pwd);
+    $reponse = $instruction->execute();
+    if ($reponse==false){
+        return false;
+    }
+    return true;
+}
