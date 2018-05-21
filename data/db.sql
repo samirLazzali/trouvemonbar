@@ -141,3 +141,10 @@ id_rec INTEGER,
 id_vente INTEGER PRIMARY KEY,
 id_usr INTEGER
 );
+
+CREATE TABLE public."participants_course"(
+id_par INTEGER PRIMARY KEY,
+soiree VARCHAR(40),
+pseudo VARCHAR(40) NOT NULL
+course VARCHAR(200)
+);
