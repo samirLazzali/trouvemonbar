@@ -160,7 +160,7 @@ if(isset($_POST['mail']))
 	
 	else if($mail_result == 'pris')
 	{
-		$_SESSION['mail_info'] = '<span class="erreur">Le mail '.htmlspecialchars($mail, ENT_QUOTES).' est déjà pris, <a href="../contact.php">contactez-nous</a> si vous pensez à une erreur.</span><br/>';
+		$_SESSION['mail_info'] = '<span class="erreur">Le mail '.htmlspecialchars($mail, ENT_QUOTES).' est déjà pris.</span><br/>';
 		$_SESSION['form_mail'] = '';
 		$_SESSION['erreurs']++;
 	}
@@ -297,7 +297,7 @@ include('../includes/top.php');?>
 						unset($_SESSION['form_mail']);
 						unset($_SESSION['form_mail_verif']);
 						$_SESSION['mail_info'] = '<span class="erreur">Le mail '.htmlspecialchars($mail, ENT_QUOTES).' est déjà pris.</span><br/>';
-						$_SESSION['mail_verif_info'] = str_replace('mail', 'mail de vérification', $_SESSION['mail_info']);
+						$_SESSION['mail_verif_info'] = '';
 						$_SESSION['erreurs']++;
 						$_SESSION['erreurs']++;
 					}
