@@ -196,7 +196,6 @@ INSERT INTO Searched_traits VALUES ('2','9');
 INSERT INTO Searched_breeds VALUES ('2','6');
 INSERT INTO Searched_breeds VALUES ('2','8');
 INSERT INTO Searched_colors VALUES ('2','1');
-INSERT INTO Searched_patterns VALUES ('2','Calico');
 
 INSERT INTO Cats VALUES ('3','3','Duchesse',FALSE,'Solide','2003-04-26','3',NULL, '1','0', '1','2',NULL, '2','1',NULL, '5','6','15');
 INSERT INTO Cat_colors VALUES ('3','9');
@@ -209,7 +208,6 @@ INSERT INTO Searched_breeds VALUES ('3','21');
 INSERT INTO Searched_breeds VALUES ('3','10');
 INSERT INTO Searched_colors VALUES ('3','3');
 INSERT INTO Searched_colors VALUES ('3','9');
-INSERT INTO Searched_patterns VALUES ('3','Colourpoint');
 
 INSERT INTO Cats VALUES ('4','1','Angel',FALSE,'Colourpoint','2009-05-16','7',NULL, '0','1', '4','1',NULL, '2','2',NULL, '5','6','15');
 INSERT INTO Cat_colors VALUES ('4','9');
@@ -218,8 +216,6 @@ INSERT INTO Cat_breed VALUES ('4','21');
 INSERT INTO Cat_personality VALUES ('4','1');
 INSERT INTO Cat_personality VALUES ('4','8');
 INSERT INTO Searched_traits VALUES ('4','2');
-INSERT INTO Searched_patterns VALUES ('4','Colourpoint');
-INSERT INTO Searched_patterns VALUES ('4','Solide');
 
 INSERT INTO Cats VALUES ('5','3','Marie',FALSE,'Ecaille de tortue','20013-07-27',NULL,'10', '1','0', '4',NULL,'3', '3','1',NULL, '15','4','12');
 INSERT INTO Cat_colors VALUES ('5','5');
@@ -230,9 +226,6 @@ INSERT INTO Cat_personality VALUES ('5','5');
 INSERT INTO Cat_personality VALUES ('5','4');
 INSERT INTO Cat_personality VALUES ('5','1');
 INSERT INTO Searched_traits VALUES ('5','9');
-INSERT INTO Searched_patterns VALUES ('5','Colourpoint');
-INSERT INTO Searched_patterns VALUES ('5','Solide');
-INSERT INTO Searched_patterns VALUES ('5','Bicolore');
 
 
 INSERT INTO Cats VALUES ('6','5','Winston',FALSE,'Tabby','2014-06-01',NULL,'3', '0','1', '2','0',2, '1','1',NULL, '4',NULL,'4');
@@ -244,4 +237,3 @@ INSERT INTO Cat_personality VALUES ('6','1');
 INSERT INTO Cat_personality VALUES ('6','2');
 INSERT INTO Cat_personality VALUES ('6','6');
 INSERT INTO Searched_traits VALUES ('6','7');
-INSERT INTO Searched_patterns VALUES ('6','Solide');
