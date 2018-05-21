@@ -1,76 +1,50 @@
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
-
 label {
     display:block;
     width:150px;
     float:left;
 }
 
-h1{
-    font-family: 'Josefin Sans', sans-serif;
-    color: #03af87;
-}
-
 .champinscription{
-    font-size: 25px;
-    font-family: 'Josefin Sans', sans-serif;
     border: solid white 1px;
-    background: white;
-    color: black;
+    background: #c5c5c5;
+    color: white;
     height: 30px;
     width: 500px;
     border-radius: 5px;
     padding: 3px;
     box-shadow: 4px 1px 8px #000000;
-    padding: 10px;
 }
 
 .intituleinscription{
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: serif;
     font-variant: small-caps;
     font-size: 20px;
 }
 
-.legende{
-    font-size: 20px;
-    font-style: italic;
-    font-family: 'Josefin Sans', sans-serif;
-    background: white;
-    border-radius: 3px;
-}
-
 .champinscription:focus{
-    font-family: 'Josefin Sans', sans-serif;
     border: solid white 1px;
     border-radius: 5px;
 }
 
-.cadreinscription{
-    font-family: 'Josefin Sans', sans-serif;
-    background: #cecece;
-}
-
 #pasencoreinscrit{
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: serif;
     font-variant: small-caps;
 }
 
 #inscrivezvous{
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: serif;
     text-decoration: none;
     color: black;
     font-weight: bold;
 }
 
 .connexion{
-    background: #03af87;
+    background: #32a124;
     color: white;
     border: solid black 1px;
     border-radius: 5px;
     padding: 10px;
     box-shadow: 2px 1px 8px #000000;
-    height: 50px;
-    width: 120px;
 }
 
 .connexion:hover{
