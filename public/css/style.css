@@ -245,3 +245,14 @@ tr:last-child {
     color: red;
     font-weight: bold;
 }
+.main h2 {
+    display: inline-block;
+}
+
+.reduce {
+    margin-left: 10px;
+}
+
+.reduce i {
+    height: 20px;
+}

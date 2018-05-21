@@ -189,8 +189,9 @@ COPY public.annonce (id, postdate, offer, op, semestre, module, genre, titre, de
 2	2018-05-21 17:20:02	f	5	2	PWR	PHP, CSS, HTML	Projet de Web	C'est trop dur j'ai besoin d'un site tout fait !	0	Un poste à Dièse	f
 4	2018-05-21 17:47:57	t	1	2	IPFL	Caml, Fonctionnel	Projet IPF	J'ai un projet sur les bras, quelqu'un en veut ?	0	4 Kebabs	f
 5	2018-05-21 17:55:27	f	3	2	LVFH2	Anglais, FH	Acteur	On cherche un acteur pour la vidéo d'anglais, quelqu'un est chaud ?	0		f
-6	2018-05-21 18:11:18	f	6	2	LVFH2	LV2, tacos	DM d'espagnol	Quelqu'un peut me faire le DM d'espagnol je sais pas parler :(	10		f
 3	2018-05-21 17:46:09	f	6	2	ILO	Objet, Java	Aide TP ILO	Comment on remplit ClientFrame2 ?	20		f
+7	2018-05-21 20:38:13	f	2	2	NULL	Stage, été	Stage	Je cherche un stage pour l'été 2018, quelqu'un a un piston ?	550		f
+6	2018-05-21 18:11:18	f	6	2	LVFH2	LV2, tacos	DM d'espagnol	Quelqu'un peut me faire le DM d'espagnol je sais pas parler :(	10		f
 \.
 
 
@@ -203,8 +204,8 @@ COPY public.links (aid, tid) FROM stdin;
 2	3
 5	6
 5	7
-6	8
-6	9
+7	10
+7	11
 \.
 
 
@@ -221,6 +222,8 @@ COPY public.tags (id, name) FROM stdin;
 7	#MCU
 8	#real
 9	#spanish
+10	#stage
+11	#remunere
 \.
 
 
@@ -242,14 +245,14 @@ COPY public.users (id, email, username, password, admin) FROM stdin;
 -- Name: annonce_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ensiie
 --
 
-SELECT pg_catalog.setval('public.annonce_id_seq', 6, true);
+SELECT pg_catalog.setval('public.annonce_id_seq', 7, true);
 
 
 --
 -- Name: tags_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ensiie
 --
 
-SELECT pg_catalog.setval('public.tags_id_seq', 9, true);
+SELECT pg_catalog.setval('public.tags_id_seq', 11, true);
 
 
 --

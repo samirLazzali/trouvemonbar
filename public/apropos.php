@@ -17,7 +17,7 @@ if(!verif_authent()) { // si le gars est authentified ==>  acces aux offres
 
 <div class="main">
 
-<!--<h2>À propos</h2>-->
+<h2></h2>
 
 <div class=annonce>
 	<div class=title>À propos</div>

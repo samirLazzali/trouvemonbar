@@ -43,6 +43,7 @@ dispSidebar();
 <?php User::displayUserForm($user, $_SESSION['admin']); ?>
     <h2>Annonces de <?php print $user->username; ?>: <strong><?php print sizeof($annonces); ?></strong> annonce<?php print (sizeof($annonces) == 1?"":"s"); ?> publiée<?php print (sizeof($annonces) == 1?"":"s"); ?></h2>
 <?php
+Annonce::reduceButton();
 
 foreach ($annonces as $an)
     $an->display();

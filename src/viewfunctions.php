@@ -19,7 +19,7 @@ function header_t($titre) {
     print "    <link rel=\"stylesheet\" href=\"css/createForm.css\">\n";
 
     print "<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>";
-    print "<script src=\"js/research.js\"></script>";
+    print "<script src=\"js/global.js\"></script>";
     print "  </head>\n";
   
     print "  <body>\n";
@@ -158,27 +158,7 @@ function affiche_erreur($str) {
 }
 
 function displayResearch() {
-    echo "<div id=\"formresearch\" class=\"formresearch\" style=display:none>";
-    echo "<div class=\"tab-content\">";
-    echo "<h1>Recherchez votre solution</h1>";
     include("form.html");
-    echo "<div id=\"signup\">";
-    echo "<h1>Sign Up for Free</h1>";
-    echo "<form action=\"recherche.php\" method=\"post\">";
-    echo "<div class=\"field-wrap\">";
-    echo "<label>Email Address<span class=\"req\">*</span></label>";
-    echo "<input type=\"email\" name=\"email\" required=\"\" autocomplete=\"off\">";
-    echo "</div>";
-    echo "<div class=\"field-wrap\">";
-    echo "<label>Set A Password<span class=\"req\">*</span></label>";
-    echo "<input type=\"password\" name=\"password\" required=\"\" autocomplete=\"off\">";
-    echo "</div><span class=\"errorDisp\"><?php echo \"Error: \$error\"; ?></span>";
-    echo "<button type=\"signup\" class=\"button button-block\" name=\"signup\">Get Started</button>";
-    echo "</form>";
-    echo "</div>";
-    echo "</div><!-- tab-content -->";
-    echo "</div><!-- /form -->";
-    echo "<script src=\"js/research.js\"></script>";
 }
 
 function buttonResearch() {

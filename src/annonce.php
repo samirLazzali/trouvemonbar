@@ -68,10 +68,6 @@ class Annonce {
 	print "</div>";
     }
 
-    public function getAge() {
-	// Age en fonction de la date de post
-    }
-
     public function setId($id) {
 	$this->id = $id;
     }
@@ -331,13 +327,14 @@ class Annonce {
 	}
     }
 
+
     public static function genQuery($criterium = []) {
 	$query = "SELECT * FROM annonce";
-	$authorized = array('op', 'semestre', 'module');
+	$authorized = array('tags', 'genre','op', 'semestre', 'module');
 	$toAdd = array();
 
 	foreach ($criterium as $key => $value) {
-	    if (in_array($key, $authorized))
+	    if (in_array($key, $authorized) && $value)
 		$toAdd[$key] = $value;
 	}
 
@@ -351,8 +348,11 @@ class Annonce {
 
 	$query = substr($query, 0, -4);
 
+	print $query;
+
 	return $query." ORDER BY postdate DESC";
     }
+
 
     public function tagsToString() {
 	$str = "";
@@ -372,6 +372,10 @@ class Annonce {
 	foreach ($li as $tag)
 	    if ($tag != "")
 		$this->tagArray[] = $tag;
+    }
+
+    public static function reduceButton() {
+	print "<a style=\"display: inline;\" class=\"reduce\" href=\"#reduce\"><i class=\"fas fa-minus-square\"></i></a>";
     }
 }
 

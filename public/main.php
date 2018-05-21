@@ -30,6 +30,7 @@ if(verif_authent()) { // si le gars est authentified ==>  acces aux offres
 
     //$annonces = getoffers($_GET["semestre"], $_GET["module"], $_GET["matiere"]);
     echo "<h2>Dernières Annonces</h2>";
+    Annonce::reduceButton();
     foreach ($annonces as $an) {
 	$an->display();
     }
