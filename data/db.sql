@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS Utilisateur(
 	login VARCHAR NOT NULL,
 	mail VARCHAR NOT NULL,
 	password VARCHAR NOT NULL,
-	phone_number INTEGER NOT NULL,
+	phone_number VARCHAR NOT NULL,
 	user_type INTEGER NOT NULL CHECK (0 <= user_type AND user_type < 3)
 	);
 	
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS Cats(
        FOREIGN KEY (owner) REFERENCES Utilisateur(id_user),
        name_cat VARCHAR NOT NULL,
        purety BOOLEAN,
-       pattern type_pattern, /* NULL s'il n'y en a pas */
+       pattern type_pattern NOT NULL,
 
        birthday_cat DATE,
        sage_min INTEGER,
@@ -35,9 +35,9 @@ CREATE TABLE IF NOT EXISTS Cats(
        sex INTEGER NOT NULL CHECK (0 <= sex AND sex < 3),
        ssex INTEGER NOT NULL CHECK (0 <= sex AND sex < 3),
 
-       csize INTEGER CHECK (0 <= csize AND csize < 3),
-       scsize_min INTEGER CHECK (0 <= csize AND csize < 3),
-       scsize_max INTEGER CHECK (0 <= csize AND csize < 3),
+       csize INTEGER CHECK (0 <= csize AND csize < 6),
+       scsize_min INTEGER CHECK (0 <= csize AND csize < 6),
+       scsize_max INTEGER CHECK (0 <= csize AND csize < 6),
 
        coat INTEGER CHECK (0<=coat AND coat < 4),
        scoat_min INTEGER CHECK (0<=coat AND coat < 4),
@@ -46,7 +46,6 @@ CREATE TABLE IF NOT EXISTS Cats(
        weight FLOAT CHECK (0<weight),
        sweight_min FLOAT CHECK (0<weight),
        sweight_max FLOAT CHECK (0<weight)
-
 	   );
 
 		/* contient aussi une race (Cat_breed), une ou plusieurs couleurs (Cat_color) et traits de caractères (cat_personnality) 
@@ -70,7 +69,7 @@ CREATE TABLE IF NOT EXISTS Personality_traits(
        name_trait VARCHAR NOT NULL
        );
 
-DROP TABLE IF EXISTS Cat_color;	   
+DROP TABLE IF EXISTS Cat_colors;
 CREATE TABLE IF NOT EXISTS Cat_colors(
 		cat INTEGER,
 		color INTEGER,
@@ -129,7 +128,7 @@ CREATE TABLE IF NOT EXISTS Searched_patterns(
 		cat INTEGER NOT NULL,
 		pattern type_pattern NOT NULL,
 		FOREIGN KEY (cat) REFERENCES Cats(id_cat),
-		PRIMARY KEY(cat,type_pattern)
+		PRIMARY KEY(cat,pattern)
 		);
 
 INSERT INTO Colors VALUES ('1','Noir');
@@ -154,6 +153,7 @@ INSERT INTO Personality_traits VALUES('5','Bruyant');
 INSERT INTO Personality_traits VALUES('6','Tonique');
 INSERT INTO Personality_traits VALUES('7','Emotif');
 INSERT INTO Personality_traits VALUES('8','Chasseur');
+INSERT INTO Personality_traits VALUES('9','Calme');
 
 
 INSERT INTO Breeds VALUES ('1','Siamois');
@@ -176,6 +176,7 @@ INSERT INTO Breeds VALUES ('17','Manx');
 INSERT INTO Breeds VALUES ('18','Angora Turc');
 INSERT INTO Breeds VALUES ('19','Savannah');
 INSERT INTO Breeds VALUES ('20','Himalayen');
+INSERT INTO Breeds VALUES ('21','chat de goutière');
 
 
 INSERT INTO Utilisateur VALUES ('1','Jesus','Jesus@paradise.net','406fcef6cb90b615f5e4c5239f05d4dc','0001001001','0'); /* mdp Amen0 :*/
@@ -183,8 +184,49 @@ INSERT INTO Utilisateur VALUES ('2','Alphabet','boss@google.net','0c4ea8bb1bd4ef
 INSERT INTO Utilisateur VALUES ('3','Clochard','mauvais@rue.com','483a6adfa09079059fd9eb3849932724','9876543210','1'); /* mdp SNCF2merde */
 INSERT INTO Utilisateur VALUES ('4','Jean-Eudes','je.dieseman@diese.org','42f66f9ed55f43a0eb4bd560e7cf87a5','0154879632','1'); /* mdp D1eseRecherche */
 
-INSERT INTO Cats VALUES ('1','1','Pierre',TRUE,NULL,'0001-12-25',NULL,NULL, '0','1', '1',NULL,NULL, '1',NULL,NULL, 5,NULL,NULL);
-INSERT INTO Cat_color VALUES ('1','9');
+INSERT INTO Cats VALUES ('1','1','Pierre',TRUE,'Solide','0001-12-25',NULL,NULL, '0','1', '1',NULL,NULL, '1',NULL,NULL, 5,NULL,NULL);
+INSERT INTO Cat_colors VALUES ('1','9');
 INSERT INTO Cat_breed VALUES ('1','14');
-INSERT INTO Cat_personnality VALUES ('1','2');
+INSERT INTO Cat_personality VALUES ('1','9');
+INSERT INTO Searched_traits VALUES ('1','9');
+INSERT INTO Searched_breeds VALUES ('1','11');
 
+INSERT INTO Cats VALUES ('2','2','Google',FALSE,'Bicolore','1995-04-26','8','15', '0','1', '2','0','2', '2','1',NULL, '6','4','10');
+INSERT INTO Cat_colors VALUES ('2','9');
+INSERT INTO Cat_colors VALUES ('2','2');
+INSERT INTO Cat_breed VALUES ('2','9');
+INSERT INTO Cat_personality VALUES ('2','2');
+INSERT INTO Cat_personality VALUES ('2','5');
+INSERT INTO Searched_traits VALUES ('2','7');
+INSERT INTO Searched_traits VALUES ('2','9');
+INSERT INTO Searched_breeds VALUES ('2','6');
+INSERT INTO Searched_breeds VALUES ('2','8');
+INSERT INTO Searched_colors VALUES ('2','1');
+INSERT INTO Searched_patterns VALUES ('2','Calico');
+
+INSERT INTO Cats VALUES ('3','3','Duchesse',FALSE,'Solide','2003-04-26','3',NULL, '1','0', '1','2',NULL, '2','1',NULL, '5','6','15');
+INSERT INTO Cat_colors VALUES ('3','9');
+INSERT INTO Cat_breed VALUES ('3','2');
+INSERT INTO Cat_personality VALUES ('3','3');
+INSERT INTO Cat_personality VALUES ('3','7');
+INSERT INTO Cat_personality VALUES ('3','9');
+INSERT INTO Searched_traits VALUES ('3','8');
+INSERT INTO Searched_breeds VALUES ('3','21');
+INSERT INTO Searched_breeds VALUES ('3','10');
+INSERT INTO Searched_colors VALUES ('3','3');
+INSERT INTO Searched_colors VALUES ('3','9');
+INSERT INTO Searched_patterns VALUES ('3','Colourpoint');
+
+INSERT INTO Cats VALUES ('4','1','Angel',FALSE,'Colourpoint','2009-05-16','7',NULL, '0','1', '4','1',NULL, '2','2',NULL, '5','6','15');
+INSERT INTO Cat_colors VALUES ('4','9');
+INSERT INTO Cat_colors VALUES ('4','3');
+INSERT INTO Cat_breed VALUES ('4','2');
+INSERT INTO Cat_personality VALUES ('4','4');
+INSERT INTO Cat_personality VALUES ('4','7');
+INSERT INTO Cat_personality VALUES ('4','9');
+INSERT INTO Searched_traits VALUES ('4','8');
+INSERT INTO Searched_breeds VALUES ('4','21');
+INSERT INTO Searched_breeds VALUES ('4','10');
+INSERT INTO Searched_colors VALUES ('4','4');
+INSERT INTO Searched_colors VALUES ('4','9');
+INSERT INTO Searched_patterns VALUES ('4','Colourpoint');
