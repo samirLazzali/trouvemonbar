@@ -82,11 +82,12 @@ else{
         echo '<h1>Upload terminé</h1>
 	    <p>Cliquez <a href="./index.php">ici</a> pour revenir à la page d accueil</p>';
         $nomposts=move_posts($_FILES['img']);
-        $query=$db->prepare('INSERT INTO posts (titre, description,img)
-        VALUES (:titre,:description, :img)');
+        $query=$db->prepare('INSERT INTO posts (titre, description,img,author)
+        VALUES (:titre,:description, :img,:author)');
         $query->bindValue(':titre', $titre, PDO::PARAM_STR);
         $query->bindValue(':description', $desc, PDO::PARAM_STR);
         $query->bindValue(':img', $nomposts, PDO::PARAM_STR);
+        $query->bindValue(':author', $id, PDO::PARAM_INT);
         $query->execute();
         $query->CloseCursor();
     }

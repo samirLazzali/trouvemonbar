@@ -42,5 +42,5 @@ function aff_posts($id_posts){
 
 
 
-    
+
 }
