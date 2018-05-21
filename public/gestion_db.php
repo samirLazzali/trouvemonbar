@@ -41,6 +41,16 @@ function recettes($connexion){
     $reponse = null;
     return $tab;
 }
+/**
+ * @brief permet de récupérer les statistiques d'une soirée
+ * @param $connexion un pdo et $soiree une soiree
+ * @return un array avec toutes les statistiques
+ */
+function statistique($connexion,$soiree){
+    $requete = "SELECT * FROM \"Statistiques\"WHERE soiree=$soiree";
+    $reponse = $connexion->query($requete);
+    return $reponse->fetch();
+}
 
 /**
  * @brief permet de récupérer le nom des ingredients necessaires pour une recette
