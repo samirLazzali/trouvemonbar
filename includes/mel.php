@@ -7,12 +7,12 @@ if (empty($_POST['titre'])) // Si on la variable est vide, on peut considérer q
 {
     echo '<h1>Upload</h1>';
     echo '<form method="post" action="upload.php" enctype="multipart/form-data">
-	<fieldset><legend>Infos</legend>
-	<label for="titre">* Titre :</label>  <input name="titre" type="text" id="titre" /><br />
-	<label for="description">Description </label><textarea name="description" cols="40" rows="5"></textarea>(150 caractères max.)<br />
+	<fieldset class=cadreinscription><legend class=\'legende\'>Infos</legend><br/>
+	<input class=champinscription name="titre" type="text" id="titre" placeholder="Titre" /><br /><br />
+	<textarea id="description" name="description" cols="40" rows="5" placeholder="description"></textarea>(150 caractères max.)<br />
 	<label for="img">Votre Image : </label><input type="file" name="img" id="img" /><br />
 	</fieldset>
-	<p><input type="submit" value="Upload" /></p></form>
+	<p><input class="connexion" type="submit" value="Upload" /></p></form>
 	</div>
 	</body>
 	</html>';
@@ -80,7 +80,7 @@ else{
 
     if ($nb_erreur==0) {
         echo '<h1>Upload terminé</h1>
-	    <p>Cliquez <a href="./index.php">ici</a> pour revenir à la page d accueil</p>';
+	    <p><a href="./index.php">Cliquez ici pour revenir à la page d accueil</a> </p>';
         $nomposts=move_posts($_FILES['img']);
         $query=$db->prepare('INSERT INTO posts (titre, description,img,author)
         VALUES (:titre,:description, :img,:author)');

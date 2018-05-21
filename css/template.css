@@ -3,15 +3,17 @@
 }
 
 body{
-background-image:url("../img/bg1.jpg");
-background-repeat:repeat;
+    background-image:url("../img/bg1.jpg");
+    background-repeat: repeat;
 }
+
 .home{
     float:left;
 }
 
 #title{
     text-align: center;
+    background-color: white;
 }
 
 #title1{
@@ -20,6 +22,7 @@ background-repeat:repeat;
     color: #03af87;
     font-style: italic;
     font-variant: small-caps;
+
 }
 
 .affichemenu{
@@ -29,7 +32,7 @@ background-repeat:repeat;
 }
 
 #menu{
-    position: absolute;
+    position:absolute;
     left: 8px;
     top: 193px;
     margin: 0;
@@ -94,9 +97,7 @@ li a{
 
 .cadre{
     border: solid black 1px;
-    background-color: white;
 }
-
 
 .posts{
     text-align: center;
@@ -104,4 +105,16 @@ li a{
 
 .vote{
     display: inline;
+}
+
+.pts{
+    margin-right: 60px;
+    margin-left: 60px;
+    text-align: center;
+    font-family: "Adobe Garamond Pro";
+    font-size: 20px;
+}
+
+.pac{
+    color: crimson;
 }

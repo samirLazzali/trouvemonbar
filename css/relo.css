@@ -103,3 +103,17 @@ a:hover{
     background: #cecece;
     padding: 5px;
 }
+
+#description{
+    font-size: 15px;
+    font-family: 'Josefin Sans', sans-serif;
+    border: solid white 1px;
+    background: white;
+    color: black;
+    height: 100px;
+    width: 1000px;
+    border-radius: 5px;
+    padding: 3px;
+    box-shadow: 4px 1px 8px #000000;
+    padding: 10px;
+}

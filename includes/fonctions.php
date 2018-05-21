@@ -46,14 +46,14 @@ function aff_posts($id_posts)
     $query->bindValue(':id', $author, PDO::PARAM_INT);
     $query->execute();
     $data = $query->fetch();
-    $author = $data["pseudo"];
+    $autho = $data["pseudo"];
     echo '<div class="posts"> <h1>' . $titre . '</h1><br />
-            <img src="./posts/' . $img . '"alt="" /><br />' . $desc . '<br />' .
-        $jaime . '+ et ' . $nul . '-<br /> Par : ' . $author.'<br /> 
-            <div class="vote"><form class="vote" method="post" action="vote.php?vp='.$id_posts.'"><input class=connexion type="submit" value="+" /></form> 
-            <form class="vote" method="post" action="vote.php?vm='.$id_posts.'"><input class=connexion type="submit" value="-" /></form></div><br /> 
+            <div class="intituleinscription"><img src="./posts/' . $img . '"alt="" /><br />' . $desc . '<br />' .
+        $jaime . ' + et ' . $nul . ' -<br /> Par : <a href="./profile.php?m='.$author.'"> ' . $autho.'</a><br /> 
+            <div class="vote"><a href="vote.php?vp='.$id_posts.'"><img src="./img/upvote.png" alt="votez +"></a> 
+            <a href="vote.php?vm='.$id_posts.'"><img src="./img/downvote.png" alt="votez -"></a></div> </div><br /> 
             
-           ________________________________________________________________________________________________________<br />';
+           ________________________________________________________________________________________________________<br /></div>';
 }
 
 ?>

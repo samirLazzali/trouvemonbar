@@ -22,7 +22,7 @@
             <a href="index.php">Home</a>
         </li>
         <li class="optionmenu">
-            <a href="">Posts</a>
+            <a href="./upload.php">Upload</a>
         </li>
         <li class="optionmenu">
             <a href="<?php echo $variable; ?>">Mon profil</a>
