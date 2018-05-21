@@ -34,7 +34,11 @@ if(verif_authent()) { // si le gars est authentified ==>  acces aux offres
 	$an->display();
     }
 } else {	// sinon pas acces aux offres
-    indexnotco();
+    if (isset($_POST['error'])) {
+	indexnotco($_POST['error']);
+    } else {
+	indexnotco();
+    }
 }
 ?>
 

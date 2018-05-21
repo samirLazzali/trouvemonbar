@@ -111,13 +111,15 @@ function indexco() {
 	show_offers($offers);
 }
 
-function indexnotco() {
-	print "<div class=\"main\">";
+function indexnotco($erreur = "") {
+    print "<div class=\"main\">";
     print "<div class=annonce>";
     print "<div class=title> Bienvenue sur Les Bons Bails </div>";
     print "<br>";
-	print "<div> <br> Connectez vous pour accéder aux offres 
-			</div>";
+    print "<div> <br> Connectez vous pour accéder aux offres ";
+    if ($erreur != "")
+	print "<br><span class=\"error\">Erreur: $erreur</span>";
+    print "</div>";
     print "<br>";
     print "<br>";
 

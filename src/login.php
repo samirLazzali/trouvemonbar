@@ -21,7 +21,7 @@ function getUsername($email) {
 
 function login() {
     if (empty($_POST['email']) || empty($_POST['password'])) {
-	return "Username or Password is invalid";
+	return "veuillez entrer votre email et mot de passe";
     } else {
 	// Define $username and $password
 	$email=$_POST['email'];
@@ -33,14 +33,14 @@ function login() {
 	    $_SESSION['username'] = $row->username;
 	    $_SESSION['admin'] = $row->admin;
 	} else {
-	    return "Invalid credentials: '$email', '$password'";
+	    return "email ou mot de passe incorrect";
 	}
     }
 }
 
 function create() {
     if (empty($_POST['email']) || empty($_POST['password'])) {
-	    return "Empty fields";
+	    return "Veuillez entrer un email et un mot de passe";
     }
     
     $email = $_POST['email'];
@@ -48,7 +48,7 @@ function create() {
     $username = getUsername($email);
 
     if ($username == -1) {
-	    return "Invalid Email";
+	    return "Email invalide: seuls les emails ENSIIE sont acceptés";
     }
     
     $connection = dbConnect();
@@ -56,7 +56,7 @@ function create() {
     $rows = dbQuery($connection, "SELECT * FROM users WHERE email='$email';");
     
     foreach($rows as $entry) {
-	    return "Email already registered";
+	    return "L'email existe déjà";
     }
     
     if (isset($_POST['username']) && $_POST['username'] != '') {
@@ -64,14 +64,14 @@ function create() {
 	    $rows = dbQuery($connection, "SELECT * FROM users WHERE username='$username';");
     
 	    foreach($rows as $entry) {
-	        return "Username already taken";
+	        return "Le surnom est déjà pris";
 	    }
     }
     
     if (dbExec($connection, "INSERT INTO users (email, username, password) VALUES ('$email','$username','$password');")) {
-	    return "Account created";
+	    return "Le compte à été créé, veuillez vous connecter";
     } else {
-	    return "PDO error";
+	    return "Erreur de BDD";
     }
 }
 
@@ -114,11 +114,11 @@ function handleLogin() {
     }
 
     if (isset($_GET['login'])) {
-	login();
+	$_POST['error'] = login();
     }
 
     if (isset($_GET['create'])) {
-	create();
+	$_POST['error'] = create();
     }
 }
 ?>

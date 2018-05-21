@@ -8,12 +8,11 @@ if (isset($_POST['submit'])) {
     $newAnnonce = Annonce::annonceFromPost($oldAnnonce->op);
     $newAnnonce->id = $oldAnnonce->id;
     $newAnnonce->date = $oldAnnonce->date;
-}
-
-if (isset($_POST['submit']))
     $res = $newAnnonce->updateDb();
-else
+} else {
+    Tags::resetTags($oldAnnonce->id);
     Annonce::delAnnonceById($oldAnnonce->id);
+}
 
 $_POST = array();
 
