@@ -13,31 +13,31 @@
 </head>
 <body>
 <?php include "upperBar.php" ?>
-<center><h2> Faites profiter les autres en créant votre évènement !</h2>
+<center><h2><em> Faites profiter les autres en créant votre évènement !</em></h2>
      	    <br/><br/>
 	     <form action="Creer_evenement.php" method="post" id="event">
 	     	   <label for="nom_event"><b>Nom de l'évènement</b></label>
 		   <br/>
-	     	   <input type="text" name="nom_event" style="width:100%;"required/>
+	     	   <input type="text" class="events" name="nom_event" style="width:100%;"required/>
 		   <br/>
 		   <br/>
 		   <label for="date_event"><b>Quand?</b></label>
 		   <br/>
-		   <input type="date" name="date_event" required>
+		   <input type="date" class="events"  name="date_event" required>
 		   <br/>
 		   <label for="lieu_event"><b>Où?</b></label>
 		   <br/>
-		   <input type="text" name="lieu_event" style="width=100%;" required>
+		   <input type="text" class="events" name="lieu_event" style="width=100%;" required>
 		   <br/>
 		   <br/>
-		   <label for="before"><b>Quel before chacal?<br/></b><label/>
-		   <input type="text" name="before" style="width:100%;" >
+		   <label for="before"><b>Quel before chacal?<br/></b></label>
+		   <input type="text" class="events" name="before" style="width:100%;" >
 		   <br></br>
-		   <label for="prix"><b>Et ça coûte combien?<br/></b><label/>
+		   <label for="prix"><b>Et ça coûte combien?<br/></b></label>
 		   <br/>
 		   <input type="text" name="prix" required>
 		   <br></br><br>
-		   <label for="image"><b> Une petite photo de l'endroit?<br/></b><label/>
+		   <label for="image"><b> Une petite photo de l'endroit?<br/></b></label>
 		   <br/>
 		   <input type="file" name="image">
 		   <br/>
