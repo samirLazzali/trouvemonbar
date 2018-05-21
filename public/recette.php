@@ -28,7 +28,9 @@ $users = $userRepository->fetchAll();
 menu_aperal();
 ?>
 
-</div>
+<br />
+<br />
+<br />
 <h3><?php echo 'Recettes' ?></h3>
 
     <table class="table table-bordered table-hover table-striped">
