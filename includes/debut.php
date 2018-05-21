@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <?php
+    echo (!empty($titre))?'<title>'.$titre.'</title>':'<title> GolrIIE </title>';
+    ?>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="./css/template.css">
+    <link rel="stylesheet" type="text/css" href="../css/template.css">
 </head>
 <?php
 
