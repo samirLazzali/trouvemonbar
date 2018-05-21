@@ -57,13 +57,13 @@ menu_navigation();
 
 <h3>Prochaine réunion</h3>
     <?php
-    $req = $connection->query('SELECT * FROM public.reunion WHERE datee= (SELECT MAX(datee) FROM public.reunion)');
+    $req = $connection->query('SELECT * FROM public.reunion WHERE id= (SELECT MAX(id) FROM public.reunion)');
     if (!$req) {
         $res = $req->fetchAll();
         foreach ($res as $reu) {
-            echo "soirée: {$reu['soiree']} </br>
-             date: {$reu['datee']} </br>
-             compt rendue: {$reu['cr']} </br>";
+            echo "soirée: {$reu['soiree']} <br/>
+             date: {$reu['datee']} <br/>
+             compt rendue: {$reu['cr']} <br/>";
         }
         if ($_SESSION['connect']>=1) {
             ?>
