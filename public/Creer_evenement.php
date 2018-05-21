@@ -5,9 +5,14 @@
 	$dbPassword = getenv('DB_PASSWORD'); 
 	$DB = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 function chargerClasse($classe) {
-require $classe . '.php';
+	require $classe . '.php';
 }
 spl_autoload_register('chargerClasse');
+if (empty($_SESSION['id']))
+{
+	header("Location: connexion.php");
+}
+
 ?>
 
 
