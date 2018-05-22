@@ -23,12 +23,12 @@ if(isset($_POST['agemin']))
 
 if(isset($_POST['agemax']))
 {
-	$agemin = trim($_POST['agemax']);
+	$agemax = trim($_POST['agemax']);
 }
 
 if(isset($_POST['sizemin']))
 {
-	$agemin = trim($_POST['sizemin']);
+	$sizemin = trim($_POST['sizemin']);
 }
 
 
@@ -39,40 +39,40 @@ if(isset($_POST['sizemax']))
 
 if(isset($_POST['coatmin']))
 {
-	$agemin = trim($_POST['coatmin']);
+	$coatmin = trim($_POST['coatmin']);
 }
 
 
 if(isset($_POST['coatmax']))
 {
-	$sizemax = trim($_POST['coatmax']);
+	$coatmax = trim($_POST['coatmax']);
 }
 
 if(isset($_POST['weightmin']))
 {
-	$agemin = trim($_POST['weightmin']);
+	$weightmin = trim($_POST['weightmin']);
 }
 
 
 if(isset($_POST['weightmax']))
 {
-	$sizemax = trim($_POST['weightmax']);
+	$weightmax = trim($_POST['weightmax']);
 }
 
 if(isset($_POST['pattern']))
 {
-	$agemin = trim($_POST['pattern']);
+	$pattern = trim($_POST['pattern']);
 }
 
 if(isset($_POST['breeds']))
 {
-	$agemin = trim($_POST['breeds']);
+	$breeds = trim($_POST['breeds']);
 }
 
 
 if(isset($_POST['colors']))
 {
-	$sizemax = trim($_POST['colors']);
+	$colors = trim($_POST['colors']);
 }
 
 if($_SESSION['erreurs'] > 0) $titre = 'Erreur lors de l\'ajout';
