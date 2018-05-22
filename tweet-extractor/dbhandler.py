@@ -1,5 +1,6 @@
 import time
 import psycopg2
+import datetime
 import requests
 
 class DBHandler():
@@ -13,6 +14,15 @@ class DBHandler():
         # self.cur = self.conn.cursor()
 
     def addTweet(self, t):
+        timestamp = 0
+        # Mon May 21 23:02:41 +0000 2018
+        months = ["Jan", "Fev", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        created_at = t["created_at"]
+        created_at = "Mon May 21 23:02:41 +0000 2018"
+        d = datetime.datetime.strptime(created_at, "%a %b %d %H:%M:%S %z %Y")
+        print(d, created_at)
+        
+        print(t)
         _id = str(t["id"])[-12:]
         content = t["full_text"]
         userId = str(t['user']['id'])[-12:]

@@ -90,6 +90,19 @@ class Appreciation implements JsonSerializable
      */
     static function fromRow($row)
     {
+
+        $SQL = "SELECT * FROM Appreciation WHERE Post = :post AND Type = :type";
+        $db = connect();
+        $st = $db->prepare($SQL);
+        $st->bindValue(":post", $row["post"]);
+        $st->bindValue(":type", $row["type"]);
+        $st->execute();
+        $row = $st->fetch();
+        return Appreciation::fromRow2($row);
+    }
+
+    static function fromRow2($row)
+    {
         return new Appreciation($row["post"], $row["author"], $row["type"], $row["timestamp"]);
     }
 

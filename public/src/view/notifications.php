@@ -52,8 +52,8 @@
                 <div class="post-in-feed">
                     <div class="post-header">
                         <span class="fas fa-heart post-liked"></span>
-                        <a href="/profile/<?=$appreciation->getAuthor()->getUsername()?>" class="post-header-author"><?=$appreciation->getAuthor()->getUsername()?></a>
-                        <span class="notification-liked-you">a aimé votre publication.</span> <span class="post-header-date" title="Heure de l'appréciation"><?=timestamp_to_string($appreciation->getTimestamp())?></span>
+                        <!--<a href="/profile/<?=$appreciation->getAuthor()->getUsername()?>" class="post-header-author"><?=$appreciation->getAuthor()->getUsername()?></a>-->
+                        <span class="notification-liked-you">Vous avez reçu un j'aime.</span> <span class="post-header-date" title="Heure de l'appréciation"><?=timestamp_to_string($appreciation->getTimestamp())?></span>
                     </div>
 
                     <div class="post-content">
