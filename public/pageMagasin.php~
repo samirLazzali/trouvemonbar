@@ -1,0 +1,62 @@
+<?php
+
+session_start() ;
+
+include("pageAccueil.php") ;
+include("donneesPerso.php") ;
+
+
+enTete("Magasin");
+
+onglets() ;
+
+fin_enTete();
+
+magasin() ;
+
+
+pied();
+
+function magasin() {
+    $tab = $_SESSION['tab'] ;
+    $money = $tab[13] ;
+    print "<p> Il vous reste $money pièces d or " ;
+    echo '<form action="magasin.php" method="post">  </p>' ;
+    $tableau = items_magasin() ;
+    while ($row = $tableau->fetch()) {
+        article($row) ;
+	echo '</br>' ;
+    }
+    echo '<p> </br> <button type="submit">Acheter</button></p>';
+    echo '</form>' ;
+}
+
+
+function article($tab) {
+    $obj = str_replace("_", " ", $tab[0]) ;
+    print "<p> <img src='$tab[0].jpeg' alt='image de $obj'/>" ;
+    print "</br> prix : $tab[1]";
+    print "</br> <input type='radio' name='article' value=$tab[0]>" ;
+    print "<label for= $tab[0]> $obj </label>" ;
+    print "</p> </br>" ;
+}
+
+
+
+
+function items_magasin() {
+    $nom_hote= "localhost" ; 
+    $nom_base = getenv('DB_NAME'); 
+    $nom_user = getenv('DB_USER');
+    $mdp=getenv('DB_PASSWORD');
+    $connection = new PDO("pgsql:host=postgres user=$nom_user dbname=$nom_base password=$mdp");
+    $req = $connection->prepare("SELECT * FROM items ;") ;
+    $reponse = $req->execute([]) ;
+    if ($reponse){
+       return($req) ;
+    }
+}
+
+
+
+?>

@@ -1,0 +1,177 @@
+/*
+
+
+function focusFunctionPerso()
+{
+    document.getElementById("aidePerso").textContent="Entrez ici le nom de votre personnage";
+
+}
+
+function blurFunctionPerso(val)
+{
+    if (val.length < 2){
+	document.getElementById("aidePerso").textContent="Nom de personnage trop court";
+	document.getElementById("aidePerso").style.color = "red";
+	return false;
+    }
+    else {
+	document.getElementById("aidePerso").textContent=" ";
+	return true;
+    }
+}
+
+function focusFunctionUser()
+{
+    document.getElementById("aideUser").textContent="Entrez ici le nom d'utilisateur";
+    
+}
+
+function blurFunctionUser(val)
+{
+    if (val.length < 2){
+	document.getElementById("aideUser").textContent="Nom d'utilisateur trop court";
+	document.getElementById("aideUser").style.color = "red";
+	return false;
+    }
+    else {
+	document.getElementById("aideUser").textContent=" ";
+	return true;
+    }
+}
+
+function focusFunctionMdp()
+{
+    document.getElementById("aideMdp").textContent="Entrez ici votre mot de passe";
+
+}
+
+function blurFunctionMdp(val)
+{
+    if (val.length < 4){
+	document.getElementById("aideMdp").textContent="Longueur du mot de passe : faible";
+	document.getElementById("aideMdp").style.color = "red";
+
+    }
+    else if (val.length > 4 && val.length <9){
+	document.getElementById("aideMdp").textContent="Longueur du mot de passe : moyenne";
+	document.getElementById("aideMdp").style.color = "orange";
+
+    }
+    else {
+	document.getElementById("aideMdp").textContent="Longueur du mot de passe : élevée ";
+	document.getElementById("aideMdp").style.color = "lightgreen";
+    }
+    return true;
+}
+
+function verification(f)
+{
+    if (blurFunctionPerso(f.personame.value) && blurFunctionUser(f.username.value) && blurFunctionMdp){
+	return true;
+    }
+    else{
+	alert("Veuillez remplir correctement le formulaire. ");
+	return false;
+    }
+}
+*/
+let Ti = 1 ;
+let Dr = 1 ;
+let To = 1 ;
+let Ph = 1 ;
+
+
+function max(a, b) {
+    if (a > b) {
+	return a ;
+    } else {
+	return b ;
+    }
+}
+
+
+
+function update_result_alienor() {
+    alert("1") ;
+    let max = max(Ph, max(To, max(Dr, Ti))) ;
+    alert("2") ;
+    if (max == Ph) {
+	let x = 1 ;
+    }
+    alert("3") ;
+    if (max == To) {
+	let x = 2 ;
+    }
+    alert("4") ;
+    if (max == Ti) {
+	let x = 3 ;
+    }
+    alert("5") ;
+    else {
+	let x = 4 ;
+    }
+    alert("6") ;
+
+    document.getElementById("result").value = x ;
+}
+
+
+/*
+
+function grey_out(id)
+{
+    let buttons = document.getElementsByName(id);
+    buttons[0].disabled = true;
+    buttons[1].disabled = true;
+}
+
+
+function ajout1plus()
+{
+    Ti -- ;
+    Dr -- ;
+    Ph ++ ;
+    To ++ ;
+    update_result() ;
+}
+*/
+
+function ajout1moins() {
+    Ti ++ ;
+    Dr -- ;
+    Ph ++ ;
+    To -- ;
+    update_result_alienor() ;
+}
+
+/*
+
+function ajout2plus()
+{
+    Ti -- ;
+    Dr ++ ;
+    Ph -- ;
+    To ++ ;
+    update_result() ;
+}
+
+
+function ajout3moins() {
+    Ti -- ;
+    Dr ++ ;
+    Ph ++ ;
+    To -- ;
+    update_result() ;
+}
+
+function ajout3plus()
+{
+    Ti ++ ;
+    Dr -- ;
+    Ph -- ;
+    To ++ ;
+    update_result() ;
+}
+
+
+*/

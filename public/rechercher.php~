@@ -1,0 +1,33 @@
+<?php
+
+
+session_start() ;
+
+
+
+rechercher() ;
+
+
+
+function rechercher() {
+   $user = $_POST["username"] ;
+   $nom_hote= "localhost" ; 
+   $nom_base = getenv('DB_NAME'); 
+   $nom_user = getenv('DB_USER');
+   $mdp=getenv('DB_PASSWORD');
+   $connection = new PDO("pgsql:host=postgres user=$nom_user dbname=$nom_base password=$mdp");
+   $req = $connection->prepare("SELECT username FROM users WHERE username=$user ;") ;
+   $reponse = $req->execute([]);
+   if ($reponse) {
+       if ($req->rowCount() == 1) {
+          $tuble = $req->fetch() ;
+	  $_SESSION["autreUser"] = $tuple[0] ;
+	  header('Location: autreSession.php') ;
+	  exit() ;
+       }
+       else {
+          header('Location: Score.php') ;
+	  exit() ;
+       }
+    }
+}

@@ -1,0 +1,26 @@
+<?php
+
+session_start() ;
+
+delete() ;
+
+function delete() {
+    
+    $nom_hote= "localhost" ; 
+    $nom_base = getenv('DB_NAME'); 
+    $nom_user = getenv('DB_USER');
+    $mdp=getenv('DB_PASSWORD');
+    $connection = new PDO("pgsql:host=postgres user=$nom_user dbname=$nom_base password=$mdp");
+
+    $req1 = $connection->prepare("DELETE FROM users JOIN perso ON users.username=perso.username JOIN inventory ON users.username=inventory.usename WHERE userName=? ;") ;
+    $user = $_SESSION['userName'] ;
+    $reponse1 = $req1->execute([$user]) ;
+    if ($reponse1) {
+        header('Location: fermeture.php') ;
+	exit() ;
+    }
+    else {
+        header('Location: fermeture.php') ;
+	exit() ;
+    }
+}

@@ -1,0 +1,99 @@
+<?php
+
+session_start() ;
+include("pageAccueil.php") ;
+
+enTete("Quête en cours...");
+
+onglets();
+
+fin_enTete();
+
+partir_enQuete() ;
+
+afficher_enQuete();
+
+pied() ;
+
+
+
+function partir_enQuete() {
+    $quete = $_POST['quete'] ;
+    $nom_hote= "localhost" ;
+    $nom_base = getenv('DB_NAME');
+    $nom_user = getenv('DB_USER');
+    $mdp=getenv('DB_PASSWORD');
+    $user = $_SESSION['userName'] ;
+    $connection = new PDO("pgsql:host=postgres user=$nom_user dbname=$nom_base password=$mdp");
+
+    $req0 = $connection->prepare("SELECT * FROM adventure WHERE q_name=? ;") ;
+    $reponse0 = $req0->execute([$quete]);
+    if(! $reponse0) {
+        exit("partir_enQuete(): connection failed");
+    }
+    $row0 = $req0->fetch();
+
+    $time =  time() + $row0[6] ;
+    
+    $req = $connection->prepare("UPDATE perso SET lastQuest=?, endTimeQuest=? WHERE username=?;") ;
+    $reponse = $req->execute([$quete, $time, $user]) ;
+    if(! $reponse) {
+        exit("partir_enQuete(): connection failed");
+    }
+}
+
+
+function afficher_enQuete() {
+    print " <h2> Vous etes encore en quete... <h2> " ;
+    print "<br/>" ;
+    
+    $nom_hote= "localhost" ;
+    $nom_base = getenv('DB_NAME');
+    $nom_user = getenv('DB_USER');
+    $mdp=getenv('DB_PASSWORD');
+    $user = $_SESSION['userName'] ;
+    $connection = new PDO("pgsql:host=postgres user=$nom_user dbname=$nom_base password=$mdp");
+
+    $req = $connection->prepare("SELECT lastQuest, endTimeQuest FROM perso where username=?") ;
+    $reponse = $req->execute([$user]);
+    if(! $reponse) {
+        exit("afficher_enQuete(): connection failed");
+    }
+    $row = $req->fetch();
+    
+    $quete = $row[0];
+    $dateFinQuete = $row[1] ;
+    $date = time();
+    $remainingTime = $dateFinQuete - $date ;
+
+    print "<body onload='minutageGo()'>" ;
+    echo '<form name="formulaire" method="post" action="finQuete.php">' ;
+    print "<input type='hidden' name='quete' value=$quete><br>" ;
+    print "<input type='text' name='minuteur' value=$remainingTime readonly><br>" ;
+    print "<input type='hidden' name='boutonFin' value='Quête terminée!' onClick='resetPage()'>" ;
+    echo '</form>' ;
+    print "</body>" ;
+    
+    ?>
+    <script type="text/javascript">
+    
+    var attente ;
+    function minutageGo(){
+        var nombre_qui_change = window.document.formulaire.minuteur.value ;
+        nombre_qui_change = parseInt(nombre_qui_change) - 1;
+        window.document.formulaire.minuteur.value = nombre_qui_change;
+        
+        attente = setTimeout("minutageGo()", 1000);
+        if(nombre_qui_change<=0) {
+	window.document.formulaire.minuteur.value = 0 ;			 
+            window.document.formulaire.boutonFin.type = "submit" ;
+        }
+    }
+
+    function resetPage() {
+    	     window.document.location.replace("quetes.php");
+    }
+    
+    </script>
+    <?php
+}

@@ -1,0 +1,80 @@
+<?php
+session_start();
+include("config.php");
+
+Rechercher() ;
+
+
+function Rechercher() {
+    $userName = $_POST["username"];
+    $password = $_POST["password"];
+    $tableau = get_id($userName,$password);
+    if ($tableau[0] == 0) {
+        $_SESSION['userName'] = $userName ;
+        header('Location: accueilPerso.php');
+        exit();
+    }
+    else {
+    print "<!DOCTYPE html>\n";		
+    print "<html>\n";
+    print "  <body>\n";
+    print "</br> <h1> Erreur : Identifiant inexistant ou mot de passe incorect !</h1> ";
+    echo '<p><a href="index.php"><input type="button" name="Retour Accueil" value="Retour Accueil"/></a></p>';
+    print "</body> </html>";
+    }
+}
+/*
+header('Location: index.php');
+        print("ce compte n'existe pas") ;
+        exit();
+	*/
+	
+function get_id($userName,$password)
+{
+    $nom_hote= "localhost" ; /*"pgsql2";*/
+    $nom_base = getenv('DB_NAME'); /* avant tpphp */
+    $nom_user = getenv('DB_USER');
+    $mdp=getenv('DB_PASSWORD');
+    $connection = new PDO("pgsql:host=postgres user=$nom_user dbname=$nom_base password=$mdp");
+    $requete = $connection->prepare("SELECT * FROM users WHERE username = ? AND password = ? ;");
+    $reponse = $requete->execute([$userName,$password]);
+    if ($reponse) {
+        if($requete->rowCount()==1){
+            $tuple=$requete->fetch();
+	    if ($tuple[3] != 'banned') {
+                return array(0,$tuple['username']);
+	    }
+	    else {
+	        header('Location: index.php') ;
+		exit() ;
+	    }
+        }
+        else{
+            return array(-1,0);
+        }
+     }
+     else {
+          return array(-2,0);
+     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+?>

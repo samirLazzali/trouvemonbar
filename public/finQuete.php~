@@ -1,0 +1,105 @@
+<?php
+
+session_start() ;
+include("donneesPerso.php") ;
+
+finQuete();
+
+header('Location: quete.php');
+
+
+
+
+
+function finQuete() {
+    $niveauQuete = $_POST['quete'] ;
+    $nom_hote= "localhost" ;
+    $nom_base = getenv('DB_NAME');
+    $nom_user = getenv('DB_USER');
+    $mdp=getenv('DB_PASSWORD');
+    $user = $_SESSION['userName'] ;
+    $connection = new PDO("pgsql:host=postgres user=$nom_user dbname=$nom_base password=$mdp");
+    
+    $req1 = $connection->prepare("SELECT gear, strength, mind, sword_skill, staff_skill, money, charac_lvl, charac_xp, guild FROM perso where username=?") ;
+    $reponse1 = $req1->execute([$user]);
+    if(!reponse) {
+        exit("ERREUR afficher_enQuete(): connection failed");
+    	}
+    $row = $req1->fetch();
+    
+    $xp_won = 5 * 2**($niveauQuete);
+    $gold_won = $xp_won * 10 ;
+    
+    $result = (float) mt_rand() / mt_getrandmax();
+    
+    if(strcmp($row[0], "Batôn") == 0) {
+        $successChance = (float) min(0.99, ($row[2] + 5*$row[4] + 5 * $niveauQuete)/(($niveauQuete+1)*100*2)) ;
+    	}
+    else {
+        $successChance = (float) min(0.99, ($row[1] + 5*$row[3] + 5 * $niveauQuete)/(($niveauQuete+1)*100*2)) ;
+    	}
+    
+    if($result < $successChance)
+        $pts = 10 * $niveauQuete ;
+    else
+        $pts = 1 ;
+        
+    $drop = (float) mt_rand() / mt_getrandmax();
+    $lootSword = (float) mt_rand() / mt_getrandmax();
+    $lootStaff = (float) mt_rand() / mt_getrandmax();
+    $loot = 0 ;
+    if($drop < 0.5) {
+        if(strcmp($row[0], "Batôn") == 0) {
+            if(lootSword < 0.4)
+                $loot++;
+            if(lootStaff < 0.6)
+                $loot = $loot + 2;
+        }
+        else {
+            if(lootSword < 0.6)
+                $loot++;
+            if(lootStaff < 0.4)
+                $loot = $loot + 2;
+        }
+    }
+    
+    calcul_niveau($row[7] + $xp, $row[6], $row[1], $row[2]);
+    
+    $req2 = $connection->prepare("UPDATE perso 
+                                 SET sword_skill=?, staff_skill=?, money=?, charac_xp=?
+                                 FROM perso where username=?") ;
+    switch($loot){
+        case 0:
+            $reponse2 = $req2->execute([$row[1], $row[2], $row[3]+$gold_won, $row[5] + $xp]);
+	    if(! $reponse2) {
+            	 exit("afficher_enQuete(): connection failed");
+    		 }
+            break;
+        case 1:
+            $reponse2 = $req2->execute([$row[1]+1, $row[2], $row[3]+$gold_won, $row[5] + $xp]);
+	    if(! $reponse2) {
+            	 exit("afficher_enQuete(): connection failed");
+    		 }
+            break;
+        case 2:
+            $reponse2 = $req2->execute([$row[1], $row[2]+1, $row[3]+$gold_won, $row[5] + $xp]);
+	    if(! $reponse2) {
+            	 exit("afficher_enQuete(): connection failed");
+    		 }
+            break; 
+        case 3:
+            $reponse2 = $req2->execute([$row[1]+1, $row[2]+1, $row[3]+$gold_won, $row[5] + $xp]);
+	    if(! $reponse2) {
+            	 exit("afficher_enQuete(): connection failed");
+    		 }
+            break;
+    }
+
+    $req3 = $connection->prepare("UPDATE guilde SET guild_points=? FROM guilde WHERE guild_name=?");
+
+    $reponse3 = $req3->execute([$pts, $row[8]]);
+
+    if(! $reponse3) {
+    	 exit("afficher_enQuete(): connection failed");
+	 }
+}

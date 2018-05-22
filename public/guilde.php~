@@ -1,0 +1,84 @@
+<?php
+
+session_start();
+
+include("pageAccueil.php") ;
+
+enTete($_SESSION['tab'][12]);
+
+onglets() ;
+
+fin_enTete();
+
+affiche_guilde() ;
+
+pied();
+
+
+
+
+function affiche_guilde() {
+    $guilde =  $_SESSION['tab'][12];
+    $infos = guilde() ;
+
+    print "<p><img src=$infos[1].png alt=''/></p>" ;
+    print "<p><img src=$infos[1].jpg alt=''/></p>" ;
+    print "<h2> Vous appartenez à la $guilde </h2>" ;
+    print "<p> Votre guilde a actuellement $infos[2] points </p>" ;
+    print "<p> Le chef de votre guilde est $infos[3] <p>" ;
+
+    $req = classement_guilde() ;
+    print "<table>" ;
+    print "<th><td>UserName</td><td>Level</td><td>XP</td></th>" ;
+    $i = 0 ;
+    while ($i < 3) {
+       $i = $i+1 ;
+       $row = $req->fetch() ;
+       print "<tr><td>$i</td><td>$row[0]</td><td>$row[1]</td><td>$row[2]</td></tr>" ;
+    }
+    print "</table>" ;
+}
+
+
+
+
+function guilde() {
+   $nom_hote= "localhost" ; 
+   $nom_base = getenv('DB_NAME'); 
+   $nom_user = getenv('DB_USER');
+   $mdp=getenv('DB_PASSWORD');
+   $connection = new PDO("pgsql:host=postgres user=$nom_user dbname=$nom_base password=$mdp");
+   $req = $connection->prepare("SELECT * FROM guilde WHERE guild_name= ? ;") ;
+   $reponse = $req->execute([$_SESSION['tab'][12]]);
+   if ($reponse) {
+       return($req->fetch()) ;
+   }
+}
+
+
+function classement_guilde() {
+   $nom_hote= "localhost" ; 
+   $nom_base = getenv('DB_NAME'); 
+   $nom_user = getenv('DB_USER');
+   $mdp=getenv('DB_PASSWORD');
+   $connection = new PDO("pgsql:host=postgres user=$nom_user dbname=$nom_base password=$mdp");
+   $req = $connection->prepare("SELECT username, charac_xp, charac_lvl FROM perso WHERE guild=? GROUP BY username ORDER BY charac_xp DESC LIMIT 3 ;") ;
+   $reponse = $req->execute([$_SESSION['tab'][12]]);
+   if ($reponse) {
+       return($req) ;
+   }
+}
+
+
+function ordre() {
+   $nom_hote= "localhost" ; 
+   $nom_base = getenv('DB_NAME'); 
+   $nom_user = getenv('DB_USER');
+   $mdp=getenv('DB_PASSWORD');
+   $connection = new PDO("pgsql:host=postgres user=$nom_user dbname=$nom_base password=$mdp");
+   $req = $connection->prepare("SELECT COUNT(username) FROM guilde WHERE guild_name= ? GROUP BY guild_name HAVING charac_xp>? ORDER BY charac_xp DESC;") ;
+   $reponse = $req->execute([$_SESSION['tab'][15], $_SESSION['tab'][12]]);
+   if ($reponse) {
+       return($req->fetch()) ;
+   }
+}

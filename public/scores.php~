@@ -1,0 +1,102 @@
+<?php
+
+/* Ce fichier affiche l'onglet scores, c'est à dire le classement des différentes guildes et des dix meilleurs joueurs, ainsi qu'une barre de recherches our consulter la page d'un autre joueur à partir de son nom d'utilisateur */
+
+session_start() ;
+include("pageAccueil.php") ;
+
+
+enTete("Scores") ;
+
+onglets() ;
+
+fin_enTete() ;
+
+
+afficher_guildes() ;
+
+afficher_perso() ;
+
+recherche() ;
+
+pied() ;
+
+
+/* Cette fonction affiche les guildes par ordre decroissant */
+function afficher_guildes() {
+    print " <h2> Voici les scores des guildes : <h2> " ;
+    print "<table>" ;
+    print "<th><td>Nom de la guilde</td><td>Points</td></th>" ;
+    $tab = points_guilde() ;
+    $i = 0 ;
+    while ($i < 4) {
+       $i = $i+1 ;
+       $row = $tab->fetch() ;
+       print "<tr><td>$i</td><td>$row[0]</td><td>$row[2]</td></tr>" ;
+       print "<br/>" ;
+    }
+    print "</table>" ;
+    print "<br/>" ;
+    print "<br/>" ;
+    print "<br/>" ;
+}
+       
+
+/* Cette fonction */
+function recherche() {
+    print "<h2>Rechercher quelqu'un par son nom d'utilisateur</h2>" ;
+    echo '<form action="rechercher.php" method="post">';
+    echo ' <p> Nom Utilisateur :  <input type="text" size="20" maxlength="18" name="username" />';
+    echo '<input type="submit" value="Rechercher" name="autentification"  class="onglets" /> </p>';
+}
+
+
+
+function afficher_perso() {
+    print " <h2> Voici les scores des dix meilleurs personnages : <h2> " ;
+    print "<br/>" ;
+    print "<table>" ;
+    print "<th><td>UserName</td><td>Character</td><td>Level</td><td>XP</td></th>" ;
+    $tab = points_joueurs() ;
+    $i = 0 ;
+    while ($i < 10) {
+       $i = $i+1 ;
+       $row = $tab->fetch() ;
+       $lien = "<a href=autreSession.php>$row[0]</a>" ;
+       print "<tr><td>$i</td><td>$lien</td><td>$row[1]</td><td>$row[2]</td><td>$row[3]</td></tr>" ;
+    }
+    print "</table>" ;
+}
+
+
+
+
+
+function points_guilde() {
+   $nom_hote= "localhost" ; 
+   $nom_base = getenv('DB_NAME'); 
+   $nom_user = getenv('DB_USER');
+   $mdp=getenv('DB_PASSWORD');
+   $connection = new PDO("pgsql:host=postgres user=$nom_user dbname=$nom_base password=$mdp");
+   $req = $connection->prepare("SELECT * FROM guilde GROUP BY guild_name ORDER BY guild_points DESC;") ;
+   $reponse = $req->execute([]);
+   if ($reponse) {
+       return($req) ;
+   }
+}
+
+
+
+
+function points_joueurs() {
+   $nom_hote= "localhost" ; 
+   $nom_base = getenv('DB_NAME'); 
+   $nom_user = getenv('DB_USER');
+   $mdp=getenv('DB_PASSWORD');
+   $connection = new PDO("pgsql:host=postgres user=$nom_user dbname=$nom_base password=$mdp");
+   $req = $connection->prepare("SELECT username, character_name, charac_lvl, charac_xp FROM perso GROUP BY character_name, username ORDER BY charac_xp DESC LIMIT 10 ;") ;
+   $reponse = $req->execute([]);
+   if ($reponse) {
+       return($req) ;
+   }
+}

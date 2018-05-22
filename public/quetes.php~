@@ -1,0 +1,210 @@
+<?php
+
+/**/
+
+session_start() ;
+include("pageAccueil.php") ;
+include("donneesPerso.php") ;
+
+
+enTete("Quêtes") ;
+
+onglets() ;
+
+fin_enTete() ;
+
+if (estEnQuete()) {
+    afficher_enQuete();
+}
+else{
+    afficher_quetes() ;
+}
+
+pied() ;
+
+
+
+function afficher_quetes() {
+    print " <h2> Quêtes disponibles : <h2> " ;
+    print "<br/>" ;
+    $tab = diff_quetes() ;
+    $tab2 = $_SESSION['tab'] ;
+    $i = 0 ;
+
+    while ($i < $tab->rowCount()) {
+        $i = $i+1 ;
+        $row = $tab->fetch() ;
+        if ($row[0] == 'Recherche_Pantoufle') {
+            print "<h2> Recherche Pantoufle </h2>" ;
+            print "<p> Ma chère poule dénommée pantoufle a disparue, trouvez la et rapportez la moi, elle a des plumes, une crete sur la tête et un bec, c'est la plus belle poule du monde ! </p>" ;
+            print "<ul>" ;
+            print "<li> Niveau requis : $row[1] </li>" ;
+            print "<li> Récompense : $row[2] </li>" ;
+            print "<li> Temps : $row[3] </li>" ;
+            print "</ul>" ;
+            if ($tab2[14] >= $row[1]) {
+                print "<form method='post' action='adventure.php'> <input type='hidden' name='quete' value=$row[0] />
+		     	 		       	     		  <input class='quete1' type='submit' name=$row[0] value='Partir'/>
+								  </form>" ;
+            }
+        }
+       
+        if ($row[0] == 'Mise_à_l_épreuve') {
+            print "<h2> Mise à l épreuve </h2>" ;
+            print "<p> On a besoin de quelqu'un pour se débarasser d'une personne gênante ou au moins lui faire comprendre qu'elle ne doit plus causer de soucis </p>" ;
+            print "<ul>" ;
+            print "<li> Niveau requis : $row[1] </li>" ;
+            print "<li> Récompense : $row[2] </li>" ;
+            print "<li> Temps : $row[3] </li>" ;
+            print "</ul>" ;
+            if ($tab2[14] >= $row[1]) {
+		print "<form method='post' action='adventure.php'> <input type='hidden' name='quete' value=$row[0] />
+		     	 		       	     		  <input class='quete2' type='submit' name=$row[0] value='Partir'/>
+								  </form>" ;
+            }
+        }
+        
+        if ($row[0] == 'Une_petite_course') {
+            print "<h2> Une petite course </h2>" ;
+            print "<p> Votre voisin à une course à faire dans le village voisin mais il s'est fait mal au dos, il vous demande d'y aller à sa place </p>" ;
+            print "<ul>" ;
+            print "<li> Niveau requis : $row[1] </li>" ;
+            print "<li> Récompense : $row[2] </li>" ;
+            print "<li> Temps : $row[3] </li>" ;
+            print "</ul>" ;
+            if ($tab2[14] >= $row[1]) {
+		print "<form method='post' action='adventure.php'> <input type='hidden' name='quete' value=$row[0] />
+		     	 		       	     		  <input class='quete3' type='submit' name=$row[0] value='Partir'/>
+								  </form>" ;
+            }
+        }
+        
+        if ($row[0] == 'Participant_à_un_tournois') {
+            print "<h2> Participant à un tournois </h2>" ;
+            print "<p> Cherche participant au tournois, prête cheval et armure, pour remporter le prochain tournois, partage presque equitable de la recompense </p>" ;
+            print "<ul>" ;
+            print "<li> Niveau requis : $row[1] </li>" ;
+            print "<li> Récompense : $row[2] </li>" ;
+            print "<li> Temps : $row[3] </li>" ;
+            print "</ul>" ;
+            if ($tab2[14] >= $row[1]) {
+                 print "<form method='post' action='adventure.php'> <input type='hidden' name='quete' value=$row[0] />
+		     	 		       	     		  <input class='quete4' type='submit' name=$row[0] value='Partir'/>
+								  </form>" ;
+            }
+        }
+        
+        if ($row[0] == 'Souris_dans_mon_auberge') {
+            print "<h2> Souris dans mon auberge </h2>" ;
+            print "<p> Mon auberge est infestée de souris depuis quelques temps, impossible de s'en debarasser, quelqu'un a t il une solution ? </p>" ;
+            print "<ul>" ;
+            print "<li> Niveau requis : $row[1] </li>" ;
+            print "<li> Récompense : $row[2] </li>" ;
+            print "<li> Temps : $row[3] </li>" ;
+            print "</ul>" ;
+            if ($tab2[14] >= $row[1]) {
+		print "<form method='post' action='adventure.php'> <input type='hidden' name='quete' value=$row[0] />
+		     	 		       	     		  <input class='quete5' type='submit' name=$row[0] value='Partir'/>
+								  </form>" ;
+            }
+        }
+        
+        if ($row[0] == 'problème') {
+            print "<p> problème !!! </p>" ;
+        }
+        print "<br/>" ;
+    }
+}
+
+
+function estEnQuete() {
+    $nom_hote= "localhost" ;
+    $nom_base = getenv('DB_NAME');
+    $nom_user = getenv('DB_USER');
+    $mdp=getenv('DB_PASSWORD');
+    $user = $_SESSION['userName'] ;
+    $connection = new PDO("pgsql:host=postgres user=$nom_user dbname=$nom_base password=$mdp");
+    
+    $req = $connection->prepare("SELECT lastQuest, endTimeQuest FROM perso where username=? ;") ;
+    $reponse = $req->execute([$user]) ;
+    if(! $reponse) {
+        exit("estEnQuete(): connection failed");
+    }
+
+    $row = $req->fetch();
+    
+    if($row[0] != null) return true;
+    else return false;
+}
+
+
+function afficher_enQuete() {
+    print " <h2> Vous etes encore en quete... <h2> " ;
+    print "<br/>" ;
+    
+    $nom_hote= "localhost" ;
+    $nom_base = getenv('DB_NAME');
+    $nom_user = getenv('DB_USER');
+    $mdp=getenv('DB_PASSWORD');
+    $user = $_SESSION['userName'] ;
+    $connection = new PDO("pgsql:host=postgres user=$nom_user dbname=$nom_base password=$mdp");
+    
+    $req = $connection->prepare("SELECT lastQuest, endTimeQuest, charac_lvl, sword_skill, staff_skill, gear, charac_xp, money FROM perso where username=?") ;
+    $reponse = $req->execute([$user]);
+    if(! $reponse) {
+        exit("afficher_enQuete(): connection failed");
+    }
+    $row = $req->fetch();
+    
+    $dateFinQuete = $row[1] ;
+    $niveauQuete = $row[0] ;
+    $date = time();
+    $remainingTime = $dateFinQuete - $date ;
+
+    print "<body onload='minutageGo()'>" ;
+    echo '<form name="formulaire" method="post" action="finQuete.php">' ;
+    print "<input type='hidden' name='quete' value=$niveauQuete><br>" ;
+    print "<input type='text' name='minuteur' value=$remainingTime readonly><br>" ;
+    print "<input type='hidden' name='boutonFin' value='Quête terminée!' onClick='resetPage()'>" ;
+    echo '</form>' ;
+    print "</body>" ;
+    
+    ?>
+    <script type="text/javascript">
+    
+    var attente ;
+    function minutageGo(){
+        var nombre_qui_change = window.document.formulaire.minuteur.value ;
+        nombre_qui_change = parseInt(nombre_qui_change) - 1;
+        window.document.formulaire.minuteur.value = nombre_qui_change;
+        
+        attente = setTimeout("minutageGo()", 1000);
+        if(nombre_qui_change<=0) {
+	window.document.formulaire.minuteur.value = 0 ;			 
+            window.document.formulaire.boutonFin.type = "submit" ;
+        }
+    }
+
+    function resetPage() {
+    	     window.document.location.replace("quetes.php");
+    }
+    
+    </script>
+    <?php
+}
+
+function diff_quetes() {
+    $nom_hote= "localhost" ; 
+    $nom_base = getenv('DB_NAME'); 
+    $nom_user = getenv('DB_USER');
+    $mdp=getenv('DB_PASSWORD');
+    $connection = new PDO("pgsql:host=postgres user=$nom_user dbname=$nom_base password=$mdp");
+    $req = $connection->prepare("SELECT q_name, q_level, reward_money, q_time FROM adventure GROUP BY q_name ORDER BY q_level ;") ;
+    $reponse = $req->execute([]);
+    if ($reponse) {
+        return($req) ;
+    }
+    else {
+        return array('problème', 0, 0, 0) ;
+    }
+}

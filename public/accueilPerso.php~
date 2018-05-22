@@ -1,0 +1,89 @@
+<?php
+
+session_start();
+
+include("pageAccueil.php") ;
+include("donneesPerso.php") ;
+
+enTete($_SESSION['userName']);
+
+onglets() ;
+
+fin_enTete();
+
+affichage() ;
+
+affiche_inventaire() ;
+
+pied();
+
+
+function affichage() {
+    print "<div class='personnage'> ";
+    $tab = donnees_accueil($_SESSION['userName']) ;
+    $_SESSION['tab'] = $tab ;
+    print "<section>" ;
+    if ($tab[2] == 'epee') {
+        print "  <img class='imggauche' src='chevalier.png' alt='Photo de chevalier' />" ;
+    }
+    if ($tab[2] == 'baton') {
+       print "  <img class='imggauche' src='mage.png' alt='Photo de mage' />" ;
+    }
+    print "</section>" ;
+    print "   </br> </br> </br> </br>  <div class='cadreperso'>  <h2> Vos caractéristiques : </h2>" ;
+    print "<aside>" ;
+    $lvl = calcul_niveau($tab[15], $tab[14], $tab[5], $tab[6]) ;
+    print "  <ul>" ;
+    print "    <li> Endurance : $tab[3] </li> " ;
+    print "    <li> Mana : $tab[4]</li> " ;
+    print "    <li> Force : $tab[5] </li> " ;
+    print "    <li> Mental : $tab[6] </li> " ;
+    print "    <li> Talent à l épée : $tab[7] </li> " ;
+    print "    <li> Talent magique : $tab[8] </li> " ;
+    print "    <li> Niveau : $lvl </li> " ;
+    print "    <li> XP : $tab[15] </li> " ;
+    print "  </ul>" ;
+    print "</aside>" ;
+
+
+}
+
+function affiche_inventaire() {
+    print "<h2> Votre inventaire : </h2>" ;
+    $tab = donnees_inventaire($_SESSION['userName']) ;
+    print "  <ul>" ;
+    $i = ($tab->rowCount()) ;
+    while ($i > 0) {
+        $row = $tab->fetch() ;
+	$obj = str_replace("_", " ", $row[2]) ;
+        print "    <li> $obj : $row[3] </li> " ;
+	$inventaire[$row[2]] = $row[3] ;
+	$i = $i-1 ;
+    }
+    $_SESSION['inventaire'] = $inventaire ;
+    print "  </ul>" ;
+
+    print "</div> " ;	
+    print "</div> ";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+?>

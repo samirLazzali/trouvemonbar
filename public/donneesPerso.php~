@@ -1,0 +1,67 @@
+<?php
+
+
+
+function donnees_accueil($username) {
+    $nom_hote= "localhost" ; 
+    $nom_base = getenv('DB_NAME'); 
+    $nom_user = getenv('DB_USER');
+    $mdp=getenv('DB_PASSWORD');
+    $connection = new PDO("pgsql:host=postgres user=$nom_user dbname=$nom_base password=$mdp");
+    $req = $connection->prepare("SELECT * FROM perso WHERE username = ? ;") ;
+    $reponse = $req->execute([$username]) ;
+    if ($reponse) {
+       if($req->rowCount()==1){
+            $tuple=$req->fetch();
+            return ($tuple);
+        }
+    }
+    else{
+       return([0,0,0,0,0,0,0]) ;
+    }
+}
+
+
+function calcul_niveau($xp, $lvl, $strength, $mind) {
+    $i = 1 ;
+    while($xp > 512) {
+        $xp = $xp - $i * 512 ;
+	$i = 1 + $i ;
+    }
+    if ($i != $lvl) {
+        $nom_hote= "localhost" ; 
+        $nom_base = getenv('DB_NAME'); 
+        $nom_user = getenv('DB_USER');
+        $mdp=getenv('DB_PASSWORD');
+	$user = $_SESSION['userName'] ;
+	$gear = $_SESSION['tab'][2] ;
+        $connection = new PDO("pgsql:host=postgres user=$nom_user dbname=$nom_base password=$mdp");
+        $req = $connection->prepare("UPDATE perso SET strength=?, mind=?, charac_lvl=? WHERE username=?;") ;
+	if(strcmp($gear, "baton")==0)
+        	$reponse = $req->execute([$strength, $mind+($i-$lvl)*rand(7,13), $i, $user]) ;
+	else
+        	$reponse = $req->execute([$strength+($i-$lvl)*rand(7,13), $mind, $i, $user]) ;
+	if(!$reponse)
+		exit("calcul_niveau(): connection failed");
+    }
+    return ($i) ;
+}
+
+
+function donnees_inventaire($username) {
+    $nom_hote= "localhost" ; 
+    $nom_base = getenv('DB_NAME'); 
+    $nom_user = getenv('DB_USER');
+    $mdp=getenv('DB_PASSWORD');
+    $connection = new PDO("pgsql:host=postgres user=$nom_user dbname=$nom_base password=$mdp");
+    $req = $connection->prepare("SELECT * FROM inventory WHERE usename = ? ;") ;
+    $reponse = $req->execute([$username]) ;
+    if ($reponse) {
+        if ($req->rowCount() >=1) {
+            return ($req);
+	}
+	else {
+	    return array("", "Vous ne possédez aucun objet", "", "") ;
+	}
+    }
+}
