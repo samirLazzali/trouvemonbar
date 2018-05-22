@@ -45,7 +45,7 @@ include('../includes/topbot.php');
 
 
 <div id="contenu">
-    <form NAME="choix">
+    <fieldset><legend><form NAME="choix">
         <select NAME="liste" onChange="affMatch()">
             <OPTION VALUE=-1 > Choisir une option
             <?php
@@ -57,8 +57,10 @@ include('../includes/topbot.php');
         ?>
         </select>
     </form>
-
+        </legend>
+        <center>
     <table id="matcher"></table>
+        </center>
 </div>
 
 <?php

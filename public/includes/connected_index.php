@@ -54,7 +54,7 @@ include('topbot.php');
         Numéro de téléphone : <?php echo $fetch -> phone_number; ?><br/>
 
 
-        <form NAME="choix">
+        <fieldset><legend><form NAME="choix">
             <select NAME="liste" onChange="affMatch()">
                 <OPTION VALUE=-1 > Voir vos chats
                     <?php
@@ -66,8 +66,12 @@ include('topbot.php');
                     ?>
             </select>
         </form>
+            </legend>
+            <center>
+                <table id="matcher"></table>
+            </center>
 
-        <table id="matcher"></table>
+            </fieldset>
         <a href="<?php echo ROOTPATH; ?>/cats/add_cat.php">Ajouter un nouveau chat ++</a>
         </p>
     </div>
