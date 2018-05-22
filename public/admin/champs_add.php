@@ -281,7 +281,6 @@ include('../includes/top.php');?>
 
 				{
 					$queries++;
-					empty_session();
 					$_SESSION['inscrit'] = $login;
 				?>
 				<h1>Ajout validée !</h1>
