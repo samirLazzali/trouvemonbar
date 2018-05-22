@@ -1,5 +1,14 @@
 <?php
 session_start();
+if(!isset($_SESSION['connect']))
+{
+            $_SESSION['connect'] = 0;
+}
+if(!isset($_SESSION['id']))
+{
+                $_SESSION['id'] = -1;
+}
+
 require '../vendor/autoload.php';
 include('menu.php');
 //postgres
@@ -48,8 +57,21 @@ menu_oeno();
     	  $j=1;
     	  foreach($irec as $id){
        			 $j++;
-   			 }  
-    if(isset($_POST['note_vins']) && $_SESSION['connect']>=1){
+	  }
+
+	  $iid = $connection->query("SELECT COUNT(*) AS nbr_vin FROM public.liste_vins")->fetch();
+	        $nbr_rec=$iid['nbr_vin'];
+	        $check=0;
+	              $req_check=$connection->query("SELECT id_usr FROM public.note_vins ")->fetchAll();
+	        foreach ($req_check as $r){
+	                if ($r['id_usr']==$_SESSION['id']){
+		                $check=1;
+		                }
+		        }
+        if ($check==0) {
+
+
+    if(isset($_POST['note']) && $_SESSION['connect']>=1){
     	echo $j;
         $req=$connection->prepare('INSERT INTO public.note_vins(note_vins,id_vin,id_vote,id_usr) VALUES(:note_vins,:id_vin,:id_vote,:id_usr)');
         $req->execute(['note_vins'=>$_POST['note'],
@@ -58,6 +80,7 @@ menu_oeno();
             'id_usr' => $_SESSION['id'],
             ]);
     }
+	}
 
         $turec=$connection->query("SELECT * FROM public.liste_vins")->fetchAll();
 

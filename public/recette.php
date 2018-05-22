@@ -1,5 +1,14 @@
 <?php
 session_start();
+if(!isset($_SESSION['connect']))
+{
+        $_SESSION['connect'] = 0;
+}
+if(!isset($_SESSION['id']))
+{
+            $_SESSION['id'] = -1;
+}
+
 require '../vendor/autoload.php';
 include('menu.php');
 //postgres
