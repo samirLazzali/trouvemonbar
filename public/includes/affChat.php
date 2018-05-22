@@ -113,7 +113,7 @@ function affChat($id_the_cat) {
             $res .= '<tr><th>Race</th><td>' . $cari->name_breed . '</td></tr><tr>';
         }
         else
-            $res .= '<tr><th></th><td>' . $cari->name_color . '</td></tr><tr>';
+            $res .= '<tr><th></th><td>' . $cari->name_breed . '</td></tr><tr>';
     $car = $connexion->query("select name_color 
                                         from Colors
                                         Join Searched_colors ON id_color=color
