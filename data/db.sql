@@ -14,7 +14,8 @@ CREATE TABLE "Ingredients" (
 CREATE TABLE "Recettes" (
   nom_rec VARCHAR NOT NULL PRIMARY KEY ,
   temps INTEGER ,  /* en minutes */
-  prix DOUBLE PRECISION  /* prix pour 10 assiettes */
+  prix DOUBLE PRECISION , /* prix pour 10 assiettes */
+  description VARCHAR
 );
 
 CREATE TABLE "Ingredients_Recettes" (
@@ -75,17 +76,19 @@ INSERT INTO "Ingredients"(nom_ing, prix) VALUES ('Chips_crevette',1.32);
 INSERT INTO "Ingredients"(nom_ing, prix) VALUES ('Pâte',0.00);
 INSERT INTO "Ingredients"(nom_ing, prix) VALUES ('Saucisse',0.00);
 
-INSERT INTO "Recettes"(nom_rec, temps, prix) VALUES ('feuillete_saucisse',10 ,1.03);
-INSERT INTO "Recettes"(nom_rec, temps, prix) VALUES ('Tartines_thon_StMoret',10 ,2.30);
-INSERT INTO "Recettes"(nom_rec, temps, prix) VALUES ('Roules_jambon_StMoret',10 ,2.22);
-INSERT INTO "Recettes"(nom_rec, temps, prix) VALUES ('Jacqueline',5,3.32);
+INSERT INTO "Recettes"(nom_rec, temps, prix, description) VALUES ('feuillete_saucisse',10 ,1.03,'Dérouler la pâte feuilletée et étaler de la moutarde sur celle-ci. 
+            Couper la pâte en plusieurs morceaux et disposer sur chaue morceaux une saucisse cocktail.
+            Enrouler enfin la saucisse avec le morceau de pâte. Faire cuire 15 à 20 minutes au four à 180°.');
+INSERT INTO "Recettes"(nom_rec, temps, prix, description) VALUES ('Tartines_thon_StMoret',10 ,2.30,'Mélanger une boite de thon avec une boite de St_Moret puis ajouter du citron. Étaler enfin la préparation sur les toasts de pain que vous aurez dorés préalablement au four.');
+INSERT INTO "Recettes"(nom_rec, temps, prix, description) VALUES ('Roules_jambon_StMoret',10 ,2.22,'Étaler le StMoret sur les tranches de jambon puis roulez celles-ci en formes de boudin. Coupez les enfin en 6 afin de réaliser plusieurs bouchées.');
+INSERT INTO "Recettes"(nom_rec, temps, prix, description) VALUES ('Jacqueline',5,3.32,'Mélanger le vin blanc avec de la limonade et du sirop de grenadine.');
 INSERT INTO "Recettes"(nom_rec, temps, prix) VALUES ('Chips',0,1.24);
 INSERT INTO "Recettes"(nom_rec, temps, prix) VALUES ('Saucisson',5,2.03);
 INSERT INTO "Recettes"(nom_rec, temps, prix) VALUES ('Concombres',5 ,0.7);
 INSERT INTO "Recettes"(nom_rec, temps, prix) VALUES ('Carottes',5,0.7);
 INSERT INTO "Recettes"(nom_rec, temps, prix) VALUES ('Nems',0,3.18);
 INSERT INTO "Recettes"(nom_rec, temps, prix) VALUES ('Chips_crevettes',0,2.50);
-INSERT INTO "Recettes"(nom_rec, temps, prix) VALUES ('Pizza',15,3.2);
+INSERT INTO "Recettes"(nom_rec, temps, prix, description) VALUES ('Pizza',15,3.2,'Dérouler la pâte à pizza puis disposer successivement sur celle-ci jambon, sauce tomate et gruyère. Puis enfourner 30 minutes à 210°');
 
 
 
