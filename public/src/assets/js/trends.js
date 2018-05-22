@@ -22,12 +22,12 @@ function getContent(result)
                 text += postToHtml(author, content, date, id);
         })
     text = text +
-        '<a id="link-more-posts" class="link-more-posts" href="#" onclick="morePosts()">' +
+        '<a id="link-more-posts" class="link-more-posts" href="#" onclick="return morePosts()">' +
             '<div class="post-in-feed" id="link-more-posts-wrapper">' +
                 'Plus de posts' +
             '</div>' +
         '</a>'+
-        '<a id="link-older-posts" class="link-more-posts" href="#" onclick="olderPosts()">' +
+        '<a id="link-older-posts" class="link-more-posts" href="#" onclick="return olderPosts()">' +
             '<div class="post-in-feed" id="link-more-posts-wrapper">' +
                 'Voir des Viieux posts' +
             '</div>' +
@@ -55,8 +55,9 @@ function getTopLikes()
         if (this.readyState == 4 && this.status == 200)
         {
             var result = JSON.parse(request.responseText)["result"];
+            console.log(result);
             var text = getContent(result) +
-                '<a id="link-older-posts" class="link-more-posts" href="#" onclick="ofAllTimes()">' +
+                '<a id="link-older-posts" class="link-more-posts" href="#" onclick="return ofAllTimes()">' +
                     '<div class="post-in-feed" id="link-more-posts-wrapper">' +
                         'Les plus aimés de tous les temps !' +
                     '</div>' +
@@ -65,7 +66,6 @@ function getTopLikes()
         }
     };
     request.open("GET", "/api/trends/toplikes?timelimit="+timelimit+"&limit="+llimit+"&getoriginals=true", true);
-
     request.send();
     return false;
 }
@@ -91,12 +91,16 @@ function getTopDislikes()
         {
             var result = JSON.parse(request.responseText)["result"];
             var text = getContent(result) +
-                '<a id="link-older-posts" class="link-more-posts" href="#" onclick="ofAllTimes()">' +
+                '<a id="link-older-posts" class="link-more-posts" href="#" onclick="return ofAllTimes()">' +
                     '<div class="post-in-feed" id="link-more-posts-wrapper">' +
                         'Les plus détestés de tous les temps !' +
                     '</div>' +
                 '</a>';
             document.getElementById('post-feed').innerHTML = text;
+        }
+        else
+        {
+            console.log(this.status);
         }
     };
     request.open("GET", "/api/trends/topdislikes?timelimit="+timelimit+"&limit="+llimit+"&getoriginals=true", true);
@@ -126,7 +130,7 @@ function getTopRt()
         {
             var result = JSON.parse(request.responseText)["result"];
             var text = getContent(result) +
-                '<a id="link-older-posts" class="link-more-posts" href="#" onclick="ofAllTimes()">' +
+                '<a id="link-older-posts" class="link-more-posts" href="#" onclick="return ofAllTimes()">' +
                     '<div class="post-in-feed" id="link-more-posts-wrapper">' +
                         'Les plus recyclés de tous les temps !' +
                     '</div>' +
@@ -157,14 +161,14 @@ function getHashtags()
             for(var tag in result)
             {
                 text += "<div class='hashtag-in-list' title='Afficher les publications liées à ce hashtag'>" +
-                            "<a href='#' class='hashtag-link' onclick='getPostsFromHashtag(\"" + tag + "\")'>" + tag + "</a>" +
+                            "<a href='#' class='hashtag-link' onclick='return getPostsFromHashtag(\"" + tag + "\")'>" + tag + "</a>" +
                         "</div>";
             }
             text += '<div class=\'hashtag-in-list\' title=\'meilleurs tags ever\'>' +
-                        '<a href="#" class=\'hashtag-link\' onclick="ofAllTimes()">top#ever</a>' +
+                        '<a href="#" class=\'hashtag-link\' onclick="return ofAllTimes()">top#ever</a>' +
                     '</div>' +
                     '<div class=\'hashtag-in-list\' title=\'plus de GWAAK\'>'+
-                        '<a href="#" class=\'hashtag-link\' onclick="moreTags()">plus...</a>' +
+                        '<a href="#" class=\'hashtag-link\' onclick="return moreTags()">plus...</a>' +
                     '</div>';
 
             document.getElementById('hashtag-list').innerHTML = text;
@@ -242,6 +246,7 @@ function morePosts()
         default :
             break;
     }
+    return false;
 }
 
 function olderPosts()
@@ -267,6 +272,7 @@ function olderPosts()
         default :
             break;
     }
+    return false;
 }
 
 function ofAllTimes()
@@ -292,9 +298,10 @@ function ofAllTimes()
         default :
             break;
     }
+    return false;
 }
 
 
 function moreTags(){
-
+    return false;
 }

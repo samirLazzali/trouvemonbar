@@ -20,9 +20,8 @@ class DBHandler():
         created_at = t["created_at"]
         created_at = "Mon May 21 23:02:41 +0000 2018"
         d = datetime.datetime.strptime(created_at, "%a %b %d %H:%M:%S %z %Y")
-        print(d, created_at)
-        
-        print(t)
+        timestamp = d.timestamp()
+
         _id = str(t["id"])[-12:]
         content = t["full_text"]
         userId = str(t['user']['id'])[-12:]
@@ -41,7 +40,7 @@ class DBHandler():
             responseTo = ''
 
         
-        SQL = "INSERT INTO Post (ID, Author, Content, Timestamp, Repost, ResponseTo) VALUES ('{id}', '{author}', '{content}', '{timestamp}', '{repost}', '{responseto}')".format(id = _id, author = userId, content = content.replace("'", "''"), timestamp = int(time.time()), repost = repost, responseto = responseTo)
+        SQL = "INSERT INTO Post (ID, Author, Content, Timestamp, Repost, ResponseTo) VALUES ('{id}', '{author}', '{content}', '{timestamp}', '{repost}', '{responseto}')".format(id = _id, author = userId, content = content.replace("'", "''"), timestamp = int(timestamp), repost = repost, responseto = responseTo)
         self.execute(SQL)
         
 

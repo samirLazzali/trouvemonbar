@@ -17,7 +17,7 @@ $tags = array_keys($trends);
         <script src="/assets/js/general.js"></script>
         <script src="/assets/js/post.js"></script>
     </head>
-    <body onload="getTopLikes()">
+    <body onload="">
         <?php require "menu.php"; ?>
         <div class="column-wrapper">
             <h1>

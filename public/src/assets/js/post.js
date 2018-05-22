@@ -428,7 +428,7 @@ function postToHtml(author, content, date, id, likecount = -1, dislikecount = -1
             '            </form>\n' +
             '        </div>\n' +
             '        <div style="display: none" class="response-form-wrapper" id="Response-div-' + id + '">\n' +
-            '            <div onBlur="respondPost_onBlur(\'' + id + '\')" class="response-field" onFocus="respondPost_onFocus(\'' + id + '\')" id="respond-post-' + id + '" contenteditable="true">\n' +
+            '            <div onBlur="respondPost_onBlur(\'' + id + '\')" class="response-field" onFocus="respondPost_onFocus(\'' + id + '\', \'' + author + '\')" id="respond-post-' + id + '" contenteditable="true">\n' +
             '                  Réponse...\n' +
             '            </div>\n' +
             '            <button class="fas fa-paper-plane response-submit" type="submit" onClick="return verifyAndSendResponse(\'' + id + '\');" title="Envoyer la réponse">\n' +
@@ -481,7 +481,7 @@ function refreshFeed(lastRefresh, filter = "")
 }
 
 function findLinks(text) {
-    var mentionRegex = /(@[^\s.]+)/g;
+    var mentionRegex = /(\@\w+)/g;
     text = text.replace(mentionRegex, function(user) {
         return '<a href="/profile/' + user.replace("@", "") + '">' + user + '</a>';
     });
