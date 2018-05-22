@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<title>Act.It!</title>
+<meta charset="UTF-8">
+
+
+<head>
+    <style type="text/css">
+        body{
+            font-family: "Lato", sans-serif;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 100px;
+            width: 350px;
+            height: 100px;
+        }
+
+        input{
+            margin-top: 20px;
+            font-size: 20px;
+        }
+        #titre{
+            text-align: center;
+            font-size: 35px;
+        }
+        #description{
+        	text-align: center;
+        	font-size: 15px;
+        	font-style: italic;
+        }
+
+        #sub{
+            border:none;
+            padding: 5px;
+            background-color: #4CAF50;
+            text-align: center;
+            width: 100px;
+            height: 40px;
+        }
+        input[type=text], select, textarea {
+            width: 70%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            margin-top: 30px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #f1f1f1;
+        }
+
+        li {
+            float: left;
+        }
+
+
+        li a {
+            display: block;
+            color: #000;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+        /* Change the link color on hover */
+        li a:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        li a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #footer{
+            width: 100%;
+            height: 10%;
+            text-align: center;
+
+            padding:15px;
+            font-size: 100%;
+            color:ghostwhite;
+        }
+
+
+    </style>
+</head>
+<body>
+<ul>
+    <li class = "g" style="font-family: Lato, sans-serif"><a href="index.php#accueil">Accueil</a></li>
+    <li class = "g" style="font-family: Lato, sans-serif"><a href="index.php#Recherche">Recherche</a></li>
+    <li class = "g" style="font-family: Lato, sans-serif"><a href="index.php#contact">Contact</a></li>
+    <li class = "g" style="font-family: Lato, sans-serif"><a class="active" href="index.php#about">Nous</a></li>
+</ul>
+
+
+<form action="newAd.php" method="post">
+
+
+    <p id = "titre">
+        Nommez un nouvel administrateur!
+        <input type="text" name="pseudo" placeholder= "pseudo" id="pseudo" onblur="veriftext(this)" /><br />
+        <input type="text" name="mail" placeholder = "adresse mail" id="mail" onblur="verifMail(this)" /><br />
+
+
+        <input id = "sub" type="submit" value="Envoyer" />
+
+    </p>
+    <p id = "description"> 
+    	Un administrateur pourra créer de nouvelle activité mais aussi nommer d'autre administrateur. Ne donnez pas ce rang a n'importe qui!
+    </p>
+
+    </form>
+    <div id = "footer">
+        <h1>Act.It!</h1>
+    </div>
+
+
+</body>
+</html>
+
+<script type="text/javascript">
+function surligne(champ, erreur)
+{
+   if(erreur)
+      champ.style.borderColor = "red";
+   else
+      champ.style.borderColor = "";
+}
+
+function veriftext(champ)
+{
+
+   	if(champ.value.length < 2 || champ.value.length > 50)
+   	{
+    	surligne(champ, true);
+    	document.getElementById('sub').setAttribute("disabled","true");
+      	return false;
+   	}
+   	else
+   	{
+      	surligne(champ, false);
+      	document.getElementById('sub').removeAttribute("disabled");
+      	return true;
+   	}
+}
+
+function verifMail(champ)
+{
+	var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{1,10}$/;
+   	if(!regex.test(champ.value))
+   	{
+      	surligne(champ, true);
+      	document.getElementById('sub').setAttribute("disabled","true");
+      	return false;
+   	}
+   	else
+   	{
+      	surligne(champ, false);
+      	document.getElementById('sub').removeAttribute("disabled");
+      	return true;
+   	}
+}
+
+</script>

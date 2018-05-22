@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<title>Act.It!</title>
+<meta charset="UTF-8">
+
+
+<head>
+	<style type="text/css">
+		body{
+			font-family: "Lato", sans-serif;
+
+		}
+
+		ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            background-color: #f1f1f1;
+        }
+
+        li a {
+            display: block;
+            color: #000;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+        /* Change the link color on hover */
+        li a:hover {
+            background-color: #555;
+            color: white;
+        }
+        li a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+		li {
+			float: left;
+		}
+		input{
+			margin-right: 30px;
+			margin-left: 30px;
+			margin-bottom: 30px;
+			width: 190px;
+		}
+		input[type=text], select, textarea {
+			width: 100%;
+			padding: 12px;
+			border: 1px solid #ccc;
+			margin-top: 16px;
+			margin-bottom: -7px;
+			resize: vertical;
+		}
+
+		input[type=password], select, textarea {
+			width: 39%;
+			padding: 12px;
+			border: 1px solid #ccc;
+			margin-top: 16px;
+			margin-bottom: -7px;
+			resize: vertical;
+		}
+
+		input[type=submit] {
+			background-color: #4CAF50;
+			color: white;
+			padding: 12px 20px;
+			border: none;
+			cursor: pointer;
+			font-size: 20px;
+			/*text-align: left;*/
+
+		}
+
+		input[type=submit]:hover {
+			background-color: #45a049;
+		}
+		h3{
+			margin-top: 7%;
+			text-align: center;
+			font-size: 40px;
+		}
+		h6{
+			text-align: center;
+		}
+
+		#creation{
+
+			padding-top: 30px ;
+			width: 850px;
+			margin:auto;
+		}
+		#envoi{
+			/*border: 1px red solid;*/
+			margin-top: 40px;
+			text-align: center;
+		}
+	p{
+		height: 1px;
+		color: red;
+		padding-left: 40px;
+	}
+
+	</style>
+
+</head>
+<body>
+	<div>
+    <ul>
+        <li class = "g"><a href="index.php#accueil">Accueil</a></li>
+        <li class = "g"><a href="index.php#Recherche">Recherche</a></li>
+        <li class = "g"><a href="index.php#contact">Contact</a></li>
+        <li class = "g"><a class="active" href="index.php#about">Nous</a></li>
+
+    </ul>
+	</div>
+	<h3 >Création d'un Compte Act.It!</h3>
+	<form action="creationUtilisateur.php" method="post">
+	<div id = "creation">
+		<input type="text" name="Nom" placeholder= "Nom" id="Nom" onblur="veriftext(this)" />
+		<p id="ENom"></p>
+        <input type="text" name="Prenom" placeholder = "Prenom" id="Prenom" onblur="veriftext(this)" />
+        <p id="EPrenom"></p>
+        <input type="text" name="Pseudo" placeholder = "pseudo" id="Pseudo" onblur="veriftext(this)" />
+        <p id="EPseudo"></p>
+		<input type="text" name="Mail" placeholder= "votreAdresseMail@act.it" id="mail" onblur="verifMail(this)" />
+		<p id="EMail"></p>
+		<input type="text" name="Tel" placeholder= "Téléphone (01 23 45 67 89)" id="tel" onblur="verifTel(this)"/>
+		<p id="ETel"></p>
+		<input type="password" name="password1" placeholder= "Mot de passe" id="password1" onblur="verifMDP(this)"/>
+		<input type="password" name="password2" placeholder= "Mot de passe (confirmation)" id="password2" onblur="verifMDP2(this)"/>
+		<p id="Emdp"></p>
+		<p id="Emdp2"></p>
+		</br>
+	</div>
+	<div id = "envoi">
+		
+		<input id = "sub" type="submit" value="Créer" />
+	</div>
+	</form>
+		
+</body>
+</html>
+
+<script type="text/javascript">
+	function surligne(champ, erreur)
+{
+   if(erreur)
+      champ.style.borderColor = "red";
+   else
+      champ.style.borderColor = "";
+}
+
+function veriftext(champ)
+{
+
+   	if(champ.value.length < 2 || champ.value.length > 50)
+   	{
+   		document.getElementById('E'+champ.name).innerHTML = "Votre "+champ.name+" doit faire entre 2 et 50 caractères";
+    	surligne(champ, true);
+    	document.getElementById('sub').setAttribute("disabled","true");
+      	return false;
+   	}
+   	else
+   	{
+   		document.getElementById('E'+champ.name).innerHTML = "";
+      	surligne(champ, false);
+      	document.getElementById('sub').removeAttribute("disabled");
+      	return true;
+   	}
+}
+
+function verifTel(champ)
+{
+	var tel = parseInt(champ.value);
+   	if(champ.value.length != 10 || isNaN(tel))
+   	{
+   		document.getElementById('ETel').innerHTML = "Entrez un numero de telephone valide";
+    	surligne(champ, true);
+    	document.getElementById('sub').setAttribute("disabled","true");
+      	return false;
+   	}
+   	else
+   	{
+   		document.getElementById('ETel').innerHTML = "";
+      	surligne(champ, false);
+      	document.getElementById('sub').removeAttribute("disabled");
+      	return true;
+   	}
+}
+
+
+function verifMail(champ)
+{
+	var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{1,10}$/;
+   	if(!regex.test(champ.value))
+   	{
+   		document.getElementById('EMail').innerHTML = "Entrez une adresse mail valide";
+      	surligne(champ, true);
+      	document.getElementById('sub').setAttribute("disabled","true");
+      	return false;
+   	}
+   	else
+   	{
+   		document.getElementById('EMail').innerHTML = "";
+      	surligne(champ, false);
+      	document.getElementById('sub').removeAttribute("disabled");
+      	return true;
+   	}
+}
+
+function verifMDP(champ)
+{
+   	if(champ.value.length < 8 || champ.value.length > 30)
+   	{
+   		document.getElementById('Emdp').innerHTML = "Votre mot de passe doit faire entre 8 et 30 caractères";
+    	surligne(champ, true);
+    	document.getElementById('sub').setAttribute("disabled","true");
+      	return false;
+   	}
+   	else
+   	{
+   		document.getElementById('Emdp').innerHTML = "";
+      	surligne(champ, false);
+      	document.getElementById('sub').removeAttribute("disabled");
+      	return true;
+   	}
+}
+
+function verifMDP2(champ)
+{
+	var pwd1 = document.getElementById('password1');
+    var pwd2 = document.getElementById('password2');
+   	if(pwd1.value != pwd2.value)
+   	{
+   		document.getElementById('Emdp2').innerHTML = "Les deux mots de passe doivent être identique!";
+    	surligne(champ, true);
+    	surligne(pwd1,true);
+    	document.getElementById('sub').setAttribute("disabled","true");
+      	return false;
+   	}
+   	else
+   	{
+   		document.getElementById('Emdp2').innerHTML = "";
+      	surligne(champ, false);
+      	surligne(pwd1,false);
+      	document.getElementById('sub').removeAttribute("disabled");
+      	return true;
+   	}
+}
+
+</script>

@@ -1,0 +1,275 @@
+
+<html>
+
+<title>Act.It</title>
+<meta charset="UTF-8">
+
+
+<head>
+
+    <style type="text/css">
+        body {
+            margin-bottom: 15px;
+            font-family: "Lato", sans-serif;
+
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            background-color: #f1f1f1;
+        }
+
+        .g {
+            float: left;
+        }
+
+
+        li a {
+            display: block;
+            color: #000;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+        /* Change the link color on hover */
+        li a:hover {
+            background-color: #555;
+            color: white;
+        }
+        li a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        input{
+
+            margin-right: 30px;
+            margin-left: 30px;
+            margin-bottom: 30px;
+            width: 190px;
+        }
+        input[type=text], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            margin-bottom: -7px;
+            resize: vertical;
+        }
+
+        input[type=password], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            margin-bottom: -7px;
+            resize: vertical;
+        }
+
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            text-align: center;
+            width: 100%;
+            margin-top: 20px;
+
+        }
+
+        img{
+
+            max-width:14%;
+            max-height: 14%;
+            /*border-color: #4CAF50;*/
+            border: solid #4CAF50;
+        }
+        p{
+            font-size: 10px;
+            height: 1px;
+        }
+
+        #profil{
+            text-align: center;
+            margin-top: 50px;
+
+        }
+
+        #info{
+            margin-left: 43%;
+            margin-top: 5px;
+            width:12%;
+            text-align: center;
+        }
+
+
+        .footer{
+            /*height: 10%;*/
+            width: 100%;
+            background-color: #4CAF50;
+
+            text-align: center;
+            position: absolute;
+            padding:5px;
+            font-size: 1.2em;
+            color:ghostwhite;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+<div>
+    <ul>
+        <li class = "g" style="font-family: Lato, sans-serif"><a href="index.php#accueil">Home</a></li>
+        <li class = "g" style="font-family: Lato, sans-serif"><a href="index.php#Recherche">News</a></li>
+        <li class = "g" style="font-family: Lato, sans-serif"><a href="index.php#contact">Contact</a></li>
+        <li class = "g" style="font-family: Lato, sans-serif"><a class="active" href="index.php#about">About</a></li>
+    </ul>
+</div>
+
+<div id = "profil">
+    <img src="profil.jpg" alt="default profile image">
+</div>
+<div id = "info">
+    <h3 style="text-align: center;">Edition du profil!</h3>
+    <form action="profilEdit.php" method="post">
+        <div id = "creation">
+            <input type="text" name="Nom" placeholder= "Nouveau nom" id="Nom" onblur="veriftext(this)" />
+            <p id="ENom"></p>
+            <input type="text" name="Prenom" placeholder = "Nouveau prenom" id="Prenom" onblur="veriftext(this)" />
+            <p id="EPrenom"></p>
+            <input type="text" name="Pseudo" placeholder = "Nouveau pseudo" id="Pseudo" onblur="veriftext(this)" />
+            <p id="EPseudo"></p>
+            <input type="text" name="Mail" placeholder= "votreNouveauMail@act.it" id="mail" onblur="verifMail(this)" />
+            <p id="EMail"></p>
+            <input type="text" name="Tel" placeholder= "Téléphone (01 23 45 67 89)" id="tel" onblur="verifTel(this)"/>
+            <p id="ETel"></p>
+            <input type="password" name="password1" placeholder= "Nouveau Mot de passe" id="password1" onblur="verifMDP(this)"/>
+            <p id="Emdp"></p>
+            <input type="password" name="password2" placeholder= "Nouveau Mot de passe (confirmation)" id="password2" onblur="verifMDP2(this)"/>
+
+        </div>
+        <input id = "sub" type="submit" value="Valider" />
+    </form>
+</div>
+</body>
+<div class="footer">
+    <h2>Act.It!</h2>
+</div>
+</html>
+
+
+
+<script type="text/javascript">
+    function surligne(champ, erreur)
+    {
+        if(erreur)
+            champ.style.borderColor = "red";
+        else
+            champ.style.borderColor = "";
+    }
+
+    function veriftext(champ)
+    {
+        if(champ.value.length < 2 || champ.value.length > 50)
+        {
+            document.getElementById('E'+champ.name).innerHTML = "Votre "+champ.name+" doit faire entre 2 et 50 caractères";
+            surligne(champ, true);
+            document.getElementById('sub').setAttribute("disabled","true");
+            return false;
+        }
+        else
+        {
+            document.getElementById('E'+champ.name).innerHTML = "";
+            surligne(champ, false);
+            document.getElementById('sub').removeAttribute("disabled");
+            return true;
+        }
+    }
+
+    function verifTel(champ)
+    {
+        var tel = parseInt(champ.value);
+        if(champ.value.length != 10 || isNaN(tel))
+        {
+            document.getElementById('ETel').innerHTML = "Entrez un numero de telephone valide";
+            surligne(champ, true);
+            document.getElementById('sub').setAttribute("disabled","true");
+            return false;
+        }
+        else
+        {
+            document.getElementById('ETel').innerHTML = "";
+            surligne(champ, false);
+            document.getElementById('sub').removeAttribute("disabled");
+            return true;
+        }
+    }
+
+
+    function verifMail(champ)
+    {
+        var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{1,10}$/;
+        if(!regex.test(champ.value))
+        {
+            document.getElementById('EMail').innerHTML = "Entrez une adresse mail valide";
+            surligne(champ, true);
+            document.getElementById('sub').setAttribute("disabled","true");
+            return false;
+        }
+        else
+        {
+            document.getElementById('EMail').innerHTML = "";
+            surligne(champ, false);
+            document.getElementById('sub').removeAttribute("disabled");
+            return true;
+        }
+    }
+
+    function verifMDP(champ)
+    {
+        if(champ.value.length < 8 || champ.value.length > 30)
+        {
+            document.getElementById('Emdp').innerHTML = "Votre mot de passe doit faire entre 2 et 30 caractères";
+            surligne(champ, true);
+            document.getElementById('sub').setAttribute("disabled","true");
+            return false;
+        }
+        else
+        {
+            document.getElementById('Emdp').innerHTML = "";
+            surligne(champ, false);
+            document.getElementById('sub').removeAttribute("disabled");
+            return true;
+        }
+    }
+
+    function verifMDP2(champ)
+    {
+        var pwd1 = document.getElementById('password1');
+        var pwd2 = document.getElementById('password2');
+        if(pwd1.value != pwd2.value)
+        {
+            document.getElementById('Emdp2').innerHTML = "Les deux mots de passe doivent être identique!";
+            surligne(champ, true);
+            surligne(pwd1,true);
+            document.getElementById('sub').setAttribute("disabled","true");
+            return false;
+        }
+        else
+        {
+            document.getElementById('Emdp2').innerHTML = "";
+            surligne(champ, false);
+            surligne(pwd1,false);
+            document.getElementById('sub').removeAttribute("disabled");
+            return true;
+        }
+    }
+
+</script>

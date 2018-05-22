@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<title>Act.It!</title>
+<meta charset="UTF-8">
+
+
+<head>
+    <style type="text/css">
+        body{
+            font-family: "Lato", sans-serif;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 200px;
+            width: 260px;
+            height: 100px;
+        }
+
+        input{
+            margin-top: 20px;
+            font-size: 20px;
+        }
+        p{
+            text-align: center;
+            font-size: 35px;
+        }
+
+        #sub{
+            border:none;
+            padding: 5px;
+            background-color: #4CAF50;
+            text-align: center;
+            width: 100px;
+            height: 40px;
+        }
+        input[type=text], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            margin-top: 30px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+
+        input[type=password], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #f1f1f1;
+        }
+
+        li {
+            float: left;
+        }
+
+
+        li a {
+            display: block;
+            color: #000;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+        /* Change the link color on hover */
+        li a:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        li a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        footer{
+            width: 100%;
+            background-color: #4CAF50;
+            bottom: 0;
+            left: 0;
+            text-align: center;
+            position: absolute;
+            padding:15px;
+            font-size: 200%;
+            color:ghostwhite;
+        }
+
+
+    </style>
+</head>
+<body>
+<ul>
+    <li class = "g" style="font-family: Lato, sans-serif"><a href="index.php#accueil">Accueil</a></li>
+    <li class = "g"style="font-family: Lato, sans-serif"><a href="index.php#Recherche">Recherche</a></li>
+    <li class = "g" style="font-family: Lato, sans-serif"><a href="index.php#contact">Contact</a></li>
+    <li class = "g" style="font-family: Lato, sans-serif"><a class="active" href="index.php#about">Nous</a></li>
+</ul>
+
+
+<form action="identification.php" method="post">
+
+
+    <p>
+        Connectez vous !
+        <input type="text" name="pseudo" placeholder= "pseudo" id="pseudo" /><br />
+        <input type="password" name="password" placeholder = "mot de passe" id="password" /><br />
+
+
+        <input id = "sub" type="submit" value="Envoyer" />
+
+    </p>
+
+    </form>
+    <footer>
+        <h1>Act.It!</h1>
+    </footer>
+
+
+</body>
+</html>
+
