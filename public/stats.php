@@ -19,7 +19,7 @@ if ($connecte==0){
             array("myth.php","Mythologie"),
             array("recette.php","Recettes"),
             array("course.php","Liste de course"),
-            array("oenologie.php","Oenologie : A quand la prochaine réu ?"),
+            array("oenologie.php","Oenologie "),
             array("contact.php","Nous contacter")
             );
         body($connecte,$liens,"stats.php");
