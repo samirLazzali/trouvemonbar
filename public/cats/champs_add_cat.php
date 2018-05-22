@@ -35,7 +35,7 @@ else
 
 if(isset($_POST['pattern']))
 {
-	$password = trim($_POST['pattern']);
+	$pattern = trim($_POST['pattern']);
 	$_SESSION['form_pattern'] = $pattern;
 	echo $pattern;
 }
@@ -60,14 +60,14 @@ if(isset($_POST['purity']))
 
 if(isset($_POST['birthdate']))
 {
-	$password = trim($_POST['birthdate']);
+	$birthdate= trim($_POST['birthdate']);
 	$_SESSION['form_birthdate'] = $birthdate;
 	echo $birthdate;
 }
 	
 if(isset($_POST['sexe']))
 {
-	$password = trim($_POST['sexe']);
+	$sexe= trim($_POST['sexe']);
 	$_SESSION['form_sexe'] = $sexe;
 	if($sexe == 1) {
 		$ssexe = 0;
@@ -85,7 +85,7 @@ else
 
 if(isset($_POST['coat']))
 {
-	$password = trim($_POST['coat']);
+	$coat = trim($_POST['coat']);
 	$_SESSION['form_coat'] = $coat;
 }
 
@@ -97,13 +97,13 @@ else
 
 if(isset($_POST['size']))
 {
-	$password = trim($_POST['size']);
+	$size = trim($_POST['size']);
 	$_SESSION['form_size'] = $size;
 }
 
 if(isset($_POST['weight']))
 {
-	$password = trim($_POST['weight']);
+	$weight= trim($_POST['weight']);
 	$_SESSION['form_weight'] = $weight;
 }
 
@@ -124,7 +124,7 @@ include('../includes/top.php');?>
 				$retour = $connexion->query("SELECT max(id_cat) AS max_id FROM cats");
 				$fetch = $retour -> fetch(PDO::FETCH_OBJ);
 				
-				echo "INSERT INTO Cats VALUES(".$connexion->quote($fetch->max_id+1).",$_SESSION['id_user'],".$connexion->quote($name).",
+				echo "INSERT INTO Cats VALUES(".$connexion->quote($fetch->max_id+1).",".$_SESSION['id_user'].",".$connexion->quote($name).",
 				".$connexion->quote($purity).",".$connexion->quote($pattern).",".$connexion->quote($birthdate).",NULL,NULL,,".$connexion->quote($size).",NULL,NULL,
 				".$connexion->quote($sexe).",".$connexion->quote($ssexe).",".$connexion->quote($coat).",NULL,NULL,".$connexion->quote($weight).",NULL,NULL)";
 				
