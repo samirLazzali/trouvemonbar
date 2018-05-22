@@ -24,7 +24,7 @@ function getContent(result)
     text = text +
         '<a id="link-more-posts" class="link-more-posts" href="#" onclick="morePosts()">' +
             '<div class="post-in-feed" id="link-more-posts-wrapper">' +
-                'Plus de publications' +
+                'Plus de posts' +
             '</div>' +
         '</a>'+
         '<a id="link-older-posts" class="link-more-posts" href="#" onclick="olderPosts()">' +
@@ -58,7 +58,7 @@ function getTopLikes()
             var text = getContent(result) +
                 '<a id="link-older-posts" class="link-more-posts" href="#" onclick="ofAllTimes()">' +
                     '<div class="post-in-feed" id="link-more-posts-wrapper">' +
-                        'Les plus aimées de tous les temps !' +
+                        'Les plus aimés de tous les temps !' +
                     '</div>' +
                 '</a>';
             document.getElementById('post-feed').innerHTML = text;
@@ -93,7 +93,7 @@ function getTopDislikes()
             var text = getContent(result) +
                 '<a id="link-older-posts" class="link-more-posts" href="#" onclick="ofAllTimes()">' +
                     '<div class="post-in-feed" id="link-more-posts-wrapper">' +
-                        'Les plus détestées de tous les temps !' +
+                        'Les plus détestés de tous les temps !' +
                     '</div>' +
                 '</a>';
             document.getElementById('post-feed').innerHTML = text;
@@ -128,7 +128,7 @@ function getTopRt()
             var text = getContent(result) +
                 '<a id="link-older-posts" class="link-more-posts" href="#" onclick="ofAllTimes()">' +
                     '<div class="post-in-feed" id="link-more-posts-wrapper">' +
-                        'Les plus recyvlées de tous les temps !' +
+                        'Les plus recyclés de tous les temps !' +
                     '</div>' +
                 '</a>';
             document.getElementById('post-feed').innerHTML = text;
