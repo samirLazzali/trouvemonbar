@@ -8,6 +8,11 @@ DROP TABLE "user";
 DROP TABLE "reunion";
 DROP TABLE "recette";
 DROP TABLE "note";
+DROP TABLE "participants";
+DROP TABLE "liste_vins";
+DROP TABLE "note_vins";
+DROP TABLE "participants_course";
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;

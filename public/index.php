@@ -1,5 +1,9 @@
 <?php
 session_start();
+if(!isset($_SESSION['connect']))
+{
+    $_SESSION['connect'] = 0;
+}
 require '../vendor/autoload.php';
 include('menu.php');
 //postgres
@@ -60,7 +64,7 @@ menu_navigation();
         $count_part=$connection->query('SELECT COUNT(*) AS nbr1 FROM public.participants')->fetch();
         $n=$count_part['nbr1'];
         if ($n!=0) {
-            $req_part = $connection->query("SELECT pseudo FROM public.participants ")->fetchAll();
+            $req_part = $connection->query("SELECT pseudo FROM public.participants WHERE id_reu = $id")->fetchAll();
             echo '<p>Participants :</br> ';
             foreach ($req_part as $reu) {
                 echo "{$reu['pseudo']} </br>";
@@ -111,7 +115,7 @@ if (isset($_POST['caché']) && $_POST['caché']==1 ){
             $req = $connection->prepare('INSERT INTO public.participants(id_reu,pseudo) VALUES (:id_reu,:pseudo)');
             $req->execute(['id_reu' => $nbr_reu,
                 'pseudo' => $_SESSION['pseudo'],
-            ]);
+	    ]);
         }
     }
     else {

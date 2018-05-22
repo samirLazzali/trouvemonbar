@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require '../vendor/autoload.php';
 include('menu.php');
@@ -10,7 +11,7 @@ $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=
 
 $userRepository = new \User\UserRepository($connection);
 $users = $userRepository->fetchAll();
-session_start();
+$_SESSION["connect"] = 0;
 ?>
 
 <html>

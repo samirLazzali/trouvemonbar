@@ -9,7 +9,8 @@ $dbPassword = getenv('DB_PASSWORD');
 $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 
 $userRepository = new \User\UserRepository($connection);
-$users = $userRepository->fetchAll();
+/*$users = $userRepository->fetchAll();*/
+$users = $connection->query('SELECT * FROM public.user ORDER BY score DESC')->fetchAll();
 
 ?>
 
@@ -47,10 +48,10 @@ $users = $userRepository->fetchAll();
         <?php /** @var \User\User $user */
         foreach ($users as $user) : ?>
             <tr>
-                <td><?php echo $user->getId() ?></td>
-                <td><?php echo $user->getPrenom() ?></td>
-                <td><?php echo $user->getNom() ?></td>
-                <td><?php echo $user->getScore() ?> points</td>
+                <td><?php echo $user['id'] ?></td>
+                <td><?php echo $user['prenom'] ?></td>
+                <td><?php echo $user['nom'] ?></td>
+                <td><?php echo $user['score'] ?> points</td>
             </tr>
         <?php endforeach; ?>
     </table>
