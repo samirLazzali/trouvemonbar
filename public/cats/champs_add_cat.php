@@ -135,6 +135,7 @@ include('../includes/top.php');?>
 				
 				else
 				{
+					echo "Push raté";
 					if($_SESSION['form_name'] !== FALSE)
 					{
 						unset($_SESSION['form_name']);
