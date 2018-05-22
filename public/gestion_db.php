@@ -68,6 +68,25 @@ function statistique($connexion,$soiree){
     return $reponse->fetch();
 }
 
+
+/**
+ * @brief permet de récupérer les noms des soirées
+ * @param $connexion un pdo
+ * @return un array avec tous les noms des soirees
+ */
+function soiree($connexion){
+    $requete = "SELECT DISTINCT soiree FROM \"Statistiques\"";
+    $reponse = $connexion->query($requete);
+    $tab = array();
+    while ($tupleCourant = $reponse->fetch() ){
+        $tab[]=$tupleCourant['soiree'];
+    }
+    $reponse = null;
+    return $tab;
+}
+
+
+
 /**
  * @brief permet de récupérer le nom des ingredients necessaires pour une recette
  * @param $connexion un pdo et $rec une recette
