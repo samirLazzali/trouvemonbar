@@ -1,6 +1,7 @@
 <?php
 require '../vendor/autoload.php';
 
+
 //postgres
 $dbName = getenv('DB_NAME');
 $dbUser = getenv('DB_USER');
@@ -12,32 +13,46 @@ $users = $userRepository->fetchAll();
 ?>
 
 <html>
-<head>
+<header>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
+    <link rel="stylesheet" href="parametres.css">
+    <h1>PinTutu</h1>
+    <div class="parametre">
+    </div>
+</header>
 <body>
 
 <div class="container">
-    <h3><?php echo 'Hello world from Docker! php' . PHP_VERSION; ?></h3>
+    <h2><?php echo 'Bienvenue sur PinTutu ! ' ; ?></h2>
 
-    <table class="table table-bordered table-hover table-striped">
+    <?php
+    echo '<form action="identification.php" formmethod="get" >
+				Identifiant <input type="text" size="20" maxlength="18" name="identifiant"><br/>
+				Mot de passe <input type="password" size="20" maxlength="18" name="password"><br/>';
+	echo '<input type="submit" name="action" value="Connexion">';
+	echo '</form>';
+	echo '<form action="comptes.php" formmethod="post">';
+	echo '<input type="submit" value="S\'inscrire">';
+	echo '</form>';
+    ?>
+
+   <!-- <table class="table table-bordered table-hover table-striped">
         <thead style="font-weight: bold">
-            <td>#</td>
-            <td>Firstname</td>
-            <td>Lastname</td>
-            <td>Age</td>
+            <td>Pseudo</td>
+            <td>Prenom</td>
+            <td>Nom</td>
+            <td>Mail</td>
         </thead>
         <?php /** @var \User\User $user */
         foreach ($users as $user) : ?>
             <tr>
-                <td><?php echo $user->getId() ?></td>
-                <td><?php echo $user->getFirstname() ?></td>
-                <td><?php echo $user->getLastname() ?></td>
-                <td><?php echo $user->getAge() ?> years</td>
+                <td><?php echo $user->getPseudo() ?></td>
+                <td><?php echo $user->getPrenom() ?></td>
+                <td><?php echo $user->getNom() ?></td>
+                <td><?php echo $user->getMail() ?> </td>
             </tr>
         <?php endforeach; ?>
-    </table>
+    </table>-->
 </div>
 </body>
 </html>

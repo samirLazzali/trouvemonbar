@@ -1,19 +1,49 @@
-CREATE TABLE "user" (
-    id SERIAL PRIMARY KEY ,
-    firstname VARCHAR NOT NULL ,
-    lastname VARCHAR NOT NULL ,
-    birthday date
+
+CREATE TABLE Media (
+  id_media VARCHAR NOT NULL,
+  titre VARCHAR NOT NULL,
+  auteur VARCHAR NOT NULL,
+  type VARCHAR NOT NULL,
+  valide VARCHAR ,
+  PRIMARY KEY (id_media),
+  FOREIGN KEY (auteur) REFERENCES Users
 );
 
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('John', 'Doe', '1967-11-22');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Yvette', 'Angel', '1932-01-24');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Amelia', 'Waters', '1981-12-01');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Manuel', 'Holloway', '1979-07-25');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Alonzo', 'Erickson', '1947-11-13');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Otis', 'Roberson', '1995-01-09');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Jaime', 'King', '1924-05-30');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Vicky', 'Pearson', '1982-12-12)');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Silvia', 'Mcguire', '1971-03-02');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Brendan', 'Pena', '1950-02-17');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Jackie', 'Cohen', '1967-01-27');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Delores', 'Williamson', '1961-07-19');
+CREATE TABLE Users (
+  pseudo VARCHAR NOT NULL,
+  mail VARCHAR NOT NULL,
+  mdp VARCHAR NOT NULL,
+  avatar VARCHAR ,
+  date_naissance DATE NOT NULL,
+  nom VARCHAR NOT NULL,
+  prenom VARCHAR NOT NULL,
+  rang VARCHAR ,
+  PRIMARY KEY (pseudo)
+);
+
+INSERT INTO Users(pseudo, mail, mdp, avatar, date_naissance, nom, prenom, rang) VALUES ('Alias','www.blabla.net','0000','\image','1997-05-29','Guyonneau','Valentin','user');
+
+CREATE TABLE Tags (
+  id_tags SMALLINT NOT NULL ,
+  nom VARCHAR NOT NULL,
+  PRIMARY KEY (id_tags)
+);
+
+INSERT INTO Tags (id_tags, nom) VALUES (1,'animaux');
+INSERT INTO Tags (id_tags, nom) VALUES (2,'mélancolique');
+INSERT INTO Tags (id_tags, nom) VALUES (3,'drôle');
+INSERT INTO Tags (id_tags, nom) VALUES (4,'paysages');
+INSERT INTO Tags (id_tags, nom) VALUES (5,'cuisine');
+INSERT INTO Tags (id_tags, nom) VALUES (6,'peinture');
+INSERT INTO Tags (id_tags, nom) VALUES (7,'sculpture');
+INSERT INTO Tags (id_tags, nom) VALUES (8,'code');
+INSERT INTO Tags (id_tags, nom) VALUES (9,'troll');
+INSERT INTO Tags (id_tags, nom) VALUES (10,'wtf');
+
+CREATE TABLE TagContenu (
+  tag SMALLINT NOT NULL,
+  id_media VARCHAR NOT NUll,
+  FOREIGN KEY (tag) REFERENCES Tags,
+  FOREIGN KEY (id_media) REFERENCES Media
+)
+

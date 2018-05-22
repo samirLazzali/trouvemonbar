@@ -3,112 +3,117 @@ namespace User;
 
 class User
 {
-    /**
-     * @var int
-     */
-    private $id;
+    public $pseudo;
 
-    /**
-     * @var string
-     */
-    private $firstname;
+    public $mail;
 
-    /**
-     * @var string
-     */
-    private $lastname;
+    public $mdp;
 
-    /**
-     * @var \DateTimeInterface
-     */
-    private $birthday;
+    public $avatar;
 
-    /**
-     * @return int
-     */
-    public function getId()
+    public $date_naissance;
+
+    public $nom;
+
+    public $prenom;
+
+    public $rang;
+
+    public function getRang()
     {
-        return $this->id;
+        return $this->rang;
     }
 
-    /**
-     * @param int $id
-     * @return User
-     */
-    public function setId($id)
+
+    public function setRang($rang)
     {
-        $this->id = $id;
+        $this->rang = $rang;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getFirstname()
+    public function getPrenom()
     {
-        return $this->firstname;
+        return $this->prenom;
     }
 
-    /**
-     * @param string $firstname
-     * @return User
-     */
-    public function setFirstname($firstname)
+    public function setPrenom($prenom)
     {
-        $this->firstname = $firstname;
+        $this->prenom = $prenom;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getLastname()
+    public function getNom()
     {
-        return $this->lastname;
+        return $this->nom;
     }
 
-    /**
-     * @param string $lastname
-     * @return User
-     */
-    public function setLastname($lastname)
+
+    public function setNom($nom)
     {
-        $this->lastname = $lastname;
+        $this->nom = $nom;
         return $this;
     }
 
-    /**
-     * @return \DateTimeInterface
-     */
-    public function getBirthday(): \DateTimeInterface
+    public function getDate_naissance()
     {
-        return $this->birthday;
+        return $this->date_naissance;
     }
 
-    /**
-     * @param \DateTimeInterface $birthday
-     * @return User
-     */
-    public function setBirthday(\DateTimeInterface $birthday)
+
+    public function setDate_naissance($date_naissance)
     {
-        $this->birthday = $birthday;
+        $this->date_naissance = $date_naissance;
+        return $this;
+    }
+
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+        return $this;
+    }
+
+    public function getMDP()
+    {
+        return $this->mdp;
+    }
+
+
+    public function setMDP($mdp)
+    {
+        $this->mdp = $mdp;
+        return $this;
+    }
+
+    public function getMail()
+    {
+        return $this->mail;
+    }
+
+     public function setMail($mail)
+    {
+        $this->mail = $mail;
         return $this;
     }
 
 
-    /**
-     * @return int
-     * @throws \OutOfRangeException
-     */
-    public function getAge(): int
+    public function getPseudo()
     {
-        $now = new \DateTime();
-
-        if ($now < $this->getBirthday()) {
-            throw new \OutOfRangeException('Birthday in the future');
-        }
-
-        return $now->diff($this->getBirthday())->y;
+        return $this->pseudo;
     }
+
+
+    public function setPseudo($pseudo)
+    {
+        $this->pseudo = $pseudo;
+        return $this;
+    }
+
+
 }
 
