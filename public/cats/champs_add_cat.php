@@ -22,7 +22,6 @@ if(isset($_POST['name']))
 		$_SESSION['name_info'] = '';
 		$_SESSION['form_name'] = $name;
 	}
-	echo $name;
 }
 
 else
@@ -37,7 +36,6 @@ if(isset($_POST['pattern']))
 {
 	$pattern = trim($_POST['pattern']);
 	$_SESSION['form_pattern'] = $pattern;
-	echo $pattern;
 }
 
 
@@ -50,11 +48,13 @@ else
 if(isset($_POST['purity']))
 {
 	$purity = trim($_POST['purity']);
-	if ($purity != true) {
+	if ($purity != 'Yes') {
 	   $purity = false;
 	   }
+	else {
+		$purity = true;
+	}
 	$_SESSION['form_purity']=$purity;
-	echo $purity;
 	   
 }
 
@@ -62,7 +62,6 @@ if(isset($_POST['birthdate']))
 {
 	$birthdate= trim($_POST['birthdate']);
 	$_SESSION['form_birthdate'] = $birthdate;
-	echo $birthdate;
 }
 	
 if(isset($_POST['sexe']))
@@ -126,7 +125,7 @@ include('../includes/top.php');?>
 				
 				if($connexion->exec("INSERT INTO Cats VALUES(".$connexion->quote($fetch->max_id+1).",".$_SESSION['id_user'].",".$connexion->quote($name).",
 				".$connexion->quote($purity).",".$connexion->quote($pattern).",".$connexion->quote($birthdate).",'0','13',".$connexion->quote($size).",'0','6',
-				".$connexion->quote($sexe).",".$connexion->quote($ssexe).",".$connexion->quote($coat).",'0','3',".$connexion->quote($weight).",'0','15')"))
+				".$connexion->quote(.intval($sexe)).",".$connexion->quote(.intval($ssexe)).",".$connexion->quote(.intval($coat)).",'0','3',".$connexion->quote(.intval($weight)).",'0','15')"))
 				{
 					$queries++;
 				?>
@@ -188,6 +187,5 @@ include('../includes/top.php');?>
 		</div>
 
 		<?php
-		empty_session();
 		include('../includes/bottom.php');
 		?>
