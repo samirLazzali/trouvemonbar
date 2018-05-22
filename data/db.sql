@@ -599,6 +599,7 @@ COPY public.comment (commentid, commentdate, content, gameid, userid) FROM stdin
 
 COPY public.file (fileid, filename, filehash, private, extension, userid) FROM stdin;
 5	MapAshan.jpg	a45b8e0b2f8c3f191dbc461ae5f2cbe2	t	\N	15
+7	bug_honshu1.png	74efad1086ab63192b901d91999178e1	t	\N	15
 \.
 
 
@@ -617,13 +618,13 @@ COPY public.game (gameid, gamename, gamedesc, duration, private, gamesystemid, c
 --
 
 COPY public.gamesystem (gamesystemid, systemname, systemdescription) FROM stdin;
-1	Pathfinder	Blabla
-2	Legend of The Five Rings	Blabla
 3	Donjons & Dragons 5	\N
 4	Warhammer Fantasy 4	\N
 5	Dark Heresy	\N
-6	Custom	\N
-8	Autre	\N
+7	Mouseguard	Un jdr avec des souris
+10	Blades In the Dark	Pour jouer des malfrats
+2	Legend of The Five Rings	L'honneur est plus fort que l'acier
+1	Pathfinder	Heroic Fantasy
 \.
 
 
@@ -645,6 +646,7 @@ COPY public.mastery (gamesystemid, userid) FROM stdin;
 5	16
 2	17
 4	17
+1	15
 \.
 
 
@@ -702,9 +704,9 @@ COPY public.tagging (tagid, gameid) FROM stdin;
 
 COPY public.users (userid, nick, firstname, lastname, mail, password, "isAdmin", token) FROM stdin;
 14	admin	\N	\N	josephine.barthel11@gmail.com	$2y$10$x7PrOp/Sby33R0W5Cpl.Ce9q3lNi68oKl83imv9G7gls4OpSS1M0.	t	\N
-15	Spawnie	Joséphine	Barthel	josephine.barthel@ensiie.fr	$2y$10$OB1XI5a0KqlsR7gqLc/Xre1FBgt0cG.zGHeE8NSGkahw6tgHZnBH6	f	\N
 16	Rezty	Florent	Amiable	famiable@bbox.fr	$2y$10$ffBd9eE951J.6btfK7VVROWQ.Ldf8tuVROAUFnhGuISS83GcSjzg6	f	\N
 17	DKan	Kanpeki	Daigostu	daigostu.kanpeki@gmail.com	$2y$10$LsZQGPodBhDeNZ0ICmOgvuDj5hcVtocyFAN6csFYEzy.D06Cix8S6	f	\N
+15	Spawnie	Joséphine	Barthel	josephine.barthel@ensiie.fr	$2y$10$FBNoeJuGCEtTfMCruskOM.30UIBqP...8x6gqpYrX7Di1XP2/9ekO	f	\N
 \.
 
 
@@ -712,28 +714,28 @@ COPY public.users (userid, nick, firstname, lastname, mail, password, "isAdmin",
 -- Name: comment_commentid_seq; Type: SEQUENCE SET; Schema: public; Owner: ensiie
 --
 
-SELECT pg_catalog.setval('public.comment_commentid_seq', 7, true);
+SELECT pg_catalog.setval('public.comment_commentid_seq', 8, true);
 
 
 --
 -- Name: file_fileid_seq; Type: SEQUENCE SET; Schema: public; Owner: ensiie
 --
 
-SELECT pg_catalog.setval('public.file_fileid_seq', 5, true);
+SELECT pg_catalog.setval('public.file_fileid_seq', 7, true);
 
 
 --
 -- Name: game_gameid_seq; Type: SEQUENCE SET; Schema: public; Owner: ensiie
 --
 
-SELECT pg_catalog.setval('public.game_gameid_seq', 86, true);
+SELECT pg_catalog.setval('public.game_gameid_seq', 87, true);
 
 
 --
 -- Name: gamesystem_gamesystemid_seq; Type: SEQUENCE SET; Schema: public; Owner: ensiie
 --
 
-SELECT pg_catalog.setval('public.gamesystem_gamesystemid_seq', 2, true);
+SELECT pg_catalog.setval('public.gamesystem_gamesystemid_seq', 10, true);
 
 
 --
@@ -747,7 +749,7 @@ SELECT pg_catalog.setval('public.gametag_tagid_seq', 1, false);
 -- Name: oneshot_scheduleid_seq; Type: SEQUENCE SET; Schema: public; Owner: ensiie
 --
 
-SELECT pg_catalog.setval('public.oneshot_scheduleid_seq', 5, true);
+SELECT pg_catalog.setval('public.oneshot_scheduleid_seq', 6, true);
 
 
 --
@@ -918,6 +920,13 @@ CREATE INDEX game_creator_index ON public.game USING btree (creator);
 --
 
 CREATE INDEX gameid_index ON public.comment USING btree (gameid);
+
+
+--
+-- Name: gamesystem_systemname_uindex; Type: INDEX; Schema: public; Owner: ensiie
+--
+
+CREATE UNIQUE INDEX gamesystem_systemname_uindex ON public.gamesystem USING btree (systemname);
 
 
 --

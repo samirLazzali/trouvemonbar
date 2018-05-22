@@ -151,6 +151,15 @@ class Gamesystem
         return $query->execute([$this->systemname, $this->systemdescription, $this->gamesystemid]);
     }
 
+    /**
+     * @return bool deletion was successful
+     */
+    public function delete()
+    {
+        $query = db()->prepare("DELETE FROM gamesystem WHERE gamesystemid = ?");
+        return $query->execute([$this->gamesystemid]);
+    }
+
 }
 
 
