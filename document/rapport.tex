@@ -38,6 +38,10 @@ Premier mondial à se lancer dans le secteur, \textbf{CATisfaction} répond à u
 \section{Réalisation du site}
 
 \subsection{Architecture générale}
+Afin d'éviter les répétitions, il a été décidé de créer des pages \textbf{top} et \textbf{bottom} qui sont réutilisés systématiquement car elles comportent la bannière et la signature du site. Néanmoins, il a fallu diviser la première citée puisque celle-ci contenait alors l'intégralité du \textbf{head} et empêcher d'implémenter des fonctions en Javascript.
+\newline
+\newline
+Pour ce qui est du reste, on prend évidemment soin de distinguer deux menus différents selon que l'utilisateur soit connectés ou pas. De plus, grâce à un système de ROOTPATH, le titre de chaque page est généré automatiquement.
 
 \subsection{Système de matching}
 Les partenaires potentiels d'un chat de l'utilisateur sont affichés dynamiquement dans un \textbf{tableau}. Les tableaux des \textit{targets} de chaque chats sont stockés sous forme de chaînes de caractères dans un tableau. Ils sont ainsi créés en PHP puis insuflés dans le script JvS à l'aide de la fonction \textbf{json\_encode()}.
@@ -45,7 +49,12 @@ Les partenaires potentiels d'un chat de l'utilisateur sont affichés dynamiqueme
 Pour sélectionner les chats correspàondant au désireux, on récupères d'abord dans la base de donnée tout les chats du bon sexe et de la bonne race si le désireux tient à la pureté du sang. A chaque chat est ensuite attribué un score, augmentant d'un certain \textbf{coefficient} pour chacun des nombreux critères demandés par le désireux qu'il respecte. Ces \textbf{coefficients} sont aujourd'hui le fruit d'une simple approche intuitive, mais l'étude des prochains clients via des calculs statistiques permettra de trouver des sytèmes plus efficaces que ces simples \textbf{coefficients}. Les chats sont ensuite triés par scores décroissants, et seuls les 5 premiers sont enregistrés. De même on pourra garder un plus grand nombre de profil si cela s'avère plus efficace. 
 
 \subsection{Design}
-\textbf{
+Le designe de notre site abuse du phénomène de toxoplasmose, autrement dit, cette attirence quasi-surnaturelle de la population humaine pour les chats (même en vidéo). De ce fait, nous avons parcemé les pages d'images de nos félins préférés, ce qui devrait sans doute attirer autant de millions d'utilisateurs que les millions de vues des vidéos de \textbf{Youtube}.
+\newline
+\newline
+Pour accentuer cela, nous avons également transformé le curseur de la souris afin qu'il prenne la forme d'une patoune !!.
+\newpage
+
 \section{Pour aller plus loin}
 Pour aller plus loin on peut imaginer des \textbf{critères inversés}, c'est-à-dire des critères non désirés en plus des critères désirés.
 \newline
