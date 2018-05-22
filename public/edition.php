@@ -13,8 +13,6 @@ if ($_SESSION['id']!=3){
     header("Location:index.php");
     exit();
 }
-head("mp.css","Aperal : Ajouter une recette");
-_header();
 ?>
 <!DOCTYPE html>
 <html>

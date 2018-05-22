@@ -23,6 +23,7 @@ _header();
                 Répeter le mot de passe : <input type="password" size="20" maxlength="18" name="pwdbis"/>
                 <br/>
                 <input type="submit" value="Inscription" name="bouton_connection"/>
+                <button type="button" ONCLICK="window.location.href='index.php'">Annuler</button>
                 <br/>
                 <a href="connexion.php">Se connecter</a>
             </p>
