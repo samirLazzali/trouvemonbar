@@ -69,6 +69,6 @@ if (isset($_POST['prenominsc']) && isset($_POST['nominsc']) && isset($_POST['pse
     
 }
 else{
-    echo '<p>veuillez remplir tout les champs</p>';
+    echo '<p>Veuillez remplir tout les champs</p>';
 }
 ?>

@@ -37,12 +37,12 @@ menu_oeno();
 <div class="gtco-container">
 <h2><?php echo 'Liste des vins' ?></h2>
 
-    <table class="table table-bordered table-hover table-striped">
-        <thead style="font-weight: bold">
-        <td>Id du vin</td>
-        <td>Nom du vin</td>
-        <td>Note</td>
-        </thead>
+    <table>
+        <tr>
+        <th>Id du vin</th>
+        <th>Nom du vin</th>
+        <th>Note</th>
+        </tr>
         <?php /** @var \User\User $user */
     	  $irec=$connection->query("SELECT * FROM public.note_vins")->fetchAll();
     	  $j=1;
@@ -79,6 +79,9 @@ menu_oeno();
 ?>
     </table>
 </div>
+<br />
+<br />
+<br />
     <?php 
     echo '<div class="gtco-container">';
 

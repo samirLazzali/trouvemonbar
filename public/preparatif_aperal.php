@@ -33,14 +33,15 @@ $users = $userRepository->fetchAll();
 <br/>
 
 </div>
-<h3><?php echo 'Préparatifs' ?></h3>
+<div class="gtco-container">
+<h2><?php echo 'Préparatifs' ?></h2>
 
-    <table class="table table-bordered table-hover table-striped">
-        <thead style="font-weight: bold">
-        <td>Soirée</td>
-        <td>Liste des courses</td>
-        <td>Participants</td>
-        </thead>
+    <table>
+        <tr>
+        <th>Soirée</th>
+        <th>Liste des courses</th>
+        <th>Participants</th>
+        </tr>
         <?php /** @var \User\User $user */
     	  $irec=$connection->query("SELECT * FROM public.participants_course")->fetchAll();
     	  $j=1;
@@ -94,5 +95,6 @@ $users = $userRepository->fetchAll();
     echo '    <fieldset><legend></legend><input type ="hidden" name="part" value=1 /></fieldset>';
     echo '   <input type ="submit" name="submit" value="Participer"/>';
     echo '</form>';
-  
+?>
+</div>
 

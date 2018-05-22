@@ -16,7 +16,8 @@ body {
   font-size: 16px;
   line-height: 1.7;
   color: #777;
-  background: grey;
+  background:grey;
+
 }
 
 #page {
@@ -53,13 +54,13 @@ body {
 }
 
 a {
-  color: #f54c53;
+  color: white;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
 }
-a:hover, a:active, a:focus {
-  color: #f54c53;
+a:hover, a:active, a:focus a:visited {
+  color: white;
   outline: none;
   text-decoration: none;
 }
@@ -67,7 +68,6 @@ a:hover, a:active, a:focus {
 p {
   color: white;
   font-family: "Roboto", Arial, sans-serif;
-  margin-bottom: 20px;
   font-weight: 400;
   font-size : 20px;
 }
@@ -114,6 +114,15 @@ h1, h3, h4, h5, h6, figure {
   padding-left: 7px;
   padding-right: 5px;
 }
+
+.gtco-container2 {
+    max-width: 800px;
+    position: relative;
+    margin: 0 auto;
+    padding-left: 200px;
+    padding-right: 20px;
+}
+
 
 .gtco-nav {
   position: absolute;

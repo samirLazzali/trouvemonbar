@@ -31,14 +31,16 @@ menu_aperal();
 <br />
 <br />
 <br />
-<h3><?php echo 'Recettes' ?></h3>
+<br />
+<div class="gtco-container">
+<h2>Recettes</h2>
 
-    <table class="table table-bordered table-hover table-striped">
-        <thead style="font-weight: bold">
-        <td>Id de la recette</td>
-        <td>Nom de la recette</td>
-        <td>Note</td>
-        </thead>
+    <table>
+        <tr>
+        <th>Id de la recette</th>
+        <th>Nom de la recette</th>
+        <th>Note</th>
+        </tr>
         <?php /** @var \User\User $user */
     	  $irec=$connection->query("SELECT * FROM public.note")->fetchAll();
     	  $j=1;
@@ -74,7 +76,9 @@ menu_aperal();
         
 ?>
     </table>
-    <?php 
+<?php
+    echo '<br />';
+    echo '<br />';	
     echo '<div class="gtco-container">';
 
     echo '<div class="form-c">';
@@ -89,7 +93,8 @@ menu_aperal();
     echo '</div>';
 
 
-    ?>
+?>
+</div>
   </body>
 
 

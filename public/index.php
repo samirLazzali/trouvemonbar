@@ -36,43 +36,39 @@ menu_navigation();
 ?>
 
 
-<header id="gtco-header" class="gtco-cover" role="banner" style="background-image: url(images/bg.jpg)">
-                <div class="gtco-container">
-                        <div class="row">
-                                <div class="col-md-12 col-md-offset-0 text-left">
-
-
-					<div class="row row-mt-15em">
+<div class="gtco-container2">
+                            
 <br />
 <br />
 <br />
 <br />
-                                        
+<br /><br /><br />               
 
 
-<h2>Prochaine réunion :</h2>
+<h2>Prochaine Soirée :</h2>
     <?php
     $req_count = $connection->query('SELECT COUNT(*) AS nbr FROM public.reunion')->fetch();
     if ($req_count['nbr']!=0) {
         $req = $connection->query('SELECT * FROM public.reunion WHERE id_reu= (SELECT MAX(id_reu) FROM public.reunion)');
         $res = $req->fetchAll();
         foreach ($res as $reu) {
-            echo "soirée: {$reu['soiree']} <br/>
-             date: {$reu['datee']} <br/>
-             compt rendue: {$reu['cr']} <br/>";
+            echo "<p>Soirée : {$reu['soiree']} <br/>
+             Date : {$reu['datee']} <br/>
+             Compte Rendu de la réunion : {$reu['cr']} <br/></p>";
             $id = $reu['id_reu'];
         }
         $count_part=$connection->query('SELECT COUNT(*) AS nbr1 FROM public.participants')->fetch();
         $n=$count_part['nbr1'];
         if ($n!=0) {
             $req_part = $connection->query("SELECT pseudo FROM public.participants ")->fetchAll();
-            echo 'participants:</br> ';
+            echo '<p>Participants :</br> ';
             foreach ($req_part as $reu) {
                 echo "{$reu['pseudo']} </br>";
-            }
+	    }
+	    echo '</p>';
         }
         else{
-            echo 'participant: aucun';
+            echo '<p>Participants : Aucun</p>';
         }
         if (isset($_SESSION['connect']) && $_SESSION['connect']>=1) {
             ?>
@@ -119,8 +115,8 @@ if (isset($_POST['caché']) && $_POST['caché']==1 ){
         }
     }
     else {
-        echo 'veuillez vous connectez avant de participer';
-        echo '<a href="connexion.php"> Se connecter</a>';
+        echo 'Veuillez vous connecter avant de participer';
+        echo '<a href="connexion.php">Se connecter</a>';
     }
 }
 ?>
