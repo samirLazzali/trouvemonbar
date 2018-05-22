@@ -20,7 +20,7 @@
 	 {
 	 ?>
       <a href="<?php echo ROOTPATH; ?>/index.php">Accueil</a>   &nbsp;<a href="<?php echo ROOTPATH; ?>/membres/moncompte.php">Gérer mon compte</a>   &nbsp;<a href="<?php echo ROOTPATH; ?>/cats/search_cat.php">Mes recherches</a>   &nbsp;<a href="<?php echo ROOTPATH; ?>/membres/matcher.php">Matcher mes chats</a>   &nbsp;<a href="<?php echo ROOTPATH; ?>/membres/deconnexion.php">Se déconnecter</a>
-      <?php if($fetch->user_type == 0) { echo ROOTPATH; ?>/admin/crud.php">Administration</a>   &nbsp; <?php
+      <?php if($fetch->user_type == 0) { echo ROOTPATH; ?>/admin/crud.php>Administration</a>   &nbsp; <?php
 	 }}
 	 
 	 else
