@@ -62,26 +62,44 @@ services:
     networks:
       - "ensiie"
 
-  pgadmin:
-    image: dpage/pgadmin4
-    ports:
-      - "80:80"
-    environment:
-      - "PGADMIN_DEFAULT_EMAIL=josephine.barthel11@gmail.com"
-      - "PGADMIN_DEFAULT_PASSWORD=ensiie"
-    networks:
-      - "ensiie"
+  #pgadmin:
+  # image: dpage/pgadmin4
+  #  ports:
+  #    - "80:80"
+  #  environment:
+  #    - "PGADMIN_DEFAULT_EMAIL=josephine.barthel11@gmail.com"
+  #    - "PGADMIN_DEFAULT_PASSWORD=ensiie"
+  #  networks:
+  #    - "ensiie"
 
 
-  exim:
-    image: elsdoerfer/exim-sender
-    ports:
-      - "4444:26"
-    environment:
-      - "ALLOWED_HOSTS=127.0.0.1"
-    networks:
-      - "ensiie"
+  # exim:
+  #  image: elsdoerfer/exim-sender
+  #  ports:
+  #    - "4444:26"
+  #  environment:
+  #    - "ALLOWED_HOSTS=127.0.0.1"
+  #  networks:
+  #    - "ensiie"
 
 networks:
     ensiie:
         driver: bridge
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
