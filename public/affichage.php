@@ -293,6 +293,7 @@ function article_myth(){
 function article_contact(){
     echo "<div id=\"article\">";
     echo "<h1><p style=\"text-indent:12em\">Nous contacter</h1>";
+    echo "<p>Président : Quentin \"Pichet\"Pichollet|<br/>email : quentin.pichollet@ensiie.fr</p>";
     echo "</div>";
 }
 

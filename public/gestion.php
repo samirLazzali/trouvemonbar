@@ -1,5 +1,13 @@
 <?php
 session_start();
+$connecte=0;
+if (isset($_SESSION['logged'])){
+    $connecte = 1;
+}
+if ($connecte==0) {
+    header("Location:index.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,7 +20,7 @@ _header();
 <body>
 <div id="main">
     <div id="article_connection">
-        <h1>Connection</h1>
+        <h1>Gestion du compte</h1>
         <p>
             <a href="change_mdp.php">Changer de mot de passe</a>
             <?php

@@ -1,7 +1,14 @@
 <?php
 session_start();
+$connecte=0;
+if (isset($_SESSION['logged'])){
+    $connecte = 1;
+}
+if ($connecte==0 || ($_SESSION['id']!=3)) {
+    header("Location:index.php");
+    exit();
+}
 ?>
-
 <!DOCTYPE html>
 <html>
 <?php

@@ -1,5 +1,13 @@
 <?php
 session_start();
+$connecte=0;
+if (isset($_SESSION['logged'])){
+    $connecte = 1;
+}
+if ($connecte==0) {
+    header("Location:index.php");
+    exit();
+}
 session_destroy();
 ?>
 

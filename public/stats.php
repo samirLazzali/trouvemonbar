@@ -1,15 +1,18 @@
 <?php
 session_start();
-?>
-
-<!DOCTYPE html>
-<html>
-<?php
 include("affichage.php");
 $connecte=0;
 if (isset($_SESSION['logged'])){
     $connecte = 1;
 }
+if ($connecte==0){
+    header("Location:connexion.php");
+    exit();
+}
+?>
+<!DOCTYPE html>
+<html>
+<?php
         head("mp.css","Aperal : Statistiques");
         $liens = array(
             array("index.php","Page d'accueil"),

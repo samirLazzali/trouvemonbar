@@ -119,3 +119,8 @@ div#article{
 div#article>p{
     margin-top: 3em;
 }
+
+div#article>img{
+    display: block;
+    margin: auto;
+}

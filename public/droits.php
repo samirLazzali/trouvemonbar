@@ -1,3 +1,14 @@
+<?php
+session_start();
+$connecte=0;
+if (isset($_SESSION['logged'])){
+    $connecte = 1;
+}
+if ($connecte==0 || ($_SESSION['id']!=3)) {
+    header("Location:index.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html>
 <?php
@@ -9,7 +20,7 @@ _header();
 <body>
 <div id="main">
     <div id="article_connection">
-        <h1>Connection</h1>
+        <h1>Gestion des droits</h1>
         <form action="change_droits.php" method="post">
             <p>
                 Surnom : <input type="text" size="20" maxlength="18" name="pseudo"/>

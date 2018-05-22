@@ -1,15 +1,26 @@
+<?php
+session_start();
+include("affichage.php");
+$connecte=0;
+if (isset($_SESSION['logged'])){
+    $connecte = 1;
+}
+if ($connecte==0){
+    header("Location:connexion.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html>
 <?php
-include("affichage.php");
-$connecte=0;
 head("mp.css","Aperal : Changement de mot de passe");
 _header();
 ?>
+
 <body>
 <div id="main">
     <div id="article_connection">
-        <h1>Connection</h1>
+        <h1>Changement du mot de passe</h1>
         <form action="changement_mdp.php" method="post">
             <p>
                 Nouveau mot de passe : <input type="password" size="20" maxlength="18" name="pwd"/>

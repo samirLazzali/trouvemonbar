@@ -112,6 +112,7 @@ INSERT INTO "Ingredients_Recettes"(nom_recette, nom_ingredient) VALUES ('Pizza',
 INSERT INTO "Ingredients_Recettes"(nom_recette, nom_ingredient) VALUES ('Pizza','Sauce_tomate');
 INSERT INTO "Ingredients_Recettes"(nom_recette, nom_ingredient) VALUES ('Pizza','Gruyere');
 
+
 INSERT INTO "Statistiques"(soiree,nb_assiettes_prepares,nb_assiettes_vendues,prix_achat,prix_vente,benefice) VALUES('A3A',50,32,45.10,48,2.90);
 INSERT INTO "Statistiques"(soiree,nb_assiettes_prepares,nb_assiettes_vendues,prix_achat,prix_vente,benefice) VALUES('Nouvel_An_Chinois',50,43,68,64.50,-3.50);
 INSERT INTO "Statistiques"(soiree,nb_assiettes_prepares,nb_assiettes_vendues,prix_achat,prix_vente,benefice) VALUES('BDS',50,30,54.10,45,-9.10);
@@ -127,7 +128,6 @@ INSERT INTO "Soirees"(id_recette, nom_soiree, recette_propose) VALUES (5,'A3A','
 
 INSERT INTO "Soirees"(id_recette, nom_soiree, recette_propose) VALUES (6,'Nouvel_An_Chinois','Jacqueline');
 INSERT INTO "Soirees"(id_recette, nom_soiree, recette_propose) VALUES (7,'Nouvel_An_Chinois','Nems');
-INSERT INTO "Soirees"(id_recette, nom_soiree, recette_propose) VALUES (8,'Nouvel_An_Chinois','Chips_crevette');
 INSERT INTO "Soirees"(id_recette, nom_soiree, recette_propose) VALUES (9,'Nouvel_An_Chinois','Carottes');
 INSERT INTO "Soirees"(id_recette, nom_soiree, recette_propose) VALUES (10,'Nouvel_An_Chinois','Concombres');
 INSERT INTO "Soirees"(id_recette, nom_soiree, recette_propose) VALUES (11,'Nouvel_An_Chinois','Pizza');

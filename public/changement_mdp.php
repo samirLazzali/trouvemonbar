@@ -1,5 +1,13 @@
 <?php
 session_start();
+$connecte=0;
+if (isset($_SESSION['logged'])){
+    $connecte = 1;
+}
+if ($connecte==0){
+    header("Location:connexion.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +22,7 @@ _header();
     <div id="article_connection">
         <?php
         if (empty($_POST['pwd']) || empty($_POST['pwd_bis']) || ($_POST['pwd']!=$_POST['pwd_bis'])) {
-            echo "<a href=\"changer_mdp.php\">Veillez à bien remplir les champs</a>";
+            echo "<a href=\"change_mdp.php\">Veillez à bien remplir les champs</a>";
         }
         else {
             $mdp = $_POST['pwd'];
