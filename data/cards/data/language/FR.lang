@@ -1,0 +1,301 @@
+﻿Français // FR
+
+%%%% GroupBoxName %%%% form = 0
+Connectivité
+Informations
+Éditions à traiter
+Liste des cartes
+Illustration
+
+%%%% Lbl_FenetrePrincipale %%%% form = 1
+Éditions disponibles :
+Avancement total :
+Avancement partiel :
+Édition traitée :
+Nombre de cartes dans l'édition :
+Nombre de cartes traitées :
+Temps écoulé :
+Temps restant :
+
+%%%% Status Connectivite %%%% form = 2
+hors ligne
+connexion
+en ligne
+
+%%%% ToolTip sur FenetrePrincipale %%%% form = 3
+Connexion
+Déconnexion
+Sélectionner tout
+Désélectionner tout
+Éditer les abréviations
+Télécharger les données principales
+Télécharger toutes les données
+Interrompre
+traité complètement
+Réinitialiser la base de données
+Rétablir le tri par défaut
+Télécharger les scans
+Télécharger tous les scans de la liste
+Actions
+Actions générales
+Actions sur la liste 
+Télécharger toutes les cotations de la liste
+Calculer les légalités
+Le calcul correct des légalités nécessite une liste des cartes complète ainsi qu'une base de formats à jour.
+Format :
+Sélectionner…
+Sélectionner les éditions non-traitées
+Séléctionner les éditions déjà traitées
+Séléctionner les éditions non-promotionnelles
+Séléctionner les éditions promotionnelles
+Supprimer une édition…
+Compter le nombre de rééditions et détecter l'original
+Le décompte correct du nombre de rééditions et la détection de l'original nécessite une liste des cartes complète.
+Télécharger les données…
+Fermer le menu
+Choix des langues étrangères
+Base de données en langues étrangères
+Harmoniser la base de données
+L'harmonisation de la base de données nécessite une liste des cartes complète.
+
+%%%% Lbl_Info %%%% form = 4
+Prêt
+Téléchargement des éditions
+Traitement des éditions
+Terminé
+sur
+Téléchargement du spoiler text relatif à
+Téléchargement interrompu
+Lecture du spoiler text relatif à
+Traitement terminé avec succès
+Téléchargement des numéros de cartes relatifs à
+Téléchargements des données relatives à
+dans la langue suivante :
+Traitement de la carte :
+Enregistrement
+indisponible, remplacée par
+Traitement terminé parce que des erreurs ont été générées
+Téléchargements des compléments relatifs à
+Téléchargements des jetons relatifs à
+
+%%%% Lbl_Set Edit %%%% form = 5
+Édition
+Abréviations utilisateur
+Date de parution
+Ajouter une ligne
+Supprimer une ligne
+Sauvegarder
+Indicateur promo
+Abréviations officielles
+Abréviation
+Plusieurs éditions portent la même abréviation !
+Abréviations des éditions
+
+%%%% Lbl_Warning %%%% form = 6
+Attention !
+abréviation manquante !
+abréviations manquantes !
+Souhaitez-vous vraiment interrompre le téléchargement ?
+Annulation en cours...
+La base de données n'est pas au format !
+Une base de données en cours de traitement a pu être récupérée. Voulez-vous continuer ?
+Un processus de téléchargement est actif. Voulez-vous l'arrêter et sauvegarder la base de données avant de fermer ?
+Chargement de
+Des noms d'éditions sont manquants !
+Voulez-vous les remplacer par leurs noms par défaut?
+
+%%%% Lbl_Langue Dispo %%%% form = 7
+Anglais
+Chinois tranditionnel
+Chinois simplifié
+Français
+Allemand
+Italien
+Japonais
+Portugais
+Russe
+Espagnol
+Coréen
+
+%%%% Lbl_Header_Base %%%% form = 8
+État
+ID
+Nom
+Éd.
+Type
+R
+Coût de mana
+CCM
+F
+E
+L
+Capacité
+Texte d'ambiance
+Alt.
+Illustrateur
+n°
+Notation
+Compléments de règles
+Couleur
+Mana généré
+Cote Min (USD)
+Cote Moy (USD)
+Cote Max (USD)
+ID (dos)
+Légalité
+Légalités
+Watermark
+Nombre d'éditions
+Original
+Identité couleur
+
+%%%% Lbl_Time %%%% form = 9
+ h
+ min
+ s
+
+%%%% Lbl_MENU_Principal %%%% form = 10
+Fichier
+Sauvegarder sous...
+Ouvrir...
+Options
+Faire un don
+À propos de...
+Quoi de neuf ?
+Discussions et suggestions
+Vérifier les mises à jour…
+Votre version est à jour.
+Une nouvelle version est disponible en ligne.
+Version actuelle :
+Version en ligne :
+Voulez-vous la télécharger et l'installer maintenant ? (Recommandé)
+Recherche de mises à jour en ligne …
+Recherche de mises à jour en ligne au démarrage
+Voulez-vous continuer ?
+
+%%%% Lbl_NEW %%%% form = 11
+Nouvelle base de données
+
+%%%% LBL_Options_menu %%%% form = 12
+Général
+Scans des cartes
+Exporter
+Données extraites
+Contenu des boosters
+
+%%%% Lbl_Options_lblGroupoBox %%%% form = 13
+Langues disponibles
+Séparateurs
+Éditions : données à exporter
+Cartes : données à exporter
+Type de scans
+Qualité des scans
+Langue des scans
+Nomenclature des scans
+Restaurer les paramètres par défaut
+Luminosité des scans
+Contraste des scans
+Spécifications des couleurs
+Divers
+Démarrage
+Formats disponibles
+Spécifications des manas produits
+
+%%%% Lbl_Options_lbl %%%% form = 14
+Caractères de saut de ligne :
+Caractères d'ouverture d'une balise italique :
+Caractères de fermeture d'une balise italique :
+Caractères de séparation pour version altérée :
+Caractères de séparation pour csv :
+Connexion automatique au démarrage
+Télécharger les cotations lors de l'extraction de données
+Trier les données :
+par nom
+par numéro de carte
+Extension :
+Source des scans :
+Basculement automatique en cas d'indisponibilité
+Dossier de sauvegarde des scans :
+Ne pas écraser les scans déjà existants
+Créer un répertoire par édition
+Nom du répertoire :
+Montrer l'état des scans
+Montrer dans 'Couleur' si la carte est hybride
+Montrer dans 'Couleur' si la carte est or
+Ne pas écraser les données déjà présentes
+Rares mythiques :
+Qté :
+Probabilité :
+Rares :
+Inhabituelles :
+Communes :
+Cartes additionnelles :
+Nom des fichiers
+Cartes bannies
+Cartes restreintes
+Cartes bannies en tant que Commander
+Éditions originales incluses dans le format
+Légende des légalités
+Arrondir les notations à l'exportation
+Caractères de séparation pour flipping cards :
+Ajuster automatiquement la taille des colonnes
+Conserver les textes d'ambiance
+Contenu par defaut
+Terrain de base
+Jeton
+Parmi une liste spécifique
+Parmi une édition spécifique
+Type n°
+Exceptions
+Ajouter une exception
+Pas de booster pour cette édition
+Présence de foil
+Présence de chef d'œuvre
+Liste des ID
+Inclure les marqueurs énergie dans 'Mana généré'
+Inclure les jetons lors de l'extraction des données
+
+%%%% LBL_MWS_Export %%%% form = 15
+Quelle édition souhaitez-vous exporter ?
+Annuler
+Inclure le packaging
+Séparer les entrées par des points-virgules
+Exporter toutes les éditions dans des fichiers séparés
+Exporter une seule édition
+Exporter toutes les éditions dans un unique fichier
+
+%%%% Lbl_Menu_Filtre %%%% form = 16
+Filtres :
+Aucun filtre
+Données à traiter
+Données traitées complètement
+Scan à télécharger
+Téléchargement du scan réussi
+Téléchargement du scan réussi, avec remplacement de la source
+Échec du téléchargement du scan
+Scan déjà existant dans le dossier d'images
+Scan déjà existant ou téléchargé avec succès
+
+%%%% Lbl_XML %%%% form = 17
+Nom de la base xml :
+Date :
+Numéro de version :
+Nom en langues étrangères
+Rareté
+Force
+Endurance
+Loyauté
+Coût converti de mana
+Numéro d'altération
+Type en langues étrangères
+Capacité en langues étrangères
+Texte d'ambiance en langues étrangères
+
+%%%% Lbl_XML_DataGrid %%%% form = 18
+Propriété
+Balise xml
+
+%%%% Lbl_SQL_DataGrid %%%% form = 19
+Propriété
+Nom sql
+Nom de la table

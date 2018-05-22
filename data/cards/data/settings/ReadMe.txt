@@ -1,0 +1,1 @@
+Default Folder of setting storage from Gatherer Extractor.

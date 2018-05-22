@@ -1,19 +1,117 @@
-CREATE TABLE "user" (
-    id SERIAL PRIMARY KEY ,
-    firstname VARCHAR NOT NULL ,
-    lastname VARCHAR NOT NULL ,
-    birthday date
+CREATE TABLE "cartes" (
+	name VARCHAR,
+	set VARCHAR,
+	set_code VARCHAR,
+	id VARCHAR PRIMARY KEY,
+	type VARCHAR,
+	power VARCHAR,
+	toughness VARCHAR,
+	loyalty VARCHAR,
+	manacost VARCHAR,
+	converted_manacost VARCHAR,
+	artist VARCHAR,
+	flavor VARCHAR,
+	color VARCHAR,
+	generated_mana VARCHAR,
+	number VARCHAR,
+	rarity VARCHAR,
+	rating FLOAT,
+	ruling VARCHAR,
+	variation VARCHAR,
+	ability VARCHAR,
+	pricing_low FLOAT,
+	pricing_mid FLOAT,
+	pricing_high FLOAT,
+	watermark VARCHAR,
+	print_number VARCHAR,
+	is_original VARCHAR,
+	back_id VARCHAR,
+	number_int FLOAT,
+	name_CN VARCHAR,
+	name_TW VARCHAR,
+	name_FR VARCHAR,
+	name_DE VARCHAR,
+	name_IT VARCHAR,
+	name_JP VARCHAR,
+	name_PT VARCHAR,
+	name_RU VARCHAR,
+	name_ES VARCHAR,
+	name_KO VARCHAR,
+	type_CN VARCHAR,
+	type_TW VARCHAR,
+	type_FR VARCHAR,
+	type_DE VARCHAR,
+	type_IT VARCHAR,
+	type_JP VARCHAR,
+	type_PT VARCHAR,
+	type_RU VARCHAR,
+	type_ES VARCHAR,
+	type_KO VARCHAR,
+	ability_CN VARCHAR,
+	ability_TW VARCHAR,
+	ability_FR VARCHAR,
+	ability_DE VARCHAR,
+	ability_IT VARCHAR,
+	ability_JP VARCHAR,
+	ability_PT VARCHAR,
+	ability_RU VARCHAR,
+	ability_ES VARCHAR,
+	ability_KO VARCHAR,
+	flavor_CN VARCHAR,
+	flavor_TW VARCHAR,
+	flavor_FR VARCHAR,
+	flavor_DE VARCHAR,
+	flavor_IT VARCHAR,
+	flavor_JP VARCHAR,
+	flavor_PT VARCHAR,
+	flavor_RU VARCHAR,
+	flavor_ES VARCHAR,
+	flavor_KO VARCHAR,
+	color_identity VARCHAR,
+	fully_handled VARCHAR,
+	custom_sort VARCHAR,
+	legality_Block VARCHAR,
+	legality_Standard VARCHAR,
+	legality_Modern VARCHAR,
+	legality_Legacy VARCHAR,
+	legality_Vintage VARCHAR,
+	legality_Highlander VARCHAR,
+	legality_French_Commander VARCHAR,
+	legality_Tiny_Leaders_Commander VARCHAR,
+	legality_Leviathan_Commander VARCHAR,
+	legality_Commander VARCHAR,
+	legality_Peasant VARCHAR,
+	legality_Pauper VARCHAR
 );
 
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('John', 'Doe', '1967-11-22');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Yvette', 'Angel', '1932-01-24');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Amelia', 'Waters', '1981-12-01');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Manuel', 'Holloway', '1979-07-25');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Alonzo', 'Erickson', '1947-11-13');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Otis', 'Roberson', '1995-01-09');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Jaime', 'King', '1924-05-30');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Vicky', 'Pearson', '1982-12-12)');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Silvia', 'Mcguire', '1971-03-02');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Brendan', 'Pena', '1950-02-17');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Jackie', 'Cohen', '1967-01-27');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Delores', 'Williamson', '1961-07-19');
+COPY cartes(name,	set, set_code, id, type, power, toughness, loyalty, manacost,	converted_manacost, artist,
+	flavor, color,	generated_mana,	number,	rarity,	rating,	ruling,	variation, ability,
+	pricing_low, pricing_mid,	pricing_high, watermark, print_number, is_original,	back_id, number_int,
+	name_CN,	name_TW, name_FR,	name_DE, name_IT,	name_JP, name_PT,	name_RU, name_ES,	name_KO,
+	type_CN,	type_TW, type_FR,	type_DE, type_IT,	type_JP, type_PT,	type_RU, type_ES, type_KO,
+	ability_CN,	ability_TW,	ability_FR,	ability_DE,	ability_IT,	ability_JP,	ability_PT,	ability_RU,	ability_ES,	ability_KO,
+	flavor_CN, flavor_TW,	flavor_FR, flavor_DE,	flavor_IT, flavor_JP,	flavor_PT, flavor_RU,	flavor_ES, flavor_KO,
+	color_identity,	fully_handled, custom_sort,	legality_Block,	legality_Standard, legality_Modern,	legality_Legacy,
+	legality_Vintage,	legality_Highlander, legality_French_Commander,	legality_Tiny_Leaders_Commander,
+	legality_Leviathan_Commander,	legality_Commander,	legality_Peasant,	legality_Pauper)
+FROM 'data/cards/cartes_formatted.csv' DELIMITER '|' CSV HEADER;
+
+CREATE TABLE "users"
+(
+  id VARCHAR PRIMARY KEY,
+  username VARCHAR,
+  email VARCHAR,
+  password VARCHAR,
+  confirmation_token VARCHAR,
+  confirmed_at DATE,
+  admin INTEGER,
+  ban INTEGER
+);
+
+CREATE TABLE "test"
+(
+  id VARCHAR REFERENCES cartes(id),
+  quantity INTEGER,
+  id_owner VARCHAR REFERENCES users(id),
+  id_user VARCHAR REFERENCES users(id)
+);

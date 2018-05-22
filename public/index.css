@@ -1,0 +1,470 @@
+@font-face {
+				font-family: "Philosopher";
+				src:url("Fonts/Philosopher-Regular.ttf");
+			}
+
+
+@font-face {
+	font-family: "Planewalker";
+	src:url("Fonts/Planewalker.otf");
+}
+
+
+@font-face {
+	font-family: "Magic";
+	src:url("Fonts/SATAM___.TTF");
+}
+
+
+
+html {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	top: 0px;
+	left: 0px:
+	right: 0px;
+	bottom: 0px;
+    font-family: Philosopher, Helvetica, sans-serif;
+	background-color: #000000;
+}
+
+
+
+
+/* Style the header */
+.header {
+	font-family: Planewalker;
+    background-color: #990000;
+    padding: 15px;
+	color: #ff9900;
+    text-align: center;
+    font-size: 100%;
+}
+
+
+.title a:active {
+	text-decoration: none;
+	color: inherit;
+	background-color: inherit;
+}
+
+.title a:link {
+	text-decoration: none;
+	color: inherit;
+	background-color: inherit;
+}
+
+.title a:visited {
+	text-decoration: none;
+	color: inherit;
+	background-color: inherit;
+}
+
+.header h2 {
+	font-family: Magic;
+	font-size: 500%;
+	margin: 30px;
+}
+
+
+/* Create three unequal columns that floats next to each other */
+.column {
+	height: 100%;
+	background-color: #;
+    float: left;
+    padding: 0px;
+	/* Should be removed. Only for demonstration */
+}
+
+/* Left and right column */
+.column.side {
+    width: 10%;
+	height: inherit;
+}
+
+#left_col {
+	height: 100%;
+	background-image: url("Pictures/Sidebar_1.png");
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+}
+
+#right_col {
+	height: 100%;
+	background-image: url("Pictures/Sidebar_2.png");
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+}
+
+img {
+	width: 100%;
+	height: 100%;
+}
+
+
+
+
+/* Middle column */
+.column.middle {
+	padding: 2%;
+    width: 76%;
+}
+
+.column.middle h1 {
+	font-family: Magic;
+	font-size: 250%;
+	color: #990000;
+}
+
+.column.middle h2 {
+	font-family: Planewalker;
+	font-size: 220%;
+}
+	
+	
+.row{
+	width: 100%;
+	height: 100%;
+}
+
+
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Style the footer */
+.footer {
+    background-color: #990000;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+    .column.side, .column.middle {
+        width: 100%;
+    }
+}
+
+
+
+
+ /* Navbar container */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  
+}
+
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* The dropdown container */
+.dropdown {
+  float: left;
+  overflow: hidden;
+  font-size: 20px;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-size: 20px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit; /* Important for vertical align on mobile phones */
+  margin: 0; /* Important for vertical align on mobile phones */
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: #ff9900;
+  color: #990000;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  font-size: 16px;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+} 
+
+
+.news {
+	font-family: Philosopher;
+}
+
+.news h2 {
+	font-family: Philosopher;
+	font-size: 30px;
+}
+
+.article {
+	padding: 5px;
+	border: 2px solid #990000;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+
+.article_header{
+	font-family: Planewalker;
+	font-size: 140%;
+}
+
+
+
+.search{
+	height: 100%;
+	padding: 5px;
+	font-family: Planewalker;
+	font-size: 120%;
+	margin-bottom: 65px;
+}
+
+#search_left{
+	float: left;
+}
+
+#search_right{
+	text-align: right;
+	float: right;
+	margin-right: 30px;
+}
+
+
+.search:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+#submit_button{
+	padding-left: 35%;
+	padding-right: 35%;
+}
+
+select {
+	float: top;
+	border: 2px solid grey;
+	border-radius: 3px;
+	margin: 10px;
+	font-family: Planewalker;
+	font-size: 100%;
+}
+
+select:focus {
+	float: center;
+	border: 2px solid #990000;
+	border-radius: 3px
+	margin: 10px;
+	font-family: Planewalker;
+	font-size: 100%;
+}
+
+
+input[type="text"]{
+	float: center;
+	border: 2px solid grey;
+	border-radius: 3px;
+	margin: 10px;
+	padding: 4px;
+	font-family: Planewalker;
+	font-size: 16px;
+}
+
+
+input[type="text"]:focus {
+	float: center;
+    border: 2px solid #990000;
+	border-radius: 3px;
+	margin: 10px;
+	padding: 4px;
+	font-family: Planewalker;
+	font-size: 16px;
+}
+
+
+input[type="password"]{
+	float: center;
+	border: 2px solid grey;
+	border-radius: 3px;
+	margin: 10px;
+	padding: 4px;
+	font-family: Planewalker;
+	font-size: 16px;
+}
+
+
+input[type="password"]:focus {
+	float: center;
+    border: 2px solid #990000;
+	border-radius: 3px;
+	margin: 10px;
+	padding: 4px;
+	font-family: Planewalker;
+	font-size: 16px;
+}
+
+
+input:required {
+    box-shadow:none;
+}
+input:invalid {
+    box-shadow: none;
+}
+
+
+
+input[type="checkbox"]{
+	margin: 5px;
+}
+
+
+input[type="button"], input[type="submit"]{
+	font-family: Magic;
+	font-size: 20px;
+	background-color: #990000;
+    border: none;
+    color: #ff9900;
+    padding: 16px 60px;
+    text-decoration: none;
+    margin: 40px 2px;
+    cursor: pointer;
+	float: left;
+}
+
+button[type="submit"]{
+	font-family: Magic;
+	font-size: 20px;
+	background-color: #990000;
+    border: none;
+    color: #ff9900;
+    padding: 16px 60px;
+    text-decoration: none;
+    margin: 40px 2px;
+    cursor: pointer;
+	float: left;
+}
+
+
+#couleur {
+	text-align: left;
+	margin: 10px;
+}
+
+#couleur td {
+	padding-right: 40px;
+}
+
+#cout {
+	text-align: center;
+	margin-top: 10px;
+}
+
+
+.card_row{
+	padding: 5px;
+	width: 100%;
+	float: left;
+}
+
+
+.card{
+	width: 32%;
+	margin: 5px;
+	float: left;
+}
+
+
+
+.card_pic{
+	width: 40%;
+	float: left;
+	padding: 10px;
+	margin: 3%;
+}
+
+
+.card_info{
+	width: 40%;
+	float: left;
+	padding: 10px;
+	margin: 3%;
+	font-size: 150%;
+}
+
+
+#result_collec{
+	text-align: center;
+	font-size: 200%;
+	float: right;
+	margin-right: 10%
+}
+
+#collec_button{
+	margin-left: 30%;
+}
+
+
+.table_collec{
+	padding-left: 60px;
+}
+
+
+
+.info_card{
+	display: none;
+	width: 32%:
+	heigth: 100%;
+	overflow: auto;
+	background-color: #333;
+	color: #f9f9f9;
+	border-width: 40px;
+	border-color: #ff9900;
+	border-radius: 3px;
+	padding: 10px;
+	font-family: Planewalker;
+	font-size: 200%;
+}

@@ -1,0 +1,301 @@
+﻿Italiano // IT
+
+%%%% GroupBoxName %%%% form = 0
+Connessione
+Informazioni
+Set da elaborare
+Lista delle carte
+Immagine
+
+%%%% Lbl_FenetrePrincipale %%%% form = 1
+Set disponibili:
+Progresso totale:
+Progresso parziale:
+Set in elaborazione:
+Numero di carte nel set:
+Numero di carte elaborate:
+Tempo trascorso:
+Tempo rimanente:
+
+%%%% Status Connectivite %%%% form = 2
+offline
+connessione
+online
+
+%%%% ToolTip sur FenetrePrincipale %%%% form = 3
+Connessione
+Disconnessione
+Seleziona tutto
+Deseleziona tutto
+Modifica le abbreviazioni dei set
+Scarica i dati principali 
+Scarica tutti i dati
+Interrompi
+elaborazione completata
+Riavvia database
+Ripristina l'ordinamento predefinito
+Scarica le immagini     
+Scarica tutte le immagini della lista
+Azioni
+Azioni generali
+Azioni sulla lista
+Scarica tutti i prezzi della lista
+Calcola le legalità
+Una lista completa delle carte e un database dei formati aggiornato sono richiesti per la corretta determinazione delle legalità.
+Formato:
+Seleziona…
+Seleziona set non elaborati
+Seleziona set completamente elaborati
+Seleziona set non promozionali
+Seleziona set promozionali
+Rimuovi un set...
+Conta le ristampe e cerca la versione originale
+Una lista completa delle carte è richiesta per la determinazione corretta delle ristampe e per una ricerca accurata della versione originale.
+Scarica i dati…
+Chiudi menu
+Scegli una lingua straniera
+Database in lingua straniera
+Harmonize database
+A full card list is required for a correct harmonization of the database.
+
+%%%% Lbl_Info %%%% form = 4
+Pronto
+Scaricamento dei set
+Elaborazione dei set
+Completato
+su
+Scaricamento del testo spoiler relativo a
+Scaricamento interrotto
+Lettura del testo spoiler relativo a
+Processo completato con successo
+Scaricamento dei numeri delle carte relativo a
+Scaricamento dei dati relativi a
+nella lingua seguente:
+Carta in elaborazione:
+Salvataggio
+non disponibile, sostituito da
+Processo interrotto a causa di errori I/O durante la richiesta remota.
+Downloading add-ons related to
+Downloading tokens related to
+
+%%%% Lbl_Set Edit %%%% form = 5
+Set
+Abbreviazione del set
+Data di rilascio
+Aggiungi una riga
+Rimuovi una riga
+Salva
+Indicatore Promo
+Official set codes
+Abbreviazione del set
+Several sets have the same set code!
+Abbreviazione del set
+
+%%%% Lbl_Warning %%%% form = 6
+Attenzione!
+abbreviazione mancante del set!
+abbreviazioni mancanti dei set!
+Vuoi davvero interrompere lo scaricamento in corso?
+Annullamento in corso...
+Database non formattato!
+Un database in elaborazione è stato recuperato. Vuoi continuare?
+Uno scaricamento è attivo. Vuoi fermarlo e salvare il database prima di chiudere?
+Loading
+Some set names are missing!
+Must they be replaced by their default names?
+
+%%%% Lbl_Langue Dispo %%%% form = 7
+Inglese
+Cinese Tradizionale
+Cinese Semplificato
+Francese
+Tedesco
+Italiano
+Giapponese
+Portoghese
+Russo
+Spagnolo
+Coreano
+
+%%%% Lbl_Header_Base %%%% form = 8
+Stat.
+ID
+Nome
+Set
+Tipo
+Rarità
+Costo di mana
+CMC
+Forza
+Cost.
+Fedeltà
+Abilità
+Testo di colore
+Var.
+Artista
+#
+Voto
+Regole
+Colore
+Mana generato
+Prezzo minimo (USD)
+Prezzo medio (USD)
+Prezzo massimo (USD)
+ID (retro)
+Legalità
+Legalità
+Marchio
+Numero di stampe
+Originale
+Color identity
+
+%%%% Lbl_Time %%%% form = 9
+ ore
+ min
+ sec
+
+%%%% Lbl_MENU_Principal %%%% form = 10
+File
+Salva come...
+Apri...
+Opzioni
+Fai una donazione
+Informazioni su...
+Novità
+Discussioni e suggerimenti
+Controlla aggiornamenti…
+La versione del programma è aggiornata.
+Una nuova versione del programma è disponibile online.
+Versione corrente:
+Versione online:
+Vuoi procedere allo scaricamento e all'installazione della nuova versione? (Raccomandato)
+Ricerca aggiornamenti…
+Ricerca aggiornamenti all'avvio
+Do you want to continue?
+
+%%%% Lbl_NEW %%%% form = 11
+Nuovo database
+
+%%%% LBL_Options %%%% form = 12
+Generale
+Immagini delle carte
+Esporta
+Dati estratti
+Imballaggio (Booster)
+
+%%%% Lbl_Options_lblGroupoBox %%%% form = 13
+Lingue disponibili
+Separatori
+Set: dati da esportare
+Carte: dati da esportare
+Tipo dell'immagine
+Qualità dell'immagine
+Lingua dell'immagine
+Formato del nome dell'immagine
+Ripristina i parametri predefiniti
+Luminosità dell'immagine
+Contrasto dell'immagine
+Specifiche del colore
+Varie
+Avvio
+Formati disponibili
+Generated mana specifications
+
+%%%% Lbl_Options_lbl %%%% form = 14
+Carattere per l'andata a capo:
+Carattere per l'inizio del corsivo:
+Carattere per la fine del corsivo:
+Carattere di separazione per le versioni alterate:
+Carattere di separazione per csv:
+Connessione automatica all'avvio
+Scarica il prezzo quando estrai i dati
+Ordinare i dati:
+per nome
+per numero della carta
+Formato:
+Fonte delle immagini:
+Cambio automatico in caso di non disponibilità
+Percorso di salvataggio:
+Non sovrascrivere le immagini esistenti
+Crea una cartella per ogni set
+Nome della cartella:
+Mostra lo stato delle immagini
+Mostra in 'colore' se la carta è ibrida
+Mostra in 'colore' se la carta è multicolore
+Non sovrascrivere i dati esistenti
+Rare mitiche:
+Quantità:
+Probabilità:
+Rare:
+Non comuni:
+Comuni:
+Carte extra:
+Nomi dei file
+Carte bandite
+Carte ristrette
+Carte bandite come Generali
+Set originali inclusi nel formato
+Legenda delle legalità
+Voti arrotondati durante l'esportazione
+Carattere di separazione per carte girevoli:
+Adattare automaticamente la larghezza delle colonne
+Conserva il testo di colore
+Contenuto predefinito
+Terreno di base
+Token
+Da un elenco specifico
+Tra edizione specifica
+Tipo N.
+Eccezioni
+Aggiungere un'eccezione
+Nessun booster per questa edizione
+Presenza di foil
+Has masterpiece
+List of Ids
+Include energy markers in 'Generated Mana'
+Include tokens when extracting data
+
+%%%% LBL_MWS_Export %%%% form = 15
+Quale edizione vuoi esportare?
+Annulla
+Includi packaging
+Separa i dati con punto e virgola
+Esportare tutte le edizioni in file separati
+Esportare una sola edizione
+Esportare tutte le edizioni in un unico file
+
+%%%% Lbl_Menu_Filtre %%%% form = 16
+Filtri:
+Nessun filtro
+Dati da elaborare
+Dati completamente elaborati
+Immagini da scaricare
+Immagini scaricate con successo
+Immagini scaricate con successo, con sostituzione della fonte
+Impossibile scaricare le immagini
+Immagine esistente nella cartella delle immagini
+Immagine esistente o scaricata con successo
+
+%%%% Lbl_XML %%%% form = 17
+Nome base xml:
+Data :
+Versione numero:
+Nome in lingue straniere
+Rarità
+Forza
+Costituzione
+Fedeltà
+Costo di mana convertito
+Numero della variante
+Tipo in lingue straniere
+Abilità in lingue straniere
+Testo di colore in lingue straniere
+
+%%%% Lbl_XML_DataGrid %%%% form = 18
+Proprietà
+Etichetta xml
+
+%%%% Lbl_SQL_DataGrid %%%% form = 19
+Proprietà
+Nome sql
+Nome della tabella

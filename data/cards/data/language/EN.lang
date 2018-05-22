@@ -1,0 +1,301 @@
+﻿English // EN
+
+%%%% GroupBoxName %%%% form = 0
+Connectivity
+Information
+Sets to process
+Card list
+Scan
+
+%%%% Lbl_FenetrePrincipale %%%% form = 1
+Available sets:
+Overall progress:
+Partial progress:
+Processed set:
+Number of cards in the set:
+Number of processed cards:
+Elapsed time:
+Remaining time:
+
+%%%% Status Connectivite %%%% form = 2
+offline
+connection
+online
+
+%%%% ToolTip sur FenetrePrincipale %%%% form = 3
+Connection
+Disconnection
+Select all
+Deselect all
+Edit set codes
+Download main data 
+Download all data
+Interrupt
+fully processed
+Reset Database
+Restore default sorting
+Download scans     
+Download all scans from the list
+Actions
+General actions
+Actions for the list
+Download all prices from the list
+Compute legalities
+A full card list and an up-to-date format database are required for a correct computation of legalities.
+Format:
+Select…
+Select unprocessed sets
+Select fully processed sets
+Select non-promotional sets
+Select promotional sets
+Remove a set...
+Count reprints and detect the original version
+A full card list is required for a correct counting of reprints and for an accurate detection of the original version.
+Download data …
+Close menu
+Choose foreign languages
+Database in foreign languages
+Harmonize database
+A full card list is required for a correct harmonization of the database.
+
+%%%% Lbl_Info %%%% form = 4
+Ready
+Set downloading
+Set processing
+Completed
+on
+Downloading spoiler text related to
+Downloading aborted
+Parsing spoiler text related to
+Process successfully completed
+Downloading card numbers related to
+Downloading data related to
+in the following language:
+Processed card:
+Saving
+not available, replaced by
+Process stopped due to I/O errors while Internet requests.
+Downloading add-ons related to
+Downloading tokens related to
+
+%%%% Lbl_Set Edit %%%% form = 5
+Set
+User-defined set codes
+Release date
+Add a row
+Remove a row
+Save
+Promo Indicator
+Official set codes
+Set code
+Several sets have the same set code!
+Set codes
+
+%%%% Lbl_Warning %%%% form = 6
+Warning!
+missing set code!
+missing set codes!
+Do you really want to abort the current downloading?
+Cancellation pending...
+Database not formatted!
+A database being processed has been recovered. Do you want to continue?
+A download process is active. Would you stop and save the database before closing?
+Loading
+Some set names are missing!
+Must they be replaced by their default names?
+
+%%%% Lbl_Langue Dispo %%%% form = 7
+English
+Traditional Chinese
+Simplified Chinese
+French
+German
+Italian
+Japanese
+Portuguese
+Russian
+Spanish
+Korean
+
+%%%% Lbl_Header_Base %%%% form = 8
+Stat.
+ID
+Name
+Ed.
+Type
+R
+Mana cost
+CMC
+P
+T
+L
+Ability
+Flavor text
+Var.
+Artist
+#
+Rating
+Ruling
+Color
+Generated mana
+Price Low (USD)
+Price Mid (USD)
+Price High (USD)
+ID (back)
+Legality
+Legalities
+Watermark
+Number of prints
+Original
+Color identity
+
+%%%% Lbl_Time %%%% form = 9
+ hr
+ min
+ sec
+
+%%%% Lbl_MENU_Principal %%%% form = 10
+File
+Save as...
+Open...
+Options
+Make a donation
+About...
+What's new?
+Discussions and suggestions
+Check for updates…
+Your version is up to date.
+A new version is available online.
+Current version:
+Online version:
+Do you want to proceed to download and installation of the new version? (Recommended)
+Search for updates…
+Search for updates on startup
+Do you want to continue?
+
+%%%% Lbl_NEW %%%% form = 11
+New database
+
+%%%% LBL_Options %%%% form = 12
+General
+Card scans
+Export
+Extracted Data
+Booster packaging
+
+%%%% Lbl_Options_lblGroupoBox %%%% form = 13
+Available languages
+Splitters
+Sets: data to export
+Cards: data to export
+Scan type
+Scan quality
+Scan language
+Scan name format
+Restore default parameters
+Scan brightness
+Scan contrast
+Color specifications
+Miscellaneous
+Start-up
+Available formats
+Generated mana specifications
+
+%%%% Lbl_Options_lbl %%%% form = 14
+Tag for new line:
+Tag for italic-mark opening:
+Tag for italic-mark closing:
+Tag for altered-version splitter:
+Tag for csv splitter:
+Automatic connection on startup
+Download price when extracting data
+Sort data:
+by name
+by card number
+Format:
+Scan source:
+Auto-switch in case of unavailability
+Save path:
+Not overwrite existing scans
+Create a directory for each set
+Directory name:
+Show scan status
+Show in 'color' if card is hybrid
+Show in 'color' if card is gold
+Not overwrite existing data
+Mythic rares:
+Qty:
+Probability:
+Rares:
+Uncommons:
+Commons:
+Extra cards:
+File names
+Banned cards
+Restricted cards
+Banned cards as Commander
+Original sets included in the format
+Legality caption
+Rounded ratings during export
+Tag for flipping card splitter:
+Automatically adjust the column size
+Keep flavour texts
+Default content
+Basic land
+Token
+Amongst a specific list
+Amongst a specific set
+Type #
+Exceptions
+Add an exception
+No booster for this set
+Has foil
+Has masterpiece
+List of Ids
+Include energy markers in 'Generated Mana'
+Include tokens when extracting data
+
+%%%% LBL_MWS_Export %%%% form = 15
+Which edition you want to export?
+Cancel
+Include packaging
+Separate entries with semicolons
+Export all sets in separated files
+Export a single set
+Export all sets in a single file
+
+%%%% Lbl_Menu_Filtre %%%% form = 16
+Filters:
+No filter
+Data to be processed
+Data fully processed
+Scan to be downloaded
+Scan downloaded successfully
+Scan downloaded successfully, with replacement of the source
+Failed to download scan
+Scan existing in the scan folder
+Scan existing or downloaded successfully
+
+%%%% Lbl_XML %%%% form = 17
+xml base name:
+Date :
+Version number:
+Name in foreign languages
+Rarity
+Power
+Toughness
+Loyalty
+Converted mana cost
+Variation number
+Type in foreign languages
+Ability in foreign languages
+Flavor text in foreign languages
+
+%%%% Lbl_XML_DataGrid %%%% form = 18
+Property
+xml Mark
+
+%%%% Lbl_SQL_DataGrid %%%% form = 19
+Property
+sql Name
+Table name

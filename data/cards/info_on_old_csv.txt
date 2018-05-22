@@ -1,0 +1,2 @@
+first line : ( | for next cell)
+£ || #_ || _# || ——— and the rest is all empty

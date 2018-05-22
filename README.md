@@ -15,3 +15,6 @@ This command starts the application without installing anything.
 
 ## Run unit tests
 `make phpunit.run`
+
+## Tester le code soi-même
+Ouvrir un navigateur, et taper `localhost:8080` dans la barre d'adresse
