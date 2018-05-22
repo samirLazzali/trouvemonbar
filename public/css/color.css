@@ -1,0 +1,100 @@
+      .nav__sign-up {
+         /*background-color: rgba(137, 144, 158, 0.35);*/
+          background-color: #4353ff;
+      }
+
+      .nav__sign-up:hover {
+         /*background-color: rgba(137, 144, 158, 0.3);*/
+          background-color: #3e4dee;
+      }
+
+
+      input.input-box,
+      textarea {
+          background: white;
+          color: rgba(255, 255, 255, 0.5);
+      }
+
+      .w-input::-webkit-input-placeholder {
+          /* WebKit browsers */
+          color: rgba(255, 255, 255, 0.5);
+      }
+
+      .w-input:-moz-placeholder {
+          /* Mozilla Firefox 4 to 18 */
+          color: rgba(255, 255, 255, 0.5);
+          opacity: 1;
+      }
+
+      .w-input::-moz-placeholder {
+          /* Mozilla Firefox 19+ */
+          color: rgba(255, 255, 255, 0.5);
+          opacity: 1;
+      }
+
+      .w-input:-ms-input-placeholder {
+          /* Internet Explorer 10+ */
+          color: rgba(255, 255, 255, 0.5);
+      }
+
+      input.black-text,
+      textarea {
+          color: rgba(255, 255, 255, 0.5);
+      }
+
+
+      .form-input__on-black::-webkit-input-placeholder {
+          color: rgba(255, 255, 255, 0.8);
+      }
+
+      .form-input__on-black:-moz-placeholder {
+          /* Firefox 18- */
+          color: rgba(255, 255, 255, 0.8);
+      }
+
+      .form-input__on-black::-moz-placeholder {
+          /* Firefox 19+ */
+          color: rgba(255, 255, 255, 0.8);
+      }
+
+      .form-input__on-black:-ms-input-placeholder {
+          color: rgba(255, 255, 255, 0.8);
+      }
+
+      .form-input__color::-webkit-input-placeholder {
+          color: rgba(255, 255, 255, 0.6);
+      }
+
+      .form-input__color:-moz-placeholder {
+          /* Firefox 18- */
+          color: rgba(255, 255, 255, 0.6);
+      }
+
+      .form-input__color::-moz-placeholder {
+          /* Firefox 19+ */
+          color: rgba(255, 255, 255, 0.6);
+      }
+
+      .form-input__color:-ms-input-placeholder {
+          color: rgba(255, 255, 255, 0.6);
+      }
+
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
+          -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+          -webkit-transition-delay: 9999s;
+      }
+
+      .ui__wrap video {
+          -webkit-transform: translateZ(0);
+          -moz-transform: translateZ(0);
+          -ms-transform: translateZ(0);
+          -o-transform: translateZ(0);
+          transform: translateZ(0);
+      }
+
+
+
+
