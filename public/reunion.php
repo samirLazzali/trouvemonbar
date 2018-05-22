@@ -29,7 +29,7 @@ session_start();
 <br />
 <br />
 <br />
-<div class="gtco-container">
+<div class="container">
 <h2><?php echo 'Réunions' ?></h2>
 
     <table>

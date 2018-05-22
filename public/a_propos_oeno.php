@@ -32,7 +32,7 @@ $users = $userRepository->fetchAll();
 <br />
 <br />
 <br />
-<div class="gtco-container">
+<div class="container">
 <h2> In Vino Veritas </h2>
 <br />
 <p>

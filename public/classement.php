@@ -32,7 +32,7 @@ $users = $connection->query('SELECT * FROM public.user ORDER BY score DESC')->fe
     menu_navigation();
     ?>
 
-<div class="gtco-container">
+<div class="container">
     <br />
     <br />
     <br />

@@ -32,7 +32,7 @@ menu_aperal();
 <br />
 <br />
 <br />
-<div class="gtco-container">
+<div class="container">
 <h2>Recettes</h2>
 
     <table>
@@ -89,7 +89,7 @@ menu_aperal();
 <?php
     echo '<br />';
     echo '<br />';	
-    echo '<div class="gtco-container">';
+    echo '<div class="container">';
 
     echo '<div class="form-c">';
     echo '<div class="form-c-head">Noter une recette :</div>';

@@ -32,7 +32,7 @@ menu_aperal();
 <br />
 <br />
 <br />
-<div class="gtco-container">
+<div class="container">
 <h2> 51 je t'aime, j'en boirais des tonneaux </h2>
 <br />
 <p>

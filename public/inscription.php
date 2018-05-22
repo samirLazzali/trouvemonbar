@@ -31,16 +31,16 @@ menu_navigation()
 <br />
 <br />
 
-<div class="gtco-container">';
+<div class="container">';
 
 <div class="form-c">
 <div class="form-c-head">Veuillez remplir les informations :</div>
 <form method = "post" action="#" >
-<label for="prenominsc"><span class="txt">Prénom <span class="required">*</span></span><input type="text" class="input-field" name="prenominsc" value="" /></label>
+<label for="prenominsc"><span class="txt">Prénom <span class="required">*</span></span><input type="text" class="input-field" name="prenominsc" value=" " /></label>
 <label for="nominsc"><span class="txt">Nom <span class="required">*</span></span><input type="text" class="input-field" name="nominsc" value="" /></label>
-<label for="mailinsc"><span class="txt">Mail <span class="required">*</span></span><input type="text" class="input-field" name="mailinsc" value="" /></label>
-<label for="pseudoinsc"><span class="txt">Pseudo <span class="required">*</span></span><input type="text" class="input-field" name="pseudoinsc" value="" /></label>
-<label for="mdpinsc"><span class="txt">Mot de passe <span class="required">*</span></span><input type="text" class="input-field" name="mdpinsc" value="" /></label>
+<label for="mailinsc"><span class="txt">Mail <span class="required">*</span></span><input type="text" class="input-field" name="mailinsc" value=" " /></label>
+<label for="pseudoinsc"><span class="txt">Pseudo <span class="required">*</span></span><input type="text" class="input-field" name="pseudoinsc" value=" " /></label>
+<label for="mdpinsc"><span class="txt">Mot de passe <span class="required">*</span></span><input type="password" class="input-field" name="mdpinsc" value="" /></label>
 <input type ="submit" name="submit" value="S'inscrire"/>
 </form>
 </div>
@@ -69,6 +69,8 @@ if (isset($_POST['prenominsc']) && isset($_POST['nominsc']) && isset($_POST['pse
     
 }
 else{
+    echo '<div class="container">';
     echo '<p>Veuillez remplir tout les champs</p>';
+    echo '</div>';
 }
 ?>

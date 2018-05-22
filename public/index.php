@@ -56,7 +56,13 @@ if (isset($_POST['caché']) && $_POST['caché']==1 ){
             $req->execute(['id_reu' => $nbr_reu,
                 'pseudo' => $_SESSION['pseudo'],
 	    ]);
-        }
+	    $idscore=$_SESSION['id'];
+	    $req2=$connection->query("SELECT score FROM public.user WHERE id=$idscore")->fetch();
+	    $nvscore=$req2['score'] + 20;
+	    $req = $connection->prepare("UPDATE public.user SET score=:score WHERE id=$idscore");
+	    $req->execute(['score' => $nvscore,]);
+		    
+	}
     }
     else {
         echo 'Veuillez vous connecter avant de participer';
@@ -66,7 +72,7 @@ if (isset($_POST['caché']) && $_POST['caché']==1 ){
 ?>
 
 
-<div class="gtco-container2">
+<div class="container2">
                             
 <br />
 <br />
@@ -91,14 +97,14 @@ if (isset($_POST['caché']) && $_POST['caché']==1 ){
         $n=$count_part['nbr1'];
         if ($n!=0) {
             $req_part = $connection->query("SELECT pseudo FROM public.participants WHERE id_reu = $id")->fetchAll();
-            echo '<p>Participants :</br> ';
+            echo '<p>Participants à la préparation :</br> ';
             foreach ($req_part as $reu) {
                 echo "{$reu['pseudo']} </br>";
 	    }
 	    echo '</p>';
         }
         else{
-            echo '<p>Participants : Aucun</p>';
+            echo '<p>Participants à la préparation : Aucun</p>';
         }
         if (isset($_SESSION['connect']) && $_SESSION['connect']>=1) {
             ?>

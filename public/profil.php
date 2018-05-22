@@ -32,7 +32,7 @@ $users = $userRepository->fetchAll();
     echo '<br />';
     echo '<br />';
 
-    echo '<div class="gtco-container">';
+    echo '<div class="container">';
 
     echo '<div class="form-c">';
     echo '<div class="form-c-head">Modifier son profil :</div>';
@@ -79,24 +79,25 @@ $users = $userRepository->fetchAll();
             echo 'Les deux mots de passe doivent être identiques';
         }
     }
-
-    $req = $connection->prepare('UPDATE public.user SET prenom=:prenom, nom=:nom, mdp=:mdp, mail=:mail, pseudo=:pseudo WHERE id=:id');
+    $idmodif = $_SESSION['id'];
+    $req = $connection->prepare("UPDATE public.user SET prenom=:prenom, nom=:nom, mdp=:mdp, mail=:mail, pseudo=:pseudo WHERE id=$idmodif");
     $test = $req->execute([':prenom' => $prenom,
         ':nom' => $nom,
         ':mdp' => $mdp,
         ':mail' => $email,
         ':pseudo' => $pseudo,
-        ':id' => $_SESSION['id'],
     ]);
 }
 else {
     echo '<body>';
-    echo '<div class="gtco-container">';
+    echo '<div class="container">';
     echo '<br />';
     echo '<br />';
-        echo '<h2>Veuillez vous connecter pour accéder à cette page</h2>';
-	echo '<a href="connexion.php">Connexion</a>';
-	echo '</body>';
+    echo '<h2>Veuillez vous connecter pour accéder à cette page</h2>';
+    echo '<h3>';
+	echo '<a href="connexion.php">Connexion </a> /  <a href="inscription.php"> Inscription</a>';
+    echo '</h3>';
+    echo '</body>';
 	echo '</div>';
 }
 ?>

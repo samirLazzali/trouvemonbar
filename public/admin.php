@@ -30,7 +30,7 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
     echo '<br />';
     echo '<br />';
     
-    echo '<div class="gtco-container">';
+    echo '<div class="container">';
 
     echo '<div class="form-c">';
     echo '<div class="form-c-head">Planifier une réunion :</div>';
@@ -44,7 +44,7 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
     echo '</div>';
     echo '</div>';
 
-    echo '<div class="gtco-container">';
+    echo '<div class="container">';
     echo '<br />';
     echo '<br />';
     echo '<div class="form-c">';
@@ -58,7 +58,7 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
 
     echo '</div>';
 
-    echo '<div class="gtco-container">';
+    echo '<div class="container">';
     echo '<br />';
     echo '<br />';
     echo '<div class="form-c">';
@@ -72,11 +72,11 @@ if (isset($_SESSION['connect']) && $_SESSION['connect']==2) {
     echo '</div>';
 
 
-    echo '<div class="gtco-container">';
+    echo '<div class="container">';
     echo '<br />';
     echo '<br />';
     echo '<div class="form-c">';
-    echo '<div class="form-c-head">Préparatif</div>';
+    echo '<div class="form-c-head">Nouvelle liste de courses</div>';
     echo '<form method = "post" action="#">';
     echo '<label for="recette"><span class="txt">Soirée <span class="required">*</span></span><input type="text" class="input-field" name="soiree"  /></label>';
     echo '<label for="recette"><span class="txt">Ingrédients <span class="required">*</span></span><textarea rows="10" cols="59" class="input-field" name="ingredient" ></textarea></label>';
@@ -152,9 +152,11 @@ else {
     echo '<body>';
     echo '<br />';
     echo '<br />';
-    echo '<div class="gtco-container">';
+    echo '<div class="container">';
     echo "<h2>Vous n'avez pas les droits d'administration !</h2>";
+    echo "<h3>";
     echo "<a href='index.php'>Accueil</a>";
+    echo "</h3>";
     echo '</div>';
     echo '</body>';
     echo '</html>';

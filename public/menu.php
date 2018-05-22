@@ -1,8 +1,8 @@
 <?php
 function menu_navigation()
 {
-    echo '<nav class="gtco-nav" role="navigation">';
-    echo '<div class="gtco-container">';
+    echo '<nav class="m-nav" role="navigation">';
+    echo '<div class="container">';
     echo '<div class="row">';
     echo '<div class="col-sm-4 col-xs-12">';
     echo '<div id="gtco-logo"><a href="index.html">Apéral <em>-</em> Oenologiie</a></div>';
@@ -34,8 +34,8 @@ function menu_navigation()
 }
 
 function menu_aperal(){
-    echo '<nav class="gtco-nav" role="navigation">';
-    echo '<div class="gtco-container">';
+    echo '<nav class="m-nav" role="navigation">';
+    echo '<div class="container">';
     echo '<div class="row">';
     echo '<div class="col-sm-4 col-xs-12">';
     echo '<div id="gtco-logo"><a href="index.html">Apéral <em>-</em> Oenologiie</a></div>';
@@ -67,7 +67,7 @@ function menu_aperal(){
     echo '<div class="col-xs-8 text-right menu-1">';
     echo '<ul>';
     echo '<li><a href="a_propos_aperal.php">A propos</a></li>';
-    echo '<li><a href="preparatif_aperal.php">Préparatifs</a></li>';
+    echo '<li><a href="preparatif_aperal.php">Courses</a></li>';
     echo '<li><a href="recette.php">Recettes</a></li>';
     echo '</ul>';
     echo '</div>';
@@ -78,8 +78,8 @@ function menu_aperal(){
 }
 
 function menu_oeno(){
-    echo '<nav class="gtco-nav" role="navigation">';
-    echo '<div class="gtco-container">';
+    echo '<nav class="m-nav" role="navigation">';
+    echo '<div class="container">';
     echo '<div class="row">';
     echo '<div class="col-sm-4 col-xs-12">';
     echo '<div id="gtco-logo"><a href="index.html">Apéral <em>-</em> Oenologiie</a></div>';

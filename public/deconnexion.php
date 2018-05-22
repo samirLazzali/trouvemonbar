@@ -15,7 +15,7 @@ $_SESSION["connect"] = 0
 </head>
 
 <body>
-<div class="gtco-container">
+<div class="container">
 <h2>Vous avez bien été déconnécté</h2>
 <a href="index.php">Retour à l'accueil</a>
 </div>

@@ -14,7 +14,7 @@ $users = $userRepository->fetchAll();
 
 <html>
 <head>
-    <title> Préparatifs  </title>
+    <title> Courses  </title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"  href="style_index.css">
@@ -33,8 +33,8 @@ $users = $userRepository->fetchAll();
 <br/>
 
 </div>
-<div class="gtco-container">
-<h2><?php echo 'Préparatifs' ?></h2>
+<div class="container">
+<h2><?php echo 'Courses' ?></h2>
 
     <table>
         <tr>
@@ -65,7 +65,14 @@ $users = $userRepository->fetchAll();
                 'soiree' => $tuple['soiree'],
                 'pseudo' => $_SESSION['pseudo'],
                 'course' => $tuple['course'],
-            ]);
+	    ]);
+
+	    $idscore=$_SESSION['id'];
+	    $req2=$connection->query("SELECT score FROM public.user WHERE id=$idscore")->fetch();
+	    $nvscore=$req2['score'] + 40;
+	    $req = $connection->prepare("UPDATE public.user SET score=:score WHERE id=$idscore");
+	    $req->execute(['score' => $nvscore,]);
+
         }
     }
     	$soir=$tuple['soiree'];
