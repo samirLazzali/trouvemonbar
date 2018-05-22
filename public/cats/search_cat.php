@@ -25,7 +25,7 @@ include('../includes/top.php');
 					$dbUser = getenv('DB_USER');
 					$dbPassword = getenv('DB_PASSWORD');
 					$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-					$chats = $connexion->query("SELECT id_cat,name_cat FROM Cats WHERE owner=$_SESSION['id_user']");
+					$chats = $connexion->query("SELECT id_cat,name_cat FROM Cats WHERE owner=".$_SESSION['id_user']);
 					while($chat = $chats -> fetch(PDO::FETCH_OBJ)) {
 						?>
 						<option value = "<?php echo $chat->id_cat; ?>" ,id="breed"><?php echo $chat->name_cat; ?></option>
