@@ -129,7 +129,7 @@ include('../includes/top.php');?>
 				
 				if($connexion->exec("INSERT INTO Cats VALUES(".$connexion->quote($fetch->max_id+1).",".$_SESSION['id_user'].",".$connexion->quote($name).",
 				".$connexion->quote($purity).",".$connexion->quote($pattern).",".$connexion->quote($birthdate).",'0','13',".$connexion->quote($size).",'0','6',
-				".$connexion->quote(.intval($sexe)).",".$connexion->quote(.intval($ssexe)).",".$connexion->quote(.intval($coat)).",'0','3',".$connexion->quote(.intval($weight)).",'0','15')"))
+				".$connexion->quote($sexe).",".$connexion->quote($ssexe).",".$connexion->quote($coat).",'0','3',".$connexion->quote($weight).",'0','15')"))
 				{
 					$queries++;
 				?>
