@@ -77,7 +77,7 @@ function affChat($id_the_cat) {
             $res .= '<tr><th>Race</th><td>' . $cari->name_breed . '</td></tr>';
         }
         else
-            $res .= '<tr><th></th><td>' . $cari->name_color . '</td></tr>';
+            $res .= '<tr><th></th><td>' . $cari->name_breed . '</td></tr>';
 
     $car = $connexion->query("select name_trait 
                                         from Personality_traits
