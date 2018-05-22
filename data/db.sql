@@ -30,6 +30,10 @@ CREATE TABLE categories (
 
 INSERT INTO categories (id, categorie) VALUES
 (1, 'club Brn');
+INSERT INTO categories (id, categorie) VALUES
+(2, 'Soirée ENSIIE');
+INSERT INTO categories (id, categorie) VALUES
+(3, 'Soirée TSP');
 
 -- --------------------------------------------------------
 
@@ -56,12 +60,6 @@ CREATE TABLE evenements (
 --
 -- Déchargement des données de la table `evenements`
 --
-
-INSERT INTO evenements (id, organisateur, nom, description, lieu, date, date_creation, date_modif, before, prix, musique, categorie, table_participants) VALUES
-(4, 'Feuj', 'First Event', NULL, 'Chez moi', '2018-05-08', '2018-05-08', NULL, NULL, 0, NULL, 1, 'participants3897910314'),
-(5, 'Feuj', 'First Event', NULL, 'Chez moi', '2018-05-09', '2018-05-09', NULL, NULL, 0, NULL, 1, 'p2411932048');
-INSERT INTO evenements (id, organisateur, nom, description, lieu, date, date_creation, date_modif, before, prix, musique, categorie, table_participants) VALUES
-(6, 'Leji', 'T pa prè', 'Venez chez oim les couz','Grotte','2018-06-24',NULL,NULL,'grotte',5,NULL,1,'');
 
 -- --------------------------------------------------------
 
@@ -128,22 +126,11 @@ CREATE TABLE "user" (
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO "user" (id, firstname, lastname, birthday, nickname, domicile, mdp, id_groupe) VALUES
-(1, 'Martin', 'Dufour', '1997-08-27', 'Feuj', 'maison', 'martin', 2);
-INSERT INTO "user" (id, firstname, lastname, birthday, nickname, domicile, mdp, id_groupe) VALUES
-(2, 'Quentin', 'Pichollet', '1997-08-19', 'Pichet', 'Orléans', '2f3497b77103fbaa8794550ed1c2c75b', 2);
-INSERT INTO "user" (id, firstname, lastname, birthday, nickname, domicile, mdp, id_groupe) VALUES/*mabite*/
-(3,'Christian','Morello', '1997-11-01', 'Leji','Besançon','78d1a0fddcd80f7e2f430fafae076cae',2);
-INSERT INTO "user" (id, firstname, lastname, birthday, nickname, domicile, mdp, id_groupe) VALUES/*sabite*/
-(4,'Hugues', 'Genin', '1998-03-24','Barnum','Valenciennes','d41d8cd98f00b204e9800998ecf8427e',2);
-INSERT INTO "user" (id, firstname, lastname, birthday, nickname, domicile, mdp, id_groupe) VALUES
-(5,'Thomas','Gubeno', '1998-12-04', 'Gub','Grasse','2db191ecb92a3f0357416048467939a1',1);/*gemlateub*/
-INSERT INTO "user" (id, firstname, lastname, birthday, nickname, domicile, mdp, id_groupe) VALUES
-(6,'Paul','Thibaud', '1997-05-12', 'Hansen','Orléans','8b16f9fb30774e1bab277eeaa0c88e46',1);/*fortnitevie*/
-INSERT INTO "user" (id, firstname, lastname, birthday, nickname, domicile, mdp, id_groupe) VALUES
-(7,'JB','Skutnik', '1997-08-23', 'Spoutnik','Lille','0f28337fe1fb96456aadc9644382c186',1);/*chibron*/
-INSERT INTO "user" (id, firstname, lastname, birthday, nickname, domicile, mdp, id_groupe) VALUES
-(8,'Yassir','Checkour', '1997-04-25', 'Yass','Casablanca','3b83beaa93c93eb761fd1d42b0287920',2);/*damn*/
-
-
-
+INSERT INTO "user" (firstname, lastname, birthday, nickname, domicile, mdp, id_groupe) VALUES
+('Martin', 'Dufour', '1997-08-27', 'Feuj', 'maison', 'martin', 2);
+INSERT INTO "user" (firstname, lastname, birthday, nickname, domicile, mdp, id_groupe) VALUES
+('Quentin', 'Pichollet', '1997-08-19', 'Pichet', 'Orléans', '2f3497b77103fbaa8794550ed1c2c75b', 2);
+INSERT INTO "user" (firstname, lastname, birthday, nickname, domicile, mdp, id_groupe) VALUES/*mabite*/
+('Christian','Morello', '1997-11-01', 'Leji','Besançon','78d1a0fddcd80f7e2f430fafae076cae',2);
+INSERT INTO "user" (firstname, lastname, birthday, nickname, domicile, mdp, id_groupe) VALUES/*sabite*/
+('Hugues', 'Genin', '1998-03-24','Barnum','Valenciennes','d41d8cd98f00b204e9800998ecf8427e',2);

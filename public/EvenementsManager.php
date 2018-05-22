@@ -96,7 +96,6 @@ class EvenementsManager
 	function getAll ($id_categorie = null) 
 	{
 		$query = $this->db->query('SELECT * FROM Evenements'. $this->queryCategorie($id_categorie, 'WHERE'));
-		echo 'SELECT * FROM Evenements'. $this->queryCategorie($id_categorie, 'WHERE');
 		$tableau_events = [];
 		while ($resultat = $query->fetch()) 
 		{
@@ -179,22 +178,17 @@ class EvenementsManager
 			$r1 = $this->db->query("INSERT INTO Evenements ($liste_attributs) VALUES ('$liste_valeurs')");
 			if ($r1){
 
-				$r2 = $this->db->query("CREATE TABLE $table_participants (id INT(10) PRIMARY KEY)");
+				$r2 = $this->db->query("CREATE TABLE $table_participants (id INT PRIMARY KEY)");
 
 				if ($r2)
 					echo 	'<div class="alert alert-success">
 		  				<strong>Votre évènement a bien été créé ! </strong> 
 						</div>';
-				
-				else 
-					echo 	"<div class='alert alert-danger'>
-		  				<strong>Une erreur est survenue lors création de la table des participants</strong> 
-						$this->db->errorInfo())</div>";;
 			}
 			else 
 				echo 	"<div class='alert alert-danger'>
 		  				<strong>Une erreur est survenue pendant la création de l'évènement</strong> 
-						$this->db->errorInfo())</div>";
+						</div>";
 
 		}
 		else {
