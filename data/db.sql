@@ -2,6 +2,9 @@
 /* CREATE TYPE type_sex AS ENUM ('Male','Femelle','Attack helicopter'); remplacés par 0 1 2 */
 /* CREATE TYPE type_size AS ENUM ('Miniscule','Petite','Moyenne','Grande','Géante','Ur momma'); remplacés par 0-5*/
 /* CREATE TYPE type_coat AS ENUM ('Nu','Court','Mi-long','Long'); remplacés par 0-3 */
+DROP TYPE IF EXISTS type_pattern CASCADE;
+CREATE TYPE type_pattern AS ENUM ('Solide','Tabby','Colourpoint','Bicolore','Ecaille de tortue','Calico','Mink','Sepia');
+
 
 
 DROP TABLE IF EXISTS Utilisateur CASCADE;
@@ -13,12 +16,12 @@ CREATE TABLE IF NOT EXISTS Utilisateur(
 	phone_number VARCHAR NOT NULL,
 	user_type INTEGER NOT NULL CHECK (0 <= user_type AND user_type < 3)
 	);
-	
+
 DROP TABLE IF EXISTS Connected CASCADE;
 CREATE TABLE IF NOT EXISTS Connected(
 	id_connected INTEGER UNIQUE NOT NULL
 	);
-	   
+
 DROP TABLE IF EXISTS Cats CASCADE;
 CREATE TABLE IF NOT EXISTS Cats(
        id_cat SERIAL PRIMARY KEY NOT NULL,
@@ -26,6 +29,7 @@ CREATE TABLE IF NOT EXISTS Cats(
        FOREIGN KEY (owner) REFERENCES Utilisateur(id_user),
        name_cat VARCHAR NOT NULL,
        purety BOOLEAN,
+	   cpattern type_pattern NOT NULL,
 
        birthday_cat DATE,
        sage_min INTEGER,
@@ -47,7 +51,7 @@ CREATE TABLE IF NOT EXISTS Cats(
        sweight_max INTEGER CHECK (0<weight)
 	   );
 
-		/* contient aussi une race (Cat_breed), une ou plusieurs couleurs (Cat_color) et traits de caractères (cat_personnality) 
+		/* contient aussi une race (Cat_breed), une ou plusieurs couleurs (Cat_color) et traits de caractères (cat_personnality)
 		et les critères de recherche correspondants + pattern recherchés */
 
 DROP TABLE IF EXISTS Breeds CASCADE;
@@ -55,17 +59,11 @@ CREATE TABLE IF NOT EXISTS Breeds(
        id_breed SERIAL PRIMARY KEY NOT NULL,
        name_breed VARCHAR NOT NULL
 	   );
-	   
+
 DROP TABLE IF EXISTS Colors CASCADE;
 CREATE TABLE IF NOT EXISTS Colors(
        id_color SERIAL PRIMARY KEY NOT NULL,
        name_color VARCHAR NOT NULL
-       );
-	   
-DROP TABLE IF EXISTS Patterns CASCADE;
-CREATE TABLE IF NOT EXISTS Patterns(
-       id_pattern SERIAL PRIMARY KEY NOT NULL,
-       name_pattern VARCHAR NOT NULL
        );
 
 DROP TABLE IF EXISTS Personality_traits CASCADE;
@@ -81,15 +79,6 @@ CREATE TABLE IF NOT EXISTS Cat_colors(
 		FOREIGN KEY (cat) REFERENCES Cats(id_cat),
 		FOREIGN KEY (color) REFERENCES Colors(id_color),
 		PRIMARY KEY (cat,color)
-		);
-		
-DROP TABLE IF EXISTS Cat_patterns CASCADE;
-CREATE TABLE IF NOT EXISTS Cat_colors(
-		cat INTEGER,
-		pattern INTEGER,
-		FOREIGN KEY (cat) REFERENCES Cats(id_cat),
-		FOREIGN KEY (pattern) REFERENCES Patterns(id_pattern),
-		PRIMARY KEY (cat,pattern)
 		);
 
 DROP TABLE IF EXISTS Cat_breed CASCADE;
@@ -158,17 +147,6 @@ INSERT INTO Colors VALUES ('10','Ambre');
 INSERT INTO Colors VALUES ('11','Ambre clair');
 INSERT INTO Colors VALUES ('12','Abricot');
 
-DROP TYPE IF EXISTS type_pattern CASCADE;
-CREATE TYPE type_pattern AS ENUM ('Solide','Tabby','Colourpoint','Bicolore','Ecaille de tortue','Calico','Mink','Sepia');
-INSERT INTO Patterns VALUES ('1','Solide');
-INSERT INTO Patterns VALUES ('2','Tabby');
-INSERT INTO Patterns VALUES ('3','Colourpoint');
-INSERT INTO Patterns VALUES ('4','Bicolore');
-INSERT INTO Patterns VALUES ('5','Ecaille de tortue');
-INSERT INTO Patterns VALUES ('6','Calico');
-INSERT INTO Patterns VALUES ('7','Mink');
-INSERT INTO Patterns VALUES ('8','Sepia');
-
 
 INSERT INTO Personality_traits VALUES('1','Malicieux');
 INSERT INTO Personality_traits VALUES('2','Joueur');
@@ -201,7 +179,7 @@ INSERT INTO Breeds VALUES ('17','Manx');
 INSERT INTO Breeds VALUES ('18','Angora Turc');
 INSERT INTO Breeds VALUES ('19','Savannah');
 INSERT INTO Breeds VALUES ('20','Himalayen');
-INSERT INTO Breeds VALUES ('21','chat de goutière');
+INSERT INTO Breeds VALUES ('21','Chat de goutière');
 
 
 INSERT INTO Utilisateur VALUES ('1','Jesus','Jesus@paradise.net','406fcef6cb90b615f5e4c5239f05d4dc','0001001001','0'); /* mdp Amen0 :*/
