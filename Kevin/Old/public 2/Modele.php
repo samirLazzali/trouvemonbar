@@ -22,6 +22,8 @@ $tweetManager = new Tweet\TweetManager($connection);
 $commentaireManager = new Commentaire\CommentaireManager($connection);
 $messageManager = new Message\MessageManager($connection);
 $hashtagManager = new Hashtag\HashtagManager($connection);
+$userManager = new User\UserManager($connection);
+
 /*$userRepository = new \User\UserRepository($connection);
 $users = $userRepository->fetchAll();
 
@@ -34,16 +36,21 @@ $messages = $messageRepository->fetchAll();*/
 date_default_timezone_set('Europe/Paris');
 
 
+function config($login,$nom, $prenom, $id, $admin) {
+   // session_start();
+    $_SESSION['login'] = $login;
+    $_SESSION['admin'] = $admin;
+    $_SESSION['nom'] = $nom;
+    $_SESSION['prénom'] = $prenom;
+    $_SESSION['id'] = $id;
+}
 
 
 /* Fonction pour recuperer le prenom de quelqu'un */
 function prenom_user($id_user){
-    global $connection;
-    $sth = $connection->prepare('SELECT * FROM "user" WHERE id=\''.$id_user.'\';');
-    $sth->execute();
-
-    $result = $sth->fetch(PDO::FETCH_OBJ);
-    return $result->firstname;
+    global $userManager;
+    $user = $userManager->get($id_user);
+    return $user->getFirstname();
 }
 
 function idUser($pseudo){
@@ -57,6 +64,38 @@ function idUser($pseudo){
     return $result->id;
 }
 
+
+function idUserLogin($login){
+    global $connection;
+    $sth = $connection->prepare('SELECT * FROM "user" WHERE login=\''.$login.'\';');
+    $sth->execute();
+    if ($sth->rowCount() == 0){
+        return FALSE;
+    }
+    $result = $sth->fetch(PDO::FETCH_OBJ);
+    return $result->id;
+}
+
+function loginUserID($id){
+    global $userManager;
+    $user = $userManager->get($id);
+    return $user->getLogin();
+}
+
+/*On récupère l'user correspondant au login*/
+function loginUser($login){
+    global $connection;
+    $sth = $connection->prepare('SELECT * FROM "user" WHERE login=\''.$login.'\';');
+    $sth->execute();
+    if ($sth->rowCount() == 0){
+        return FALSE;
+    }
+    $result = $sth->fetch(PDO::FETCH_OBJ);
+    return $result;
+}
+
+
+
 function get_friendList($id){
     global $connection;
     $sth = $connection->prepare('SELECT * FROM "amis" WHERE personne1=\''.$id.'\' ');
@@ -69,11 +108,11 @@ function get_friendList($id){
         $Res[$i] = array();
         if($result->personne1 == $id){
             $Res[$i]['id'] = $result->personne2;
-            $Res[$i]['prénom'] = prenom_user($result->personne2) ;
+            $Res[$i]['login'] = loginUserID($result->personne2) ;
         }
         else{
             $Res[$i]['id'] = $result->personne1;
-            $Res[$i]['prénom'] = prenom_user($result->personne1) ;
+            $Res[$i]['login'] = loginUserID($result->personne1) ;
         }
         $result = $sth->fetch(PDO::FETCH_OBJ);
         $i++;
@@ -142,7 +181,7 @@ function getTweetLikes($T_id){
  */
 function getTweetAmis($id){
     global $connection;
-    $sth = $connection->prepare('SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne2=auteur WHERE personne1=\''.$id.'\' ');
+    $sth = $connection->prepare('SELECT tweet.id,auteur,contenu,date_envoie FROM "amis" JOIN "tweet" ON personne2=auteur WHERE personne1=\''.$id.'\' ORDER BY date_envoie DESC');
     $sth->execute();
     $result = $sth->fetch(PDO::FETCH_OBJ);
     $res = array();
@@ -159,8 +198,7 @@ function getTweetAmis($id){
 
         $res[$i][] = $tweet;
         $i++;
-        /* echo "[\"".prenom_user($result->auteur)."\",\"$result->contenu\",\"$result->date_envoie\",\"$result->id\",\"".$likes->nb."\"]";
-         $result = $sth->fetch(PDO::FETCH_OBJ);*/
+
         $result = $sth->fetch(PDO::FETCH_OBJ);
     }
     return $res;
@@ -188,7 +226,8 @@ function ecrireCommentaire($idParent, $type, $contenu, $TargetOwner){
 function deleteTweet($id){
     global $tweetManager;
 
-    $tweet = $tweetManager->get($id);
+    $tweet = new Tweet\Tweet();
+    $tweet->setId($id);
     $tweetManager->delete($tweet);
 }
 
@@ -352,7 +391,7 @@ function getHashtagId($mot){
  */
 function getTweetsHashtag($idH){
     global $connection;
-    $req = $connection->prepare('SELECT * FROM "hashtagEtTweet" JOIN "tweet" ON id_tweet=id WHERE id_hashtag = \''.$idH.'\'');
+    $req = $connection->prepare('SELECT * FROM "hashtagEtTweet" JOIN "tweet" ON id_tweet=id WHERE id_hashtag = \''.$idH.'\' ORDER BY date_envoie DESC');
     $req->execute();
     $result = $req->fetch(PDO::FETCH_OBJ);
     $T = array();

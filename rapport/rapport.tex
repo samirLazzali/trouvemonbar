@@ -107,17 +107,18 @@ language=Caml,        % choix du langage de programmation
 	\paragraph{\Huge{Préambule}}
 
 	\paragraph{}
-	\large{A COMPLETER}\\
-		L'objectif de notre projet est de réaliser une application Web qui va tout copier de twitter et qui va leur voler tout le marché. Nous devons alors intégrer dans notre application les fonctionnalités suivantes : 
+ Après analyse de toutes les opportunités d'application, nous avons choisi de développer une application de type Twitter. En effet, meme si celle-ci n'apparait pas comme étant la plus simple à créer c'est l'application qui nous parle le plus car nous sommes tous utilisateur de ce réseau-social.
+	    Le fait d'utiliser régulièrement cette application nous a permis de tout de suite cibler les services à offrir aux utilisateur.
+		L'objectif de notre projet est donc de réaliser une application Web qui va tout copier de twitter et qui va leur voler tout le marché. Nous devons alors intégrer dans notre application les fonctionnalités suivantes : 
 \begin{itemize}
 \item Inscription et Connexion d'utilisateur
 \item Publication de tweet 
+\item Modification du profil de l'utilisateur
 \item Hashtag et noms d'utilisateur cliquables
 \item Commentaires de tweet et de commentaires
 \item Possibilité de like des tweet
 \item Envoi de messages privés
 \end{itemize}
-	
 
 
 %\section{Présentation}	
@@ -132,10 +133,6 @@ Expliquer la répartition des rôles au sein de l’équipe
 La problématique à laquelle il répond.
 
 \newpage
-\section{Problématique}	
-	\large{A COMPLETER}
-
-Nous avons essayé de respecter au maximum le modèle MVC durant le développement de l'application.
 
 \section{La connexion}	
 L'application web TwitIIE est basée sur le fait même d'avoir un compte par personne, éventuellement un compte pour un groupe ou une association. Il est donc nécessaire de créer cette page de connexion, d'une part pour pouvoir accéder aux fonctionnalités de l'application mais également pour pouvoir authentifier les tweets envoyés.
@@ -159,6 +156,21 @@ Pour cela, quelques informations lui sont demandé via un formulaire de type POS
 \item[Prenom :] De même, le prénom est demandé.
 \item[Date de naissance :] Permet également de renseigner le profil de l'utilisateur. On pourrait également faire un test de majorité, mais l'application TwitIIE ne présente pour le moment aucun danger pour les personne mineures, l'accès leur est donc autorisé.
 \end{description}
+
+
+\section{La modification du profil}
+L'utilisateur a la possibilité de modifier son profil quand il le souhaite, pour cela il doit se rendre sur la page Modifier\_profil.php accessible depuis la barre de navigation.
+L'utilisateur est ensuite invité à remplir un formulaire de modification contenant les champs suivants :
+\begin{description}
+\item[Ancien mot de passe]
+\item[Nouveau mot de passe]
+\item[Confirmation du nouveau mot de passe]
+\item[Nom]
+\item[Prenom]
+\item[Date de naissance]
+\end{description}
+Les champs Ancien mot de passe, Nom, Prenom et Date de naissance doivent etre remplis. Pour faciliter l'utilisation nous remplissons avec les valeurs actuelles ces champ (sauf Ancien mot de passe bien-sur).
+Il n'a alors besoin de les modifier que s'il en a envie. Les champs sont alors mis a jours dans la base de données grace à un userManager. Nous mettons également à jour les variables de Session.
 
 
 
@@ -256,12 +268,27 @@ On a aussi décidé de créer une classe \texttt{Message} et une classe \texttt{
 Pour cette partie, on a principalement utilisé de l'AJAX pour envoyer des messages privés et pour charger les messages reçus automatiquement sans avoir besoin de réactualiser la page. Ces deux éléments sont les principales difficultés rencontrées pour réaliser cette fonctionnalité.
 
 
+
+\section{Le style de l'application}
+Pour la mise en page de notre application nous avons utilisé le CSS. La difficulté rencontrée ici a été de pouvoir se projeter et de s'accorder sur les couleurs et le style pour toutes les pages. Nous n'avons donc dans un premier temps pas pris compte de la mise en page de l'application pour se concentrer sur le fonctionnement de celle-ci.
+Une fois le projet avancé, nous avons réalisé des maquettes de toutes les pages afin d'avoir une idée plus claire de l'agencement de celles-ci. Nous avons ensuite choisi les couleurs de l'application grace au site color.adobe.com qui propose un panel de couleurs à associer.
+
+
 %\newpage		
 \section{Répartition des tâches}
-	
-			
-\section{Conclusion}			
-Malheureusement, nous n'avons pas réalisé la fonctionnalité de notifications par manque de temps.
+
+Kevin s'est principalement occupé de la partie des messages privés. Julien était en charge des tweets et des abonnements. Ensuite, Jiahui a travaillé sur les hashtags et commentaires avec Kevin. Edwin a réalisé l'inscription, la connexion et la modification de profil de l'application web. Jiahui s'est chargé de la partie administrateur.
+
+Nous avons réalisé ensemble des maquettes pour toutes les pages présentes sur le site. C'est comme cela que le style général a été choisi. Chaque personne s'est ensuite occupé du style de la page qu'il avait développé.
+
+\section{Conclusion}		
+
+Ce projet nous permis de mettre à profit les connaissances acquises durant les cours de web. Cela nous a été utile d'avoir une première expérience en développement web. 
+
+
+
+
+Malheureusement, nous n'avons pas réalisé la fonctionnalité de notifications et par manque de temps. 
 
 \end{document}
  

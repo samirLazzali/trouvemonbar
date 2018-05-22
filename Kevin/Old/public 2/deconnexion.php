@@ -10,8 +10,8 @@ session_start();
 require '../vendor/autoload.php';
 require_once 'Vue.php';
 
-enTete("Déconnexion", "CSS/style.css");
-titreH1("Au revoir ".$_SESSION['prénom']);
+enTeteConnexion("Deconnexion","CSS/style.css");
+echo '<h1>Au revoir '.$_SESSION['login'].'</h1>';
 
 
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.2.2)  21 MAY 2018 18:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.2.2)  22 MAY 2018 12:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -886,7 +886,7 @@ LaTeX Info: Redefining \nameref on input line 74.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<Logo_transparent.png, id=60, 569.12625pt x 223.83624pt>
+<Logo_transparent.png, id=64, 569.12625pt x 223.83624pt>
 File: Logo_transparent.png Graphic file (type png)
 
 <use Logo_transparent.png>
@@ -947,46 +947,34 @@ been already used, duplicate ignored
                    \relax 
 l.105 	\newpage
                 [1] [2] [3]
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 167.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 179.
 
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 190.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 190.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 190.
 
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 202.
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 190.
-
-[4] [5]
-Overfull \hbox (2.03322pt too wide) in paragraph at lines 233--234
-\T1/lmr/m/n/14.4 Pour re-lier chaque ha-sh-tag à des tweets, on a uti-li-sée un
-e table \T1/lmtt/m/n/14.4 hashtagEtTweet \T1/lmr/m/n/14.4 : 
- []
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 266.
-[6] [7]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 266.
+[4] [5] [6]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 293.
+ [7]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 293.
  (./rapport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 266.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 266.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 293.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 293.
 Package rerunfilecheck Info: File `rapport.out' has not changed.
-(rerunfilecheck)             Checksum: A671381CE0458A90C99856F1FA64DCCA;829.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 266.
+(rerunfilecheck)             Checksum: 30D738F8915A58E0EFEBF92F6639CA4A;910.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 293.
  ) 
 Here is how much of TeX's memory you used:
- 10719 strings out of 492995
- 153542 string characters out of 6132705
- 253629 words of memory out of 5000000
- 14041 multiletter control sequences out of 15000+600000
- 59929 words of font info for 64 fonts, out of 8000000 for 9000
+ 10694 strings out of 492995
+ 153231 string characters out of 6132705
+ 254629 words of memory out of 5000000
+ 14021 multiletter control sequences out of 15000+600000
+ 47384 words of font info for 46 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 28i,10n,49p,490b,467s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 28i,10n,49p,490b,423s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/lo
 cal/texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/texlive/20
 17/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2017/texmf-d
@@ -994,10 +982,10 @@ ist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/2017/texmf-dist/fonts
 /type1/public/lm/lmmi12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/pub
 lic/lm/lmr12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmr1
 7.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmtt12.pfb>
-Output written on rapport.pdf (8 pages, 168662 bytes).
+Output written on rapport.pdf (8 pages, 170839 bytes).
 PDF statistics:
- 149 PDF objects out of 1000 (max. 8388607)
- 129 compressed objects within 2 object streams
- 24 named destinations out of 1000 (max. 500000)
- 118 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 155 PDF objects out of 1000 (max. 8388607)
+ 135 compressed objects within 2 object streams
+ 25 named destinations out of 1000 (max. 500000)
+ 126 words of extra memory for PDF output out of 10000 (max. 10000000)
 

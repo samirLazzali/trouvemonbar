@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.2.2)  21 MAY 2018 16:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.2.2)  22 MAY 2018 11:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -950,40 +950,56 @@ been already used, duplicate ignored
                    \relax 
 l.105 	\newpage
                 [1] [2] [3]
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 165.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 187.
 
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
+) [4]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <14.4> on input line 204.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 204.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 204.
 
-./rapportweb.tex:172: LaTeX Error: Lonely \item--perhaps a missing list environ
-ment.
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 204.
+
+[5] [6]
+Overfull \hbox (7.64691pt too wide) in paragraph at lines 241--243
+\T1/lmr/m/n/14.4 On a aussi d�-cid� de cr�er une classe \T1/lmtt/m/n/14.4 Messa
+ge \T1/lmr/m/n/14.4 et une classe \T1/lmtt/m/n/14.4 MessageManager
+ []
+
+[7]
+
+./rapportweb.tex:260: LaTeX Error: \begin{description} on input line 172 ended 
+by \end{document}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.172 \item  -
-              si l’utilisateur n’est pas abonné à celui recherché, on...
-
+l.260 \end{document}
+                    
 ? 
-./rapportweb.tex:172: Emergency stop.
+./rapportweb.tex:260: Emergency stop.
  ...                                              
                                                   
-l.172 \item  -
-              si l’utilisateur n’est pas abonné à celui recherché, on...
-
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+l.260 \end{document}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
  
 Here is how much of TeX's memory you used:
- 10655 strings out of 492995
- 153000 string characters out of 6132705
- 252608 words of memory out of 5000000
- 14000 multiletter control sequences out of 15000+600000
- 47384 words of font info for 46 fonts, out of 8000000 for 9000
+ 10696 strings out of 492995
+ 153474 string characters out of 6132705
+ 253608 words of memory out of 5000000
+ 14024 multiletter control sequences out of 15000+600000
+ 59929 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 28i,10n,49p,493b,467s stack positions out of 5000i,500n,10000p,200000b,80000s
-./rapportweb.tex:172:  ==> Fatal error occurred, no output PDF file produced!
+ 28i,10n,49p,493b,567s stack positions out of 5000i,500n,10000p,200000b,80000s
+./rapportweb.tex:260:  ==> Fatal error occurred, no output PDF file produced!
