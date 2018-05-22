@@ -46,7 +46,7 @@ include('../includes/top.php');
 					$retour = $connexion->query("SELECT id_breed,name_breed FROM breeds ORDER BY name_breed");
 					while($race = $retour -> fetch(PDO::FETCH_OBJ)) {
 						?>
-						<option value = "<?php $race->id_breed?>",id="breed"><?php echo $race->name_breed;?></option>
+						<option value = "<?php echo $race->id_breed; ?>" ,id="breed"><?php echo $race->name_breed; ?></option>
 					<?php } ?>
 					</select></td></td>
 					</tr>

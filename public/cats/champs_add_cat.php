@@ -119,13 +119,15 @@ include('../includes/top.php');?>
 				
 				if($connexion->exec("INSERT INTO Cats VALUES(".$connexion->quote($fetch->max_id+1).",".$_SESSION['id_user'].",".$connexion->quote($name).",
 				'FALSE',".$connexion->quote($pattern).",".$connexion->quote($birthdate).",'0','13',".$connexion->quote($sexe).",".$connexion->quote($ssexe).",
-				".$connexion->quote($size).",'0','5',".$connexion->quote($coat).",'0','3',".$connexion->quote($weight).",'0','15')"))
+				".$connexion->quote($size).",'0','5',".$connexion->quote($coat).",'0','3',".$connexion->quote($weight).",'0','15')")
+				&&
+				$connexion->exec("INSERT INTO Cat_breed VALUES(".$connexion->quote($fetch->max_id+1).",".$connexion->quote($breed).")")) 
 				{
 					$queries++;
-				?>
-				<h1>Chat enregistré !</h1>
-				<?php
-				}
+					$queries++;?>
+					<h1>Chat enregistré !</h1>
+					<?php }
+			
 				
 				else
 				{
@@ -142,7 +144,9 @@ include('../includes/top.php');?>
 						$_SESSION['erreurs']++;
 					}
 				}
-			}
+				}
+				
+			
 			if($_SESSION['erreurs'] > 0)
 			{
 				if($_SESSION['erreurs'] == 1) {
