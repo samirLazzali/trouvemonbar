@@ -23,7 +23,7 @@ _header();
 <body>
 <div id="main">
     <div id="article_connection">
-        <h1>Edition de la basse de données</h1>
+        <h1>Edition de la base de données</h1>
         <button style="margin-top: 3em" type=\"button\" ONCLICK="window.location.href='ajout_recette.php'">Ajouter une recette</button>
         <button style="margin-top: 3em" type=\"button\" ONCLICK="window.location.href='ajout_ingredient.php'">Ajouter un ingrédient</button>
         <br/>
