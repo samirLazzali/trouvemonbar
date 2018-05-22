@@ -16,7 +16,7 @@ if (isset($_SESSION['logged'])){
             array("stats.php","Statistiques et trésorerie"),
             array("recette.php","Recettes"),
             array("course.php","Liste de course"),
-            array("oenologie.php","Oenologie : A quand la prochaine réu ?"),
+            array("oenologie.php","Oenologie "),
             array("contact.php","Nous contacter")
             );
         body($connecte,$liens,"myth.php");

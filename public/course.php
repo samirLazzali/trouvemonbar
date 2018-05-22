@@ -16,7 +16,7 @@ head("mp.css","Aperal : Liste de course");
                     array("stats.php","Statistiques et trésorerie"),
                     array("myth.php","Mythologie"),
                     array("recette.php","Recettes"),
-                    array("oenologie.php","Oenologie : A quand la prochaine réu ?"),
+                    array("oenologie.php","Oenologie "),
                     array("contact.php","Nous contacter")
                     );
     body($connecte,$liens,"course.php");

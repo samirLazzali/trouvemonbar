@@ -17,7 +17,7 @@ if (isset($_SESSION['logged'])){
             array("myth.php","Mythologie"),
             array("recette.php","Recettes"),
             array("course.php","Liste de course"),
-            array("oenologie.php","Oenologie : A quand la prochaine réu ?")
+            array("oenologie.php","Oenologie ")
             );
         body($connecte,$liens,"contact.php");
         _footer();

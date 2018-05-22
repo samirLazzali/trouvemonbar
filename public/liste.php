@@ -17,7 +17,7 @@ $liens = array(
     array("myth.php","Mythologie"),
     array("course.php","Course"),
     array("recette.php","Recettes"),
-    array("oenologie.php","Oenologie : A quand la prochaine réu ?"),
+    array("oenologie.php","Oenologie "),
     array("contact.php","Nous contacter")
 );
 echo "<body>";
