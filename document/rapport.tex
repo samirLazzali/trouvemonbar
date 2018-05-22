@@ -23,7 +23,7 @@
 Le groupe "CATisfaction" est composé des étudiants suivants : 
 \begin{itemize}
 \item Thomas "Psiich0" BERATTO 
-\item Corentin "Tuareg" LAFONT
+\item Corentin "Tuareg" LAFOND
 \item Quentin "Docteur" DELAVELLE
 \item Adrien "Fontaine" VIZIER
 \end{itemize}
@@ -39,11 +39,19 @@ Premier mondial à se lancer dans le secteur, \textbf{CATisfaction} répond à u
 
 \subsection{Architecture générale}
 
-
 \subsection{Système de matching}
+Les partenaires potentiels d'un chat de l'utilisateur sont affichés dynamiquement dans un \textbf{tableau}. Les tableaux des \textit{targets} de chaque chats sont stockés sous forme de chaînes de caractères dans un tableau. Ils sont ainsi créés en PHP puis insuflés dans le script JvS à l'aide de la fonction \textbf{json\_encode()}.
+\newline
+Pour sélectionner les chats correspàondant au désireux, on récupères d'abord dans la base de donnée tout les chats du bon sexe et de la bonne race si le désireux tient à la pureté du sang. A chaque chat est ensuite attribué un score, augmentant d'un certain \textbf{coefficient} pour chacun des nombreux critères demandés par le désireux qu'il respecte. Ces \textbf{coefficients} sont aujourd'hui le fruit d'une simple approche intuitive, mais l'étude des prochains clients via des calculs statistiques permettra de trouver des sytèmes plus efficaces que ces simples \textbf{coefficients}. Les chats sont ensuite triés par scores décroissants, et seuls les 5 premiers sont enregistrés. De même on pourra garder un plus grand nombre de profil si cela s'avère plus efficace. 
 
 \subsection{Design}
-
+\textbf{
 \section{Pour aller plus loin}
-
+Pour aller plus loin on peut imaginer des \textbf{critères inversés}, c'est-à-dire des critères non désirés en plus des critères désirés.
+\newline
+On aurait aussi aimé mettre en place un système de communication entre les utilisateurs \textbf{interne au site}, mais cela demande du temps que nous n'avons pas encore.
+\newline
+Il est possible que face à un très grand nombre de chats sur le serveur, certaines requêtes puissent prendre du temps. En étudiant le code pourrions parvenir à \textbf{limiter ces délais}, mais aujourd'hui cela est loin d'être un problème.
+\newline
+Actuellement le site ne permet pas les rencontres entre chats \textbf{du même sexe}. L'homosexualité n'étant pas inconnue au monde félin, la possibilité de rencontres mono-genre pourra facilement être ajouté à l'avenir, les \textbf{variables} nécessaires étant déjà en place.
 \end{document}
