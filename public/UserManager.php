@@ -12,7 +12,7 @@ class UserManager
 	}
 
 	function getId ($id) {
-		$query = $this->db->query("SELECT * FROM user WHERE id = $id");
+		$query = $this->db->query('SELECT * FROM "user" WHERE id =' .  $id);
 		if ($query) 
 			return new User($query->fetch());
 		else

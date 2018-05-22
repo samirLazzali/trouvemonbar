@@ -57,10 +57,6 @@ class EvenementsManager
 				return null;
 			}
 		}
-		else 
-		{
-			echo "EvenementManager: getMusique: pas de musique<br>";
-		}
 		
 	}
 
@@ -100,6 +96,7 @@ class EvenementsManager
 	function getAll ($id_categorie = null) 
 	{
 		$query = $this->db->query('SELECT * FROM Evenements'. $this->queryCategorie($id_categorie, 'WHERE'));
+		echo 'SELECT * FROM Evenements'. $this->queryCategorie($id_categorie, 'WHERE');
 		$tableau_events = [];
 		while ($resultat = $query->fetch()) 
 		{
@@ -113,7 +110,7 @@ class EvenementsManager
 	function getFirsts ($nb_evenements, $id_categorie = null) 
 	{
 		$query = $this->db->query('SELECT * FROM Evenements' . $this->queryCategorie($id_categorie, 'WHERE') . "ORDER BY date LIMIT $nb_evenements");
-		$tableau_evenements = [];
+		$tableau_evenements;
 		while ($resultat = $query->fetch()) 
 		{
 			$tableau_evenements[] = new Evenement($resultat);
@@ -192,12 +189,12 @@ class EvenementsManager
 				else 
 					echo 	"<div class='alert alert-danger'>
 		  				<strong>Une erreur est survenue lors création de la table des participants</strong> 
-						</div>";;
+						$this->db->errorInfo())</div>";;
 			}
 			else 
 				echo 	"<div class='alert alert-danger'>
 		  				<strong>Une erreur est survenue pendant la création de l'évènement</strong> 
-						</div>";
+						$this->db->errorInfo())</div>";
 
 		}
 		else {

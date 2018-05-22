@@ -40,7 +40,7 @@ spl_autoload_register('chargerClasse');
 		<div class="row">
 
 			<div class="container col-md-9 col-xs-9">
-				<?php include "Accueil_Contenu.php" ?>
+				<?php include "Accueil_contenu.php" ?>
 			</div>
 				
 			<div class="container col-md-3 col-xs-3">
