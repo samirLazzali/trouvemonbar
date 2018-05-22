@@ -11,13 +11,13 @@ $dbName = getenv('DB_NAME');
 $dbUser = getenv('DB_USER');
 $dbPassword = getenv('DB_PASSWORD');
 $connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-$result = $connexion->query("SELECT COUNT(*) AS nbr, id_user, login, password FROM Utilisateur WHERE
+$result = $connexion->query("SELECT * FROM Utilisateur WHERE
 							login = '".$_POST['login']."' GROUP BY id_user");
 $result -> setFetchMode(PDO::FETCH_OBJ);
 $fetch = $result->fetch();
 global $queries;
 $queries++;
-if(($fetch->nbr) == 1)
+if($fetch)
 {
 	if(md5($_POST['password']) == $fetch->password)
 	{
@@ -59,7 +59,7 @@ if(($fetch->nbr) == 1)
 	}
 }
 				
-else if($fetch->nbr > 1)
+else if($fetch)
 {
 	$informations = Array(
 					true,
@@ -76,8 +76,8 @@ else if($fetch->nbr > 1)
 else
 {	$informations = Array(
 					true,
-					'Nom d\'utilisateur inconnu',
-					'Le nom d\'utilisateur <span class="login">'.htmlspecialchars($_POST['login'], ENT_QUOTES).'</span> n\'existe pas dans notre base de données. Vous avez probablement fait une erreur.',
+					'Nom d\'utilisateur ou mot de passe inconnu',
+					'Le nom d\'utilisateur <span class="login">'.htmlspecialchars($_POST['login'], ENT_QUOTES).'</span> ou le mot de passe n\'existent pas dans notre base de données. Vous avez probablement fait une erreur.',
 					' - <a href="'.ROOTPATH.'/index.php">Index</a>',
 					ROOTPATH.'/membres/connexion.php',
 					5
