@@ -44,7 +44,7 @@
   				<input type="button" value="Je participe">
 			</form>
 			<p>Vous ne participez pas.</p>
-	    	
+	    	<!-- commentaire -->
 	    	
 	    	
 	     </center>
