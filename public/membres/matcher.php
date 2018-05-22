@@ -54,7 +54,7 @@ include('../includes/topbot.php');
                         echo '<OPTION VALUE='.$i.'>'.$namesChatsPossedes[$i];
                 }
             }
-            ?>
+        ?>
         </select>
     </form>
 
