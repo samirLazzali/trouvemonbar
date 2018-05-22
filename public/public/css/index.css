@@ -1,0 +1,42 @@
+header {
+	padding-top:1%;
+	background-color: rgba(204, 51, 255, 0.2);
+}
+header a {color:white;}
+body {overflow-y: hidden;}
+footer {color: white;}
+body{
+	background-image: url("../image/fond.jpeg");
+	background-repeat: no-repeat;
+	background-size:100% 100%;
+	padding-bottom:8%;
+}
+.accueil{
+	margin-top:8%;
+	border: 2px solid white;
+	border-radius: 15px;
+	background-color: white;
+}
+.choix-sexe {margin-top: 3%;}
+.retour {border-radius: 20px;}
+.id-sexe {display: none;}
+.info {display: none;}
+.btn-homme, .btn-femme, .btn-both {
+	border-radius: 15px;
+	width: 100%;
+}
+.btn-homme:hover {
+	border-color: #0099cc;
+	color: #0099cc;
+	background-color: white;
+}
+.btn-femme:hover {
+	border-color: #ff33cc;
+	color: #ff33cc;
+	background-color: white;
+}
+.btn-both:hover {
+	border-color: black;
+	background-color: white;
+}
+#mail-info, #date-info {color: red;}

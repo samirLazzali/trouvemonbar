@@ -1,0 +1,25 @@
+#chat {
+  background-color: #e8e8e8;
+}
+#chat_list {
+  float: left;
+  width: 39%;
+  overflow-y: auto;
+}
+#chat_list .new {background-color: #73bbff;}
+#chat_text {
+  margin-left: 39%;
+  background-color: #fcfcfc;
+  text-align: justify;
+  text-justify: inter-word;
+  overflow-y: auto;
+}
+.chat-left {
+  margin-left: 20%;
+  background-color: #f26093;
+}
+.chat-right {
+  margin-right: 20%;
+  background-color: #9ba0ff;
+}
+.numero {font-weight:bold;}

@@ -1,0 +1,26 @@
+.menu_config {
+	border-left: 1px black dotted;
+}
+ul.nav .score:hover {
+	background-color: white !important;
+	cursor: default;
+}
+ul.nav a:hover {
+	background-color: #c1c1c1 !important;
+}
+ul.nav .deconnect:hover {
+	background-color: #e50404 !important;
+}
+#sous_menu {
+	position: absolute;
+	display: none;
+	z-index: 1000;
+}
+nav {font-size: 12px;}
+body {
+	overflow-x: hidden;
+	background: linear-gradient(#e66465, #9198e5) no-repeat fixed;
+}
+
+.error {color: red;}
+.ok {color: green;}

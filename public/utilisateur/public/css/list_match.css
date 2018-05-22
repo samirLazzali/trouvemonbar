@@ -1,0 +1,13 @@
+.list_match {background-color: white;}
+.list_match li {
+  width: 15%;
+  margin-top:10px;
+  margin-left: 10px;
+}
+.list_match li:hover {background-color: #f2f2f2;}
+.list_match li.non_lu {background-color: #00cc00;}
+div.list-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

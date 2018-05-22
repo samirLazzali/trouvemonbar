@@ -1,0 +1,11 @@
+#news .date_news {text-align: right;}
+#news h3{
+  background-color: #66ff99;
+}
+#news{
+  margin-top: 5%;
+  background-color: white;
+}
+#news div.sujet {
+  background-color: #e6f2ff;
+}
