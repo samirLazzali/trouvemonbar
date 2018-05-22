@@ -24,9 +24,10 @@ _header();
             $connexion = db_connect();
             $inscrit = inscript($surnom, $prenom,$nom,$mdp,$connexion);
             db_close($connexion);
-            if ($inscrit == true) {
+            if ($inscrit == 1) {
                 $_SESSION['logged']=true;
                 $_SESSION['pseudo']=$_POST['pseudo'];
+                $_SESSION['id']=1;
                 echo "<a href=\"index.php\">succès</a>";
             }
             else {
