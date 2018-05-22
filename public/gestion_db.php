@@ -42,6 +42,26 @@ function recettes($connexion){
     return $tab;
 }
 
+/**
+ * @brief permet de récupérer le nom des ingredients dans la table ingredients
+ * @param $connexion un pdo
+ * @return un array avec tous les ingrédients disponibles
+ */
+function ingredient($connexion){
+    $requete = "SELECT nom_ing FROM \"Ingredients\"";
+    $reponse = $connexion->query($requete);
+    $tab = array();
+    while ($tupleCourant = $reponse->fetch() ){
+        $tab[]=$tupleCourant['nom_ing'];
+    }
+    $reponse = null;
+    return $tab;
+}
+
+/**
+ * @brief permet d'afficher les recettes et leur description dans la table recettes
+ * @param $connexion un pdo
+ */
 function descr_recettes($connexion){
     $requete = "SELECT nom_rec,description FROM \"Recettes\"";
     $reponse = $connexion->query($requete);
@@ -146,6 +166,28 @@ function modif_mp($mdp,$connexion,$pseudo){
     $reponse = $instruction->execute();
     if ($reponse==false){
         return false;
+    }
+    return true;
+}
+
+function ajouter($ingredients,$recette,$temps,$prix,$description,$connexion){
+    $instruction = $connexion->prepare("INSERT INTO \"Recettes\"(nom_rec, temps, prix, description) VALUES (:recette,:temps,:prix, :descr)");
+    $instruction->bindParam(':recette',$recette);
+    $instruction->bindParam(':temps',$temps);
+    $instruction->bindParam(':prix',$prix);
+    $instruction->bindParam(':descr',$description);
+    $reponse = $instruction->execute();
+    if ($reponse==false){
+        return false;
+    }
+    foreach ($ingredients as $ing){
+        $instruction = $connexion->prepare("INSERT INTO \"Ingredients_Recettes\"(nom_recette, nom_ingredient) VALUES (:recette,:ing)");
+        $instruction->bindParam(':recette',$recette);
+        $instruction->bindParam(':ing',$ing);
+        $reponse = $instruction->execute();
+        if ($reponse==false){
+            return false;
+        }
     }
     return true;
 }
