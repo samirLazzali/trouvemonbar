@@ -46,15 +46,25 @@ menu_aperal();
     	  $j=1;
     	  foreach($irec as $id){
        			 $j++;
-   			 }  
-    if(isset($_POST['note']) && $_SESSION['connect']>=1){
-    	echo $j;
-        $req=$connection->prepare('INSERT INTO public.note(note,id_rec,id_vente,id_usr) VALUES(:note,:id_rec,:id_vente,:id_usr)');
-        $req->execute(['note'=>$_POST['note'],
-            'id_rec'=>$_POST['id'],
-            'id_vente' => $j,
-            'id_usr' => $_SESSION['id'],
-            ]);
+   			 }
+        $iid = $connection->query("SELECT COUNT(*) AS nbr_rec FROM public.recette")->fetch();
+        $nbr_rec=$iid['nbr_rec'];
+        $check=0;
+        $req_check=$connection->query("SELECT id_usr FROM public.note ")->fetchAll();
+        foreach ($req_check as $r){
+            if ($r['id_usr']==$_SESSION['id']){
+                $check=1;
+            }
+        }
+        if ($check==0) {
+            if(isset($_POST['note']) && $_SESSION['connect']>=1) {
+                 $req = $connection->prepare('INSERT INTO public.note(note,id_rec,id_vente,id_usr) VALUES(:note,:id_rec,:id_vente,:id_usr)');
+                 $req->execute(['note' => $_POST['note'],
+                    'id_rec' => $_POST['id'],
+                    'id_vente' => $j,
+                    'id_usr' => $_SESSION['id'],
+                ]);
+            }
     }
 
         $turec=$connection->query("SELECT * FROM public.recette")->fetchAll();
