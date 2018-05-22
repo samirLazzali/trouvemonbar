@@ -52,7 +52,7 @@ function affChat($id_the_cat) {
     $res.='<tr><th>Genre</th><td>'. affSexe($the_cat->sex) .'</td></tr><tr>';
     $res.='<tr><th>Taille</th><td>'. affTaille($the_cat->csize) .'</td></tr><tr>';
     $res.='<tr><th>Poid</th><td>'. $the_cat->weight .'kg </td></tr><tr>';
-    $res.='<tr><th>Pelage</th><td>'. affCoat($the_cat->weight).'</td></tr><tr>';
+    $res.='<tr><th>Pelage</th><td>'. affCoat($the_cat->coat).'</td></tr><tr>';
     $car = $connexion->query("select name_color 
                                         from Colors
                                         Join Cat_colors ON id_color=color
@@ -61,29 +61,96 @@ function affChat($id_the_cat) {
     while ($cari=$car->fetch(PDO::FETCH_OBJ))
         if ($i) {
             $i = false;
-            $res .= '<tr><th>Couleur</th><td>' . affCoat($cari->name_color) . '</td></tr><tr>';
+            $res .= '<tr><th>Couleur</th><td>' . $cari->name_color . '</td></tr><tr>';
         }
         else
-            $res .= '<tr><th></th><td>' . affCoat($cari->name_color) . '</td></tr><tr>';
+            $res .= '<tr><th></th><td>' . $cari->name_color . '</td></tr><tr>';
 
-    $car = $connexion->query("select name_color 
-                                        from Colors
-                                        Join Cat_colors ON id_color=color
+    $car = $connexion->query("select name_breed 
+                                        from Breeds
+                                        Join Cat_breed ON id_breed=breed
                                         WHERE cat = ".$id_the_cat);
     $i = true;
     while ($cari=$car->fetch(PDO::FETCH_OBJ))
         if ($i) {
             $i = false;
-            $res .= '<tr><th>Couleur</th><td>' . affCoat($cari->name_color) . '</td></tr><tr>';
+            $res .= '<tr><th>Race</th><td>' . $cari->name_breed . '</td></tr><tr>';
         }
+        else
+            $res .= '<tr><th></th><td>' . $cari->name_color . '</td></tr><tr>';
 
-    $res.='<tr><th>Recherche</th><td></td></tr><tr>';
-    $res.='<tr><th>Genre</th><td>'. $the_cat->ssex .'</td></tr><tr>';
+    $car = $connexion->query("select name_trait 
+                                        from Personality_traits
+                                        Join Cat_personality ON id_trait=trait
+                                        WHERE cat = ".$id_the_cat);
+    $i = true;
+    while ($cari=$car->fetch(PDO::FETCH_OBJ))
+        if ($i) {
+            $i = false;
+            $res .= '<tr><th>Personnalité</th><td>' . $cari->name_trait . '</td></tr><tr>';
+        }
+        else
+            $res .= '<tr><th></th><td>' . $cari->name_trait . '</td></tr><tr>';
+
+
+
+
+    $res.='<tr><th><u>Recherche</u></th><td></td></tr><tr>';
+    $res.='<tr><th>Genre</th><td>'. affSexe($the_cat->ssex) .'</td></tr><tr>';
     $res.='<tr><th>Age</th><td>'. $the_cat->sage_min .' - '. $the_cat->sage_max .'ans </td></tr><tr>';
     $res.='<tr><th>Taille</th><td>'. affTaille($the_cat->scsize_min) .' - '. affTaille($the_cat->scsize_max) .'</td></tr><tr>';
     $res.='<tr><th>Poid</th><td>'. $the_cat->sweight_min .' - '. $the_cat->sweight_max .'kg </td></tr><tr>';
     $res.='<tr><th>Pelage</th><td>'. affCoat($the_cat->scoat_min) .' - '. affCoat($the_cat->scoat_max) .'</td></tr><tr>';
 
+    $car = $connexion->query("select name_breed 
+                                        from Breeds
+                                        Join Searched_breeds ON id_breed=breed
+                                        WHERE cat = ".$id_the_cat);
+    $i = true;
+    while ($cari=$car->fetch(PDO::FETCH_OBJ))
+        if ($i) {
+            $i = false;
+            $res .= '<tr><th>Race</th><td>' . $cari->name_breed . '</td></tr><tr>';
+        }
+        else
+            $res .= '<tr><th></th><td>' . $cari->name_color . '</td></tr><tr>';
+    $car = $connexion->query("select name_color 
+                                        from Colors
+                                        Join Searched_colors ON id_color=color
+                                        WHERE cat = ".$id_the_cat);
+    $i = true;
+    while ($cari=$car->fetch(PDO::FETCH_OBJ))
+        if ($i) {
+            $i = false;
+            $res .= '<tr><th>Couleur</th><td>' . $cari->name_color . '</td></tr><tr>';
+        }
+        else
+            $res .= '<tr><th></th><td>' . $cari->name_color . '</td></tr><tr>';
+
+    $car = $connexion->query("select pattern 
+                                        from Searched_patterns
+                                        WHERE cat = ".$id_the_cat);
+    $i = true;
+    while ($cari=$car->fetch(PDO::FETCH_OBJ))
+        if ($i) {
+            $i = false;
+            $res .= '<tr><th>Motif</th><td>' . $cari->pattern . '</td></tr><tr>';
+        }
+        else
+            $res .= '<tr><th></th><td>' . $cari->pattern . '</td></tr><tr>';
+
+    $car = $connexion->query("select name_trait 
+                                        from Personality_traits
+                                        Join Searched_traits ON id_trait=trait
+                                        WHERE cat = ".$id_the_cat);
+    $i = true;
+    while ($cari=$car->fetch(PDO::FETCH_OBJ))
+        if ($i) {
+            $i = false;
+            $res .= '<tr><th>Personnalité</th><td>' . $cari->name_trait . '</td></tr><tr>';
+        }
+        else
+            $res .= '<tr><th></th><td>' . $cari->name_trait . '</td></tr><tr>';
 
 
 
