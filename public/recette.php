@@ -32,7 +32,7 @@ $connexion = db_connect();
 $liste_recettes = descr_recettes($connexion);
 db_close($connexion);
 echo "</p>";
- if ($_SESSION['id']==3){
+ if (isset($_SESSION['id'])&&($_SESSION['id']==3)){
     echo "<button type=\"button\" ONCLICK=\"window.location.href='edition.php'\">Editer la base de données</button>";
 }
 echo "</div>";
