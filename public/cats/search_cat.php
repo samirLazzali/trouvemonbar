@@ -19,7 +19,7 @@ include('../includes/top.php');
 				<fieldset><legend>Renseignements</legend>
 				<table>
 					<tr><td><label for="cats" class="float">Choix du chat : </label></td>
-					<td><select name="catss" id="cats" size="1">
+					<td><select name="cats" id="cats" size="1">
 					<?php
 					$dbName = getenv('DB_NAME');
 					$dbUser = getenv('DB_USER');
