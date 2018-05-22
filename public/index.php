@@ -8,9 +8,6 @@ include('includes/functions.php');
 actualiser_session();
 
 $titre = '';
-
-
-include('includes/top.php'); 
 ?>
 		<?php
 		if(isset($_SESSION['id_user'])) {
