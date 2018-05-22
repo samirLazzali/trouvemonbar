@@ -129,7 +129,6 @@ include('../includes/top.php');?>
 				".$connexion->quote($sexe).",".$connexion->quote($ssexe).",".$connexion->quote($coat).",'0','3',".$connexion->quote($weight).",'0','15')"))
 				{
 					$queries++;
-					empty_session();
 				?>
 				<h1>Chat enregistré !</h1>
 				<?php
@@ -160,8 +159,8 @@ include('../includes/top.php');?>
 					$_SESSION['nb_erreurs'] = '<span class="erreur">Il y a eu '.$_SESSION['erreurs'].' erreurs.</span><br/>';
 				}
 			?>
-			<h1>Inscription non validée.</h1>
-			<p>Vous avez rempli le formulaire d'inscription du site et nous vous en remercions, cependant, nous n'avons
+			<h1>Ajout non validée.</h1>
+			<p>Vous avez rempli le formulaire d'ajout de chat du site et nous vous en remercions, cependant, nous n'avons
 			pas pu valider votre inscription, en voici les raisons :<br/>
 			<?php
 				echo $_SESSION['nb_erreurs'];
@@ -189,5 +188,6 @@ include('../includes/top.php');?>
 		</div>
 
 		<?php
+		empty_session();
 		include('../includes/bottom.php');
 		?>
