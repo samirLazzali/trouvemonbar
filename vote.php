@@ -1,4 +1,5 @@
 <?php
+include("./includes/header.php");
 $p = isset($_GET['vp'])?(int) $_GET['vp']:0;
 $m = isset($_GET['vm'])?(int) $_GET['vm']:0;
 

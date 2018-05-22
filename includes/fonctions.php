@@ -42,18 +42,23 @@ function aff_posts($id_posts)
     $img = $data["img"];
     $author = $data["author"];
     $query->CloseCursor();
+    if($titre!=NULL){
     $query = $db->prepare('SELECT pseudo FROM membres WHERE id=:id');
     $query->bindValue(':id', $author, PDO::PARAM_INT);
     $query->execute();
     $data = $query->fetch();
     $autho = $data["pseudo"];
-    echo '<div class="posts"> <h1>' . $titre . '</h1><br />
+    $admin=NULL;
+    if($_SESSION["level"]==3 || $_SESSION["id"]==$author){
+        $admin='<a href="./delete.php?s='.$id_posts.'">Supprimer?</a>?';
+    }
+    echo '<div class="posts"> <h1>' . $titre . '</h1>  '.$admin.'<br />
             <div class="intituleinscription"><img src="./posts/' . $img . '"alt="" /><br />' . $desc . '<br />' .
         $jaime . ' + et ' . $nul . ' -<br /> Par : <a href="./profile.php?m='.$author.'"> ' . $autho.'</a><br /> 
             <div class="vote"><a href="vote.php?vp='.$id_posts.'"><img src="./img/upvote.png" alt="votez +"></a> 
             <a href="vote.php?vm='.$id_posts.'"><img src="./img/downvote.png" alt="votez -"></a></div> </div><br /> 
             
-           ________________________________________________________________________________________________________<br /></div>';
+           ________________________________________________________________________________________________________<br /></div>';}
 }
 
 ?>

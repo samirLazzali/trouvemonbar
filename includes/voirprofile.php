@@ -95,7 +95,7 @@ $membre = isset($_GET['m'])?(int) $_GET['m']:'';
                         $nb_erreur++;
                     }
                     $query=$db->prepare('SELECT mail FROM membres WHERE id =:id');
-                    $query->bindValue(':id',$id,PDO::PARAM_INT);
+                    $query->bindValue(':id',$membre,PDO::PARAM_INT);
                     $query->execute();
                     $data=$query->fetch();
                     if (strtolower($data['mail']) != strtolower($email)) {
@@ -106,7 +106,7 @@ $membre = isset($_GET['m'])?(int) $_GET['m']:'';
                         $used = ($query->fetchColumn() == 0) ? 1 : 0;
                         $query->CloseCursor();
                         if (!$used) {
-                            $email_erreur1 = "Adresse email est déjà utilisée par un membre";
+                            $email_erreur1 = "Adresse email est déjà utilisée par un membre ";
                             $nb_erreur++;
                         }
                         //On vérifie la forme maintenant
