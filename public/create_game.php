@@ -20,7 +20,13 @@ if(!Auth::logged())
 //query options for scrolling lists
 $gamesystems = Gamesystem::make_list();
 $reccurrences = Reccurrence::makelist();
-$user = new User($_SESSION['user']);
+
+//user files for file selection
+try {
+    $user = new User($_SESSION['user']);
+}catch(Exception $e) {
+    error_log($e);
+}
 $userfiles = $user->hisfiles();
 
 $layout = new Layout("users");

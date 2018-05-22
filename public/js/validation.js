@@ -1,5 +1,0 @@
-
-/**
- *  function for inputs validation
- */
-

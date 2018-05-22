@@ -1,9 +1,3 @@
-
-
-
-
-
-
 //boolean for the diffrent required parts
 let title_ok = false;
 let duration_ok = false;

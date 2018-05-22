@@ -1,3 +1,6 @@
+
+
+
 //list of files so far
 let files = [];
 
@@ -5,7 +8,6 @@ let files = [];
 let select = "";
 
 updateselect();
-
 //update the display of files
 function update_files_display()
 {

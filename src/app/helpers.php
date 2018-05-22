@@ -13,7 +13,7 @@ session_start();
 
 
 /**
- * @brief autoloader. do not edit. do not call.
+ * @brief autoloader override
  * @param $classname
  * @return bool
  */
@@ -31,6 +31,13 @@ spl_autoload_register(function($classname) {
         }
     }
     return class_exists($classname);
+});
+
+/**
+ * @brief exception handler override
+ */
+set_exception_handler(function($exception) {
+    error_log($exception);
 });
 
 /**

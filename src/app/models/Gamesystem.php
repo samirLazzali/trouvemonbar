@@ -17,19 +17,11 @@ class Gamesystem
     }
 
     /**
-     * @param mixed $gamesystemid
+     * @param int|null $gamesystemid
      */
     public function setGamesystemid($gamesystemid)
     {
         $this->gamesystemid = $gamesystemid;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSystemname()
-    {
-        return $this->systemname;
     }
 
     /**
@@ -41,6 +33,21 @@ class Gamesystem
     }
 
     /**
+     * @param mixed $systemdescription
+     */
+    public function setSystemdescription($systemdescription)
+    {
+        $this->systemdescription = $systemdescription;
+    }
+    /**
+     * @return mixed
+     */
+    public function getSystemname()
+    {
+        return $this->systemname;
+    }
+
+    /**
      * @return mixed
      */
     public function getSystemdescription()
@@ -48,16 +55,8 @@ class Gamesystem
         return $this->systemdescription;
     }
 
-    /**
-     * @param mixed $systemdescription
-     */
-    public function setSystemdescription($systemdescription)
-    {
-        $this->systemdescription = $systemdescription;
-    }
 
-
-    private $gamesystemid, $systemname, $systemdescription;
+    protected $gamesystemid, $systemname, $systemdescription;
     /**
      * @return array|boolean Array of gamesystem if at least 1 was found. False if none was found.
      */
@@ -88,6 +87,68 @@ class Gamesystem
         $result = $query->fetch();
         return $result->systemname;
 
+    }
+
+    /**
+     * Gamesystem constructor.
+     * @param $gamesystemid int
+     * @throws Exception system not found
+     */
+    public function __construct($gamesystemid=null)
+    {
+        //if we are building via constructor
+        if($gamesystemid !== null) {
+            $this->gamesystemid = $gamesystemid;
+
+            //query
+            $query = db()->prepare("SELECT * FROM gamesystem WHERE gamesystemid = ?");
+            $query->execute([$gamesystemid]);
+
+            if ($query->rowCount() != 1) throw  new  Exception("System can't be found :" . $gamesystemid);
+
+            $system = $query->fetch();
+
+            //inject results from database columns into the object
+            foreach (['systemname', 'systemdescription'] as $attr) {
+                $this->$attr = $system->$attr;
+            }
+        }
+        //if not we are bulding via fetch_class
+    }
+
+    /**
+     * @return int number of gms for this system
+     */
+    public function get_gms_number()
+    {
+        $query = db()->prepare("SELECT DISTINCT COUNT(userid) as nb_gms 
+                                          FROM gamesystem LEFT JOIN mastery m2 on gamesystem.gamesystemid = m2.gamesystemid 
+                                          WHERE m2.gamesystemid = ?");
+        $query->execute([$this->gamesystemid]);
+        return $query->fetch()->nb_gms;
+    }
+
+    /**
+     * @param $name string
+     * @param $desc string
+     * @return bool was the insertion successful
+     */
+    public static function insert($name, $desc)
+    {
+        $query = db()->prepare("INSERT INTO gamesystem (systemname, systemdescription) VALUES (?, ?)");
+        return $query->execute([$name, $desc]);
+
+    }
+
+    /**
+     * @return bool was update successful
+     */
+    public function update()
+    {
+        $query = db()->prepare("UPDATE gamesystem 
+                                          SET systemname = ?, systemdescription = ? 
+                                          WHERE gamesystemid = ? ");
+        return $query->execute([$this->systemname, $this->systemdescription, $this->gamesystemid]);
     }
 
 }

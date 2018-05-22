@@ -12,7 +12,7 @@
 
 require "../src/app/helpers.php";
 
-
+//page for logged users
 if(Auth::logged()) {
 
     $gameid = $_GET['id'];
@@ -45,6 +45,7 @@ if(Auth::logged()) {
 
     }
 }
+//page for unlogged users
 else {
     $gameid = $_GET['id'];
 

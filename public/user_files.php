@@ -12,14 +12,26 @@
 if(!Auth::logged())
     redirect("index.php");
 
-    Auth::get_user();
-    $isAdmin = Auth::user()->isAdmin();
-    $userid=$_GET['user'];
-    $myid=$_SESSION['user'];
-    $filelist=File::filelist();
-    $layout = new Layout("users");
-    include view("files_view.php");
-    $layout->show("List de fichier ");
+//is the user looking at the page admin
+Auth::get_user();
+$me = Auth::user();
+$isAdmin = $me->isAdmin();
+
+//is the user looking at the page the owner of the account
+$userid=$_GET['user'];
+$myid=$_SESSION['user'];
+
+//list of users file
+try {
+    $filelist = (new User($userid))->hisfiles();
+}catch(Exception $e)
+{
+    error_log($e);
+}
+
+$layout = new Layout("users");
+include view("files_view.php");
+$layout->show("List de fichier ");
 
 
 

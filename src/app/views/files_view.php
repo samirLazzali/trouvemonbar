@@ -18,7 +18,7 @@
                 echo "<div>";
                 File::download($file->filename, $file->fileid);
 
-                //the admin can remove file
+                //the admin can remove a file
                 if($isAdmin) echo "<a href='actions/remove_file.php?file=$file->fileid' class='btn btn-danger btn-sm'> X </a>";
                 echo "</div>";
                 $flag = true;

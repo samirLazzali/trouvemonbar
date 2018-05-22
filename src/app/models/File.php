@@ -39,6 +39,7 @@ class File
     /**
      * @param $filename
      * @param $filehash
+     * @param $userid int
      * @param bool $private false
      * @param null $extension
      * @return int db()->lastInsertId() id of the file which was just upload if successful

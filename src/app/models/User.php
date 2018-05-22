@@ -67,6 +67,9 @@ class User
 
     }
 
+    /**
+     * @return true if user is admin
+     */
     public function isAdmin()
     {
         return $this->isAdmin;
@@ -124,7 +127,7 @@ class User
      * Update the user's password and mail
      * @param $passwd
      * @param $mail
-     * @todo fill.
+     * @return bool true if update successful
      */
     public function updateUser($passwd, $mail)
     {
@@ -162,7 +165,6 @@ class User
      * @param $passwd
      * @param $mail
      * @return string db()->lastInsertId() id of the user who was just added in case of success
-     * @todo add check if mail or nick already exists
      */
     public static function insertUser($nick, $passwd, $mail)
     {
@@ -200,17 +202,6 @@ class User
         $query->execute([$userid]);
 
         return $query->fetchAll();
-    }
-
-    public static function deleteMastery($userid){
-        $query = db()->prepare("DELETE FROM mastery WHERE userid=?");
-        $success=$query->execute([$userid]);
-        if($success)
-            return true;
-
-        else
-            return false;
-
     }
 
     /**

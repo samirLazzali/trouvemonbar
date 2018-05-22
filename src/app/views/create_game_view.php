@@ -25,7 +25,6 @@
                 }
                 ?>
 
-                <!-- todo : add an add system option-->
             </select>
         </div>
 
@@ -40,8 +39,8 @@
         <!--SCHEDULE SELECTION -->
         <label for="oneshot" class="font-weight-bold"> Ajouter un horaire: </label>
         <div class="form-group">
-            <!-- ADD A SCHEDULE -->
 
+            <!-- ADD A SCHEDULE -->
 
             <!-- ADD A ONE-TIME SESSION -->
 
@@ -144,7 +143,6 @@
             </select>
             <input type="button" onclick="add_file()" class="btn btn-primary btn-sm" value="Ajouter">
         </div>
-
 
         <!-- SUBMIT -->
         <div class="form-group">

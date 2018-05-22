@@ -17,6 +17,8 @@
 require "../src/app/helpers.php";
 $gamelist = Game::gamelist();
 
+
+//page for logged users
 if(Auth::logged())
 {
     $disabled="";
@@ -28,6 +30,7 @@ if(Auth::logged())
     include view("game_list_view.php");
     $layout->show('Tables');
 }
+//page for unlogged users
 else {
     $disabled="disabled";
     $isAdmin = false;

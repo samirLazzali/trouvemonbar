@@ -21,7 +21,6 @@ class Auth
 
     /**
      * @brief called automatically when the app is launched
-     * @throws exception if user can't be found
      */
     public static function get_user()
     {
@@ -48,7 +47,6 @@ class Auth
 
     /**
      * @return mixed User current user
-     * @throws Exception user could not be found
      */
     public static function user()
     {

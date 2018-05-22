@@ -17,8 +17,9 @@ try {
 }
 catch(Exception $e)
 {
-
+    error_log($e);
 }
+
 $games = $user->gm_for();
 $participations = $user->pc_for();
 $systems = $user->hisSystems();

@@ -9,13 +9,13 @@
 class Layout
 {
     /*
-     * fonctions correspondantes à chaque layout
+     * functions corresponding to each layout
      */
 
     /**
      * layout for logged in users : _layout/users.php
-     * @param $layout
-     * @throws Exception
+     * @param $layout string name of the desired layout
+     * @param $title string title for the page
      */
 
     public function users($layout, $title='')
@@ -27,12 +27,21 @@ class Layout
         Auth::get_user();
         $user = Auth::user();
 
-        //@todo create static function Navbar::generate_user_navbar to hold this code
+        //link to index page
         $index_button = Navbar::generate_navbar_button("index.php", "Calendrier");
+
+        //link to game page
         $games_button = Navbar::generate_navbar_button("games.php", "Tables");
+
+        //link to userlist page
         $users_button = Navbar::generate_navbar_button("userlist.php", "Joueurs");
+
+        //link to profile page
         $profile_button = Navbar::generate_navbar_button("user_profile.php?user=".$user->getId(), $user->getNick() );
+
+        //link to logout action
         $logout_button = Navbar::generate_navbar_button("actions/disconnect.php", "Se déconnecter");
+
         $this->navbar = new Navbar(array($index_button, $games_button, $users_button), array($profile_button, $logout_button));
 
         /*
@@ -44,18 +53,17 @@ class Layout
     /**
      * layout for visitors : _layout/visitors.php
      * @param string name of the desired layout
+     * @param string title for the page
      */
     public function visitors($layout, $title='')
     {
         /*
          * Generate navbar for visitors
          */
-
-        //@todo create static function Navbar::generate_visitor_navbar to hold this code
         $index_button = Navbar::generate_navbar_button("index.php", "Accueil");
-        $login_button = Navbar::generate_navbar_button("authentication.php", "Se connecter", false);
-        $games_button = Navbar::generate_navbar_button("games.php", "Tables");
-        $subscribe_button = Navbar::generate_navbar_button("subscribe.php", "S'inscrire", false);
+        $login_button = Navbar::generate_navbar_button("authentication.php", "Se connecter");
+        $games_button = Navbar::generate_navbar_button("games.php","Tables");
+        $subscribe_button = Navbar::generate_navbar_button("subscribe.php", "S'inscrire");
         $this->navbar = new Navbar(array($index_button, $games_button),  array( $login_button , $subscribe_button) );
 
         /*
@@ -85,12 +93,12 @@ class Layout
         ob_end_clean();
         $path = view('_layouts/'.$this->layout.'.php');
 
-        //si la fonction correspondante au layout demandé existe
+        //if there is a function corresponding to the layout
         if(method_exists($this, $this->layout))
-            //appeler cette fonction
+            //call this func
             call_user_func_array([$this, $this->layout], array_merge([$path], func_get_args()));
         else
-            //sinon on inclut simplement le layout demandé
+            //if function not found, instead include layout
             include $path;
 
     }
