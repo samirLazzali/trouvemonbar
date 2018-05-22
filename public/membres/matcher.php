@@ -59,7 +59,7 @@ include('../includes/topbot.php');
     </form>
         </legend>
         <center>
-    <table id="matcher"></table>
+    <table id="matcher" cellspacing="8"></table>
         </center>
 </div>
 

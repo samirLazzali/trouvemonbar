@@ -83,8 +83,16 @@ body div#bande_d{
 #contenu a:hover{
     color : red;
 }
+
+
+tr > th:first-child {
+    text-align: right;
+}
 tr > td:first-child {
-    text-align : right;
+    text-align: right;
+}
+tr > td:last-child {
+    text-align : left;
 }
 td input {
     width : 250px;
