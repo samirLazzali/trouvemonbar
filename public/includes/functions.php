@@ -141,13 +141,12 @@ function checklogin($login)
 		$dbUser = getenv('DB_USER');
 		$dbPassword = getenv('DB_PASSWORD');
 		$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-		$retour = $connexion->query("SELECT Count(*) AS nbr FROM Utilisateur WHERE login = '$login'");
-		$retour -> setFetchMode(PDO::FETCH_OBJ);
-		$fetch = $retour -> fetch();
+		$retour = $connexion->query("SELECT * FROM Utilisateur WHERE login = '$login'");
+		$fetch = $retour -> fetch(PDO::FETCH_OBJ);
 		global $queries;
 		$queries++;
 		
-		if(($fetch->nbr) > 0)
+		if($fetch)
 		{return 'pris';}
 		else { return 'Ok';}
 	}
@@ -228,7 +227,8 @@ function empty_session()
 {
 	foreach($_SESSION as $cle => $element)
 	{
-		unset($_SESSION[$cle]);
+		if ($cle != 'erreurs') unset($_SESSION[$cle]);
+
 	}
 }
 

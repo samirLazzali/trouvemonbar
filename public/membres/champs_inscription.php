@@ -17,34 +17,39 @@ if(isset($_POST['login']))
 {
 	$login = trim($_POST['login']);
 	$login_result = checklogin($login);
+
+
 	if($login_result == 'court')
 	{
 		$_SESSION['login_info'] = '<span class="erreur">Le nom d\'utilisateur '.htmlspecialchars($login, ENT_QUOTES).' est trop court, vous devez en choisir un plus long (minimum 3 caractères).</span><br/>';
 		$_SESSION['form_login'] = '';
 		$_SESSION['erreurs']++;
 	}
+
 	
-	else if($login_result == 'long')
+	if($login_result == 'long')
 	{
 		$_SESSION['login_info'] = '<span class="erreur">Le nom d\'utilisateur '.htmlspecialchars($login, ENT_QUOTES).' est trop long, vous devez en choisir un plus court (maximum 32 caractères).</span><br/>';
 		$_SESSION['form_login'] = '';
 		$_SESSION['erreurs']++;
 	}
 	
-	else if($login_result == 'pris')
+
+	if($login_result == 'pris')
 	{
+		
 		$_SESSION['login_info'] = '<span class="erreur">Le nom d\'utilisateur '.htmlspecialchars($login, ENT_QUOTES).' est déjà pris, choisissez-en un autre.</span><br/>';
 		$_SESSION['form_login'] = '';
 		$_SESSION['erreurs']++;
 	}
-		
-	else if($login_result == 'Ok')
+	if($login_result == 'Ok')
 	{
+		
 		$_SESSION['login_info'] = '';
 		$_SESSION['form_login'] = $login;
 	}
 	
-	else if($login_result == 'vide')
+	if($login_result == 'vide')
 	{
 		$_SESSION['login_info'] = '<span class="erreur">Vous n\'avez pas entré de nom d\'utilisateur.</span><br/>';
 		$_SESSION['form_login'] = '';
@@ -270,8 +275,14 @@ include('../includes/top.php');?>
 				$dbUser = getenv('DB_USER');
 				$dbPassword = getenv('DB_PASSWORD');
 				$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-				if($connexion->exec("INSERT INTO Utilisateur VALUES(NULL, '".$connexion->quote($login)."',
-				'".$connexion->quote($mail)."','".md5($password)."','".$connexion->quote($phone_number)."')"))
+
+				$retour = $connexion->query("SELECT max(id_user) AS max_id FROM utilisateur");
+				$fetch = $retour -> fetch(PDO::FETCH_OBJ);
+
+				if($connexion->exec("INSERT INTO Utilisateur VALUES(".$connexion->quote($fetch->max_id+1).", ".$connexion->quote($login).",
+				".$connexion->quote($mail).",'".md5($password)."',".$connexion->quote($phone_number).",'1')"))
+				
+
 				{
 					$queries++;
 					empty_session();
@@ -287,6 +298,7 @@ include('../includes/top.php');?>
 				{
 					if($_SESSION['form_login'] !== FALSE)
 					{
+
 						unset($_SESSION['form_login']);
 						$_SESSION['login_info'] = '<span class="erreur">Le nom d\'utilisateur '.htmlspecialchars($login, ENT_QUOTES).' est déjà pris, choisissez-en un autre.</span><br/>';
 						$_SESSION['erreurs']++;
@@ -308,7 +320,10 @@ include('../includes/top.php');?>
 						$_SESSION['erreurs']++;
 					}
 				}
+			
+
 			}
+			
 			if($_SESSION['erreurs'] > 0)
 			{
 				if($_SESSION['erreurs'] == 1) {
@@ -352,5 +367,7 @@ include('../includes/top.php');?>
 		</div>
 
 		<?php
+		unset($_SESSION['erreurs']);
+
 		include('../includes/bottom.php');
 		?>
