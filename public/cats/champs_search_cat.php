@@ -89,12 +89,13 @@ include('../includes/top.php');?>
 				$dbPassword = getenv('DB_PASSWORD');
 				$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 				
-				if($connexion->exec("UPDATE Cats SET sage_min = $agemin, sage_max=$agemax, scsize_min = $sizemin, scsize_max=$sizemax, scoat_min = $coatmin, scoat_max=$coatmax,
-				sweight_min = $weightmin, sweight_max=$weightmax")
+				if($connexion->exec("UPDATE Cats SET sage_min = ".$connexion->quote($agemin).", sage_max=".$connexion->quote($agemax).", scsize_min = ".$connexion->quote(sizemin).",
+				scsize_max=".$connexion->quote($sizemax).", scoat_min = ".$connexion->quote($coatmin).", scoat_max=".$connexion->quote($coatmax).",
+				sweight_min = ".$connexion->quote($weightmin).", sweight_max=".$connexion->quote($weightmax)."")
 				&&
-				$connexion->exec("INSERT INTO Searched_breeds VALUES("$cats","$breeds")")
+				$connexion->exec("INSERT INTO Searched_breeds VALUES(".$connexion->quote($cats).",".$connexion->quote($breeds).")")
 				&&
-				$connexion->exec("INSERT INTO Searched_colors VALUES("$cats","$colors")")) 
+				$connexion->exec("INSERT INTO Searched_colors VALUES(".$connexion->quote($cats).",".$connexion->quote($colors).")")) 
 				{
 					$queries++;
 					$queries++;?>
