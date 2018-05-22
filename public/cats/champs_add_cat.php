@@ -122,8 +122,8 @@ include('../includes/top.php');?>
 				".$connexion->quote($sexe).",".$connexion->quote($ssexe).",".$connexion->quote($coat).",'0','3',".$connexion->quote($weight).",'0','15')";
 				
 				if($connexion->exec("INSERT INTO Cats VALUES(".$connexion->quote($fetch->max_id+1).",".$_SESSION['id_user'].",".$connexion->quote($name).",
-				".$connexion->quote($purity).",".$connexion->quote($pattern).",".$connexion->quote($birthdate).",'0','13',".$connexion->quote($size).",'0','6',
-				".$connexion->quote($sexe).",".$connexion->quote($ssexe).",".$connexion->quote($coat).",'0','3',".$connexion->quote($weight).",'0','15')"))
+				".$connexion->quote($purity).",".$connexion->quote($pattern).",".$connexion->quote($birthdate).",'0','13',".$connexion->quote($size).",'0','5',
+				".$connexion->quote($sexe).",".$connexion->quote($ssexe).",".$connexion->quote($coat).",'0','2',".$connexion->quote($weight).",'0','15')"))
 				{
 					$queries++;
 				?>
