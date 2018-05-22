@@ -108,10 +108,13 @@ language=Caml,        % choix du langage de programmation
 
 	\paragraph{}
 	\large{A COMPLETER}\\
-		L'objectif de notre projet est de réaliser une application Web qui va tout copier de twitter et qui va leur voler tout le marché. Nous devons alors intégrer dans notre application les fonctionnalités suivantes : 
+	    Après analyse de toutes les opportunités d'application, nous avons choisi de développer une application de type Twitter. En effet, meme si celle-ci n'apparait pas comme étant la plus simple à créer c'est l'application qui nous parle le plus car nous sommes tous utilisateur de ce réseau-social.
+	    Le fait d'utiliser régulièrement cette application nous a permis de tout de suite cibler les services à offrir aux utilisateur.
+		L'objectif de notre projet est donc de réaliser une application Web qui va tout copier de twitter et qui va leur voler tout le marché. Nous devons alors intégrer dans notre application les fonctionnalités suivantes : 
 \begin{itemize}
 \item Inscription et Connexion d'utilisateur
 \item Publication de tweet 
+\item Modification du profil de l'utilisateur
 \item Hashtag et noms d'utilisateur cliquables
 \item Commentaires de tweet et de commentaires
 \item Possibilité de like des tweet
@@ -159,6 +162,25 @@ Pour cela, quelques informations lui sont demandé via un formulaire de type POS
 \item[Prenom :] De meme, le prénom est demandé.
 \item[Date de naissance :] Permet également de renseigner le profil de l'utilisateur. On pourrait également faire un test de majorité, mais l'application TwitIIE ne présente pour le momment aucun danger pour les personne mineures, l'accès leur est donc autorisé.
 \end{description}
+
+Nous avons eu quelques problématiques dans l'implémentation de ces deux fonctionnalités lors de la modification de la table (INSERT et UPDATE). Ces problèmes ont été résolus grace à l'utilisation d'un userManager. 
+
+
+\{La modification du profil}
+L'utilisateur a la possibilité de modifier son profil quand il le souhaite, pour cela il doit se rendre sur la page Modifier_profil.php accessible depuis la barre de navigation.
+L'utilisateur est ensuite invité à remplir un formulaire de modification contenant les champs suivants :
+\begin{description}
+\item[Ancien mot de passe :]
+\item[Nouveau mot de passe :]
+\item[Confirmation du nouveau mot de passe :]
+\item[Nom :]
+\item[Prenom :]
+\item[Date de naissance :]
+
+Les champs Ancien mot de passe, Nom, Prenom et Date de naissance doivent etre remplis. Pour faciliter l'utilisation nous remplissons avec les valeurs actuelles ces champ (sauf Ancien mot de passe bien-sur).
+Il n'a alors besoin de les modifier que s'il en a envie. Les champs sont alors mis a jours dans la base de données grace à un userManager. Nous mettons également à jour les variables de Session.
+
+
 
 \section{Les Abonnements}	
 
@@ -223,6 +245,10 @@ On a aussi décidé de créer une classe \texttt{Message} et une classe \texttt{
 
 Pour cette partie, on a principalement utilisé de l'AJAX pour envoyer des messages privés et pour charger les messages reçus automatiquement sans avoir besoin de réactualiser la page. Ces deux éléments sont les principales difficultés rencontrées pour réaliser cette fonctionnalité.
 
+
+\section{Le style de l'application}
+Pour la mise en page de notre application nous avons utilisé le CSS. La difficulté rencontrée ici a été de pouvoir se projeter et de s'accorder sur les couleurs et le style pour toutes les pages. Nous n'avons donc dans un premier temps pas pris compte de la mise en page de l'application pour se concentrer sur le fonctionnement de celle-ci.
+Une fois le projet avancé, nous avons réalisé des maquettes de toutes les pages afin d'avoir une idée plus claire de l'agencement de celles-ci. Nous avons ensuite choisi les couleurs de l'application grace au site color.adobe.com qui propose un panel de couleurs à associer.
 
 \newpage		
 \section{Répartition des tâches}
