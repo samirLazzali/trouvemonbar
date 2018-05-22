@@ -13,10 +13,11 @@ include('../includes/top.php');
 
 <br />
 
-                
+<center>                
 <a href="add.php">Ajouter un utilisateur</a>
                 
-
+<br/>
+<p></p>
 
 
 <table cellspacing="0" cellpadding="0" style="border:solid 1px black; font-family:verdana; font-size:12px;">
@@ -65,7 +66,7 @@ include('../includes/top.php');
     </tr>
   </tbody>
 </table> 
-
+</center>
 <?php
 include('../includes/bottom.php');
 ?>
