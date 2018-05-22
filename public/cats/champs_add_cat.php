@@ -122,9 +122,13 @@ include('../includes/top.php');?>
 				".$connexion->quote($size).",'0','5',".$connexion->quote($coat).",'0','3',".$connexion->quote($weight).",'0','15')"))
 				{
 					$queries++;
-				?>
-				<h1>Chat enregistré !</h1>
-				<?php
+					if($connexion->exec("INSERT INTO Cat_breed VALUES(".$connexion->quote($fetch->max_id+1).",".$connexion->quote($breed).")") {
+						$queries++;?>
+						<h1>Chat enregistré !</h1>
+					<?php }
+					else {
+						$_SESSION['erreurs']++;
+					}
 				}
 				
 				else
