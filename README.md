@@ -10,5 +10,5 @@
 Lien du site diffusé publiquement : https://tinyurl.com/meetiie
 
 ## Problème
-L'équipe Meetiie a eu des problèmes avec le Docker il n'est donc pas correctement configuré (nous avons du utilisé autre chose
+L'équipe Meetiie a eu des problèmes avec le Docker il n'est donc pas configuré (nous avons du utilisé autre chose
 que le Docker pour ce projet). Veuillez nous excuser par avance :'(
