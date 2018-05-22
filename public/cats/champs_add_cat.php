@@ -45,17 +45,19 @@ else
 	exit();
 }
 
+if(isset($_POST['breed']))
+{
+	$breed = trim($_POST['breed']);
+	$_SESSION['form_purity']=$breed;
+}
+
 if(isset($_POST['purity']))
 {
 	$purity = trim($_POST['purity']);
-	if ($purity != 'Yes') {
-	   $purity = false;
-	   }
-	else {
-		$purity = true;
-	}
 	$_SESSION['form_purity']=$purity;
-	   
+	if($purity == "FALSE") {
+		$breed = 21;
+	}
 }
 
 if(isset($_POST['birthdate']))
@@ -122,14 +124,10 @@ include('../includes/top.php');?>
 				$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 				$retour = $connexion->query("SELECT max(id_cat) AS max_id FROM cats");
 				$fetch = $retour -> fetch(PDO::FETCH_OBJ);
-
-				echo "INSERT INTO Cats VALUES(".$connexion->quote($fetch->max_id+1).",".$_SESSION['id_user'].",".$connexion->quote($name).",
-				".$connexion->quote($purity).",".$connexion->quote($pattern).",".$connexion->quote($birthdate).",'0','13',".$connexion->quote($size).",'0','6',
-				".$connexion->quote($sexe).",".$connexion->quote($ssexe).",".$connexion->quote($coat).",'0','3',".$connexion->quote($weight).",'0','15')";
 				
 				if($connexion->exec("INSERT INTO Cats VALUES(".$connexion->quote($fetch->max_id+1).",".$_SESSION['id_user'].",".$connexion->quote($name).",
-				".$connexion->quote($purity).",".$connexion->quote($pattern).",".$connexion->quote($birthdate).",'0','13',".$connexion->quote($size).",'0','6',
-				".$connexion->quote(.intval($sexe)).",".$connexion->quote(.intval($ssexe)).",".$connexion->quote(.intval($coat)).",'0','3',".$connexion->quote(.intval($weight)).",'0','15')"))
+				".$connexion->quote($purity).",".$connexion->quote($pattern).",".$connexion->quote($birthdate).",'0','13',".$connexion->quote($sexe).",".$connexion->quote($ssexe).",
+				".$connexion->quote($size).",'0','5',".$connexion->quote($coat).",'0','3',".$connexion->quote($weight).",'0','15')"))
 				{
 					$queries++;
 				?>
@@ -139,7 +137,6 @@ include('../includes/top.php');?>
 				
 				else
 				{
-					echo "Push raté";
 					if($_SESSION['form_name'] !== FALSE)
 					{
 						unset($_SESSION['form_name']);
