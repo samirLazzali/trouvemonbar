@@ -9,6 +9,10 @@ if ($connecte==0){
     header("Location:connexion.php");
     exit();
 }
+if ($_SESSION['id']!=3){
+    header("Location:index.php");
+    exit();
+}
 head("mp.css","Aperal : Ajouter une recette");
 _header();
 ?>
@@ -40,7 +44,7 @@ _header();
             </p>
             <input type='submit' value='Valider' name='bouton_valider'/>
         </form>
-        <button type="button" ONCLICK="window.location.href='recette.php'">Annuler</button>
+        <button type="button" ONCLICK="window.location.href='edition.php'">Annuler</button>
     </div>
 </div>
 </body>

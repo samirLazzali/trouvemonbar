@@ -17,33 +17,27 @@ if ($_SESSION['id']!=3){
 <html>
 <?php
 include("affichage.php");
-head("mp.css","Aperal : Ajouter une recette");
+head("mp.css","Aperal : Ajouter un ingrédient");
 _header();
 ?>
 <body>
 <div id="main">
     <div id="article_connection">
         <?php
-        if (empty($_POST['recette']) || empty($_POST['ingredients'])) {
-            echo "<a href=\"ajout_recette.php\">échec : veillez à remplir correctement les champs recette et ingrédients</a>";
+        if (empty($_POST['ingredient']) || empty($_POST['prix'])) {
+            echo "<a href=\"ajout_ingredient.php\">échec : veillez à remplir correctement les champs</a>";
         }
         else {
-            $ing = array();
-            foreach ($_POST['ingredients'] as $i){
-                $ing[]=$i;
-            }
-            $recette = $_POST['recette'];
-            $temps=$_POST['temps'];
+            $ing = $_POST['ingredient'];
             $prix=$_POST['prix'];
-            $descr=$_POST['description'];
             $connexion = db_connect();
-            $ajout = ajouter($ing, $recette,$temps,$prix,$descr,$connexion);
+            $ajout = ajouter_ing($ing, $prix,$connexion);
             db_close($connexion);
             if ($ajout == true) {
                 echo "<a href=\"index.php\">succès</a>";
             }
             else {
-                echo "<a href=\"edition.php\">La recette existe déjà</a>";
+                echo "<a href=\"edition.php\">L'ingrédient existe déjà</a>";
             }
         }
         ?>
@@ -53,4 +47,3 @@ _header();
 <?php
 _footer();
 ?>
-</html>

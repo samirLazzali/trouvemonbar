@@ -9,7 +9,7 @@ _header();
 <body>
 <div id="main">
     <div id="article_connection">
-        <h1>Connection</h1>
+        <h1>Inscription</h1>
         <form action="inscription_bd.php" method="post">
             <p>
                 Pseudonyme : <input type="text" size="20" maxlength="18" name="pseudo"/>

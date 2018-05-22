@@ -308,7 +308,8 @@ function article_recette(){
     db_close($connexion);
     echo "</p>";
     if (isset($_SESSION['ip']) && ($_SESSION['ip']==3)){
-        echo "<button type=\"button\" ONCLICK=\"window.location.href='ajout_recette.php'\">Ajouter une recette</button>";
+        echo "<button type=\"button\" ONCLICK=\"window.location.href='edition.php'\">Editer base de donnée</button>";
+
     }
     echo "</div>";
 }

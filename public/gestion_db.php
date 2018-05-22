@@ -192,6 +192,17 @@ function ajouter($ingredients,$recette,$temps,$prix,$description,$connexion){
     return true;
 }
 
+function ajouter_ing($ing,$prix,$connexion){
+    $instruction = $connexion->prepare("INSERT INTO \"Ingredients\"(nom_ing,prix) VALUES (:ing,:prix)");
+    $instruction->bindParam(':prix',$prix);
+    $instruction->bindParam(':ing',$ing);
+    $reponse = $instruction->execute();
+    if ($reponse==false){
+        return false;
+    }
+    return true;
+}
+
 function modif_droit($pseudo,$droit,$connexion){
     $instruction = $connexion->prepare("UPDATE \"user\" SET id=:id WHERE surname=:pseudo");
     $instruction->bindParam(':pseudo',$pseudo);
