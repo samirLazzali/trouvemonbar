@@ -179,7 +179,7 @@ INSERT INTO Breeds VALUES ('17','Manx');
 INSERT INTO Breeds VALUES ('18','Angora Turc');
 INSERT INTO Breeds VALUES ('19','Savannah');
 INSERT INTO Breeds VALUES ('20','Himalayen');
-INSERT INTO Breeds VALUES ('21','chat de goutière');
+INSERT INTO Breeds VALUES ('21','Chat de goutière');
 
 
 INSERT INTO Utilisateur VALUES ('1','Jesus','Jesus@paradise.net','406fcef6cb90b615f5e4c5239f05d4dc','0001001001','0'); /* mdp Amen0 :*/

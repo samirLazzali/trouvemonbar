@@ -45,11 +45,19 @@ else
 	exit();
 }
 
+if(isset($_POST['breed']))
+{
+	$breed = trim($_POST['breed']);
+	$_SESSION['form_purity']=$breed;
+}
+
 if(isset($_POST['purity']))
 {
 	$purity = trim($_POST['purity']);
 	$_SESSION['form_purity']=$purity;
-	   
+	if($purity == "FALSE") {
+		$breed = 21;
+	}
 }
 
 if(isset($_POST['birthdate']))
@@ -129,7 +137,6 @@ include('../includes/top.php');?>
 				
 				else
 				{
-					echo "Push raté";
 					if($_SESSION['form_name'] !== FALSE)
 					{
 						unset($_SESSION['form_name']);
