@@ -106,7 +106,10 @@ function affCompat($id_the_cat) {
     else {
         $res ="<tr><th>Nom</th><th>Numéro de téléphone</th></tr>";
         array_multisort($scorechatspot,SORT_DESC, $chatspot);
+        $cpt = 0;
         foreach($chatspot as $elu) {
+            if($cpt++ ==5)
+                break;
             $infoelu = $connexion->query("select phone_number, name_cat
                                                     from Utilisateur
                                                     join Cats ON owner = id_user 
