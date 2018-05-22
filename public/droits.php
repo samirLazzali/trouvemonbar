@@ -31,6 +31,7 @@ _header();
                 <input type="radio" name="droit" value="3"/>Administrateur
                 <br/>
                 <input type="submit" value="Valider" name="bouton_validation"/>
+                <button type="button" ONCLICK="window.location.href='index.php'">Annuler</button>
             </p>
         </form>
     </div>

@@ -21,7 +21,10 @@ _header();
     <div id="article_connection">
         <?php
         if (empty($_POST['pseudo']) || empty($_POST['droit'])) {
-            echo "<a href=\"changer_mdp.php\">Veillez à bien remplir les champs</a>";
+            echo "<a href=\"droits.php\">Veillez à bien remplir les champs</a>";
+        }
+        elseif ($_SESSION['pseudo']==$_POST['pseudo']){
+            echo "<a href=\"droits.php\">Vous ne pouvez pas changer vos propres droits</a>";
         }
         else {
             $pseudo=$_POST['pseudo'];
