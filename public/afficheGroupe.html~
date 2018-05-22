@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <article>
+      <p><?php
+	 $connexion = pg_connect("host=localhost dbname=ensiie");
+	 $requeteid = "SELECT id_grp FROM groupe WHERE utilisateur_n = $user;";
+	 $idgrp = pq_query($connexion,$requeteid);
+	 while($tmp = pg_fetch($idgrp)){
+	 while($match = pg_fetch($matchlist)){
+	 $requeteprono = "SELECT mise,pron FROM pronostique WHERE utilisateur_n = $user AND id_grp = $tmp AND match_n = $match;";
+	 $prono = pg_query($connexion,$requetepron);
+	 echo "$match pronostique: $prono['pron'] mise: $prono['mise']"; 
+	 }
+	 $requeteuser = "SELECT utilisateur_n FROM groupe WHERE id_grp = $tmp;";
+	 $usernames = pg_query($connexion,$requeteuser);
+	 echo "Membres du groupe:";
+	 foreach ($usernames as $names){
+	 echo ", $names";
+	 }
+	  ?>
+	</p>
+    </article>
+  </body>
+</html>

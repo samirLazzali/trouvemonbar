@@ -1,0 +1,64 @@
+<?php
+//on teste si le visiteur a rempli le formulaire
+if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription'){
+    
+    //on vérifie que nos variables existent et ne sont pas vides
+    if ((isset($_POST['nom']) && !empty($_POST['nom'])) && (isset($_POST['mdp']) && !empty($_POST['mdp'])) && (isset($_POST['mdp2']) && !empty($_POST['mdp2']))){
+        
+        //on regarde si les 2 mdp sont les mêmes
+        if($_POST['mdp'] != $_POST['mdp2']){
+            $erreur = 'Les 2 mots de passe sont différents.';
+        }
+        else{
+            $base = mysql_connect('serveur', 'nom', 'mdp');
+            mysql_select_db('nom_base', $base);
+            
+            //on regarde si ce nom n'est pas déjà utilisé
+            $sql = 'SELECT count(*) FROM utilisateur WHERE nom="'.mysql_escape_string($_POST['login']).'"';
+            $req = mysql_query($sql) or die('Erreur SQL <br />'.$sql.'<br />'.mysql_error());
+            $dara = mysql_fetch_array($req);
+            
+            if($data[0] == 0){
+                $sql = 'INSERT INTO utilisateur VALUES("'.mysql_escape_string($_POST['nom']).'","'.mysql_escape_string($_POST['mdp']).'","'.mysql_escape_string($_POST['efav']).'","'0'","'.mysql_escape_string($_POST['desc']).'","");
+                mysql_query($sql) or die('Erreur SQL '.$sql.'<br />'.mysql_error());
+                
+                session_start();
+                $_SESSION['nom'] = $_POST['nom'];
+                header('Location: membre.php');
+                exit();
+            }
+            
+            else{
+                $erreur = 'Ce nom est déjà pris. Veuillez en choisir un autre.';
+            }
+        }
+        else{
+            $erreur = 'Au moins un des champs est vide.';
+        }
+    }
+?>
+
+
+
+<html>
+<head>
+<title>Inscription</title>
+</head>
+
+<body>
+Inscription à l'espace membre: <br />
+<form action="inscription.php" method="post">
+Nom: <input type="text" name="nom" value="<?php if (isset($_POST['nom'])) echo htmlentities(trim($_POST['nom'])); ?>"><br />
+Mot de passe: <input type="password" name="mdp" value="<?php if (isset($_POST['mdp'])) echo htmlentities(trim($_POST['mdp'])); ?>"><br />
+Confirmation du mot de passe : <input type="password" name="mdp2" value="<?php if (isset($_POST['mdp2'])) echo htmlentities(trim($_POST['mdp2'])); ?>"><br />
+Equipe favorite: <input type="text" name="efav" value="<?php if (isset($_POST['efav'])) echo htmlentities(trim($_POST['efav'])); ?>"><br />
+Description(200 mots max): <input type="text" name="desc" value="<?php if (isset($_POST['desc'])) echo htmlentities(trim($_POST['desc'])); ?>"><br />
+<input type="submit" name="inscription" value="Inscription">
+</form>
+
+<?php
+if (isset($erreur)) echo '<br />',$erreur;
+?>
+
+</body>
+</html>

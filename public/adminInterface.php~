@@ -1,0 +1,79 @@
+<?php
+   $dbName = getenv('DB_NAME');
+   $dbUser = getenv('DB_USER');
+   $dbPassword = getenv('DB_PASSWORD');
+   $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
+   ?>
+
+<html>
+  <body>
+    <p>Ajout D'un match:
+      <form action="gestionAdmin.php" method="post">
+	<select name="equipe1">
+	  <?php	
+	     $requete = "SELECT nom FROM equipe;";
+	     $reponse = $connection->prepare($requete);
+	     $reponse->execute();
+	     foreach($reponse as $nomequipe){
+	       $nomeq = $nomequipe['nom'];
+	       echo "<option value=$nomeq>$nomeq</option>";
+	     }
+	     ?>
+	</select>
+	<select name="equipe2">
+	  <?php
+	     $requete = "SELECT nom FROM equipe;";
+	     $reponse = $connection->prepare($requete);
+	     $reponse->execute();
+	     foreach($reponse as $nomequipe){
+	       $nomeq = $nomequipe['nom'];
+	       echo "<option value=$nomeq>$nomeq</option>";
+	     }
+	     ?>
+	</select>
+	<input type="date" name="matchdate">
+	<input type="submit" value="Ajouter" name="ajouequip">
+      </form>
+      <form action="gestionAdmin.php" method="post">
+	<select name="equipe1">
+	  <?php	
+	     $requete = "SELECT nom FROM equipe;";
+	     $reponse = $connection->prepare($requete);
+	     $reponse->execute();
+	     foreach($reponse as $nomequipe){
+	       $nomeq = $nomequipe['nom'];
+	       echo "<option value=$nomeq>$nomeq</option>";
+	     }
+	     ?>
+	</select>
+	<select name="equipe2">
+	  <?php
+	     $requete = "SELECT nom FROM equipe;";
+	     $reponse = $connection->prepare($requete);
+	     $reponse->execute();
+	     foreach($reponse as $nomequipe){
+	       $nomeq = $nomequipe['nom'];
+	       echo "<option value=$nomeq>$nomeq</option>";
+	     }
+	     ?>
+	</select>
+	<input type="date" name="matchdate">
+	<input type="submit" value="Supprimer" name="suprequip">
+      </form>
+      Ban un joueur:
+      <form action="gestionAdmin.php" method="post">
+	<input type="text" size="20" maxlength="20" name="user"/>
+	<input type="submit" value="Supprimer" name="banuser">
+      </form>
+      <?php
+      $requete = "SELECT nom_match FROM matchs;";
+      $reponse = $connection->prepare($requete);
+      $reponse->execute();
+      foreach($reponse as $nomequipe){
+          $nomeq = $nomequipe['nom_match'];
+	  echo $nomeq;
+      }
+      ?>
+    </p>
+  </body>
+</html>

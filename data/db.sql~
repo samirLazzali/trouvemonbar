@@ -1,0 +1,63 @@
+CREATE TABLE "utilisateur" (
+       nom VARCHAR(16) PRIMARY KEY,
+       mdp VARCHAR(16) NOT NULL,
+       e_fav VARCHAR(20),
+       score INT,
+       description VARCHAR(200),
+       administrateur BOOLEAN);
+
+CREATE TABLE "groupe" (
+       id_grp INT NOT NULL,
+       utilisateur_n VARCHAR(16) REFERENCES utilisateur(nom) NOT NULL,
+       solde INT,
+       balance INT,
+       PRIMARY KEY (id_grp, utilisateur_n));
+
+CREATE TABLE "matchs" (
+       nom_match VARCHAR(43) PRIMARY KEY,
+       date_m DATE NOT NULL,
+       resultat VARCHAR(1),
+       cote_1 INT,
+       cote_N INT,
+       cote_2 INT);
+
+CREATE TABLE "pronostics" (
+       utilisateur_n VARCHAR(16) REFERENCES utilisateur(nom) NOT NULL,
+       id_grp INT  NOT NULL,
+       match_n VARCHAR(43) REFERENCES matchs(nom_match) NOT NULL,
+       mise INT,
+       pron VARCHAR(1),
+       FOREIGN KEY (id_grp,utilisateur_n) REFERENCES groupe(id_grp,utilisateur_n),
+       PRIMARY KEY (utilisateur_n,id_grp,match_n));
+
+CREATE TABLE "equipe" (
+       nom VARCHAR(20) PRIMARY KEY,
+       lien_ecusson VARCHAR(200));
+
+INSERT INTO "utilisateur"(nom, mdp, administrateur) VALUES ('Admin', 'Admin', TRUE);
+
+INSERT INTO "equipe"(nom) VALUES ('PSG');
+INSERT INTO "equipe"(nom) VALUES ('ASSE');
+
+INSERT INTO "equipe"(nom,lien_ecusson) VALUES ('Paris SG','https://static.footballinclusive.com/media/7s5z2w3l9z9u0i3l3y9z/Paris-Saint-Germain-2013-2060-team-logo.svg');
+INSERT INTO "equipe"(nom,lien_ecusson) VALUES ('AS Saint-Etienne','https://i.pinimg.com/originals/42/63/3b/42633bce9c4882938e55e7bd340b9c02.png');
+INSERT INTO "equipe"(nom,lien_ecusson) VALUES ('AS Monaco','https://upload.wikimedia.org/wikipedia/fr/thumb/b/ba/AS_Monaco_FC.svg/590px-AS_Monaco_FC.svg.png');
+INSERT INTO "equipe"(nom,lien_ecusson) VALUES ('O Lyon','https://is1-ssl.mzstatic.com/image/thumb/Purple118/v4/63/53/9d/63539d03-a926-31f0-77bb-30d2d4c622a7/mzl.jgalnouq.jpg/246x0w.jpg');
+INSERT INTO "equipe"(nom,lien_ecusson) VALUES ('O Marseille','https://i.pinimg.com/474x/8d/9b/b4/8d9bb4053b75d617c639d82f833b6792.jpg');
+INSERT INTO "equipe"(nom,lien_ecusson) VALUES ('OGC Nice','https://pbs.twimg.com/profile_images/883077780040241159/jTYP7yvM.jpg');
+INSERT INTO "equipe"(nom,lien_ecusson) VALUES ('Gd Bordeaux','https://futhead.cursecdn.com/static/img/17/clubs/59.png');
+INSERT INTO "equipe"(nom,lien_ecusson) VALUES ('S Rennes','https://i.pinimg.com/originals/ee/6e/9d/ee6e9dbd9975b0150fd8fa6aeb7c3cc1.png');
+INSERT INTO "equipe"(nom,lien_ecusson) VALUES ('EA Guingamp','https://media.eterritoire.fr/?u=aHR0cDovL2NkdDI5Lm1lZGlhLnRvdXJpbnNvZnQuY29tL3VwbG9hZC9EMTY4MkVGRC1CNDVCLTQ3ODItOEUyRi0yMUQxRUNBMjM0QUEvbG9nby1FQUctNy5qcGc~');
+INSERT INTO "equipe"(nom,lien_ecusson) VALUES ('RC Strasbourg','https://static.footballinclusive.com/media/d5805e9a52a309f4eef8/RC-Strasbourg-Alsace-2012-2060-team-logo.svg');
+INSERT INTO "equipe"(nom,lien_ecusson) VALUES ('AS Amiens','https://static.footballinclusive.com/media/4a3u5t3g5i3x9s8j5e7a/Amiens-SC-1900-2060-team-logo.svg');
+INSERT INTO "equipe"(nom,lien_ecusson) VALUES ('Lille OSC','https://i.pinimg.com/originals/ec/3e/75/ec3e75824ebe1387f7362a746285dbcb.png');
+INSERT INTO "equipe"(nom,lien_ecusson) VALUES ('SCO Angers','https://as01.epimg.net/img/comunes/fotos/fichas/equipos/large/4241.png');
+INSERT INTO "equipe"(nom,lien_ecusson) VALUES ('ESTAC Troyes','http://fr.fcmulhouse.net/wp-content/uploads/2018/04/ESTAC-Troyes.png');
+INSERT INTO "equipe"(nom,lien_ecusson) VALUES ('FC Nantes','https://i.pinimg.com/originals/51/63/45/51634540aa3bb9abbcd5514f426d7d12.png');
+INSERT INTO "equipe"(nom,lien_ecusson) VALUES ('Dijon FCO','http://www.getfootballnewsfrance.com/assets/Dijon.jpg');
+INSERT INTO "equipe"(nom,lien_ecusson) VALUES ('Toulouse FC','http://www.iol.pt/multimedia/oratvi/multimedia/imagem/id/13294575/');
+INSERT INTO "equipe"(nom,lien_ecusson) VALUES ('SM Caen','https://static.footballinclusive.com/media/3m8x8c5y6t6m4u8c6t9c/Stade-Malherbe-de-Caen-2016-2060-team-logo.svg');
+INSERT INTO "equipe"(nom,lien_ecusson) VALUES ('Montpellier HSC','https://upload.wikimedia.org/wikipedia/lv/a/a8/Montpellier_HSC_logo.svg');
+INSERT INTO "equipe"(nom,lien_ecusson) VALUES ('FC Metz','https://upload.wikimedia.org/wikipedia/fr/thumb/2/20/FC-Metz.svg/1200px-FC-Metz.svg.png');
+
+       

@@ -1,0 +1,137 @@
+<?php
+$dbName = getenv('DB_NAME');
+$dbUser = getenv('DB_USER');
+$dbPassword = getenv('DB_PASSWORD');
+$connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
+
+//on regarde si le visiteur s'est connecté
+if (isset($_POST['connexion']) && $_POST['connexion']){
+    if (isset($_POST['nom']) && isset($_POST['mdp'])){
+        //on regarde si la base contient ce couple nom/pw
+        $requete = "SELECT count(*) FROM utilisateur WHERE nom=? AND mdp=?;";
+        $rep = $connection->prepare($requete);
+        $rep->execute(array($_POST['nom'],$_POST['mdp']));
+        
+        //si on a une réponse, le visiteur a un compte
+        if ($rep){
+            session_start();
+            $_SESSION['nom'] = $_POST['nom'];
+            header('Location:membre.php');
+            exit();
+        }
+        
+        //si on n'a pas de réponse, l'utilisateur s'est trompé dans son nom/mdp
+        elseif (!$rep){
+            $erreur = 'Compte non reconnu.';
+        }
+        
+        //sinon, pb dans la bdd
+        else{
+            $erreur = 'Problème dans la base de données: plusieurs membres ont les mêmes identifiants';
+        }
+    }
+    
+    //les deux champs ne sont pas remplis
+    else{
+        $erreur = 'Au moins un des champs est vide.';
+    }
+}
+
+//on teste si le visiteur a rempli le formulaire
+if (isset($_POST['inscription']) && $_POST['inscription']){
+    
+    //on vérifie que nos variables existent et ne sont pas vides
+    if ((isset($_POST['nom']) && !empty($_POST['nom'])) && (isset($_POST['mdp']) && !empty($_POST['mdp'])) && (isset($_POST['mdp2']) && !empty($_POST['mdp2']))){
+        
+        //on regarde si les 2 mdp sont les mêmes
+        if($_POST['mdp'] != $_POST['mdp2']){
+            $erreur = 'Les 2 mots de passe sont différents.';
+        }
+        else{
+            //on regarde si ce nom n'est pas déjà utilisé
+            $nom = $_POST['nom'];
+            $req = "SELECT count(*) FROM utilisateur WHERE nom=$nom;";
+            $rep = $connection->prepare($req);
+            $rep->execute();
+	    $nb = $rep->fetch();
+            
+            if($nb == 0){
+                $mdp = $_POST['mdp'];
+                $efav = $_POST['efav'];
+                $desc = $_POST['desc'];
+                $req2 = "INSERT INTO utilisateur(nom,mdp,e_fav,score,description,administrateur) VALUES ('$nom', '$mdp', '$efav', '0', '$desc', 'f');";
+                $rep2 = $connection->prepare($req2);
+                $rep2->execute();
+                
+                session_start();
+                $_SESSION['nom'] = $_POST['nom'];
+                header('Location: membre.php');
+                exit();
+            }
+            
+            else{
+                $erreur = 'Ce nom est déjà pris. Veuillez en choisir un autre.';
+            }
+        }
+    }
+    else{
+        $erreur = 'Au moins un des champs est vide.';
+    }
+}
+
+echo '<script src="script.js"></script>';
+
+?>
+
+
+
+<html>
+    <head>
+        <link rel="stylesheet" href="css.css"
+        <title>Projet Prono</title>
+    </head>
+    <body>
+        <div class="accueil">
+            <div class="form">
+                <form class="connexion" action="index.php" method="post">
+                    <input type="text" name="nom" placeholder="Nom" ><br/>
+                    <input type="password" name="mdp" placeholder="Mot de passe" ><br/>
+                    <input type="submit" name="connexion" value="Connexion">
+                    <p class="message">Pas encore inscrit? <a href="#">Créez un compte !</a></p>
+                </form>
+        
+                <form class="inscription" action="index.php" method="post">
+                    <input type="text" name="nom" placeholder="Nom"><br />
+                    <input type="password" name="mdp" placeholder="Mot de passe"><br />
+                    <input type="password" placeholder="Confirmation du mot de passe" name="mdp2"><br />
+                    Equipe favorite: <select name="efav">
+                    <?php
+                    $req3 = "SELECT nom FROM equipe;";
+                    $rep3 = $connection->prepare($req3);
+                    $rep3->execute();
+                    foreach($rep3 as $nomequipe){
+                        $nomeq = $nomequipe['nom'];
+                        echo "<option value='" . $nomeq ."'>$nomeq</option>";
+                    }
+                    ?>
+                    </select>
+                    <input type="text" name="desc" placeholder="Description (200 caractères max)"><br />
+                    <input type="submit" name="inscription" value="Inscription">
+                    <p class="message">Déjà inscrit? <a href="#">Connectez-vous !</a></p>
+                </form>
+            </div>
+        </div>
+    
+        <?php
+        if (isset($erreur)) echo '<br /><br />',$erreur;
+        ?>
+    
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script>
+             $('.message a').click(function(){
+                $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+            });
+        </script>
+        
+    </body>
+</html>

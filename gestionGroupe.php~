@@ -1,0 +1,64 @@
+<?php
+   $dbName = getenv('DB_NAME');
+   $dbUser = getenv('DB_USER');
+   $dbPassword = getenv('DB_PASSWORD');
+   $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
+   $user = 'Admin';
+
+   $matchlist = $connection->prepare("SELECT nom_match FROM Matchs;");
+   $matchlist->execute();
+
+   if(array_key_exists("nouvgroupe",$_POST) && $_POST['nouvgroupe']){
+     $requete = "SELECT MAX(idgrp) FROM groupe";
+     $idgroupe = $connection->prepare($requete);
+     $idgroupe->execute();
+     $idgroup = $idgroupe->fetchAll();
+     if(empty($idgroup)){
+       $idgroup = 1;
+     }
+     else{
+       $idgroup = $idgroup['idgrp']++;
+     }
+     $groupeplayer="";
+     for($j = 0; $j < 5; $j++){
+       $joueur = "joueur" . $j;
+       $groupeplayer = $_POST[$joueur];
+       if(!empty($groupeplayer)){
+         $rep = $connection->prepare("INSERT INTO groupe(id_grp,utilisateur_n,solde,balance) VALUES ('$idgroup', '$groupeplayer', '1000', '1000');");
+         $rep->execute();
+       }
+     }
+     $rep = $connection->prepare("INSERT INTO groupe(id_grp,utilisateur_n,solde,balance) VALUES ('$idgroup', '$user', '1000', '1000');");
+     $rep->execute();
+     echo "Groupe creer !";
+   }
+   
+   if(array_key_exists("parier",$_POST) && $_POST['parier']){
+     $grp = $_POST['group'];
+     $match = $_POST['match'];
+     $mise = 0;
+     if(isset($_POST['mise'])){
+       $mise = $_POST['mise'];
+     }
+     $prono = (string) $_POST['prono'];
+     $balance = $_POST['balance'] - $mise;
+
+     $requete = "SELECT id_grp,mise FROM pronostics WHERE id_grp = '$grp' AND utilisateur_n = '$user' AND match_n = '$match';";
+     $rep = $connection->prepare($requete);
+     $rep->execute();
+     $repon = $rep->fetch();
+
+     $requete = "INSERT INTO pronostics(utilisateur_n,id_grp,match_n,mise,pron) VALUES ('$user','$grp','$match', '$mise', '$prono');";
+     if(isset($repon['id_grp'])){
+       $requete = "UPDATE pronostics SET pron = '$prono', mise = '$mise' WHERE id_grp = '$grp' AND utilisateur_n = '$user' AND match_n = '$match';";
+       $balance = $balance + $repon['mise'];
+     }
+     $rep = $connection->prepare($requete);
+     $rep->execute();
+     $requete = "UPDATE groupe SET balance = '$balance' WHERE id_grp = '$grp' AND utilisateur_n = '$user';";
+     $rep = $connection->prepare($requete);
+     $rep->execute();
+   }
+
+   header("Location: index.php");
+   ?>

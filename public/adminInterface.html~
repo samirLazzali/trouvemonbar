@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <p>Ajout D'un match:
+      <form action="ajoutEquip.php" method="post">
+	<select name="equipe1">
+	  <?php
+	     $connexion = pg_connect("host=localhost:5431 dbname=php-docker.local");
+	     $requete = "SELECT nom FROM equipe;";
+	     $reponse = pg_query($connexion,$requete);
+	     while($nomequipe = pg_fetch($reponse)){
+	       echo "<option value=$nomequipe>$nomequipe</option>";
+	     }
+	     ?>
+	</select>
+	<select name="equipe2">
+	  <?php
+	     $connexion = pg_connect("host=127.0.0.1:5431 dbname=ensiie");
+	     $requete = "SELECT nom FROM equipe;";
+	     $reponse = pg_query($connexion,$requete);
+	     while($nomequipe = pg_fetch($reponse)){
+	       echo "<option value=$nomequipe>$nomequipe</option>";
+	     }
+	     ?>
+	</select>
+	<input type="date" name="matchdate">
+	<input type="submit" value="Ajouter" name="ajouequip">
+      </form>
+      <form action="supprEquip.php" method="post">
+	<select name="equipe1">
+	  <?php
+	     $connexion = pg_connect("host=127.0.0.1 dbname=ensiie");
+	     $requete = "SELECT nom FROM equipe;";
+	     $reponse = pg_query($connexion,$requete);
+	     while($nomequipe = pg_fetch($reponse)){
+	       echo "<option value=$nomequipe>$nomequipe</option>";
+	     }
+	     ?>
+	</select>
+	<select name="equipe2">
+	  <?php
+	     $connexion = pg_connect("host=127.0.0.1 dbname=ensiie");
+	     $requete = "SELECT nom FROM equipe;";
+	     $reponse = pg_query($connexion,$requete);
+	     while($nomequipe = pg_fetch($reponse)){
+	       echo "<option value=$nomequipe>$nomequipe</option>";
+	     }
+	     ?>
+	</select>
+	<input type="date" name="matchdate">
+	<input type="submit" value="Supprimer" name="suprequip">
+      </form>
+      Ban un joueur:
+      <form action="banuser.php" method="post">
+	<input type="text" size="20" maxlength="20" name="user"/>
+	<input type="submit" value="Supprimer" name="banuser">
+      </form>
+    </p>
+  </body>
+</html>

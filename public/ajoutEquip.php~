@@ -1,0 +1,19 @@
+<?php
+   $dbName = getenv('DB_NAME');
+   $dbUser = getenv('DB_USER');
+   $dbPassword = getenv('DB_PASSWORD');
+   $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
+   ?>
+
+<html>
+  <body>
+    <?php
+       $match = "$_POST['equipe1'] - $_POST['equipe2']";
+       $date = $_POST['matchdate'];
+       $requete = "INSERT INTO matchs(nom_match,date_m) VALUES ('$match', '$date');";
+       $rep = connection->prepare($requete);
+    $rep->execute();
+    echo "$rep";
+    ?>
+  </body>
+</html>

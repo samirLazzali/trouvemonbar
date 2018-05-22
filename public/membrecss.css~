@@ -1,0 +1,5 @@
+.profile {
+    with: 360px;
+    padding: 8% 0 0;
+    margin: auto;
+}

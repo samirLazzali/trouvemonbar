@@ -1,0 +1,77 @@
+<?php
+   $dbName = getenv('DB_NAME');
+   $dbUser = getenv('DB_USER');
+   $dbPassword = getenv('DB_PASSWORD');
+   $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
+   $user = 'Admin';
+
+   $matchlist = $connection->prepare("SELECT nom_match FROM Matchs;");
+   $matchlist->execute();
+   ?>
+
+<html>
+  <body>
+	<?php
+	$requeteid = "SELECT id_grp FROM groupe WHERE utilisateur_n = '$user';";
+	$idgrp = $connection->prepare($requeteid);
+	$idgrp->execute();
+	foreach($idgrp as $temp){
+	   $tmp = $temp['id_grp'];
+	   if(!empty($tmp)){
+	     $requetebal = "SELECT solde FROM groupe WHERE utilisateur_n = '$user' AND id_grp = $tmp";
+	     $bal = $connection->prepare($requetebal);
+	     $bal->execute();
+	     $balance = $bal->fetch();
+	     $balance = $balance['solde'];
+	     echo "Solde: " . $balance . "<br />";
+	     foreach($matchlist as $match){
+	       $m = $match['nom_match'];
+	       echo $m . " ";
+	       $requeteprono = "SELECT mise,pron FROM pronostics WHERE utilisateur_n = '$user' AND id_grp = '$tmp' AND match_n = '$m';";
+	       $prono = $connection->prepare($requeteprono);
+	       $prono->execute();
+	       foreach($prono as $p){
+	         echo "pronostique: " . $p['pron'] . " mise: " . $p['mise'];
+	       }
+	       echo "<br />";
+	       echo "Parier: ";
+	       echo "<form action=gestionGroupe.php method=post>";
+	       echo "<select name=prono>";
+	       echo "<option value=1>1</option>";
+	       echo "<option value=0>0</option>";
+	       echo "<option value=2>2</option>";
+	       echo "</select>";
+	       echo "<input type=number name=mise min=0 max=$balance>";
+	       echo "<input type=submit value=Parier name=parier >";
+	       echo "<input type=hidden name=match value='" . $m ."' >";
+	       echo "<input type=hidden name=group value=$tmp>";
+	       echo "<input type=hidden name=balance value=$balance>";
+	       echo "<input type=hidden name=user value='" . $user ."' >";
+	       echo "</form>";
+	       echo "<br />";
+	     }
+	     
+	     $requeteuser = "SELECT utilisateur_n FROM groupe WHERE id_grp = $tmp;";
+	     $usernames = $connection->prepare($requeteuser);
+	     $usernames->execute();
+	     echo "Membres du groupe:";
+	     foreach ($usernames as $names){
+	       echo $names['utilisateur_n'] . ", ";
+	     }
+	  }
+	}
+	?>
+	<form action="gestionGroupe.php" method="post">
+	  Creer un groupe:<br />Membres (5 max, vous exclu):<br />
+	  <?php
+	  for($j = 0;$j < 5;$j++){
+	  $joueur = "joueur"  . $j;
+	    echo "<input type=text size=20 maxlength=16 name=$joueur /><br />";
+	  }
+	  ?>
+	  <input type="submit" value="Creer" name="nouvgroupe">
+	  <input type="hidden" name="user" value="$user" >
+	</form>
+  </body>
+</html>
+
