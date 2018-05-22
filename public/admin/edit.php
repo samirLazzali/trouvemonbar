@@ -7,13 +7,8 @@ include('../includes/config.php');
 include('../includes/functions.php');
 actualiser_session();
 
-if(isset($_SESSION['id_user']))
-{
-    header('Location: '.ROOTPATH.'/index.php');
-    exit();
-}
 
-include('topCrud.php');
+include('../includes/top.php');
 
 $titre = 'Inscription';
 ?>

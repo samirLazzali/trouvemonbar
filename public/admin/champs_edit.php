@@ -6,11 +6,6 @@ include('../includes/config.php');
 
 include('../includes/functions.php');
 actualiser_session();
-if(isset($_SESSION['id_user']))
-{
-	header('Location: '.ROOTPATH.'/index.php');
-	exit();
-}
 
 
 $dbName = getenv('DB_NAME');
@@ -185,7 +180,7 @@ else
 if($_SESSION['erreurs'] > 0) $titre = 'Erreur lors de la modification';
 else $titre = 'Finalisation de la modification';
 
-include('topCrud.php');?>
+include('../includes/top.php');?>
 		
 		<div id="contenu">
 			<?php
