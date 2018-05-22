@@ -37,33 +37,68 @@ include('../includes/top.php');
 				<fieldset><legend>Renseignements</legend>
 				<table>
 					<tr>
-					<td><label for="pseudo" class="float">Nom d'utilisateur :</label></td>
-					<td><input type="text" name="login" id="login" size="30" /></td>
+					<?php $_SESSION['prev_mail']='exemple@mail.fr';
+					$_SESSION['prev_pseudo']='Pseudo';
+					$_SESSION['prev_mdp']='MDPP';
+					$_SESSION['prev_mdpbis']='MDPP';
+					$_SESSION['prev_mailbis']='exemple@mail.fr';
+					$_SESSION['prev_tel']='0102030405';
+					?>
+					<td><label for="pseudo" value=<?php $_SESSION['prev_pseudo'] ?> class="float">Nom d'utilisateur :</label></td>
+
+					<?php
+					echo '<td><input type="text" name="login" value='.$_SESSION['prev_pseudo']. ' id="login" size="30" /></td>'
+					?>
+
+					
+
 					<td><em> (compris entre 3 et 32 caractères)</em></td>
 					</tr>
 					<tr>
 					<td><label for="mdp" class="float">Mot de passe :</label></td>
-					<td><input type="password" name="password" id="password" size="30" /></td>
+					
+					<?php
+					echo '<td><input type="password" name="password" value='.$_SESSION['prev_mdp']. ' id="password" size="30" /></td>'
+					?>
+
 					<td><em>(compris entre 4 et 50 caractères, avec au moins un chiffre et une majuscule)</em></td>
 					</tr>
 					<tr>
 					<td><label for="mdp_verif" class="float">Mot de passe (vérification) :</label></td>
-					<td><input type="password" name="password_verif" id="password_verif" size="30" /></td>
+
+					<?php
+					echo '<td><input type="password" name="password_verif" value='.$_SESSION['prev_mdpbis']. ' id="password_verif" size="30" /></td>'
+					?>
 					<td></td>
 					</tr>
 					<tr>
+					
 					<td><label for="mail" class="float">Mail :</label></td>
-					<td><input type="text" name="mail" id="mail" size="30" /></td>
+
+					<?php
+					echo '<td><input type="text" name="mail" value='.$_SESSION['prev_mail']. ' id="mail" size="30" /></td>'
+					?>
+
 					<td></td>
 					</tr>
 					<tr>
 					<td><label for="mail_verif" class="float">Mail (vérification) :</label></td>
-					<td><input type="text" name="mail_verif" id="mail_verif" size="30" /></td>
+
+					<?php
+					echo '<td><input type="text" name="mail_verif" value='.$_SESSION['prev_mailbis']. ' id="mail_verif" size="30" /></td>'
+					?>
+
 					<td></td>
 					</tr>
 					<tr>
 					<td><label for="phone_number" class="float">Numéro de téléphone :</label></td>
-					<td><input type="integer" name="phone_number" id="phone_number" size="30" /></td>
+					
+					<?php
+					echo '<td><input type="integer" name="phone_number" value='.$_SESSION['prev_tel']. ' id="phone_number" size="30" /></td>'
+					?>
+
+
+
 					<td></td>
 					</tr>
 				</table>
