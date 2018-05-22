@@ -28,7 +28,7 @@ foreach ($events as $e) {
 	if ($nbParticipants == 0)
 		$part = "Aucun participant";
 	else if ($nbParticipants == 1)
-		$part = "1 partipant";
+		$part = "1 participant";
 	else
 		$part = $nbParticipants . ' participants';
 	echo '<p class="text-right" href="#">'. $part . '</p>';
