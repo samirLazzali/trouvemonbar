@@ -62,7 +62,7 @@ if(isset($_POST['birthdate']))
 {
 	$password = trim($_POST['birthdate']);
 	$_SESSION['form_birthdate'] = $birthdate;
-	echo $birthdate
+	echo $birthdate;
 }
 	
 if(isset($_POST['sexe']))
@@ -125,11 +125,11 @@ include('../includes/top.php');?>
 				$fetch = $retour -> fetch(PDO::FETCH_OBJ);
 				
 				echo "INSERT INTO Cats VALUES(".$connexion->quote($fetch->max_id+1).",$_SESSION['id_user'],".$connexion->quote($name).",
-				".$connexion->quote($purity).",".$connexion->quote($birthdate).",NULL,NULL,,".$connexion->quote($size).",NULL,NULL,
+				".$connexion->quote($purity).",".$connexion->quote($pattern).",".$connexion->quote($birthdate).",NULL,NULL,,".$connexion->quote($size).",NULL,NULL,
 				".$connexion->quote($sexe).",".$connexion->quote($ssexe).",".$connexion->quote($coat).",NULL,NULL,".$connexion->quote($weight).",NULL,NULL)";
 				
-				if($connexion->exec("INSERT INTO Cats VALUES(".$connexion->quote($fetch->max_id+1).",'$_SESSION['id_user']',".$connexion->quote($name).",
-				".$connexion->quote($purity).",".$connexion->quote($birthdate).",NULL,NULL,,".$connexion->quote($size).",NULL,NULL,
+				if($connexion->exec("INSERT INTO Cats VALUES(".$connexion->quote($fetch->max_id+1).",$_SESSION['id_user'],".$connexion->quote($name).",
+				".$connexion->quote($purity).",".$connexion->quote($pattern).",".$connexion->quote($birthdate).",NULL,NULL,".$connexion->quote($size).",NULL,NULL,
 				".$connexion->quote($sexe).",".$connexion->quote($ssexe).",".$connexion->quote($coat).",NULL,NULL,".$connexion->quote($weight).",NULL,NULL)"))
 				{
 					$queries++;
