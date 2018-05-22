@@ -41,6 +41,22 @@ function recettes($connexion){
     $reponse = null;
     return $tab;
 }
+
+function descr_recettes($connexion){
+    $requete = "SELECT nom_rec,description FROM \"Recettes\"";
+    $reponse = $connexion->query($requete);
+    while ($tupleCourant = $reponse->fetch() ){
+        echo "<ul>";
+        $rec = $tupleCourant['nom_rec'];
+        echo "<li><strong><em>$rec</em></strong></li>";
+        $descr = $tupleCourant['description'];
+        echo "<p>$descr</p>";
+        echo "</br>";
+        echo "</ul>";
+    }
+    $reponse = null;
+}
+
 /**
  * @brief permet de récupérer les statistiques d'une soirée
  * @param $connexion un pdo et $soiree une soiree
