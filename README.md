@@ -1,32 +1,54 @@
-# Projet Web
+# Vitz 
 
-## A toujours faire avant de faire quoi que ce soit :
+## Groupe
 
-Récupérez les dernières modifications des autres, histoire d'éviter de devoir faire des fusions après.
+- Thomas Kowalski
+- Thibaut Milhaud
+- Florian Barre
+- Pierrick Barbarroux
+
+## Comptes existants 
+
+`Oxymore:motdepasse`
+
+Ou (à la place de `Oxymore`) : 
+
+- `Iko`
+- `Drascma`
+- `Yéti`
+
+Vous pouvez aussi créer votre propre compte, mais vous ne serez pas modérateur.
+
+**Remarque :** les noms de comptes (et les e-mails) ne sont pas sensibles à la casse.
+
+## Installation
 
 ```
-git pull
+make install
+```
+
+## Initialisation (importation) d'une BDD existatne
+
+```
+make db.init
+```
+
+**Remarque :** c'est automatiquement appelé à l'installation.
+
+En cas de problème avec l'importation, contactez-nous ou utilisez la récupération depuis Twitter automatique (partie suivante).
+
+## Récupération de tweets depuis Twitter
+
+Nous avons un script Python (utilisant `twarc`) qui permet de faire ça automatiquement :
+
+```
+cd tweet-extractor
+python3 extract.py # à arrêter quand on le souhaite
+python3 generationlikes.py # pour générer des likes / dislikes dans la BDD
+```
+
+## Exportation de la BDD 
+
+```
+make db.export
 ``` 
-
-## Lancer le projet en local
-
-* Ouvrez un terminal, exécutez `make start`.
-* Rendez-vous ici [http://localhost:8080](http://localhost:8080), le site fonctionne !
-
-## Connexion à la base de données
-
-Si vous avez besoin d'accéder à la BDD du site, utilisez
-
-`make db.connect`
-
-## Tests unitaires
-
-Je sais pas encore comment ça marche, mais ce sera exécuté comme ça :
-
-`make phpunit.run`
-
-## Quelques petits trucs :
-
-* Annuler un commit : `git reset`
-* Annuler tous les changements depuis le dernier commit : `git checkout .`
-* Installer Docker : il faut être chanceux (et courageux)

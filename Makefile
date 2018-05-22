@@ -54,6 +54,11 @@ db.init:
 	docker-compose exec postgres /bin/bash -c 'psql -U $$POSTGRES_USER -h localhost -f data/posts.pgsql'
 	docker-compose exec postgres /bin/bash -c 'psql -U $$POSTGRES_USER -h localhost -f data/subscription.pgsql'
 	docker-compose exec postgres /bin/bash -c 'psql -U $$POSTGRES_USER -h localhost -f data/report.pgsql'
+	docker-compose exec postgres /bin/bash -c 'psql -U $$POSTGRES_USER -h localhost -f data/bdd.pgsql'
+
+db.export:
+	docker-compose exec postgres /bin/bash -c 'pg_dump -U $$POSTGRES_USER -h localhost > bdd.pgsql'
+
 
 php.connect:
 	docker-compose exec php /bin/bash

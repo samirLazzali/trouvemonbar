@@ -234,7 +234,6 @@ class Post implements JsonSerializable
         foreach($rows as $row) {
             $p = Post::fromRow($row);
             $p->getAuthor();
-            $p->content = $p->toHtml();
             $result[] = $p;
         }
         return $result;
@@ -650,7 +649,6 @@ class Post implements JsonSerializable
     {
         $content = $this->content;
         $ex = preg_split("/[^[:alnum:]#@_éèàôöûüâäîïêëŷÿ]+/", $content);
-
         foreach($ex as $term)
         {
             $toAdd = $term;

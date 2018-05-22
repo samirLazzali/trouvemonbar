@@ -32,7 +32,7 @@ function timeConverter(UNIX_timestamp){
     var date = a.getDate();
     if (date < 10)
         date = '0' + date;
-    var hour = a.getHours() - 2;
+    var hour = a.getHours();
     if (hour < 10)
         hour = '0' + hour;
     var min = a.getMinutes();
