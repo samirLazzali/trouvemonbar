@@ -16,6 +16,32 @@ $userRepository = new \User\UserRepository($connection);
 $users = $userRepository->fetchAll();
 ?>
 
+<?php
+if (isset($_POST['caché']) && $_POST['caché']==1 ){
+    if (isset($_SESSION['connect']) && $_SESSION['connect']>=1) {
+        $iid = $connection->query("SELECT COUNT(*) AS nbr_reu FROM public.reunion")->fetch();
+        $nbr_reu=$iid['nbr_reu'];
+        $check=0;
+        $req_check=$connection->query("SELECT pseudo FROM public.participants WHERE id_reu=$nbr_reu ")->fetchAll();
+        foreach ($req_check as $r){
+            if ($r['pseudo']==$_SESSION['pseudo']){
+                $check=1;
+            }
+        }
+        if ($check==0) {
+            echo "$nbr_reu";
+            $req = $connection->prepare('INSERT INTO public.participants(id_reu,pseudo) VALUES (:id_reu,:pseudo)');
+            $req->execute(['id_reu' => $nbr_reu,
+                'pseudo' => $_SESSION['pseudo'],
+	    ]);
+        }
+    }
+    else {
+        echo 'Veuillez vous connecter avant de participer';
+        echo '<a href="connexion.php">Se connecter</a>';
+    }
+}
+?>
 
 <html>
 <head>
@@ -98,29 +124,3 @@ menu_navigation();
 </div>
 
 
-<?php
-if (isset($_POST['caché']) && $_POST['caché']==1 ){
-    if (isset($_SESSION['connect']) && $_SESSION['connect']>=1) {
-        $iid = $connection->query("SELECT COUNT(*) AS nbr_reu FROM public.reunion")->fetch();
-        $nbr_reu=$iid['nbr_reu'];
-        $check=0;
-        $req_check=$connection->query("SELECT pseudo FROM public.participants WHERE id_reu=$nbr_reu ")->fetchAll();
-        foreach ($req_check as $r){
-            if ($r['pseudo']==$_SESSION['pseudo']){
-                $check=1;
-            }
-        }
-        if ($check==0) {
-            echo "$nbr_reu";
-            $req = $connection->prepare('INSERT INTO public.participants(id_reu,pseudo) VALUES (:id_reu,:pseudo)');
-            $req->execute(['id_reu' => $nbr_reu,
-                'pseudo' => $_SESSION['pseudo'],
-	    ]);
-        }
-    }
-    else {
-        echo 'Veuillez vous connecter avant de participer';
-        echo '<a href="connexion.php">Se connecter</a>';
-    }
-}
-?>
