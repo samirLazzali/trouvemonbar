@@ -227,7 +227,7 @@ function empty_session()
 {
 	foreach($_SESSION as $cle => $element)
 	{
-		if ($cle != 'erreurs') unset($_SESSION[$cle]);
+		 unset($_SESSION[$cle]);
 
 	}
 }
