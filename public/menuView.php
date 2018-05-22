@@ -5,7 +5,7 @@
  * Date: 5/14/18
  * Time: 4:30 PM
  */
-function head(){
+function head2(){
     echo "<!DOCTYPE html>
     <html>
     <head>
@@ -17,33 +17,30 @@ function head(){
 }
 
 function tab($menu){
-    $days=['lundi','mardi','mercredi','jeudi','vendredi','samedi','Dimanche'];
+    $days=['lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche'];
 
 
     print'<div id="tab">';
-    print'    <table>';
-    print'    <thead style="font-weight: bold">';
-    print'      <td></td><td>Midi</td><td>Soir</td>';
-    print'  </thead>';
     $i=0;
     foreach ($days as $day){
 
       echo  "<div class=\" $day " . $day ."-1 clearfix\">
       <p class=\". $day .\">". strtoupper($day) ."</p>
-      <div class=\"dejeuner dejeuner-1 clearfix\">
+      <div class=\"dejeuner dejeuner-" . ($i+1) ." clearfix\">
         <p class=\"dejeuner\">Déjeuner</p>
         <p class=\"plat\" id=\"menu" . $i . "\">";
         afficherRecette("menu" . $i,$i,$menu[$i]);
         $i++;
         echo"</p>
       </div>
-      <div class=\"diner diner-1 clearfix\">
+      <div class=\"diner diner-" . ($i) ." clearfix\">
         <p class=\"diner\">Dîner</p>
         <p class=\"plat\" id=\"menu" . $i . "\">";
         afficherRecette("menu" . $i,$i,$menu[$i]);
         $i++;
         echo "</p>
       </div>
+    </div>
     </div>";
 
 
@@ -62,11 +59,13 @@ function tab($menu){
 
 
 function afficherRecette($id,$index,$recetteid){
-    print 'oui '. $id . $recetteid;
     $recette=recette($recetteid);
+    print "<a href='recette.php?recette=". $recetteid . "'> ";
     print $recette['nom'];
+    print "</a>";
     print '<br/>';
-    print '<button id="modif" onclick="modifrecette(\''. $id .'\','. $index .')">Modifier</button>';
-
+    print "temps: " . $recette['temps']; print "<br />difficulté: " . $recette['difficulte'];
+    print'<br/>';
+    print '<button class="modif" onclick="modifrecette(\''. $id .'\','. $index .')">Modifier</button>';
 }
 ?>

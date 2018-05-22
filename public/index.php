@@ -1,43 +1,77 @@
 <?php
-require '../vendor/autoload.php';
-
-//postgres
-$dbName = getenv('DB_NAME');
-$dbUser = getenv('DB_USER');
-$dbPassword = getenv('DB_PASSWORD');
-$connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-
-$userRepository = new \User\UserRepository($connection);
-$users = $userRepository->fetchAll();
+include "vue.php";
+session_start();
 ?>
 
-<html>
-<head>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
-<body>
+<!doctype html>
+  <html>
 
-<div class="container">
-    <h3><?php echo 'Hello world from Docker! php' . PHP_VERSION; ?></h3>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="initial-scale=1.0">
+      <title>index</title>
+      <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+      <link rel="stylesheet" href="css/standardize.css">
+      <link rel="stylesheet" href="css/index-grid.css">
+      <link rel="stylesheet" href="css/index.css">
+    </head>
 
-    <table class="table table-bordered table-hover table-striped">
-        <thead style="font-weight: bold">
-            <td>#</td>
-            <td>Firstname</td>
-            <td>Lastname</td>
-            <td>Age</td>
-        </thead>
-        <?php /** @var \User\User $user */
-        foreach ($users as $user) : ?>
-            <tr>
-                <td><?php echo $user->getId() ?></td>
-                <td><?php echo $user->getFirstname() ?></td>
-                <td><?php echo $user->getLastname() ?></td>
-                <td><?php echo $user->getAge() ?> years</td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
+    <body class="body page-index clearfix">
+
+      <?php
+      $pseudo = NULL;
+      if (isset($_SESSION["pseudo"])){
+        $pseudo = $_SESSION["pseudo"];
+      }
+      head($pseudo);
+      ?>
+      <div class="presentation presentation-1">
+    <p class="presentation">Dans Ton Caddie ! crée ta liste de courses pour la semaine, correspondant à des menus personnalisés basés sur tes goûts et besoins, accompagnés de leurs recettes !</p>
+  </div>
+  <section class="engagement clearfix">
+    <h2 class="accroche">Dans Ton Caddie ! s'engage ...</h2>
+    <div class="container1 clearfix">
+      <h3 class="qualite">La Qualité</h3>
+      <p class="text1">Nous nous efforçons de nous investir au maximum pour chacun de nos clients, car notre satisfaction passe tout d'abord par la tienne !</p>
+    </div>
+    <div class="container2 clearfix">
+      <h3 class="technologie">La Personnalisation</h3>
+      <p class="text"></p>
+      <p class="text2">Nous mettons tout en oeuvre pour répondre à tes envies, on s'occupe du caddie et des recettes, mais c'est toi le chef !&nbsp;</p>
+    </div>
+    <div class="container3 clearfix">
+      <h3 class="service">La Confiance</h3>
+      <p class="text3">Nous voulons que ton expérience soit la plus sereine possible, et nous remercions nos clients pour la confiance qu'ils nous accordent !</p>
+    </div>
+  </section>
+  <section class="nouveau nouveau-1 clearfix">
+    <h2 class="nouveau">Nouveautés</h2>
+    <aside class="recette1 recette1-1"></aside>
+    <article class="recette1 recette1-2 clearfix">
+      <h4 class="titre1">Gâteau gourmand aux fruits rouges</h4>
+      <p class="recette1">Voici une délicieuse recette de gâteau aux fruits rouges !</p>
+    </article>
+    <aside class="recette2 recette2-1"></aside>
+    <article class="recette2 recette2-2 clearfix">
+      <h4 class="titre2">La Croziflette</h4>
+      <p class="recette2">Une recette gourmande et originale !</p>
+    </article>
+    <aside class="recette3 recette3-1"></aside>
+    <article class="recette3 recette3-2 clearfix">
+      <h4 class="titre3">Tiramisu</h4>
+      <p class="recette3">Le fameux gâteau italien dans vos assiettes !</p>
+    </article>
+  </section>
+  <footer class="contact clearfix">
+    <div class="reseau clearfix">
+      <div class="facebook"></div>
+      <div class="twitter"></div>
+      <div class="discord"></div>
+    </div>
+    <div class="adresse">
+      <p>1, square de la Résistance</p>
+      <p>91 000 Evry</p>
 </div>
+  </footer>
 </body>
 </html>

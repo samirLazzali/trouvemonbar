@@ -1,4 +1,5 @@
 <?php
+session_start();
 /**
  * Created by PhpStorm.
  * User: agammon
@@ -8,7 +9,9 @@
 include("model.php");
 include("viewControler.php");
 
-
+if (!isset($_SESSION['pseudo']) || $_SESSION['id_groupe'] != 2){
+    header('Location: index.php'); 
+}
 
 
 

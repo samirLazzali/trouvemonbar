@@ -3,6 +3,7 @@ session_start();
 
 include("model.php");
 include("menuView.php");
+include("vue.php");
 
 ?>
 <!doctype html>
@@ -17,19 +18,30 @@ include("menuView.php");
     <link rel="stylesheet" href="css/standardize.css">
     <link rel="stylesheet" href="css/catalogue-grid.css">
     <link rel="stylesheet" href="css/catalogue.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script   src="https://code.jquery.com/jquery-3.3.1.js"
+              integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="   crossorigin="anonymous"></script>
 
 </head>
 
 <body class="body page-catalogue clearfix">
 <?php
 
+
+$pseudo = NULL;
+if (isset($_SESSION["pseudo"])){
+    $pseudo = $_SESSION["pseudo"];
+}
+head($pseudo);
+
 genMenu();
 
 tab($_SESSION['menu']);
 
 
-
 ?>
+
+<a href="liste.php"><button class="modif" href="liste.php">Ma liste de course</button></a>
 
 <script>
     function modifrecette(idd,ind){
@@ -47,7 +59,9 @@ tab($_SESSION['menu']);
     }
 
 
+
 </script>
 
+<?php footer()?>
 </body>
 </html>

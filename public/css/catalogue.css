@@ -1,0 +1,403 @@
+
+
+.dejeuner {
+  float: left;
+  margin-top: 25px;
+}
+
+.dessert {
+  float: left;
+  clear: both;
+  width: 44.118914261%;
+  min-height: 20px;
+  margin: 19px 0 0 27.46144%;
+  font-style: italic;
+  font-size: 1em;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+.dimanche,
+.jeudi,
+.mardi,
+.mercredi,
+.samedi,
+.vendredi {
+  float: left;
+}
+
+.dimanche .dimanche {
+  width: 10.8333333333%;
+  min-height: 65px;
+  margin: 106px 0 0 14.99856%;
+  font-family: 'Kristen ITC';
+  font-size: 1.563em;
+  font-weight: 700;
+  color: #088a08;
+}
+
+.diner {
+  float: left;
+  margin-top: 25px;
+}
+
+.dejeuner .dejeuner,
+.diner .diner {
+  width: 44.4252956101%;
+  min-height: 26px;
+  margin-left: 27.46144%;
+  font-size: 1.25em;
+  text-align: center;
+  text-decoration: underline;
+  color: rgb(0, 0, 0);
+}
+
+
+
+.entree {
+  float: left;
+  clear: both;
+  width: 44.4252956101%;
+  min-height: 20px;
+  margin: 27px 0 0 27.46144%;
+  font-style: italic;
+  font-size: 1em;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+
+.inscription .inscription {
+  width: 99.1071428571%;
+  min-height: 15px;
+  margin-top: 7px;
+  font-family: Montserrat;
+  font-size: 1em;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.jeudi .jeudi {
+  width: 10.8333333333%;
+  min-height: 65px;
+  margin: 106px 0 0 14.99856%;
+  font-family: 'Kristen ITC';
+  font-size: 1.563em;
+  font-weight: 700;
+  color: #6a0888;
+}
+
+.lundi {
+  float: left;
+}
+
+.lundi .lundi {
+  width: 10.8333333333%;
+  min-height: 65px;
+  margin: 106px 0 0 14.99856%;
+  font-family: 'Kristen ITC';
+  font-size: 1.563em;
+  font-weight: 700;
+  color: rgb(250, 204, 46);
+}
+
+.mardi .mardi {
+  width: 10.8333333333%;
+  min-height: 65px;
+  margin: 106px 0 0 14.99856%;
+  font-family: 'Kristen ITC';
+  font-size: 1.563em;
+  font-weight: 700;
+  color: rgb(254, 100, 46);
+}
+
+
+
+.mercredi .mercredi {
+  width: 10.8333333333%;
+  min-height: 65px;
+  margin: 106px 0 0 14.99856%;
+  font-family: 'Kristen ITC';
+  font-size: 1.563em;
+  font-weight: 700;
+  color: rgb(255, 0, 0);
+}
+
+.plat {
+  float: left;
+  clear: both;
+  width: 44.118914261%;
+  min-height: 20px;
+  margin: 24px 0 0 27.46144%;
+  font-style: italic;
+  font-size: 1em;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+
+
+.samedi .samedi {
+  width: 10.8333333333%;
+  min-height: 65px;
+  margin: 106px 0 0 14.99856%;
+  font-family: 'Kristen ITC';
+  font-size: 1.563em;
+  font-weight: 700;
+  color: #3104b4;
+}
+
+
+
+.vendredi .vendredi {
+  width: 10.8333333333%;
+  min-height: 65px;
+  margin: 106px 0 0 14.99856%;
+  font-family: 'Kristen ITC';
+  font-size: 1.563em;
+  font-weight: 700;
+  color: #0040ff;
+}
+
+._button {
+  display: block;
+  position: relative;
+  float: left;
+  z-index: 4;
+  width: 12%;
+  height: 27px;
+  margin: -1062px 0 0 44%;
+  border: 1px solid rgb(128, 128, 128);
+  border-radius: 3px;
+  background-color: rgb(222, 222, 222);
+  font-family: Ubuntu;
+  font-size: 1em;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+
+
+
+
+.dejeuner-1 {
+  width: 23.4375%;
+  height: 233px;
+  margin-left: 7.99431%;
+  border-right: 13px solid rgb(250, 204, 46);
+  background-color: rgb(255, 255, 255);
+}
+
+.dejeuner-11 {
+  width: 23.4375%;
+  height: 233px;
+  margin-left: 7.99431%;
+  border-right: 13px solid rgb(49, 4, 180);
+  background-color: rgb(255, 255, 255);
+}
+
+.dejeuner-13 {
+  width: 23.4375%;
+  height: 233px;
+  margin-left: 7.99431%;
+  border-right: 13px solid #088a08;
+  background-color: rgb(255, 255, 255);
+}
+
+.dejeuner-3 {
+  width: 23.4375%;
+  height: 233px;
+  margin-left: 7.99431%;
+  border-right: 13px solid rgb(254, 100, 46);
+  background-color: rgb(255, 255, 255);
+}
+
+.dejeuner-5 {
+  width: 23.4375%;
+  height: 233px;
+  margin-left: 7.99431%;
+  border-right: 13px solid rgb(255, 0, 0);
+  background-color: rgb(255, 255, 255);
+}
+
+.dejeuner-7 {
+  width: 23.4375%;
+  height: 233px;
+  margin-left: 7.99431%;
+  border-right: 13px solid rgb(106, 8, 136);
+  background-color: rgb(255, 255, 255);
+}
+
+.dejeuner-9 {
+  width: 23.4375%;
+  height: 233px;
+  margin-left: 7.99431%;
+  border-right: 13px solid rgb(0, 64, 255);
+  background-color: rgb(255, 255, 255);
+}
+
+.dimanche-1 {
+  clear: both;
+  width: 73.1666666666%;
+  height: 291px;
+  margin: 39px 0 0 14%;
+  border: 5px solid #088a08;
+  border-radius: 100px;
+  background-color: rgb(255, 255, 255);
+}
+
+.diner-1 {
+  width: 23.4375%;
+  height: 233px;
+  margin-left: 2.13314%;
+  border-left: 13px solid rgb(250, 204, 46);
+  background-color: rgb(255, 255, 255);
+}
+
+.diner-11 {
+  width: 23.4375%;
+  height: 233px;
+  margin-left: 2.13314%;
+  border-left: 13px solid rgb(49, 4, 180);
+  background-color: rgb(255, 255, 255);
+}
+
+.diner-13 {
+  width: 23.4375%;
+  height: 233px;
+  margin-left: 2.13314%;
+  border-left: 13px solid rgb(8, 138, 8);
+  background-color: rgb(255, 255, 255);
+}
+
+.diner-3 {
+  width: 23.4375%;
+  height: 233px;
+  margin-left: 2.13314%;
+  border-left: 13px solid rgb(254, 100, 46);
+  background-color: rgb(255, 255, 255);
+}
+
+.diner-5 {
+  width: 23.4375%;
+  height: 233px;
+  margin-left: 2.13314%;
+  border-left: 13px solid rgb(255, 0, 0);
+  background-color: rgb(255, 255, 255);
+}
+
+.diner-7 {
+  width: 23.4375%;
+  height: 233px;
+  margin-left: 2.13314%;
+  border-left: 13px solid rgb(106, 8, 136);
+  background-color: rgb(255, 255, 255);
+}
+
+.diner-9 {
+  width: 23.4375%;
+  height: 233px;
+  margin-left: 2.13314%;
+  border-left: 13px solid rgb(0, 64, 255);
+  background-color: rgb(255, 255, 255);
+}
+
+
+
+.jeudi-1 {
+  clear: both;
+  width: 73.1666666666%;
+  height: 291px;
+  margin: 39px 0 0 14%;
+  border: 5px solid #6a0888;
+  border-radius: 100px;
+  background-color: rgb(255, 255, 255);
+}
+
+.lundi-1 {
+  width: 73.1666666666%;
+  height: 291px;
+  margin: 39px 0 0 14%;
+  border: 5px solid #facc2e;
+  border-radius: 100px;
+  background-color: rgb(255, 255, 255);
+}
+
+.mardi-1 {
+  clear: both;
+  width: 73.1666666666%;
+  height: 291px;
+  margin: 39px 0 0 14%;
+  border: 5px solid #fe642e;
+  border-radius: 100px;
+  background-color: rgb(255, 255, 255);
+}
+
+
+
+.mercredi-1 {
+  clear: both;
+  width: 73.1666666666%;
+  height: 291px;
+  margin: 39px 0 0 14%;
+  border: 5px solid #ff0000;
+  border-radius: 100px;
+  background-color: rgb(255, 255, 255);
+}
+
+
+
+.recherche-2 {
+  position: relative;
+  z-index: 3;
+  width: 9.5%;
+  min-height: 32px;
+  margin: -1138px 0 0 20.89974%;
+  font-family: Ubuntu;
+  font-size: 1.25em;
+  text-decoration: underline;
+  color: rgb(255, 255, 255);
+}
+
+.samedi-1 {
+  clear: both;
+  width: 73.1666666666%;
+  height: 291px;
+  margin: 39px 0 0 14%;
+  border: 5px solid #3104b4;
+  border-radius: 100px;
+  background-color: rgb(255, 255, 255);
+}
+
+.vendredi-1 {
+  clear: both;
+  width: 73.1666666666%;
+  height: 291px;
+  margin: 39px 0 0 14%;
+  border: 5px solid #0040ff;
+  border-radius: 100px;
+  background-color: rgb(255, 255, 255);
+}
+
+
+
+.modif { -webkit-border-radius: 26;
+  -moz-border-radius: 26;
+  border-radius: 26px;
+  font-family: Arial;
+  color: #000000;
+  font-size: 15px;
+  padding: 10px;
+  border: solid #000000 1px;
+  text-decoration: none;
+}
+
+.modif:hover {
+  background: #ffffff;
+  background-image: -webkit-linear-gradient(top, #ffffff, #ededed);
+  background-image: -moz-linear-gradient(top, #ffffff, #ededed);
+  background-image: -ms-linear-gradient(top, #ffffff, #ededed);
+  background-image: -o-linear-gradient(top, #ffffff, #ededed);
+  background-image: linear-gradient(to bottom, #ffffff, #ededed);
+  text-decoration: none;
+}

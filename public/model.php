@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: agammon
@@ -20,10 +21,11 @@ function genMenu(){
     $bdd=db_connect();
     $count=$bdd->query('SELECT count(*) FROM recette');
     $max=$count->fetch()['count'];
+    $_SESSION['menu']=array();
     for($i=0;$i<14;$i++){
-        $rd=rand(1,20);
+        $rd=rand(1,$max);
         while (in_array($rd,$_SESSION['menu'])){
-            $rd=rand(1,20);
+            $rd=rand(1,$max);
         }
         $_SESSION['menu'][$i]=$rd;
     }
@@ -41,9 +43,9 @@ function changerecette($index){
     $bdd=db_connect();
     $count=$bdd->query('SELECT count(*) FROM recette');
     $max=$count->fetch()['count'];
-        $rd=rand(1,20);
+        $rd=rand(1,$max);
         while (in_array($rd,$_SESSION['menu'])){
-            $rd=rand(1,50);
+            $rd=rand(1,$max);
         }
         $_SESSION['menu'][$index]=$rd;
 

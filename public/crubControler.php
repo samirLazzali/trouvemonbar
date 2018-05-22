@@ -1,5 +1,5 @@
-
 <?php
+session_start();
 /**
  * Created by PhpStorm.
  * User: agammon
@@ -10,8 +10,18 @@
 //include(vue.php);
 include("model.php");
 include("viewControler.php");
+if (!isset($_SESSION['pseudo']) || $_SESSION['id_groupe'] != 2){
+    header('Location: index.php');
+}
 
-head();
+echo "<!DOCTYPE html>
+    <html>
+    <head>
+    <title>Crub</title>
+    <script   src=\"https://code.jquery.com/jquery-3.3.1.js\"
+              integrity=\"sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=\"   crossorigin=\"anonymous\"></script>
+</head>
+<body>";
 
 $bdd = db_connect();
 $tables = $bdd->query("SELECT * FROM pg_catalog.pg_tables WHERE tableowner='ensiie';");
@@ -127,7 +137,6 @@ function delmod(choice,element) {
 
         dataType: 'html',
         success: function (code_html, statut) {
-
         },
 
     });
