@@ -18,7 +18,7 @@ $informations = Array(/*Déconnexion*/
 				'Vous êtes à présent déconnecté.',
 				' - <a href="'.ROOTPATH.'/membres/connexion.php">Se connecter</a>',
 				ROOTPATH.'/index.php',
-				5
+				2
 				);
 
 require_once('../information.php');
