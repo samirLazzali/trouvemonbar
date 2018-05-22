@@ -124,11 +124,7 @@ include('../includes/top.php');?>
 				$retour = $connexion->query("SELECT max(id_cat) AS max_id FROM cats");
 				$fetch = $retour -> fetch(PDO::FETCH_OBJ);
 				
-				echo "INSERT INTO Cats VALUES(".$connexion->quote($fetch->max_id+1).",".$_SESSION['id_user'].",".$connexion->quote($name).",
-				".$connexion->quote($purity).",".$connexion->quote($pattern).",".$connexion->quote($birthdate).",NULL,NULL,,".$connexion->quote($size).",NULL,NULL,
-				".$connexion->quote($sexe).",".$connexion->quote($ssexe).",".$connexion->quote($coat).",NULL,NULL,".$connexion->quote($weight).",NULL,NULL)";
-				
-				if($connexion->exec("INSERT INTO Cats VALUES(".$connexion->quote($fetch->max_id+1).",$_SESSION['id_user'],".$connexion->quote($name).",
+				if($connexion->exec("INSERT INTO Cats VALUES(".$connexion->quote($fetch->max_id+1).",".$_SESSION['id_user'].",".$connexion->quote($name).",
 				".$connexion->quote($purity).",".$connexion->quote($pattern).",".$connexion->quote($birthdate).",'0','13',".$connexion->quote($size).",'0','6',
 				".$connexion->quote($sexe).",".$connexion->quote($ssexe).",".$connexion->quote($coat).",'0','3',".$connexion->quote($weight).",'0','15')"))
 				{
