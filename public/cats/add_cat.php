@@ -37,7 +37,10 @@ include('../includes/top.php');
 					
 					<tr>
 					<td><label for="purity" class="float">Chat pur sang</label></td>
-					<td><input type="checkbox" name="purity" id="purity" value="true"/></td>
+					<td><select name="purity" id="purity" size="1">
+						<option value="true",name="purity">Oui</option>
+						<option value="false",name="purity">Non</option>
+						</select></td></td>
 					</tr>
 					
 					<tr>
