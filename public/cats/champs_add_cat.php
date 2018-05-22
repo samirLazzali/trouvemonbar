@@ -48,17 +48,9 @@ else
 if(isset($_POST['breed']))
 {
 	$breed = trim($_POST['breed']);
-	$_SESSION['form_purity']=$breed;
+	$_SESSION['form_breed']=$breed;
 }
 
-if(isset($_POST['purity']))
-{
-	$purity = trim($_POST['purity']);
-	$_SESSION['form_purity']=$purity;
-	if($purity == "FALSE") {
-		$breed = 21;
-	}
-}
 
 if(isset($_POST['birthdate']))
 {
@@ -126,7 +118,7 @@ include('../includes/top.php');?>
 				$fetch = $retour -> fetch(PDO::FETCH_OBJ);
 				
 				if($connexion->exec("INSERT INTO Cats VALUES(".$connexion->quote($fetch->max_id+1).",".$_SESSION['id_user'].",".$connexion->quote($name).",
-				".$connexion->quote($purity).",".$connexion->quote($pattern).",".$connexion->quote($birthdate).",'0','13',".$connexion->quote($sexe).",".$connexion->quote($ssexe).",
+				'FALSE',".$connexion->quote($pattern).",".$connexion->quote($birthdate).",'0','13',".$connexion->quote($sexe).",".$connexion->quote($ssexe).",
 				".$connexion->quote($size).",'0','5',".$connexion->quote($coat).",'0','3',".$connexion->quote($weight).",'0','15')"))
 				{
 					$queries++;

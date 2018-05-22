@@ -36,14 +36,6 @@ include('../includes/top.php');
 					</tr>
 					
 					<tr>
-					<td><label for="purity" class="float">Chat pur sang</label></td>
-					<td><select name="purity" id="purity" size="1">
-						<option value="TRUE",name="purity">Oui</option>
-						<option value="FALSE",name="purity">Non</option>
-						</select></td></td>
-					</tr>
-					
-					<tr>
 					<td><label for="breed" class="float">Race :</label></td>
 					<td><select name="breed" id="breed" size="1">
 					<?php
@@ -51,11 +43,11 @@ include('../includes/top.php');
 					$dbUser = getenv('DB_USER');
 					$dbPassword = getenv('DB_PASSWORD');
 					$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-					$retour = $connexion->query("SELECT id_breed,name_breed FROM breeds");
+					$retour = $connexion->query("SELECT id_breed,name_breed FROM breeds ORDER BY name_breed");
 					while($race = $retour -> fetch(PDO::FETCH_OBJ)) {
 						?>
-						<option value = "<?php$race->id_breed?>",id="breed"><?phpecho $race->name_breed;?></option>
-					}
+						<option value = "<?php $race->id_breed?>",id="breed"><?php echo $race->name_breed;?></option>
+					<?php } ?>
 					</select></td></td>
 					</tr>
 					
