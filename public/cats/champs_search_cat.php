@@ -48,8 +48,6 @@ if(isset($_POST['coatmax']))
 	$sizemax = trim($_POST['coatmax']);
 }
 
-}
-
 if(isset($_POST['weightmin']))
 {
 	$agemin = trim($_POST['weightmin']);
