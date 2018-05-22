@@ -9,13 +9,10 @@ header_t("Les Bons Bails");
 
 if(!verif_authent()) { // si le gars est authentified ==>  acces aux offres
     displayLogin();
+    print "    <link rel=\"stylesheet\" href=\"css/full.css\">";
 } else {
     displayResearch();
-}
-if(verif_authent()) {
     dispSidebar();
-} else {
-    print "    <link rel=\"stylesheet\" href=\"css/full.css\">";
 }
 ?>
 
@@ -24,16 +21,16 @@ if(verif_authent()) {
 <?php
 
 if(verif_authent()) { // si le gars est authentified ==>  acces aux offres
-    //indexco();
+
     $annonces = Annonce::getAnnonces();
 
-    //$annonces = getoffers($_GET["semestre"], $_GET["module"], $_GET["matiere"]);
     echo "<h2>Dernières Annonces</h2>";
     Annonce::reduceButton();
-    foreach ($annonces as $an) {
+    foreach ($annonces as $an)
 	$an->display();
-    }
+
 } else {	// sinon pas acces aux offres
+
     if (isset($_POST['error'])) {
 	indexnotco($_POST['error']);
     } else {
