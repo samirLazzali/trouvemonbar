@@ -201,6 +201,8 @@ Chaque utilisateur a possibilité d'écrire un tweet qui sera par la suite visib
 Un formulaire sur la page \texttt{accueil} permet à l’utilisateur d’écrire un tweet.
 De plus, on récupère les tweets des abonnements sur le fil d’actualité à l’aide d'une  jointure $n…n$ sur la table \texttt{amis} et \texttt{tweet}.
 
+Lorsque l'utilisateur est un administrateur, il peut supprimer des tweets. Cela permet d'avoir une modération des publications.
+
 \subsection{Likes}
 Il est aussi possible d'aimer un tweet. On crée une table \texttt{like} spécifique à cette fonctionnalité, prenant en compte les informations suivantes :
 \begin{description}
@@ -232,6 +234,8 @@ Voici comment nous avons décidé de créer notre table \texttt{commentaire}:
 Nous avons aussi créer les classes \texttt{Commentaire} et \texttt{CommentaireManager} afin de manipuler plus facilement les commentaires.
 
 Pour l'affichage des commentaires avec les différents niveaux, il a fallu une récursion. En effet, pour chaque commentaire, on va exécuter une nouvelle fois la requête pour récupérer tous les commentaires du commentaire courant.
+
+Lorsque l'utilisateur est un administrateur, il peut supprimer des commentaires. 
 
 \newpage
 \section{Les Hashtags}		
