@@ -83,7 +83,7 @@ function descr_recettes($connexion){
  * @return un array avec toutes les statistiques
  */
 function statistique($connexion,$soiree){
-    $requete = "SELECT * FROM \"Statistiques\"WHERE soiree=$soiree";
+    $requete = "SELECT * FROM \"Statistiques\"WHERE soiree='$soiree'";
     $reponse = $connexion->query($requete);
     return $reponse->fetch();
 }

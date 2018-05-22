@@ -125,13 +125,19 @@ div#article>img{
     margin: auto;
 }
 
-div#table{
+table {
+    border: 1px solid black;
+    margin-top: 3em;
+}
+
+th{
     border: 1px solid black;
 }
 
-div#table>th{
+td{
     border: 1px solid black;
 }
-div#table>td{
+
+tr{
     border: 1px solid black;
 }
