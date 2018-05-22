@@ -45,7 +45,7 @@ else
 	exit();
 }
 
-if(isset($_CHECK['purity']))
+if(isset($_POST['purity']))
 {
 	$purity = trim($_POST['purity']);
 	$_SESSION['form_purity']=$purity;
