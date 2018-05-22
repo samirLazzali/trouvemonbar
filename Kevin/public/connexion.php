@@ -29,7 +29,10 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
     if ($data->nb ==1) {
         session_start();
         $idUser = idUserLogin($_POST['login']);
-        config($_POST['login'],nom_user($idUser), prenom_user($idUser), $idUser, 'false');
+        $userManager = new User\UserManager($connection);
+        $user = $userManager->get($idUser);
+
+        config($_POST['login'],nom_user($idUser), prenom_user($idUser), $idUser, $user->getAdministrateur());
 
         header('Location: accueil.php');
         //exit();

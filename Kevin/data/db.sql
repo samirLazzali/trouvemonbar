@@ -56,10 +56,10 @@ CREATE TABLE "tweet" (
   date_envoie timestamp ,
   contenu VARCHAR(300)
 );
-INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('1', '1999-12-23 12:45:23', '****');
-INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('2', '1999-12-23 12:45:24', '****');
-INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('3', '1999-12-23 12:45:25', '****');
-INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('5', '1999-12-23 12:45:26', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('1', '2018-05-21 11:44:23', 'Ici cest #Paris');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('2', '2018-05-20 23:22:24', 'Marre de la greve #SNCF');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('3', '2018-05-19 21:33:25', '****');
+INSERT INTO "tweet"(auteur, date_envoie, contenu) VALUES ('5', '2018-05-18 16:45:26', '****');
 
 CREATE TABLE "like" (
   tweet_id int references "tweet"(id) ,
@@ -82,12 +82,12 @@ CREATE TABLE "commentaire" (
   parent_id integer ,
   parent_type typeDeCommentaire
 );
-INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('1','2', '1999-12-23 12:45:23', '****', '2', 'tweet');
-INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('1','7', '1999-12-23 12:45:23', 'FAZFAZFAZFAZ', '2', 'tweet');
-INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('1','7', '1999-12-23 12:45:23', 'FAZFAZFAZFAZ', '3', 'tweet');
-INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('1','7', '1999-12-23 12:45:23', '1234555555', '1', 'tweet');
-INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('1','7', '1999-12-23 12:45:23', 'bonjour', '1', 'commentaire');
-INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('1','7', '1999-12-23 12:45:23', 'aurevoir', '1', 'commentaire');
+INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('1','2', '1999-12-23 12:45:23', 'tkt', '1', 'tweet');
+INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('2','7', '1999-12-23 12:45:23', 'Oui', '1', 'tweet');
+INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('3','7', '1999-12-23 12:45:23', 'non', '3', 'tweet');
+INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('4','7', '1999-12-23 12:45:23', '666', '1', 'tweet');
+INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('1','7', '1999-12-23 12:45:23', 'Slt', '1', 'commentaire');
+INSERT INTO "commentaire"(owner_id, target_id, date_envoie, contenu, parent_id, parent_type) VALUES ('1','7', '1999-12-23 12:45:23', 'bye', '1', 'commentaire');
 
 
 CREATE TABLE "hashtag" (
@@ -96,13 +96,18 @@ CREATE TABLE "hashtag" (
 );
 INSERT INTO "hashtag"(mot) VALUES ('paris');
 INSERT INTO "hashtag"(mot) VALUES ('tt');
+INSERT INTO "hashtag"(mot) VALUES ('mytho');
+INSERT INTO "hashtag"(mot) VALUES ('balancetonporc');
+INSERT INTO "hashtag"(mot) VALUES ('sncf');
+
 
 
 CREATE TABLE "hashtagEtTweet" (
   id_hashtag int REFERENCES "hashtag"(id) ,
   id_tweet int REFERENCES "tweet"(id)
 );
-INSERT INTO "hashtagEtTweet"(id_hashtag, id_tweet) VALUES (1, 2);
+INSERT INTO "hashtagEtTweet"(id_hashtag, id_tweet) VALUES (1, 1);
+INSERT INTO "hashtagEtTweet"(id_hashtag, id_tweet) VALUES (5, 2);
 
 
 

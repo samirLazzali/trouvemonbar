@@ -29,8 +29,14 @@ enTete("Profil de $pseudo", "CSS/style.css");
 afficheMenu();
 
 titreH1("Profil de $pseudo");
+/*
+if ($_SESSION['admin'] == "true") {
 
-
+    echo '<form method="POST" action="profil.php/">'."\n";
+    echo '<input type="button" value="Supprimer le tweet">'."\n";
+    echo "</form>\n";
+}
+*/
 
 
 ?>

@@ -244,6 +244,13 @@ function ecrireCommentaire($idParent, $type, $contenu, $TargetOwner){
 
 }
 
+function deleteCommentaire($id){
+    global $commentaireManager;
+
+    $commentaire = new Commentaire\Commentaire();
+    $commentaire->setId($id);
+    $commentaireManager->delete($commentaire);
+}
 
 function deleteTweet($id){
     global $tweetManager;

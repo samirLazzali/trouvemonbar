@@ -34,7 +34,7 @@ class User
     private $password;
 
     /**
-     * @var boolean
+     * @var string
      */
     private $administrateur;
 
@@ -157,7 +157,7 @@ class User
      * @param string $password
      * @return User
      */
-    public function setPassword(string $password)
+    public function setPassword($password)
     {
         $this->password = $password;
         return $this;
@@ -165,7 +165,7 @@ class User
 
 
     /**
-     * @return boolean
+     * @return string
      */
     public function getAdministrateur()
     {
@@ -176,7 +176,7 @@ class User
      * @param string $administrateur
      * @return User
      */
-    public function setAdministrateur(string $administrateur)
+    public function setAdministrateur($administrateur)
     {
         $this->administrateur = $administrateur;
         return $this;

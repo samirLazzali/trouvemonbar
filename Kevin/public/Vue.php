@@ -212,6 +212,13 @@ function afficherCommentaires($T) {
         echo '        <input type="text" size=50 name="contenu" placeholder="Veuillez saisir votre commentaire ...">'."\n";
         echo '        <input type="submit" value="Envoyer" onclick="alert(\'Commentaire Envoyé\')" class="inputbutton">'."\n";
         echo "</form>\n";
+        if ($_SESSION['admin'] == "true") {
+            //AFFICHE BOUTON SUPPRESSION*/
+            echo '<form method="POST" action="Commentaire/deleteCommentaire.php">'."\n";
+            echo '<input type="hidden" name="id_commentaire" value="'.$res->getId().'">'."\n";
+            echo '<input type="button" value="Supprimer commentaire" onclick="if(confirm(\'Voulez-vous vraiment supprimer ce commentaire ?\')){this.form.submit();}" class="inputbutton">'."\n";
+            echo "</form>\n";
+        }
 
         afficherCommentaires(getCommentaires($res->getId(), "commentaire"));
         print "</li>\n";

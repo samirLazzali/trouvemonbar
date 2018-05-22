@@ -22,7 +22,7 @@ class TweetManager{
 
         $req->bindValue(':auteur', $tweet->getAuteur());
         $req->bindValue(':date_envoie',  date_format($tweet->getDate(),"Y-m-d H:i:s"));
-        $req->bindValue(':contenu', addslashes($tweet->getContenu()));
+        $req->bindValue(':contenu', $tweet->getContenu());
         $req->execute();
     }
 

@@ -27,7 +27,7 @@ class HashtagManager
     {
         $req = $this->db->prepare('INSERT INTO "hashtag" (mot) VALUES (:mot)');
 
-        $req->bindValue(':mot', addslashes($hashtag->getMot()));
+        $req->bindValue(':mot', $hashtag->getMot());
 
         $req->execute();
     }

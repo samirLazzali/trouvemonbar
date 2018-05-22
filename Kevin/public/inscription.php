@@ -72,7 +72,7 @@ enTeteConnexion("Inscription à l'espace membre :","CSS/style.css");
 <span class="formulaire">Confirmation du mot de passe : <input type="password" name="pass_confirm"/><br/> </span>
 <span class="formulaire">Nom : <input type="text" name="lastname"/><br/> </span>
 <span class="formulaire">Prenom : <input type="text" name="firstname"/><br/> </span>
-<span class="formulaire">Date de naissance : <input type="date(Y-m-d)" name="bday"/> <br/> </span>
+<span class="formulaire">Date de naissance (y/m/d) : <input type="date(Y-m-d)" name="bday"/> <br/> </span>
 <input type="submit" name="inscription" value="Inscription" class="styleButton">
 </form>
 

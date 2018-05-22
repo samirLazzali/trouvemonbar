@@ -46,7 +46,7 @@ class UserManager
          $req = $this->db->prepare('UPDATE "user" SET firstname = :firstname, lastname = :lastname, birthday = :birthday, password =:password WHERE id = :id');
 
         $req->bindValue(':firstname', $user->getFirstname());
-        $req->bindValue(':lastname', $user->getFirstname());
+        $req->bindValue(':lastname', $user->getLastname());
         $req->bindValue(':birthday', date_format($user->getBirthday(),"Y-m-d"));
         $req->bindValue(':password', $user->getPassword());
         $req->bindValue(':id', $user->getId());
