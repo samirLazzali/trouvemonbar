@@ -16,6 +16,28 @@ $userRepository = new \User\UserRepository($connection);
 $users = $userRepository->fetchAll();
 ?>
 
+<html>
+<head>
+    <title> Accueil  </title>
+    <!-- Latest compiled and minified CSS -->
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"  href="style_index.css">
+
+    <!-- Modif Gub -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<?php
+menu_navigation();
+?>
+
 <?php
 if (isset($_POST['caché']) && $_POST['caché']==1 ){
     if (isset($_SESSION['connect']) && $_SESSION['connect']>=1) {
@@ -41,28 +63,6 @@ if (isset($_POST['caché']) && $_POST['caché']==1 ){
         echo '<a href="connexion.php">Se connecter</a>';
     }
 }
-?>
-
-<html>
-<head>
-    <title> Accueil  </title>
-    <!-- Latest compiled and minified CSS -->
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css"  href="style_index.css">
-
-    <!-- Modif Gub -->
-
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
-    <!-- Animate.css -->
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/style.css">
-
-</head>
-<body>
-
-<?php
-menu_navigation();
 ?>
 
 
