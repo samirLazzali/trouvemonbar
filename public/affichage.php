@@ -320,18 +320,24 @@ function article_stats(){
     $connexion = db_connect();
     $liste_soiree = soiree($connexion);
     db_close($connexion);
+    $id = $_SESSION['id'];
     echo "<div id=\"article\">";
-    echo "<h1><p style=\"text-indent:10em\">Statistiques et trésorerie</h1>";
-    echo "<table>";
-    echo "<tr><th>Soirée</th><th>Nombre d'assiettes vendues</th><th>Cout achat</th><th>Revenus</th><th>Bénéfice</th></tr>";
-    foreach ($liste_soiree as $soiree){
-        $connexion = db_connect();
-        $liste_stats = statistique($connexion,$soiree);
-        db_close($connexion);
-        echo "<tr><td>$soiree</td><td>$liste_stats[2]</td><td>$liste_stats[3]</td><td>$liste_stats[4]</td>
-        <td>$liste_stats[5]</td></tr>";
+    if ($id==1){
+        echo "<p>Vous devez être membre pour accéder à cette page</p>";
     }
-    echo "</table>";
+    else {
+        echo "<h1><p style=\"text-indent:10em\">Statistiques et trésorerie</h1>";
+        echo "<table>";
+        echo "<tr><th>Soirée</th><th>Nombre d'assiettes vendues</th><th>Cout achat</th><th>Revenus</th><th>Bénéfice</th></tr>";
+        foreach ($liste_soiree as $soiree) {
+            $connexion = db_connect();
+            $liste_stats = statistique($connexion, $soiree);
+            db_close($connexion);
+            echo "<tr><td>$soiree</td><td>$liste_stats[2]</td><td>$liste_stats[3]</td><td>$liste_stats[4]</td>
+        <td>$liste_stats[5]</td></tr>";
+        }
+        echo "</table>";
+    }
     echo "</div>";
 }
 
