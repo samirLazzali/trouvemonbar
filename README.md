@@ -1,5 +1,5 @@
 ## Usage
- * Il n'y a pas de docker fourni ici, l'explication se trouve dans le rapport /rapport.pdf
+ * Le DOcker n'est pas configuré, l'explication se trouve dans le rapport /rapport.pdf
  * La connexion sql se configure via le fichier /public/modele/connect_bdd.php à configurer préalablement
  * Le site utilise un système de mail à configurer préalablement :
 	* Dans le fichier /public/controleur/inscription.php la variable '$site' a changé selon l'hébergeur
