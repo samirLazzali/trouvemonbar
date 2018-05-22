@@ -93,9 +93,9 @@ include('../includes/top.php');?>
 				scsize_max=".$connexion->quote($sizemax).", scoat_min = ".$connexion->quote($coatmin).", scoat_max=".$connexion->quote($coatmax).",sweight_min = ".$connexion->quote($weightmin).",
 				sweight_max=".$connexion->quote($weightmax)))
 				&&
-				($connexion->exec("INSERT INTO Cat_breed VALUES(".$connexion->quote($cats).",".$connexion->quote($breeds).")")) 
+				($connexion->exec("INSERT INTO searched_breeds VALUES(".$connexion->quote($cats).",".$connexion->quote($breeds).")")) 
 				&&
-				($connexion->exec("INSERT INTO Cat_breed VALUES(".$connexion->quote($cats).",".$connexion->quote($colors).")"))) 
+				($connexion->exec("INSERT INTO searched_colors VALUES(".$connexion->quote($cats).",".$connexion->quote($colors).")"))) 
 				{
 					$queries++;
 					$queries++;?>
