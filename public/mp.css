@@ -124,3 +124,14 @@ div#article>img{
     display: block;
     margin: auto;
 }
+
+div#table{
+    border: 1px solid black;
+}
+
+div#table>th{
+    border: 1px solid black;
+}
+div#table>td{
+    border: 1px solid black;
+}
