@@ -12,13 +12,27 @@ include('../includes/top.php');
 ?>
 		
 		<div id="contenu">
-			
 			<h1>Formulaire de mise en place des recherches</h1>
 			<p>Bienvenue sur la page d'ajout de recherches.<br/>
 			Merci de remplir ces champs pour continuer.</p>
 			<form action="champs_search_cat.php" method="post" name="Search">
 				<fieldset><legend>Renseignements</legend>
 				<table>
+					<tr><td><label for="cats" class="float">Choix du chat : </label></td>
+					<td><select name="catss" id="cats" size="1">
+					<?php
+					$dbName = getenv('DB_NAME');
+					$dbUser = getenv('DB_USER');
+					$dbPassword = getenv('DB_PASSWORD');
+					$connexion = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
+					$chats = $connexion->query("SELECT id_cat,name_cat FROM Cats WHERE owner=$_SESSION['id_user']");
+					while($chat = $chats -> fetch(PDO::FETCH_OBJ)) {
+						?>
+						<option value = "<?php echo $chat->id_cat; ?>" ,id="breed"><?php echo $chat->name_cat; ?></option>
+					<?php } ?>
+					</select></td></td>
+					</tr>
+					
 					<tr>
 					<td><label for="agemin" class="float">Age minimal recherché (en année) : </label></td>
 					<td><input type="integer" name="agemin" id="agemin" size="30" /></td>
@@ -127,10 +141,11 @@ include('../includes/top.php');
 						</select></td>
 					</tr>
 					<input type="submit" value="Valider" />
+				</table>
 				</fieldset>
 			</form>
 		</div>
 
 <?php
-		include('../includes/bottom.php');
-		?>
+include('../includes/bottom.php');
+?>
