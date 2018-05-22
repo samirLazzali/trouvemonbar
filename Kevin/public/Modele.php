@@ -48,6 +48,17 @@ function prenom_user($id_user){
     return $user->getFirstname();
 }
 
+
+/*
+ * Fonction pour recupérer le nom d'un utilisateur en connaissant son id
+ */
+function nom_user($id_user){
+    global $userManager;
+    $user = $userManager->get($id_user);
+    return $user->getLastname();
+}
+
+
 /*
 function idUser($pseudo){
     global $connection;
