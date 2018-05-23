@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nouveau produit</title>
+    <link rel="stylesheet" href="style-connexion.css"/>
+</head>
+
+
+
+<body>
+<div class = "corps">
+        <header class = "tete">
+            <div class = "logo"><a href="index.php"><img src="../img/logo/logo.png" alt="logo_manger_pas_cher" class="logo"/></a></div>
+        
+            <div class = "phrase_accroche"><p class = "phrase_accroche"><a href="index.php" class="phrase_approche">Une autre vision de la consommation </a></p></div>
+    
+            <div class = "espace_commercant">
+                <div class = "espace_commercants">	
+                        <a href="index.php" class="espace_commercants"> Retourner à l'accueil </a>
+                </div>
+            </div>
+        
+        </header>
+
+
+<section class="inscription">
+    <header class= "inscription"> 
+            <h1>Nouveau produit</h1>
+            
+    </header>
+
+    <article class= "creation_compte_gen">
+        <form action="Creation_Produit2.php" method="post">
+
+            <div class="produit">
+                Categorie : <div class="compte_produit"> <input type="text" size="16" maxlength="15" value="categorie" name="categorie" /> </div>
+            </div>
+            <div class="produit">
+                Type :  <div class="compte_produit"> <input type="text" size="16" maxlength="15" value="types" name="types" /></div>
+            </div>
+            <div class="produit">
+                Marque : <div class="compte_produit"> <input type="text" size="16" maxlength="15" value="marque" name="marque" /> </div>
+            </div>
+            <div class="produit">
+                Prix : <div class="compte_produit"> <input type="number" value= "0" name="prix" /> </div>
+            </div>
+
+            <div class="produit">
+                Date de peremption :<div class="compte_produit"> <input type="date" size="16" maxlength="15" name="date_de_peremption" /> </div>
+            </div>
+            <div class="produit">
+                Reduction : <div class="compte_produit"> <input type="number" value="10" name="reduction" /> </div>
+            </div>
+            <div class="produit">
+                Quantite : <div class="compte_produit"> <input type="number" step="1" value="0" min="0" max="50" name="quantite" /> </div>
+            </div>
+            <div class="produit">
+                Lien image : <div class="compte_produit"> <input type="text" size="150" maxlength="150" value="http://site_image.fr/" name="image" /> </div>
+            </div>
+            <div class="produit">
+                <input type="submit" value="Envoyer" name="Bouton">
+            </div>
+        </form>
+    </article>
+</section>
+
+</div>
+</body>
+
+
+

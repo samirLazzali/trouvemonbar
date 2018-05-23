@@ -1,0 +1,543 @@
+/*
+*
+{
+    border: 3px solid black;
+} */
+
+/* TRUC SRTYLES : position: sticky;
+                  top: 0; */
+
+/* HEADER */
+
+header{
+    display: flex;
+    flex-wrap: wrap;
+    margin : 1%;
+    margin-left: 3%;
+    padding: 0%;
+    
+}
+
+section.sticky
+{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin : 1%;
+    margin-left: 1%;
+    margin-bottom: 0%;
+    padding: 1%;
+    border: 1px solid black;
+    border-radius: 10px;
+    position: sticky;
+    top: 0;
+    background:#A4D42A;
+}
+
+img.logo
+{
+    width: 90%;
+    height: 90%; 
+}
+
+div.logo
+{
+    width: 10%;
+    padding-left: 0%;
+    height: 40%;
+}
+
+div.phrase_accroche
+{
+    margin-top: 5%;
+    width: 65%;
+    height: 10%;
+}
+
+p.phrase_accroche
+{
+    margin: 0%;
+}
+
+a.phrase_approche, a.phrase_approche:visited
+{
+    font-family: "tomatoes";
+    font-weight: bold;
+    color: #ff4f4f;
+    font-size: 150%;
+    text-decoration: underline;
+    
+}
+
+a.phrase_approche:hover
+{
+    color: white;
+}
+
+@font-face 
+{
+    font-family: 'tomatoes';
+    src: url('../police/tomatoes.ttf');
+}
+
+h1
+{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a:visited
+{
+    color : blue ;
+}
+
+a.menu, a.menu_commercants
+{
+    color : white;
+    text-decoration: none;
+}
+
+div.recherche_produit
+{
+    display: flex;
+    margin: auto;
+    margin-left:0%;
+    border: 2px solid black;
+    border-radius: 10px;
+    height: 10%;
+    
+}
+
+input
+{
+    border-radius: 10px;
+}
+
+div.recherche_produit_text, div.recherche_produit_form
+{
+    padding-top: 0%;
+    padding-bottom: 0%;
+    
+}
+
+p.mon_compte
+{
+    text-align: right;
+    margin: auto; 
+
+}
+
+
+div.mon_compte_photo
+{   
+    margin: auto;
+    margin-top: auto;
+}
+
+div.mon_compte_text
+{
+    margin-top: 0%;
+    margin: auto;
+    text-align: top;
+    font-family: Verdana;
+}
+
+a.liste_panier
+{
+    color : white;
+    text-decoration: none;
+}
+
+label.bouton
+{
+    font-family: Verdana;
+}
+
+a.liste_panier:hover, a.liste_panier:focus
+{
+    font-weight: bold;
+}
+
+div.mon_compte
+{
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    padding-right: 1%;
+    margin-left: 1%;
+    border: 1px solid black; 
+    border-radius: 5px;
+}
+
+div.mon_commerce
+{
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    padding-right: 0%;
+    margin-left: auto;
+}
+
+div.mon_panier
+{
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    padding-right: 1%;
+    margin-left: auto;
+    border: 1px solid black; 
+    border-radius: 5px;
+}
+
+#pop_panier{
+	display: none;
+    position: static;
+    flex-wrap: nowrap;
+    margin-bottom: auto;
+    z-index:1001;
+    border-top: 2px solid black;
+    background:#A4D42A;
+}
+
+#panier{
+    display: none;
+}
+
+#panier:checked + #pop_panier{
+    display: block;
+}
+
+#pop_compte{
+	display: none;
+    position: static;
+    flex-wrap: nowrap;
+    margin-bottom: auto;
+    z-index:1001;
+    border-top: 2px solid black;
+    background:#A4D42A;
+}
+
+#compte{
+    display: none;
+}
+
+#compte:checked + #pop_compte{
+    display: block;
+}
+
+/*
+#modalCheck5:checked + #fenetre{
+    display: block;
+} */
+
+a.mon_compte
+{
+    text-decoration: none;
+    color: black; 
+    font-weight: bold;
+}
+
+div.espace_commercants
+{
+    background-color: rgb(0, 143, 19);
+    margin-right: 0%;
+    margin-left: 0%;
+    margin-bottom: 0%;
+    margin-top: 1%;
+    padding: 0.5%;
+    border-radius: 10px;
+    font-family : Georgia;
+    font-variant : small-caps;
+    font-weight: bold;
+    width: 100%;
+}
+
+div.espace_commercant
+{
+    width: 22%;
+    text-align: center;
+}
+
+
+a.espace_commercants, a.espace_commercants:visited
+{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+div.espace_commercants:hover
+{
+    background-color: rgb(1, 58, 20);
+}
+/* FIN HEADER */
+
+/* CORPS */
+div.corps
+{
+    background-image: url("../img/background/background-corps2.jpg");
+    background-attachment: scroll;
+    background-repeat: repeat;
+    padding: 1%;
+    width: 60%;
+    min-width: 950px;
+    margin : auto;
+
+}
+
+
+
+body
+{
+    background-image: url("../img/background/background.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    padding: 0px;
+    margin-left : 0px;
+    margin-right : 0px
+}
+/* FIN CORPS */
+
+footer
+{
+    padding: 0%;
+    width : 60%;
+    margin: auto;
+    border-top: 3px solid black;
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+ul.footer
+{
+    margin-top:1%;
+}
+
+h4.footer
+{
+    margin-top: 0%;
+    margin-bottom: 1%;
+}
+
+ul.menu, ul.menu_commercants
+{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 0px;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    font-family : "Arial Black";
+
+}
+
+div.menu, div.menu_commercants
+{
+    
+    padding-left : 2%;
+    padding-right: 2%;
+    border-right: 2px solid black;
+    border-radius: 2px;
+    margin : auto;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    flex: 1;
+
+}
+
+div.menu_deconnexion, div.menu_commercants_ajout
+{
+    
+    padding-left : 2%;
+    padding-right: 2%;
+    margin : auto;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    flex: 1;
+
+}
+
+
+div.menu:hover, div.menu_commercants:hover,div.menu_deconnexion:hover, div.menu_commercants_ajout:hover
+{
+    border-radius: 5px;
+    background-color : rgb(0, 2, 90);
+}
+
+li.menu, li.menu_commercants
+{
+    display : inline;
+}
+
+nav
+{
+    margin-left : 2%;
+    background-color: rgb(36, 36, 255);
+    margin-right : 2%;
+    border-radius: 5px;
+    
+}
+
+section.corp
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    
+}
+
+.presentation
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: Georgia;
+    margin: 2%;
+    width: 60%;
+    text-align: justify;
+    background-image: url("../img/background/background_inscription.jpg");
+    background-attachment: scroll;
+    background-repeat: repeat;
+}
+
+.pdt_mnt
+{
+    background-color: #cfe7f5;
+	margin:  30%;
+	width: 40%;
+    height: 200px;
+}
+
+aside.pubs
+{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.pub1
+{
+    margin-bottom: 5%;
+}
+
+
+.rating a {
+    float: right;
+    color: #aaa;
+    text-decoration: none;
+    font-size: 2em;
+    transition: color .4s;
+}
+.rating a:hover,
+.rating a:focus,
+.rating a:hover ~ a,
+.rating a:focus ~ a {
+    color: orange;
+    cursor: pointer;
+}
+
+
+.qt a {
+    float: right;
+    color: #aaa;
+    text-decoration: none;
+    font-size: 2em;
+    transition: color .4s;
+}
+.qt a:hover,
+.qt a:focus,
+.qt a:hover ~ a,
+.qt a:focus ~ a {
+    color: blue;
+    cursor: pointer;
+}
+
+
+input.quantite{
+    font-size: 2.5em;
+    width: 50px;
+    margin: 0;
+}
+
+input.quantite#result{
+    width: 50px;
+    text-align: center;
+}
+
+li
+{
+list-style-type: none;
+}
+
+figure {
+  float: center;
+  width: 30%;
+  text-align: center;
+  font-style: italic;
+  font-size: smaller;
+  text-indent: 0;
+  
+  margin: 0.5em;
+  padding: 0.5em;
+}
+img.imgfig{
+    position: absolute;
+    right: -350px;
+}
+figcaption
+{
+    position: absolute;
+    bottom: -200px;
+    right: -400px;
+    color: red;
+    font-size: 50px;
+    background-color: #A4D42A;
+}
+
+#carrousel{
+
+    position:relative;
+
+    height:250px;
+
+    width:500px;
+
+    margin:auto;
+
+}
+
+#carrousel ul li{
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+}
+.carrousel_btn{
+    position: absolute;
+    bottom: 80px;
+    border: none;
+    background-color: rgb(0,0,0,0);
+}
+.carrousel_btn::-moz-focus-inner
+{
+    border:0; 
+} 
+.carrousel_btn h1
+{
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 40px;
+}
+.carrousel_btn:hover
+{
+    color: rgb(34,39,213);
+}
+.prev{
+    left: 10px;
+}
+.next{
+    right: 10px;
+}

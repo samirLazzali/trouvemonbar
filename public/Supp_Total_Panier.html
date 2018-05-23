@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style-connexion.css"/>
+    <title>Supprimer Panier</title>
+</head>
+<body>
+<div class = "corps">
+    <header class = "tete">
+        <div class = "logo"><a href="index.php"><img src="../img/logo/logo.png" alt="logo_manger_pas_cher" class="logo"/></a></div>
+
+        <div class = "phrase_accroche"><p class = "phrase_accroche"><a href="index.php" class="phrase_approche">Une autre vision de la consommation </a></p></div>
+
+        <div class = "espace_commercant">
+            <div class = "espace_commercants">
+                <a href="index.php" class="espace_commercants"> Retourner à l'acceuil </a>
+            </div>
+        </div>
+
+    </header>
+
+    <script>
+        function Supprimer() {
+            //Création dynamique du formulaire
+            var form = document.createElement("form");
+            form.setAttribute("method", "POST");
+            form.setAttribute("action", "Supprimer_Totalite_Panier.php");
+
+            //Ajout des paramètres sous forme de champs cachés
+            var champCache1 = document.createElement("input");
+            champCache1.setAttribute("type", "hidden");
+            champCache1.setAttribute("name", "oui");
+            champCache1.setAttribute("value", "oui");
+            form.appendChild(champCache1);
+
+            //Ajout du formulaire à la page et soumission du formulaire
+            document.body.appendChild(form);
+            form.submit();
+
+        }
+    </script>
+
+
+    <section class="inscription">
+        <header class= "inscription">
+            <h1> Supprimer l'ensemble de votre panier </h1>
+
+            <p>êtes-vous sur de vouloir supprimer l'ensemble de votre Panier ?</p>
+            <td><button type=”button” onclick="Supprimer()">Confirmer</button>
+
+        </header>
+
+        <br/><br/><br/><br/><br/><br/><a href="index.php">Retour</a>
+    </section>
+
+</div>
+</body>
+</html>

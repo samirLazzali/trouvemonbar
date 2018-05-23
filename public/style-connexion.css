@@ -1,0 +1,269 @@
+
+/* HEADER */
+
+header.tete
+{
+    display: flex;
+    flex-wrap: wrap;
+    margin : 1%;
+    margin-top: 0%;
+    margin-left: 5%;
+    padding: 0%;
+    margin-top: 1%;
+    justify-content: space-between;
+    border-bottom: 5px solid blue;
+}
+
+img.logo
+{
+    width: 90%;
+    height: 90%; 
+}
+
+div.logo
+{
+    width: 10%;
+    padding-left: 0%;
+    height: 40%;
+}
+
+div.phrase_accroche
+{
+    margin-top: 5%;
+    width: 65%;
+    height: 10%;
+}
+
+p.phrase_accroche
+{
+    margin: 0%;
+}
+
+a.phrase_approche, a.phrase_approche:visited
+{
+    font-family: "tomatoes";
+    font-weight: bold;
+    color: #ff4f4f;
+    font-size: 150%;
+    text-decoration: underline;
+    
+}
+
+a.phrase_approche:hover
+{
+    color: white;
+}
+
+@font-face 
+{
+    font-family: 'tomatoes';
+    src: url('../police/tomatoes.ttf');
+}
+
+h1
+{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a:visited
+{
+    color : blue ;
+}
+
+a.menu, a.menu_commercants
+{
+    color : white;
+    text-decoration: none;
+}
+
+div.espace_commercants
+{
+    background-color: rgb(0, 143, 19);
+    margin-right: 0%;
+    margin-left: 0%;
+    margin-bottom: 0%;
+    margin-top: 1%;
+    padding: 0.5%;
+    border-radius: 10px;
+    font-family : Georgia;
+    font-variant : small-caps;
+    font-weight: bold;
+    width: 100%;
+}
+
+div.espace_commercant
+{
+    width: 22%;
+    text-align: center;
+}
+
+
+a.espace_commercants, a.espace_commercants:visited
+{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+div.espace_commercants:hover
+{
+    background-color: rgb(1, 58, 20);
+}
+/* FIN HEADER */
+
+/* CORPS */
+div.corps
+{
+    background-image: url("../img/background/background-corps2.jpg");
+    background-attachment: scroll;
+    background-repeat: repeat;
+    padding: 1%;
+    width: 60%;
+    min-width: 750px;
+    margin : auto;
+
+}
+
+div.corps_produits
+{
+    background-image: url("../img/background/background-corps2.jpg");
+    background-attachment: scroll;
+    background-repeat: repeat;
+    padding: 1%;
+    width: 60%;
+    min-width: 1100px;
+    margin : auto;
+
+}
+
+tr.categorie
+{
+    color: red;
+    font-weight: bold;
+
+}
+
+tr.categorie td
+{
+    border-bottom : 2px solid black;
+}
+
+td
+{
+    border-bottom: 1px dotted black;
+    text-align: center;
+}
+
+body
+{
+    background-image: url("../img/background/background.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    padding: 0px;
+    margin-left : 0px;
+    margin-right : 0px;
+}
+
+div.produit{
+    margin: 0%;
+    padding: 0%;
+}
+
+div.compte_fr   {
+    margin: 0%;
+    padding: 0%;
+}
+/* FIN CORPS */
+
+/* CONNEXION */
+
+section.inscription_produit
+{
+    /* background-image: url("../img/background/background_inscription.jpg");
+    background-attachment: scroll;
+    background-repeat: repeat; */
+    margin-left: 2%;
+    padding: 3%;
+    padding-top:1%;
+    margin-top: 2%;
+}
+
+section.inscription
+{
+    background-image: url("../img/background/background_inscription.jpg");
+    background-attachment: scroll;
+    background-repeat: repeat; 
+    margin-left: 2%;
+    padding: 3%;
+    padding-top:1%;
+    margin-top: 2%;
+}
+
+a.notation
+{
+    text-decoration: none; 
+}
+
+article.creation_compte_gen
+{
+    display : flex;
+    margin-top: 2%;
+}
+
+div.produit
+{
+    margin-bottom: 1%;
+}
+
+div.compte_produit
+{
+    margin-left: auto;
+    margin-bottom: 0%;
+}
+
+div.compte_form
+{
+    margin-left: auto;
+    margin-bottom: 5%;
+}
+
+input
+{
+    margin-left: auto;
+    margin-bottom: 0%;
+}
+/* FIN DE CONNEXION */
+
+/* STARS */
+
+.rating a {
+    float: right;
+    color: #aaa;
+    text-decoration: none;
+    font-size: 1em;
+    transition: color .4s;
+}
+.rating a:hover,
+.rating a:focus,
+.rating a:hover ~ a,
+.rating a:focus ~ a {
+    color: orange;
+    cursor: pointer;
+}
+
+
+.qt a {
+    float: right;
+    color: #aaa;
+    text-decoration: none;
+    font-size: 1em;
+    transition: color .4s;
+}
+.qt a:hover,
+.qt a:focus,
+.qt a:hover ~ a,
+.qt a:focus ~ a {
+    color: blue;
+    cursor: pointer;
+}
