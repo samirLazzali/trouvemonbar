@@ -1,0 +1,172 @@
+body
+{
+	/* Concernant le texte */
+	font-family: 'Verdana';
+	color: white;
+	font-size: large;
+	text-align: center;
+
+	/* Concernant le fond */
+	background-image: url("Images/fond.jpg");
+	background-color: #030c1d;
+	background-position: left;
+	background-attachment : fixed;
+	background-repeat : no-repeat;
+	
+	
+	/* Concernant le contour */
+	padding:  100px 70px 100px 70px;
+	/*border-radius: 10px;
+	box-shadow: 6px 6px 5px black;
+	border: 5px lightblue solid;
+	border-radius: 10px 10px 10px 10px;*/
+}
+
+
+
+#login{
+	display: flex;
+	justify-content: right; /* Paramètre pour placer les éléments qui sont dans le conteneur */
+	width: 1100px;
+	height: 70px;	
+	/*border: 10px black double;
+	border-radius: 10px 10px 10px 10px;
+	background-color: lightblue; */
+	/*position:  4px; 
+	z-index: 9; 
+	margin-bottom:-0.5px;*/
+}
+
+.elementLogin
+{
+	/* Concernant le contour */
+	width: 150px;
+	height: 20px;
+	padding: 15px 5px 15px 5px;
+	background-color: lightblue;
+	border: 2px solid black;
+	border-radius: 10px;
+	box-shadow: 6px 6px 5px black;
+
+	/* Concernant le texte */
+	text-align: center;
+}
+
+
+
+
+#menu
+{
+	display: flex;
+	justify-content: space-around; /* Paramètre pour placer les éléments qui sont dans le conteneur */
+	
+	width: 1100px;                     /* Caractéristiques du conteneur */
+	height: 100px;	
+	/*border: 10px yellow double;*/
+	border-radius: 10px 10px 10px 10px;
+
+
+}
+
+
+.elementMenu
+{
+	width: 130px;
+	height: 60px;
+	padding: 15px 5px 15px 5px;
+	
+	border: 2px solid black;
+	border-radius: 10px;
+	box-shadow: 6px 6px 5px black;
+	
+	text-align: center;
+	line-height: 60px;
+	text-decoration: none;
+	color: red;
+}
+
+#coeur{
+	display: flex;
+	justify-content: space-around; /* Paramètre pour placer les éléments qui sont dans le conteneur */
+	
+	
+	/*border: 10px green double;*/
+	border-radius: 10px 10px 10px 10px;
+}
+
+nav, header,section,footer{
+	border: 10px lightblue double;
+	border-radius: 10px 10px 10px 10px; 
+	background: rgba(0,0,0,0.5);
+
+}
+
+nav {
+	/* Caractéristiques du conteneur */
+	width: 200px;                     
+	height: 1000px;
+	/* Caractéristiques du texte*/
+	text-align: left;
+	/*color: black;*/
+}
+
+section {
+	/* Caractéristiques du conteneur */
+	width: 3500px;                     
+	height: 1000px;
+	/* Caractéristiques du texte*/
+        vertical-align: left;
+}
+
+footer {
+        text-align: left;
+	/*color: black;*/
+}
+
+.elementLogin > a:link, .elementLogin > a:visited, .elementMenu > a:link, .elementMenu > a:visited{
+    text-decoration: none;
+    text-align: center;
+    color: black;
+}
+
+
+.elementLogin > a:hover, .elementMenu > a:hover {
+    text-decoration: none;
+    text-align: center;
+    font-weight:bold;
+}
+
+a:link, a:visited{
+    text-decoration: none;
+    text-align: center;
+    color: white;
+}
+
+
+a:hover {
+    text-decoration: none;
+    text-align: center;
+    color: cyan;
+}
+
+
+
+h3{
+	text-align: center;
+}
+
+p,ul{
+	text-align: left;
+}
+/*
+nav.li{
+	color: black;
+}*/
+/*
+a:active {
+    text-decoration: none;
+    text-align: center;
+    color: blue;
+}*/
+
+
