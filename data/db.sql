@@ -1,19 +1,72 @@
-CREATE TABLE "user" (
-    id SERIAL PRIMARY KEY ,
-    firstname VARCHAR NOT NULL ,
-    lastname VARCHAR NOT NULL ,
-    birthday date
-);
+CREATE TABLE "utilisateur" (
+  "id" SERIAL primary key NOT NULL,
+  "mail" varchar(255) NOT NULL,
+  "statut" varchar(255) NOT NULL,
+  "code_validation" varchar(255) DEFAULT NULL,
+  "mdp" text NOT NULL,
+  "date_dernier_co" timestamp NOT NULL,
+  "date_inscription" timestamp NOT NULL,
 
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('John', 'Doe', '1967-11-22');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Yvette', 'Angel', '1932-01-24');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Amelia', 'Waters', '1981-12-01');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Manuel', 'Holloway', '1979-07-25');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Alonzo', 'Erickson', '1947-11-13');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Otis', 'Roberson', '1995-01-09');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Jaime', 'King', '1924-05-30');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Vicky', 'Pearson', '1982-12-12)');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Silvia', 'Mcguire', '1971-03-02');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Brendan', 'Pena', '1950-02-17');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Jackie', 'Cohen', '1967-01-27');
-INSERT INTO "user"(firstname, lastname, birthday) VALUES ('Delores', 'Williamson', '1961-07-19');
+  UNIQUE (mail)
+);
+CREATE TABLE "profil" (
+  "id" SERIAL primary key NOT NULL,
+  "id_utilisateur" int references utilisateur(id) on delete cascade NOT NULL,
+  "id_sexe" varchar(10) NOT NULL,
+  "search_sexe" varchar(10) NOT NULL,
+  "tags" text,
+  "date_naissance" timestamp NOT NULL
+);
+CREATE TABLE "qadmin" (
+  "id" SERIAL primary key NOT NULL,
+  "id_admin" int references utilisateur(id) on delete cascade NOT NULL,
+  "question" varchar(255) NOT NULL,
+  "reponses" text NOT NULL,
+  "date_q" timestamp NOT NULL
+);
+CREATE TABLE "qutilisateur" (
+  "id" SERIAL primary key NOT NULL,
+  "id_utilisateur" int NOT NULL,
+  "mail" varchar(255) NOT NULL,
+  "question" int references qadmin(id) on delete cascade NOT NULL,
+  "reponse" text NOT NULL,
+  "date_q" timestamp NOT NULL
+);
+CREATE TABLE "sex_appeal" (
+  "id" SERIAL primary key NOT NULL,
+  "id_admin" int NOT NULL,
+  "nom" varchar(255) NOT NULL,
+  "pallier" int NOT NULL,
+  "genre" varchar(10) NOT NULL,
+  "date_update" timestamp NOT NULL
+);
+CREATE TABLE "suggestion" (
+  "id" SERIAL primary key NOT NULL,
+  "id_cible" int references utilisateur(id) on delete cascade NOT NULL,
+  "id_utilisateur" int references utilisateur(id) on delete cascade NOT NULL,
+  "resultat" int NOT NULL,
+  "etat_lu" int NOT NULL DEFAULT 0,
+  "date_match" timestamp NOT NULL
+);
+CREATE TABLE "suggestiontotal" (
+  "id" SERIAL primary key NOT NULL,
+  "id_utilisateur" int references utilisateur(id) on delete cascade NOT NULL,
+  "nombre_match_cumule" int NOT NULL DEFAULT 0,
+  "date_update" timestamp NOT NULL
+);
+CREATE TABLE "newsletter" (
+  "id" SERIAL primary key NOT NULL,
+  "id_admin" int NOT NULL,
+  "sujet" varchar(255) NOT NULL,
+  "message" text NOT NULL,
+  "date_news" timestamp NOT NULL
+);
+CREATE TABLE "chat" (
+  "id" SERIAL primary key NOT NULL,
+  "id_chat" text NOT NULL,
+  "id_cible" int references utilisateur(id) on delete cascade NOT NULL,
+  "id_utilisateur" int references utilisateur(id) on delete cascade NOT NULL,
+  "message" varchar(2000) NOT NULL,
+  "etat_lu" int NOT NULL DEFAULT 0,
+  "date_message" timestamp NOT NULL
+);
