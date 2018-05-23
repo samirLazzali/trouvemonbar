@@ -1,0 +1,34 @@
+div.Nonconnected{
+    position :absolute;
+    border : 1px solid grey;
+    top :40%;
+    left : 40%;
+    padding-bottom : 20px;
+    background-color : #F08080;
+    border-radius:10px;
+}
+div.bann{
+    border : purple;
+    padding-bottom : 12px;
+    color :#582900; 
+}
+
+div.Connect{
+    font-family : 'Pangolin',cursive;
+    color :#8B0000;
+}
+
+div.log {
+
+border : black;
+}
+
+body{
+    font-family : 'Exo',sans-serif;
+
+}
+
+div.emprunter{
+    padding-left : 200px;
+}
+

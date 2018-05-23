@@ -1,0 +1,67 @@
+body{
+font-family : 'Exo',sans-serif;
+}
+h1{
+position  :absolute;
+left :20%;
+top : 10%;
+}
+div.profile{
+    position : absolute;
+    top : 20%;
+    left : 20%;
+border : 1px solid blue;
+width : 400px;
+}
+
+
+div.bouton a{
+    font-family  :'Ubuntu', sans-serif;
+    text-decoration :none;
+    border-radius: 2px;
+    color :white;
+display :block;
+width :150px;
+text-align :center;
+vertical-align :middle;
+background-color : #1560BD;
+
+}
+
+div.bouton a:hover{
+background-color: #66c2ff;
+}
+
+div.emprunt{
+    width : 1000px;
+    position : absolute;
+    left : 20%;
+    top : 30%;
+}
+
+div.baka{
+    width :1000px;
+position : absolute;
+left : 20%;
+}
+
+div.trans1{
+    position : absolute;
+    right :0%;
+}
+
+div.ligne_verticale{
+    position : absolute;
+    left :20%;
+     width:5px;
+   border-left:1px solid gray;
+     height:950px;
+}
+
+div.ligne_verticale1{
+    position : absolute;
+    right :27.2%;
+     width:5px;
+   border-left:1px solid gray;
+     height:950px;
+}

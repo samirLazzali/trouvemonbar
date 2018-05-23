@@ -1,0 +1,19 @@
+div.log{
+    position : absolute;
+    top : 20%;
+    left : 30%;
+    border :1px solid blue;
+    width : 700px;
+    padding-top : 20px;
+    padding-bottom : 100px;
+    padding-left : 30px;
+    background-color:#B0C4DE;
+    border-radius : 10px;
+}
+
+body{
+padding-left : 200px;
+font-size : 20px;
+font-family : 'Exo',sans-serif;
+
+}

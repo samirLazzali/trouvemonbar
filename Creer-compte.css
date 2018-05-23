@@ -1,0 +1,29 @@
+.text-center{
+    border: black;
+}
+
+p{
+    font-size: 20px;
+}
+
+body{
+padding-left : 200px;
+font-family : 'Exo',sans-serif;
+
+}
+
+div.inscription{
+    border : 1px solid orange;
+font-family : 'Exo',sans-serif;
+
+    padding-bottom : 20px;
+    padding-left : 40px;
+    width : 800px;
+    background-color : #F4A460;
+}
+
+div.mov{
+position : absolute;
+right : 15%;
+top : 25%;
+}

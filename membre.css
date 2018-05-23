@@ -1,0 +1,18 @@
+div.bouton a{
+    font-family  :'Ubuntu', sans-serif;
+    text-decoration :none;
+    border-radius: 2px;
+    color :white;
+display :block;
+width :150px;
+text-align :center;
+vertical-align :middle;
+background-color : #1560BD;
+
+}
+
+body{
+font-size : 20px;
+padding-left : 200px;
+}
+

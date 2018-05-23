@@ -1,0 +1,25 @@
+table,tr{
+ padding:0px;
+}
+
+
+div.bouton a{
+    font-family  :'Ubuntu', sans-serif;
+    text-decoration :none;
+    border-radius: 2px;
+    color :white;
+display :block;
+width :150px;
+text-align :center;
+vertical-align :middle;
+background-color : #1560BD;
+
+}
+
+div.bouton a:hover{
+background-color: #66c2ff;
+}
+body{
+font-family : 'Exo',sans-serif;
+padding-left:300px;
+}

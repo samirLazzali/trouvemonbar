@@ -1,0 +1,8 @@
+Pour utiliser le projet, téléchargez tous les fichiers dans le dossier public du docker.
+Remplace le fichier db.sql par celui du projet
+Faites un make start pour intialisez.
+
+
+Il ya actuellement un membre admin : 
+login : Miryuni 
+pass :Test

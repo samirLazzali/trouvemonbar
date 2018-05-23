@@ -1,0 +1,109 @@
+div.indexrecherche{
+    border : 1px solid purple;
+    border-radius: 10px;
+padding-top : 20px;
+background-color : #ff471a;
+padding-bottom : 20px;
+}
+
+div.affichemanga{
+    font-family : 'Pangolin',cursive;
+    border-radius : 10px;
+}
+
+div.rechercheindex{
+    font-family : 'Pangolin',cursive;
+    border-radius : 10px;
+}
+
+div.mangaaleatoire{
+    padding-bottom : 10px;
+    border-radius : 10px;
+    border : 1px solid purple;
+    padding-top : 20px;
+    background-color : #66c2ff;
+}
+
+div.resume1{
+    background-color : #ff471a;
+    border : 1px solid purple;
+    
+}
+
+div.resume2{
+    font-family : 'Pangolin',cursive;
+}
+
+span{
+width:15px;
+display : inline-block;
+background :red;
+height:15px;
+text-align:center;
+border-radius:100px;
+line-height: 15px;
+color: white; 
+font-family : 'Gloria Hallelujah',cursive;
+}
+
+div.log{
+background-color : #66c2ff;
+    border-radius : 10px;
+position : absolute;
+top: 0%;
+right:50%;
+left :90%;
+margin : 20px blue;
+border : 3px dotted red;
+width : 150px ;
+padding-left : 20px;
+padding-right:20px;
+}
+
+
+h1{
+ margin-left :44%;
+ font-family:'Gugi', cursive;
+}
+
+div.pref{
+    top :10px;
+background-color : #66c2ff;
+    border-radius : 10px;
+    padding-bottom : 20px;
+    padding-top : 20px;
+    border :1px solid grey;
+}
+
+
+div.front{
+    text-align : center;
+}
+
+div.manga_pref{
+    font-family : "Pangolin",cursive;
+    border : 1px solid grey;
+    border-radius :10px;
+    width : 500px;
+    padding-bottom : 20px;
+}
+
+div.ui-widget{
+    border-radius : 10px;
+    position : absolute;
+    top : 20%;
+    left :30%;
+    border : 1px solid purple;
+    width : 800px;
+}
+
+body{
+font-family : 'Pangolin',cursive;
+}
+
+div.trans{
+    position : absolute;
+    right : 3%;
+    top : 52%;
+}
+

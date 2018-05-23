@@ -1,0 +1,6 @@
+div.log{
+    position : absolute;
+    top : 25%;
+    border : solid 1px black;
+    background-color : blue;
+}
