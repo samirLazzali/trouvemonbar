@@ -1,0 +1,23 @@
+<?php 
+session_start();
+?>
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Inscription</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="text/javascript" src="verif.js"></script>
+</head>
+<body>
+	<nav> </nav>
+  <legend> Informations générales </legend>
+	 <fieldset>
+    <form method="post" action="inscriptionPoteaux.php" >
+      <label for="pseudo">Pseudo</label> : <input type="text" name="pseudo" id="pseudo" size="20" maxlength="20" onblur="checkPseudo(this)"/><br/><br/>
+      <label for="pwd">Mot de passe</label> : <input type="password" name="pwd" id="pwd" size="20" maxlength="15"/><br/><br/>
+      <input type="submit" value="Login"/>
+  	</form>
+  </fieldset>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<?php 
+
+session_start();
+$dbName = getenv('DB_NAME');
+$dbUser = getenv('DB_USER');
+$dbPassword = getenv('DB_PASSWORD');
+$connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
+
+$GLOBALS['dbName']=$dbName;
+$GLOBALS['dbUser']=$dbUser;
+$GLOBALS['dbPassword']=$dbPassword;
+$GLOBALS['connection']=$connection;
+
+function printCandidats(){
+  $req="SELECT prenom_c,pseudo_c,nom_c FROM candidat";
+
+}
+
+
+
+?>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+<title>Page Title</title>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="style.css" />
+
+<div class="hero-image">
+  <div class="hero-text">
+    <h1>MISTERIIE</h1>
+    <p>Edition 2018/2019</p>
+  </div>
+</div>
+<div class="navbar">
+  <a href="#accueil"><a href="./main.html">Accueil</a></a>
+  <a href="#informations"><a href="./informations.html">Informations</a></a>
+  <a href="#candidats"><a href="./candidats.html">Candidats</a></a>
+  <a href="#contact"><a href="./contact.html">Contact</a></a>
+  <a href="#monprofil"><a href="./monprofil.html">Mon profil</a></a>
+  <a href="#parametres"><a href="./parametres.html">Paramètres</a></a>
+  <a href="#login"><a href="./login.html">Login</a>
+  <a href="#signup"><a href="./signup.html">S'enregistrer</a></a>
+
+</div>
+
+<hr/>
+
+<div class="main">
+  <p>
+    <?php printCandidats();?>
+  </p>
+</div>
+ 
+
+
+</body>
+</html>

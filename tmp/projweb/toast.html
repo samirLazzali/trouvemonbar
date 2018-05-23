@@ -1,0 +1,45 @@
+
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Inscription</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body>
+	<nav> </nav>
+	 <fieldset>
+      <legend>Identité sexuelle </legend>
+      <ul>
+          <li>
+            <label for="title_1">
+              <input type="radio" id="title_1" name="title" value="M." >
+              Homme
+            </label>
+          </li>
+          <li>
+            <label for="title_2">
+              <input type="radio" id="title_2" name="title" value="Ms.">
+              Femme
+            </label>
+          </li>
+          <li>
+            <label for="title_2">
+              <input type="radio" id="title_2" name="title" value="O.">
+              Autre
+            </label>
+          </li>
+      </ul>
+    </fieldset>
+    <fieldset>
+    	<legend> Informations générales </legend>
+    	<form method="post" action="Inscription.php">
+    		<label for="pseudo">Pseudo</label> : <input type="text" name="pseudo" id="pseudo" size="20" maxlength="20"/><br/>
+    		<label for="prenom">Prénom</label> : <input type="text" name="prenom" id="prenom" size="20" maxlength="12"/><br/>
+    		<label for="nom">Nom</label> : <input type="text" name="nom" id="nom" size="20" maxlength="15"/><br/>
+    		<input type="submit" value="Valider"/>
+    	</form>
+    </fieldset>
+</body>
+</html>

@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+<title>Inscription</title>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<script type="text/javascript" src="verif.js"></script>>
+<div class="hero-image">
+  <div class="hero-text">
+    <h1>MISTERIIE</h1>
+    <p>Edition 2018/2019</p>
+  </div>
+</div>
+<div class="navbar">
+  <a href="#accueil"><a href="./main.html">Accueil</a></a>
+  <a href="#candidats"><a href="./classement.php">Classement</a></a>
+  <a href='#epreuves'><a href="./epreuves.php">Épreuves</a></a>
+  <a href="#login"><a href="./login.html">Login</a>
+  <a href="#signup"><a href="./Inscription.html">S'enregistrer</a></a>
+  <a href="#admin"><a href="./administration.php">Administration</a></a>
+  <a href="#deconnexion"><a href="./deconnexion.php">Déconnexion</a></a>
+</div>
+
+<legend> Informations générales </legend>
+	 <fieldset>
+    <form method="post" action="inscription.php" onsubmit="return checkForm(this)">
+      <p> 
+        Identité sexuelle
+        <input type="radio" name="id_sexe" value="Homme" id="homme" checked="checked" /> <label for="homme">Homme</label>
+        <input type="radio" name="id_sexe" value="Femme" id="femme" /> <label for="femme">Femme</label>
+        <input type="radio" name="id_sexe" value="Autre" id="autre" /> <label for="autre">Autre</label>
+      </p>
+      <label for="pseudo">Pseudo</label> : <input type="text" name="pseudo" id="pseudo" size="20" maxlength="20" onblur="checkPseudo(this)"/><br/><br/>
+  	  <label for="prenom">Prénom</label> : <input type="text" name="prenom" id="prenom" size="20" maxlength="12" onblur="checkPrenom(this)"/><br/><br/>
+  	  <label for="nom">Nom</label> : <input type="text" name="nom" id="nom" size="20" maxlength="15" onblur="checkNom(this)"/><br/><br/>
+      <label for="pwd">Mot de passe</label> : <input type="password" name="pwd" id="pwd" size="20" maxlength="15"/><br/><br/>
+      <label for="pwd2">Confirmez votre mot de passe</label> : <input type="password" name="pwd2" id="pwd2" size="20" maxlength="15" onblur="checkMDP(this)"/><br/><br/>
+      <input type="submit" value="Valider"/>
+  	</form>
+  </fieldset>
+</body>
+</html>
+
