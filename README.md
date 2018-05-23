@@ -1,0 +1,4 @@
+- remplacer le dossier public de ensiie-project-master
+- dans un terminal, "cd ensiie-project-master" puis "make start"
+- utiliser un navigateur et aller à l'adresse "localhost:8080"
+- mettre custom-php.ini dans .docker/php-fpm/config/

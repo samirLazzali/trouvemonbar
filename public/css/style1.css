@@ -1,0 +1,250 @@
+.Nomdusite {
+    background-image: url("../php/top_img.jpg");
+    padding: 30px;
+    text-align: center;
+    font-size: 3em;
+    color: white;
+    font-weight: bold;
+}
+
+#navbar {
+    background-color: #555;
+    overflow: hidden;
+    text-align: center;
+    color: #f1f1f1;
+    width: 100%;
+    display: inline-block;
+    padding: 8px 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#navbar .lien {
+    display: inline;
+    color: #f2f2f2;
+    padding: 16px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    margin: auto;
+}
+
+#navbar .img_lien{
+    display: inline;
+    padding: 16px 10px;
+    position: relative;
+    left: 33%;
+}
+
+#navbar .lien:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+#navbar .img_lien img{
+    height: 23px;
+    width: 23px;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+}
+
+.sticky + .container {
+    padding-top: 60px;
+}
+
+
+
+.chapitres{
+    list-style-type:none;
+    padding:0;
+    margin-right: auto;
+    margin-left: auto;
+    width: 60%;
+}
+
+.chapitres a{
+    text-decoration: none;
+}
+
+.chapitres a li{
+    width: 100%;
+    color: white;
+    background-color: #666666;
+    margin: 0 auto;
+    padding:8px 16px;
+    border-bottom:1px solid #cacaca;
+}
+.chapitres a:last-child{
+    border-bottom:none
+}
+
+.chapitres a li:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+
+
+.container_upload form {
+    width: 35%;
+    margin: auto;
+    padding: 15px 0px;
+    background-color: #555555;
+    color: #cacaca;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.row {
+    display: flex;
+}
+
+.column {
+    flex: 50%;
+}
+
+body {
+    font-size: 1.2em;
+    font-family: Arial, serif;
+    text-align: center;
+    height: 100%;
+    background-color: #cacaca;
+    margin: 0;
+}
+
+hr {
+    color: black;
+    width: 30%;
+}
+
+.container {
+    min-height: 81%;
+    padding: 16px;
+}
+
+.column p {
+    width: 80%;
+    text-align: justify;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    background-color: #757575;
+}
+
+table, th, tr, td {
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+table{
+    width: 80%;
+    margin: 0 auto;
+}
+
+td, th {
+    width: 25%;
+    text-align: center;
+}
+
+
+
+.footer {
+    background-color: #666666;
+}
+
+.clearfix { clear: both; }
+
+.btn1{
+    display: inline-block;
+    border: 1px solid #99D3F5;
+    border-radius: 4px;
+    padding: 4px 12px;
+    color: red;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+}
+
+
+
+/**     BACKGROUND IMAGE **/
+#bgimg{
+    color: white;
+    font-weight: bold;
+    text-decoration : none;
+}
+
+/*      PAGES DU MANGA      **/
+.imgManga{
+    background-color: #F4F8FF;
+    margin-bottom: 1px;
+
+}
+
+
+/*************** SWITCH ********************
+****************NIGHTMODE*****************/
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: blue ;
+    -webkit-transition: .1s;
+    transition: .1s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .1s;
+    transition: .1s;
+}
+
+input:checked + .slider {
+    background-color: black;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 50px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/***********END NIGHTMODE***********
+************************************/
