@@ -1,0 +1,185 @@
+body
+{
+	background-color: RGB(00,00,40);
+	color: #B0C4DE;
+}
+h1{
+    color: #00BFFF;
+}
+h2{
+    color: #58acfa;
+}
+a
+{
+	color:#AFEEEE;
+   text-decoration: none;
+}   
+a:hover {
+    color: lightpink;
+}
+em {
+    color: cyan;
+}
+
+
+nav {
+    text-align: center;
+    margin: 0; padding: 0;
+    display: block;
+    width: 100%;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: dodgerblue;
+    background: linear-gradient(deepskyblue, dodgerblue);
+    background: -webkit-linear-gradient(deepskyblue, dodgerblue);
+    background:    -moz-linear-gradient(deepskyblue, dodgerblue);
+    background:     -ms-linear-gradient(deepskyblue, dodgerblue);
+    background:      -o-linear-gradient(deepskyblue, dodgerblue);
+    background:         linear-gradient(deepskyblue, dodgerblue);
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .3),
+    0 3px 5px rgba(0, 0, 0, .2),
+    0 5px 10px rgba(0, 0, 0, .2),
+    0 20px 20px rgba(0, 0, 0, .15);
+}
+
+nav li {
+    border-right: 1px solid #bbb;
+    float: left;
+    display: inline;
+    text-align: center;
+}
+
+nav li form
+{
+    float: right;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    text-decoration: none;
+    margin: auto;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .4);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .7) inset,
+    0 -1px 0 hsl(210, 100%, 32%) inset,
+    0 -2px 0 hsl(210, 100%, 38%) inset,
+    0 -3px 0 hsl(210, 100%, 44%) inset,
+    0 -4px 0 hsl(210, 100%, 50%) inset,
+    0 -5px 0 hsl(210, 100%, 60%) inset;
+    transition: all .3s .1s;
+    position: relative;
+}
+
+nav li a {
+    float : right;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 20px 45px;
+    text-decoration: none;
+    margin: auto;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .4);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .7) inset,
+    0 -1px 0 hsl(210, 100%, 32%) inset,
+    0 -2px 0 hsl(210, 100%, 38%) inset,
+    0 -3px 0 hsl(210, 100%, 44%) inset,
+    0 -4px 0 hsl(210, 100%, 50%) inset,
+    0 -5px 0 hsl(210, 100%, 60%) inset;
+    transition: all .3s .1s;
+    position: relative;
+}
+
+nav ul li:first-child a{
+    border-radius: 3px 0 0 3px;
+}
+nav ul li:last-child a{
+    border-radius: 0 3px 3px 0;
+}
+
+nav ul li a:hover,
+nav ul li a:focus{
+    background: rgba(255,255,255,.2);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .7) inset,
+    0 -1px 0 hsl(210, 100%, 42%) inset,
+    0 -2px 0 hsl(210, 100%, 48%) inset,
+    0 -3px 0 hsl(210, 100%, 54%) inset,
+    0 -4px 0 hsl(210, 100%, 60%) inset,
+    0 -5px 0 hsl(210, 100%, 70%) inset;
+    padding: 8px 25px 17px 25px;
+    transition: all .3s 0s;
+}
+
+nav ul li a:active{
+    background: linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.1));
+    box-shadow: 0 0 2px rgba(0,0,0,.3) inset;
+}
+
+nav ul li a::before{
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 9px;
+    margin-left: -2px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, .5);
+}
+
+nav ul li a:hover::before,
+nav ul li a:focus::before{
+    background: white;
+    box-shadow: 0 0 2px white,
+    0 -1px 0 rgba(0, 0, 0, .4);
+}
+
+/*Change the link color to #111 (black) on hover*/
+nav li a:hover {
+    background-color: #111;
+}
+
+.erreur{
+    color:red;
+}
+.container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.col-md-12 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.page-header {
+    align-content: center;
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+}
+
+table {
+ border-width:1px; 
+ border-style:solid; 
+ border-color:black;
+ border-collapse : collapse;
+}
+
+td { 
+ border-width:1px;
+ border-style:solid; 
+ border-color:black;
+ }
