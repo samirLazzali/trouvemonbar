@@ -1,0 +1,7 @@
+
+<html>
+<form action="Pays.html" method="post">
+  <input type="text" name="nom_pays" value="nom_pays" />
+  <input type="submit" value="Rechercher" />
+</form>
+</html>

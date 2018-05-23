@@ -1,0 +1,54 @@
+h1{
+    color: blue;
+}
+body{
+    background-image:url(../data/fond.jpeg);
+}
+connexion{
+    font-size : 12px;
+    position: absolute;
+    right: 10px;
+    top: 60px;
+    background-color: lightblue;
+    color:grey;
+    padding:10px;
+    width: 200px;
+    border: 2px solid;
+    border-radius: 1em;
+}
+
+ut{color:red;}
+
+a{color:black;}
+
+nav ul
+{
+    padding: 0px;
+    margin: 0px;
+    list-style-type:none;
+    background-color: #ADD8E6;
+    color: grey;
+    border:2px solid;
+    border-radius:1em;
+}
+
+nav li {
+    display: inline-block;
+    width: 200px;
+    height: 40px;
+    margin:0px;
+    padding:0px;
+    border-right:1px solid grey;
+    text-align:center;
+    line-height: 40px;
+}
+
+nav li :hover{
+    background-color:#008080;
+
+nav li a{
+    display:block;
+    text-decoration:none;
+    color: white;
+}
+

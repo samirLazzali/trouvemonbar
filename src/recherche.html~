@@ -1,0 +1,89 @@
+
+<DOCTYPE html>
+  <html>
+
+    <head>
+      <link rel="stylesheet" href="presentation_pages.css" type="text/css">
+      <meta charset="utf-8" />
+      <title>Rechercher une destination</title>
+     
+    </head>
+
+    
+    <body>
+      <form action="methode_recherche.php" method="post">
+      <nav>
+
+	<ul>
+	  <li><a href="page_accueil.html">Accueil</a></li>
+	  <li><a href="recherche.html">Recherche destination</a></li>
+	  <li><a href="formulaire_contact.html">Contact</a></li>
+	</ul>
+
+      </nav>
+
+      <h2>Envie de découvrir :</h2>
+
+      <input type="radio" name="select" value="pays" onclick="document.getElementById('pays2').style.display='initial';document.getElementById('ville2').style.display='none';document.getElementById('monument2').style.display='none'"/>
+      <label for="pays">Un pays ?</label>
+
+      <div id="pays2" style="display:none">
+	<input type="text" size="30" name="recherche_pays" id="recherche_pays" onkeyup="showHint(this.value)" />
+	<input type="submit" value="Rechercher" name="rechville"/>
+	<input type="reset" value="Annuler" />
+      </div>
+
+      <br/>
+      <br/>
+
+
+      <input type="radio" name="select" value="ville" onclick="document.getElementById('ville2').style.display='initial';document.getElementById('pays2').style.display='none';document.getElementById('monument2').style.display='none'"/>
+      <label for="pays">Une ville ?</label>
+
+      <div id="ville2" style="display:none">
+	<input type="text" size="30" name="recherche_ville" id="recherche_ville" onkeyup="showHint(this.value)"/>
+	<input type="submit" value="Rechercher"/>
+	<input type="reset" value="Annuler" />
+      </div>
+
+      <br/>
+      <br/>
+
+      <input type="radio" name="select" value="monument" onclick="document.getElementById('monument2').style.display='initial';document.getElementById('pays2').style.display='none';document.getElementById('ville2').style.display='none'"/>
+      <label for="pays">Un monument ?</label>
+
+      <div id="monument2" style="display:none">
+	<input type="text" size="30" name="recherche_monument" id="recherche_monument" onkeyup="showHint(this.value)" />
+	<input type="submit" value="Rechercher"/>
+	<input type="reset" value="Annuler" />
+      </div>
+
+      </form>
+    </body>
+
+    <script>
+    function rechpays(pays){
+    $pays = $POST[’pays’];
+    echo " <p>Résultat pour la recherche : $pays  <br/>";
+      /*on veut un pays qui contienne la chaine rentree*/
+
+      $requete = "SELECT * FROM Pays WHERE nom_p LIKE ’%$pays%’;";
+      $connexion = pg_connect("host=localhost dbname=db.sql");
+      $reponse = pg_query($connexion, $requete);
+      if($reponse){
+      $nbTuples = pg_num_rows($reponse);
+      echo "<ul>";
+	while ($tupleCourant = pg_fetch_assoc($reponse)){
+	echo "<li> Nom du pays :  $tupleCourant[’nom_p’], ";
+	  echo "Capitale :  $tupleCourant[’capitale’]</li>";
+	}
+	echo "</ul>";
+      }
+      else{echo "Probleme a l execution de la requete sur les pays";}
+      pg_close($connexion);
+      echo "</p>";
+    }
+    </script>
+
+   
+</html>

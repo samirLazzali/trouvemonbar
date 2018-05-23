@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="presentation_pages.css" type="text/css">
+    <meta charset="UTF-8" />
+    <title>Création d'un compte client</title>
+    <link rel="stylesheet" type="text/css" href="????.css"/>
+  </head>  
+
+  <body>
+
+    <nav>
+    <ul>
+      <li><a href="page_accueil.html">Accueil</a></li>
+      <li><a href="recherche.html">Recherche destination</a></li>
+      <li><a href="formulaire_contact.html">Contact</a></li>
+    </ul>
+    </nav>
+    <form action="validation2.php" method="post">
+     <h1>Création d'un compte client</h1>
+
+     <p>Veuillez renseigner les informations ci-dessous afin de créer votre compte.
+       Les champs obligatoires sont suivis par <strong><abbr title="required">*</abbr></strong>.
+     </p>
+      
+        <section>
+            <h2>Information de contact</h2>
+            <fieldset>
+              <legend>Qualité</legend>
+              <ul>
+                  <li>
+                    <label for="title_1">
+                      <input type="radio" id="title_1" name="title" value="M." >
+                      Monsieur
+                    </label>
+                  </li>
+                  <li>
+                    <label for="title_2">
+                      <input type="radio" id="title_2" name="title" value="Ms.">
+                      Madame
+                    </label>
+                  </li>
+              </ul>
+            </fieldset>
+            <p>
+              <label for="name">
+                <span>Nom: </span>
+                <strong><abbr title="required">*</abbr></strong>
+              </label>
+              <input type="text" id="name" name="username">
+            </p>
+	     <p>
+              <label for="prenom">
+                <span>Prénom: </span>
+                <strong><abbr title="required">*</abbr></strong>
+              </label>
+              <input type="text" id="prename" name="userprename">
+            </p>
+            <p>
+              <label for="mail">
+                <span>E-mail: </span>
+                <strong><abbr title="required">*</abbr></strong>
+              </label>
+              <input type="email" id="mail" name="usermail">
+            </p>
+            <p>
+              <label for="pwd">
+                <span>Mot de passe: </span>
+                <strong><abbr title="required">*</abbr></strong>
+              </label>
+              <input type="password" id="pwd" name="password">
+            </p>
+        </section>
+        <section>
+            <h2>Adresse</h2>
+            <p>
+	      <label for="ville">Ville : </label>
+	      <input type="text" id="ville" name="ville">
+	    </p>
+	    <p>
+	      <label for="pays">Pays : </label>
+	      <input type="text" id="pays" name="pays">
+	    </p>
+	    
+           
+        </section>
+        <section>
+            <p> <button type="submit">Valider l'inscription</button> </p>
+        </section>
+    </form>
+
+      <h2>Confidentialité</h2>
+
+    En validant votre inscriptions, vous acceptez nos conditions d'utilisation;
+    Si vous souhaitez obtenir des informations au sujet de la confidentialité de vos données, merci de lire les documents suivants:
+
+
+
+   <ul> <li> <a href="">Conditions et termes d'utilisation</a>
+  </ul>
+   
+
+</body>
+</html> 

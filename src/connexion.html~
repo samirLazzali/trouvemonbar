@@ -1,0 +1,38 @@
+
+<DOCTYPE html>
+  <html>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="connexion.css" type="text/css">
+
+    <connexion>
+      
+      <form action="connexion.php" method="post">
+	<p>
+	  <label for="Pseudo">Pseudo:</label>
+	  <input type="text" size="20" name="Pseudo" id="Pseudo"/>
+	</p>
+	<p>
+	  <label for="mdp">Mot de passe:</label>
+	  <input type="password" size="20" name="mdp" id="mdp"/>
+	 
+	</p>
+	<input type="submit" value="Se connecter"/>
+       
+	<br/>
+       
+	<p>Pas encore utilisateur?</p>
+	<a href="page_accueil.html" type="Button">Creer un compte</a>
+      </form>
+    </connexion>
+    
+      <nav>
+	<ul>
+	  <li><a href="page_accueil.html">Accueil</a></li>
+	  <li><a href="recherche.html">Recherche destination</a></li>
+	  <li><a href="formulaire_contact.html">Contact</a></li>
+	</ul>
+      </nav>
+   
+     
+  </html>
+  

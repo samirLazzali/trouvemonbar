@@ -1,28 +1,13 @@
 <?php
-namespace User;
+namespace Pays;
 
-class User
+class Pays
 {
     /**
      * @var int
      */
-    private $pseudo;
+    private $id_p;
 
-    /**
-     * @var string
-     */
-    private $nom;
-
-    /**
-     * @var string
-     */
-    private $prenom;
-
-    /**
-     * @var string
-     */
-    private $email;
-    
     /**
      * @var string
      */
@@ -31,12 +16,37 @@ class User
     /**
      * @var string
      */
-    private $nom_v;
+    private $code_p;
 
     /**
      * @var string
      */
-    private $mdp;
+    private $devise;
+    
+    /**
+     * @var string
+     */
+    private $langue;
+
+    /**
+     * @var string
+     */
+    private $capitale;
+
+    /**
+     * @var string
+     */
+    private $continent;
+
+    /**
+     * @var string
+     */
+    private $drapeau;
+
+    /**
+     * @var string
+     */
+    private $lienwiki_p;
 
 
     /**

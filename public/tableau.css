@@ -1,0 +1,17 @@
+table{
+  border: medium solid;
+  border-collapse: collapse;
+  width: 50%;
+}
+th {
+  border: thin solid #B22222;
+  width: 50%;
+  padding: 5px;
+  background-color: #F08080;
+}
+td {
+  font-family: sans-serif;
+
+  text-align: center;
+  background-color: #ffffff;
+}

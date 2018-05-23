@@ -1,18 +1,4 @@
-
-<?php
-require '../vendor/autoload.php';
-
-//postgres
-$dbName = getenv('DB_NAME');
-$dbUser = getenv('DB_USER');
-$dbPassword = getenv('DB_PASSWORD');
-$connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
-
-$userRepository = new \User\UserRepository($connection);
-$users = $userRepository->fetchAll();
-?>
-
-
+<!DOCTYPE html>
 <html>
   <head>
     <link rel="stylesheet" href="presentation_pages.css" type="text/css">
@@ -32,14 +18,9 @@ $users = $userRepository->fetchAll();
     <h1> Présentation du contexte</h1>
     <p> 
     blabla présentation contexte
-    <?php foreach ($users as $user) : 
-    if ($user->getPseudo()=="1") {
-    
-    echo $user->getnom();} ?>
-    <?php endforeach; ?>
     </p>
     <h1>Les destinations du moment:</h1>
-    <a href=""> <p><em>Bayonne</em></p> <img src="/data/bayonne.jpg" width="320" alt="bayonne"/> </a>
+    <a href="formulaire_contact.html"> <p><em>Bayonne</em></p> <img src="../data/bayonne.jpg" width="320" alt="bayonne"/> </a>
 
     
     <connexion>
@@ -54,13 +35,11 @@ $users = $userRepository->fetchAll();
 	 
        </p>
        <input type="submit" value="Se connecter"/>
-      </form>
-
-      <br/>
        
-      <ut><p>Pas encore utilisateur?</p></ut>
-      <form action="creation_compte.html" method="post">
-	<input type="submit" value="Créer un compte"/>
+       <br/>
+       
+       <ut><p>Pas encore utilisateur?</p></ut>
+       <a href="creation_compte.html" type="Button">Creer un compte</a>
       </form>
     </connexion> 
   </body>

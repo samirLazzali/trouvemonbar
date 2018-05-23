@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		<b> <?php echo $_POST['nom_pays']; ?> </b></br>
+	</title>
+</head>
+<body>
+	<h1>Quelques informations :</h1>
+  <p>
+  <?php
+	$requete="SELECT nom_p, code_p, devise, langue, capitale, continent FROM Pays WHERE nom_p=$_POST[0];";
+  $conn=db_connect("/data/db.sql");
+  if (!$conn) echo 'erreur: connexion à la base de données impossible';
+  $result =  db_query($conn,$requete);
+  if (!$result) echo 'erreur: la requête ne peut pas être executée';
+  if (db_count($result)==0) echo 'erreur: pas de pays trouvé avec le numéro donné';
+  else {
+      $row=db_fetch($result);
+
+			?>
+      <table>
+        <caption>Quelques informations sur ce pays</caption>
+        <tr><th>Nom du Pays</th><th>Code ISO</th><th>Devise</th><th>Langue</th><th>Capitale</th><th>Continent</th></tr>
+        <tr><td><?php $row['nom_p'] ?></td><td><?php $row['code_p']?></td><td><?php $row['devise']?></td><td><?php $row['langue']?></td><td><?php $row['capitale']?></td><td><?php $row['continent']?></td></tr>
+      </table>
+	</p></br></br>
+	<h1>Drapeau :</h1>
+	<p><?php print_drapeau($nom_pays); ?></p></br></br>
+	<h1>Pour plus d'informations :</h1>
+	<p><?php print_lien_pays($nom_pays); ?></p></br></br>
+</body>
+</html>
