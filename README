@@ -1,0 +1,8 @@
+Voici notre Projet Web.
+
+Vous trouverez le Rapport sous format PDF et deux dossiers.
+
+	-L'un contient la version originale, utilisant le gestionnaire de BD Mysql.
+	Cette version est celle utilisée tout le long de notre projet, et lors de la soutenance.
+
+	-L'autre contient la version adaptée à PostgreSQL, qui n'a cependant pas pu être testé.

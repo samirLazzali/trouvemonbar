@@ -1,0 +1,133 @@
+@font-face {
+    font-family: 'PT-Sans-Caption-Bold';
+    src:url('font/PT-Sans-Caption-Bold.ttf.woff') format('woff'),
+        url('font/PT-Sans-Caption-Bold.ttf.svg#PT-Sans-Caption-Bold') format('svg'),
+        url('font/PT-Sans-Caption-Bold.ttf.eot'),
+        url('font/PT-Sans-Caption-Bold.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(45deg, #f07d47 10%, #f7ee2d 90%);
+    font-family: 'PT-Sans-Caption-Bold';
+    height: 100vh;
+    font-size: 14px;
+}
+.content {
+    max-width: 340px;
+    width: 90%;
+    margin: 5vh auto;
+}
+
+.logo_form {
+    width: 120px;
+    height: 120px;
+}
+
+.title_logo_form {
+    text-align: center;
+}
+
+.title_form {
+    font-weight: 500;
+    margin-bottom: -10px;
+    font-size: 34px;
+    color: white;
+}
+
+.form {
+    border-radius: 6px;
+    margin-top: 40px;
+    overflow: hidden;
+}
+
+.form_input {
+    width: 100%;
+    outline: 0;
+    font-family: 'PT-Sans-Caption-Bold';
+    padding: 20px;
+    border: 0;
+    display: block;
+}
+
+.btn {
+    border: 0;
+    display: block;
+    color: white;
+    padding: 20px;
+    outline: 0;
+    width: 100%;
+    background: #f07d47;
+    font-family: 'PT-Sans-Caption-Bold';
+    cursor: pointer;
+}
+
+.error_form, .subtitle_form {
+    margin-top: 5px;
+    font-family: arial;
+}
+
+.error_form {
+    color: red;
+}
+
+.subtitle_form {
+    color: white;
+}
+
+.only_title_page_title, .only_title_page_subtitle{
+    text-align: center;
+    color: white;
+}
+
+.only_title_page_logo {
+    margin-top: 5%;
+    text-align: center;
+}
+
+.choose_page_button {
+    text-decoration: none;
+    padding: 5px;
+    margin: 10px 10px 0 10px;
+    border-radius: 5px;
+    color: #f07d47;
+    background-color: white;
+    border: 3px solid #f07d47;
+    cursor: pointer;
+    font-family: 'PT-Sans-Caption-Bold';
+    min-width: 90px;
+}
+
+.choose_page_content {
+    text-align: center;
+    width: 30%;
+    margin: auto;
+}
+
+.choose_page_content p {
+    margin-bottom: 20px;
+    font-family: arial;
+}
+
+.under_form_text {
+    text-align: center;
+    margin-top: 10px;
+    font-family: arial;
+    color: blue;
+    text-decoration: none;
+}
+
+.under_form_text:hover{
+    color: #0d338a;
+}
+
+.under_form_element a {
+    text-decoration: none;
+}

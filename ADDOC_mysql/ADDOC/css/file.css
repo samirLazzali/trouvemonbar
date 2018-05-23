@@ -1,0 +1,196 @@
+@font-face {
+    font-family: 'PT-Sans-Caption-Bold';
+    src:url('font/PT-Sans-Caption-Bold.ttf.woff') format('woff'),
+        url('font/PT-Sans-Caption-Bold.ttf.svgPT-Sans-Caption-Bold') format('svg'),
+        url('font/PT-Sans-Caption-Bold.ttf.eot'),
+        url('font/PT-Sans-Caption-Bold.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+  background: #fafafa;
+  margin: 0;
+  font-family: 'PT-Sans-Caption-Bold';
+}
+
+.wrap{
+  top: 4%;
+  left: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+}
+
+.title_file {
+	font-size: 24px;
+}
+
+nav {
+  position: fixed;
+  background-color: white;
+  z-index: 5;
+  width: 100%;
+  height: 50px;
+}
+
+.arrow-left-header {
+	height: 50px;
+	margin-left: 10px;
+}
+
+.content_file_display {
+	position: fixed;
+	width: 100%;
+	height: calc(100% - 50px);
+	top: 50px;
+	background-color: #404040;
+	text-align: center;
+}
+
+.pdf_display {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.image_display {
+	position: relative;
+	max-width: 90%;
+	max-height: 90%;
+	margin-top: 1%;
+}
+
+.right_actions_header {
+	position: absolute;
+	top: 0;
+	right: 10px;
+	height: 50px;
+}
+
+.action_icon {
+	max-height: 50px;
+}
+
+.print-header {
+	display: none;
+}
+
+.upload-header {
+	height: 40px;
+}
+
+
+
+
+
+.upload_file_link {
+	position: relative;
+	text-decoration: none;
+	top: -10px;
+}
+
+
+.content_popup label
+{
+    padding: 10px;
+    background: red; 
+    display: table;
+    color: #fff;
+    cursor: pointer;
+    margin: auto;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.content_popup input[type="file"] {
+    display: none;
+}
+
+.content_popup input[type="submit"] {
+  position: relative;
+	text-decoration: none;
+  padding: 5px;
+  border-radius: 5px;
+  color: #f07d47;
+  background-color: white;
+  border: 3px solid #f07d47;
+  cursor: pointer;
+  font-family: 'PT-Sans-Caption-Bold';
+  min-width: 90px;
+  float: right;
+}
+
+
+.content_popup input[type="submit"]:hover {
+	color: white;
+	background-color: #f07d47;
+}
+
+.button {
+  font-size: 1em;
+  padding: 10px;
+  color: #fff;
+  border: 2px solid #06D85F;
+  border-radius: 20px/50px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #06D85F;
+}
+
+.popup_square {
+
+  	position: fixed;
+  	top: 0;
+  	left: 0;
+  	width: 100%;
+  	height: 100%;
+  	z-index: 50;
+  	background: rgba(0, 0, 0, 0.7);
+  	visibility: hidden;
+  	opacity: 0;
+}
+
+
+.popup_square:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  text-align: center;
+}
+
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+
+.popup .close:hover {
+  color: #f07d47;
+}
+
+.popup .content_popup {
+  max-height: 30%;
+  overflow: auto;
+}
