@@ -1,0 +1,19 @@
+body.modal-form {
+    background-color: #008080;
+}
+input.submit-button{
+	color: #008080;
+}
+
+h1{
+	color: white;	
+}
+
+h2{
+	color: white;
+}
+
+p{
+	padding-top: 50px;
+    padding-bottom: 50px
+}
