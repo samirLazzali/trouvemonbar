@@ -1,0 +1,357 @@
+body {
+  background-color: rgb(255, 255, 255);
+  font: 400 1.625em/1.38 'Kite One';
+  color: rgb(223, 107, 7);
+}
+
+.accroche {
+  position: relative;
+  float: left;
+  z-index: 23;
+  width: 34%;
+  min-height: 98px;
+  margin: 28px 0 0 8.37973%;
+  border-radius: 20px;
+  background-color: rgb(235, 113, 8);
+  font-size: 1em;
+  line-height: 1.7;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.accueil {
+  float: left;
+}
+
+.accueil .accueil {
+  width: 99.3997713414%;
+  min-height: 66px;
+  margin-left: 0.58005%;
+  font-size: 1em;
+  line-height: 2.5;
+  text-align: center;
+  color: rgb(223, 107, 7);
+}
+
+.adresse {
+  float: left;
+  width: 20.4171983645%;
+  min-height: 44px;
+  margin: 9px 0 0 69.59896%;
+  font: 0.692em/2 Montserrat;
+  color: rgb(211, 101, 6);
+}
+
+.bandeau {
+  float: left;
+  width: 100%;
+  height: 91px;
+}
+
+.bandeau .menu {
+  position: relative;
+  z-index: 1;
+  width: 12%;
+  min-height: 42px;
+  margin-top: 20px;
+  font-size: 1em;
+  text-align: center;
+  color: rgb(223, 107, 7);
+}
+
+.code_postal {
+  float: left;
+  clear: both;
+  width: 20.4171983645%;
+  min-height: 44px;
+  margin: 9px 0 0 69.59896%;
+  font: 0.692em/2 Montserrat;
+  color: rgb(211, 101, 6);
+}
+
+.connexion {
+  float: left;
+}
+
+.cuisine {
+  float: left;
+  width: 100%;
+}
+
+.dessert {
+  float: left;
+  clear: both;
+  width: 28.7633083596%;
+  min-height: 47px;
+  margin: 192px 0 0 35.58261%;
+  font-family: 'Playfair Display';
+  font-size: 1.154em;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+.entree {
+  float: left;
+  width: 28.7633083596%;
+  min-height: 47px;
+  margin: 12px 0 0 35.61958%;
+  font-family: 'Playfair Display';
+  font-size: 1.154em;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+.inscription {
+  float: left;
+}
+
+.connexion .connexion,
+.inscription .inscription {
+  width: 100%;
+  min-height: 40px;
+  font-size: 0.615em;
+  line-height: 2.5;
+  text-align: center;
+  color: rgb(235, 113, 8);
+}
+
+.connexion .connexion:hover,
+.inscription .inscription:hover {
+  background-color: rgb(235, 113, 8);
+  color: rgb(255, 255, 255);
+}
+
+.ligne_droite {
+  position: relative;
+  float: left;
+  z-index: 3;
+  width: 34%;
+  min-height: 42px;
+  margin-top: 20px;
+  font-size: 0.615em;
+  color: rgb(211, 101, 6);
+}
+
+.ligne_gauche {
+  position: relative;
+  float: left;
+  z-index: 2;
+  width: 34%;
+  min-height: 42px;
+  margin: 20px 0 0 9.99883%;
+  font-size: 0.615em;
+  color: rgb(211, 101, 6);
+}
+
+.logo {
+  position: relative;
+  float: left;
+  z-index: 22;
+  width: 32.4166666666%;
+  height: 132px;
+  margin: 58px 0 0 10%;
+  background-image: url('../images/Cuisine.png'), url('../images/Cuisine.png');
+  background-repeat: no-repeat, repeat;
+  background-size: cover, cover;
+  background-position: center center, left top;
+  background-attachment: scroll, scroll;
+}
+
+.menu {
+  float: left;
+}
+
+.navigation {
+  position: relative;
+  float: left;
+  z-index: 21;
+  width: 54.4166666666%;
+  height: 66px;
+  margin: 26px 0 0 6.79622%;
+}
+
+.plat {
+  float: left;
+  clear: both;
+  width: 28.7633083596%;
+  min-height: 47px;
+  margin: 175px 0 0 35.58261%;
+  font-family: 'Playfair Display';
+  font-size: 1.154em;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+.recettes {
+  float: left;
+}
+
+.recettes .recettes {
+  width: 100%;
+  min-height: 66px;
+  font-size: 1em;
+  line-height: 2.5;
+  text-align: center;
+  color: rgb(223, 107, 7);
+}
+
+.recettes .recettes:hover {
+  background-color: rgb(211, 101, 6);
+  color: rgb(255, 255, 255);
+}
+
+.repas {
+  float: left;
+  clear: both;
+  width: 52.7996460591%;
+  height: 700px;
+  margin: 104px 0 0 23.64377%;
+  border-radius: 10px;
+  background-color: rgba(179, 179, 179, 0.99);
+}
+
+.reservation {
+  float: left;
+}
+
+.reservation .reservation {
+  width: 100.0095858895%;
+  min-height: 66px;
+  font-size: 1em;
+  line-height: 2.5;
+  text-align: center;
+  color: rgb(223, 107, 7);
+}
+
+.accueil .accueil:hover,
+.menu-2:hover,
+.reservation .reservation:hover {
+  background-color: rgb(223, 107, 7);
+  color: rgb(255, 255, 255);
+}
+
+.text {
+  float: left;
+  clear: both;
+  width: 52.7658134783%;
+  min-height: 41px;
+  margin: 25px 0 0 23.64377%;
+  font-size: 0.769em;
+  text-align: center;
+  color: rgb(223, 107, 7);
+}
+
+.accueil-1 {
+  width: 24.9617151607%;
+  height: 66px;
+  margin-left: -0.02172%;
+}
+
+.accueil-1:hover {
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  border-top-width: 0;
+  border-right-width: 0;
+  border-bottom-width: 0;
+  border-left-width: 0;
+  border-style: none;
+  background-color: rgb(255, 255, 255);
+}
+
+.accueil-1:active {
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+}
+
+.connexion-1 {
+  clear: both;
+  width: 18.7994791666%;
+  height: 40px;
+  margin-left: 10%;
+  border: 1px dashed rgb(0, 0, 0);
+}
+
+.cuisine-1 {
+  height: 330px;
+  margin-left: -0.0625%;
+  border: 5px solid rgb(235, 113, 8);
+  border-radius: 20px;
+  background-color: rgb(255, 255, 255);
+}
+
+.cuisine-2 {
+  clear: both;
+  height: 120px;
+  background-color: rgba(0, 0, 0, 0.98);
+}
+
+.inscription-1 {
+  position: relative;
+  clear: both;
+  z-index: 25;
+  width: 18.7994791666%;
+  height: 40px;
+  margin-left: 10%;
+  border: 1px dashed rgb(0, 0, 0);
+}
+
+.menu-1 {
+  position: relative;
+  z-index: 16;
+  width: 25.0174939072%;
+  height: 66px;
+  margin-left: 1.5274%;
+}
+
+.menu-2 {
+  width: 100.0095858895%;
+  min-height: 66px;
+  background-color: rgba(255, 255, 255, 0);
+  font-size: 1em;
+  line-height: 2.5;
+  text-align: center;
+  color: rgb(223, 107, 7);
+}
+
+.menu-3 {
+  clear: both;
+  width: 100.0638020833%;
+  height: 1006px;
+  margin-left: -0.0638%;
+}
+
+.recettes-1 {
+  width: 24.9617151607%;
+  height: 66px;
+  margin: -66px 0 0 75.03077%;
+}
+
+.recettes-1:hover {
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  border-left: 2px solid rgb(236, 113, 8);
+}
+
+.reservation-1 {
+  position: relative;
+  clear: both;
+  z-index: 18;
+  width: 24.9617151607%;
+  height: 66px;
+  margin: -66px 0 0 50.06636%;
+}
+
+.menu-1:hover,
+.reservation-1:hover {
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  border-left: 2px solid rgb(234, 113, 8);
+}

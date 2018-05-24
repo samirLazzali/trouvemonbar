@@ -1,0 +1,382 @@
+body {
+  background-color: rgb(255, 255, 255);
+  font: 400 1.625em/2.5 'Kite One';
+  color: rgb(223, 107, 7);
+}
+
+.accroche {
+  position: relative;
+  float: left;
+  z-index: 21;
+  width: 34%;
+  min-height: 98px;
+  margin: 28px 0 0 8.37973%;
+  border-radius: 20px;
+  background-color: rgb(235, 113, 8);
+  font-size: 1em;
+  line-height: 1.7;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.accueil {
+  float: left;
+}
+
+.accueil .accueil {
+  width: 99.3997713414%;
+  min-height: 66px;
+  margin-left: 0.58005%;
+  font-size: 1em;
+  text-align: center;
+  color: rgb(223, 107, 7);
+}
+
+.adresse {
+  float: left;
+  width: 20.4171983645%;
+  min-height: 44px;
+  margin: 9px 0 0 69.59896%;
+  font: 0.692em/2 Montserrat;
+  color: rgb(211, 101, 6);
+}
+
+.code_postal {
+  float: left;
+  clear: both;
+  width: 20.4171983645%;
+  min-height: 44px;
+  margin: 9px 0 0 69.59896%;
+  font: 0.692em/2 Montserrat;
+  color: rgb(211, 101, 6);
+}
+
+.connexion {
+  float: left;
+}
+
+.container {
+  position: relative;
+  float: left;
+  z-index: 9;
+  width: 59.6%;
+  height: 746px;
+  margin: 27px 0 0 2.74349%;
+  border: 2px solid rgb(223, 107, 7);
+  border-radius: 20px;
+}
+
+.author {
+  position: relative;
+  float: left;
+  z-index: 3;
+  width: 13.5989583333%;
+  min-height: 30px;
+  margin: -52px 0 0 71.19922%;
+  font-size: 0.769em;
+  line-height: 1.38;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+.cuisine {
+  float: left;
+  width: 100%;
+}
+
+.type {
+  position: relative;
+  float: left;
+  clear: both;
+  z-index: 2;
+  width: 13.5989583333%;
+  min-height: 30px;
+  margin: -52px 0 0 42.39974%;
+  font-size: 0.769em;
+  line-height: 1.38;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+
+.ingredients {
+  float: left;
+}
+
+.inscription {
+  float: left;
+}
+
+.connexion .connexion,
+.inscription .inscription {
+  width: 100%;
+  min-height: 40px;
+  font-size: 0.615em;
+  text-align: center;
+  color: rgb(235, 113, 8);
+}
+
+.connexion .connexion:hover,
+.inscription .inscription:hover {
+  background-color: rgb(235, 113, 8);
+  color: rgb(255, 255, 255);
+}
+
+.liste {
+  float: left;
+  width: 72.0218476316%;
+  height: 717px;
+  margin: 53px 0 0 13.30433%;
+  border: 2px solid rgb(223, 107, 7);
+  border-radius: 20px;
+}
+
+.liste .ingredients {
+  width: 87.2982645688%;
+  min-height: 49px;
+  margin: 23px 0 0 7.10379%;
+  font-size: 0.769em;
+  line-height: 1.38;
+  text-decoration: underline;
+  color: rgb(0, 0, 0);
+}
+
+.logo {
+  position: relative;
+  float: left;
+  z-index: 20;
+  width: 32.4166666666%;
+  height: 132px;
+  margin: 58px 0 0 10%;
+  background-image: url('../images/Cuisine.png'), url('../images/Cuisine.png');
+  background-repeat: no-repeat, repeat;
+  background-size: cover, cover;
+  background-position: center center, left top;
+  background-attachment: scroll, scroll;
+}
+
+.menu {
+  float: left;
+}
+
+.menu .menu {
+  width: 100.0095858895%;
+  min-height: 66px;
+  background-color: rgba(255, 255, 255, 0);
+  font-size: 1em;
+  text-align: center;
+  color: rgb(223, 107, 7);
+}
+
+.navigation {
+  position: relative;
+  float: left;
+  z-index: 19;
+  width: 54.4166666666%;
+  height: 66px;
+  margin: 26px 0 0 6.79622%;
+}
+
+.photo {
+  float: left;
+  width: 13.5989583333%;
+  height: 150px;
+  margin: 29px 0 0 10%;
+  background-image: url('../images/tarte%20au%20citron%20meringu%C3%A9.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left top;
+}
+
+.tit {
+  float: left;
+  width: 13.5989583333%;
+  height: 150px;
+  margin: 29px 0 0 10%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left top;
+}
+
+.preparation {
+  float: left;
+  width: 77.6166622726%;
+  min-height: 35px;
+  margin: 14px 0 0 11.19387%;
+  font-size: 1em;
+  line-height: 1.38;
+  text-align: center;
+  text-decoration: underline;
+  color: rgb(0, 0, 0);
+}
+
+.recette {
+  float: left;
+  clear: both;
+  width: 100%;
+  height: 1075px;
+}
+
+.recettes {
+  float: left;
+}
+
+.recettes .recettes {
+  width: 100%;
+  min-height: 66px;
+  font-size: 1em;
+  text-align: center;
+  color: rgb(223, 107, 7);
+}
+
+.recettes .recettes:hover {
+  background-color: rgb(211, 101, 6);
+  color: rgb(255, 255, 255);
+}
+
+.reservation {
+  float: left;
+}
+
+.reservation .reservation {
+  width: 100.0095858895%;
+  min-height: 66px;
+  font-size: 1em;
+  text-align: center;
+  color: rgb(223, 107, 7);
+}
+
+.accueil .accueil:hover,
+.menu .menu:hover,
+.reservation .reservation:hover {
+  background-color: rgb(223, 107, 7);
+  color: rgb(255, 255, 255);
+}
+
+.titre {
+    float: left;
+}
+
+.titre .titre {
+  position: relative;
+  z-index: 1;
+  width: 40.7994791666%;
+  min-height: 48px;
+  margin: 30px 0 0 20.39974%;
+  font-size: 1em;
+  line-height: 1.38;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+.accueil-1 {
+  width: 24.9617151607%;
+  height: 66px;
+  margin-left: -0.02172%;
+}
+
+.accueil-1:hover {
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  border-top-width: 0;
+  border-right-width: 0;
+  border-bottom-width: 0;
+  border-left-width: 0;
+  border-style: none;
+  background-color: rgb(255, 255, 255);
+}
+
+.accueil-1:active {
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+}
+
+.connexion-1 {
+  clear: both;
+  width: 18.7994791666%;
+  height: 40px;
+  margin-left: 10%;
+  border: 1px dashed rgb(0, 0, 0);
+}
+
+.cuisine-1 {
+  height: 330px;
+  border: 5px solid rgb(235, 113, 8);
+  border-radius: 20px;
+  background-color: rgb(255, 255, 255);
+}
+
+.cuisine-2 {
+  clear: both;
+  height: 120px;
+  background-color: rgba(0, 0, 0, 0.98);
+}
+
+.ingredients-1 {
+  position: relative;
+  clear: both;
+  z-index: 7;
+  width: 27.6536458333%;
+  height: 856px;
+  border-right: 5px dashed rgb(223, 107, 7);
+}
+
+.inscription-1 {
+  position: relative;
+  clear: both;
+  z-index: 23;
+  width: 18.7994791666%;
+  height: 40px;
+  margin-left: 10%;
+  border: 1px dashed rgb(0, 0, 0);
+}
+
+.menu-1 {
+  position: relative;
+  z-index: 14;
+  width: 25.0174939072%;
+  height: 66px;
+  margin-left: 1.5274%;
+}
+
+.recettes-1 {
+  width: 24.9617151607%;
+  height: 66px;
+  margin: -66px 0 0 75.03077%;
+}
+
+.recettes-1:hover {
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  border-left: 2px solid rgb(236, 113, 8);
+}
+
+.reservation-1 {
+  position: relative;
+  clear: both;
+  z-index: 16;
+  width: 24.9617151607%;
+  height: 66px;
+  margin: -66px 0 0 50.06636%;
+}
+
+.menu-1:hover,
+.reservation-1:hover {
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  border-left: 2px solid rgb(234, 113, 8);
+}
+
+.titre-1 {
+  width: 100%;
+  height: 219px;
+  background-color: rgba(179, 179, 179, 0.99);
+}
