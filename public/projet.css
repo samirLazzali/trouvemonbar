@@ -1,0 +1,105 @@
+h1
+{
+	color: #000080;
+	text-align: center;
+}
+
+
+div.block_asso
+{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 100%;
+	border-color: black;
+	border-width: 3px;
+}
+
+div.asso
+{
+	width: 200px;
+	height: 200px;
+	text-align: center;
+	align-content: center;
+	margin: 15px;
+	color: #000080;
+	margin: 0;
+  	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  	font-size: 20px;
+}
+
+nav
+{
+	background: #B0C4DE;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 0;
+	width: 100%;
+
+}
+
+div.el
+{
+	background-color: #3b9cfd;
+	width: 16%;
+	text-align: center;
+	align-content: space-around;
+    border-radius: 5px;
+	margin: 0px;
+	color: #B0C4DE;
+  	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  	font-size: 15px;
+}
+
+
+div.connexion
+{
+	align-content: space-around;
+	text-align: center;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	border-radius: 6px;
+	background-color: #4a88c6;
+	color: #B0C4DE;
+	width: 125px;
+	height: 32px;
+	position: relative;
+	left: 89%;
+	top: 45px;
+	font-size: 15px;
+
+}
+
+
+body {
+  	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  	font-size: 25px;
+  	color: #061843;
+  	background-color: #B0C4DE;
+
+}
+
+a:link{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  	font-size: 20px;
+	color: #25292B;
+}
+
+a:hover{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  	font-size: 20px;
+	color: #00BFFF;
+}
+
+a:visited{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  	font-size: 20px;
+	color: #000080;
+}
+
+header{
+	position: relative;
+	top: 0px;
+	left:0px;
+}
+
