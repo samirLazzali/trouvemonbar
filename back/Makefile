@@ -53,7 +53,7 @@ php.connect:
 	docker-compose exec php /bin/bash
 
 phpunit.run:
-	docker-compose exec php vendor/bin/phpunit --config=phpunit.xml
+	docker-compose exec php vendor/bin/kahlan --coverage=4
 
 composer.install:
 	docker-compose exec php composer install || exit 0

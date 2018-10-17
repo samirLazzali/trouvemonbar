@@ -3,103 +3,55 @@ namespace User;
 
 class User
 {
-    /**
-     * @var int
-     */
     private $id;
-
-    /**
-     * @var string
-     */
     private $firstname;
-
-    /**
-     * @var string
-     */
     private $lastname;
-
-    /**
-     * @var \DateTimeInterface
-     */
     private $birthday;
 
-    /**
-     * @return int
-     */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @param int $id
-     * @return User
-     */
-    public function setId($id)
+    public function setId(int $id)
     {
         $this->id = $id;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getFirstname()
+    public function getFirstname(): string
     {
         return $this->firstname;
     }
 
-    /**
-     * @param string $firstname
-     * @return User
-     */
-    public function setFirstname($firstname)
+    public function setFirstname(string $firstname)
     {
         $this->firstname = $firstname;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getLastname()
     {
         return $this->lastname;
     }
 
-    /**
-     * @param string $lastname
-     * @return User
-     */
     public function setLastname($lastname)
     {
         $this->lastname = $lastname;
         return $this;
     }
 
-    /**
-     * @return \DateTimeInterface
-     */
     public function getBirthday(): \DateTimeInterface
     {
         return $this->birthday;
     }
 
-    /**
-     * @param \DateTimeInterface $birthday
-     * @return User
-     */
     public function setBirthday(\DateTimeInterface $birthday)
     {
         $this->birthday = $birthday;
         return $this;
     }
 
-
-    /**
-     * @return int
-     * @throws \OutOfRangeException
-     */
     public function getAge(): int
     {
         $now = new \DateTime();
@@ -111,4 +63,3 @@ class User
         return $now->diff($this->getBirthday())->y;
     }
 }
-
