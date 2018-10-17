@@ -1,31 +1,35 @@
 # front
 
+Installation de nvm (Node Version Manager) qui permet l'utilisation de plusieurs version de node et surtout de simplifier son installation. Il installe la runtime de NodeJS et NPM.
+
+https://github.com/creationix/nvm#install-script
+
 ## Project setup
 ```
-yarn install
+npm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-yarn run serve
+npm run serve
 ```
 
 ### Compiles and minifies for production
 ```
-yarn run build
+npm run build
 ```
 
 ### Run your tests
 ```
-yarn run test
+npm run test
 ```
 
 ### Lints and fixes files
 ```
-yarn run lint
+npm run lint
 ```
 
 ### Run your unit tests
 ```
-yarn run test:unit
+npm run test:unit
 ```
