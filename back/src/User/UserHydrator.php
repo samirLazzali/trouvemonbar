@@ -16,8 +16,8 @@ class UserHydrator
         if ($user->getLastname()) {
             $data['lastname'] = $user->getLastname();
         }
-        if ($user->getBirthday()) {
-            $data['birthday'] = $user->getBirthday();
+        if ($user->getAge()) {
+            $data['age'] = $user->getAge();
         }
 
         return $data;

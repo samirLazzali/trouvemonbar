@@ -3,12 +3,13 @@
     <v-data-table
       :headers="headers"
       :items="users"
+      hide-actions
     >
       <template slot="items" slot-scope="{ item }">
         <td>{{ item.id }}</td>
         <td>{{ item.firstname }}</td>
         <td>{{ item.lastname }}</td>
-        <td>{{ item.birthday.date }}</td>
+        <td>{{ item.age }} years</td>
       </template>
     </v-data-table>
   </div>
@@ -24,7 +25,7 @@ export default {
         { text: 'Id', value: 'id' },
         { text: 'Firstname', value: 'firstname' },
         { text: 'Lastname', value: 'lastname' },
-        { text: 'Birthday', value: 'birthday' }
+        { text: 'Age', value: 'age' }
       ],
       users: []
     }
