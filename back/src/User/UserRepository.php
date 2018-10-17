@@ -8,28 +8,26 @@ class UserRepository
      */
     private $connection;
 
+    private $userHydrator;
+
     /**
      * UserRepository constructor.
      * @param \PDO $connection
      */
-    public function __construct(\PDO $connection)
+    public function __construct(\PDO $connection, UserHydrator $userHydrator)
     {
         $this->connection = $connection;
+        $this->userHydrator = $userHydrator;
     }
 
     public function fetchAll()
     {
-        $rows = $this->connection->query('SELECT * FROM "user"')->fetchAll(\PDO::FETCH_OBJ);
+        $rows = $this
+            ->connection->query('SELECT * FROM "user"')
+            ->fetchAll(\PDO::FETCH_ASSOC);
         $users = [];
         foreach ($rows as $row) {
-            $user = new User();
-            $user
-                ->setId($row->id)
-                ->setFirstname($row->firstname)
-                ->setLastname($row->lastname)
-                ->setBirthday(new \DateTimeImmutable($row->birthday));
-
-            $users[] = $user;
+            $users[] = $this->userHydrator->hydrate($row);
         }
 
         return $users;

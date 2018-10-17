@@ -7,7 +7,8 @@ $dbUser = getenv('DB_USER');
 $dbPassword = getenv('DB_PASSWORD');
 $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
 
-$userRepository = new \User\UserRepository($connection);
+$userHydrator = new \User\UserHydrator();
+$userRepository = new \User\UserRepository($connection, $userHydrator);
 $users = $userRepository->fetchAll();
 
 $userHydrator = new \User\UserHydrator();

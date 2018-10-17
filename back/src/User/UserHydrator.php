@@ -22,4 +22,13 @@ class UserHydrator
 
         return $data;
     }
+
+    public function hydrate(array $data): User
+    {
+        return (new User())
+            ->setId($data['id'] ?? null)
+            ->setFirstname($data['firstname'] ?? null)
+            ->setLastname($data['lastname'] ?? null)
+            ->setBirthday(new \DateTime($data['birthday']));
+    }
 }

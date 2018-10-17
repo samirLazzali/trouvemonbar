@@ -8,7 +8,7 @@ class User
     private $lastname;
     private $birthday;
 
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -19,7 +19,7 @@ class User
         return $this;
     }
 
-    public function getFirstname(): string
+    public function getFirstname()
     {
         return $this->firstname;
     }
