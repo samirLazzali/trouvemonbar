@@ -1,7 +1,9 @@
 <?php
-require '../vendor/autoload.php';
+header("Content-Type:application/json");
 
-//postgres
+require '../vendor/autoload.php';
+use \Router\Router;
+
 $dbName = getenv('DB_NAME');
 $dbUser = getenv('DB_USER');
 $dbPassword = getenv('DB_PASSWORD');
@@ -11,10 +13,13 @@ $userHydrator = new \User\UserHydrator();
 $userRepository = new \User\UserRepository($connection, $userHydrator);
 $users = $userRepository->fetchAll();
 
-$userHydrator = new \User\UserHydrator();
 $data = [];
 foreach ($users as $user) {
     $data[] = $userHydrator->extract($user);
 }
-echo json_encode($data);
-?>
+
+Router::get('/api/users', function() use($data) {
+    echo json_encode($data);
+});
+
+Router::execute();
