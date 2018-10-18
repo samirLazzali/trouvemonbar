@@ -4,62 +4,88 @@ namespace User;
 class User
 {
     private $id;
-    private $firstname;
-    private $lastname;
-    private $birthday;
+    private $pseudo;
+    private $email;
+    private $hash;
+    private $role;
 
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
     }
 
-    public function setId(int $id)
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
     {
         $this->id = $id;
-        return $this;
     }
 
-    public function getFirstname()
+    /**
+     * @return mixed
+     */
+    public function getPseudo()
     {
-        return $this->firstname;
+        return $this->pseudo;
     }
 
-    public function setFirstname(string $firstname)
+    /**
+     * @param mixed $pseudo
+     */
+    public function setPseudo($pseudo)
     {
-        $this->firstname = $firstname;
-        return $this;
+        $this->pseudo = $pseudo;
     }
 
-    public function getLastname()
+    /**
+     * @return mixed
+     */
+    public function getEmail()
     {
-        return $this->lastname;
+        return $this->email;
     }
 
-    public function setLastname($lastname)
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
     {
-        $this->lastname = $lastname;
-        return $this;
+        $this->email = $email;
     }
 
-    public function getBirthday(): \DateTimeInterface
+    /**
+     * @return mixed
+     */
+    public function getHash()
     {
-        return $this->birthday;
+        return $this->hash;
     }
 
-    public function setBirthday(\DateTimeInterface $birthday)
+    /**
+     * @param mixed $hash
+     */
+    public function setHash($hash)
     {
-        $this->birthday = $birthday;
-        return $this;
+        $this->hash = $hash;
     }
 
-    public function getAge(): int
+    /**
+     * @return mixed
+     */
+    public function getRole()
     {
-        $now = new \DateTime();
+        return $this->role;
+    }
 
-        if ($now < $this->getBirthday()) {
-            throw new \OutOfRangeException('Birthday in the future');
-        }
-
-        return $now->diff($this->getBirthday())->y;
+    /**
+     * @param mixed $role
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
     }
 }

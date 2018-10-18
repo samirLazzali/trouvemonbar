@@ -7,9 +7,10 @@
     >
       <template slot="items" slot-scope="{ item }">
         <td>{{ item.id }}</td>
-        <td>{{ item.firstname }}</td>
-        <td>{{ item.lastname }}</td>
-        <td>{{ item.age }} years</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.hash }}</td>
+        <td>{{ item.pseudo }}</td>
+        <td>{{ item.role }}</td>
       </template>
     </v-data-table>
   </div>
@@ -23,9 +24,10 @@ export default {
     return {
       headers: [
         { text: 'Id', value: 'id' },
-        { text: 'Firstname', value: 'firstname' },
-        { text: 'Lastname', value: 'lastname' },
-        { text: 'Age', value: 'age' }
+        { text: 'Email', value: 'email' },
+        { text: 'Hash', value: 'hash' },
+        { text: 'Pseudo', value: 'pseudo' },
+        { text: 'Role', value: 'role' }
       ],
       users: []
     }
