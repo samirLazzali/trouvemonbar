@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TheUserPage.vue renders props.msg when passed 1`] = `
+<div>
+  <div>
+    <div class="v-table__overflow">
+      <table class="v-datatable v-table theme--light">
+        <thead>
+          <tr>
+            <th role="columnheader" scope="col" aria-label="Id: Sorted ascending. Activate to sort descending." aria-sort="ascending" tabindex="0" class="column sortable active asc text-xs-left">Id<i aria-hidden="true" class="v-icon material-icons theme--light" style="font-size: 16px;">arrow_upward</i></th>
+            <th role="columnheader" scope="col" aria-label="Firstname: Not sorted. Activate to sort ascending." aria-sort="none" tabindex="0" class="column sortable text-xs-left">Firstname<i aria-hidden="true" class="v-icon material-icons theme--light" style="font-size: 16px;">arrow_upward</i></th>
+            <th role="columnheader" scope="col" aria-label="Lastname: Not sorted. Activate to sort ascending." aria-sort="none" tabindex="0" class="column sortable text-xs-left">Lastname<i aria-hidden="true" class="v-icon material-icons theme--light" style="font-size: 16px;">arrow_upward</i></th>
+            <th role="columnheader" scope="col" aria-label="Age: Not sorted. Activate to sort ascending." aria-sort="none" tabindex="0" class="column sortable text-xs-left">Age<i aria-hidden="true" class="v-icon material-icons theme--light" style="font-size: 16px;">arrow_upward</i></th>
+          </tr>
+          <tr class="v-datatable__progress">
+            <th colspan="4" class="column"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>test1</td>
+            <td>test1</td>
+            <td>14 years</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>test2</td>
+            <td>test2</td>
+            <td>94 years</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>test3</td>
+            <td>test3</td>
+            <td>54 years</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+`;
