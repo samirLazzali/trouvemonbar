@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <v-data-table
       :headers="headers"
       :items="users"
@@ -17,7 +18,7 @@
 
 <script>
 export default {
-  name: 'TheUserPage',
+  name: 'TheUser',
 
   data () {
     return {
