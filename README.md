@@ -7,7 +7,7 @@ Projet Web ENSIIE:
 * Swann Castel
 
 ## Notre Projet
-Notre souhait est de créer une application Web qui propose à nos utilisateurs des bars qui correspondent à leurs préférences. les utilisateurs pourront ainsi se créer un compte afin d'enregistrer leurs paramètres et ainsi profiter de nos recommandations. Ils pourront aussi donner des avis sur les bars.
+Notre souhait est de créer une application Web qui propose à nos utilisateurs des bars qui correspondent à leurs préférences. les utilisateurs pourront se créer un compte afin d'enregistrer leurs paramètres et ainsi profiter de nos recommandations. Ils pourront aussi donner des avis sur les bars.
 
 ## Architecture du projet
 Pour la partie backend, nous utilisons nginx et php-fpm pour fournir une API REST.
