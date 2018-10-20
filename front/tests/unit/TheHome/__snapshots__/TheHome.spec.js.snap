@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TheHome.vue renders props.msg when passed 1`] = `
+exports[`TheHome.vue should render properly 1`] = `
 <div>
   <div class="v-card v-card--flat theme--light transparent">
     <div class="v-card__text light-green--text">
