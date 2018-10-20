@@ -5,6 +5,7 @@
       :headers="headers"
       :items="users"
       hide-actions
+      :loading="loading"
     >
       <template slot="items" slot-scope="{ item }">
         <td>{{ item.id }}</td>
@@ -28,13 +29,17 @@ export default {
         { text: 'Lastname', value: 'lastname' },
         { text: 'Age', value: 'age' }
       ],
-      users: []
+      users: [],
+      loading: true
     }
   },
 
   created () {
     this.$api.getUsers()
-      .then(users => (this.users = users))
+      .then(users => {
+        this.users = users
+        this.loading = false
+      })
   }
 }
 </script>
