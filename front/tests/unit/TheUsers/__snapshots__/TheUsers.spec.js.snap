@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TheUser.vue renders props.msg when passed 1`] = `
+exports[`TheUsers.vue renders props.msg when passed 1`] = `
 <div>
   <div>
     <div class="v-table__overflow">
