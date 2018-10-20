@@ -1,18 +1,11 @@
 <template>
   <div>
-    <the-user-page></the-user-page>
+    this is home
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import TheUserPage from '@/components/TheUserPage.vue'
-
 export default {
-  name: 'Home',
-
-  components: {
-    TheUserPage
-  }
+  name: 'Home'
 }
 </script>
