@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <v-data-table
       :headers="headers"
       :items="users"

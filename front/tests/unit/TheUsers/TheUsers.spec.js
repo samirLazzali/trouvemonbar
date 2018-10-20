@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils'
-import TheUser from '@/components/TheUser.vue'
+import TheUsers from '@/views/TheUsers.vue'
 
-describe('TheUser.vue', () => {
+describe('TheUsers.vue', () => {
   it('renders props.msg when passed', async () => {
-    const wrapper = mount(TheUser, {
+    const wrapper = mount(TheUsers, {
       mocks: {
         $api: {
           getUsers () {
