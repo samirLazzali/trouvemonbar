@@ -7,7 +7,7 @@ describe('Api', () => {
     Api.install(MockVue)
   })
 
-  it('should return a list of users', done => {
+  it('should call /api/users api', done => {
     const mockVue = new MockVue()
 
     mockVue.$api.getUsers()

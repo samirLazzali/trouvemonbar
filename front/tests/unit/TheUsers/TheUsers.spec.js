@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import TheUsers from '@/views/TheUsers.vue'
 
 describe('TheUsers.vue', () => {
-  it('renders props.msg when passed', async () => {
+  it('should render a table of users', async () => {
     const wrapper = mount(TheUsers, {
       mocks: {
         $api: {
