@@ -2,41 +2,55 @@
 namespace Router;
 
 describe('Router', function() {
-    beforeEach(function() {
-        $this->router = new Router();
-    });
-
-    it('should handle get request', function() {
+    it('should handle a get request', function() {
         $_SERVER['REQUEST_METHOD'] = 'GET';
-        $_SERVER['REQUEST_URI'] = '/test/awesome/get';
-
-        $this->router::get('/test/{}/{}', function($awesome, $get) {
-            return [$awesome, $get];
+        $_SERVER['REQUEST_URI'] = '/api/users/1/messages/2';
+        Router::get('/api/users/{}/messages/{}', function($request) {
+            return $request;
         });
 
-        expect($this->router::execute())->toBe(['awesome', 'get']);
+        $request = Router::execute();
+
+        expect($request->params)->toBe(['1', '2']);
     });
 
-    it('should handle post request', function() {
+    it('should handle a post request', function() {
         $_SERVER['REQUEST_METHOD'] = 'POST';
-        $_SERVER['REQUEST_URI'] = '/test/awesome/post';
-
-        $this->router::post('/test/{}/{}', function($awesome, $post) {
-            return [$awesome, $post];
+        $_SERVER['REQUEST_URI'] = '/api/users/12/messages/22';
+        allow('file_get_contents')->toBeCalled()->andReturn('{"text": "awesome text"}');
+        Router::post('/api/users/{}/messages/{}', function($request) {
+            return $request;
         });
 
-        expect($this->router::execute())->toBe(['awesome', 'post']);
+        $request = Router::execute();
+
+        expect($request->params)->toBe(['12', '22']);
+        expect($request->body->text)->toBe('awesome text');
     });
 
-
-    it('should handle delete request', function() {
-        $_SERVER['REQUEST_METHOD'] = 'DELETE';
-        $_SERVER['REQUEST_URI'] = '/test/awesome/delete';
-
-        $this->router::delete('/test/{}/{}', function($awesome, $delete) {
-            return [$awesome, $delete];
+    it('should handle a put request', function() {
+        $_SERVER['REQUEST_METHOD'] = 'PUT';
+        $_SERVER['REQUEST_URI'] = '/api/users/24/messages/89';
+        allow('file_get_contents')->toBeCalled()->andReturn('{"text": "awesome update"}');
+        Router::put('/api/users/{}/messages/{}', function($request) {
+            return $request;
         });
 
-        expect($this->router::execute())->toBe(['awesome', 'delete']);
+        $request = Router::execute();
+
+        expect($request->params)->toBe(['24', '89']);
+        expect($request->body->text)->toBe('awesome update');
+    });
+
+    it('should handle a delete request', function() {
+        $_SERVER['REQUEST_METHOD'] = 'DELETE';
+        $_SERVER['REQUEST_URI'] = '/api/users/119/messages/31';
+        Router::delete('/api/users/{}/messages/{}', function($request) {
+            return $request;
+        });
+
+        $request = Router::execute();
+
+        expect($request->params)->toBe(['119', '31']);
     });
 });

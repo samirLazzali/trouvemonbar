@@ -4,6 +4,7 @@
       :headers="headers"
       :items="users"
       hide-actions
+      :loading="loading"
     >
       <template slot="items" slot-scope="{ item }">
         <td>{{ item.id }}</td>
@@ -18,7 +19,7 @@
 
 <script>
 export default {
-  name: 'TheUserPage',
+  name: 'TheUser',
 
   data () {
     return {
@@ -29,13 +30,17 @@ export default {
         { text: 'Pseudo', value: 'pseudo' },
         { text: 'Role', value: 'role' }
       ],
-      users: []
+      users: [],
+      loading: true
     }
   },
 
   created () {
     this.$api.getUsers()
-      .then(users => (this.users = users))
+      .then(users => {
+        this.users = users
+        this.loading = false
+      })
   }
 }
 </script>

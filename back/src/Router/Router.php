@@ -5,6 +5,7 @@ class Router
 {
 	private static $GET = [];
 	private static $POST = [];
+	private static $PUT = [];
 	private static $DELETE = [];
 
 	public static function get($pattern, $callback) {
@@ -17,6 +18,12 @@ class Router
         $pattern = str_replace('{}', '(\w+)', $pattern);
         $regex = '/^' . str_replace('/', '\/', $pattern) . '$/';
 		self::$POST[$regex] = $callback;
+    }
+
+    public static function put($pattern, $callback) {
+        $pattern = str_replace('{}', '(\w+)', $pattern);
+        $regex = '/^' . str_replace('/', '\/', $pattern) . '$/';
+		self::$PUT[$regex] = $callback;
     }
 
     public static function delete($pattern, $callback) {
@@ -35,6 +42,9 @@ class Router
             case 'POST':
                 $routes = self::$POST;
                 break;
+            case 'PUT':
+                $routes = self::$PUT;
+                break;
             case 'DELETE':
                 $routes = self::$DELETE;
                 break;
@@ -42,8 +52,15 @@ class Router
 
         foreach ($routes as $pattern => $callback) {
             if (preg_match($pattern, $_SERVER['REQUEST_URI'], $params)) {
-				array_shift($params);
-				return call_user_func_array($callback, array_values($params));
+                $body = json_decode(file_get_contents('php://input'));
+                array_shift($params);
+
+                $request = (object) [
+                    "body" => $body,
+                    "params" => $params
+                ];
+
+				return call_user_func_array($callback, [$request]);
 			}
 		}
 	}
