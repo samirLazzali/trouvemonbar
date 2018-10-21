@@ -42,14 +42,14 @@ Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator)
     if($id != '' and is_int($id))
 	{
     	$bar = $barRepository->fetchById($id);
-    	if(is_a($bar, Bar::class))
+    	if($bar != NULL)
     	{
     		echo json_encode($barHydrator->extract($bar));
     	}
     	else
     	{
     		http_response_code(404);
-			echo json_encode(array('error' => 'No such bar with this id.'.get_class($bar)));
+			echo json_encode(array('error' => 'No such bar with this id.'));
     	}
 	}
 	else
