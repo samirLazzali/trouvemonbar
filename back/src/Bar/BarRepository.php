@@ -23,7 +23,6 @@ class BarRepository
 
     public function fetchById($id)
     {
-        // Return False if an error occured
         $request = $this->connection->prepare('SELECT * FROM "bar" where id=:id');
         $request->bindParam(':id',$id, \PDO::PARAM_INT);
         $request->execute();

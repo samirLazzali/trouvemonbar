@@ -36,11 +36,18 @@ Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator)
     if(isset($request->params[0]))
     {
     	// Equivalent of JavaScript's parseInt function
+    	// set $id to '' if any character is not a digit of request->params[0]
     	$id = (int) preg_replace('/\D/', '', $request->params[0]);
+    }
+    else
+    {
+    	http_response_code(404);
+		echo json_encode(array('error' => 'Parameters are not correct.'));
     }
 
     if($id != '' and is_int($id))
 	{
+		// Get the bar
     	$bar = $barRepository->fetchById($id);
     	if($bar != NULL)
     	{
