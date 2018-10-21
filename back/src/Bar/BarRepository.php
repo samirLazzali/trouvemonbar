@@ -25,7 +25,7 @@ class BarRepository
     {
         // Return False if an error occured
         $request = $this->connection->prepare('SELECT * FROM bar where id=:id');
-        $request = $request->bindValue(':id',$id, PDO::PARAM_INT);
+        $request = $request->bindValue(':id',$id, \PDO::PARAM_INT);
         $request->setFetchMode();
         $request->execute();
         return $request->fetch();
