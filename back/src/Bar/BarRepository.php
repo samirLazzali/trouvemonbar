@@ -29,7 +29,7 @@ class BarRepository
         // $request = $request->setFetchMode(\PDO::FETCH_CLASS, Bar::class);
         $bar = $request->fetch();
         print_r($bar)
-        return bar;
+        return $bar;
     }
 
 }
