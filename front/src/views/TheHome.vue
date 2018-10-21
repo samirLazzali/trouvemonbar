@@ -8,10 +8,10 @@
     </v-card>
 
     <v-layout row wrap>
-      <v-flex xs12 lg2 xl3></v-flex>
-      <v-flex xs12 lg8 xl6>
+      <v-flex xs12 lg8 xl6 offset-lg2 offset-xl3>
         <v-toolbar color="transparent" flat>
           <v-autocomplete
+            v-model="selected"
             :items="keywords"
             label="Ce que j'aimerais"
             multiple
@@ -20,7 +20,14 @@
             solo
           ></v-autocomplete>
 
-          <v-btn large color="success">J'ai soif !</v-btn>
+          <v-btn
+            large
+            color="success"
+            @click="search"
+            :loading="loading"
+            :disabled="loading"
+            v-text="'J\'ai soif !'"
+          ></v-btn>
         </v-toolbar>
       </v-flex>
     </v-layout>
@@ -33,7 +40,21 @@ export default {
 
   data () {
     return {
-      keywords: ['Bière', 'Danse', 'Détente', 'Vin', 'Shot']
+      selected: [],
+      keywords: ['Bière', 'Danse', 'Détente', 'Vin', 'Shot'],
+      loading: false
+    }
+  },
+
+  methods: {
+    search () {
+      this.loading = true
+
+      this.$store.dispatch('SEARCH_REQUEST', this.selected)
+        .then(() => {
+          this.$router.push('/search')
+          this.loading = false
+        })
     }
   }
 }
