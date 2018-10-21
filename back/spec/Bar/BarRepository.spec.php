@@ -11,11 +11,11 @@ describe('BarRepository', function() {
 
         expect($bars[0]->getId())->toBe(1);
         expect($bars[0]->getName())->toBe('Un bar à Evry');
-        expect($bars[0]->getAdresse())->toBe('3 rue André Lalande');
+        expect($bars[0]->getAddress())->toBe('3 rue André Lalande');
 
         expect($bars[1]->getId())->toBe(2);
         expect($bars[1]->getName())->toBe('Un bar à Grigny');
-        expect($bars[1]->getAdresse())->toBe('3 rue de l\'Elephant');
+        expect($bars[1]->getAddress())->toBe('3 rue de l\'Elephant');
     });
 });
 
