@@ -34,7 +34,7 @@ class BarRepository
         }
         else
         {
-            return False;
+            return NULL;
         }
     }
 
