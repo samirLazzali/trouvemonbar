@@ -41,7 +41,7 @@ Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator)
     }
     else
     {
-    	http_response_code(404);
+    	http_response_code(400);
 		echo json_encode(array('error' => 'Parameters are not correct.'));
     }
 
@@ -61,7 +61,7 @@ Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator)
 	}
 	else
 	{
-		http_response_code(404);
+		http_response_code(400);
 		echo json_encode(array('error' => 'Parameters are not correct.'));
 	}
 });
