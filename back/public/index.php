@@ -44,8 +44,8 @@ Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator)
 	}
 });
 
-$bars = $barRepository->fetchById(1);
-echo json_encode($barHydrator->extract($bar));
+// $bars = $barRepository->fetchById(1);
+// echo json_encode($barHydrator->extract($bar));
 
 Router::execute();
 
