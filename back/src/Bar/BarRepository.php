@@ -30,10 +30,10 @@ class BarRepository
         print_r($bar);
 
 
-        $request = $this->connection->prepare('SELECT * FROM "bar" where id=:id');
-        $request = $request->bindParam(':id',$id, PDO::PARAM_INT);
-        $request = $request->setFetchMode(\PDO::FETCH_CLASS, Bar::class);
-        $bar = $request->fetch();
+        // $request = $this->connection->prepare('SELECT * FROM "bar" where id=:id');
+        // $request = $request->bindParam(':id',$id, PDO::PARAM_INT);
+        // $request = $request->setFetchMode(\PDO::FETCH_CLASS, Bar::class);
+        // $bar = $request->fetch();
         return $bar;
     }
 
