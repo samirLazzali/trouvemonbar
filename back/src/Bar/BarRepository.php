@@ -26,7 +26,7 @@ class BarRepository
         // Return False if an error occured
         $request = $this->connection->prepare('SELECT * FROM "bar" where id=:id');
         $request->bindParam(':id',$id, \PDO::PARAM_INT);
-        $request->setFetchMode(PDO::FETCH_CLASS, "Bar");
+        $request->setFetchMode(PDO::FETCH_CLASS, Bar::class);
         $request->execute();
         return $request->fetch();
     }
