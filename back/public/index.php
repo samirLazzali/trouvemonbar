@@ -32,17 +32,16 @@ Router::get('/api/bars', function() use($barRepository, $barHydrator) {
 
 // get a bar per id
 Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator) {
- 	print_r($request->params);
- //    if(isset($request->params[0]) and is_int($request->params[0]))
-	// {
-	// 	$id = $request->params[0];
- //    	$bars = $barRepository->fetchById($id);
- //    	echo json_encode($barHydrator->extract($bar));
-	// }
-	// else
-	// {
-	// 	echo json_encode($barHydrator->extract(array('error' => 'No such bar.')));
-	// }
+    if(isset($request->params[0]) and is_int($request->params[0]))
+	{
+		$id = $request->params[0];
+    	$bars = $barRepository->fetchById($id);
+    	echo json_encode($barHydrator->extract($bar));
+	}
+	else
+	{
+		echo json_encode(array('error' => 'No such bar.'));
+	}
 });
 
 // $bars = $barRepository->fetchById(1);
