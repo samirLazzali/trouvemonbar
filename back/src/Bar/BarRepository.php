@@ -15,7 +15,7 @@ class BarRepository
     public function fetchAll()
     {
         $Bars = $this->connection
-            ->query('SELECT * FROM "Bar"')
+            ->query('SELECT * FROM "bar"')
             ->fetchAll(\PDO::FETCH_CLASS, Bar::class);
 
         return $Bars;
