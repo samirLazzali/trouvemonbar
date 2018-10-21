@@ -49,7 +49,7 @@ Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator)
     	else
     	{
     		http_response_code(404);
-			echo json_encode(array('error' => 'No such bar with this id.'));
+			echo json_encode(array('error' => 'No such bar with this id.'.getclass($bar)));
     	}
 	}
 	else
