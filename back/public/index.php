@@ -12,11 +12,23 @@ $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=
 $userHydrator = new \User\UserHydrator();
 $userRepository = new \User\UserRepository($connection, $userHydrator);
 
+
+$barHydrator = new \Bar\BarHydrator();
+$barRepository = new \User\BarRepository($connection, $barHydrator);
+
 // get all users
 Router::get('/api/users', function() use($userRepository, $userHydrator) {
     $users = $userRepository->fetchAll();
 
     echo json_encode($userHydrator->extractAll($users));
+});
+
+
+// get all bars
+Router::get('/api/bars', function($request) {
+    $bars = $barRepository->fetchAll();
+    echo json_encode($barRepository->extractAll($bars));
+
 });
 
 Router::execute();

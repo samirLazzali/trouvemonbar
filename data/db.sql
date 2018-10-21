@@ -21,7 +21,7 @@ CREATE TABLE "user" (
 CREATE table bar (
   id   SERIAL PRIMARY KEY,
   name VARCHAR,
-  adresse VARCHAR
+  address VARCHAR
 );
 
 
@@ -65,7 +65,7 @@ INSERT INTO "user" (pseudo, email, hash, role) VALUES
 ('Jackie', 'Cohen@gmail.com', 'unHash','USER'),
 ('Delores', 'Williamson@gmail.com', 'unHash','USER');
 
-INSERT INTO bar (name, adresse) VALUES ('Un bar', '6 Rue de l ''adresse de Fou'),
+INSERT INTO bar (name, address) VALUES ('Un bar', '6 Rue de l ''adresse de Fou'),
 ('La Frange', '7 Rue de l ''adresse de Fou'),
 ('Yellow Mad Monkey', '8 Rue de l ''adresse de Fou'),
 ('Velvet Bar Paris', '9 Rue de l ''adresse de Fou'),
