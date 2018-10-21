@@ -40,7 +40,6 @@ Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator)
 
     if($id != '' and is_int($request->params[0]))
 	{
-		$id = $request->params[0];
     	$bars = $barRepository->fetchById($id);
     	echo json_encode($barHydrator->extract($bar));
 	}
