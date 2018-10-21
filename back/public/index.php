@@ -33,7 +33,8 @@ Router::get('/api/bars', function() use($barRepository, $barHydrator) {
 // get a bar per id
 Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator) {
     print_r($request->params[0]);
-    print_r(is_int($request->params[0]));
+    $text = var_export(is_int($request->params[0]),true);
+    print_r('....'.$text);
  //    if(isset($request->params[0]) and is_int($request->params[0]))
 	// {
 	// 	$id = $request->params[0];
