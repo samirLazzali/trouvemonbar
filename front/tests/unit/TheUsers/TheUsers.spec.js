@@ -22,20 +22,23 @@ describe('TheUsers.vue', () => {
 const users = [
   {
     id: 1,
-    firstname: 'test1',
-    lastname: 'test1',
-    age: 14
+    email: 'test1',
+    hash: 'test1',
+    pseudo: 'test1',
+    role: 'USER'
   },
   {
     id: 2,
-    firstname: 'test2',
-    lastname: 'test2',
-    age: 94
+    email: 'test2',
+    hash: 'test2',
+    pseudo: 'test2',
+    role: 'USER'
   },
   {
     id: 3,
-    firstname: 'test3',
-    lastname: 'test3',
-    age: 54
+    email: 'test3',
+    hash: 'test3',
+    pseudo: 'test3',
+    role: 'ADMIN'
   }
 ]
