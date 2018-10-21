@@ -30,7 +30,7 @@ describe('BarHydrator', function() {
             (new Bar())
             ->setId(2)
             ->setName('Un bar à Grigny')
-            ->setAddress('3 rue de l\'Elephant');
+            ->setAddress('3 rue de l\'Elephant')
         ];
 
         $data = $this->barHydrator->extractAll($bars);
