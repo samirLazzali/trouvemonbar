@@ -25,15 +25,15 @@ $barRepository = new \Bar\BarRepository($connection, $barHydrator);
 
 // get all bars
 Router::get('/api/bars', function() use($barRepository, $barHydrator) {
-    $bars = $barRepository->fetchAll();
-    echo json_encode($barRepository->extractAll($bars));
+    // $bars = $barRepository->fetchAll();
+    // echo json_encode($barHydrator->extractAll($bars));
 
 });
 
 Router::execute();
 
 $bars = $barRepository->fetchAll();
-echo json_encode($barRepository->extractAll($bars));
+echo json_encode($barHydrator->extractAll($bars));
 
 // simple route
 
