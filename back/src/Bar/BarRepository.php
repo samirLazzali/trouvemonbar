@@ -28,7 +28,7 @@ class BarRepository
         // $request = $request->bindParam(':id',$id, PDO::PARAM_INT);
         // $request = $request->setFetchMode(\PDO::FETCH_CLASS, Bar::class);
         $request->execute();
-        $Bar = $request->fetch();
+        $bar = $request->fetch();
         print_r($bar);
         return $bar;
     }
