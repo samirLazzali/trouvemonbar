@@ -14,7 +14,7 @@ class BarHydrator
         if ($Bar->getName()) {
             $data['name'] = $Bar->getName();
         }
-        if ($Bar->getAdress()) {
+        if ($Bar->getAddress()) {
             $data['address'] = $Bar->getAddress();
         }
 
