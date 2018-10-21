@@ -12,9 +12,6 @@ $connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=
 $userHydrator = new \User\UserHydrator();
 $userRepository = new \User\UserRepository($connection, $userHydrator);
 
-
-
-
 // get all users
 Router::get('/api/users', function() use($userRepository, $userHydrator) {
     $users = $userRepository->fetchAll();
