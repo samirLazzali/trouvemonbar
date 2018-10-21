@@ -28,7 +28,7 @@ class BarRepository
         $request = $this->connection->prepare('SELECT * FROM "bar" where id=?');
         // $request = $request->bindValue(':id',$id, PDO::PARAM_INT);
         // $request->execute();
-        $request->setFetchMode(\PDO::PDO::FETCH_INTO, $myClass);
+        $request->setFetchMode(\PDO::FETCH_INTO, $myClass);
         $request->execute($id);
         return $myClass;
         // if(count($bars)>0)
