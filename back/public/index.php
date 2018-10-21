@@ -19,7 +19,55 @@ Router::get('/api/users', function() use($userRepository, $userHydrator) {
     echo json_encode($userHydrator->extractAll($users));
 });
 
+
+$barHydrator = new \Bar\BarHydrator();
+$barRepository = new \Bar\BarRepository($connection, $barHydrator);
+
+// get all bars
+Router::get('/api/bars', function() use($barRepository, $barHydrator) {
+    $bars = $barRepository->fetchAll();
+    echo json_encode($barHydrator->extractAll($bars));
+
+});
+
+// get a bar per id
+Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator) {
+    
+    if(isset($request->params[0]))
+    {
+    	// Equivalent of JavaScript's parseInt function
+    	// set $id to '' if any character is not a digit of request->params[0]
+    	$id = (int) preg_replace('/\D/', '', $request->params[0]);
+    }
+    else
+    {
+    	http_response_code(400);
+		echo json_encode(array('error' => 'Parameters are not correct.'));
+    }
+
+    if($id != '' and is_int($id))
+	{
+		// Get the bar
+    	$bar = $barRepository->fetchById($id);
+    	if($bar != NULL)
+    	{
+    		echo json_encode($barHydrator->extract($bar));
+    	}
+    	else
+    	{
+    		http_response_code(404);
+			echo json_encode(array('error' => 'No such bar with this id.'));
+    	}
+	}
+	else
+	{
+		http_response_code(400);
+		echo json_encode(array('error' => 'Parameters are not correct.'));
+	}
+});
+
 Router::execute();
+
 
 // simple route
 
