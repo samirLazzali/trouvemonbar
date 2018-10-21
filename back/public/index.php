@@ -43,7 +43,7 @@ Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator)
 	// {
 	// 	echo json_encode($barHydrator->extract(array('error' => 'No such bar.')));
 	// }
-// });
+});
 
 // $bars = $barRepository->fetchById(1);
 // echo json_encode($barHydrator->extract($bar));
