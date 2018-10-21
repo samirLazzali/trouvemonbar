@@ -32,6 +32,9 @@ Router::get('/api/bars', function() use($barRepository, $barHydrator) {
 
 Router::execute();
 
+$bars = $barRepository->fetchAll();
+echo json_encode($barRepository->extractAll($bars));
+
 // simple route
 
 // get the user 1
