@@ -28,7 +28,7 @@ class BarRepository
         $request = $request->bindValue(':id',$id, PDO::PARAM_INT);
         $request->execute();
         $bars = request->fetchAll(\PDO::FETCH_CLASS, Bar::class);
-        if(count($bars)>0)
+        if(count($bars) > 0)
         {
             return $bars[0];
         }
