@@ -13,8 +13,7 @@ $userHydrator = new \User\UserHydrator();
 $userRepository = new \User\UserRepository($connection, $userHydrator);
 
 
-$barHydrator = new \Bar\BarHydrator();
-$barRepository = new \User\BarRepository($connection, $barHydrator);
+
 
 // get all users
 Router::get('/api/users', function() use($userRepository, $userHydrator) {
@@ -23,6 +22,9 @@ Router::get('/api/users', function() use($userRepository, $userHydrator) {
     echo json_encode($userHydrator->extractAll($users));
 });
 
+
+$barHydrator = new \Bar\BarHydrator();
+$barRepository = new \Bar\BarRepository($connection, $barHydrator);
 
 // get all bars
 Router::get('/api/bars', function($request) {
