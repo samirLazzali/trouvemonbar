@@ -59,10 +59,10 @@ composer.install:
 	docker-compose exec php composer install || exit 0
 
 npm.build: npm.install
-	docker run -v $$PWD/front:/usr/src/app -ti node sh -c "cd /usr/src/app && npm run build"
+	docker run -v $$PWD/front:/usr/src/app -ti node:alpine sh -c "cd /usr/src/app && npm run build"
 
 npm.install:
-	docker run -v $$PWD/front:/usr/src/app -ti node sh -c "cd /usr/src/app && npm install"
+	docker run -v $$PWD/front:/usr/src/app -ti node:alpine sh -c "cd /usr/src/app && npm install"
 
 npmunit.run:
-	docker run -v $$PWD/front:/usr/src/app -ti node sh -c "cd /usr/src/app && npm test"
+	docker run -v $$PWD/front:/usr/src/app -ti node:alpine sh -c "cd /usr/src/app && npm test"

@@ -8,12 +8,13 @@ exports[`TheUsers.vue should render a table of users 1`] = `
         <thead>
           <tr>
             <th role="columnheader" scope="col" aria-label="Id: Sorted ascending. Activate to sort descending." aria-sort="ascending" tabindex="0" class="column sortable active asc text-xs-left">Id<i aria-hidden="true" class="v-icon material-icons theme--light" style="font-size: 16px;">arrow_upward</i></th>
-            <th role="columnheader" scope="col" aria-label="Firstname: Not sorted. Activate to sort ascending." aria-sort="none" tabindex="0" class="column sortable text-xs-left">Firstname<i aria-hidden="true" class="v-icon material-icons theme--light" style="font-size: 16px;">arrow_upward</i></th>
-            <th role="columnheader" scope="col" aria-label="Lastname: Not sorted. Activate to sort ascending." aria-sort="none" tabindex="0" class="column sortable text-xs-left">Lastname<i aria-hidden="true" class="v-icon material-icons theme--light" style="font-size: 16px;">arrow_upward</i></th>
-            <th role="columnheader" scope="col" aria-label="Age: Not sorted. Activate to sort ascending." aria-sort="none" tabindex="0" class="column sortable text-xs-left">Age<i aria-hidden="true" class="v-icon material-icons theme--light" style="font-size: 16px;">arrow_upward</i></th>
+            <th role="columnheader" scope="col" aria-label="Email: Not sorted. Activate to sort ascending." aria-sort="none" tabindex="0" class="column sortable text-xs-left">Email<i aria-hidden="true" class="v-icon material-icons theme--light" style="font-size: 16px;">arrow_upward</i></th>
+            <th role="columnheader" scope="col" aria-label="Hash: Not sorted. Activate to sort ascending." aria-sort="none" tabindex="0" class="column sortable text-xs-left">Hash<i aria-hidden="true" class="v-icon material-icons theme--light" style="font-size: 16px;">arrow_upward</i></th>
+            <th role="columnheader" scope="col" aria-label="Pseudo: Not sorted. Activate to sort ascending." aria-sort="none" tabindex="0" class="column sortable text-xs-left">Pseudo<i aria-hidden="true" class="v-icon material-icons theme--light" style="font-size: 16px;">arrow_upward</i></th>
+            <th role="columnheader" scope="col" aria-label="Role: Not sorted. Activate to sort ascending." aria-sort="none" tabindex="0" class="column sortable text-xs-left">Role<i aria-hidden="true" class="v-icon material-icons theme--light" style="font-size: 16px;">arrow_upward</i></th>
           </tr>
           <tr class="v-datatable__progress">
-            <th colspan="4" class="column"></th>
+            <th colspan="5" class="column"></th>
           </tr>
         </thead>
         <tbody>
@@ -21,19 +22,22 @@ exports[`TheUsers.vue should render a table of users 1`] = `
             <td>1</td>
             <td>test1</td>
             <td>test1</td>
-            <td>14 years</td>
+            <td>test1</td>
+            <td>USER</td>
           </tr>
           <tr>
             <td>2</td>
             <td>test2</td>
             <td>test2</td>
-            <td>94 years</td>
+            <td>test2</td>
+            <td>USER</td>
           </tr>
           <tr>
             <td>3</td>
             <td>test3</td>
             <td>test3</td>
-            <td>54 years</td>
+            <td>test3</td>
+            <td>ADMIN</td>
           </tr>
         </tbody>
       </table>

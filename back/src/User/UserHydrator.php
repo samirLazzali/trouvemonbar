@@ -1,4 +1,5 @@
 <?php
+
 namespace User;
 
 class UserHydrator
@@ -10,25 +11,28 @@ class UserHydrator
         if ($user->getId()) {
             $data['id'] = $user->getId();
         }
-        if ($user->getFirstname()) {
-            $data['firstname'] = $user->getFirstname();
+        if ($user->getEmail()) {
+            $data['email'] = $user->getEmail();
         }
-        if ($user->getLastname()) {
-            $data['lastname'] = $user->getLastname();
+        if ($user->getHash()) {
+            $data['hash'] = $user->getHash();
         }
-        if ($user->getAge()) {
-            $data['age'] = $user->getAge();
+        if ($user->getPseudo()) {
+            $data['pseudo'] = $user->getPseudo();
+        }
+        if ($user->getRole()) {
+            $data['role'] = $user->getRole();
         }
 
         return $data;
     }
 
-    public function hydrate(array $data): User
+    public function extractAll($users)
     {
-        return (new User())
-            ->setId($data['id'] ?? null)
-            ->setFirstname($data['firstname'] ?? null)
-            ->setLastname($data['lastname'] ?? null)
-            ->setBirthday(new \DateTime($data['birthday']));
+        $data = [];
+        foreach ($users as $user) {
+            $data[] = $this->extract($user);
+        }
+        return $data;
     }
 }

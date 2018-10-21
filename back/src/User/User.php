@@ -4,62 +4,63 @@ namespace User;
 class User
 {
     private $id;
-    private $firstname;
-    private $lastname;
-    private $birthday;
+    private $pseudo;
+    private $email;
+    private $hash;
+    private $role;
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function setId(int $id)
+    public function setId($id)
     {
         $this->id = $id;
         return $this;
     }
 
-    public function getFirstname()
+    public function getPseudo()
     {
-        return $this->firstname;
+        return $this->pseudo;
     }
 
-    public function setFirstname(string $firstname)
+    public function setPseudo($pseudo)
     {
-        $this->firstname = $firstname;
+        $this->pseudo = $pseudo;
         return $this;
     }
 
-    public function getLastname()
+    public function getEmail()
     {
-        return $this->lastname;
+        return $this->email;
     }
 
-    public function setLastname($lastname)
+    public function setEmail($email)
     {
-        $this->lastname = $lastname;
+        $this->email = $email;
         return $this;
     }
 
-    public function getBirthday(): \DateTimeInterface
+    public function getHash()
     {
-        return $this->birthday;
+        return $this->hash;
     }
 
-    public function setBirthday(\DateTimeInterface $birthday)
+    public function setHash($hash)
     {
-        $this->birthday = $birthday;
+        $this->hash = $hash;
         return $this;
     }
 
-    public function getAge(): int
+    public function getRole()
     {
-        $now = new \DateTime();
+        return $this->role;
+    }
 
-        if ($now < $this->getBirthday()) {
-            throw new \OutOfRangeException('Birthday in the future');
-        }
-
-        return $now->diff($this->getBirthday())->y;
+    public function setRole($role)
+    {
+        $this->role = $role;
+        return $this;
     }
 }
