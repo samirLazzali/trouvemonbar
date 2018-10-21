@@ -24,11 +24,10 @@ class BarRepository
     public function fetchById($id)
     {
         // Return False if an error occured
-        $bar = $this->connection
-                ->prepare('SELECT * FROM "bar" where id=:id')
-                ->bindParam(':id',$id, PDO::PARAM_INT)
-                ->fetch(\PDO::FETCH_CLASS, Bar::class);
-
+        $request = $this->connection->prepare('SELECT * FROM "bar" where id=:id');
+        $request = $request->bindParam(':id',$id, PDO::PARAM_INT);
+        $request = $request->setFetchMode(\PDO::FETCH_CLASS, Bar::class);
+        $bar = $request->fetch();
         return $bar;
     }
 
