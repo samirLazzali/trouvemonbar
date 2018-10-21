@@ -13,6 +13,11 @@ export default new Router({
       component: TheHome
     },
     {
+      path: '/search',
+      name: 'search',
+      component: () => import('./views/TheSearch.vue')
+    },
+    {
       path: '/users',
       name: 'users',
       component: () => import('./views/TheUsers.vue')
