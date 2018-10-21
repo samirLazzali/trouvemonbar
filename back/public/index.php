@@ -32,6 +32,7 @@ Router::get('/api/bars', function() use($barRepository, $barHydrator) {
 
 // get a bar per id
 Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator) {
+    
     if(isset($request->params[0]))
     {
     	// Equivalent of JavaScript's parseInt function
@@ -41,11 +42,20 @@ Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator)
     if($id != '' and is_int($id))
 	{
     	$bar = $barRepository->fetchById($id);
-    	echo json_encode($barHydrator->extract($bar));
+    	if(is_a($bar, 'Bar'))
+    	{
+    		echo json_encode($barHydrator->extract($bar));
+    	}
+    	else
+    	{
+    		http_response_code(404);
+			echo json_encode(array('error' => 'No such bar with this id.'));
+    	}
 	}
 	else
 	{
-		echo json_encode(array('error' => 'No such bar.'));
+		http_response_code(404);
+		echo json_encode(array('error' => 'Parameters are not correct.'));
 	}
 });
 
