@@ -34,7 +34,7 @@ Router::get('/api/bars', function() use($barRepository, $barHydrator) {
 Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator) {
     if(isset($request->params[0]))
     {
-    	// Equivalent of JavaScript's parseInt function?
+    	// Equivalent of JavaScript's parseInt function
     	$id = (int) preg_replace('/\D/', '', $request->params[0]);
     }
 
