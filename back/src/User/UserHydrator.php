@@ -24,17 +24,15 @@ class UserHydrator
             $data['role'] = $user->getRole();
         }
 
-
         return $data;
     }
 
-    public function hydrate(array $data): User
+    public function extractAll($users)
     {
-        return (new User())
-            ->setId($data['id'] ?? null)
-            ->setEmail($data['email'] ?? null)
-            ->setHash($data['hash'] ?? null)
-            ->setPseudo($data['pseudo'] ?? null)
-            ->setRole($data['role'] ?? null);
+        $data = [];
+        foreach ($users as $user) {
+            $data[] = $this->extract($user);
+        }
+        return $data;
     }
 }

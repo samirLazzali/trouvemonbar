@@ -16,12 +16,7 @@ $userRepository = new \User\UserRepository($connection, $userHydrator);
 Router::get('/api/users', function() use($userRepository, $userHydrator) {
     $users = $userRepository->fetchAll();
 
-    $data = [];
-    foreach ($users as $user) {
-        $data[] = $userHydrator->extract($user);
-    }
-
-    echo json_encode($data);
+    echo json_encode($userHydrator->extractAll($users));
 });
 
 Router::execute();

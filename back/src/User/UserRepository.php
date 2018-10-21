@@ -14,14 +14,9 @@ class UserRepository
 
     public function fetchAll()
     {
-        $rows = $this->connection
+        $users = $this->connection
             ->query('SELECT * FROM "user"')
-            ->fetchAll(\PDO::FETCH_ASSOC);
-
-        $users = [];
-        foreach ($rows as $row) {
-            $users[] = $this->userHydrator->hydrate($row);
-        }
+            ->fetchAll(\PDO::FETCH_CLASS, User::class);
 
         return $users;
     }

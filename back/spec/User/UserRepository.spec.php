@@ -7,15 +7,19 @@ describe('UserRepository', function() {
 
         $users = $userRepository->fetchAll();
 
+        expect(sizeof($users))->toBe(2);
+
         expect($users[0]->getId())->toBe(1);
-        expect($users[0]->getFirstname())->toBe('bob');
-        expect($users[0]->getLastname())->toBe('marley');
-        expect($users[0]->getAge())->toBe(23);
+        expect($users[0]->getEmail())->toBe('bob.marley@gmail.com');
+        expect($users[0]->getHash())->toBe('HASH');
+        expect($users[0]->getPseudo())->toBe('boby');
+        expect($users[0]->getRole())->toBe('USER');
 
         expect($users[1]->getId())->toBe(2);
-        expect($users[1]->getFirstname())->toBe('bob2');
-        expect($users[1]->getLastname())->toBe('marley2');
-        expect($users[1]->getAge())->toBe(16);
+        expect($users[1]->getEmail())->toBe('bob.marley@gmail.com');
+        expect($users[1]->getHash())->toBe('HASH');
+        expect($users[1]->getPseudo())->toBe('boby');
+        expect($users[1]->getRole())->toBe('USER');
     });
 });
 
@@ -25,18 +29,19 @@ class MockPDO {
     }
     public function fetchAll() {
         return [
-            [
-                'id' => 1,
-                'firstname' => 'bob',
-                'lastname' => 'marley',
-                'birthday' => '1995-05-22'
-            ],
-            [
-                'id' => 2,
-                'firstname' => 'bob2',
-                'lastname' => 'marley2',
-                'birthday' => '2001-11-12'
-            ]
+            (new User())
+            ->setId(1)
+            ->setEmail('bob.marley@gmail.com')
+            ->setHash('HASH')
+            ->setPseudo('boby')
+            ->setRole('USER')
+            ,
+            (new User())
+            ->setId(2)
+            ->setEmail('bob.marley@gmail.com')
+            ->setHash('HASH')
+            ->setPseudo('boby')
+            ->setRole('USER')
         ];
     }
 }
