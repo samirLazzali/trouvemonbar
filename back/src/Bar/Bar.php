@@ -6,12 +6,7 @@ class Bar
     private $id;
     private $name;
     private $address;
-    private $keywords;
-
-    function __construct()
-    {
-        $this->keywords = array();
-    }
+    private $keywords=array();
 
     public function getId()
     {
