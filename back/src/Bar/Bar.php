@@ -51,8 +51,8 @@ class Bar
         $this->keywords[] = $keyword; 
     }
 
-    public function addKeywords($keyword)
+    public function addKeywords($keywords)
     {
-        array_push($this->keywords, ...$keyword);
+        array_push($this->keywords, ...$keywords);
     }
 }
