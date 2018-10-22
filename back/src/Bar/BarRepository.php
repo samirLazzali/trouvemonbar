@@ -49,8 +49,7 @@ class BarRepository
             {
                 $bar->addKeywords($keywords);
             }
-            return $bar;
-            
+            return $bar;           
             
         }
         else

@@ -12,7 +12,7 @@
     "autoload-dev": {
         "psr-4": {
             "User\\": "test/unit/User/",
-            "User\\": "test/unit/Bar/"
+            "Bar\\": "test/unit/Bar/"
         }
     }
 }
