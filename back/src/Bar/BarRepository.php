@@ -39,7 +39,7 @@ class BarRepository
         if(count($bars) > 0)
         {
             // Get the first bar
-            $bar = $bars[0]:
+            $bar = $bars[0];
             $request = $this->connection->prepare('SELECT kw.name FROM "keybar" kb, "bar" b, "idKeyWord" kw where kb.idBar=b.id AND kw.id=kb.idKeyWord AND b.id=:id');
             $request->bindParam(':id',$id, \PDO::PARAM_INT);
             $request->execute();
