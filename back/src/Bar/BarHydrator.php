@@ -17,6 +17,10 @@ class BarHydrator
         if ($Bar->getAddress()) {
             $data['address'] = $Bar->getAddress();
         }
+        if($Bar->getKeywords())
+        {
+            $data['keywords'] = $Bar->getKeywords();
+        }
 
         return $data;
     }

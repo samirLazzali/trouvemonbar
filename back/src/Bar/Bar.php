@@ -45,6 +45,11 @@ class Bar
         $this->address = $address;
         return $this;
     }
+
+    public function getKeywords()
+    {
+        return $this->keywords;
+    }
     
     public function addKeyword($keyword)
     {
