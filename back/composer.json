@@ -5,12 +5,14 @@
     "autoload": {
         "psr-4": {
             "User\\": "src/User/",
+            "Bar\\": "src/Bar/",
             "Router\\": "src/Router/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "User\\": "test/unit/User/"
+            "User\\": "test/unit/User/",
+            "Bar\\": "test/unit/Bar/"
         }
     }
 }
