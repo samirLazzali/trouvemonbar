@@ -21,7 +21,7 @@ class BarRepository
             $request = $this->connection->prepare('SELECT kw.name FROM "keybar" kb, "bar" b, "idKeyWord" kw where kb.idBar=b.id AND kw.id=kb.idKeyWord AND b.id=:id');
             $request->bindParam(':id',$bar->getId(), \PDO::PARAM_INT);
             $request->execute();
-            $keywords = $request->fetchAll(PDO::FETCH_COLUMN);
+            $keywords = $request->fetchAll(\PDO::FETCH_COLUMN);
             if(count($keywords) > 0)
             {
                 $bar->addKeywords($keywords);
