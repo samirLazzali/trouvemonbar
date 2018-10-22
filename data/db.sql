@@ -25,7 +25,7 @@ CREATE TABLE keycategory (
 CREATE table bar (
   id      SERIAL PRIMARY KEY,
   name    VARCHAR,
-  adresse VARCHAR
+  address VARCHAR
 );
 
 
@@ -69,7 +69,7 @@ VALUES ('John', 'Doe@gmail.com', 'unHash', 'USER'),
        ('Jackie', 'Cohen@gmail.com', 'unHash', 'USER'),
        ('Delores', 'Williamson@gmail.com', 'unHash', 'USER');
 
-INSERT INTO bar (name, adresse)
+INSERT INTO bar (name, address)
 VALUES ('Un bar', '6 Rue de l ''adresse de Fou'),
        ('La Frange', '7 Rue de l ''adresse de Fou'),
        ('Yellow Mad Monkey', '8 Rue de l ''adresse de Fou'),
