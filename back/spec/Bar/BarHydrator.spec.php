@@ -41,13 +41,13 @@ describe('BarHydrator', function() {
             [
                 'id' => 1,
                 'name' => 'Un bar à Evry',
-                'address' => '3 rue André Lalande'
+                'address' => '3 rue André Lalande',
                 'keywords' => ['AAA']
             ],
             [
                 'id' => 2,
                 'name' => 'Un bar à Grigny',
-                'address' => '3 rue de l\'Elephant'
+                'address' => '3 rue de l\'Elephant',
                 'keywords' => ['AAA']
             ]
         ]);
