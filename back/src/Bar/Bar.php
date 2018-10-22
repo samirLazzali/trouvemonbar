@@ -6,6 +6,12 @@ class Bar
     private $id;
     private $name;
     private $address;
+    private $keywords;
+
+    function __construct()
+    {
+        $this->keywords = array();
+    }
 
     public function getId()
     {
@@ -38,5 +44,15 @@ class Bar
     {
         $this->address = $address;
         return $this;
+    }
+    
+    public function addKeyword($keyword)
+    {
+        $this->keywords[] = $keyword; 
+    }
+
+    public function addKeywords($keyword)
+    {
+        array_push($this->keywords, ...$keyword);
     }
 }
