@@ -37,10 +37,9 @@ export default {
 
   created () {
     this.$api.getUsers()
-      .then(users => {
-        this.users = users
-        this.loading = false
-      })
+      .then(users => (this.users = users))
+      .catch(console.error)
+      .finally(() => (this.loading = false))
   }
 }
 </script>

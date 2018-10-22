@@ -1,0 +1,39 @@
+<template>
+  <v-toolbar color="transparent" flat>
+    <v-autocomplete
+      v-model="selectedKeywords"
+      :items="keywords"
+      label="Ce que j'aimerais"
+      multiple
+      hide-no-data
+      hide-details
+      solo
+    ></v-autocomplete>
+
+    <v-btn
+      large
+      color="success"
+      @click="$emit('search', selectedKeywords)"
+      v-text="'J\'ai soif !'"
+    ></v-btn>
+  </v-toolbar>
+</template>
+
+<script>
+export default {
+  name: 'SearchBar',
+
+  props: {
+    keywords: {
+      type: Array,
+      required: true
+    }
+  },
+
+  data () {
+    return {
+      selectedKeywords: []
+    }
+  }
+}
+</script>

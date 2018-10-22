@@ -15,7 +15,17 @@ export default new Router({
     {
       path: '/search',
       name: 'search',
-      component: () => import('./views/TheSearch.vue')
+      props: route => ({ query: route.query }),
+      component: () => import('./views/TheSearch.vue'),
+      beforeEnter: (to, _, next) => {
+        const query = to.query.q
+
+        if (query && query.trim()) {
+          next()
+        } else {
+          next('/')
+        }
+      }
     },
     {
       path: '/users',
