@@ -26,7 +26,7 @@ $barRepository = new \Bar\BarRepository($connection, $barHydrator);
 // get all bars
 Router::get('/api/bars', function() use($barRepository, $barHydrator) {
     $bars = $barRepository->fetchAll();
-    echo json_encode($barHydrator->extractAll($bars), , JSON_UNESCAPED_UNICODE);
+    echo json_encode($barHydrator->extractAll($bars), JSON_UNESCAPED_UNICODE);
 
 });
 
@@ -51,7 +51,7 @@ Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator)
     	$bar = $barRepository->fetchById($id);
     	if($bar != NULL)
     	{
-    		echo json_encode($barHydrator->extract($bar), , JSON_UNESCAPED_UNICODE);
+    		echo json_encode($barHydrator->extract($bar), JSON_UNESCAPED_UNICODE);
     	}
     	else
     	{
