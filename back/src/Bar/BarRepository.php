@@ -18,8 +18,9 @@ class BarRepository
             ->query('SELECT * FROM "bar"')
             ->fetchAll(\PDO::FETCH_CLASS, Bar::class);
         foreach ($bars as $bar) {
+            $id = $bar->getId();
             $request = $this->connection->prepare('SELECT kw.name FROM "keybar" kb, "bar" b, "idKeyWord" kw where kb.idBar=b.id AND kw.id=kb.idKeyWord AND b.id=:id');
-            $request->bindParam(':id',$bar->getId(), \PDO::PARAM_INT);
+            $request->bindParam(':id',$id, \PDO::PARAM_INT);
             $request->execute();
             $keywords = $request->fetchAll(\PDO::FETCH_COLUMN);
             if(count($keywords) > 0)
