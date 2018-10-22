@@ -62,6 +62,7 @@ class Router
 
 				return call_user_func_array($callback, [$request]);
 			}
-		}
+        }
+        http_response_code(404);
 	}
 }
