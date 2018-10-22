@@ -14,7 +14,7 @@ class BarRepository
 
     public function fetchAll()
     {
-        $Bars = $this->connection
+        $bars = $this->connection
             ->query('SELECT * FROM "bar"')
             ->fetchAll(\PDO::FETCH_CLASS, Bar::class);
         foreach ($bars as $bar) {
@@ -27,7 +27,7 @@ class BarRepository
                 $bar->addKeywords($keywords);
             }
         }
-        return $Bars;
+        return $bars;
     }
 
     public function fetchById($id)
