@@ -24,17 +24,11 @@
                 size="14"
               ></v-rating>
               <div class="ml-2 grey--text text--darken-2">
-                <span>{{ 4 }}</span>
+                <span>1</span>
                 <span>({{ 245 }})</span>
               </div>
             </div>
           </div>
-
-          <v-spacer></v-spacer>
-
-          <v-btn icon class="mr-0">
-            <v-icon>arrow_right</v-icon>
-          </v-btn>
         </v-card-title>
       </v-card>
     </v-hover>

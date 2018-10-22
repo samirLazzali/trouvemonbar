@@ -1,21 +1,15 @@
 <template>
   <div>
-    <div>
-      Vous avez cherché:
-      <v-chip
-        v-for="keyword in keywords"
-        :key="keyword"
-      >
-        {{ keyword }}
-      </v-chip>
-    </div>
+    <search-bar
+      :keywords="keywords"
+    ></search-bar>
 
     <v-container fluid grid-list-xl>
       <v-layout row wrap>
         <bar
           v-for="{ id, name, address } in bars"
           :key="id"
-          :id="id"
+          v-bind:id="id"
           :name="name"
           :address="address"
         ></bar>
@@ -26,21 +20,41 @@
 
 <script>
 import Bar from '@/components/Bar'
+import SearchBar from '@/components/SearchBar'
 
 export default {
   name: 'TheSearch',
 
   components: {
-    Bar
+    Bar,
+    SearchBar
+  },
+
+  props: {
+    query: {
+      type: Object,
+      required: true
+    }
+  },
+
+  data () {
+    return {
+      bars: []
+    }
   },
 
   computed: {
     keywords () {
-      return this.$store.state.keywords
-    },
-    bars () {
-      return this.$store.state.bars
+      return []
     }
+  },
+
+  created () {
+    this.$log.debug(this.query)
+
+    this.$api.searchRequest(this.query)
+      .then(bars => (this.bars = bars))
+      .catch(this.$log.error)
   }
 }
 </script>

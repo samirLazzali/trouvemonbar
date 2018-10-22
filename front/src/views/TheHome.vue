@@ -9,52 +9,43 @@
 
     <v-layout row wrap>
       <v-flex xs12 lg8 xl6 offset-lg2 offset-xl3>
-        <v-toolbar color="transparent" flat>
-          <v-autocomplete
-            v-model="selected"
-            :items="keywords"
-            label="Ce que j'aimerais"
-            multiple
-            hide-no-data
-            hide-details
-            solo
-          ></v-autocomplete>
-
-          <v-btn
-            large
-            color="success"
-            @click="search"
-            :loading="loading"
-            :disabled="loading"
-            v-text="'J\'ai soif !'"
-          ></v-btn>
-        </v-toolbar>
+        <search-bar
+          :keywords="keywords"
+          @search="search"
+        ></search-bar>
       </v-flex>
     </v-layout>
   </div>
 </template>
 
 <script>
+import SearchBar from '@/components/SearchBar'
+
 export default {
   name: 'Home',
 
+  components: {
+    SearchBar
+  },
+
   data () {
     return {
-      selected: [],
-      keywords: ['Bière', 'Danse', 'Détente', 'Vin', 'Shot'],
-      loading: false
+      keywords: [],
+      selectedKeywords: []
     }
   },
 
-  methods: {
-    search () {
-      this.loading = true
+  created () {
+    this.$api.getKeywords()
+      .then(keywords => (this.keywords = keywords))
+      .catch(this.$log.error)
+  },
 
-      this.$store.dispatch('SEARCH_REQUEST', this.selected)
-        .then(() => {
-          this.$router.push('/search')
-          this.loading = false
-        })
+  methods: {
+    search (selectedKeywords) {
+      if (selectedKeywords.length === 0) return
+
+      this.$router.push(`/search?q=${selectedKeywords.join(',')}`)
     }
   }
 }
