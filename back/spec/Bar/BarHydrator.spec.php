@@ -26,7 +26,7 @@ describe('BarHydrator', function() {
             (new Bar())
             ->setId(1)
             ->setName('Un bar à Evry')
-            ->setAddress('3 rue André Lalande')
+            ->setAddress('3 rue André Lalande'),
             (new Bar())
             ->setId(2)
             ->setName('Un bar à Grigny')
