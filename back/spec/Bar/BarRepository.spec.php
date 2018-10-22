@@ -20,6 +20,8 @@ describe('BarRepository', function() {
 });
 
 class MockPDO {
+    public function prepare(){}
+
     public function query() {
         return $this;
     }
