@@ -11,6 +11,7 @@
       <v-flex xs12 lg8 xl6 offset-lg2 offset-xl3>
         <search-bar
           :keywords="keywords"
+          v-model="selectedKeywords"
           @search="search"
         ></search-bar>
       </v-flex>
@@ -42,10 +43,10 @@ export default {
   },
 
   methods: {
-    search (selectedKeywords) {
-      if (selectedKeywords.length === 0) return
+    search () {
+      if (this.selectedKeywords.length === 0) return
 
-      this.$router.push(`/search?q=${selectedKeywords.join(',')}`)
+      this.$router.push(`/search?q=${this.selectedKeywords.join(',')}`)
     }
   }
 }

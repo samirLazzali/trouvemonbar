@@ -1,7 +1,8 @@
 <template>
   <v-toolbar color="transparent" flat>
     <v-autocomplete
-      v-model="selectedKeywords"
+      :value="value"
+      @input="v => $emit('input', v)"
       :items="keywords"
       label="Ce que j'aimerais"
       multiple
@@ -13,7 +14,7 @@
     <v-btn
       large
       color="success"
-      @click="$emit('search', selectedKeywords)"
+      @click="$emit('search', value)"
       v-text="'J\'ai soif !'"
     ></v-btn>
   </v-toolbar>
@@ -27,12 +28,10 @@ export default {
     keywords: {
       type: Array,
       required: true
-    }
-  },
-
-  data () {
-    return {
-      selectedKeywords: []
+    },
+    value: {
+      type: Array,
+      required: true
     }
   }
 }
