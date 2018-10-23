@@ -14,11 +14,21 @@ class BarRepository
 
     public function fetchAll()
     {
-        $Bars = $this->connection
+        $bars = $this->connection
             ->query('SELECT * FROM "bar"')
             ->fetchAll(\PDO::FETCH_CLASS, Bar::class);
-
-        return $Bars;
+        foreach ($bars as $bar) {
+            $id = $bar->getId();
+            $request = $this->connection->prepare('SELECT kw.name FROM "keybar" kb, "bar" b, "keyword" kw where kb.idBar=b.id AND kw.id=kb.idKeyWord AND b.id=:id');
+            $request->bindParam(':id',$id, \PDO::PARAM_INT);
+            $request->execute();
+            $keywords = $request->fetchAll(\PDO::FETCH_COLUMN);
+            if(count($keywords) > 0)
+            {
+                $bar->addKeywords($keywords);
+            }
+        }
+        return $bars;
     }
 
     public function fetchById($id)
@@ -29,7 +39,19 @@ class BarRepository
         $bars = $request->fetchAll(\PDO::FETCH_CLASS, Bar::class);
         if(count($bars) > 0)
         {
-            return $bars[0];
+            // Get the first bar
+            $bar = $bars[0];
+            $request = $this->connection->prepare('SELECT kw.name FROM "keybar" kb, "bar" b, "keyword" kw where kb.idBar=b.id AND kw.id=kb.idKeyWord AND b.id=:id');
+            $request->bindParam(':id',$id, \PDO::PARAM_INT);
+            $request->execute();
+            $keywords = $request->fetchAll(\PDO::FETCH_COLUMN);
+            if(count($keywords) > 0)
+            {
+                $bar->addKeywords($keywords);
+            }
+            return $bar;
+            //           
+            
         }
         else
         {
