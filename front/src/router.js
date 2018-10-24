@@ -33,9 +33,9 @@ export default new Router({
       component: () => import('./views/TheUsers.vue')
     },
     {
-      path: '/login',
-      name: 'login',
-      component: () => import('./views/TheLogin.vue')
+      path: '/signin',
+      name: 'signin',
+      component: () => import('./views/TheSignIn.vue')
     }
   ]
 })

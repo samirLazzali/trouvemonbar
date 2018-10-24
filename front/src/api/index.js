@@ -1,13 +1,13 @@
 import { user } from './user'
 import { bar } from './bar'
 import { keyword } from './keyword'
-import { login } from './login'
+import { signin } from './signin'
 
 const api = {
   ...user,
   ...bar,
   ...keyword,
-  ...login,
+  ...signin,
 
   searchRequest () {
     return new Promise((resolve, reject) => {
