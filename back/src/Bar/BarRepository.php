@@ -19,7 +19,7 @@ class BarRepository
             ->fetchAll(\PDO::FETCH_CLASS, Bar::class);
         foreach ($bars as $bar) {
             $id = $bar->getId();
-            $request = $this->connection->prepare('SELECT kw.name FROM "keybar" kb, "bar" b, "keyword" kw where kb.idBar=b.id AND kw.id=kb.idKeyWord AND b.id=:id');
+            $request = $this->connection->prepare('SELECT kw.name FROM "keybar" kb, "bar" b, "keyword" kw where kb.idBar=b.id AND kw.id=kb.idKeyWord and kb.nboccurence>0 and b.id=:id');
             $request->bindParam(':id',$id, \PDO::PARAM_INT);
             $request->execute();
             $keywords = $request->fetchAll(\PDO::FETCH_COLUMN);
