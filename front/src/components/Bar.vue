@@ -27,7 +27,10 @@
                 <span>1</span>
                 <span>({{ 245 }})</span>
               </div>
+            
             </div>
+            <v-chip v-for="keyword in keywords" :key="keyword.id">{{ keyword }} </v-chip>
+
           </div>
         </v-card-title>
       </v-card>
@@ -53,6 +56,11 @@ export default {
     address: {
       type: String,
       required: true
+    },
+
+    keywords: {
+      type : Array,
+      required : true
     }
   }
 }
