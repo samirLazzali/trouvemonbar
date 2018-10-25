@@ -29,10 +29,17 @@ Router::get('/api/bars', function() use($barRepository, $barHydrator) {
     echo json_encode($barHydrator->extractAll($bars), JSON_UNESCAPED_UNICODE);
 
 });
+//get bar by keyword
+Router::get('/api/bars/keyword', function() use($barRepository, $barHydrator) {
+    $keywords=['cinéma','concerts','voiture'];
+    $bars = $barRepository->fetchByKeyWords($keywords);
+    echo json_encode($barHydrator->extractAll($bars), JSON_UNESCAPED_UNICODE);
+
+});
 
 // get a bar per id
 Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator) {
-    
+
     if(isset($request->params[0]))
     {
     	// Equivalent of JavaScript's parseInt function

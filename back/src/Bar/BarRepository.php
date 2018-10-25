@@ -50,13 +50,30 @@ class BarRepository
                 $bar->addKeywords($keywords);
             }
             return $bar;
-            //           
-            
+            //
+
         }
         else
         {
             return NULL;
         }
+    }
+
+    public function fetchByKeyWords($keywords){
+        if(count($keywords)>0){
+            foreach($keywords as $keyword){
+                $request = $this->connection->prepare('select b.name from bar as b join keybar as kb on b.id=kb.idbar join keyword as kw on kw.id=kb.idkeyword where kw.name=:kw ');
+                $request->bindParam(':kw',$keyword, \PDO::PARAM_STR);
+
+            $request->execute();
+            $bars= $request->fetchAll(\PDO::FETCH_CLASS, Bar::CLASS);
+            }
+
+
+        }
+
+        return $bars;
+
     }
 
 }

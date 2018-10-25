@@ -294,12 +294,13 @@ VALUES (1, 2),
 
 INSERT INTO keybar (idKeyWord, nbOccurence, idBar)
 VALUES (1, 1, 1),
-       (2, 1, 2),
+       (3, 1, 1),
+       (4, 1, 1),
+       (1, 1, 3),
+       (1, 1, 4),
+       (3, 0, 2),
        (3, 0, 3),
-       (4, 0, 4),
-       (5, 0, 5),
-       (6, 0, 6),
-       (7, 0, 7),
+       (1, 0, 7),
        (8, 0, 8),
        (9, 0, 9),
        (10, 0, 10),
@@ -407,6 +408,19 @@ VALUES (1, 1),
        (10, 10),
        (11, 11),
        (1, 12);
+
+/*select A.name 
+from 
+(((select b.name from bar as b join keybar as kb on b.id=kb.idbar join keyword as kw on kw.id=kb.idkeyword where kw.name='cinéma') as A 
+ join
+  (select b.name from bar as b join keybar as kb on b.id=kb.idbar join keyword as kw on kw.id=kb.idkeyword where kw.name='concerts')as B 
+  on A.name = B.name) 
+  join (select b.name from bar as b join keybar as kb on b.id=kb.idbar join keyword as kw on kw.id=kb.idkeyword where kw.name='voiture' ) 
+  as C on A.name=C.name) join (select b.name from bar as b join keybar as kb on b.id=kb.idbar join keyword as kw on kw.id=kb.idkeyword where kw.name='voiture' ) 
+  as C on A.name=C.name ;
+
+
+select A.name */
 
 -- select * from keyuser;
 -- select * from keyword;
