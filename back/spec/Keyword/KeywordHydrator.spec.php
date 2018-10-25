@@ -12,11 +12,9 @@ describe('KeywordHydrator', function() {
             (new Keyword())->setId(2)->setName('paul')
         ];
 
-        expect($this->keywordHydrator->extractAll($keywords))->toBe(
-            [
-                [ 'id' => 1, 'name' => 'bob' ],
-                [ 'id' => 2, 'name' => 'paul' ]
-            ]
-        );
+        expect($this->keywordHydrator->extractAll($keywords))->toBe([
+            [ 'id' => 1, 'name' => 'bob' ],
+            [ 'id' => 2, 'name' => 'paul' ]
+        ]);
     });
 });
