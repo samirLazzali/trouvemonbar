@@ -3,7 +3,7 @@ namespace Keyword;
 
 class KeywordHydrator
 {
-    public function extract(Keyword $keyword)
+    private function extract(Keyword $keyword)
     {
         $data = [];
         if ($keyword->getId()) {

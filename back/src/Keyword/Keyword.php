@@ -15,4 +15,16 @@ class Keyword
     {
         return $this->name;
     }
+
+    public function setId(int $id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function setName(string $name)
+    {
+        $this->name = $name;
+        return $this;
+    }
 }
