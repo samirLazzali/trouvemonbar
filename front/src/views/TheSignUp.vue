@@ -26,7 +26,7 @@
                         value="bernard@gmail.com"
                       ></v-text-field>
                       <span class="caption grey--text text--darken-1">
-                        This is the email you will use to login to your Vuetify account
+                       Cette email sera utilisé pour vérifier votre compte.
                       </span>
                     </v-card-text>
                   </v-window-item>
@@ -34,29 +34,23 @@
                   <v-window-item :value="2" color="success">
                     <v-card-text>
                       <v-text-field
-                        label="Password"
+                        label="Mot de passe"
                         type="password"
                       ></v-text-field>
                       <v-text-field
-                        label="Confirm Password"
+                        label="Confirmez le mot de passe"
                         type="password"
                       ></v-text-field>
                       <span class="caption grey--text text--darken-1">
-                        Please enter a password for your account
+                        Veuillez entrer un mot de passe pour votre compte
                       </span>
                     </v-card-text>
                   </v-window-item>
 
                   <v-window-item :value="3" color="success">
                     <div class="pa-3 text-xs-center">
-                      <v-img
-                        class="mb-3"
-                        contain
-                        height="128"
-                        src="https://cdn.vuetifyjs.com/images/logos/v.svg"
-                      ></v-img>
-                      <h3 class="title font-weight-light mb-2">Welcome to Vuetify</h3>
-                      <span class="caption grey--text">Thanks for signing up!</span>
+                      <h3 class="title font-weight-light mb-2">Bienvenue sur votre Trouvetonbar</h3>
+                      <span class="caption grey--text">Merci pour votre inscription</span>
                     </div>
                   </v-window-item>
                 </v-window>
@@ -69,7 +63,7 @@
                     flat
                     @click="step--"
                   >
-                    Back
+                    Précédant
                   </v-btn>
                   <v-spacer></v-spacer>
                   <v-btn
@@ -78,7 +72,7 @@
                     depressed
                     @click="step++"
                   >
-                    Next
+                    Suivant
                   </v-btn>
                 </v-card-actions>
               </v-card>
@@ -101,9 +95,9 @@ export default {
     computed: {
       currentTitle () {
         switch (this.step) {
-          case 1: return 'Sign-up'
-          case 2: return 'Create a password'
-          default: return 'Account created'
+          case 1: return 'Inscription'
+          case 2: return 'Mot de passe'
+          default: return 'Inscription réussie'
         }
       }
     }
