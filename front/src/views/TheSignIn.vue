@@ -28,12 +28,17 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
+export default {
+  name: 'TheSignIn',
+
+  data () {
+    return {
       drawer: null
-    }),
-    props: {
-      source: String
     }
+  },
+
+  props: {
+    source: String
   }
+}
 </script>

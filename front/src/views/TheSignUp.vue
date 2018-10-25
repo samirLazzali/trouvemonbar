@@ -84,22 +84,23 @@
 </template>
 
 <script>
-
-
 export default {
-    name : 'login',
-    data: () => ({
-      step: 1
-    }),
+  name: 'TheSignUp',
 
-    computed: {
-      currentTitle () {
-        switch (this.step) {
-          case 1: return 'Inscription'
-          case 2: return 'Mot de passe'
-          default: return 'Inscription réussie'
-        }
+  data () {
+    return {
+      step: 1
+    }
+  },
+
+  computed: {
+    currentTitle () {
+      switch (this.step) {
+        case 1: return 'Inscription'
+        case 2: return 'Mot de passe'
+        default: return 'Inscription réussie'
       }
     }
   }
+}
 </script>
