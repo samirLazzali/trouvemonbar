@@ -90,22 +90,23 @@
 </template>
 
 <script>
-
-
 export default {
-    name : 'login',
-    data: () => ({
-      step: 1
-    }),
+  name: 'TheSignUp',
 
-    computed: {
-      currentTitle () {
-        switch (this.step) {
-          case 1: return 'Sign-up'
-          case 2: return 'Create a password'
-          default: return 'Account created'
-        }
+  data () {
+    return {
+      step: 1
+    }
+  },
+
+  computed: {
+    currentTitle () {
+      switch (this.step) {
+        case 1: return 'Sign-up'
+        case 2: return 'Create a password'
+        default: return 'Account created'
       }
     }
   }
+}
 </script>
