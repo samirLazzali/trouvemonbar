@@ -14,6 +14,14 @@
         <v-card-title>
           <div>
             <span class="headline">{{ name }}</span>
+
+            <div>
+              <v-chip
+                v-for="(keyword, i) in keywords"
+                :key="i"
+              >{{ keyword }}</v-chip>
+            </div>
+
             <div class="d-flex">
               <v-rating
                 :value="4"
@@ -23,6 +31,7 @@
                 readonly
                 size="14"
               ></v-rating>
+
               <div class="ml-2 grey--text text--darken-2">
                 <span>1</span>
                 <span>({{ 245 }})</span>
@@ -53,6 +62,10 @@ export default {
     address: {
       type: String,
       required: true
+    },
+
+    keywords: {
+      type: Array
     }
   }
 }

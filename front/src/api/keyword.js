@@ -3,7 +3,7 @@
 export const keyword = {
   getKeywords () {
     return new Promise(resolve => {
-      resolve(['Bière', 'Foot', 'Sport', 'Danse', 'Détente', 'Manga'])
+      resolve(['cinéma', 'théâtre', 'concerts', 'voiture', 'cuisine', 'patisserie'])
     })
   }
 }
