@@ -53,4 +53,13 @@ describe('Router', function() {
 
         expect($request->params)->toBe(['119', '31']);
     });
+
+    it('should set status code to 404 when no route found', function() {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_SERVER['REQUEST_URI'] = '/bad/url';
+
+        Router::execute();
+
+        expect(http_response_code())->toBe(404);
+    });
 });
