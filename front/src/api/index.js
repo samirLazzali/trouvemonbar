@@ -7,11 +7,15 @@ const api = {
   ...bar,
   ...keyword,
 
-  searchRequest () {
+  searchRequest (query) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         bar.getBars()
-          .then(resolve)
+          .then(bars => {
+            resolve(bars.filter(b => b.keywords.some(k => {
+              return query.q.includes(k)
+            })))
+          })
           .catch(reject)
       }, 1000)
     })

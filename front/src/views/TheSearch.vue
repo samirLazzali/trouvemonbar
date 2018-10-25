@@ -17,11 +17,12 @@
 
       <v-layout row wrap>
         <bar
-          v-for="{ id, name, address } in bars"
+          v-for="{ id, name, address, keywords } in bars"
           :key="id"
           v-bind:id="id"
           :name="name"
           :address="address"
+          :keywords="keywords.filter(k => selectedKeywords.includes(k))"
         ></bar>
       </v-layout>
     </v-container>
