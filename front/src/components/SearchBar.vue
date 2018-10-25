@@ -2,7 +2,7 @@
   <v-toolbar color="transparent" flat>
     <v-autocomplete
       :value="value"
-      @input="v => $emit('input', v)"
+      @input="$emit('input', $event)"
       :items="keywords"
       label="Ce que j'aimerais"
       multiple

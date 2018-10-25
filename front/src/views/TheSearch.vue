@@ -3,7 +3,6 @@
     <search-bar
       :keywords="keywords"
       v-model="selectedKeywords"
-      @input.once="changed = true"
       @search="search"
     ></search-bar>
 
