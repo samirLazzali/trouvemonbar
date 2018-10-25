@@ -1,9 +1,8 @@
-// import axios from 'axios'
+import axios from 'axios'
 
 export const keyword = {
   getKeywords () {
-    return new Promise(resolve => {
-      resolve(['cinéma', 'théâtre', 'concerts', 'voiture', 'cuisine', 'patisserie'])
-    })
+    return axios.get('/api/keywords')
+      .then(res => res.data)
   }
 }

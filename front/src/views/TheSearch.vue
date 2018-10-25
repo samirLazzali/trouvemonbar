@@ -58,7 +58,7 @@ export default {
 
   created () {
     this.$api.getKeywords()
-      .then(keywords => (this.keywords = keywords))
+      .then(keywords => (this.keywords = keywords.map(k => k.name)))
       .catch(this.$log.error)
   },
 
