@@ -2,12 +2,11 @@
 header("Content-Type:application/json");
 
 require '../vendor/autoload.php';
+require_once __DIR__ . '/keyword.php';
+
 use \Router\Router;
 
-$dbName = getenv('DB_NAME');
-$dbUser = getenv('DB_USER');
-$dbPassword = getenv('DB_PASSWORD');
-$connection = new PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
+$connection = \Database\DatabaseSingleton::getInstance();
 
 $userHydrator = new \User\UserHydrator();
 $userRepository = new \User\UserRepository($connection, $userHydrator);
@@ -32,7 +31,7 @@ Router::get('/api/bars', function() use($barRepository, $barHydrator) {
 
 // get a bar per id
 Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator) {
-    
+
     if(isset($request->params[0]))
     {
     	// Equivalent of JavaScript's parseInt function
