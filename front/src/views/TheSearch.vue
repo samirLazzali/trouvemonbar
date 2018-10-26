@@ -58,7 +58,7 @@ export default {
 
   created () {
     this.$api.getKeywords()
-      .then(keywords => (this.keywords = keywords.map(k => k.name)))
+      .then(keywords => (this.keywords = keywords))
       .catch(this.$log.error)
   },
 
@@ -69,6 +69,7 @@ export default {
         this.$log.debug(this.query)
 
         this.selectedKeywords = this.query.q.split(',')
+        this.loading = true
 
         this.$api.searchRequest(this.query)
           .then(bars => (this.bars = bars))
