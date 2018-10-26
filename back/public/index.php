@@ -23,14 +23,13 @@ $barHydrator = new \Bar\BarHydrator();
 $barRepository = new \Bar\BarRepository($connection, $barHydrator);
 
 // get all bars
-Router::get('/api/bars', function() use($barRepository, $barHydrator) {
-    $bars = $barRepository->fetchAll();
-    echo json_encode($barHydrator->extractAll($bars), JSON_UNESCAPED_UNICODE);
 
-});
 
-Router::get('/api/bars/keywords', function() use($barRepository, $barHydrator) {
-    #temporaire , juste pour me souvenir de la structure
+Router::get('/api/bars\?keywords\=(.+)', function($request) use($barRepository, $barHydrator) {
+#Router::get('/api/bars', function($request) use($barRepository, $barHydrator) {
+
+    $keywords =rawurldecode($request->params[0]);
+    #Quoi mettre du coup dans le if?
     if(!is_string($keywords) && $keywords!='')
     {
         http_response_code(400);
