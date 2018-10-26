@@ -29,6 +29,30 @@ Router::get('/api/bars', function() use($barRepository, $barHydrator) {
 
 });
 
+Router::get('/api/bars/keywords', function() use($barRepository, $barHydrator) {
+    #temporaire , juste pour me souvenir de la structure
+    if(!is_string($keywords) && $keywords!='')
+    {
+        http_response_code(400);
+		echo json_encode(array('error' => 'Parameters are not correct.'));
+
+    }
+    $kwTab=explode(',',$keywords);
+
+    $bars = $barRepository->fetchByKeyWords($kwTab);
+    if($bars !=NULL)
+    {
+        echo json_encode($barHydrator->extractAll($bars), JSON_UNESCAPED_UNICODE);
+    }
+    else
+    {
+        http_response_code(404);
+			echo json_encode(array('error' => 'No such bar with those keywords'));
+    }
+
+
+});
+
 // get a bar per id
 Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator) {
 
