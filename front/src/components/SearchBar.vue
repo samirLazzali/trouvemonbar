@@ -8,6 +8,7 @@
       multiple
       hide-no-data
       hide-details
+      clearable
       solo
     ></v-autocomplete>
 
