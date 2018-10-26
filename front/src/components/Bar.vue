@@ -24,7 +24,7 @@
 
             <div class="d-flex">
               <v-rating
-                :value="4"
+                :value="name.length % 5"
                 color="amber"
                 dense
                 half-increments
@@ -34,7 +34,7 @@
 
               <div class="ml-2 grey--text text--darken-2">
                 <span>1</span>
-                <span>({{ 245 }})</span>
+                <span>({{ name.length }})</span>
               </div>
             </div>
           </div>
