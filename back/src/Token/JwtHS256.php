@@ -24,8 +24,14 @@ class JwtHS256
     {
         [$header, $payload, $signature] = explode('.', $token);
 
-        $json = json_decode(Base64Url::decode($payload));
+        $signatureValidation = Base64Url::encode(
+            hash_hmac('sha256', $header . '.' . $payload, $secret, true)
+        );
+        if (strcmp($signatureValidation, $signature) !== 0) {
+            throw new \Exception('Token is corrupted');
+        }
 
+        $json = json_decode(Base64Url::decode($payload));
         if ($json->exp < time()) {
             throw new \Exception('Token has expired');
         }
