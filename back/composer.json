@@ -11,11 +11,5 @@
             "Database\\": "src/Database/",
             "Token\\": "src/Token/"
         }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "User\\": "test/unit/User/",
-            "Bar\\": "test/unit/Bar/"
-        }
     }
 }
