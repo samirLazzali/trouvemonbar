@@ -22,9 +22,6 @@ class BarRepository
             $request = $this->connection->prepare('SELECT kw.name FROM "keybar" kb, "bar" b, "keyword" kw where kb.idBar=b.id AND kw.id=kb.idKeyWord AND b.id=:id');
             $request->bindParam(':id',$id, \PDO::PARAM_INT);
             $request->execute();
-            if(!$request){
-                return false;
-            }
             $keywords = $request->fetchAll(\PDO::FETCH_COLUMN);
             if(count($keywords) > 0)
             {
@@ -47,12 +44,10 @@ class BarRepository
             $request = $this->connection->prepare('SELECT kw.name FROM "keybar" kb, "bar" b, "keyword" kw where kb.idBar=b.id AND kw.id=kb.idKeyWord AND b.id=:id');
             $request->bindParam(':id',$id, \PDO::PARAM_INT);
             $request->execute();
-            if(!$request){
-                return false;
-            }
             $keywords = $request->fetchAll(\PDO::FETCH_COLUMN);
             if(count($keywords) > 0)
             {
+
                 $bar->addKeywords($keywords);
             }
             return $bar;
@@ -62,21 +57,46 @@ class BarRepository
             return NULL;
         }
     }
+    public function bindKeyWordWithBar($id){
+        $request = $this->connection->prepare('SELECT kw.name FROM "keybar" kb, "bar" b, "keyword" kw where kb.idBar=b.id AND kw.id=kb.idKeyWord AND b.id=:id' );
+        $request->bindParam(':id',$id, \PDO::PARAM_INT);
+        $request->execute();
+        $keywords = $request->fetchAll(\PDO::FETCH_COLUMN);
+        if(count($keywords) > 0)
+        {
+            return $keywords;
+        }
+        else
+        {
+            return false;
+        }
+
+
+    }
 
     public function fetchByKeyWords($keywords){
         if(count($keywords)>0){
-            $request = $this->connection->prepare('select b.*,b.address from bar as b join keybar as kb on b.id=kb.idbar join keyword as kw on kw.id=kb.idkeyword where kw.name=:kw ');
+            $request = $this->connection->prepare('select b.* from bar as b join keybar as kb on b.id=kb.idbar join keyword as kw on kw.id=kb.idkeyword where UPPER(kw.name)=UPPER(:kw) ');
             foreach($keywords as $keyword){
                 $request->bindParam(':kw',$keyword, \PDO::PARAM_STR);
                 $request->execute();
-                if(!$request){
-                    return false;
-                }
                 $bars= $request->fetchAll(\PDO::FETCH_CLASS, Bar::CLASS);
             }
 
+
+        }
+        foreach($bars as $bar)
+        {
+            $keywords=$this->bindKeyWordWithBar($bar->getId());
+            if($keywords!=false)
+            {
+
+                $bar->addKeywords($keywords);
+            }
         }
         return $bars;
     }
+
+
 
 }
