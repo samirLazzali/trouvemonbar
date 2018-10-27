@@ -66,8 +66,8 @@ class BarRepository
     public function bindKeyWordWithBar($id){
         $request = $this->connection->prepare('SELECT kw.name FROM "keybar" kb, "bar" b, "keyword" kw where kb.idBar=b.id AND kw.id=kb.idKeyWord AND b.id=:id' );
         $request->bindParam(':id',$id, \PDO::PARAM_INT);
-        $request->execute();
-        if(!$execute){
+
+        if(!$request->execute()){
             return false;
         }
         $keywords = $request->fetchAll(\PDO::FETCH_COLUMN);
@@ -82,28 +82,51 @@ class BarRepository
 
 
     }
+    public function compareByID($A,$B)
+    {
+        $idA= $A->getId();
+        $idB= $B->getId();
+        if($idA === $idB)
+        {
+            return 0;
+        }
+        return ($idA>$idB)?1:-1;
+    }
+
 
     public function fetchByKeyWords($keywords){
+
+        $results = array();
+
         if(count($keywords)>0){
             $request = $this->connection->prepare('select b.* from bar as b join keybar as kb on b.id=kb.idbar join keyword as kw on kw.id=kb.idkeyword where UPPER(kw.name)=UPPER(:kw) ');
+            $request->bindParam(':kw',array_values($keywords)[0], \PDO::PARAM_STR);
+            $request->execute();
+            $results =  $request->fetchAll(\PDO::FETCH_CLASS, Bar::CLASS);
+            array_shift($keywords);
+            if(count($keywords)==0){
+                return $results;
+            }
             foreach($keywords as $keyword){
+                $tmp=array();
+                $bars=array();
                 $request->bindParam(':kw',$keyword, \PDO::PARAM_STR);
                 $request->execute();
-                $bars= $request->fetchAll(\PDO::FETCH_CLASS, Bar::CLASS);
+                while($row = $request->fetchAll(\PDO::FETCH_CLASS,Bar::CLASS))
+                    $tmp = $row;
+
+                $bars=array_uintersect($tmp,$results,[$this,'compareByID']);
             }
-
-
         }
-        foreach($bars as $bar)
+        foreach($test as $bar)
         {
             $keywords=$this->bindKeyWordWithBar($bar->getId());
             if($keywords!=false)
             {
-
                 $bar->addKeywords($keywords);
             }
         }
-        return $bars;
+        return$bars;
     }
 
 

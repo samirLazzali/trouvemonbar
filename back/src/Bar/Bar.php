@@ -45,14 +45,26 @@ class Bar
     {
         return $this->keywords;
     }
-    
+
     public function addKeyword(string $keyword)
     {
-        $this->keywords[] = $keyword; 
+        $this->keywords[] = $keyword;
     }
 
     public function addKeywords(array $keywords)
     {
         array_push($this->keywords, ...$keywords);
+    }
+    public function compareByID($A,$B)
+    {
+        var_dump("bla");
+
+        $idA= $A->getId();
+        $idB= $B->getId();
+        if($idA === $idB)
+        {
+            return 0;
+        }
+        return ($idA>$idB)?1:-1;
     }
 }
