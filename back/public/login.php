@@ -14,10 +14,7 @@ Router::post('/api/login', function($request) use($userRepository) {
 
     if (!$user) return http_response_code(401);
 
-    $id = $user->getId();
-
-
-    $token = \Token\JwtHS256::generate($id, getenv('SECRET'), time());
+    $token = \Token\JwtHS256::generate($user->getId(), getenv('SECRET'), time());
 
     header("Authorization: Bearer $token");
     echo $token; // TODO: remove when front is ok
