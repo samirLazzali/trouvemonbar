@@ -97,27 +97,31 @@ class BarRepository
     public function fetchByKeyWords($keywords){
 
         $results = array();
-
-        if(count($keywords)>0){
+        $bars=array();
+        $end=0;
+        if($end == 0){
             $request = $this->connection->prepare('select b.* from bar as b join keybar as kb on b.id=kb.idbar join keyword as kw on kw.id=kb.idkeyword where UPPER(kw.name)=UPPER(:kw) ');
             $request->bindParam(':kw',array_values($keywords)[0], \PDO::PARAM_STR);
             $request->execute();
             $results =  $request->fetchAll(\PDO::FETCH_CLASS, Bar::CLASS);
             array_shift($keywords);
             if(count($keywords)==0){
-                return $results;
+                $bars=$results;
+                $end=1;
             }
             foreach($keywords as $keyword){
                 $tmp=array();
-                $bars=array();
+
                 $request->bindParam(':kw',$keyword, \PDO::PARAM_STR);
                 $request->execute();
                 while($row = $request->fetchAll(\PDO::FETCH_CLASS,Bar::CLASS))
                     $tmp = $row;
-
+                var_dump($tmp);
                 $bars=array_uintersect($tmp,$results,[$this,'compareByID']);
+                $results=$tmp;
             }
         }
+        var_dump($bars);
         foreach($bars as $bar)
         {
             $keywords=$this->bindKeyWordWithBar($bar->getId());
