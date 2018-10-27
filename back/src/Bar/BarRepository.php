@@ -118,7 +118,7 @@ class BarRepository
                 $bars=array_uintersect($tmp,$results,[$this,'compareByID']);
             }
         }
-        foreach($test as $bar)
+        foreach($bars as $bar)
         {
             $keywords=$this->bindKeyWordWithBar($bar->getId());
             if($keywords!=false)
