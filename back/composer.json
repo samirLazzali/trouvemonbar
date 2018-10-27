@@ -8,7 +8,8 @@
             "Bar\\": "src/Bar/",
             "Router\\": "src/Router/",
             "Keyword\\": "src/Keyword/",
-            "Database\\": "src/Database/"
+            "Database\\": "src/Database/",
+            "Token\\": "src/Token/"
         }
     },
     "autoload-dev": {
