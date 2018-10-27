@@ -62,8 +62,9 @@ class BarRepository
     public function fetchByKeyWords($keywords){
 
         if(count($keywords)>0){
+            $request = $this->connection->prepare('select b.name,b.address from bar as b join keybar as kb on b.id=kb.idbar join keyword as kw on kw.id=kb.idkeyword where kw.name=:kw ');
+
             foreach($keywords as $keyword){
-                $request = $this->connection->prepare('select b.name,b.address from bar as b join keybar as kb on b.id=kb.idbar join keyword as kw on kw.id=kb.idkeyword where kw.name=:kw ');
 
                 $request->bindParam(':kw',$keyword, \PDO::PARAM_STR);
 
