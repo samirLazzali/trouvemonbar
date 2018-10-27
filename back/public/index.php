@@ -3,13 +3,9 @@ header("Content-Type:application/json");
 
 require '../vendor/autoload.php';
 require_once __DIR__ . '/keyword.php';
+require_once __DIR__ . '/login.php';
 
 use \Router\Router;
-
-$connection = \Database\DatabaseSingleton::getInstance();
-
-$userHydrator = new \User\UserHydrator();
-$userRepository = new \User\UserRepository($connection, $userHydrator);
 
 // get all users
 Router::get('/api/users', function() use($userRepository, $userHydrator) {
