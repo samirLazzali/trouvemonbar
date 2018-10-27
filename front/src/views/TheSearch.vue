@@ -16,12 +16,13 @@
 
       <v-layout row wrap>
         <bar
-          v-for="{ id, name, address, keywords } in bars"
+          v-for="{ id, name, address, keywords} in bars"
           :key="id"
           v-bind:id="id"
           :name="name"
           :address="address"
-          :keywords="keywords.filter(k => selectedKeywords.includes(k))"
+          :keywords="keywords"
+
         ></bar>
       </v-layout>
     </v-container>
@@ -71,8 +72,10 @@ export default {
         this.selectedKeywords = this.query.q.split(',')
         this.loading = true
 
-        this.$api.searchRequest(this.query)
-          .then(bars => (this.bars = bars))
+        this.$api.getBars(this.query)
+          .then(bars => {
+            this.bars = bars
+            })
           .catch(this.$log.error)
           .finally(() => (this.loading = false))
       }
