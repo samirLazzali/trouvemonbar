@@ -26,9 +26,10 @@ $barRepository = new \Bar\BarRepository($connection, $barHydrator);
 
 
 Router::get('/api/bars\?keywords\=(.+)', function($request) use($barRepository, $barHydrator) {
-#Router::get('/api/bars', function($request) use($barRepository, $barHydrator) {
 
     $keywords =rawurldecode($request->params[0]);
+
+
     #Quoi mettre du coup dans le if?
     if(!is_string($keywords) && $keywords!='')
     {
