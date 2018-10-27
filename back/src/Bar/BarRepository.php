@@ -22,6 +22,9 @@ class BarRepository
             $request = $this->connection->prepare('SELECT kw.name FROM "keybar" kb, "bar" b, "keyword" kw where kb.idBar=b.id AND kw.id=kb.idKeyWord AND b.id=:id');
             $request->bindParam(':id',$id, \PDO::PARAM_INT);
             $request->execute();
+            if(!$request){
+                return false;
+            }
             $keywords = $request->fetchAll(\PDO::FETCH_COLUMN);
             if(count($keywords) > 0)
             {
@@ -44,6 +47,9 @@ class BarRepository
             $request = $this->connection->prepare('SELECT kw.name FROM "keybar" kb, "bar" b, "keyword" kw where kb.idBar=b.id AND kw.id=kb.idKeyWord AND b.id=:id');
             $request->bindParam(':id',$id, \PDO::PARAM_INT);
             $request->execute();
+            if(!$request){
+                return false;
+            }
             $keywords = $request->fetchAll(\PDO::FETCH_COLUMN);
             if(count($keywords) > 0)
             {
@@ -63,6 +69,9 @@ class BarRepository
             foreach($keywords as $keyword){
                 $request->bindParam(':kw',$keyword, \PDO::PARAM_STR);
                 $request->execute();
+                if(!$request){
+                    return false;
+                }
                 $bars= $request->fetchAll(\PDO::FETCH_CLASS, Bar::CLASS);
             }
 
