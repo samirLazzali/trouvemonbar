@@ -60,14 +60,14 @@ export default {
   },
 
   computed: {
-    isAuthenticad () {
-      return this.$store.getters.isAuthenticad
+    isAuthenticated () {
+      return this.$store.getters.isAuthenticated
     }
   },
 
   watch: {
-    isAuthenticad () {
-      if (!this.isAuthenticad) this.$router.push('/')
+    isAuthenticated () {
+      if (!this.isAuthenticated) this.$router.push('/')
     }
   },
 
