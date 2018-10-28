@@ -4,15 +4,25 @@
       <v-btn to="/" fab flat color="transparent">
         <img src="./assets/logo.png" alt="logo">
       </v-btn>
+
       <v-toolbar-title>Trouvemonbar.com</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
       <v-toolbar-items>
-        <template v-if="$store.getters.isAuthenticated">
-          <v-btn color="success" flat>Bonjour {{ user.pseudo }}</v-btn>
-          <v-btn color="success" flat @click="logout">Déconnexion</v-btn>
+        <template v-if="isAuthenticated">
+          <v-menu bottom left offset-y>
+            <v-btn icon large slot="activator" color="success">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
+            <v-list>
+              <v-list-tile @click="logout">
+                <v-list-tile-title>Déconnexion</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
         </template>
+
         <template v-else>
           <v-btn color="success" flat to="/signup">S'inscrire</v-btn>
           <v-btn color="success" flat to="/signin">Connexion</v-btn>
@@ -35,9 +45,8 @@ export default {
   name: 'App',
 
   computed: {
-    user () {
-      return this.$store.state.user
-    }
+    isAuthenticated () { return this.$store.getters.isAuthenticated },
+    user () { return this.$store.state.user }
   },
 
   methods: {

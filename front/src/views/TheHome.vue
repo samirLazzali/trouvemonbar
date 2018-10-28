@@ -5,7 +5,7 @@
         <v-flex xs12>
           <v-card color="transparent" flat>
             <v-card-text class="light-green--text">
-              <h1 class="text-xs-center">La flemme de chercher un bar ?</h1>
+              <h1 class="text-xs-center">La flemme de chercher un bar {{ user ? user.pseudo : '' }} ?</h1>
               <h1 class="text-xs-center">On s'occupe de tout !</h1>
             </v-card-text>
           </v-card>
@@ -38,6 +38,10 @@ export default {
       keywords: [],
       selectedKeywords: []
     }
+  },
+
+  computed: {
+    user () { return this.$store.state.user }
   },
 
   created () {
