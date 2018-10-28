@@ -12,28 +12,6 @@ class BarRepository
         $this->BarHydrator = $BarHydrator;
     }
 
-    public function fetchAll()
-    {
-        $bars = $this->connection
-            ->query('SELECT * FROM "bar"')
-            ->fetchAll(\PDO::FETCH_CLASS, Bar::class);
-        foreach ($bars as $bar) {
-            $id = $bar->getId();
-            $request = $this->connection->prepare('SELECT kw.name FROM "keybar" kb, "bar" b, "keyword" kw WHERE kb.idBar=b.id AND kw.id=kb.idKeyWord AND b.id=:id');
-            $request->bindParam(':id',$id, \PDO::PARAM_INT);
-            $request->execute();
-            if(!$execute){
-                return false;
-            }
-            $keywords = $request->fetchAll(\PDO::FETCH_COLUMN);
-            if(count($keywords) > 0)
-            {
-                $bar->addKeywords($keywords);
-            }
-        }
-        return $bars;
-    }
-
     public function fetchById($id)
     {
         $request = $this->connection->prepare('SELECT * FROM "bar" WHERE id = :id');
