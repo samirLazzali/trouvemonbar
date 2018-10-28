@@ -24,6 +24,9 @@ describe('UserRepository', function() {
 });
 
 class MockPDO {
+
+    public function prepare(){}
+    
     public function query() {
         return $this;
     }

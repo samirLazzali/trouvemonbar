@@ -1,17 +1,34 @@
-# ENSIIE Project Skeleton
+# back REST api
 
-## Install you application
-* Change the parameters in .env file by your own values.
-* To install and start the application run `make install`
-* Your web site is running here [http:localhost:8080](http:localhost:8080)
+// simple route
 
-## Start you application
-`make start`
+// get the user 1
+// Router::get('/api/users/1, function() {});
 
-This command starts the application without installing anything.
+// create a new user with a request body
+// Router::post('/api/users', function() {});
 
-## Connect to the database
-`make db.connect`
+// update the user 1 with a request body
+// Router::put('/api/users/1', function() {});
 
-## Run unit tests
-`make phpunit.run`
+// delete all users
+// Router::delete('/api/users', function() {});
+
+// delete the user 1
+// Router::delete('/api/users/1', function() {});
+
+// for create and delete, if id 1 does not exist return 404
+
+// nested route
+
+// get all messages of the user 1
+// Router::get('/api/users/1/messages, function() {})
+
+// create a message of the user 1 with the request body
+// Router::post('/api/users/1/messages, function() {})
+
+// update the message 2 of the user 1 with the request body
+// Router::put('/api/users/1/messages/2, function() {})
+
+// delete the message 2 of the user 1
+// Router::delete('/api/users/1/messages/2, function() {})

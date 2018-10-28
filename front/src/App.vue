@@ -4,14 +4,29 @@
       <v-btn to="/" fab flat color="transparent">
         <img src="./assets/logo.png" alt="logo">
       </v-btn>
+
       <v-toolbar-title>Trouvemonbar.com</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn color="success" flat to="/users">Utilisateurs</v-btn>
-        <v-btn color="success" flat>S'inscrire</v-btn>
-        <v-btn color="success" flat>Connexion</v-btn>
+      <v-toolbar-items>
+        <template v-if="isAuthenticated">
+          <v-menu bottom left offset-y>
+            <v-btn icon large slot="activator" color="success">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
+            <v-list>
+              <v-list-tile @click="logout">
+                <v-list-tile-title>Déconnexion</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+        </template>
+
+        <template v-else>
+          <v-btn color="success" flat to="/signup">S'inscrire</v-btn>
+          <v-btn color="success" flat to="/signin">Connexion</v-btn>
+          </template>
       </v-toolbar-items>
     </v-toolbar>
 
@@ -27,6 +42,18 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+
+  computed: {
+    isAuthenticated () { return this.$store.getters.isAuthenticated },
+    user () { return this.$store.state.user }
+  },
+
+  methods: {
+    logout () {
+      this.$log.debug('logout', this.user)
+      this.$store.dispatch('logout')
+    }
+  }
 }
 </script>

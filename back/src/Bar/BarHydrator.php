@@ -4,28 +4,32 @@ namespace Bar;
 
 class BarHydrator
 {
-    public function extract(Bar $Bar): array
+    public function extract(Bar $bar): array
     {
         $data = [];
 
-        if ($Bar->getId()) {
-            $data['id'] = $Bar->getId();
+        if ($bar->getId()) {
+            $data['id'] = $bar->getId();
         }
-        if ($Bar->getName()) {
-            $data['name'] = $Bar->getName();
+        if ($bar->getName()) {
+            $data['name'] = $bar->getName();
         }
-        if ($Bar->getAddress()) {
-            $data['address'] = $Bar->getAddress();
+        if ($bar->getAddress()) {
+            $data['address'] = $bar->getAddress();
+        }
+        if($bar->getKeywords())
+        {
+            $data['keywords'] = $bar->getKeywords();
         }
 
         return $data;
     }
 
-    public function extractAll($Bars)
+    public function extractAll($bars)
     {
         $data = [];
-        foreach ($Bars as $Bar) {
-            $data[] = $this->extract($Bar);
+        foreach ($bars as $bar) {
+            $data[] = $this->extract($bar);
         }
         return $data;
     }

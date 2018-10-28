@@ -1,12 +1,13 @@
-import axios from 'axios'
+import { bar } from './bar'
+import { keyword } from './keyword'
+
+const api = {
+  ...bar,
+  ...keyword
+}
 
 export default {
   install (Vue) {
-    Vue.prototype.$api = {
-      async getUsers () {
-        return axios.get('/api/users')
-          .then(res => res.data)
-      }
-    }
+    Vue.prototype.$api = api
   }
 }
