@@ -24,13 +24,12 @@
 
       <v-layout row wrap>
         <bar
-          v-for="{ id, name, address, keywords} in bars"
+          v-for="{ id, name, address, keywords } in bars"
           :key="id"
           v-bind:id="id"
           :name="name"
           :address="address"
           :keywords="keywords"
-
         ></bar>
       </v-layout>
     </v-container>
