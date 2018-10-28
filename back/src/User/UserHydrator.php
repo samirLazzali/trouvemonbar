@@ -23,6 +23,9 @@ class UserHydrator
         if ($user->getRole()) {
             $data['role'] = $user->getRole();
         }
+        if (sizeof($user->getkeywords()) > 0) {
+            $data['keywords'] = $user->getKeywords();
+        }
 
         return $data;
     }
