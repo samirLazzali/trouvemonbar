@@ -2,9 +2,8 @@
 
 use \Router\Router;
 
-$connection = \Database\DatabaseSingleton::getInstance();
-
-$keywordRepository = new \Keyword\KeywordRepository($connection);
+$pdo =\Database\DatabaseSingleton::getInstance();
+$keywordRepository = new \Keyword\KeywordRepository($pdo);
 $keywordHydrator = new \Keyword\KeywordHydrator();
 
 Router::get('/api/keywords', function() use($keywordRepository, $keywordHydrator) {

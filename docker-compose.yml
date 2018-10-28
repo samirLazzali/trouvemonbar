@@ -32,6 +32,7 @@ services:
       DB_NAME: ${DB_USER}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
+      SECRET: ${SECRET}
     volumes:
       - ./back:/var/www/html
       - $SSH_AUTH_SOCK:/ssh-agent

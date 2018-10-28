@@ -1,26 +1,15 @@
 <?php
 header("Content-Type:application/json");
 
-require '../vendor/autoload.php';
+require_once '../vendor/autoload.php';
 require_once __DIR__ . '/keyword.php';
+require_once __DIR__ . '/login.php';
 
 use \Router\Router;
 
-$connection = \Database\DatabaseSingleton::getInstance();
-
-$userHydrator = new \User\UserHydrator();
-$userRepository = new \User\UserRepository($connection, $userHydrator);
-
-// get all users
-Router::get('/api/users', function() use($userRepository, $userHydrator) {
-    $users = $userRepository->fetchAll();
-
-    echo json_encode($userHydrator->extractAll($users));
-});
-
-
+$pdo = \Database\DatabaseSingleton::getInstance();
 $barHydrator = new \Bar\BarHydrator();
-$barRepository = new \Bar\BarRepository($connection, $barHydrator);
+$barRepository = new \Bar\BarRepository($pdo, $barHydrator);
 
 // get all bars
 

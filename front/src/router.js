@@ -28,11 +28,6 @@ export default new Router({
       }
     },
     {
-      path: '/users',
-      name: 'users',
-      component: () => import('./views/TheUsers.vue')
-    },
-    {
       path: '/signin',
       name: 'signin',
       component: () => import('./views/TheSignIn.vue')
