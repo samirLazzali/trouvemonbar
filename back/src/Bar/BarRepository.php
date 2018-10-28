@@ -116,12 +116,10 @@ class BarRepository
                 $request->execute();
                 while($row = $request->fetchAll(\PDO::FETCH_CLASS,Bar::CLASS))
                     $tmp = $row;
-                var_dump($tmp);
                 $bars=array_uintersect($tmp,$results,[$this,'compareByID']);
                 $results=$tmp;
             }
         }
-        var_dump($bars);
         foreach($bars as $bar)
         {
             $keywords=$this->bindKeyWordWithBar($bar->getId());
