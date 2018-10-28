@@ -1,5 +1,15 @@
 <template>
   <v-content>
+    <v-snackbar
+      v-model="snackbar"
+      bottom
+      left
+      color="error"
+      :timeout="3000"
+    >
+      Login ou Mot de passe incorrect
+    </v-snackbar>
+
     <v-container fluid>
       <v-layout align-center justify-center>
         <v-flex xs12 sm8 md6 lg4>
@@ -73,7 +83,8 @@ export default {
         minCounter: value => value.length >= 3 || 'Min 3 caractères.',
         maxCounter: value => value.length < 25 || 'Max 25 caractères.',
         required: value => !!value || 'Obligatoire.'
-      }
+      },
+      snackbar: false
     }
   },
 
@@ -82,13 +93,14 @@ export default {
       if (!this.$refs.login.validate()) return
 
       try {
-        this.$store.dispatch('login', {
+        await this.$store.dispatch('login', {
           email: this.login,
           password: this.password
         })
         this.$router.push('/')
       } catch (err) {
         this.$log.error(err)
+        this.snackbar = true
       }
     }
   }
