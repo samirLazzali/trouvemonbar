@@ -82,7 +82,7 @@ export default {
       switch (this.step) {
         case 1: return 'Inscription'
         case 2: return 'Mot de passe'
-        case 3: return 'Inscription réussie'
+        default: return 'Inscription réussie'
       }
     }
   }
