@@ -61,7 +61,7 @@ export default new Router({
     {
       path: '/me',
       name: 'me',
-      component: () => import('./views/TheMe.vue'),
+      component: () => import('./views/TheMe/TheMe.vue'),
       beforeEnter: ifAuthenticated
     }
   ]
