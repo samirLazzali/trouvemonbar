@@ -16,6 +16,9 @@
               <v-icon>account_circle</v-icon>
             </v-btn>
             <v-list>
+              <v-list-tile @click="$router.push('/me')">
+                <v-list-tile-title>Mon compte</v-list-tile-title>
+              </v-list-tile>
               <v-list-tile @click="logout">
                 <v-list-tile-title>Déconnexion</v-list-tile-title>
               </v-list-tile>
