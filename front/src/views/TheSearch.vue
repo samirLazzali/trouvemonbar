@@ -14,6 +14,14 @@
         indeterminate
       ></v-progress-linear>
 
+      <v-alert
+        :value="alert"
+        type="info"
+      >
+        Désolé, mais votre recherche n'a rien donné.
+        Essayez avec d'autres mots clés !
+      </v-alert>
+
       <v-layout row wrap>
         <bar
           v-for="{ id, name, address, keywords} in bars"
@@ -53,7 +61,8 @@ export default {
       keywords: [],
       selectedKeywords: [],
       bars: [],
-      loading: true
+      loading: true,
+      alert: false
     }
   },
 
@@ -75,8 +84,13 @@ export default {
         this.$api.getBars(this.query)
           .then(bars => {
             this.bars = bars
-            })
-          .catch(this.$log.error)
+            this.alert = false
+          })
+          .catch(err => {
+            this.$log.error(err)
+
+            if (err.response.status === 404) this.alert = true
+          })
           .finally(() => (this.loading = false))
       }
     }
