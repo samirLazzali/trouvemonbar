@@ -11,105 +11,38 @@ $pdo = \Database\DatabaseSingleton::getInstance();
 $barHydrator = new \Bar\BarHydrator();
 $barRepository = new \Bar\BarRepository($pdo, $barHydrator);
 
-// get all bars
+Router::get('/api/bars\?keywords\=(.+)', function($request) use($barRepository, $barHydrator)
+{
+    $keywords = explode(',', rawurldecode($request->params[0]));
+    $bars = $barRepository->fetchByKeyWords($keywords);
 
-
-Router::get('/api/bars\?keywords\=(.+)', function($request) use($barRepository, $barHydrator) {
-
-    $keywords =rawurldecode($request->params[0]);
-
-
-    #Quoi mettre du coup dans le if?
-    if(!is_string($keywords) && $keywords!='')
-    {
-        http_response_code(400);
-		echo json_encode(array('error' => 'Parameters are not correct.'));
-
-    }
-    $kwTab=explode(',',$keywords);
-
-    $bars = $barRepository->fetchByKeyWords($kwTab);
-    if($bars !=NULL)
-    {
-        echo json_encode($barHydrator->extractAll($bars), JSON_UNESCAPED_UNICODE);
-    }
-    else
-    {
+    if($bars == NULL) {
         http_response_code(404);
-			echo json_encode(array('error' => 'No such bar with those keywords'));
+        echo json_encode(array('error' => 'No such bar with those keywords'));
+        return;
     }
 
-
+    echo json_encode($barHydrator->extractAll($bars), JSON_UNESCAPED_UNICODE);
 });
 
-// get a bar per id
-Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator) {
+Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator)
+{
+    $id = intval($request->params[0]);
 
-    if(isset($request->params[0]))
-    {
-    	// Equivalent of JavaScript's parseInt function
-    	// set $id to '' if any character is not a digit of request->params[0]
-    	$id = (int) preg_replace('/\D/', '', $request->params[0]);
-    }
-    else
-    {
+    if (strval($id) !== $request->params[0]) {
     	http_response_code(400);
-		echo json_encode(array('error' => 'Parameters are not correct.'));
+        echo json_encode(array('error' => 'Parameters are not correct.'));
+        return;
     }
 
-    if($id != '' and is_int($id))
-	{
-		// Get the bar
-    	$bar = $barRepository->fetchById($id);
-    	if($bar != NULL)
-    	{
-    		echo json_encode($barHydrator->extract($bar), JSON_UNESCAPED_UNICODE);
-    	}
-    	else
-    	{
-    		http_response_code(404);
-			echo json_encode(array('error' => 'No such bar with this id.'));
-    	}
-	}
-	else
-	{
-		http_response_code(400);
-		echo json_encode(array('error' => 'Parameters are not correct.'));
-	}
+    $bar = $barRepository->fetchById($id);
+    if ($bar == null) {
+        http_response_code(404);
+        echo json_encode(array('error' => 'No such bar with this id.'));
+        return;
+    }
+
+    echo json_encode($barHydrator->extract($bar), JSON_UNESCAPED_UNICODE);
 });
 
 Router::execute();
-
-
-// simple route
-
-// get the user 1
-// Router::get('/api/users/1, function() {});
-
-// create a new user with a request body
-// Router::post('/api/users', function() {});
-
-// update the user 1 with a request body
-// Router::put('/api/users/1', function() {});
-
-// delete all users
-// Router::delete('/api/users', function() {});
-
-// delete the user 1
-// Router::delete('/api/users/1', function() {});
-
-// for create and delete, if id 1 does not exist return 404
-
-// nested route
-
-// get all messages of the user 1
-// Router::get('/api/users/1/messages, function() {})
-
-// create a message of the user 1 with the request body
-// Router::post('/api/users/1/messages, function() {})
-
-// update the message 2 of the user 1 with the request body
-// Router::put('/api/users/1/messages/2, function() {})
-
-// delete the message 2 of the user 1
-// Router::delete('/api/users/1/messages/2, function() {})
