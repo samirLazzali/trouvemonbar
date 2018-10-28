@@ -1,5 +1,15 @@
 <template>
   <v-content>
+    <v-snackbar
+      v-model="snackbar"
+      bottom
+      left
+      :color="snackbarState"
+      :timeout="3000"
+    >
+      {{ snackbarText }}
+    </v-snackbar>
+
     <v-container fluid>
       <v-layout align-center justify-center>
         <v-flex xs12 sm8 md6 lg4>
@@ -66,6 +76,9 @@ export default {
 
   data () {
     return {
+      snackbar: false,
+      snackbarText: '',
+      snackbarState: 'error',
       step: 1,
       isValid: false,
       pseudo: '',
@@ -94,11 +107,36 @@ export default {
           pseudo: this.pseudo,
           password: this.password
         })
-        if (res.status === 200) {
-          this.$router.push('/')
+        this.$log.debug('test')
+        switch (res.status) {
+          case 200:
+            this.snackbarText = 'Inscription réussie.'
+            this.snackbarState = 'success'
+            setTimeout(this.$router.push('/signin '), 3)
+            break
+          case 400:
+            this.snackbarText = 'Paramètres invalides.'
+            this.snackbarState = 'error'
+            break
+          case 418:
+            this.snackbarText = 'Email ou mot de passe déjà utilisé.'
+            this.snackbarState = 'error'
+            break
+          case 500:
+            this.snackbarText = 'Erreur interne.'
+            this.snackbarState = 'error'
+            break
+          default:
+            this.snackbarText = 'Une erreur s\'est produite'
+            this.snackbarState = 'error'
+            break
         }
+        this.snackbar = true
       } catch (exception) {
-        this.$log.debug(exception)
+        this.$log.error(exception)
+        this.snackbarText = 'Une erreur s\'est produite'
+        this.snackbarState = 'error'
+        this.snackbar = true
       }
     }
 
