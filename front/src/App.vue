@@ -9,7 +9,6 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn color="success" flat to="/users">Utilisateurs</v-btn>
         <v-btn color="success" flat to="/signup">S'inscrire</v-btn>
         <v-btn color="success" flat to="/signin">Connexion</v-btn>
       </v-toolbar-items>
