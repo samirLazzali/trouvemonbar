@@ -10,14 +10,29 @@
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
-                <v-form>
-                  <v-text-field prepend-icon="person" name="login" label="Login" type="text"></v-text-field>
-                  <v-text-field id="password" prepend-icon="lock" name="password" label="Mot de passe" type="password"></v-text-field>
+                <v-form v-model="isValid" ref="login" lazy-validation>
+                  <v-text-field
+                    v-model="login"
+                    prepend-icon="person"
+                    name="login"
+                    label="Login"
+                    type="text"
+                    :rules="[rules.required,rules.email]"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="password"
+                    id="password"
+                    prepend-icon="lock"
+                    name="password"
+                    label="Mot de passe"
+                    type="password"
+                    :rules="[rules.required,rules.minCounter,rules.maxCounter]"
+                  ></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="success">Connexion</v-btn>
+                <v-btn color="success" @click="submit" :disabled="!isValid">Connexion</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -31,14 +46,44 @@
 export default {
   name: 'TheSignIn',
 
+  props: {
+    source: String
+  },
+
   data () {
     return {
-      drawer: null
+      drawer: null,
+      isValid: false,
+      login: '',
+      password: '',
+      rules: {
+        email: value => {
+          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          return pattern.test(value) || 'Invalid e-mail.'
+        },
+        minCounter: value => value.length >= 3 || 'Min 3 characters',
+        maxCounter: value => value.length < 25 || 'Max 25 characters',
+        required: value => !!value || 'Required.'
+      }
     }
   },
 
-  props: {
-    source: String
+  methods: {
+    async submit () {
+      if (!this.$refs.login.validate()) return
+
+      try {
+        const res = await this.$api.login({
+          email: this.login,
+          password: this.password
+        })
+        localStorage.setItem('user-token', res.headers.authorization)
+      } catch (error) {
+        localStorage.removeItem('user-toker')
+        this.$log.error('An error occured during the login')
+        this.$log.debug(error)
+      }
+    }
   }
 }
 </script>
