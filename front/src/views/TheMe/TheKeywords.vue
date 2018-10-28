@@ -7,11 +7,11 @@
         <v-autocomplete
           v-model="newKeywords"
           :items="allKeywords"
-          item-text="name"
-          item-value="id"
           label="Mots clés"
           multiple
         ></v-autocomplete>
+
+        <v-card-text>Vos mots clés actuels :</v-card-text>
 
         <v-chip
           v-for="(keyword, i) in keywords"
@@ -19,7 +19,7 @@
           color="green"
           text-color="white"
         >
-          {{ keyword }}
+          {{ keyword | capitalize }}
         </v-chip>
       </v-container>
     </v-card-text>
@@ -29,6 +29,14 @@
 <script>
 export default {
   name: 'TheKeywords',
+
+  filters: {
+    capitalize (value) {
+      if (!value) return ''
+      value = value.toString()
+      return value.charAt(0).toUpperCase() + value.slice(1)
+    }
+  },
 
   props: {
     keywords: {
@@ -45,8 +53,7 @@ export default {
 
   computed: {
     allKeywords () {
-      return this.$store.state.keywords || []
-        .filter(k => !this.keywords.includes(k.name))
+      return this.$store.state.keywords
     }
   }
 }
