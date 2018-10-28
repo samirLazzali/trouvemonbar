@@ -9,7 +9,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: JSON.parse(localStorage.getItem('user'))
+    user: JSON.parse(localStorage.getItem('user')),
+    keywords: null
   },
 
   getters: {
@@ -19,6 +20,9 @@ export default new Vuex.Store({
   mutations: {
     user (state, user) {
       state.user = user
+    },
+    keywords (state, keywords) {
+      state.keywords = keywords
     }
   },
 
@@ -41,11 +45,25 @@ export default new Vuex.Store({
           })
       })
     },
+
     logout ({ commit }) {
       commit('user', null)
       localStorage.removeItem('user-token')
       localStorage.removeItem('user')
       delete axios.defaults.headers.common['Authorization']
+    },
+
+    keywords ({ commit, state }) {
+      if (state.keywords) return
+
+      return new Promise((resolve, reject) => {
+        axios.get('/api/keywords')
+          .then(res => {
+            commit('keywords', res.data)
+            resolve()
+          })
+          .catch(reject)
+      })
     }
   }
 })
