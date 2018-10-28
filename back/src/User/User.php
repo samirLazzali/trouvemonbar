@@ -73,5 +73,6 @@ class User
     public function addKeywords(array $keywords)
     {
         array_push($this->keywords, ...$keywords);
+        return $this;
     }
 }
