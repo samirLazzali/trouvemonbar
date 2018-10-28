@@ -40,10 +40,7 @@ class UserRepository
 
         if (!$stmt->execute()) return false;
 
-        $keywords = $stmt->fetchAll(\PDO::FETCH_COLUMN);
-        if (!$keywords) return false;
-
-        $user->addKeywords($keywords);
+        $user->addKeywords($stmt->fetchAll(\PDO::FETCH_COLUMN));
         return $user;
     }
 
