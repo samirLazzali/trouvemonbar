@@ -9,8 +9,14 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn color="success" flat to="/signup">S'inscrire</v-btn>
-        <v-btn color="success" flat to="/signin">Connexion</v-btn>
+        <template v-if="user">
+          <v-btn color="success" flat>Bonjour {{ user.pseudo }}</v-btn>
+          <v-btn color="success" flat @click="logout">Déconnexion</v-btn>
+        </template>
+        <template v-else>
+          <v-btn color="success" flat to="/signup">S'inscrire</v-btn>
+          <v-btn color="success" flat to="/signin">Connexion</v-btn>
+          </template>
       </v-toolbar-items>
     </v-toolbar>
 
@@ -26,6 +32,19 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+
+  computed: {
+    user () {
+      return this.$store.state.user
+    }
+  },
+
+  methods: {
+    logout () {
+      this.$log.debug('logout', this.user)
+      this.$store.dispatch('logout')
+    }
+  }
 }
 </script>

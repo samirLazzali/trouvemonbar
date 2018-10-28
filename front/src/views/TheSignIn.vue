@@ -3,12 +3,13 @@
     <v-content>
       <v-container fluid>
         <v-layout align-center justify-center>
-          <v-flex xs12 sm8 md4>
+          <v-flex xs12 sm8 md6 lg4>
             <v-card class="elevation-12">
               <v-toolbar dark color="success">
                 <v-toolbar-title>Formulaire de connexion</v-toolbar-title>
                 <v-spacer></v-spacer>
               </v-toolbar>
+
               <v-card-text>
                 <v-form v-model="isValid" ref="login" lazy-validation>
                   <v-text-field
@@ -30,9 +31,16 @@
                   ></v-text-field>
                 </v-form>
               </v-card-text>
+
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="success" @click="submit" :disabled="!isValid">Connexion</v-btn>
+                <v-btn
+                  color="success"
+                  @click="submit"
+                  :disabled="!isValid"
+                >
+                  Connexion
+                </v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -78,6 +86,10 @@ export default {
           password: this.password
         })
         localStorage.setItem('user-token', res.headers.authorization)
+
+        this.$log.debug('logged', res.data)
+        this.$store.commit('user', res.data)
+        this.$router.push('/')
       } catch (error) {
         localStorage.removeItem('user-toker')
         this.$log.error('An error occured during the login')
