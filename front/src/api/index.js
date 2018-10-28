@@ -1,9 +1,11 @@
 import { bar } from './bar'
 import { keyword } from './keyword'
+import { signup } from './signup'
 
 const api = {
   ...bar,
-  ...keyword
+  ...keyword,
+  ...signup
 }
 
 export default {
