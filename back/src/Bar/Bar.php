@@ -45,10 +45,10 @@ class Bar
     {
         return $this->keywords;
     }
-    
+
     public function addKeyword(string $keyword)
     {
-        $this->keywords[] = $keyword; 
+        $this->keywords[] = $keyword;
     }
 
     public function addKeywords(array $keywords)
