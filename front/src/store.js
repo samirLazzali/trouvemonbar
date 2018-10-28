@@ -58,8 +58,15 @@ export default new Vuex.Store({
 
       return new Promise((resolve, reject) => {
         axios.get('/api/keywords')
-          .then(res => {
-            commit('keywords', res.data)
+          .then(res => res.data)
+          .then(keywords => {
+            return keywords
+              .map(k => k.name)
+              .map(name => name.charAt(0).toUpperCase() + name.slice(1))
+              .sort((a, b) => a.localeCompare(b))
+          })
+          .then(keywords => {
+            commit('keywords', keywords)
             resolve()
           })
           .catch(reject)

@@ -8,7 +8,7 @@
         <v-spacer></v-spacer>
         <v-avatar size="80">
           <img
-            src="https://cdn.vuetifyjs.com/images/john.jpg"
+            src="https://scontent-cdt1-1.xx.fbcdn.net/v/t31.0-1/c282.0.960.960/p960x960/10506738_10150004552801856_220367501106153455_o.jpg?_nc_cat=1&_nc_ht=scontent-cdt1-1.xx&oh=38581a4d2787b796406d8c112566b69d&oe=5C3E0712"
             :alt="user.pseudo"
           >
         </v-avatar>
@@ -55,18 +55,13 @@ export default {
   data () {
     return {
       user: null,
-      tab: 0,
-      newKeywords: []
+      tab: 0
     }
   },
 
   computed: {
     isAuthenticad () {
       return this.$store.getters.isAuthenticad
-    },
-
-    keywords () {
-      return this.$store.state.keywords
     }
   },
 
