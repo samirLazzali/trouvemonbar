@@ -23,7 +23,7 @@ class UserRepository
 
     public function fetchByEmailAndHash(string $email, string $hash)
     {
-        $stmt = $this->connection->prepare('SELECT id, email, pseudo, role FROM "user" WHERE email = :email AND hash = :hash');
+        $stmt = $this->connection->prepare('SELECT id, email, pseudo, role FROM "user" WHERE UPPER(email) = UPPER(:email) AND hash = :hash');
         $stmt->bindParam(':email', $email, \PDO::PARAM_STR);
         $stmt->bindParam(':hash', $hash, \PDO::PARAM_STR);
 
