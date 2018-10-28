@@ -8,13 +8,8 @@
             "Bar\\": "src/Bar/",
             "Router\\": "src/Router/",
             "Keyword\\": "src/Keyword/",
-            "Database\\": "src/Database/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "User\\": "test/unit/User/",
-            "Bar\\": "test/unit/Bar/"
+            "Database\\": "src/Database/",
+            "Token\\": "src/Token/"
         }
     }
 }

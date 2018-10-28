@@ -1,9 +1,7 @@
-import { user } from './user'
 import { bar } from './bar'
 import { keyword } from './keyword'
 
 const api = {
-  ...user,
   ...bar,
   ...keyword,
 
