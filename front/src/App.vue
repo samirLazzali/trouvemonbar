@@ -8,8 +8,8 @@
 
       <v-spacer></v-spacer>
 
-      <v-toolbar-items class="hidden-sm-and-down">
-        <template v-if="user">
+      <v-toolbar-items>
+        <template v-if="$store.getters.isAuthenticated">
           <v-btn color="success" flat>Bonjour {{ user.pseudo }}</v-btn>
           <v-btn color="success" flat @click="logout">Déconnexion</v-btn>
         </template>

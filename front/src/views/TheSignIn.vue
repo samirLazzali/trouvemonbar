@@ -82,18 +82,13 @@ export default {
       if (!this.$refs.login.validate()) return
 
       try {
-        const res = await this.$api.login({
+        this.$store.dispatch('login', {
           email: this.login,
           password: this.password
         })
-        localStorage.setItem('user-token', res.headers.authorization)
-        this.$log.debug('logged', res.data)
-        this.$store.commit('user', res.data)
         this.$router.push('/')
-      } catch (error) {
-        localStorage.removeItem('user-toker')
-        this.$log.error('An error occured during the login')
-        this.$log.debug(error)
+      } catch (err) {
+        this.$log.error(err)
       }
     }
   }
