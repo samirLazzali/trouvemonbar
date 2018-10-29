@@ -78,6 +78,8 @@ Router::put('/api/users/{}', function($request) use($userRepository, $userHydrat
         return;
     }
 
+
+
     // Check parameter
     if (is_null($request->body) || !(isset($request->params[0]) && isset($request->body->user->password))) return http_response_code(400);
 
@@ -88,6 +90,11 @@ Router::put('/api/users/{}', function($request) use($userRepository, $userHydrat
     if ($id === null)
     {
         return http_response_code(400);
+    }
+
+    if($user->getId() != $id)
+    {
+        return http_response_code(401);
     }
 
     $password = $request->body->user->password;
