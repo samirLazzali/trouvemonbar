@@ -73,10 +73,8 @@ Router::put('/api/users/{}', function($request) use($userRepository, $userHydrat
     try {
         $userId = JwtHS256::validate($token, getenv('SECRET'));
         $user = $userRepository->fetchById($userId);
-        echo json_encode($userHydrator->extract($user));
     } catch (Exception $e) {
         http_response_code(401);
-        echo json_encode(['error' => $e->getMessage()]);
         return;
     }
 
