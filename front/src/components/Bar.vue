@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs12 sm6 md4>
+  <v-flex xs12 sm6 md4 @click="$emit('clicked', id)">
     <v-hover>
       <v-card
         slot-scope="{ hover }"

@@ -30,6 +30,7 @@
           :name="name"
           :address="address"
           :keywords="keywords"
+          @clicked="barClicked"
         ></bar>
       </v-layout>
     </v-container>
@@ -106,6 +107,12 @@ export default {
       this.bars = []
       this.loading = true
       this.$router.push(`/search?q=${this.selectedKeywords.join(',')}`)
+    },
+
+    barClicked (id) {
+      this.$log.debug('clicked', id)
+
+      this.$router.push(`/bars/${id}`)
     }
   }
 }

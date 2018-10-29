@@ -9,5 +9,9 @@ export const bar = {
       }
 
     }).then(res => res.data)
+  },
+  getBar (id) {
+    return axios.get('/api/bars/' + id)
+      .then(res => res.data)
   }
 }

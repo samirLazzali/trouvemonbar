@@ -59,10 +59,16 @@ export default new Router({
       beforeEnter: ifNotAuthenticated
     },
     {
+      path: '/bars/:id',
+      name: 'bars',
+      component: () => import('./views/TheBar.vue')
+    },
+    {
       path: '/me',
       name: 'me',
       component: () => import('./views/TheMe/TheMe.vue'),
       beforeEnter: ifAuthenticated
     }
+
   ]
 })
