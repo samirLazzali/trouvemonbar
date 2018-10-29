@@ -1,22 +1,26 @@
 <template>
-  <div>
-    <v-card color="transparent" flat>
-        <v-card-text class="light-green--text">
-          <h1 class="text-xs-center">La flemme de chercher un bar ?</h1>
-          <h1 class="text-xs-center">On s'occupe de tout !</h1>
-        </v-card-text>
-    </v-card>
+  <v-content>
+    <v-container fluid>
+      <v-layout align-center justify-center row wrap>
+        <v-flex xs12>
+          <v-card color="transparent" flat>
+            <v-card-text class="light-green--text">
+              <h1 class="text-xs-center">La flemme de chercher un bar {{ user ? user.pseudo : '' }} ?</h1>
+              <h1 class="text-xs-center">On s'occupe de tout !</h1>
+            </v-card-text>
+          </v-card>
+        </v-flex>
 
-    <v-layout row wrap>
-      <v-flex xs12 lg8 xl6 offset-lg2 offset-xl3>
-        <search-bar
-          :keywords="keywords"
-          v-model="selectedKeywords"
-          @search="search"
-        ></search-bar>
-      </v-flex>
-    </v-layout>
-  </div>
+          <v-flex xs12 lg8 xl6>
+            <search-bar
+              :keywords="keywords"
+              v-model="selectedKeywords"
+              @search="search"
+            ></search-bar>
+          </v-flex>
+      </v-layout>
+    </v-container>
+  </v-content>
 </template>
 
 <script>
@@ -31,15 +35,21 @@ export default {
 
   data () {
     return {
-      keywords: [],
       selectedKeywords: []
     }
   },
 
+  computed: {
+    user () {
+      return this.$store.state.user
+    },
+    keywords () {
+      return this.$store.state.keywords || []
+    }
+  },
+
   created () {
-    this.$api.getKeywords()
-      .then(keywords => (this.keywords = keywords))
-      .catch(this.$log.error)
+    this.$store.dispatch('keywords')
   },
 
   methods: {

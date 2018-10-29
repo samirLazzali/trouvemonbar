@@ -5,7 +5,7 @@ $pdo = \Database\DatabaseSingleton::getInstance();
 $userHydrator = new \User\UserHydrator();
 $userRepository = new \User\UserRepository($pdo, $userHydrator);
 
-Router::post('/api/login', function($request) use($userRepository) {
+Router::post('/api/login', function($request) use($userRepository, $userHydrator) {
     if (is_null($request->body)) return http_response_code(400);
 
     $email = $request->body->email;
@@ -14,8 +14,8 @@ Router::post('/api/login', function($request) use($userRepository) {
 
     if (!$user) return http_response_code(401);
 
-    $token = \Token\JwtHS256::generate($user->getId(), getenv('SECRET'), time());
+    $token = \Token\JwtHS256::generate($user->getId(), getenv('SECRET'), time() + (1000 * 60 * 30));
 
     header("Authorization: Bearer $token");
-    echo $token; // TODO: remove when front is ok
+    echo json_encode($userHydrator->extract($user));
 });

@@ -58,7 +58,6 @@ export default {
 
   data () {
     return {
-      keywords: [],
       selectedKeywords: [],
       bars: [],
       loading: true,
@@ -66,10 +65,14 @@ export default {
     }
   },
 
+  computed: {
+    keywords () {
+      return this.$store.state.keywords
+    }
+  },
+
   created () {
-    this.$api.getKeywords()
-      .then(keywords => (this.keywords = keywords))
-      .catch(this.$log.error)
+    this.$store.dispatch('keywords')
   },
 
   watch: {

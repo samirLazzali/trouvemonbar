@@ -1,23 +1,9 @@
 import { bar } from './bar'
-import { keyword } from './keyword'
+import { user } from './user'
 
 const api = {
   ...bar,
-  ...keyword,
-
-  searchRequest (query) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        bar.getBars()
-          .then(bars => {
-            resolve(bars.filter(b => b.keywords.some(k => {
-              return query.q.includes(k)
-            })))
-          })
-          .catch(reject)
-      }, 1000)
-    })
-  }
+  ...user
 }
 
 export default {
