@@ -16,8 +16,7 @@
         <v-chip
           v-for="(keyword, i) in keywords"
           :key="i"
-          color="green"
-          text-color="white"
+          outline color="green"
         >
           {{ keyword | capitalize }}
         </v-chip>
