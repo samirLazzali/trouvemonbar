@@ -41,6 +41,15 @@ class UserRepository
         return $stmt->execute();
     }
 
+    public function updatePassword($id, $hash)
+    {
+        $stmt = $this->connection->prepare('UPDATE "user" SET hash=:hash where id=:id');
+        $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
+        $stmt->bindParam(':hash', $hash, \PDO::PARAM_STR);
+
+        return $stmt->execute();
+    }
+
     // Return FALSE if it doesnt exist otherwise it returns TRUE
     public function pseudoChecker($pseudo)
     {

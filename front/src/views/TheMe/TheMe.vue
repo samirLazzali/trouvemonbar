@@ -32,8 +32,7 @@
 
       <v-tab-item>
         <the-account
-          :email="user.email"
-          :pseudo="user.pseudo"
+          :user="user"
         ></the-account>
       </v-tab-item>
     </v-tabs-items>

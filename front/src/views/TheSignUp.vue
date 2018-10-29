@@ -109,6 +109,7 @@ export default {
         })
         this.snackbarText = 'Inscription réussie.'
         this.snackbarState = 'success'
+        this.snackbar = true
         setTimeout(() => this.$router.push('/signin'), 2000)
       } catch (err) {
         this.$log.error(err)
@@ -118,7 +119,7 @@ export default {
             this.snackbarState = 'error'
             break
           case 418:
-            this.snackbarText = 'Email ou mot de passe déjà utilisé.'
+            this.snackbarText = 'Email ou login déjà utilisé.'
             this.snackbarState = 'error'
             break
           case 500:
