@@ -7,7 +7,7 @@
           column
           justify-center
         >
-        <h1 class="display-3 font-weight-thin mb-5 pb-5 ">{{bar.name}}</h1>
+        <h1 class="display-3 font-weight-thin mb-5 pb-5">{{ bar.name }}</h1>
         </v-layout>
       </v-parallax>
 
@@ -15,7 +15,7 @@
         <v-layout>
           <v-flex xs4>
             <v-img
-              src="https://lh3.googleusercontent.com/p/AF1QipOQ3rYB5ZLuGaQZ7ic1nzcetIR24wF5diRTaaaJ=s1600-w400"
+              :src="`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${bar.photoreference}&key=AIzaSyBL5wwReFZULzsHE0wJSifX_g43OMWR2jo`"
               height="200px"
               contain
             ></v-img>
@@ -37,6 +37,15 @@
                 >
                   {{ keyword }}
                 </v-chip>
+                <v-rating
+                  v-model="bar.rating"
+                  color="yellow darken-3"
+                  background-color="grey darken-1"
+                  empty-icon="$vuetify.icons.ratingFull"
+                  half-increments
+                  hover
+                  readonly
+                ></v-rating>
               </div>
             </v-card-title>
           </v-flex>
@@ -51,11 +60,28 @@
 
           <v-card-text>
             <div class="subheading">
-              Nom : {{bar.name }}
+              Nom : {{ bar.name }}
               <br>
-              Addresse : {{bar.address }}
+              Addresse : {{ bar.address }}
             </div>
           </v-card-text>
+
+          <v-container>
+
+            <GmapMap
+              :center="center"
+              :zoom="15"
+              map-type-id="terrain"
+              style="width: 700px; height: 400px"
+            >
+              <GmapMarker
+                :position="marker.position"
+                clickable
+                draggable
+                @click="center = marker.position"
+              />
+            </GmapMap>
+          </v-container>
         </v-card>
       </v-card>
     </v-flex>
@@ -77,15 +103,36 @@ export default {
   data () {
     return {
       keywords: [],
-      bar: [],
+      bar: null,
       loading: true,
-      lorem: `lorem`
+      lorem: `lorem`,
+      center: {
+        lat: 10,
+        lng: 10
+      },
+      marker: {
+        position: {
+          lat: 10,
+          lng: 10
+        }
+      }
     }
   },
 
   created () {
     this.$api.getBar(this.$route.params.id)
-      .then(bar => (this.bar = bar))
+      .then(bar => {
+        this.$log.debug(bar)
+
+        this.bar = bar
+        this.bar.rating = Number.parseFloat(bar.rating)
+        const position = {
+          lat: Number.parseFloat(bar.lat),
+          lng: Number.parseFloat(bar.lng)
+        }
+        this.marker.position = position
+        this.center = position
+      })
       .catch(this.$log.error)
   }
 }

@@ -8,7 +8,7 @@
       >
         <v-img
           :aspect-ratio="16/9"
-          src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+          :src="`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=AIzaSyBL5wwReFZULzsHE0wJSifX_g43OMWR2jo`"
         ></v-img>
 
         <v-card-title>
@@ -66,6 +66,11 @@ export default {
 
     keywords: {
       type: Array
+    },
+
+    photoReference: {
+      type: String,
+      required: true
     }
   }
 }

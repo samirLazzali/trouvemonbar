@@ -24,12 +24,13 @@
 
       <v-layout row wrap>
         <bar
-          v-for="{ id, name, address, keywords } in bars"
+          v-for="{ id, name, address, keywords, photoreference } in bars"
           :key="id"
           v-bind:id="id"
           :name="name"
           :address="address"
           :keywords="keywords"
+          :photo-reference="photoreference"
           @clicked="barClicked"
         ></bar>
       </v-layout>
@@ -67,7 +68,7 @@ export default {
 
   computed: {
     keywords () {
-      return this.$store.state.keywords
+      return this.$store.state.keywords || []
     }
   },
 
