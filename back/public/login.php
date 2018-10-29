@@ -14,7 +14,7 @@ Router::post('/api/login', function($request) use($userRepository, $userHydrator
 
     if (!$user) return http_response_code(401);
 
-    $token = \Token\JwtHS256::generate($user->getId(), getenv('SECRET'), time() + (1000 * 60 * 30));
+    $token = \Token\JwtHS256::generate($user->getId(), getenv('SECRET'), time() + (60 * 30));
 
     header("Authorization: Bearer $token");
     echo json_encode($userHydrator->extract($user));
