@@ -83,7 +83,7 @@ export default {
         this.$log.error(err)
         if (err.response.status === 401) {
           this.$store.dispatch('logout')
-          this.$router.push('/sigin')
+          this.$router.push('/signin')
         }
       })
   }
