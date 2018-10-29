@@ -21,6 +21,7 @@ Router::get('/api/users/{}', function() use($userRepository, $userHydrator) {
         $user = $userRepository->fetchById($userId);
         echo json_encode($userHydrator->extract($user));
     } catch (Exception $e) {
+        http_response_code(401);
         echo json_encode(['error' => $e->getMessage()]);
     }
 });
