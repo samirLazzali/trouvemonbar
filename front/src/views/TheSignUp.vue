@@ -102,18 +102,17 @@ export default {
     async submit () {
       if (!this.$refs.signup.validate()) return
       try {
-        const res = await this.$api.signup({
+        await this.$api.signup({
           email: this.email,
           pseudo: this.pseudo,
           password: this.password
         })
-        this.$log.debug('test')
-        switch (res.status) {
-          case 200:
-            this.snackbarText = 'Inscription réussie.'
-            this.snackbarState = 'success'
-            setTimeout(this.$router.push('/signin '), 3)
-            break
+        this.snackbarText = 'Inscription réussie.'
+        this.snackbarState = 'success'
+        setTimeout(() => this.$router.push('/signin'), 2000)
+      } catch (err) {
+        this.$log.error(err)
+        switch (err.response.status) {
           case 400:
             this.snackbarText = 'Paramètres invalides.'
             this.snackbarState = 'error'
@@ -131,11 +130,6 @@ export default {
             this.snackbarState = 'error'
             break
         }
-        this.snackbar = true
-      } catch (exception) {
-        this.$log.error(exception)
-        this.snackbarText = 'Une erreur s\'est produite'
-        this.snackbarState = 'error'
         this.snackbar = true
       }
     }
