@@ -7,6 +7,10 @@ class Bar
     private $name;
     private $address;
     private $keywords=array();
+    private $photoreference;
+    private $rating;
+    private $lat;
+    private $lng;
 
     public function getId()
     {
@@ -50,7 +54,25 @@ class Bar
     {
         $this->keywords[] = $keyword;
     }
-
+    public function getPhoto()
+    {
+        return $this->photoreference;
+    }
+    public function setPhoto(string $photoreference)
+    {
+        $this->photoreference = $photoreference;
+    }
+    public function getRating()
+    {
+        return $this->rating;
+    }
+    public function getLat(){
+        return $this->lat;
+    }
+    public function getLng()
+    {
+        return $this->lng;
+    }
     public function addKeywords(array $keywords)
     {
         array_push($this->keywords, ...$keywords);

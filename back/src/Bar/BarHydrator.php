@@ -21,6 +21,22 @@ class BarHydrator
         {
             $data['keywords'] = $bar->getKeywords();
         }
+        if($bar->getRating())
+        {
+            $data['rating'] = $bar->getRating();
+        }
+        if($bar->getPhoto())
+        {
+            $data['photoreference'] = $bar->getPhoto();
+        }
+        if($bar->getLat())
+        {
+            $data['lat'] = $bar->getLat();
+        }
+        if($bar->getLng())
+        {
+            $data['lng'] = $bar->getLng();
+        }
 
         return $data;
     }
@@ -34,3 +50,4 @@ class BarHydrator
         return $data;
     }
 }
+

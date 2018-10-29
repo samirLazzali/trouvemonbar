@@ -26,7 +26,7 @@ CREATE table bar (
   id             SERIAL PRIMARY KEY,
   name           VARCHAR,
   rating         FLOAT,
-  photoReference VARCHAR,
+  photoreference VARCHAR,
   placeId        VARCHAR,
   address        VARCHAR,
   lat            FLOAT,
@@ -74,7 +74,7 @@ VALUES ('John', 'Doe@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa0
        ('Jackie', 'Cohen@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
        ('Delores', 'Williamson@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER');
 
-INSERT INTO bar(name,rating,photoReference,placeId,address,lat,lng) VALUES
+INSERT INTO bar(name,rating,photoreference,placeId,address,lat,lng) VALUES
 ('Le Balajo','3.4','CmRaAAAAClcr1Ao4hoiO3FY3iqfjwVyaVcYnNHuE_YSHrbgd1c83Q6g6h2s_vhDvlBPiAxIx-75cG-QuJIkTjgtfVxP3hwuWc8uxSb-W5thQO99ybDpKgIENiw7XlcCC7uoH6DUvEhCCx8f45PDpYSYqngJ1PWsJGhQ2G5t-x-ybOq6lABIYJQFODTmy_A','ChIJ_TtGzABy5kcRtodA2O-ARXI','9 Rue de Lappe, Paris','48.85406709999999','2.3722419'),
 ('Tribar (Bar de Nuit Paris)','3.3','CmRaAAAA8dGzWzYBXr0rKcGktxLgpsQsfHEemf9tpNSWF7TjC_epgLUDDzJ4MiJE8akaYO-52tzVoAyiED3LeaAVqtd-B4t9g6p-Y12Fm_b8aB-IajMZ75VtYhPThuDbuskSBo0gEhCbP-JHHK0vIwxVbBpkdXfzGhS3LEm7qnOjNuSPORVbITNk-eB2dQ','ChIJrx1wLQdy5kcR0LqCzSb0dTk','20 Rue de Lappe, Paris','48.853691','2.372602999999999'),
 ('La Chapelle des Lombards','3.7','CmRaAAAAiFb1MlF9sYhgwQntSdIzpG7sLHVvVcuKT-UBI0kYslVnWf73I9gl4RDS1D0JC_uaRCV_0t_TgVQSVc9qL7flXlbCmPcT4Rue9NFWp7jiq8rFBla7ypLNDrE6lOVDe5yJEhCViIGNwTdI6-MBeL3GxjwKGhTxrxUSZXb6OrYvOyp6z4yPcb9N2A','ChIJhZZ_Mgdy5kcRAKG4Z5rAQlU','17-19 Rue de Lappe, Paris','48.853877','2.372489'),
