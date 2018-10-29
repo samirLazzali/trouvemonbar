@@ -76,8 +76,8 @@
             >
               <GmapMarker
                 :position="marker.position"
-                :clickable="true"
-                :draggable="true"
+                clickable
+                draggable
                 @click="center = marker.position"
               />
             </GmapMap>
@@ -134,15 +134,6 @@ export default {
         this.center = position
       })
       .catch(this.$log.error)
-  },
-
-  methods: {
-    onIdle () {
-    },
-
-    onMapClick () {},
-
-    setUserPosition () {}
   }
 }
 </script>
