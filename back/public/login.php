@@ -22,7 +22,7 @@ Router::post('/api/login', function($request) use($userRepository, $userHydrator
 
 
 Router::post('/api/users', function($request) use($userRepository, $userHydrator) {
-    if (is_null($request->body) && isset($request->body->email)  && isset($request->body->pseudo) && isset($request->body->password)) return http_response_code(400);
+    if (is_null($request->body) || !(isset($request->body->email)  && isset($request->body->pseudo) && isset($request->body->password))) return http_response_code(400);
 
     // Get all the information from the body
     $email = $request->body->email;
@@ -50,6 +50,55 @@ Router::post('/api/users', function($request) use($userRepository, $userHydrator
     $user->setRole('USER');
 
     if(!$userRepository->signupUser($user))
+    {
+        return http_response_code(500);
+    }
+    else
+    {
+        return http_response_code(200);
+    }
+
+});
+
+Router::put('/api/users/{}', function($request) use($userRepository, $userHydrator) {
+    // Get the token, check validity and if valid get the user
+    if (!array_key_exists('HTTP_AUTHORIZATION', $_SERVER)) {
+        http_response_code(401);
+        echo json_encode(['error' => 'You are not authorized without JWT']);
+        return;
+    }
+
+    [, $token] = explode(' ', $_SERVER['HTTP_AUTHORIZATION']);
+
+    try {
+        $userId = JwtHS256::validate($token, getenv('SECRET'));
+        $user = $userRepository->fetchById($userId);
+        echo json_encode($userHydrator->extract($user));
+    } catch (Exception $e) {
+        http_response_code(401);
+        echo json_encode(['error' => $e->getMessage()]);
+        return;
+    }
+
+    // Check parameter
+    if (is_null($request->body) || !(isset($request->params[0]) && isset($request->body->user->password))) return http_response_code(400);
+
+
+    // Get all the information from the body
+    $str_id = $request->params[0];
+    $id = ctype_digit($str_id) ? intval($str_id) : null;
+    if ($id === null)
+    {
+        return http_response_code(400);
+    }
+
+    $password = $request->body->user->password;
+
+    if(strlen($password) < 3) return http_response_code(400);
+
+    $hash = hash('sha256', $password);
+
+    if(!$userRepository->updatePassword($id,$hash))
     {
         return http_response_code(500);
     }
