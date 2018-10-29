@@ -1,8 +1,9 @@
 
 <template>
 <div>
+
   <v-flex xs12>
-    <v-parallax height="400" :src="require('@/assets/img/bg7.jpg')">
+    <v-parallax class="para" height="400" :src="require('@/assets/img/bg7.jpg')">
       <v-layout
       align-center
       column
@@ -27,13 +28,13 @@
               </v-card-actions>
 
             <div class="headline">Mots clefs:</div>
-              <v-chip
+              <div><v-chip
               v-for="keyword in bar.keywords"
               :key="keyword"
               outline color="green darken-1"
               >
               {{ keyword }}
-              </v-chip>
+              </v-chip></div>
 
           </v-card-title>
           </v-flex>
@@ -54,6 +55,7 @@
          </v-card>
         </v-card>
     </v-flex>
+
   </div>
 </template>
 
@@ -92,8 +94,9 @@ export default {
   margin-top:-48px;
 }
 
-.container{
-     max-width: 100vw;
-     padding:0px;
+.para{
+
+     margin-top:-30px;
+
   }
 </style>
