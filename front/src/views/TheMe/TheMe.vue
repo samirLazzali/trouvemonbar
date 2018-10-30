@@ -67,7 +67,7 @@ export default {
 
   watch: {
     isAuthenticated () {
-      if (!this.isAuthenticated) this.$router.push('/')
+      if (!this.isAuthenticated) this.$router.push('/signin')
     }
   },
 
@@ -85,9 +85,6 @@ export default {
         if (err.response.status === 401) {
           this.$store.dispatch('logout')
           Toaster.$emit('info', 'Votre session a expiré')
-          setTimeout(() => {
-            this.$router.push('/signin')
-          }, 500)
         }
       })
   }
