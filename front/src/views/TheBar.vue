@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="bar">
     <v-flex xs12>
       <v-parallax class="para" height="400" :src="require('@/assets/img/bg7.jpg')">
         <v-layout
