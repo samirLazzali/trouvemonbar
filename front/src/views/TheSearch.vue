@@ -24,8 +24,8 @@
 
       <v-layout row wrap>
         <bar
-          v-for="{ id, name, address, keywords, photoreference } in bars"
-          :key="id"
+          v-for="({ id, name, address, keywords, photoreference }, i) in bars"
+          :key="i"
           v-bind:id="id"
           :name="name"
           :address="address"
