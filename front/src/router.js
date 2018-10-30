@@ -16,7 +16,7 @@ const ifAuthenticated = (to, from, next) => {
   if (store.getters.isAuthenticated) {
     return next()
   }
-  next('/')
+  next('/signin')
 }
 
 export default new Router({

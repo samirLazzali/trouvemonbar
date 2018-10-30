@@ -40,16 +40,28 @@
         </v-fade-transition>
       </v-container>
     </v-content>
+
+    <snackbar></snackbar>
   </v-app>
 </template>
 
 <script>
+import Snackbar from './components/Snackbar'
+
 export default {
   name: 'App',
 
+  components: {
+    Snackbar
+  },
+
   computed: {
-    isAuthenticated () { return this.$store.getters.isAuthenticated },
-    user () { return this.$store.state.user }
+    isAuthenticated () {
+      return this.$store.getters.isAuthenticated
+    },
+    user () {
+      return this.$store.state.user
+    }
   },
 
   methods: {
