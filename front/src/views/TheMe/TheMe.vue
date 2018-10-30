@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import Toaster from '@/toaster.js'
 import TheKeywords from './TheKeywords'
 import TheAccount from './TheAccount'
 
@@ -80,9 +81,13 @@ export default {
       })
       .catch(err => {
         this.$log.error(err)
+
         if (err.response.status === 401) {
           this.$store.dispatch('logout')
-          this.$router.push('/signin')
+          Toaster.$emit('info', 'Votre session a expiré')
+          setTimeout(() => {
+            this.$router.push('/signin')
+          }, 500)
         }
       })
   }
