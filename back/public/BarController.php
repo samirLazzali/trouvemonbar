@@ -4,7 +4,7 @@ use \Router\Router;
 
 $pdo = \Database\DatabaseSingleton::getInstance();
 $barHydrator = new \Bar\BarHydrator();
-$barRepository = new \Bar\BarRepository($pdo, $barHydrator);
+$barRepository = new \Bar\BarRepository($pdo);
 
 Router::get('/api/bars\?keywords\=(.+)', function($request) use($barRepository, $barHydrator)
 {
