@@ -66,8 +66,8 @@
             </div>
           </v-card-text>
 
-          <v-container>
-
+          <v-container class="testC fill-height" fill-height>
+            <v-card color="green lighten-5" class="pa-4 hidden-sm-and-down">
             <GmapMap
               :center="center"
               :zoom="15"
@@ -81,6 +81,7 @@
                 @click="center = marker.position"
               />
             </GmapMap>
+            </v-card>
           </v-container>
         </v-card>
       </v-card>
@@ -143,6 +144,12 @@ export default {
 </script>
 
 <style>
+.testC {
+  display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 805px;
+}
 .titled {
   margin-top: -100px;
 }
