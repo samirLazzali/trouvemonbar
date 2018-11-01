@@ -1,54 +1,68 @@
 <template>
   <v-content>
+    <v-snackbar
+      v-model="snackbar"
+      bottom
+      left
+      :color="snackbarState"
+      :timeout="3000"
+    >
+      {{ snackbarText }}
+    </v-snackbar>
+
     <v-container fluid>
       <v-layout align-center justify-center>
         <v-flex xs12 sm8 md6 lg4>
           <v-card class="elevation-12">
             <v-toolbar dark color="success">
-              <v-toolbar-title>{{ currentTitle }}</v-toolbar-title>
+              <v-toolbar-title>Inscription</v-toolbar-title>
               <v-spacer></v-spacer>
             </v-toolbar>
-
             <v-card-text color="success">
-              <v-form v-if="step===1">
-                <v-text-field label="Email" v-model="email" :rules="[rules.required,rules.email]" required></v-text-field>
+              <v-form v-model="isValid" ref="signup" lazy-validation>
+                <v-text-field
+                  label="Pseudo"
+                  v-model="pseudo"
+                  :rules="[rules.required,rules.minCounter,rules.maxCounter]"
+                  required
+                ></v-text-field>
+                <v-text-field
+                  label="Email"
+                  v-model="email"
+                  :rules="[rules.required,rules.email]"
+                  required
+                ></v-text-field>
                 <span class="caption grey--text text--darken-1">
                 Cette email sera utilisé pour vérifier votre compte.
                 </span>
-              </v-form>
-
-              <v-form v-else-if="step===2">
-                <v-text-field label="Mot de passe" type="password" v-model="password" :rules="[rules.required]" required></v-text-field>
-                <v-text-field label="Confirmez le mot de passe" type="password" v-model="confirmedPassword" :rules="[rules.required,rules.passwordMatch]" required></v-text-field>
+                <v-text-field
+                  label="Mot de passe"
+                  type="password"
+                  v-model="password"
+                  :rules="[rules.required,rules.minCounter,rules.maxCounter]"
+                  required
+                ></v-text-field>
+                <v-text-field
+                  label="Confirmez le mot de passe"
+                  type="password" v-model="confirmedPassword"
+                  :rules="[rules.required,rules.minCounter,rules.maxCounter,rules.passwordMatch]"
+                  required
+                ></v-text-field>
                 <span class="caption grey--text text--darken-1">
                 Veuillez entrer un mot de passe pour votre compte
                 </span>
-              </v-form>
-
-              <v-form v-else-if="step===3">
-                <div class="pa-3 text-xs-center">
-                  <h3 class="title font-weight-light mb-2">Bienvenue sur votre Trouvetonbar</h3>
-                  <span class="caption grey--text">Merci pour votre inscription</span>
-                </div>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="success"
+                    @click="submit"
+                    :disabled="!isValid"
+                  >
+                    Continuer
+                  </v-btn>
+                </v-card-actions>
               </v-form>
             </v-card-text>
-
-            <v-card-actions>
-              <v-btn
-                :disabled="step === 1"
-                flat
-                @click="step--">
-                Précédant
-              </v-btn>
-              <v-spacer></v-spacer>
-              <v-btn
-                :disabled="step === 3"
-                color="success"
-                depressed
-                @click="step++">
-                Suivant
-              </v-btn>
-            </v-card-actions>
           </v-card>
         </v-flex>
       </v-layout>
@@ -62,8 +76,13 @@ export default {
 
   data () {
     return {
+      snackbar: false,
+      snackbarText: '',
+      snackbarState: 'error',
       step: 1,
-      email: 'bernard@gmail.com',
+      isValid: false,
+      pseudo: '',
+      email: '',
       password: '',
       confirmedPassword: '',
       rules: {
@@ -71,18 +90,48 @@ export default {
           const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           return pattern.test(value) || 'Invalid e-mail.'
         },
+        minCounter: value => value.length >= 3 || 'Min 3 caractères.',
+        maxCounter: value => value.length < 25 || 'Max 25 caractères.',
         passwordMatch: value => value === this.password || 'Password must match',
         required: value => !!value || 'Required.'
       }
     }
   },
 
-  computed: {
-    currentTitle () {
-      switch (this.step) {
-        case 1: return 'Inscription'
-        case 2: return 'Mot de passe'
-        default: return 'Inscription réussie'
+  methods: {
+    async submit () {
+      if (!this.$refs.signup.validate()) return
+      try {
+        await this.$api.signup({
+          email: this.email,
+          pseudo: this.pseudo,
+          password: this.password
+        })
+        this.snackbarText = 'Inscription réussie.'
+        this.snackbarState = 'success'
+        this.snackbar = true
+        setTimeout(() => this.$router.push('/signin'), 2000)
+      } catch (err) {
+        this.$log.error(err)
+        switch (err.response.status) {
+          case 400:
+            this.snackbarText = 'Paramètres invalides.'
+            this.snackbarState = 'error'
+            break
+          case 418:
+            this.snackbarText = 'Email ou login déjà utilisé.'
+            this.snackbarState = 'error'
+            break
+          case 500:
+            this.snackbarText = 'Erreur interne.'
+            this.snackbarState = 'error'
+            break
+          default:
+            this.snackbarText = 'Une erreur s\'est produite'
+            this.snackbarState = 'error'
+            break
+        }
+        this.snackbar = true
       }
     }
   }

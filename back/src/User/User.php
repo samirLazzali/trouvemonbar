@@ -8,6 +8,7 @@ class User
     private $email;
     private $hash;
     private $role;
+    private $keywords = [];
 
     public function getId()
     {
@@ -61,6 +62,19 @@ class User
     public function setRole($role)
     {
         $this->role = $role;
+        return $this;
+    }
+
+    public function getkeywords()
+    {
+        return $this->keywords;
+    }
+
+    public function addKeywords(array $keywords)
+    {
+        if (isset($keywords) && sizeof($keywords) > 0) {
+            array_push($this->keywords, ...$keywords);
+        }
         return $this;
     }
 }

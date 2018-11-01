@@ -26,7 +26,7 @@ CREATE table bar (
   id             SERIAL PRIMARY KEY,
   name           VARCHAR,
   rating         FLOAT,
-  photoReference VARCHAR,
+  photoreference VARCHAR,
   placeId        VARCHAR,
   address        VARCHAR,
   lat            FLOAT,

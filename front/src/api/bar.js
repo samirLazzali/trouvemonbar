@@ -9,5 +9,18 @@ export const bar = {
       }
 
     }).then(res => res.data)
-  }
-}
+  },
+  getBar (id) {
+    return axios.get('/api/bars/' + id)
+      .then(res => res.data)
+  },
+  addBars (query) {
+    //var kw = JSON.stringify(query.q).replace('"', '')
+    return axios.get('/api/addbar' , { // + kw
+      params: {
+        keywords: kw.replace('"', '')
+      }
+
+    }).then(res => res.data)
+  },
+};

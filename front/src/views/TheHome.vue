@@ -35,19 +35,21 @@ export default {
 
   data () {
     return {
-      keywords: [],
       selectedKeywords: []
     }
   },
 
   computed: {
-    user () { return this.$store.state.user }
+    user () {
+      return this.$store.state.user
+    },
+    keywords () {
+      return this.$store.state.keywords || []
+    }
   },
 
   created () {
-    this.$api.getKeywords()
-      .then(keywords => (this.keywords = keywords))
-      .catch(this.$log.error)
+    this.$store.dispatch('keywords')
   },
 
   methods: {
