@@ -75,6 +75,9 @@ class Bar
     }
     public function addKeywords(array $keywords)
     {
-        array_push($this->keywords, ...$keywords);
+        if (isset($keywords) && sizeof($keywords) > 0) {
+            array_push($this->keywords, ...$keywords);
+        }
+        return $this;
     }
 }
