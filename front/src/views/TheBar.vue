@@ -133,7 +133,11 @@ export default {
         this.marker.position = position
         this.center = position
       })
-      .catch(this.$log.error)
+      .catch(err => {
+        this.$log.error(err)
+
+        if (err.response.status === 404) this.$router.push('/')
+      })
   }
 }
 </script>
