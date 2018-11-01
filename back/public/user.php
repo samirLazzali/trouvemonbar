@@ -6,7 +6,7 @@ use \Token\JwtHS256;
 $pdo = \Database\DatabaseSingleton::getInstance();
 $userHydrator = new \User\UserHydrator();
 $userValidator = new \User\UserValidator();
-$userRepository = new \User\UserRepository($pdo, $userHydrator);
+$userRepository = new \User\UserRepository($pdo);
 
 Router::get('/api/users/{}', function() use($userRepository, $userHydrator) {
     if (!array_key_exists('HTTP_AUTHORIZATION', $_SERVER)) {
@@ -51,7 +51,7 @@ Router::post('/api/users', function($request) use($userRepository, $userValidato
     }
 });
 
-Router::put('/api/users/{}', function($request) use($userRepository, $userHydrator) {
+Router::put('/api/users/{}', function($request) use($userRepository) {
     if (!array_key_exists('HTTP_AUTHORIZATION', $_SERVER)) {
         http_response_code(401);
         echo json_encode(['error' => 'You are not authorized without JWT']);

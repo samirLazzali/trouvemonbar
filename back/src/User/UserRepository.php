@@ -4,12 +4,10 @@ namespace User;
 class UserRepository
 {
     private $connection;
-    private $userHydrator;
 
-    public function __construct($connection, UserHydrator $userHydrator)
+    public function __construct($connection)
     {
         $this->connection = $connection;
-        $this->userHydrator = $userHydrator;
     }
 
     public function fetchByEmailAndHash(string $email, string $hash)

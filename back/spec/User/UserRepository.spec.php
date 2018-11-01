@@ -3,7 +3,7 @@ namespace User;
 
 describe('UserRepository', function() {
     it('should fetch all users', function() {
-        $userRepository = new UserRepository(new MockPDO(), new UserHydrator());
+        $userRepository = new UserRepository(new MockPDO());
 
         $user = $userRepository->fetchByEmailAndHash('email', 'hash');
 

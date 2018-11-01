@@ -3,7 +3,7 @@ use \Router\Router;
 
 $pdo = \Database\DatabaseSingleton::getInstance();
 $userHydrator = new \User\UserHydrator();
-$userRepository = new \User\UserRepository($pdo, $userHydrator);
+$userRepository = new \User\UserRepository($pdo);
 
 Router::post('/api/login', function($request) use($userRepository, $userHydrator) {
     if (is_null($request->body)) return http_response_code(400);
