@@ -68,7 +68,21 @@ export default new Router({
       name: 'me',
       component: () => import('./views/TheMe/TheMe.vue'),
       beforeEnter: ifAuthenticated
-    }
+    },
+    {
+      path: '/addbar',
+      name: 'addbar',
+      props: route => ({ query: route.query }),
+      component: () => import('./views/TheAdd.vue'),
+      beforeEnter: (to, _, next) => {
+        const query = to.query.q
 
+        if (query && query.trim() && ifAuthenticated) {
+          next()
+        } else {
+          next('/')
+        }
+      }
+    }
   ]
 })

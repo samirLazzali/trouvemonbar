@@ -46,4 +46,24 @@ Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator)
     echo json_encode($barHydrator->extract($bar), JSON_UNESCAPED_UNICODE);
 });
 
+Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator)
+    {
+        $id = intval($request->params[0]);
+
+        if (strval($id) !== $request->params[0]) {
+            http_response_code(400);
+            echo json_encode(array('error' => 'Parameters are not correct.'));
+            return;
+        }
+
+        $bar = $barRepository->fetchById($id);
+        if ($bar == null) {
+            http_response_code(404);
+            echo json_encode(array('error' => 'No such bar with this id.'));
+            return;
+        }
+
+        echo json_encode($barHydrator->extract($bar), JSON_UNESCAPED_UNICODE);
+    });
+
 Router::execute();

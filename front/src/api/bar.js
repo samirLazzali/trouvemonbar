@@ -13,5 +13,9 @@ export const bar = {
   getBar (id) {
     return axios.get('/api/bars/' + id)
       .then(res => res.data)
+  },
+  searchApiGoogle (query)
+  {
+
   }
 }
