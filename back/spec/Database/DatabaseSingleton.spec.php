@@ -5,6 +5,6 @@ describe('DatabaseSingleton', function() {
         $pdo = \Database\DatabaseSingleton::getInstance();
 
         expect($pdo)->toBeAnInstanceOf('PDO');
-        expect($pdo)->toBeAnInstanceOf(\Database\DatabaseSingleton::getInstance());
+        expect($pdo)->toBe(\Database\DatabaseSingleton::getInstance());
     });
 });
