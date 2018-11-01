@@ -21,9 +21,7 @@ class BarRepository
         $bar = $request->fetch();
         if (!$bar) return null;
 
-        $request = $this->connection->prepare('SELECT kw.name FROM "keybar" kb, "bar" b, "keyword" kw WHERE kb.idBar = b.id AND kw.id = kb.idKeyWord AND b.id = :id');
-        $request->bindParam(':id', $id, \PDO::PARAM_INT);
-        if ($request->execute()) $bar->addKeywords($request->fetchAll(\PDO::FETCH_COLUMN));
+        $bar->addKeywords($this->getKeywords($bar->getId()));
 
         return $bar;
     }
@@ -36,13 +34,12 @@ class BarRepository
             $query .= ' UPPER(kw.name) = UPPER(?)';
         }
 
-        $stmt = $this->connection->prepare($query);
-        if (!$stmt->execute($keywords)) return null;
+        $request = $this->connection->prepare($query);
+        if (!$request->execute($keywords)) return null;
 
-        $bars = $stmt->fetchAll(\PDO::FETCH_CLASS, Bar::CLASS);
+        $bars = $request->fetchAll(\PDO::FETCH_CLASS, Bar::class);
         foreach($bars as $bar) {
-            $kw = $this->getKeywords($bar->getId());
-            $bar->addKeywords($kw);
+            $bar->addKeywords($this->getKeywords($bar->getId()));
         }
         return $bars;
     }
