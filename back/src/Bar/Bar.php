@@ -12,6 +12,7 @@ class Bar
     private $lat;
     private $lng;
 
+
     public function getId()
     {
         return $this->id;
@@ -61,18 +62,37 @@ class Bar
     public function setPhoto(string $photoreference)
     {
         $this->photoreference = $photoreference;
+        return $this;
     }
     public function getRating()
     {
         return $this->rating;
     }
+
+    public function setRating($rating)
+    {
+        $this->rating= $rating;
+        return $this;
+    }
+
     public function getLat(){
         return $this->lat;
+    }
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+        return $this;
     }
     public function getLng()
     {
         return $this->lng;
     }
+    public function setLng($lng)
+    {
+        $this->lng = $lng;
+        return $this;
+    }
+
     public function addKeywords(array $keywords)
     {
         array_push($this->keywords, ...$keywords);
