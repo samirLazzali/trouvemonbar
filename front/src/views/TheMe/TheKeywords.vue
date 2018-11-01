@@ -2,7 +2,7 @@
   <v-card flat>
     <v-card-text>
       <v-container color="white">
-        <v-card-title class="headline">Ajouter des nouveaux mots clés que vous appréssiez !</v-card-title>
+        <v-card-title class="headline">Ajoutez des nouveaux mots clés que vous appréciez !</v-card-title>
 
         <v-autocomplete
           v-model="newKeywords"

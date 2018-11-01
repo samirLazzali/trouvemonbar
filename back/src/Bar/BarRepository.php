@@ -4,12 +4,10 @@ namespace Bar;
 class BarRepository
 {
     private $connection;
-    private $BarHydrator;
 
-    public function __construct($connection, BarHydrator $BarHydrator)
+    public function __construct($connection)
     {
         $this->connection = $connection;
-        $this->BarHydrator = $BarHydrator;
     }
 
     public function fetchById($id)
@@ -88,6 +86,6 @@ class BarRepository
                 $bar->addKeywords($keywords);
             }
         }
-        return$bars;
+        return $bars;
     }
 }
