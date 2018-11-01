@@ -66,21 +66,21 @@
             </div>
           </v-card-text>
 
-          <v-container class="testC fill-height" fill-height>
+          <v-container class="mapContainer">
             <v-card color="green lighten-5" class="pa-4 hidden-sm-and-down">
-            <GmapMap
-              :center="center"
-              :zoom="15"
-              map-type-id="terrain"
-              style="width: 700px; height: 400px"
-            >
-              <GmapMarker
-                :position="marker.position"
-                clickable
-                draggable
-                @click="center = marker.position"
-              />
-            </GmapMap>
+              <GmapMap
+                :center="center"
+                :zoom="15"
+                map-type-id="terrain"
+                style="width: 700px; height: 400px"
+              >
+                <GmapMarker
+                    :position="marker.position"
+                    clickable
+                    draggable
+                    @click="center = marker.position"
+                />
+              </GmapMap>
             </v-card>
           </v-container>
         </v-card>
@@ -144,11 +144,11 @@ export default {
 </script>
 
 <style>
-.testC {
+.mapContainer {
   display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 805px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 805px;
 }
 .titled {
   margin-top: -100px;
