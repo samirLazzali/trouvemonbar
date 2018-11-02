@@ -15,6 +15,9 @@ env:
     - DB_PORT_EXTERNAL=5431
     - SECRET=secret123
 
+addons:
+  ssh_known_hosts: 51.38.237.240
+
 before_install:
   - eval "$(ssh-agent -s)"
   - make start
@@ -26,4 +29,18 @@ install:
 script:
   - make phpunit.run
   - make npmunit.run
+
+after_success:
   - make npm.build
+
+before_deploy:
+  - openssl aes-256-cbc -K $encrypted_d7678493f959_key -iv $encrypted_d7678493f959_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
+  - chmod 600 /tmp/deploy_rsa
+  - ssh-add /tmp/deploy_rsa
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: ssh ensiie@51.38.237.240 ll
+  on:
+    branch: master
