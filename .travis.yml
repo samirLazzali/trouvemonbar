@@ -15,5 +15,8 @@ env:
     - DB_PORT_EXTERNAL=5431
     - SECRET=secret123
 
+before_install:
+   - eval "$(ssh-agent -s)"
+
 script:
   - make install
