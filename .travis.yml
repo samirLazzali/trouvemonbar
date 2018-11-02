@@ -13,6 +13,7 @@ env:
     - DB_USER=ensiie
     - DB_PASSWORD=ensiie
     - DB_PORT_EXTERNAL=5431
+    - DB_HOST=postgres
     - SECRET=secret123
 
 addons:
@@ -23,7 +24,7 @@ before_install:
   - make start
 
 install:
-  - make composer.install
+  - make composer.install.prod
   - make npm.install
 
 script:
@@ -41,10 +42,6 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script:
-    - rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/front/dist/ ensiie@51.38.237.240:/var/www/html/
-    - rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/back/vendor/ ensiie@51.38.237.240:/var/www/api/
-    - rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/back/public/ ensiie@51.38.237.240:/var/www/api/
-    - rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/back/src/ ensiie@51.38.237.240:/var/www/api/
+  script: ./deploy.sh
   on:
     branch: feature/set-cicd-for-travis

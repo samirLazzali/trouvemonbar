@@ -58,6 +58,9 @@ phpunit.run:
 composer.install:
 	docker-compose exec php composer install || exit 0
 
+composer.install.prod:
+	docker-compose exec php composer install --no-dev || exit 0
+
 npm.build: npm.install
 	docker run -v $$PWD/front:/usr/src/app -ti node:alpine sh -c "cd /usr/src/app; npm run build"
 
