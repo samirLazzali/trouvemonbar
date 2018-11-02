@@ -43,4 +43,4 @@ deploy:
   skip_cleanup: true
   script: ssh ensiie@51.38.237.240 ll
   on:
-    branch: master
+    branch: feature/set-cicd-for-travis
