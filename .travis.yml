@@ -1,7 +1,8 @@
-langage: node_js
+sudo: required
 
-node_js: '10'
+services:
+  - docker
 
-cache:
-  directories:
-    - node_modules
+before_install:
+  - docker pull node:alpine
+  - docker run -v $PWD/front:/usr/src/app -ti node:alpine sh -c "cd /usr/src/app && npm install"
