@@ -1,4 +1,4 @@
-language: generic
+langage: bash
 
 sudo: required
 
