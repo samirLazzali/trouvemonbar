@@ -1,4 +1,4 @@
-# ENSIIE Project Web Trouvemonbar
+# ENSIIE Project Web Trouvemonbar [![Build Status](https://travis-ci.org/swanncastel/ensiie-project.svg?branch=master)](https://travis-ci.org/swanncastel/ensiie-project)
 
 Projet Web ENSIIE:
 * Samir Lazzali
@@ -8,7 +8,9 @@ Projet Web ENSIIE:
 
 ## Site disponible ici <https://okeeffe.ovh>
 
-Installation de nginx, php-fpm et création d'un user ensiie
+Installation de nginx, php-fpm et création d'un user ensiie.
+
+Génération du certificat SSL avec Certbot <https://certbot.eff.org/.>
 
 Définition des variables d'env dans /etc/php/7.2/fpm/pool.d/www.conf
 
