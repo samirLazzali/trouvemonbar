@@ -16,9 +16,14 @@ env:
     - SECRET=secret123
 
 before_install:
-   - eval "$(ssh-agent -s)"
+  - eval "$(ssh-agent -s)"
+  - make start
+
+install:
+  - make composer.install
+  - make npm.install
 
 script:
-  - make install
   - make phpunit.run
   - make npmunit.run
+  - make npm.build
