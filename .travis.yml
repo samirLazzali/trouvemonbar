@@ -1,12 +1,19 @@
 sudo: required
 
-language: bash
+language: php
+
+php:
+  - 7.1.23
 
 services:
   - docker
 
-script:
+before_install:
   - docker pull node:alpine
+
+install:
   - docker run -v $PWD/front:/usr/src/app -ti node:alpine sh -c "cd /usr/src/app && npm install"
+
+script:
   - docker run -v $PWD/front:/usr/src/app -ti node:alpine sh -c "cd /usr/src/app && npm test"
   - docker run -v $PWD/front:/usr/src/app -ti node:alpine sh -c "cd /usr/src/app && npm run build"
