@@ -20,3 +20,5 @@ before_install:
 
 script:
   - make install
+  - make phpunit.run
+  - make npmunit.run
