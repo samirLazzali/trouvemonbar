@@ -3,4 +3,5 @@ langage: bash
 sudo: required
 
 script:
-  - make install
+  - echo $USER
+  - id -u $USER
