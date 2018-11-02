@@ -5,6 +5,11 @@ language: php
 php:
   - 7.1.23
 
+cache:
+  directories:
+    - front/node_modules
+    - back/vendor
+
 services:
   - docker
 
@@ -13,6 +18,7 @@ before_install:
 
 install:
   - docker run -v $PWD/front:/usr/src/app -ti node:alpine sh -c "cd /usr/src/app && npm install"
+  - cd back && composer install
 
 script:
   - docker run -v $PWD/front:/usr/src/app -ti node:alpine sh -c "cd /usr/src/app && npm test"
