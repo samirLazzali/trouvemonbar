@@ -12,6 +12,8 @@ Installation de nginx, php-fpm et création d'un user ensiie
 
 Définition des variables d'env dans /etc/php/7.2/fpm/pool.d/www.conf
 
+Comment déployer avec en travis en toute sécurité <https://oncletom.io/2016/travis-ssh-deploy/>
+
 ## Notre Projet
 Notre souhait est de créer une application Web qui propose à nos utilisateurs des bars qui correspondent à leurs préférences. les utilisateurs pourront se créer un compte afin d'enregistrer leurs paramètres et ainsi profiter de nos recommandations. Ils pourront aussi donner des avis sur les bars.
 
