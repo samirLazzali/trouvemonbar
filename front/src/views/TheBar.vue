@@ -66,21 +66,22 @@
             </div>
           </v-card-text>
 
-          <v-container>
-
-            <GmapMap
-              :center="center"
-              :zoom="15"
-              map-type-id="terrain"
-              style="width: 700px; height: 400px"
-            >
-              <GmapMarker
-                :position="marker.position"
-                clickable
-                draggable
-                @click="center = marker.position"
-              />
-            </GmapMap>
+          <v-container class="mapContainer">
+            <v-card color="green lighten-5" class="pa-4 hidden-sm-and-down">
+              <GmapMap
+                :center="center"
+                :zoom="15"
+                map-type-id="terrain"
+                style="width: 700px; height: 400px"
+              >
+                <GmapMarker
+                    :position="marker.position"
+                    clickable
+                    draggable
+                    @click="center = marker.position"
+                />
+              </GmapMap>
+            </v-card>
           </v-container>
         </v-card>
       </v-card>
@@ -133,12 +134,22 @@ export default {
         this.marker.position = position
         this.center = position
       })
-      .catch(this.$log.error)
+      .catch(err => {
+        this.$log.error(err)
+
+        if (err.response.status === 404) this.$router.push('/')
+      })
   }
 }
 </script>
 
 <style>
+.mapContainer {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 805px;
+}
 .titled {
   margin-top: -100px;
 }

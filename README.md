@@ -1,10 +1,20 @@
-# ENSIIE Project Web Trouvemonbar
+# ENSIIE Project Web Trouvemonbar [![Build Status](https://travis-ci.org/swanncastel/ensiie-project.svg?branch=master)](https://travis-ci.org/swanncastel/ensiie-project)
 
 Projet Web ENSIIE:
 * Samir Lazzali
 * Jerôme O'Keffe
 * Emilio De sousa
 * Swann Castel
+
+## Site disponible ici <https://okeeffe.ovh>
+
+Installation de nginx, php-fpm et création d'un user ensiie.
+
+Génération du certificat SSL avec Certbot <https://certbot.eff.org/.>
+
+Définition des variables d'env dans /etc/php/7.2/fpm/pool.d/www.conf
+
+Comment déployer avec en travis en toute sécurité <https://oncletom.io/2016/travis-ssh-deploy/>
 
 ## Notre Projet
 Notre souhait est de créer une application Web qui propose à nos utilisateurs des bars qui correspondent à leurs préférences. les utilisateurs pourront se créer un compte afin d'enregistrer leurs paramètres et ainsi profiter de nos recommandations. Ils pourront aussi donner des avis sur les bars.

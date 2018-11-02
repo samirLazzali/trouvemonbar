@@ -27,17 +27,27 @@
             ></v-text-field>
 
             <v-text-field
-              v-model="password"
+              v-model="currentPassword"
               type="password"
-              label="Modifier mon mot de passe"
-              :rules="rules"
+              label="Mot de passe actuel"
+              :rules="passwordRules"
+              @keyup.enter="submit"
             ></v-text-field>
 
             <v-text-field
-              v-model="confirmedPassword"
+              v-model="password"
+              type="password"
+              label="Modifier mon mot de passe"
+              :rules="passwordRules,differentPasswordRules"
+              @keyup.enter="submit"
+            ></v-text-field>
+
+            <v-text-field
+              v-model="passwordConfirmation"
               type="password"
               label="Confirmer mon mot de passe"
-              :rules="rules"
+              :rules="passwordRules,samePasswordRules"
+              @keyup.enter="submit"
             ></v-text-field>
 
             <v-btn color="success"
@@ -69,14 +79,16 @@ export default {
       snackbarText: '',
       snackbarState: 'error',
       isValid: false,
-      rules: [
+      passwordRules: [
         value => value.length >= 3 || 'Min 3 caractères.',
         value => value.length < 25 || 'Max 25 caractères.',
-        value => value === this.password || 'Password must match',
         value => !!value || 'Required.'
       ],
+      samePasswordRules: value => value === this.password || 'Password must match',
+      differentPasswordRules: value => value !== this.currentPassword || 'Veuillez renseigner un nouveau mot de passe différent de l\'ancien',
+      currentPassword: '',
       password: '',
-      confirmedPassword: ''
+      passwordConfirmation: ''
     }
   },
   methods: {
@@ -84,6 +96,7 @@ export default {
       if (!this.$refs.user.validate()) return
       try {
         // Add the password to the user Object
+        this.user.currentPassword = this.currentPassword
         this.user.password = this.password
         await this.$api.updateUser(this.user)
         this.snackbarText = 'Mise à jour du mot de passe réussie.'
@@ -99,6 +112,10 @@ export default {
             break
           case 401:
             this.snackbarText = 'Opération non autorisé'
+            this.snackbarState = 'error'
+            break
+          case 403:
+            this.snackbarText = 'Mot de passe incorect'
             this.snackbarState = 'error'
             break
           case 500:

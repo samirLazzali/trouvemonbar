@@ -24,12 +24,14 @@
                   label="Pseudo"
                   v-model="pseudo"
                   :rules="[rules.required,rules.minCounter,rules.maxCounter]"
+                  @keyup.enter="submit"
                   required
                 ></v-text-field>
                 <v-text-field
                   label="Email"
                   v-model="email"
                   :rules="[rules.required,rules.email]"
+                  @keyup.enter="submit"
                   required
                 ></v-text-field>
                 <span class="caption grey--text text--darken-1">
@@ -40,12 +42,14 @@
                   type="password"
                   v-model="password"
                   :rules="[rules.required,rules.minCounter,rules.maxCounter]"
+                  @keyup.enter="submit"
                   required
                 ></v-text-field>
                 <v-text-field
                   label="Confirmez le mot de passe"
                   type="password" v-model="confirmedPassword"
                   :rules="[rules.required,rules.minCounter,rules.maxCounter,rules.passwordMatch]"
+                  @keyup.enter="submit"
                   required
                 ></v-text-field>
                 <span class="caption grey--text text--darken-1">
