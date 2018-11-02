@@ -2,9 +2,9 @@
 header("Content-Type:application/json");
 
 require_once '../vendor/autoload.php';
-require_once __DIR__ . '/keyword.php';
-require_once __DIR__ . '/login.php';
-require_once __DIR__ . '/user.php';
+require_once __DIR__ . '/KeywordController.php';
+require_once __DIR__ . '/LoginController.php';
+require_once __DIR__ . '/UserController.php';
 
 use \Router\Router;
 
