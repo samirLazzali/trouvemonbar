@@ -13,7 +13,8 @@ class DatabaseSingleton
             $dbName = getenv('DB_NAME');
             $dbUser = getenv('DB_USER');
             $dbPassword = getenv('DB_PASSWORD');
-            self::$PDO = new \PDO("pgsql:host=postgres user=$dbUser dbname=$dbName password=$dbPassword");
+            $dbHost = getenv('DB_HOST');
+            self::$PDO = new \PDO("pgsql:host=$dbHost user=$dbUser dbname=$dbName password=$dbPassword");
         }
         return self::$PDO;
     }
