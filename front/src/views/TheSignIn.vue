@@ -27,7 +27,7 @@
                   name="login"
                   label="Login"
                   type="text"
-                  :rules="[rules.required,rules.email]"
+                  :rules="rules"
                   @keyup.enter="submit"
                 ></v-text-field>
 
@@ -38,7 +38,7 @@
                   name="password"
                   label="Mot de passe"
                   type="password"
-                  :rules="[rules.required,rules.minCounter,rules.maxCounter]"
+                  :rules="rules"
                   @keyup.enter="submit"
                 ></v-text-field>
               </v-form>
@@ -75,15 +75,11 @@ export default {
       isValid: false,
       login: '',
       password: '',
-      rules: {
-        email: value => {
-          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-          return pattern.test(value) || 'Adresse email invalide.'
-        },
-        minCounter: value => value.length >= 3 || 'Min 3 caractères.',
-        maxCounter: value => value.length < 25 || 'Max 25 caractères.',
-        required: value => !!value || 'Obligatoire.'
-      },
+      rules: [
+        value => value.length >= 3 || 'Min 3 caractères.',
+        value => value.length < 25 || 'Max 25 caractères.',
+        value => !!value || 'Obligatoire.'
+      ],
       snackbar: false
     }
   },
@@ -94,7 +90,7 @@ export default {
 
       try {
         await this.$store.dispatch('login', {
-          email: this.login,
+          login: this.login,
           password: this.password
         })
         this.$router.push('/')

@@ -33,7 +33,7 @@ Router::post('/api/users', function($request) use($userRepository, $userValidato
     }
 
     $user = (new \User\User())
-        ->setEmail($request->body->email)
+        ->setEmail(strtolower($request->body->email))
         ->setHash(hash('sha256', $request->body->password))
         ->setPseudo($request->body->pseudo)
         ->setRole('USER');
@@ -62,7 +62,7 @@ Router::put('/api/users/{}', function($request) use($userRepository) {
 
     try {
         $userId = JwtHS256::validate($token, getenv('SECRET'));
-        $user = $userRepository->fetchById($userId);
+        $user = $userRepository->fetchFullById($userId);
     } catch (Exception $e) {
         http_response_code(401);
         echo json_encode(['error' => $e->getMessage()]);
@@ -70,7 +70,10 @@ Router::put('/api/users/{}', function($request) use($userRepository) {
     }
 
     // Check parameter
-    if (is_null($request->body) || !(isset($request->params[0]) && isset($request->body->user->password))) return http_response_code(400);
+    if (is_null($request->body) || !(isset($request->params[0]) && isset($request->body->password) && isset($request->body->currentPassword))) return http_response_code(400);
+
+    $curent_password = $request->body->currentPassword;
+    $current_hash = hash('sha256', $curent_password);
 
 
     // Get all the information from the body
@@ -86,19 +89,25 @@ Router::put('/api/users/{}', function($request) use($userRepository) {
         return http_response_code(401);
     }
 
-    $password = $request->body->user->password;
 
-    if(strlen($password) < 3) return http_response_code(400);
-
-    $hash = hash('sha256', $password);
-
-    if(!$userRepository->updatePassword($id,$hash))
+    if($user->getHash() != $current_hash)
     {
-        return http_response_code(500);
+        return http_response_code(403);
+    }
+
+    $new_password = $request->body->password;
+
+    if(strlen($new_password) < 3) return http_response_code(400);
+
+    $new_hash = hash('sha256', $new_password);
+
+    if(!$userRepository->updatePassword($id, $new_hash))
+    {
+        return http_response_code(200);
     }
     else
     {
-        return http_response_code(200);
+        return http_response_code(500);
     }
 
 });

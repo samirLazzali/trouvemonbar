@@ -21,71 +21,36 @@ class BarRepository
         $bar = $request->fetch();
         if (!$bar) return null;
 
-        $request = $this->connection->prepare('SELECT kw.name FROM "keybar" kb, "bar" b, "keyword" kw WHERE kb.idBar=b.id AND kw.id=kb.idKeyWord AND b.id=:id');
-        $request->bindParam(':id', $id, \PDO::PARAM_INT);
-        if ($request->execute()) $bar->addKeywords($request->fetchAll(\PDO::FETCH_COLUMN));
+        $bar->addKeywords($this->getKeywords($bar->getId()));
 
         return $bar;
     }
 
-    public function bindKeyWordWithBar($id)
-    {
-        $request = $this->connection->prepare('SELECT kw.name FROM "keybar" kb, "bar" b, "keyword" kw WHERE kb.idBar=b.id AND kw.id=kb.idKeyWord AND b.id=:id' );
-        $request->bindParam(':id',$id, \PDO::PARAM_INT);
-
-        if (!$request->execute()) return false;
-
-        $keywords = $request->fetchAll(\PDO::FETCH_COLUMN);
-
-        if(count($keywords) > 0) {
-            return $keywords;
-        } else {
-            return false;
-        }
-    }
-
-    public function compareByID($A,$B)
-    {
-        $idA = $A->getId();
-        $idB = $B->getId();
-
-        if ($idA === $idB) return 0;
-
-        return $idA > $idB ? 1 : -1;
-    }
-
     public function fetchByKeyWords($keywords)
     {
-        $results = [];
-        $bars = [];
-
-        $request = $this->connection->prepare('select b.* from bar as b join keybar as kb on b.id=kb.idbar join keyword as kw on kw.id=kb.idkeyword WHERE UPPER(kw.name)=UPPER(:kw) ');
-        $request->bindParam(':kw',array_values($keywords)[0], \PDO::PARAM_STR);
-        $request->execute();
-        $results =  $request->fetchAll(\PDO::FETCH_CLASS, Bar::CLASS);
-        array_shift($keywords);
-        if(count($keywords)==0){
-            $bars=$results;
-        }
-        foreach($keywords as $keyword){
-            $tmp = [];
-
-            $request->bindParam(':kw',$keyword, \PDO::PARAM_STR);
-            $request->execute();
-            while($row = $request->fetchAll(\PDO::FETCH_CLASS,Bar::CLASS))
-                $tmp = $row;
-            $bars=array_uintersect($tmp,$results,[$this,'compareByID']);
-            $results=$tmp;
+        $query = 'SELECT DISTINCT b.* FROM bar AS b JOIN keybar AS kb ON b.id = kb.idbar JOIN keyword AS kw ON kw.id = kb.idkeyword WHERE';
+        for ($i = 0; $i < sizeof($keywords); $i++) {
+            if ($i !== 0) $query .= ' OR';
+            $query .= ' UPPER(kw.name) = UPPER(?)';
         }
 
-        foreach($bars as $bar)
-        {
-            $keywords=$this->bindKeyWordWithBar($bar->getId());
-            if($keywords!=false)
-            {
-                $bar->addKeywords($keywords);
-            }
+        $request = $this->connection->prepare($query);
+        if (!$request->execute($keywords)) return null;
+
+        $bars = $request->fetchAll(\PDO::FETCH_CLASS, Bar::class);
+        foreach($bars as $bar) {
+            $bar->addKeywords($this->getKeywords($bar->getId()));
         }
         return $bars;
+    }
+
+    private function getKeywords($id)
+    {
+        $request = $this->connection->prepare('SELECT kw.name FROM "keybar" kb, "bar" b, "keyword" kw WHERE kb.idBar = b.id AND kw.id = kb.idKeyWord AND b.id = :id');
+        $request->bindParam(':id',$id, \PDO::PARAM_INT);
+
+        if (!$request->execute()) return null;
+
+        return $request->fetchAll(\PDO::FETCH_COLUMN);
     }
 }
