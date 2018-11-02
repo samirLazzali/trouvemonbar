@@ -41,6 +41,10 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script: ssh ensiie@51.38.237.240 ll
+  script:
+    - rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/front/dist/ ensiie@51.38.237.240:/var/www/html/
+    - rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/back/vendor/ ensiie@51.38.237.240:/var/www/api/
+    - rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/back/public/ ensiie@51.38.237.240:/var/www/api/
+    - rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/back/src/ ensiie@51.38.237.240:/var/www/api/
   on:
     branch: feature/set-cicd-for-travis
