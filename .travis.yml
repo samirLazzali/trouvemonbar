@@ -3,8 +3,7 @@ sudo: required
 services:
   - docker
 
-script:
+before_install:
   - docker pull node:alpine
-  - docker run -v $PWD/front:/usr/src/app -ti node:alpine sh -c "cd /usr/src/app; npm install"
-	- docker run -v $PWD/front:/usr/src/app -ti node:alpine sh -c "cd /usr/src/app; npm test"
-	- docker run -v $PWD/front:/usr/src/app -ti node:alpine sh -c "cd /usr/src/app; npm run build"
+  - docker run -v $PWD/front:/usr/src/app -ti node:alpine sh -c "cd /usr/src/app && npm install"
+  - docker run -v $PWD/front:/usr/src/app -ti node:alpine sh -c "cd /usr/src/app && npm test"
