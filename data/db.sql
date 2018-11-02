@@ -61,18 +61,18 @@ CREATE TABLE blacklist (
 );
 
 INSERT INTO "user" (pseudo, email, hash, role)
-VALUES ('John', 'Doe@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Yvette', 'Angel@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Amelia', 'Waters@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Manuel', 'Holloway@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Alonzo', 'Erickson@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Otis', 'Roberson@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Jaime', 'King@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Vicky', 'Pearson@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER)'),
-       ('Silvia', 'Mcguire@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Brendan', 'Pena@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Jackie', 'Cohen@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Delores', 'Williamson@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER');
+VALUES ('John', 'doe@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
+       ('Yvette', 'angel@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
+       ('Amelia', 'waters@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
+       ('Manuel', 'holloway@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
+       ('Alonzo', 'erickson@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
+       ('Otis', 'roberson@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
+       ('Jaime', 'king@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
+       ('Vicky', 'pearson@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER)'),
+       ('Silvia', 'mcguire@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
+       ('Brendan', 'pena@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
+       ('Jackie', 'cohen@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
+       ('Delores', 'williamson@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER');
 
 INSERT INTO bar(name,rating,photoreference,placeId,address,lat,lng) VALUES
 ('Le Balajo','3.4','CmRaAAAAClcr1Ao4hoiO3FY3iqfjwVyaVcYnNHuE_YSHrbgd1c83Q6g6h2s_vhDvlBPiAxIx-75cG-QuJIkTjgtfVxP3hwuWc8uxSb-W5thQO99ybDpKgIENiw7XlcCC7uoH6DUvEhCCx8f45PDpYSYqngJ1PWsJGhQ2G5t-x-ybOq6lABIYJQFODTmy_A','ChIJ_TtGzABy5kcRtodA2O-ARXI','9 Rue de Lappe, Paris','48.85406709999999','2.3722419'),

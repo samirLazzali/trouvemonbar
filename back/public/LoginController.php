@@ -10,7 +10,7 @@ Router::post('/api/login', function($request) use($userRepository, $userHydrator
 
     $email = $request->body->email;
     $hash = hash('sha256', $request->body->password);
-    $user = $userRepository->fetchByEmailAndHash($email, $hash);
+    $user = $userRepository->fetchByLoginAndHash($email, $hash);
 
     if (!$user) return http_response_code(401);
 
