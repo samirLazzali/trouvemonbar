@@ -1,16 +1,6 @@
-cache:
-  directories:
-    - front/node_modules
-    - back/vendor
+langage: bash
 
-matrix:
-  include:
-    - language: node_js
-      node_js: 10
-      before_install:
-        - cd front/
-      install: 
-        - npm install
-      script:
-        - npm test
-        - npm run build
+sudo: required
+
+script:
+  - make install
