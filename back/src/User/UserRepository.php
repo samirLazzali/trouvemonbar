@@ -42,8 +42,6 @@ class UserRepository
     public function updatePassword($id, $hash)
     {
         $stmt = $this->connection->prepare('UPDATE "user" SET hash=:hash where id=:id');
-        $id_str=strval($id);
-        echo("UPDATE \"user\" SET hash={$hash} where id= {$id_str}");
         $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
         $stmt->bindParam(':hash', $hash, \PDO::PARAM_STR);
 
