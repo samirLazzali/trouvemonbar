@@ -3,17 +3,17 @@ langage: bash
 sudo: required
 
 env:
-  - NGINX_PORT=3000
-  - SERVER_NAME=php-docker.local
-  - PHP_ADDRESS=php
-  - TIMEZONE='Europe/Paris'
-  - DOCKER_USER=travis
-  - DOCKER_USER_ID=2000
-  - DB_USER=ensiie
-  - DB_PASSWORD=ensiie
-  - DB_PORT_EXTERNAL=5431
-  - SECRET=secret123
+  global:
+    - NGINX_PORT=3000
+    - SERVER_NAME=php-docker.local
+    - PHP_ADDRESS=php
+    - TIMEZONE='Europe/Paris'
+    - DOCKER_USER=travis
+    - DOCKER_USER_ID=2000
+    - DB_USER=ensiie
+    - DB_PASSWORD=ensiie
+    - DB_PORT_EXTERNAL=5431
+    - SECRET=secret123
 
 script:
-  - echo $USER
-  - id -u $USER
+  - make install
