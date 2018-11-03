@@ -65,6 +65,13 @@ CREATE TABLE commentsBar (
   idBar   INT REFERENCES bar (id),
   idComm  INT REFERENCES comments (id) 
 )
+
+CREATE TABLE commentsUser (
+  id      SERIAL PRIMARY KEY,
+  idUser  INT REFERENCES "user" (id),
+  idComm INT REFERENCES comments (id)
+)
+
 CREATE TABLE comments (
   id      SERIAL PRIMARY KEY,
   content text
