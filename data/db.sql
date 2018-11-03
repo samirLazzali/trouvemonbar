@@ -60,6 +60,16 @@ CREATE TABLE blacklist (
   idUser INT REFERENCES "user" (id)
 );
 
+CREATE TABLE commentsBar (
+  id      SERIAL PRIMARY KEY,
+  idBar   INT REFERENCES bar (id),
+  idComm  INT REFERENCES comments (id) 
+)
+CREATE TABLE comments (
+  id      SERIAL PRIMARY KEY,
+  content text
+)
+
 INSERT INTO "user" (pseudo, email, hash, role)
 VALUES ('John', 'doe@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
        ('Yvette', 'angel@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
