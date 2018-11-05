@@ -24,13 +24,14 @@
 
       <v-layout row wrap>
         <bar
-          v-for="({ id, name, address, keywords, photoreference }, i) in bars"
+          v-for="({ id, name, address, keywords, photoreference, rating }, i) in bars"
           :key="i"
           v-bind:id="id"
           :name="name"
           :address="address"
           :keywords="keywords"
           :photo-reference="photoreference"
+          :rating="Number.parseFloat(rating)"
           @clicked="barClicked"
         ></bar>
       </v-layout>

@@ -24,13 +24,15 @@
 
             <div class="d-flex">
               <v-rating
-                :value="name.length % 5"
-                color="amber"
-                dense
-                half-increments
-                readonly
-                size="14"
-              ></v-rating>
+                  v-model="rating"
+                  color="yellow darken-3"
+                  background-color="grey darken-1"
+                  empty-icon="$vuetify.icons.ratingFull"
+                  half-increments
+                  hover
+                  size="15"
+                  readonly
+                ></v-rating>
 
               <div class="ml-2 grey--text text--darken-2">
                 <span>1</span>
@@ -70,6 +72,11 @@ export default {
 
     photoReference: {
       type: String,
+      required: true
+    },
+
+    rating: {
+      type: Number,
       required: true
     }
   }
