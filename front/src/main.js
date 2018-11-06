@@ -14,17 +14,16 @@ Vue.config.productionTip = false
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyBL5wwReFZULzsHE0wJSifX_g43OMWR2jo',
-    libraries: 'places' // This is required if you use the Autocomplete plugin
-    // OR: libraries: 'places,drawing'
-    // OR: libraries: 'places,drawing,visualization'
-    // (as you require)
-
-    /// / If you want to set the version, you can do so:
-    // v: '3.26',
+    libraries: 'places'
   }
 })
 Vue.use(Api)
-Vue.use(Vuetify)
+Vue.use(Vuetify, {
+  theme: {
+    primary: '#545463',
+    secondary: '#fcac38'
+  }
+})
 
 new Vue({
   router,

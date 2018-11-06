@@ -14,7 +14,7 @@
       <v-layout align-center justify-center>
         <v-flex xs12 sm8 md6 lg4>
           <v-card class="elevation-12">
-            <v-toolbar dark color="success">
+            <v-toolbar dark color="primary">
               <v-toolbar-title>Formulaire de connexion</v-toolbar-title>
               <v-spacer></v-spacer>
             </v-toolbar>
@@ -47,7 +47,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
-                color="success"
+                color="secondary"
                 @click="submit"
                 :disabled="!isValid"
               >

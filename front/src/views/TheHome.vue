@@ -4,7 +4,7 @@
       <v-layout align-center justify-center row wrap>
         <v-flex xs12>
           <v-card color="transparent" flat>
-            <v-card-text class="light-green--text">
+            <v-card-text class="purple-color">
               <h1 class="text-xs-center">La flemme de chercher un bar {{ user ? user.pseudo : '' }} ?</h1>
               <h1 class="text-xs-center">On s'occupe de tout !</h1>
             </v-card-text>
