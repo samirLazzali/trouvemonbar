@@ -5,7 +5,7 @@
         <img src="./assets/img/logo2.png" alt="logo" height="60" width="60">
       </v-btn>
 
-      <v-toolbar-title style="color: #545463">Trouvemonbar.com</v-toolbar-title>
+      <v-toolbar-title class="purple-color">Trouvemonbar.com</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -72,3 +72,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.purple-color {
+  color: #545463;
+}
+</style>
