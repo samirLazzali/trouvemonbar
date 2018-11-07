@@ -7,7 +7,7 @@ class Bar
     private $name;
     private $address;
     private $keywords = [];
-    private $arrayComm = array();
+    private $arrayComm = [];
     private $photoreference;
     private $rating;
     private $lat;
