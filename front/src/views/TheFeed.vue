@@ -32,6 +32,18 @@ export default {
     }
   },
 
+  computed: {
+    isAuthenticated () {
+      return this.$store.getters.isAuthenticated
+    }
+  },
+
+  watch: {
+    isAuthenticated () {
+      if (!this.isAuthenticated) this.$router.push('/signin')
+    }
+  },
+
   async created () {
     try {
       this.user = await this.$api.getUserInfo(this.$store.state.user.id)
