@@ -27,7 +27,8 @@ class BarRepository
         if (!$bar) return null;
         $comments = $this->commentRepository->fetchByIdBar($id);
         $bar->addKeywords($this->getKeywords($bar->getId()));
-        $bar->addComments($comments);
+        if (isset($comments) && sizeof($comments) > 0)
+            $bar->addComments($comments);
 
         return $bar;
     }
