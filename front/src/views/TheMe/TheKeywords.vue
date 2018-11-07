@@ -3,13 +3,13 @@
     <v-card flat>
       <v-card-text>
         <v-container color="white">
-          <v-card-text v-if="keywords">Vos mots clés actuels (Clicker pour supprimer) :</v-card-text>
+          <v-card-text v-if="keywords">Vos mots clés actuels :</v-card-text>
 
-          <v-chip
+          <v-chip close
             id="keywordsList"
             v-for="keyword in userKeywords"
             :key="keyword.id"
-            @click="deleteKeyword(keyword.id)"
+            @input="deleteKeyword(keyword.id)"
             outline color="green"
           >
             {{ keyword.name | capitalize }}
