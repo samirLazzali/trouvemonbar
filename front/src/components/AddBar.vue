@@ -10,7 +10,7 @@
 
           <v-img
             :aspect-ratio="16/9"
-            :src="photoReference"
+            :src="`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=AIzaSyBL5wwReFZULzsHE0wJSifX_g43OMWR2jo`"
           ></v-img>
 
           <v-card-title>

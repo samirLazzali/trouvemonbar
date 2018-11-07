@@ -71,10 +71,11 @@ Router::get('/api/addbar\?keywords\=(.+)', function($request) use($barHydrator) 
     // récupération des bars
     $bars = [];
     foreach ($arrayResponse['results'] as $value) {
+
         // j'ai mis une photo par defaut d'un bar random
-        $photoref = "https://lefooding.com/media/W1siZiIsIjIwMTYvMDcvMTgvMTRfMzJfMjZfNTk0X2Jhcl9oYXJyeXNfbmV3X3lvcmtfYmFyX3BhcmlzLmpwZyJdLFsicCIsInRodW1iIiwiNjcyeDYwMCJdXQ/bar-harrys-new-york-bar-paris.jpg?sha=3a132a68";
+        $photoref = "CmRaAAAAFIU2P46W3fs6FBBRy4gfBBES5jpW44KZIseyOVmPGqZDd5T6Lq2Zw2y31Acreo0z0ZwVSOsQ8wj2zU6vhuuk3Z2fMFqJQcrxFtg5OuirPk69_leTfz4I05G1QX2CfwYtEhBkjxDP2f71cXP8QgBOxFTrGhQFSr77AIsNSG-mAIiFDWyP7kISvg";
         if(array_key_exists('photos',$value)){
-            $photoref = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=".$value['photos'][0]['photo_reference']."&key=AIzaSyBL5wwReFZULzsHE0wJSifX_g43OMWR2jo";
+            $photoref = $value['photos'][0]['photo_reference'];
         }
         $rating = -1;
         if(array_key_exists('rating', $value)){
@@ -99,26 +100,27 @@ Router::get('/api/addbar\?keywords\=(.+)', function($request) use($barHydrator) 
 });
 
 Router::post('/api/addbar', function($request) use($barRepository, $barHydrator) {
-    // if (is_null($request->body)) return http_response_code(400);
+    if (is_null($request->body)) return http_response_code(400);
 
     /*
     if (!$userValidator->validate($request->body)) {
         return http_response_code(400);
     }
     */
-    $isStored = $barRepository->isStored($request->body->bar->placeId);
+    $isStored = $barRepository->isStored($request->body->data->bar->placeId);
     var_dump($isStored);
     if($isStored == null) {
         // inserrer le bar et retourner son id
         $tmpBar = (new \Bar\Bar())
             ->setName($request->body->data->bar->name)
-            ->setPhoto($request->body->bar->photoReference ? $request->body->data->bar->photoReference : 'NULL')
-            ->SetRating($request->body->bar->rating ? $request->body->data->bar->rating : 'NULL')
+            ->setPhoto($request->body->data->bar->photoReference)
+            ->SetRating($request->body->data->bar->rating)
             ->SetAddress($request->body->data->bar->address)
             ->setLat($request->body->data->bar->lat)
             ->setLng($request->body->data->bar->lng)
             ->setPlaceId($request->body->data->bar->placeId);
         $barRepository->creatBar($tmpBar);
+        // return last insert !
     }
 
 });
