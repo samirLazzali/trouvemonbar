@@ -6,7 +6,6 @@ class UserRepository
     private $connection;
     private $keywordRepository;
 
-
     public function __construct($connection)
     {
         $this->connection = $connection;

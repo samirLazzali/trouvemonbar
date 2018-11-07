@@ -19,5 +19,4 @@ export const user = {
   deleteKeyword (userId, keywordId) {
     return axios.delete(`/api/users/${userId}/keywords/${keywordId}`)
   }
-
 }
