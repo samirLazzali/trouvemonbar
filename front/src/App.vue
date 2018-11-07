@@ -16,10 +16,10 @@
               <v-icon>account_circle</v-icon>
             </v-btn>
             <v-list>
-              <v-list-tile @click="$router.push('/feed')">
+              <v-list-tile to="/feed">
                 <v-list-tile-title>Mon feed</v-list-tile-title>
               </v-list-tile>
-              <v-list-tile @click="$router.push('/me')">
+              <v-list-tile to="/me">
                 <v-list-tile-title>Mon compte</v-list-tile-title>
               </v-list-tile>
               <v-list-tile @click="logout">
