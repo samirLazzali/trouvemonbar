@@ -206,4 +206,3 @@ Router::delete('/api/users/{}/keywords/{}', function($request) use($userReposito
         return http_response_code(500);
 
 });
-
