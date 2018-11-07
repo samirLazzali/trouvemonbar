@@ -2,17 +2,17 @@
   <v-app id="app">
     <v-toolbar app>
       <v-btn to="/" fab flat color="transparent" icon>
-        <img src="./assets/logo.png" alt="logo" height="50" width="50">
+        <img src="./assets/img/logo2.png" alt="logo" height="60" width="60">
       </v-btn>
 
-      <v-toolbar-title>Trouvemonbar.com</v-toolbar-title>
+      <v-toolbar-title class="purple-color">Trouvemonbar.com</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
       <v-toolbar-items>
         <template v-if="isAuthenticated">
           <v-menu bottom left offset-y>
-            <v-btn icon large slot="activator" color="success">
+            <v-btn icon large slot="activator" color="primary">
               <v-icon>account_circle</v-icon>
             </v-btn>
             <v-list>
@@ -27,8 +27,8 @@
         </template>
 
         <template v-else>
-          <v-btn color="success" flat to="/signup">S'inscrire</v-btn>
-          <v-btn color="success" flat to="/signin">Connexion</v-btn>
+          <v-btn color="primary" flat to="/signup">S'inscrire</v-btn>
+          <v-btn color="primary" flat to="/signin">Connexion</v-btn>
           </template>
       </v-toolbar-items>
     </v-toolbar>
@@ -72,3 +72,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.purple-color {
+  color: #545463;
+}
+</style>

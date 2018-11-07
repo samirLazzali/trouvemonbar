@@ -14,7 +14,7 @@
 
     <v-btn
       large
-      color="success"
+      color="secondary"
       @click="$emit('search', value)"
       v-text="'J\'ai soif !'"
     ></v-btn>
