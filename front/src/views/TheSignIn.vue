@@ -93,7 +93,7 @@ export default {
           login: this.login,
           password: this.password
         })
-        this.$router.push('/')
+        this.$router.push('/feed')
       } catch (err) {
         this.$log.error(err)
         this.snackbar = true
