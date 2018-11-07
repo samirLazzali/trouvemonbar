@@ -12,7 +12,7 @@ describe('BarHydrator', function() {
             ->setId(1)
             ->setName('Un bar à Evry')
             ->setAddress('3 rue André Lalande')
-            ->addKeywords(['toto', 'tata', 'tutu'])
+            ->addKeywords([(new \Keyword\Keyword())->setName('toto')->setId(1)])
             ->setRating('4.5')
             ->setLng('4.43')
             ->setLat('9.12')
@@ -21,7 +21,7 @@ describe('BarHydrator', function() {
             ->setId(2)
             ->setName('Un bar à Grigny')
             ->setAddress('3 rue de l\'Elephant')
-            ->addKeywords(['bobo', 'baba', 'bubu'])
+            ->addKeywords([(new \Keyword\Keyword())->setName('bobo')->setId(2)])
             ->setRating('1.3')
             ->setLng('1.298')
             ->setLat('5.285')
@@ -35,7 +35,7 @@ describe('BarHydrator', function() {
                 'id' => 1,
                 'name' => 'Un bar à Evry',
                 'address' => '3 rue André Lalande',
-                'keywords' => ['toto', 'tata', 'tutu'],
+                'keywords' => [['id' => 1, 'name' => 'toto']],
                 'rating' => '4.5',
                 'photoreference' => 'photo',
                 'lat' => '9.12',
@@ -45,7 +45,7 @@ describe('BarHydrator', function() {
                 'id' => 2,
                 'name' => 'Un bar à Grigny',
                 'address' => '3 rue de l\'Elephant',
-                'keywords' => ['bobo', 'baba', 'bubu'],
+                'keywords' => [['id' => 2, 'name' => 'bobo']],
                 'rating' => '1.3',
                 'photoreference' => 'otherPhoto',
                 'lat' => '5.285',

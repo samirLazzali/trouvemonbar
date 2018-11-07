@@ -14,14 +14,14 @@ describe('UserHydrator', function() {
             ->setHash('HASH')
             ->setPseudo('boby')
             ->setRole('USER')
-            ->addKeywords(['a', 'b', 'c']),
+            ->addKeywords([(new \Keyword\Keyword())->setName('toto')->setId(1)]),
             (new User())
             ->setId(2)
             ->setEmail('test@gmail.com')
             ->setHash('HASH2')
             ->setPseudo('boby2')
             ->setRole('ADMIN')
-            ->addKeywords(['d', 'e', 'f'])
+            ->addKeywords([(new \Keyword\Keyword())->setName('bobo')->setId(2)])
         ];
 
         $data = $this->userHydrator->extractAll($users);
@@ -33,7 +33,7 @@ describe('UserHydrator', function() {
                 'hash' => 'HASH',
                 'pseudo' => 'boby',
                 'role' => 'USER',
-                'keywords' => ['a', 'b', 'c']
+                'keywords' => [['id' => 1, 'name' => 'toto']],
             ],
             [
                 'id' => 2,
@@ -41,7 +41,7 @@ describe('UserHydrator', function() {
                 'hash' => 'HASH2',
                 'pseudo' => 'boby2',
                 'role' => 'ADMIN',
-                'keywords' => ['d', 'e', 'f']
+                'keywords' => [['id' => 2, 'name' => 'bobo']],
             ]
         ]);
     });
