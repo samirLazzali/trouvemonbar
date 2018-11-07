@@ -63,9 +63,6 @@ export default new Vuex.Store({
         axios.get('/api/keywords')
           .then(res => res.data)
           .then(keywords => {
-            return keywords
-          })
-          .then(keywords => {
             commit('keywords', keywords)
             resolve()
           })
