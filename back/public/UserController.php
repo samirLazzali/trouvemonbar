@@ -111,3 +111,51 @@ Router::put('/api/users/{}', function($request) use($userRepository) {
     }
 
 });
+
+
+Router::post('/api/users/{}/keywords', function($request) use($userRepository, $keywordRepository, $keywordHydrator) {
+    if (!array_key_exists('HTTP_AUTHORIZATION', $_SERVER)) {
+        http_response_code(401);
+        echo json_encode(['error' => 'You are not authorized without JWT']);
+        return;
+    }
+
+    [, $token] = explode(' ', $_SERVER['HTTP_AUTHORIZATION']);
+
+    try {
+        $userId = \Token\JwtHS256::validate($token, getenv('SECRET'));
+        $user = $userRepository->fetchFullById($userId);
+    } catch (Exception $e) {
+        http_response_code(401);
+        echo json_encode(['error' => $e->getMessage()]);
+        return;
+    }
+
+    if(!(!is_null($request->body->keywordsIds) && isset($request->params[0]) && is_array($request->body->keywordsIds) && count($request->body->keywordsIds) > 0)) return http_response_code(400);
+
+    // Get all the information from the body
+    $str_id = $request->params[0];
+    $user_id = ctype_digit($str_id) ? intval($str_id) : null;
+    if ($user_id == null)
+    {
+        return http_response_code(400);
+    }
+
+
+    $keywords_ids = $request->body->keywordsIds;
+
+    if(count($keywords_ids) < 1) return http_response_code(400);
+
+    // Check if authorized or not
+    if($user_id != $user->getId()){
+        return http_response_code(400);
+    }
+
+    // Insert thoses keyword_ids inside the keyword inside the table keyuser
+    if($keywordRepository->addKeywordByUser($user_id,$keywords_ids))
+        return http_response_code(200);
+    else
+        return http_response_code(500);
+
+});
+

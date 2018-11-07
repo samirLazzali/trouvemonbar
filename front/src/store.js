@@ -34,6 +34,7 @@ export default new Vuex.Store({
             const token = res.headers.authorization
             localStorage.setItem('user-token', token)
             localStorage.setItem('user', JSON.stringify({
+              id: res.data.id,
               pseudo: res.data.pseudo
             }))
             commit('user', res.data)
@@ -63,9 +64,6 @@ export default new Vuex.Store({
           .then(res => res.data)
           .then(keywords => {
             return keywords
-              .map(k => k.name)
-              .map(name => name.charAt(0).toUpperCase() + name.slice(1))
-              .sort((a, b) => a.localeCompare(b))
           })
           .then(keywords => {
             commit('keywords', keywords)

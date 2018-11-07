@@ -6,6 +6,7 @@
           <v-card-text v-if="keywords">Vos mots clés actuels :</v-card-text>
 
           <v-chip
+            id="keywordsList"
             v-for="(keyword, i) in keywords"
             :key="i"
             outline color="green"
@@ -16,8 +17,10 @@
           <v-card-title class="headline">Ajoutez des nouveaux mots clés que vous appréciez !</v-card-title>
 
           <v-autocomplete
-            v-model="newKeywords"
+            v-model="newKeywordsIds"
             :items="allKeywords"
+            item-text="name"
+            item-value="id"
             label="Mots clés"
             multiple
           ></v-autocomplete>
@@ -31,23 +34,14 @@
               Ajoutez
             </v-btn>
           </v-card-actions>
-
         </v-container>
       </v-card-text>
     </v-card>
-    <v-snackbar
-      v-model="snackbar"
-      bottom
-      left
-      :color="snackbarState"
-      :timeout="3000"
-    >
-      {{ snackbarText }}
-    </v-snackbar>
   </v-content>
 </template>
 
 <script>
+import Toaster from '@/toaster.js'
 export default {
   name: 'TheKeywords',
 
@@ -68,10 +62,7 @@ export default {
 
   data () {
     return {
-      newKeywords: [],
-      snackbar: false,
-      snackbarText: '',
-      snackbarState: 'error'
+      newKeywordsIds: []
     }
   },
 
@@ -84,31 +75,30 @@ export default {
 
   methods: {
     async addKeyword () {
-      if (this.newKeywords.length > 0) {
+      if (this.newKeywordsIds.length > 0) {
         try {
-          await this.$api.addKeywords(this.newKeywords)
-          this.snackbarText = 'Mots clés ajoutés avec succès.'
-          this.snackbarState = 'success'
-          this.snackbar = true
-          this.keywords.push(this.newKeywords)
+          await this.$api.addKeywords(this.$store.state.user.id, this.newKeywordsIds)
+          Toaster.$emit('success', 'Mots clés ajoutés avec succès.')
+          this.keywords.push(
+            this.allKeywords
+              .filter(k => this.newKeywordsIds.includes(k.id))
+              .map(k => k.name))
+          this.keywords.sort()
+          this.$log.debug(this.allKeywords.filter(k => this.newKeywordsIds.includes(k.id)).map(k => k.name))
         } catch (err) {
           this.$log.error(err)
           switch (err.response.status) {
             case 400:
-              this.snackbarText = 'Paramètres invalides.'
-              this.snackbarState = 'error'
+              Toaster.$emit('error', 'Paramètres invalides.')
               break
             case 418:
-              this.snackbarText = 'Email ou login déjà utilisé.'
-              this.snackbarState = 'error'
+              Toaster.$emit('error', 'Mot clé déjà existant.')
               break
             case 500:
-              this.snackbarText = 'Erreur interne.'
-              this.snackbarState = 'error'
+              Toaster.$emit('error', 'Erreur interne.')
               break
             default:
-              this.snackbarText = 'Une erreur s\'est produite'
-              this.snackbarState = 'error'
+              Toaster.$emit('error', 'Une erreur s\'est produite')
               break
           }
           this.snackbar = true

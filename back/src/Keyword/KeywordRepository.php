@@ -12,7 +12,7 @@ class KeywordRepository
 
     public function fetchAll()
     {
-        $stmt = $this->connection->query('SELECT id, name FROM keyword');
+        $stmt = $this->connection->query('SELECT id, name FROM keyword ORDER BY name ASC');
         if (!$stmt) {
             return false;
         }
