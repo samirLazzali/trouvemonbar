@@ -48,9 +48,7 @@ Router::post('/api/keywords', function($request) use($userRepository, $keywordRe
         }
     }
     if(count($keyword_ids) < 1) return http_response_code(400);
-    print_r($keyword_ids);
     $user_id = $user->getId();
-    print($user_id);
     // Insert thoses keyword_ids inside the keyword inside the table keyuser
     if(!$keywordRepository->addKeywordByUser($user_id,$keyword_ids))
         return http_response_code(200);
