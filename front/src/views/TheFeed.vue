@@ -9,6 +9,7 @@
         :address="bar.address"
         :keywords="bar.keywords.filter(k => user.keywords.includes(k))"
         :photoReference="bar.photoreference"
+        :rating="bar.rating"
         @clicked="$router.push(`/bars/${$event}`)"
       ></bar>
     </v-layout>
@@ -16,6 +17,7 @@
 </template>
 
 <script>
+import Toaster from '@/toaster.js'
 import Bar from '@/components/Bar'
 
 export default {
@@ -38,6 +40,11 @@ export default {
       this.bars = await this.$api.getBars({ q: this.user.keywords.join(',') })
     } catch (err) {
       this.$log.error(err)
+      if (err.response.status === 401) {
+        Toaster.$emit('info', 'Votre session a expiré')
+        this.$store.dispatch('logout')
+        this.$router.push('/signin')
+      }
     }
   }
 }
