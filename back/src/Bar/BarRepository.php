@@ -1,7 +1,6 @@
 <?php
 namespace Bar;
 
-
 class BarRepository
 {
     private $connection;
@@ -11,7 +10,6 @@ class BarRepository
     {
         $this->connection = $connection;
         $this->commentRepository = new \Comment\CommentRepository($connection);
-
     }
 
     public function fetchById($id)

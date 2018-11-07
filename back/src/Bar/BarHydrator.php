@@ -17,28 +17,22 @@ class BarHydrator
         if ($bar->getAddress()) {
             $data['address'] = $bar->getAddress();
         }
-        if($bar->getKeywords())
-        {
+        if($bar->getKeywords()) {
             $data['keywords'] = $bar->getKeywords();
         }
-        if($bar->getRating())
-        {
+        if($bar->getRating()) {
             $data['rating'] = $bar->getRating();
         }
-        if($bar->getPhoto())
-        {
+        if($bar->getPhoto()) {
             $data['photoreference'] = $bar->getPhoto();
         }
-        if($bar->getLat())
-        {
+        if($bar->getLat()) {
             $data['lat'] = $bar->getLat();
         }
-        if($bar->getLng())
-        {
+        if($bar->getLng()) {
             $data['lng'] = $bar->getLng();
         }
-        if($bar->getComments())
-        {
+        if($bar->getComments()) {
             $data['comments'] = $bar->getComments();
         }
 
