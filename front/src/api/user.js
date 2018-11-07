@@ -15,5 +15,9 @@ export const user = {
     return axios.post(`/api/users/${id}/keywords`, {
       keywordsIds: keywordsIds
     })
+  },
+  deleteKeyword (userId, keywordId) {
+    return axios.delete(`/api/users/${userId}/keywords/${keywordId}`)
   }
+
 }

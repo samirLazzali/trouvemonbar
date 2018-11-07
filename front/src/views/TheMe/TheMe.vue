@@ -78,7 +78,7 @@ export default {
       .then(user => {
         this.$log.debug(user)
         this.user = user
-        this.user.keywords.sort((a, b) => a.localeCompare(b))
+        this.user.keywords.sort((a, b) => a.name.localeCompare(b.name))
       })
       .catch(err => {
         this.$log.error(err)

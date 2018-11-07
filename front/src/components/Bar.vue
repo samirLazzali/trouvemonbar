@@ -19,7 +19,7 @@
               <v-chip
                 v-for="(keyword, i) in keywords"
                 :key="i"
-              >{{ keyword }}</v-chip>
+              >{{ keyword.name }}</v-chip>
             </div>
 
             <div class="d-flex">

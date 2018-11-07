@@ -3,15 +3,16 @@
     <v-card flat>
       <v-card-text>
         <v-container color="white">
-          <v-card-text v-if="keywords">Vos mots clés actuels :</v-card-text>
+          <v-card-text v-if="keywords">Vos mots clés actuels (Clicker pour supprimer) :</v-card-text>
 
           <v-chip
             id="keywordsList"
-            v-for="(keyword, i) in keywords"
-            :key="i"
+            v-for="keyword in userKeywords"
+            :key="keyword.id"
+            @click="deleteKeyword(keyword.id)"
             outline color="green"
           >
-            {{ keyword | capitalize }}
+            {{ keyword.name | capitalize }}
           </v-chip>
 
           <v-card-title class="headline">Ajoutez des nouveaux mots clés que vous appréciez !</v-card-title>
@@ -62,7 +63,8 @@ export default {
 
   data () {
     return {
-      newKeywordsIds: []
+      newKeywordsIds: [],
+      userKeywords: this.keywords
     }
   },
 
@@ -79,12 +81,37 @@ export default {
         try {
           await this.$api.addKeywords(this.$store.state.user.id, this.newKeywordsIds)
           Toaster.$emit('success', 'Mots clés ajoutés avec succès.')
-          this.keywords.push(
-            this.allKeywords
-              .filter(k => this.newKeywordsIds.includes(k.id))
-              .map(k => k.name))
-          this.keywords.sort()
-          this.$log.debug(this.allKeywords.filter(k => this.newKeywordsIds.includes(k.id)).map(k => k.name))
+          this.userKeywords.push(
+            ...this.allKeywords
+              .filter(k => this.newKeywordsIds.includes(k.id)))
+          this.userKeywords.sort((a, b) => a.name.localeCompare(b.name))
+        } catch (err) {
+          this.$log.error(err)
+          switch (err.response.status) {
+            case 400:
+              Toaster.$emit('error', 'Paramètres invalides.')
+              break
+            case 418:
+              Toaster.$emit('error', 'Mot clé déjà existant.')
+              break
+            case 500:
+              Toaster.$emit('error', 'Erreur interne.')
+              break
+            default:
+              Toaster.$emit('error', 'Une erreur s\'est produite')
+              break
+          }
+          this.snackbar = true
+        }
+      }
+    },
+    async deleteKeyword (id) {
+      if (typeof id !== 'undefined') {
+        try {
+          await this.$api.deleteKeyword(this.$store.state.user.id, id)
+          Toaster.$emit('success', 'Mots clés supprimés avec succès.')
+          this.userKeywords = this.userKeywords.filter(k => k.id !== id)
+          this.userKeywords.sort((a, b) => a.name.localeCompare(b.name))
         } catch (err) {
           this.$log.error(err)
           switch (err.response.status) {
