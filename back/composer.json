@@ -11,7 +11,8 @@
             "Router\\": "src/Router/",
             "Keyword\\": "src/Keyword/",
             "Database\\": "src/Database/",
-            "Token\\": "src/Token/"
+            "Token\\": "src/Token/",
+            "Comment\\": "src/Comment/"
         }
     }
 }
