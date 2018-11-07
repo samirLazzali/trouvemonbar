@@ -9,7 +9,7 @@
     <v-container fluid grid-list-xl>
       <v-progress-linear
         v-if="loading"
-        color="success"
+        color="secondary"
         height="4"
         indeterminate
       ></v-progress-linear>
