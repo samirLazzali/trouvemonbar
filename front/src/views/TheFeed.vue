@@ -40,7 +40,7 @@ export default {
 
   watch: {
     isAuthenticated () {
-      if (!this.isAuthenticated) this.$router.push('/signin')
+      if (!this.isAuthenticated) this.$router.push('/')
     }
   },
 
@@ -50,6 +50,10 @@ export default {
       this.bars = await this.$api.getBars({ q: this.user.keywords.join(',') })
     } catch (err) {
       this.$log.error(err)
+
+      if (err.response.status === 401) {
+        this.$router.push('/signin')
+      }
     }
   }
 }
