@@ -1,13 +1,17 @@
 <?php
 namespace Bar;
 
+
 class BarRepository
 {
     private $connection;
+    private $commentRepository;
 
     public function __construct($connection)
     {
         $this->connection = $connection;
+        $this->commentRepository = new \Comment\CommentRepository($connection);
+
     }
 
     public function fetchById($id)
@@ -19,9 +23,11 @@ class BarRepository
         if (!$request->execute()) return null;
 
         $bar = $request->fetch();
-        if (!$bar) return null;
 
+        if (!$bar) return null;
+        $comments = $this->commentRepository->fetchByIdBar($id);
         $bar->addKeywords($this->getKeywords($bar->getId()));
+        $bar->addComments($comments);
 
         return $bar;
     }
@@ -53,4 +59,5 @@ class BarRepository
 
         return $request->fetchAll(\PDO::FETCH_COLUMN);
     }
+
 }

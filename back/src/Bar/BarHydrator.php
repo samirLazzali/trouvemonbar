@@ -37,6 +37,10 @@ class BarHydrator
         {
             $data['lng'] = $bar->getLng();
         }
+        if($bar->getComments())
+        {
+            $data['comments'] = $bar->getComments();
+        }
 
         return $data;
     }
