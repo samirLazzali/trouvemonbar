@@ -8,9 +8,9 @@ $userRepository = new \User\UserRepository($pdo);
 Router::post('/api/login', function($request) use($userRepository, $userHydrator) {
     if (is_null($request->body)) return http_response_code(400);
 
-    $email = $request->body->email;
+    $login = $request->body->login;
     $hash = hash('sha256', $request->body->password);
-    $user = $userRepository->fetchByLoginAndHash($email, $hash);
+    $user = $userRepository->fetchByLoginAndHash($login, $hash);
 
     if (!$user) return http_response_code(401);
 

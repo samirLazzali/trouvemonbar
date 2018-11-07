@@ -78,6 +78,7 @@ export default {
   computed: {
     allKeywords () {
       return this.$store.state.keywords
+        .filter(k => !this.keywords.includes(k))
     }
   },
 
@@ -89,6 +90,7 @@ export default {
           this.snackbarText = 'Mots clés ajoutés avec succès.'
           this.snackbarState = 'success'
           this.snackbar = true
+          this.keywords.push(this.newKeywords)
         } catch (err) {
           this.$log.error(err)
           switch (err.response.status) {

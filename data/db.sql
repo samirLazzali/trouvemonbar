@@ -42,9 +42,9 @@ CREATE TABLE keyword (
 
 
 CREATE TABLE keyuser (
-  id        SERIAL PRIMARY KEY,
   idKeyWord INT REFERENCES keyword (id),
-  idUser    INT REFERENCES "user" (id)
+  idUser    INT REFERENCES "user" (id),
+  PRIMARY KEY (idKeyWord, idUser)
 );
 
 CREATE TABLE keybar (

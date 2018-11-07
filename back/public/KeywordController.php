@@ -4,6 +4,7 @@ use \Router\Router;
 
 $pdo =\Database\DatabaseSingleton::getInstance();
 $keywordRepository = new \Keyword\KeywordRepository($pdo);
+$userRepository = new \User\UserRepository($pdo);
 $keywordHydrator = new \Keyword\KeywordHydrator();
 
 Router::get('/api/keywords', function() use($keywordRepository, $keywordHydrator) {
@@ -14,7 +15,7 @@ Router::get('/api/keywords', function() use($keywordRepository, $keywordHydrator
     echo json_encode($keywordHydrator->extractAll($keywords), JSON_UNESCAPED_UNICODE);
 });
 
-Router::post('/api/keywords', function() use($keywordRepository, $keywordHydrator) {
+Router::post('/api/keywords', function($request) use($userRepository, $keywordRepository, $keywordHydrator) {
     if (!array_key_exists('HTTP_AUTHORIZATION', $_SERVER)) {
         http_response_code(401);
         echo json_encode(['error' => 'You are not authorized without JWT']);
@@ -24,7 +25,7 @@ Router::post('/api/keywords', function() use($keywordRepository, $keywordHydrato
     [, $token] = explode(' ', $_SERVER['HTTP_AUTHORIZATION']);
 
     try {
-        $userId = JwtHS256::validate($token, getenv('SECRET'));
+        $userId = \Token\JwtHS256::validate($token, getenv('SECRET'));
         $user = $userRepository->fetchFullById($userId);
     } catch (Exception $e) {
         http_response_code(401);
@@ -40,18 +41,18 @@ Router::post('/api/keywords', function() use($keywordRepository, $keywordHydrato
     $keyword_ids = array();
     foreach($keywords as $keyword)
     {
-        $keyword_id = $keywordHydrator->getIdByKeyword($keyword);
+        $keyword_id = $keywordRepository->getIdByKeyword($keyword);
         if($keyword_id != -1)
         {
             $keyword_ids[] = $keyword_id;
         }
     }
     if(count($keyword_ids) < 1) return http_response_code(400);
-
+    print_r($keyword_ids);
     $user_id = $user->getId();
-
+    print($user_id);
     // Insert thoses keyword_ids inside the keyword inside the table keyuser
-    if(!$keywordHydrator->addKeywordByUser($user_id,$keyword_ids))
+    if(!$keywordRepository->addKeywordByUser($user_id,$keyword_ids))
         return http_response_code(200);
     else
         return http_response_code(500);
