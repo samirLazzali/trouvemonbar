@@ -1,13 +1,13 @@
 <template>
   <v-toolbar color="transparent" flat>
-      <v-text-field
-        :value="value"
-        label="Un nom de bar :"
-        @input="$emit('input', $event)"
-        outline
-        clearable
-        solo
-      ></v-text-field>
+    <v-text-field
+      :value="value"
+      label="Un nom de bar :"
+      @input="$emit('input', $event)"
+      outline
+      clearable
+      solo
+    ></v-text-field>
 
     <v-btn
       large
@@ -19,14 +19,14 @@
 </template>
 
 <script>
-  export default {
-    name: 'AddSearchBar',
+export default {
+  name: 'AddSearchBar',
 
-    props: {
-      value: {
-        type: String,
-        required: true
-      }
+  props: {
+    value: {
+      type: String,
+      required: true
     }
   }
+}
 </script>

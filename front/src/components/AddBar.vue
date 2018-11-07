@@ -1,64 +1,106 @@
 <template>
-  <v-flex  xs12 lg8 xl6 @click="$emit('clicked', id)">
+  <v-flex xs12 lg8 xl6>
     <v-hover>
       <v-card
         slot-scope="{ hover }"
         :class="`elevation-${hover ? 12 : 2}`"
         class="mx-auto"
       >
-        <v-img
-          :aspect-ratio="16/9"
-          :src="`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=AIzaSyBL5wwReFZULzsHE0wJSifX_g43OMWR2jo`"
-        ></v-img>
+        <div @click="$emit('clicked', id)">
 
-        <v-card-title>
-          <div>
-            <span class="headline">{{ name }}</span>
+          <v-img
+            :aspect-ratio="16/9"
+            :src="photoReference"
+          ></v-img>
 
-            <div class="d-flex">
-              <v-rating
-                :value="name.length % 5"
-                color="amber"
-                dense
-                half-increments
-                readonly
-                size="14"
-              ></v-rating>
+          <v-card-title>
+            <div>
+              <span class="headline">{{ name }}</span>
 
-              <div class="ml-2 grey--text text--darken-2">
-                <span>1</span>
-                <span>({{ name.length }})</span>
+              <div class="d-flex">
+                <v-rating
+                  :value="rating % 5"
+                  color="amber"
+                  dense
+                  half-increments
+                  readonly
+                  size="14"
+                ></v-rating>
+
+                <div class="ml-2 grey--text text--darken-2">
+                  <span>1</span>
+                  <span>({{ name.length }})</span>
+                </div>
               </div>
             </div>
-          </div>
-        </v-card-title>
+          </v-card-title>
+        </div>
+        <v-card-actions>
+          <v-btn icon @click="$emit('black', bar)">
+            <v-icon>block</v-icon>
+          </v-btn>
+          <v-spacer></v-spacer>
+          <v-btn icon @click="$emit('liked', bar)">
+            <v-icon>favorite_border</v-icon>
+          </v-btn>
+        </v-card-actions>
       </v-card>
+
     </v-hover>
   </v-flex>
 </template>
 
 <script>
 export default {
-  name: 'Bar',
+  name: 'AddBar',
 
   props: {
     id: {
       type: Number,
       required: true
     },
-
     name: {
       type: String,
       required: true
     },
-
     photoReference: {
       type: String,
       required: true
     },
     rating: {
-      type: Number,
+      type: String,
       required: true
+    },
+    lat: {
+      type: String,
+      required: true
+    },
+    lng: {
+      type: String,
+      required: true
+    },
+    placeId: {
+      type: String,
+      required: true
+    },
+    address: {
+      type: String,
+      required: true
+    }
+  },
+
+  computed: {
+    bar () {
+      return {
+        id: this.id,
+        name: this.name,
+        photoReference: this.photoReference,
+        rating: this.rating,
+        placeId: this.placeId,
+        lat: this.lat,
+        lng: this.lng,
+        address: this.address
+      }
     }
   }
 }

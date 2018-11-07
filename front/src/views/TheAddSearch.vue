@@ -24,88 +24,142 @@
       </v-alert>
 
       <v-layout row wrap>
-        <bar
-          v-for="({ id, name, photoreference }, i) in bars"
+        <add-bar
+          v-for="({ id, name, photoreference , rating, address, lng, lat, placeId}, i) in bars"
           :key="i"
           v-bind:id="id"
           :name="name"
-          :address="address"
           :photo-reference="photoreference"
-          @clicked="barClicked"
-        ></bar>
+          :rating="rating"
+          :address="address"
+          :lng="lng"
+          :lat="lat"
+          :placeId="placeId"
+          @black="black"
+          @liked="liked"
+        ></add-bar>
+
       </v-layout>
     </v-container>
   </div>
 </template>
 
 <script>
-  import Bar from '@/components/AddBar'
-  import AddSearchBar from '@/components/AddSearchBar'
+import AddBar from '@/components/AddBar'
+import AddSearchBar from '@/components/AddSearchBar'
+// @keyup.enter="submit"
 
-  export default {
-    name: 'TheAddSearch',
+export default {
+  name: 'TheAddSearch',
 
-    components: {
-      Bar,
-      AddSearchBar
-    },
+  components: {
+    AddBar,
+    AddSearchBar
+  },
 
-    props: {
-      query: {
-        type: Object,
-        required: true
+  props: {
+    query: {
+      type: Object,
+      required: true
+    }
+  },
+
+  data () {
+    return {
+      selectedText: '',
+      bars: [],
+      loading: true,
+      alert: false
+    }
+  },
+
+  watch: {
+    query: {
+      immediate: true,
+      handler () {
+        // this.$log.debug(this.query)
+
+        this.selectedText = this.query.q
+        this.loading = true
+
+        this.$api.addBars(this.query)
+          .then(bars => {
+            this.bars = bars
+            this.alert = false
+          })
+          .catch(err => {
+            this.$log.error(err)
+
+            if (err.response.status === 404) this.alert = true
+          })
+          .finally(() => (this.loading = false))
       }
+    }
+  },
+
+  methods: {
+    search () {
+      if (this.selectedText === this.query.q) return
+      if (this.selectedText.length === 0) return
+
+      this.bars = []
+      this.loading = true
+      this.$router.push(`/addsearch?q=${this.selectedText.toLowerCase()}`)
     },
-
-    data() {
-      return {
-        selectedText: "",
-        bars: [],
-        loading: true,
-        alert: false
-      }
-    },
-
-
-    watch: {
-      query: {
-        immediate: true,
-        handler() {
-          this.$log.debug(this.query)
-
-          this.selectedText = this.query.q;
-          this.loading = true
-
-          this.$api.addBars(this.query)
-            .then(bars => {
-              this.bars = bars
-              this.alert = false
-            })
-            .catch(err => {
-              this.$log.error(err)
-
-              if (err.response.status === 404) this.alert = true
-            })
-            .finally(() => (this.loading = false))
+    async liked (bar) {
+      try {
+        await this.$api.likedListBar({
+          data: { bar, 'list': 'liked' }
+        })
+      } catch (err) {
+        this.$log.error(err)
+        switch (err.response.status) {
+          case 400:
+            this.snackbarText = 'Paramètres invalides.'
+            this.snackbarState = 'error'
+            break
+          case 418:
+            this.snackbarText = 'Email ou login déjà utilisé.'
+            this.snackbarState = 'error'
+            break
+          case 500:
+            this.snackbarText = 'Erreur interne.'
+            this.snackbarState = 'error'
+            break
+          default:
+            this.snackbarText = 'Une erreur s\'est produite'
+            this.snackbarState = 'error'
+            break
         }
       }
     },
-
-    methods: {
-      search() {
-        if (this.selectedText === this.query.q) return
-        if (this.selectedText.length === 0) return
-
-        this.bars = []
-        this.loading = true
-        this.$router.push(`/addsearch?q=${this.selectedText}`)
-      },
-
-      barClicked(id) {
-        this.$log.debug('clicked', id)
-
-        this.$router.push(`/bars/${id}`)
+    async black (bar) {
+      try {
+        await this.$api.blackListBar({
+          data: { bar, 'list': 'black' }
+        })
+      } catch (err) {
+        this.$log.error(err)
+        switch (err.response.status) {
+          case 400:
+            this.snackbarText = 'Paramètres invalides.'
+            this.snackbarState = 'error'
+            break
+          case 418:
+            this.snackbarText = 'Email ou login déjà utilisé.'
+            this.snackbarState = 'error'
+            break
+          case 500:
+            this.snackbarText = 'Erreur interne.'
+            this.snackbarState = 'error'
+            break
+          default:
+            this.snackbarText = 'Une erreur s\'est produite'
+            this.snackbarState = 'error'
+            break
+        }
       }
     }
   }
+}
 </script>

@@ -53,4 +53,55 @@ class BarRepository
 
         return $request->fetchAll(\PDO::FETCH_COLUMN);
     }
+
+    public function isStored($id)
+    {
+        // retourn id ou -1;
+        $request = $this->connection->prepare('SELECT id FROM "bar" WHERE placeId = :placeId');
+        $request->bindParam(':placeId', $id, \PDO::PARAM_INT);
+
+        if (!$request->execute()) return null;
+
+        $idBar = $request->fetch();
+        if (!$idBar) return null;
+        return $idBar;
+    }
+
+    public function creatBar($bar)
+    {
+        $name = $bar->getName();
+        $address = $bar->getAddress();
+        $photoreference = $bar->getPhoto();
+        $rating = $bar->getRating();
+        $placeId = $bar->getPlaceId();
+        $lat = $bar->getLat();
+        $lng = $bar->getLng();
+
+        $stmt = $this->connection->prepare('INSERT INTO bar(name,rating,photoReference,placeId,address,lat,lng) VALUES (:name,:rating,:photoreference,:placeId,:address,:lat,:lng)');
+        $stmt->bindParam(':name',$name, \PDO::PARAM_STR);
+        $stmt->bindParam(':address',$address, \PDO::PARAM_STR);
+        $stmt->bindParam(':photoreference',$photoreference, \PDO::PARAM_STR);
+        $stmt->bindParam(':rating',$rating, \PDO::PARAM_STR);
+        $stmt->bindParam(':placeId',$placeId, \PDO::PARAM_STR);
+        $stmt->bindParam(':lat',$lat, \PDO::PARAM_STR);
+        $stmt->bindParam(':lng',$lng, \PDO::PARAM_STR);
+        return $stmt->execute();
+    }
+
+
+    public function addBarInList($idUser, $idBar, $listname)
+    {
+        // 1 get id of list - SELECT id from list where name = :black;
+        $request = $this->connection->prepare('SELECT id from list where name = :list');
+        $request->bindParam(':list', $listname, \PDO::PARAM_INT);
+        if (!$request->execute()) return null;
+        $idList = strval($request->fetch()[0]);
+        if (!$idList) return null;
+        // 2 insert on barlist
+        $stmt = $this->connection->prepare('INSERT INTO barList (idBar, idUser, idList) VALUES (:idBar, :idUser, :idList)');
+        $stmt->bindParam(':idBar', $idBar, \PDO::PARAM_STR);
+        $stmt->bindParam(':idUser', $idUser, \PDO::PARAM_STR);
+        $stmt->bindParam(':idList', $idList, \PDO::PARAM_STR);
+        return $stmt->execute();
+    }
 }

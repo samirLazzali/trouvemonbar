@@ -5,6 +5,7 @@ require_once '../vendor/autoload.php';
 require_once __DIR__ . '/KeywordController.php';
 require_once __DIR__ . '/LoginController.php';
 require_once __DIR__ . '/UserController.php';
+require_once __DIR__ . '/SearchController.php';
 
 use \Router\Router;
 

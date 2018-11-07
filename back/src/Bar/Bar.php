@@ -9,6 +9,7 @@ class Bar
     private $keywords = [];
     private $photoreference;
     private $rating;
+    private $placeId;
     private $lat;
     private $lng;
 
@@ -99,5 +100,17 @@ class Bar
     {
         $this->lng = $lng;
         return $this;
+    }
+    public function getPlaceId()
+    {
+        return $this->placeId;
+    }
+
+
+    public function setPlaceId($placeId)
+    {
+        $this->placeId = $placeId;
+        return $this;
+
     }
 }

@@ -37,6 +37,10 @@ class BarHydrator
         {
             $data['lng'] = $bar->getLng();
         }
+        if($bar->getPlaceId())
+        {
+            $data['placeId'] = $bar->getPlaceId();
+        }
 
         return $data;
     }

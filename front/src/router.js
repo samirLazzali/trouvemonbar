@@ -73,16 +73,18 @@ export default new Router({
       path: '/addbar',
       name: 'addbar',
       props: route => ({query: route.query}),
-      component: () => import('./views/TheAddHome.vue')
-    },{
+      component: () => import('./views/TheAddHome.vue'),
+      beforeEnter: ifNotAuthenticated
+
+    },
+    {
       path: '/addsearch',
       name: 'addsearch',
       props: route => ({ query: route.query }),
       component: () => import('./views/TheAddSearch.vue'),
       beforeEnter: (to, _, next) => {
         const query = to.query.q
-
-        if (query && query.trim()) {
+        if (query && query.trim() && ifNotAuthenticated) {
           next()
         } else {
           next('/')

@@ -2,8 +2,9 @@
 
 DROP TABLE IF EXISTS keyuser;
 DROP TABLE IF EXISTS keybar;
-DROP TABLE IF EXISTS blacklist;
+DROP TABLE IF EXISTS barlist;
 DROP TABLE IF EXISTS bar;
+DROP TABLE IF EXISTS list;
 DROP TABLE IF EXISTS keyword;
 DROP TABLE IF EXISTS keycategory;
 DROP TABLE IF EXISTS "user";
@@ -54,11 +55,21 @@ CREATE TABLE keybar (
   idBar       INT REFERENCES bar (id)
 );
 
-CREATE TABLE blacklist (
+CREATE TABLE list (
+  id     SERIAL PRIMARY KEY,
+  name   VARCHAR
+);
+
+CREATE TABLE barList (
   id     SERIAL PRIMARY KEY,
   idBar  INT REFERENCES bar (id),
-  idUser INT REFERENCES "user" (id)
+  idUser INT REFERENCES "user" (id),
+  idList INT REFERENCES list (id)
 );
+
+
+INSERT INTO list (name) VALUES('black'),('liked');
+SELECT * from list;
 
 INSERT INTO "user" (pseudo, email, hash, role)
 VALUES ('John', 'doe@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
@@ -520,19 +531,6 @@ VALUES (1, 1, 1),
        (99, 0, 11),
        (100, 0, 1);
 
-INSERT INTO blacklist (idBar, idUser)
-VALUES (1, 1),
-       (2, 2),
-       (3, 3),
-       (4, 4),
-       (5, 5),
-       (6, 6),
-       (7, 7),
-       (8, 8),
-       (9, 9),
-       (10, 10),
-       (11, 11),
-       (1, 12);
 
 -- select * from keyuser;
 -- select * from keyword;
