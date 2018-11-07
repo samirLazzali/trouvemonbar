@@ -14,11 +14,11 @@
       <v-layout align-center justify-center>
         <v-flex xs12 sm8 md6 lg4>
           <v-card class="elevation-12">
-            <v-toolbar dark color="success">
+            <v-toolbar dark color="primary">
               <v-toolbar-title>Inscription</v-toolbar-title>
               <v-spacer></v-spacer>
             </v-toolbar>
-            <v-card-text color="success">
+            <v-card-text color="primary">
               <v-form v-model="isValid" ref="signup" lazy-validation>
                 <v-text-field
                   label="Pseudo"
@@ -58,7 +58,7 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn
-                    color="success"
+                    color="secondary"
                     @click="submit"
                     :disabled="!isValid"
                   >
