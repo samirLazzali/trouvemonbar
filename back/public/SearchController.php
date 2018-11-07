@@ -100,16 +100,16 @@ Router::get('/api/addbar\?keywords\=(.+)', function($request) use($barHydrator) 
 });
 
 Router::post('/api/addbar', function($request) use($barRepository, $barHydrator) {
-    if (is_null($request->body)) return http_response_code(400);
+    if (is_null($request->body->data)) return http_response_code(400);
 
     /*
     if (!$userValidator->validate($request->body)) {
         return http_response_code(400);
     }
     */
-    $isStored = $barRepository->isStored($request->body->data->bar->placeId);
-    var_dump($isStored);
-    if($isStored == null) {
+    $barId = $barRepository->isStored($request->body->data->bar->placeId);
+
+    if($barId == null) {
         // inserrer le bar et retourner son id
         $tmpBar = (new \Bar\Bar())
             ->setName($request->body->data->bar->name)
@@ -119,8 +119,9 @@ Router::post('/api/addbar', function($request) use($barRepository, $barHydrator)
             ->setLat($request->body->data->bar->lat)
             ->setLng($request->body->data->bar->lng)
             ->setPlaceId($request->body->data->bar->placeId);
-        $barRepository->creatBar($tmpBar);
-        // return last insert !
+        $barId = $barRepository->creatBar($tmpBar)[0];
     }
+    // 
+    $barRepository->addBarInList($request->body->data->userPseudo,$barId,$request->body->data->list);
 
 });

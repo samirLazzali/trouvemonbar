@@ -85,11 +85,12 @@ class BarRepository
         $stmt->bindParam(':placeId',$placeId, \PDO::PARAM_STR);
         $stmt->bindParam(':lat',$lat, \PDO::PARAM_STR);
         $stmt->bindParam(':lng',$lng, \PDO::PARAM_STR);
-        return $stmt->execute();
+        $stmt->execute();
+        return $this->connection->lastInsertId();
     }
 
 
-    public function addBarInList($idUser, $idBar, $listname)
+    public function addBarInList($pseudoUser, $idBar, $listname)
     {
         // 1 get id of list - SELECT id from list where name = :black;
         $request = $this->connection->prepare('SELECT id from list where name = :list');
@@ -97,7 +98,15 @@ class BarRepository
         if (!$request->execute()) return null;
         $idList = strval($request->fetch()[0]);
         if (!$idList) return null;
-        // 2 insert on barlist
+
+        // 2 get id of user ;
+        $request = $this->connection->prepare('SELECT id from "user" where pseudo = :pseudoUser');
+        $request->bindParam(':pseudoUser', $pseudoUser, \PDO::PARAM_STR);
+        if (!$request->execute()) return null;
+        $idUser = strval($request->fetch()[0]);
+        if (!$idUser) return null;
+
+        // 3 insert on barlist
         $stmt = $this->connection->prepare('INSERT INTO barList (idBar, idUser, idList) VALUES (:idBar, :idUser, :idList)');
         $stmt->bindParam(':idBar', $idBar, \PDO::PARAM_STR);
         $stmt->bindParam(':idUser', $idUser, \PDO::PARAM_STR);

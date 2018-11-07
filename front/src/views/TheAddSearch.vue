@@ -109,7 +109,7 @@ export default {
     async liked (bar) {
       try {
         await this.$api.likedListBar({
-          data: { bar, 'list': 'liked' }
+          data: { bar, 'list': 'liked', 'userPseudo': this.$store.state.user.pseudo }
         })
       } catch (err) {
         this.$log.error(err)
@@ -136,7 +136,7 @@ export default {
     async black (bar) {
       try {
         await this.$api.blackListBar({
-          data: { bar, 'list': 'black' }
+          data: { bar, 'list': 'black', 'userPseudo': this.$store.state.user.pseudo }
         })
       } catch (err) {
         this.$log.error(err)
