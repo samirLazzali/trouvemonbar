@@ -24,7 +24,7 @@
 
             <div class="d-flex">
               <v-rating
-                :value="Number.parseFloat(rating)"
+                :value="name.length % 5"
                 color="amber"
                 dense
                 half-increments
@@ -33,8 +33,8 @@
               ></v-rating>
 
               <div class="ml-2 grey--text text--darken-2">
-                <span>{{ rating }}</span>
-                <span>(0)</span>
+                <span>1</span>
+                <span>({{ name.length }})</span>
               </div>
             </div>
           </div>
@@ -69,11 +69,6 @@ export default {
     },
 
     photoReference: {
-      type: String,
-      required: true
-    },
-
-    rating: {
       type: String,
       required: true
     }
