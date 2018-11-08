@@ -12,13 +12,12 @@ class UserRepository
         $this->keywordRepository = new \Keyword\KeywordRepository($connection);
     }
 
-    public function fetchByLoginAndHash(string $login, string $hash)
+    public function fetchByLogin(string $login)
     {
-        $stmt = $this->connection->prepare('SELECT id, email, pseudo, role FROM "user" WHERE (LOWER(email) = LOWER(:email) OR LOWER(pseudo) = LOWER(:pseudo)) AND hash = :hash');
+        $stmt = $this->connection->prepare('SELECT id, email, hash, pseudo, role FROM "user" WHERE (LOWER(email) = LOWER(:email) OR LOWER(pseudo) = LOWER(:pseudo))');
         $stmt->setFetchMode(\PDO::FETCH_CLASS, User::class);
         $stmt->bindParam(':email', $login, \PDO::PARAM_STR);
         $stmt->bindParam(':pseudo', $login, \PDO::PARAM_STR);
-        $stmt->bindParam(':hash', $hash, \PDO::PARAM_STR);
 
         if (!$stmt->execute()) return false;
 

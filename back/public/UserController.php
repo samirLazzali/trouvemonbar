@@ -32,9 +32,11 @@ Router::post('/api/users', function($request) use($userRepository, $userValidato
         return http_response_code(400);
     }
 
+    $hash = password_hash($request->body->password,PASSWORD_BCRYPT);
+
     $user = (new \User\User())
         ->setEmail(strtolower($request->body->email))
-        ->setHash(hash('sha256', $request->body->password))
+        ->setHash($hash)
         ->setPseudo($request->body->pseudo)
         ->setRole('USER');
 
@@ -72,10 +74,6 @@ Router::put('/api/users/{}', function($request) use($userRepository) {
     // Check parameter
     if (is_null($request->body) || !(isset($request->params[0]) && isset($request->body->password) && isset($request->body->currentPassword))) return http_response_code(400);
 
-    $curent_password = $request->body->currentPassword;
-    $current_hash = hash('sha256', $curent_password);
-
-
     // Get all the information from the body
     $str_id = $request->params[0];
     $id = ctype_digit($str_id) ? intval($str_id) : null;
@@ -89,8 +87,8 @@ Router::put('/api/users/{}', function($request) use($userRepository) {
         return http_response_code(401);
     }
 
-
-    if($user->getHash() != $current_hash)
+    $current_password = $request->body->currentPassword;
+    if(!password_verify($current_password,$user->getHash()))
     {
         return http_response_code(403);
     }
@@ -99,9 +97,8 @@ Router::put('/api/users/{}', function($request) use($userRepository) {
 
     if(strlen($new_password) < 3) return http_response_code(400);
 
-    $new_hash = hash('sha256', $new_password);
-
-    if(!$userRepository->updatePassword($id, $new_hash))
+    $new_hash = password_hash($new_password,PASSWORD_BCRYPT);
+    if($userRepository->updatePassword($id, $new_hash))
     {
         return http_response_code(200);
     }
