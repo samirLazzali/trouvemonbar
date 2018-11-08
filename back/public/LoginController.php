@@ -6,7 +6,7 @@ $userHydrator = new \User\UserHydrator();
 $userRepository = new \User\UserRepository($pdo);
 
 Router::post('/api/login', function($request) use($userRepository, $userHydrator) {
-    //if (!(!is_null($request->body) && isset($request->body->password) && strlen($request->body->password)>3)) return http_response_code(400);
+    if (is_null($request->body) || !(isset($request->body->password)) || (strlen($request->body->password) < 3)) return http_response_code(400);
 
     $login = $request->body->login;
     $user = $userRepository->fetchByLogin($login);
