@@ -60,11 +60,12 @@ CREATE TABLE blacklist (
   idUser INT REFERENCES "user" (id)
 );
 
-CREATE TABLE comments (
-  id      SERIAL PRIMARY KEY,
-  idBar   INT REFERENCES bar (id),
-  idUser  INT REFERENCES "user" (id),
-  content text
+CREATE TABLE comment (
+  id        SERIAL PRIMARY KEY,
+  idBar     INT REFERENCES bar (id),
+  idUser    INT REFERENCES "user" (id),
+  content   text,
+  dateCom   timestamp
 );
 
 INSERT INTO "user" (pseudo, email, hash, role)
@@ -541,6 +542,8 @@ VALUES (1, 1),
        (11, 11),
        (1, 12);
 
+INSERT INTO comment(idBar, idUser, content,dateCom)
+VALUES (1,1,'un avis','2018-06-22');
 -- select * from keyuser;
 -- select * from keyword;
 -- select * from bar;
