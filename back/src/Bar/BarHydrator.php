@@ -17,8 +17,10 @@ class BarHydrator
         if ($bar->getAddress()) {
             $data['address'] = $bar->getAddress();
         }
-        if($bar->getKeywords()) {
-            $data['keywords'] = $bar->getKeywords();
+        if($bar->getKeywords())
+        {
+            $keywordHydrator = new \Keyword\KeywordHydrator();
+            $data['keywords'] = $keywordHydrator->extractAll($bar->getKeywords());
         }
         if($bar->getRating()) {
             $data['rating'] = $bar->getRating();

@@ -10,5 +10,13 @@ export const user = {
   },
   updateUser (user) {
     return axios.put(`/api/users/${user.id}`, user)
+  },
+  addKeywords (id, keywordsIds) {
+    return axios.post(`/api/users/${id}/keywords`, {
+      keywordsIds: keywordsIds
+    })
+  },
+  deleteKeyword (userId, keywordId) {
+    return axios.delete(`/api/users/${userId}/keywords/${keywordId}`)
   }
 }

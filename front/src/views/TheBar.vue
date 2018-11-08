@@ -35,7 +35,7 @@
                   :key="keyword"
                   outline color="green darken-1"
                 >
-                  {{ keyword }}
+                  {{ keyword.name }}
                 </v-chip>
                 <v-rating
                   v-model="bar.rating"

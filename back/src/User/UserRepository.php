@@ -4,10 +4,12 @@ namespace User;
 class UserRepository
 {
     private $connection;
+    private $keywordRepository;
 
     public function __construct($connection)
     {
         $this->connection = $connection;
+        $this->keywordRepository = new \Keyword\KeywordRepository($connection);
     }
 
     public function fetchByLoginAndHash(string $login, string $hash)
@@ -73,12 +75,10 @@ class UserRepository
         $user = $stmt->fetch();
         if (!$user) return false;
 
-        $stmt = $this->connection->prepare('SELECT kw.name FROM "user" u, keyword kw, keyuser ku WHERE u.id = :id AND u.id = ku.idUser AND ku.idKeyWord = kw.id');
-        $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
+        $keywords = $this->keywordRepository->getKeywordsByUserId($id);
+        if($keywords != null)
+            $user->addKeywords($keywords);
 
-        if (!$stmt->execute()) return false;
-
-        $user->addKeywords($stmt->fetchAll(\PDO::FETCH_COLUMN));
         return $user;
     }
 
@@ -94,12 +94,10 @@ class UserRepository
         $user = $stmt->fetch();
         if (!$user) return false;
 
-        $stmt = $this->connection->prepare('SELECT kw.name FROM "user" u, keyword kw, keyuser ku WHERE u.id = :id AND u.id = ku.idUser AND ku.idKeyWord = kw.id');
-        $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
+        $keywords = $this->keywordRepository->getKeywordsByUserId($id);
+        if($keywords != null)
+            $user->addKeywords($keywords);
 
-        if (!$stmt->execute()) return false;
-
-        $user->addKeywords($stmt->fetchAll(\PDO::FETCH_COLUMN));
         return $user;
     }
 

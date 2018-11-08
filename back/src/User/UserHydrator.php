@@ -23,8 +23,9 @@ class UserHydrator
         if ($user->getRole()) {
             $data['role'] = $user->getRole();
         }
-        if (sizeof($user->getkeywords()) > 0) {
-            $data['keywords'] = $user->getKeywords();
+        if (count($user->getkeywords()) > 0) {
+            $keywordHydrator = new \Keyword\KeywordHydrator();
+            $data['keywords'] = $keywordHydrator->extractAll($user->getKeywords());
         }
 
         return $data;
