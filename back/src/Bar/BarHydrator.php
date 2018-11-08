@@ -22,21 +22,20 @@ class BarHydrator
             $keywordHydrator = new \Keyword\KeywordHydrator();
             $data['keywords'] = $keywordHydrator->extractAll($bar->getKeywords());
         }
-        if($bar->getRating())
-        {
+        if($bar->getRating()) {
             $data['rating'] = $bar->getRating();
         }
-        if($bar->getPhoto())
-        {
+        if($bar->getPhoto()) {
             $data['photoreference'] = $bar->getPhoto();
         }
-        if($bar->getLat())
-        {
+        if($bar->getLat()) {
             $data['lat'] = $bar->getLat();
         }
-        if($bar->getLng())
-        {
+        if($bar->getLng()) {
             $data['lng'] = $bar->getLng();
+        }
+        if($bar->getComments()) {
+            $data['comments'] = $bar->getComments();
         }
 
         return $data;

@@ -5,11 +5,13 @@ class BarRepository
 {
     private $connection;
     private $keywordRepository;
+    private $commentRepository;
 
     public function __construct($connection)
     {
         $this->connection = $connection;
         $this->keywordRepository = new \Keyword\KeywordRepository($connection);
+        $this->commentRepository = new \Comment\CommentRepository($connection);
     }
 
     public function fetchById($id)
@@ -21,7 +23,6 @@ class BarRepository
         if (!$request->execute()) return null;
 
         $bar = $request->fetch();
-        if (!$bar) return null;
 
         $bar->addKeywords($this->keywordRepository->getKeywordsByBarId($bar->getId()));
 
