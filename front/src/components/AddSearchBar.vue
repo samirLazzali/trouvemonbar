@@ -2,16 +2,15 @@
   <v-toolbar color="transparent" flat>
     <v-text-field
       :value="value"
-      label="Un nom de bar :"
+      label="Un nom de bar"
       @input="$emit('input', $event)"
-      outline
       clearable
       solo
     ></v-text-field>
 
     <v-btn
       large
-      color="success"
+      color="secondary"
       @click="$emit('search', value)"
       v-text="'J\'ai soif !'"
     ></v-btn>

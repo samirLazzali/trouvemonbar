@@ -4,8 +4,9 @@
       <v-layout align-center justify-center row wrap>
         <v-flex xs12>
           <v-card color="transparent" flat>
-            <v-card-text class="light-green--text">
-              <h1 class="text-xs-center"> Alors {{ user ? user.pseudo : '' }}, tu trouves qu'un bar manque à la liste ?</h1>
+            <v-card-text class="purple-color">
+              <h1 class="text-xs-center"> Alors {{ user ? user.pseudo : '' }}, tu trouves qu'un bar manque à la liste
+                ?</h1>
               <h1 class="text-xs-center">On s'occupe de tout !</h1>
             </v-card-text>
           </v-card>
@@ -23,33 +24,33 @@
 </template>
 
 <script>
-  import AddSearchBar from '@/components/AddSearchBar'
+import AddSearchBar from '@/components/AddSearchBar'
 
-  export default {
-    name: 'AddHome',
+export default {
+  name: 'AddHome',
 
-    components: {
-      AddSearchBar
-    },
+  components: {
+    AddSearchBar
+  },
 
-    data () {
-      return {
-        selectedText: ""
-      }
-    },
+  data () {
+    return {
+      selectedText: ''
+    }
+  },
 
-    computed: {
-      user () {
-        return this.$store.state.user
-      }
-    },
+  computed: {
+    user () {
+      return this.$store.state.user
+    }
+  },
 
-    methods: {
-      search () {
-        if (this.selectedText.length === 0) return
+  methods: {
+    search () {
+      if (this.selectedText.length === 0) return
 
-        this.$router.push(`/addsearch?q=${this.selectedText}`)
-      }
+      this.$router.push(`/addsearch?q=${this.selectedText}`)
     }
   }
+}
 </script>

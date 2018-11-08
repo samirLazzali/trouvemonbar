@@ -121,7 +121,8 @@ Router::post('/api/addbar', function($request) use($barRepository, $barHydrator)
             ->setPlaceId($request->body->data->bar->placeId);
         $barId = $barRepository->creatBar($tmpBar)[0];
     }
-    // 
+    // ajout du bar
+    // TODO : verifier qu'il n'est pas deja liké
     $barRepository->addBarInList($request->body->data->userPseudo,$barId,$request->body->data->list);
 
 });

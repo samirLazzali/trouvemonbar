@@ -35,6 +35,12 @@
         ></bar>
       </v-layout>
     </v-container>
+    <v-btn
+      color="secondary"
+      @click='addbar'
+    >
+      Un bar manque à la liste ?
+    </v-btn>
   </div>
 </template>
 
@@ -101,6 +107,9 @@ export default {
   },
 
   methods: {
+    addbar () {
+      this.$router.push(`/addbar`)
+    },
     search () {
       if (this.selectedKeywords.join(',') === this.query.q) return
       if (this.selectedKeywords.length === 0) return

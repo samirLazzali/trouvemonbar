@@ -10,7 +10,7 @@
     <v-container fluid grid-list-xl>
       <v-progress-linear
         v-if="loading"
-        color="success"
+        color="secondary"
         height="4"
         indeterminate
       ></v-progress-linear>
@@ -90,7 +90,7 @@ export default {
           .catch(err => {
             this.$log.error(err)
 
-            if (err.response.status === 404) this.alert = true
+            if (err.response.status === 500) this.alert = true
           })
           .finally(() => (this.loading = false))
       }
@@ -113,24 +113,6 @@ export default {
         })
       } catch (err) {
         this.$log.error(err)
-        switch (err.response.status) {
-          case 400:
-            this.snackbarText = 'Paramètres invalides.'
-            this.snackbarState = 'error'
-            break
-          case 418:
-            this.snackbarText = 'Email ou login déjà utilisé.'
-            this.snackbarState = 'error'
-            break
-          case 500:
-            this.snackbarText = 'Erreur interne.'
-            this.snackbarState = 'error'
-            break
-          default:
-            this.snackbarText = 'Une erreur s\'est produite'
-            this.snackbarState = 'error'
-            break
-        }
       }
     },
     async black (bar) {
@@ -140,24 +122,6 @@ export default {
         })
       } catch (err) {
         this.$log.error(err)
-        switch (err.response.status) {
-          case 400:
-            this.snackbarText = 'Paramètres invalides.'
-            this.snackbarState = 'error'
-            break
-          case 418:
-            this.snackbarText = 'Email ou login déjà utilisé.'
-            this.snackbarState = 'error'
-            break
-          case 500:
-            this.snackbarText = 'Erreur interne.'
-            this.snackbarState = 'error'
-            break
-          default:
-            this.snackbarText = 'Une erreur s\'est produite'
-            this.snackbarState = 'error'
-            break
-        }
       }
     }
   }
