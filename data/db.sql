@@ -67,11 +67,12 @@ CREATE TABLE barList (
   idList INT REFERENCES list (id)
 );
 
-CREATE TABLE comments (
-  id      SERIAL PRIMARY KEY,
-  idBar   INT REFERENCES bar (id),
-  idUser  INT REFERENCES "user" (id),
-  content text
+CREATE TABLE comment (
+  id        SERIAL PRIMARY KEY,
+  idBar     INT REFERENCES bar (id),
+  idUser    INT REFERENCES "user" (id),
+  content   text,
+  dateCom   timestamp
 );
 
 INSERT INTO "user" (pseudo, email, hash, role)
@@ -535,6 +536,8 @@ VALUES (1, 1, 1),
        (100, 0, 1);
 
 
+INSERT INTO comment(idBar, idUser, content,dateCom)
+VALUES (1,1,'un avis','2018-06-22');
 -- select * from keyuser;
 -- select * from keyword;
 -- select * from bar;

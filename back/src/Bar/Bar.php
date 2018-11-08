@@ -7,6 +7,7 @@ class Bar
     private $name;
     private $address;
     private $keywords = [];
+    private $arrayComm = [];
     private $photoreference;
     private $rating;
     private $placeId;
@@ -55,6 +56,20 @@ class Bar
     {
         if (isset($keywords) && sizeof($keywords) > 0) {
             array_push($this->keywords, ...$keywords);
+        }
+        return $this;
+    }
+
+    public function getComments()
+    {
+        return $this->arrayComm;
+    }
+
+    public function addComments(array $comments)
+    {
+        if (isset($comments) && sizeof($comments) > 0)
+        {
+            array_push($this->arrayComm, ...$comments);
         }
         return $this;
     }
