@@ -16,13 +16,16 @@ class CommentHydrator
         }
         if($comment->getIdUser())
         {
-            $data['idUser'] = $comment->getIdUser();
+            $data['iduser'] = $comment->getIdUser();
         }
         if ($comment->getContent()) {
             $data['content'] = $comment->getContent();
         }
         if ($comment->getDate()) {
             $data['dateCom'] = $comment->getDate();
+        }
+        if ($comment->getUserName()) {
+            $data['nameuser'] = $comment->getUserName();
         }
         return $data;
     }

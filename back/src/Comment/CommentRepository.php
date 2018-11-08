@@ -8,11 +8,12 @@ class CommentRepository
     public function __construct($connection)
     {
         $this->connection = $connection;
+        $this->userRepository = new \User\UserRepository($connection);
     }
 
     public function fetchByIdBar($idBar)
     {
-        $request = $this->connection->prepare('SELECT idBar,idUser,content,dateCom FROM "comment" WHERE idBar = :id');
+        $request = $this->connection->prepare('SELECT idBar,idUser,content,dateCom FROM comment WHERE idBar = :id');
         $request->setFetchMode(\PDO::FETCH_CLASS, Comment::class);
         $request->bindParam(':id', $idBar, \PDO::PARAM_INT);
 
@@ -20,6 +21,9 @@ class CommentRepository
 
         $comments = $request->fetchAll(\PDO::FETCH_CLASS);
         if (!$comments) return null;
+        foreach($comments as $comment) {
+            $comment->pseudo = $this->userRepository->fetchById($comment->iduser)->getPseudo();
+        }
         return $comments;
     }
 

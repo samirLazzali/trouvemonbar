@@ -8,6 +8,7 @@ class Comment
     private $idUser;
     private $content;
     private $dateCom;
+    private $pseudo;
 
     public function getId()
     {
@@ -21,7 +22,7 @@ class Comment
 
     public function getIdUser()
     {
-        return $this->idUser;
+        return $this->iduser;
     }
 
     public function getContent()
@@ -31,7 +32,12 @@ class Comment
 
     public function getDate()
     {
-        return $this->date;
+        return $this->dateCom;
+    }
+
+    public function getPseudo()
+    {
+        return $this->pseudo;
     }
 
     public function setId(int $id)
@@ -63,4 +69,12 @@ class Comment
         $this->dateCom = $dateCom;
         return $this;
     }
+
+    public function setPseudo(string $pseudo)
+    {
+        $this->pseudo = $pseudo;
+        return $this;
+    }
+
+
 }
