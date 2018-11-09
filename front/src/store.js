@@ -33,7 +33,10 @@ export default new Vuex.Store({
           .then(res => {
             const token = res.headers.authorization
             localStorage.setItem('user-token', token)
-            localStorage.setItem('user', JSON.stringify(res.data))
+            localStorage.setItem('user', JSON.stringify({
+              id: res.data.id,
+              pseudo: res.data.pseudo
+            }))
             commit('user', res.data)
             axios.defaults.headers.common['Authorization'] = token
             resolve()
@@ -59,12 +62,6 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios.get('/api/keywords')
           .then(res => res.data)
-          .then(keywords => {
-            return keywords
-              .map(k => k.name)
-              .map(name => name.charAt(0).toUpperCase() + name.slice(1))
-              .sort((a, b) => a.localeCompare(b))
-          })
           .then(keywords => {
             commit('keywords', keywords)
             resolve()

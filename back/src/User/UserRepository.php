@@ -4,19 +4,20 @@ namespace User;
 class UserRepository
 {
     private $connection;
+    private $keywordRepository;
 
     public function __construct($connection)
     {
         $this->connection = $connection;
+        $this->keywordRepository = new \Keyword\KeywordRepository($connection);
     }
 
-    public function fetchByLoginAndHash(string $login, string $hash)
+    public function fetchByLogin(string $login)
     {
-        $stmt = $this->connection->prepare('SELECT id, email, pseudo, role FROM "user" WHERE (LOWER(email) = LOWER(:email) OR LOWER(pseudo) = LOWER(:pseudo)) AND hash = :hash');
+        $stmt = $this->connection->prepare('SELECT id, email, hash, pseudo, role FROM "user" WHERE (LOWER(email) = LOWER(:email) OR LOWER(pseudo) = LOWER(:pseudo))');
         $stmt->setFetchMode(\PDO::FETCH_CLASS, User::class);
         $stmt->bindParam(':email', $login, \PDO::PARAM_STR);
         $stmt->bindParam(':pseudo', $login, \PDO::PARAM_STR);
-        $stmt->bindParam(':hash', $hash, \PDO::PARAM_STR);
 
         if (!$stmt->execute()) return false;
 
@@ -73,12 +74,10 @@ class UserRepository
         $user = $stmt->fetch();
         if (!$user) return false;
 
-        $stmt = $this->connection->prepare('SELECT kw.name FROM "user" u, keyword kw, keyuser ku WHERE u.id = :id AND u.id = ku.idUser AND ku.idKeyWord = kw.id');
-        $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
+        $keywords = $this->keywordRepository->getKeywordsByUserId($id);
+        if($keywords != null)
+            $user->addKeywords($keywords);
 
-        if (!$stmt->execute()) return false;
-
-        $user->addKeywords($stmt->fetchAll(\PDO::FETCH_COLUMN));
         return $user;
     }
 
@@ -94,12 +93,10 @@ class UserRepository
         $user = $stmt->fetch();
         if (!$user) return false;
 
-        $stmt = $this->connection->prepare('SELECT kw.name FROM "user" u, keyword kw, keyuser ku WHERE u.id = :id AND u.id = ku.idUser AND ku.idKeyWord = kw.id');
-        $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
+        $keywords = $this->keywordRepository->getKeywordsByUserId($id);
+        if($keywords != null)
+            $user->addKeywords($keywords);
 
-        if (!$stmt->execute()) return false;
-
-        $user->addKeywords($stmt->fetchAll(\PDO::FETCH_COLUMN));
         return $user;
     }
 
