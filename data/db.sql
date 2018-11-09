@@ -42,9 +42,9 @@ CREATE TABLE keyword (
 
 
 CREATE TABLE keyuser (
-  id        SERIAL PRIMARY KEY,
   idKeyWord INT REFERENCES keyword (id),
-  idUser    INT REFERENCES "user" (id)
+  idUser    INT REFERENCES "user" (id),
+  PRIMARY KEY (idKeyWord, idUser)
 );
 
 CREATE TABLE keybar (
@@ -69,18 +69,18 @@ CREATE TABLE comment (
 );
 
 INSERT INTO "user" (pseudo, email, hash, role)
-VALUES ('John', 'doe@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Yvette', 'angel@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Amelia', 'waters@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Manuel', 'holloway@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Alonzo', 'erickson@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Otis', 'roberson@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Jaime', 'king@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Vicky', 'pearson@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER)'),
-       ('Silvia', 'mcguire@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Brendan', 'pena@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Jackie', 'cohen@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Delores', 'williamson@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER');
+VALUES ('John', 'doe@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Yvette', 'angel@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Amelia', 'waters@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Manuel', 'holloway@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Alonzo', 'erickson@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Otis', 'roberson@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Jaime', 'king@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Vicky', 'pearson@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Silvia', 'mcguire@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Brendan', 'pena@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Jackie', 'cohen@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Delores', 'williamson@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER');
 
 INSERT INTO bar(name,rating,photoreference,placeId,address,lat,lng) VALUES
 ('Le Balajo','3.4','CmRaAAAAClcr1Ao4hoiO3FY3iqfjwVyaVcYnNHuE_YSHrbgd1c83Q6g6h2s_vhDvlBPiAxIx-75cG-QuJIkTjgtfVxP3hwuWc8uxSb-W5thQO99ybDpKgIENiw7XlcCC7uoH6DUvEhCCx8f45PDpYSYqngJ1PWsJGhQ2G5t-x-ybOq6lABIYJQFODTmy_A','ChIJ_TtGzABy5kcRtodA2O-ARXI','9 Rue de Lappe, Paris','48.85406709999999','2.3722419'),

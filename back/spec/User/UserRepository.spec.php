@@ -5,7 +5,7 @@ describe('UserRepository', function() {
     it('should fetch all users', function() {
         $userRepository = new UserRepository(new MockPDO());
 
-        $user = $userRepository->fetchByLoginAndHash('email', 'hash');
+        $user = $userRepository->fetchByLogin('email');
 
         expect($user->getId())->toBe(1);
         expect($user->getEmail())->toBe('bob.marley@gmail.com');

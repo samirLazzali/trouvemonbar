@@ -4,6 +4,7 @@
       :value="value"
       @input="$emit('input', $event)"
       :items="keywords"
+      item-text="name"
       label="Ce que j'aimerais"
       multiple
       hide-no-data

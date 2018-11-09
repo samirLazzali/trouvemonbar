@@ -4,11 +4,13 @@ namespace Bar;
 class BarRepository
 {
     private $connection;
+    private $keywordRepository;
     private $commentRepository;
 
     public function __construct($connection)
     {
         $this->connection = $connection;
+        $this->keywordRepository = new \Keyword\KeywordRepository($connection);
         $this->commentRepository = new \Comment\CommentRepository($connection);
     }
 
@@ -22,11 +24,7 @@ class BarRepository
 
         $bar = $request->fetch();
 
-        if (!$bar) return null;
-        $comments = $this->commentRepository->fetchByIdBar($id);
-        $bar->addKeywords($this->getKeywords($bar->getId()));
-        if (isset($comments) && sizeof($comments) > 0)
-            $bar->addComments($comments);
+        $bar->addKeywords($this->keywordRepository->getKeywordsByBarId($bar->getId()));
 
         return $bar;
     }
@@ -44,19 +42,8 @@ class BarRepository
 
         $bars = $request->fetchAll(\PDO::FETCH_CLASS, Bar::class);
         foreach($bars as $bar) {
-            $bar->addKeywords($this->getKeywords($bar->getId()));
+            $bar->addKeywords($this->keywordRepository->getKeywordsByBarId($bar->getId()));
         }
         return $bars;
     }
-
-    private function getKeywords($id)
-    {
-        $request = $this->connection->prepare('SELECT kw.name FROM "keybar" kb, "bar" b, "keyword" kw WHERE kb.idBar = b.id AND kw.id = kb.idKeyWord AND b.id = :id');
-        $request->bindParam(':id',$id, \PDO::PARAM_INT);
-
-        if (!$request->execute()) return null;
-
-        return $request->fetchAll(\PDO::FETCH_COLUMN);
-    }
-
 }
