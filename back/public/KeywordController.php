@@ -15,5 +15,3 @@ Router::get('/api/keywords', function() use($keywordRepository, $keywordHydrator
     if (!$keywords) return http_response_code(500);
     echo json_encode($keywordHydrator->extractAll($keywords), JSON_UNESCAPED_UNICODE);
 });
-
-

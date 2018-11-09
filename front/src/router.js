@@ -72,7 +72,7 @@ export default new Router({
     {
       path: '/addbar',
       name: 'addbar',
-      props: route => ({query: route.query}),
+      props: route => ({ query: route.query }),
       component: () => import('./views/TheAddHome.vue'),
       beforeEnter: ifAuthenticated
 

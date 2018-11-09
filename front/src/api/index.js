@@ -1,6 +1,6 @@
 import { bar } from './bar'
 import { user } from './user'
-import {barList} from "./barList";
+import { barList } from './barList'
 
 const api = {
   ...bar,

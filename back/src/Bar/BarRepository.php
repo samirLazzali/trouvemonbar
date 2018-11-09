@@ -67,7 +67,7 @@ class BarRepository
 
         if (!$request->execute()) return null;
 
-        $idBar = $request->fetch();
+        $idBar = $request->fetch()['id'];
         if (!$idBar) return null;
         return $idBar;
     }
@@ -117,5 +117,6 @@ class BarRepository
         $stmt->bindParam(':idUser', $idUser, \PDO::PARAM_STR);
         $stmt->bindParam(':idList', $idList, \PDO::PARAM_STR);
         return $stmt->execute();
+
     }
 }

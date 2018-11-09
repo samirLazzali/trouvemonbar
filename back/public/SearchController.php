@@ -9,32 +9,6 @@ $barRepository = new \Bar\BarRepository($pdo);
 $keywordHydrator = new \Keyword\KeywordHydrator();
 $barHydrator = new \Bar\BarHydrator();
 
-Router::get('/api/barlist\?idUser\=(.+)\&idBar\=(.+)\&barlist\=(.+)', function($request) use ($barRepository)
-{
-
-    // http://localhost:3000/api/barlist?idUser=1&idBar=1&barlist=black
-    $idUser = intval($request->params[0]);
-    $idBar = intval($request->params[1]);
-    $barlist = $request->params[2];
-
-    if ((strval($idBar) !== $request->params[1]) &&
-        (strval($idUser) !== $request->params[0]) &&
-        (strval($barlist) !== $request->params[2])) {
-        http_response_code(400);
-        echo json_encode(array('error' => 'Parameters are not correct.'));
-        return;
-    }
-
-    if(!$barRepository->addBarInList($idUser,$idBar,$barlist))
-    {
-        return http_response_code(500);
-    } else {
-        return http_response_code(201);
-    }
-    return;
-});
-
-
 
 Router::get('/api/addbar\?keywords\=(.+)', function($request) use($barHydrator) {
     // http://localhost:3000/api/addbar?keywords=%22o%22
@@ -107,22 +81,24 @@ Router::post('/api/addbar', function($request) use($barRepository, $barHydrator)
         return http_response_code(400);
     }
     */
-    $barId = $barRepository->isStored($request->body->data->bar->placeId);
-
+    $bar = $request->body->data->bar;
+    $list = $request->body->data->list;
+    $pseudo = $request->body->data->userPseudo;
+    $barId = $barRepository->isStored($bar->placeId);
     if($barId == null) {
         // inserrer le bar et retourner son id
         $tmpBar = (new \Bar\Bar())
-            ->setName($request->body->data->bar->name)
-            ->setPhoto($request->body->data->bar->photoReference)
-            ->SetRating($request->body->data->bar->rating)
-            ->SetAddress($request->body->data->bar->address)
-            ->setLat($request->body->data->bar->lat)
-            ->setLng($request->body->data->bar->lng)
-            ->setPlaceId($request->body->data->bar->placeId);
-        $barId = $barRepository->creatBar($tmpBar)[0];
+            ->setName($bar->name)
+            ->setPhoto($bar->photoReference)
+            ->SetRating($bar->rating)
+            ->SetAddress($bar->address)
+            ->setLat($bar->lat)
+            ->setLng($bar->lng)
+            ->setPlaceId($bar->placeId);
+        $barId = $barRepository->creatBar($tmpBar);
     }
     // ajout du bar
     // TODO : verifier qu'il n'est pas deja liké
-    $barRepository->addBarInList($request->body->data->userPseudo,$barId,$request->body->data->list);
+    $barRepository->addBarInList($pseudo,$barId,$list);
 
 });
