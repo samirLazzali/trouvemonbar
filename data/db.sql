@@ -1,5 +1,6 @@
 -- jdbc:postgresql://localhost:5432/ensiie
 
+DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS keyuser;
 DROP TABLE IF EXISTS keybar;
 DROP TABLE IF EXISTS blacklist;
