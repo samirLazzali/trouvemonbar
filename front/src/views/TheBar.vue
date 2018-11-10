@@ -32,7 +32,7 @@
               <div>
                 <v-chip
                   v-for="keyword in bar.keywords"
-                  :key="keyword"
+                  :key="keyword.name"
                   outline color="green darken-1"
                 >
                   {{ keyword.name }}
@@ -84,15 +84,12 @@
               </GmapMap>
             </v-card>
             <div class="comment-list">
-              <span v-show="loading" class="spinner"></span>
-                <ul>
-                    <comment v-for="comment in bar.comments" :key="comment.id" :comment="comment"></comment>
-                </ul>
+              <ul>
+                <comment :isAuthenticated="isAuthenticated" v-for="comment in bar.comments" :key="comment.idUser" :comment="comment"></comment>
+              </ul>
             </div>
             <template v-if="isAuthenticated">
-              <comment-form v-on:commented="updateComment"></comment-form>
-            </template>
-            <template v-else>
+              <comment-form :loading2="loading2" :comment="comment" @submit="submit" v-model="submitted"></comment-form>
             </template>
           </v-container>
         </v-card>
@@ -105,7 +102,8 @@
 import Bar from '@/components/Bar'
 import SearchBar from '@/components/SearchBar'
 import Comment from '@/components/Comment'
-import CommentForm from '@/components/CommentForm.vue'
+import CommentForm from '@/components/CommentForm'
+import Toaster from '@/toaster.js'
 
 export default {
   name: 'TheBar',
@@ -125,8 +123,12 @@ export default {
 
   data () {
     return {
+      options: { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' },
+      today: new Date(),
+      submitted: null,
+      loading2: false,
+      comment: Comment,
       keywords: [],
-      comments: [],
       bar: null,
       loading: true,
       lorem: `lorem`,
@@ -162,14 +164,50 @@ export default {
 
         if (err.response.status === 404) this.$router.push('/')
       })
+  },
+  methods: {
+    async submit (submitted) {
+      this.loading2 = true
+      if (submitted.content !== undefined) {
+        try {
+          await this.$api.addComment(this.idBar, {
+            content: submitted.content,
+            idUser: this.$store.state.user.id,
+            idBar: this.bar.id,
+            dateCom: this.today.toLocaleDateString('fr-FR', this.options)
+          })
+          Toaster.$emit('success', 'Avis ajouté avec succès.')
+          this.loading2 = false
+          setTimeout(() => window.location.reload(false), 1200)
+        } catch (err) {
+          this.$log.error(err)
+          switch (err.response.status) {
+            case 400:
+              Toaster.$emit('error', 'Paramètres invalides.')
+              break
+            case 418:
+              Toaster.$emit('error', 'Vous ne pouvez poster qu\'un seul avis sur ce bar')
+              break
+            case 500:
+              Toaster.$emit('error', 'Erreur interne.')
+              break
+            default:
+              Toaster.$emit('error', 'Une erreur s\'est produite')
+              break
+          }
+          this.loading2 = false
+          this.snackbar = true
+        }
+      } else {
+        Toaster.$emit('error', 'Votre commentaire ne peut être vide')
+      }
+      this.loading2 = false
+    }
   }
 }
 </script>
 
 <style>
-body {
-
-  }
 
   .brand h3{
     color: #47b784;

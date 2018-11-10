@@ -22,7 +22,7 @@ class Comment
 
     public function getIdUser()
     {
-        return $this->iduser;
+        return $this->idUser;
     }
 
     public function getContent()

@@ -66,7 +66,7 @@ CREATE TABLE comment (
   idBar     INT REFERENCES bar (id),
   idUser    INT REFERENCES "user" (id),
   content   text,
-  dateCom   timestamp
+  dateCom   VARCHAR
 );
 
 INSERT INTO "user" (pseudo, email, hash, role)
@@ -543,8 +543,6 @@ VALUES (1, 1),
        (11, 11),
        (1, 12);
 
-INSERT INTO comment(idBar, idUser, content,dateCom)
-VALUES (1,1,'un avis','2018-06-22');
 -- select * from keyuser;
 -- select * from keyword;
 -- select * from bar;

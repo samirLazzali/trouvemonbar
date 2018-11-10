@@ -13,5 +13,8 @@ export const bar = {
   getBar (id) {
     return axios.get('/api/bars/' + id)
       .then(res => res.data)
+  },
+  addComment (idBar, comment) {
+    return axios.post(`/api/bars/${idBar}`, comment)
   }
 }

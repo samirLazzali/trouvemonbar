@@ -1,50 +1,42 @@
 <template>
   <div class="comment-box" id="comment">
-        <div class="loader" v-show="loading" >
-          <span class="spinner"></span>
-        </div>
-
-        <form action="" method="post" @submit.prevent="submit">
-          <textarea v-model="data.message" class="input-message" name="message" id="message" rows="3" placeholder="Your comment..." required></textarea>
-          <input v-model="data.name" class="input-name" type="text" name="name" placeholder="Your Name" required>
-          <input :disabled="loading" type="submit" value="Comment">
-        </form>
+    <div class="loader" v-show="loading2" >
+      <span class="spinner"></span>
     </div>
+    <form action="" method="post" @submit.prevent="submit">
+      <textarea v-model="comment.content" class="input-message" name="message" id="message" rows="3" placeholder="Donnez votre avis!" required></textarea>
+      <v-layout justify-end>
+        <v-btn
+          :disabled="loading2"
+          large
+          color="secondary"
+          @click="$emit('submit', comment)"
+          v-text="'Comment'"
+        ></v-btn>
+      </v-layout>
+    </form>
+  </div>
 </template>
 
 <script>
 export default {
+  name: 'CommentForm',
   data () {
     return {
-      loading: false,
-      data: {}
     }
   },
-  methods: {
-    submit () {
-      this.loading = true
-
-      // Save Comment
-      this.$http.post('http://localhost:3434', this.data).then((response) => {
-        // success callback
-
-        // fire event for comment
-        this.$emit('commented', response.data)
-
-        // Clear the message
-        this.data.message = ''
-
-        this.loading = false
-      }, (response) => {
-        // error callback
-        this.loading = false
-      })
-    }
+  props: {
+    comment: {
+      type: Object,
+      required: true
+    },
+    loading2: Boolean
   }
 }
 </script>
 
 <style>
+
   .comment-box {
     background-color: #FFF;
     width: 100%;
@@ -54,7 +46,7 @@ export default {
   .comment-box form {
     padding: 1rem;
   }
-  .comment-box input, .comment-box textarea {
+   .comment-box input, .comment-box textarea {
     font-size: .8em;
     width: 97.3%;
     padding: .6em;
@@ -66,23 +58,26 @@ export default {
     transition: all ease 0.3s;
   }
   .comment-box input:focus, .comment-box textarea:focus {
-    border-color: #47b784;
+    border-color: #fcac38;
     outline: none;
     box-shadow: inset 0 0 3px #DDD;
-  }
-  .comment-box input[type="submit"] {
-    margin-bottom: 0;
-    width: 30%;
-    background-color: #47b784;
-    color: #FFF;
-    border-color: #47b784;
-    font-weight: bold;
-    text-transform: uppercase;
   }
   .comment-box input[type="submit"]:focus {
     background-color: #36495d;
   }
+  .comment-box input[type="submit"] {
+    margin-bottom: 0;
+    width: 30%;
+    background-color: #fcac38;
+    color: #FFF;
+    border-color: #fcac38;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
   .comment-box input[type="submit"]:disabled {
+    opacity: 0.6
+  }
+  .test:disabled {
     opacity: 0.6
   }
   #comment {
@@ -93,6 +88,7 @@ export default {
     z-index: 999;
   }
   #comment .loader {
+    text-align:center;
     content: '';
     width: 100%;
     height: 100%;
