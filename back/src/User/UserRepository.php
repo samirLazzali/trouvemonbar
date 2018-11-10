@@ -52,7 +52,7 @@ class UserRepository
     public function isValidUser(User $user)
     {
         $email = $user->getEmail();
-        $psuedo = $user->getPseudo();
+        $pseudo = $user->getPseudo();
 
         $stmt = $this->connection->prepare('SELECT count(*) FROM "user" WHERE email = :email OR pseudo = :pseudo');
         $stmt->bindParam(':email', $email, \PDO::PARAM_STR);

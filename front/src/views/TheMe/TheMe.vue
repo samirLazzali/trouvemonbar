@@ -1,5 +1,5 @@
 <template>
-  <div v-if="user">
+  <div v-if="user" class="elevation-5">
     <v-parallax
       src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
       height="200"
@@ -19,6 +19,7 @@
     <v-tabs
       slot="extension"
       v-model="tab"
+      slider-color="secondary"
       grow
     >
       <v-tab>Mots clés</v-tab>
@@ -27,41 +28,41 @@
 
     <v-tabs-items v-model="tab">
       <v-tab-item>
-        <the-keywords :keywords="user.keywords"></the-keywords>
+        <the-me-keywords></the-me-keywords>
       </v-tab-item>
 
       <v-tab-item>
-        <the-account
-          :user="user"
-        ></the-account>
+        <the-me-account></the-me-account>
       </v-tab-item>
     </v-tabs-items>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Toaster from '@/toaster.js'
-import TheKeywords from './TheKeywords'
-import TheAccount from './TheAccount'
+import TheMeKeywords from './TheMeKeywords'
+import TheMeAccount from './TheMeAccount'
 
 export default {
   name: 'TheMe',
 
   components: {
-    TheKeywords,
-    TheAccount
+    TheMeKeywords,
+    TheMeAccount
   },
 
   data () {
     return {
-      user: null,
       tab: 0
     }
   },
 
   computed: {
-    isAuthenticated () {
-      return this.$store.getters.isAuthenticated
+    ...mapGetters(['isAuthenticated']),
+    user: {
+      get () { return this.$store.state.user },
+      set (user) { this.$store.commit('user', user) }
     }
   },
 
@@ -74,11 +75,13 @@ export default {
   created () {
     this.$store.dispatch('keywords')
 
-    this.$api.getUserInfo(this.$store.state.user.id)
+    this.$api.getUserInfo(this.user.id)
       .then(user => {
         this.$log.debug(user)
+
+        user.keywords = user.keywords || []
+        user.keywords.sort((a, b) => a.name.localeCompare(b.name))
         this.user = user
-        this.user.keywords.sort((a, b) => a.name.localeCompare(b.name))
       })
       .catch(err => {
         this.$log.error(err)
