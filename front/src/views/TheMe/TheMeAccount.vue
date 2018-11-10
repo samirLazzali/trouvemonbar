@@ -50,7 +50,8 @@
               @keyup.enter="submit"
             ></v-text-field>
 
-            <v-btn color="success"
+            <v-btn
+              color="secondary"
               @click="submit"
               :disabled="!isValid"
             >
@@ -64,15 +65,11 @@
 </template>
 
 <script>
-export default {
-  name: 'TheAccount',
+import { mapState } from 'vuex'
 
-  props: {
-    user: {
-      type: Object,
-      required: true
-    }
-  },
+export default {
+  name: 'TheMeAccount',
+
   data () {
     return {
       snackbar: false,
@@ -82,20 +79,22 @@ export default {
       passwordRules: [
         value => value.length >= 3 || 'Min 3 caractères.',
         value => value.length < 25 || 'Max 25 caractères.',
-        value => !!value || 'Required.'
+        value => !!value || 'Obligatoire.'
       ],
-      samePasswordRules: value => value === this.password || 'Password must match',
+      samePasswordRules: value => value === this.password || 'Le mot de passe doit correspondre.',
       differentPasswordRules: value => value !== this.currentPassword || 'Veuillez renseigner un nouveau mot de passe différent de l\'ancien',
       currentPassword: '',
       password: '',
       passwordConfirmation: ''
     }
   },
+
+  computed: mapState(['user']),
+
   methods: {
     async submit () {
       if (!this.$refs.user.validate()) return
       try {
-        // Add the password to the user Object
         this.user.currentPassword = this.currentPassword
         this.user.password = this.password
         await this.$api.updateUser(this.user)
