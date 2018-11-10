@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <v-container fluid grid-list-xl>
     <v-layout row wrap>
-      <v-flex xs12>
+      <v-flex sm12 md8 xl6>
         <v-card class="elevation-4">
           <v-card-title class="headline">
             Bienvenue sur votre FeedBar {{ user.pseudo }}
@@ -28,24 +28,19 @@
           </v-card-actions>
         </v-card>
       </v-flex>
-    </v-layout>
 
-    <v-container fluid grid-list-xl>
-      <v-layout row wrap>
-        <bar
-          v-for="(bar, i) in bars"
-          :key="i"
-          :id="bar.id"
-          :name="bar.name"
-          :address="bar.address"
-          :keywords="bar.keywords"
-          :photoReference="bar.photoreference"
-          :rating="Number.parseFloat(bar.rating)"
-          @clicked="$router.push(`/bars/${$event}`)"
-        ></bar>
-      </v-layout>
-    </v-container>
-  </div>
+      <bar
+        v-for="(bar, i) in bars"
+        :key="i"
+        :id="bar.id"
+        :name="bar.name"
+        :address="bar.address"
+        :photoReference="bar.photoreference"
+        :rating="Number.parseFloat(bar.rating)"
+        @clicked="$router.push(`/bars/${$event}`)"
+      ></bar>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

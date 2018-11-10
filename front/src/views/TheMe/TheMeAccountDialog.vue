@@ -89,9 +89,6 @@ export default {
         this.$log.error(err)
 
         switch (err.response.status) {
-          case 400:
-            Toaster.$emit('error', 'Paramètres invalides.')
-            break
           case 401:
             Toaster.$emit('error', 'Opération non autorisé.')
             break

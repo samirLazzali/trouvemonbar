@@ -1,46 +1,42 @@
 <template>
   <div>
     <v-card flat>
+      <v-card-title class="headline">Vos mots clés</v-card-title>
+
       <v-card-text>
-        <v-card-text>
-          <h4>Vos mots clés actuels :</h4>
+        <v-layout row wrap>
+          <v-flex xs12 sm6>
+            <v-autocomplete
+              v-model="newKeywordsIds"
+              :items="allowedUserKeywords"
+              item-text="name"
+              item-value="id"
+              label="Nouveaux mots clés"
+              multiple
+            ></v-autocomplete>
 
-          <v-chip
-            id="keywordsList"
-            v-for="(keyword, i) in user.keywords"
-            :key="i"
-            @input="deleteKeywordsOfUser(keyword.id)"
-            outline
-            color="primary"
-            close
-          >
-            {{ keyword.name | capitalize }}
-          </v-chip>
+            <v-btn
+              color="secondary"
+              :loading="loading"
+              @click="addKeyword"
+            >
+              Ajouter
+            </v-btn>
+          </v-flex>
 
-          <v-card-title class="headline">
-            Ajoutez des nouveaux mots clés que vous appréciez !
-          </v-card-title>
-
-          <v-autocomplete
-            v-model="newKeywordsIds"
-            :items="allowedUserKeywords"
-            item-text="name"
-            item-value="id"
-            label="Mots clés"
-            multiple
-          ></v-autocomplete>
-        </v-card-text>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="secondary"
-            :loading="loading"
-            @click="addKeyword"
-          >
-            Ajoutez
-          </v-btn>
-        </v-card-actions>
+          <v-flex xs12 sm6>
+            <v-chip
+              v-for="(keyword, i) in user.keywords"
+              :key="i"
+              @input="deleteKeywordsOfUser(keyword.id)"
+              outline
+              color="primary"
+              close
+            >
+              {{ keyword.name | capitalize }}
+            </v-chip>
+          </v-flex>
+        </v-layout>
       </v-card-text>
     </v-card>
   </div>
