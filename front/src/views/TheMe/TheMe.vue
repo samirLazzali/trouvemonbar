@@ -1,5 +1,5 @@
 <template>
-  <div v-if="user">
+  <div v-if="user" class="elevation-5">
     <v-parallax
       src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
       height="200"
@@ -19,6 +19,7 @@
     <v-tabs
       slot="extension"
       v-model="tab"
+      slider-color="secondary"
       grow
     >
       <v-tab>Mots clés</v-tab>
