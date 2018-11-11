@@ -15,9 +15,9 @@ export const bar = {
       .then(res => res.data)
   },
   addComment (idBar, comment) {
-    return axios.post(`/api/bars/${idBar}`, comment)
+    return axios.post(`/api/bars/${idBar}/comments`, comment)
   },
-  deleteComment (idUser, idBar) {
-    return axios.delete(`/api/bars/${idBar}/users/${idUser}`)
+  deleteComment (id) {
+    return axios.delete(`/api/comments/${id}`)
   }
 }
