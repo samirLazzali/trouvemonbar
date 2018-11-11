@@ -14,36 +14,32 @@
     <p class="ml-5" v-html="comment.content"></p>
     <template v-if="this.$store.getters.isAuthenticated && this.$store.state.user.id === comment.iduser">
       <v-layout justify-end>
-
-       <v-icon >create</v-icon> <v-icon @click="dialog = true" >clear</v-icon>
-       <v-dialog
-      v-model="dialog"
-      max-width="290"
-    >
-      <v-card>
-        <v-card-title class="headline">Confirmez-vous la supression de ce commentaire?</v-card-title>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-
-          <v-btn
-            color="green darken-1"
-            flat="flat"
-            @click="dialog = false"
-          >
-            Refuser
-          </v-btn>
-
-          <v-btn
-            color="green darken-1"
-            flat="flat"
-            @click="$emit('deleteComment',comment), dialog = false"
-          >
-            Accepter
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+        <v-icon >create</v-icon> <v-icon @click="dialog = true" >clear</v-icon>
+        <v-dialog
+          v-model="dialog"
+          max-width="290"
+        >
+          <v-card>
+            <v-card-title class="headline">Confirmez-vous la supression de ce commentaire?</v-card-title>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="secondary"
+                flat="flat"
+                @click="dialog = false"
+              >
+                Refuser
+              </v-btn>
+              <v-btn
+                color="secondary"
+                flat="flat"
+                @click="$emit('deleteComment',comment), dialog = false"
+              >
+                Accepter
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-layout>
     </template>
   </v-card>
