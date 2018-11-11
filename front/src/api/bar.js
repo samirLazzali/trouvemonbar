@@ -17,10 +17,10 @@ export const bar = {
   addComment (idBar, comment) {
     return axios.post(`/api/bars/${idBar}/comments`, comment)
   },
-  deleteComment (id) {
-    return axios.delete(`/api/comments/${id}`)
+  deleteComment (id, idBar) {
+    return axios.delete(`/api/bars/${idBar}/comments/${id}`)
   },
-  updateComment (id, comment) {
-    return axios.put(`/api/comments/${id}`, comment)
+  updateComment (id, idBar, comment) {
+    return axios.put(`/api/bars/${idBar}/comments/${id}`, comment)
   }
 }

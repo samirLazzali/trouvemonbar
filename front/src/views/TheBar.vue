@@ -162,7 +162,7 @@ export default {
     async deleteComment (comment) {
       if (comment) {
         try {
-          await this.$api.deleteComment(this.bar.id + 'c' + this.$store.state.user.id)
+          await this.$api.deleteComment(this.bar.id + 'c' + this.$store.state.user.id, this.bar.id)
           this.bar.comments.splice(this.bar.comments.findIndex(comment => comment.iduser === this.$store.state.user.id), 1)
           Toaster.$emit('success', 'Avis supprimé avec succès.')
         } catch (err) {
@@ -176,7 +176,7 @@ export default {
       if (comment) {
         try {
           comment.datecom = this.today.toLocaleDateString('fr-FR', this.options)
-          await this.$api.updateComment(comment.id, comment)
+          await this.$api.updateComment(comment.id, this.bar.id, comment)
           this.modify = false
           Toaster.$emit('success', 'Avis modifié avec succès.')
         } catch (err) {

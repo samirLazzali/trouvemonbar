@@ -69,7 +69,7 @@ Router::post('/api/bars/{}/comments', function($request) use($barRepository, $co
     }
 });
 
-Router::delete('/api/comments/{}', function($request) use($userRepository, $commentRepository) {
+Router::delete('/api/bar/{}/comments/{}', function($request) use($userRepository, $commentRepository) {
     if (!array_key_exists('HTTP_AUTHORIZATION', $_SERVER)) {
         http_response_code(401);
         echo json_encode(['error' => 'You are not authorized without JWT']);
@@ -87,9 +87,16 @@ Router::delete('/api/comments/{}', function($request) use($userRepository, $comm
         return;
     }
 
-    if(!(isset($request->params[0]))) return http_response_code(400);
+    if(!(isset($request->params[0]) && isset($request->params[1]))) return http_response_code(400);
 
-    $comment_id = $request->params[0];
+
+    $str_bar_id = $request->params[0];
+    $bar_id = ctype_digit($str_bar_id) ? intval($str_bar_id) : null;
+    if ($bar_id == null)
+    {
+        return http_response_code(400);
+    }
+    $comment_id = $request->params[1];
     if ($comment_id == null)
     {
         return http_response_code(400);
@@ -101,7 +108,7 @@ Router::delete('/api/comments/{}', function($request) use($userRepository, $comm
 
 });
 
-Router::put('/api/comments/{}', function($request) use($userRepository, $commentRepository, $commentValidator) {
+Router::put('/api/bars/{}/comments/{}', function($request) use($userRepository, $commentRepository, $commentValidator) {
     if (!array_key_exists('HTTP_AUTHORIZATION', $_SERVER)) {
         http_response_code(401);
         echo json_encode(['error' => 'You are not authorized without JWT']);
@@ -118,18 +125,28 @@ Router::put('/api/comments/{}', function($request) use($userRepository, $comment
         echo json_encode(['error' => $e->getMessage()]);
         return;
     }
+    if (!$user){
+        http_response_code(401);
+    }
 
-    if(!(isset($request->params[0]))) return http_response_code(400);
+    if(!(isset($request->params[0]) && ($user->getId() === $request->body->iduser) && isset($request->params[1]))) return http_response_code(400);
 
 
-    $comment_id = $request->params[0];
+
+    $str_bar_id = $request->params[0];
+    $bar_id = ctype_digit($str_bar_id) ? intval($str_bar_id) : null;
+    if ($bar_id == null)
+    {
+        return http_response_code(400);
+    }
+    $comment_id = $request->params[1];
     if ($comment_id == null)
     {
         return http_response_code(400);
     }
     $comment = (new \Comment\Comment())
         ->setId($comment_id)
-        ->setIdBar($request->body->idbar)
+        ->setIdBar($bar_id)
         ->setIdUser($request->body->iduser)
         ->setContent($request->body->content)
         ->setDate($request->body->datecom);
