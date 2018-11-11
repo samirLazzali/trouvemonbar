@@ -20,7 +20,7 @@
           large
           color="secondary"
           @click="$emit('submit', comment)"
-          v-text="'Comment'"
+          v-text="'Commenter'"
         ></v-btn>
       </v-layout>
     </v-form>

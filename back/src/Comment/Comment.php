@@ -40,7 +40,7 @@ class Comment
         return $this->pseudo;
     }
 
-    public function setId(int $id)
+    public function setId(string $id)
     {
         $this->id = $id;
         return $this;

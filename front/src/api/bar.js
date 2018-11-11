@@ -19,5 +19,8 @@ export const bar = {
   },
   deleteComment (id) {
     return axios.delete(`/api/comments/${id}`)
+  },
+  updateComment (id, comment) {
+    return axios.put(`/api/comments/${id}`, comment)
   }
 }

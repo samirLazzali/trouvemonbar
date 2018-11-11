@@ -41,10 +41,18 @@
               </GmapMap>
             </v-card>
             <div class="comment-list">
-              <comment v-for="comment in bar.comments" :key="comment.idUser" :comment="comment" @deleteComment="deleteComment"></comment>
+              <comment
+                @change-modify-false="modify = false"
+                @change-modify="modify = true"
+                v-for="comment in bar.comments"
+                :key="comment.idUser" :modify="modify"
+                :comment="comment"
+                @deleteComment="deleteComment"
+                @updateComment="updateComment">
+              </comment>
             </div>
-            <template v-if="isAuthenticated">
-              <comment-form :comment="comment" @submit="submit" v-model="submitted"></comment-form>
+            <template v-if="isAuthenticated && !modify">
+              <comment-form :comment="comment" @submit="submit" v-model="submitted"  ></comment-form>
             </template>
           </v-container>
         </v-card>
@@ -76,6 +84,7 @@ export default {
 
   data () {
     return {
+      modify: false,
       options: { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' },
       today: new Date(),
       submitted: null,
@@ -125,7 +134,8 @@ export default {
     async submit (submitted) {
       if (submitted.content !== undefined) {
         try {
-          await this.$api.addComment(this.idBar, {
+          await this.$api.addComment(this.bar.id, {
+            id: this.bar.id + 'c' + this.$store.state.user.id,
             content: submitted.content,
             idUser: this.$store.state.user.id,
             idBar: this.bar.id,
@@ -142,24 +152,7 @@ export default {
           this.bar.comments.push(this.tmpCom)
         } catch (err) {
           this.$log.error(err)
-          switch (err.response.status) {
-            case 400:
-              Toaster.$emit('error', 'Paramètres invalides.')
-              break
-            case 401:
-              this.$store.dispatch('logout')
-              Toaster.$emit('info', 'Votre session a expiré')
-              break
-            case 418:
-              Toaster.$emit('error', 'Vous ne pouvez poster qu\'un seul avis sur ce bar')
-              break
-            case 500:
-              Toaster.$emit('error', 'Erreur interne.')
-              break
-            default:
-              Toaster.$emit('error', 'Une erreur s\'est produite')
-              break
-          }
+          this.checkError(err.response.status)
           this.snackbar = true
         }
       } else {
@@ -167,30 +160,50 @@ export default {
       }
     },
     async deleteComment (comment) {
-      if (typeof comment !== 'undefined') {
+      if (comment) {
         try {
-          await this.$api.deleteComment(comment.id)
+          await this.$api.deleteComment(this.bar.id + 'c' + this.$store.state.user.id)
           this.bar.comments.splice(this.bar.comments.findIndex(comment => comment.iduser === this.$store.state.user.id), 1)
           Toaster.$emit('success', 'Avis supprimé avec succès.')
         } catch (err) {
           this.$log.error(err)
-          switch (err.response.status) {
-            case 400:
-              Toaster.$emit('error', 'Paramètres invalides.')
-              break
-            case 401:
-              this.$store.dispatch('logout')
-              Toaster.$emit('info', 'Votre session a expiré')
-              break
-            case 500:
-              Toaster.$emit('error', 'Erreur interne.')
-              break
-            default:
-              Toaster.$emit('error', 'Une erreur s\'est produite')
-              break
-          }
+          this.checkError(err.response.status)
           this.snackbar = true
         }
+      }
+    },
+    async updateComment (comment) {
+      if (comment) {
+        try {
+          comment.datecom = this.today.toLocaleDateString('fr-FR', this.options)
+          await this.$api.updateComment(comment.id, comment)
+          this.modify = false
+          Toaster.$emit('success', 'Avis modifié avec succès.')
+        } catch (err) {
+          this.$log.error(err)
+          this.checkError(err.response.status)
+          this.snackbar = true
+        }
+      }
+    },
+    checkError (error) {
+      switch (error) {
+        case 400:
+          Toaster.$emit('error', 'Paramètres invalides.')
+          break
+        case 401:
+          this.$store.dispatch('logout')
+          Toaster.$emit('info', 'Votre session a expiré')
+          break
+        case 403:
+          Toaster.$emit('error', 'Vous ne pouvez poster qu\'un seul avis par bar')
+          break
+        case 500:
+          Toaster.$emit('error', 'Erreur interne.')
+          break
+        default:
+          Toaster.$emit('error', 'Une erreur s\'est produite')
+          break
       }
     }
   }

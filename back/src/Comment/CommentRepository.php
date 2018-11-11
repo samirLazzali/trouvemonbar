@@ -13,12 +13,14 @@ class CommentRepository
 
     public function createComment($comment)
     {
+        $id = $comment->getId();
         $idUser = $comment->getIdUser();
         $idBar = $comment->getIdBar();
         $content = $comment->getContent();
         $dateCom = $comment->getDate();
 
-        $stmt = $this->connection->prepare('INSERT INTO "comment"(idUser, idBar, content, dateCom) VALUES (:idUser, :idBar, :content, :dateCom)');
+        $stmt = $this->connection->prepare('INSERT INTO "comment"( id ,idUser, idBar, content, dateCom) VALUES (:id, :idUser, :idBar, :content, :dateCom)');
+        $stmt->bindParam(':id', $id, \PDO::PARAM_STR);
         $stmt->bindParam(':idUser', $idUser, \PDO::PARAM_INT);
         $stmt->bindParam(':idBar', $idBar, \PDO::PARAM_INT);
         $stmt->bindParam(':content', $content, \PDO::PARAM_STR);
@@ -40,20 +42,18 @@ class CommentRepository
 
     public function updateComment($comment)
     {
-        $idUser = $comment->getIdUser();
-        $idBar = $comment->getIdBar();
+        $id = $comment->getId();
         $content = $comment->getContent();
         $dateCom = $comment->getDate();
 
-        if(!(isset($idUser) && isset($idBar))){
+        if(!(isset($id))){
             return False;
         }
 
-        $stmt = $this->connection->prepare('UPDATE "comment" SET content=:content , dateCom=:dateCom where idUser=:idUser AND idBar=:idBar');
+        $stmt = $this->connection->prepare('UPDATE "comment" SET content=:content , dateCom=:dateCom where id=:id');
         $stmt->bindParam(':content',$content, \PDO::PARAM_STR);
         $stmt->bindParam(':dateCom',$dateCom, \PDO::PARAM_STR);
-        $stmt->bindParam(':idUser',$idUser, \PDO::PARAM_INT);
-        $stmt->bindParam(':idBar',$idBar, \PDO::PARAM_INT);
+        $stmt->bindParam(':id',$id, \PDO::PARAM_INT);
         return $stmt->execute();
     }
 
@@ -89,7 +89,7 @@ class CommentRepository
 
     public function fetchAll()
     {
-        $stmt = $this->connection->query('SELECT id,idBar,idUser,content,dateCom FROM comment');
+        $stmt = $this->connection->query('SELECT * FROM comment');
         if (!$stmt) {
             return false;
         }

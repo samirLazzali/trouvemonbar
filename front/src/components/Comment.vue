@@ -1,5 +1,6 @@
 <template>
   <v-card class="pa-3 ml-2 mr-2 mt-3">
+
     <v-layout align-center justify-space-between fill-height>
       <v-avatar
       class="ml-3"
@@ -11,10 +12,11 @@
       </v-avatar>
       <span>{{ comment.datecom }} </span>
     </v-layout>
+    <template v-if="!modify || this.$store.state.user.id !== comment.iduser">
     <p class="ml-5" v-html="comment.content"></p>
     <template v-if="this.$store.getters.isAuthenticated && this.$store.state.user.id === comment.iduser">
       <v-layout justify-end>
-        <v-icon >create</v-icon> <v-icon @click="dialog = true" >clear</v-icon>
+        <v-icon @click="$emit('change-modify')" >create</v-icon> <v-icon @click="dialog = true" >clear</v-icon>
         <v-dialog
           v-model="dialog"
           max-width="290"
@@ -42,6 +44,32 @@
           </v-card>
         </v-dialog>
       </v-layout>
+
+    </template>
+    </template>
+    <template v-else>
+      <v-textarea
+          class="mt-3"
+          box
+          v-model="comment.content"
+          label="Modifier votre avis:"
+          :value="comment.content"
+        ></v-textarea>
+         <v-layout justify-end>
+           <v-btn
+          medium
+          color="secondary"
+          @click="$emit('change-modify-false')"
+          v-text="'Annuler'"
+        ></v-btn>
+        <v-btn
+          medium
+          color="secondary"
+          @click="$emit('updateComment', comment)"
+          v-text="'Valider'"
+        ></v-btn>
+
+      </v-layout>
     </template>
   </v-card>
 </template>
@@ -57,6 +85,7 @@ export default {
   },
 
   props: {
+    modify: Boolean,
     comment: Object
   },
 
