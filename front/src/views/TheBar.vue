@@ -44,7 +44,7 @@
               <comment
                 @change-modify-false="modify = false"
                 @change-modify="modify = true"
-                v-for="comment in bar.comments"
+                v-for="comment in comments"
                 :key="comment.idUser" :modify="modify"
                 :comment="comment"
                 @deleteComment="deleteComment"
@@ -90,6 +90,7 @@ export default {
       submitted: null,
       arrayComm: [],
       comment: Comment,
+      comments: Array,
       tmpCom: Object,
       commentId: null,
       keywords: [],
@@ -112,8 +113,8 @@ export default {
     this.$api.getBar(this.$route.params.id)
       .then(bar => {
         this.$log.debug(bar)
-
         this.bar = bar
+        this.comments = bar.comments
         this.bar.rating = Number.parseFloat(bar.rating)
         const position = {
           lat: Number.parseFloat(bar.lat),
@@ -121,8 +122,8 @@ export default {
         }
         this.marker.position = position
         this.center = position
-        if (this.bar.comments === undefined) {
-          this.bar.comments = []
+        if (this.comments === undefined) {
+          this.comments = []
         }
       })
       .catch(err => {
@@ -149,7 +150,8 @@ export default {
             iduser: this.$store.state.user.id,
             pseudo: this.$store.state.user.pseudo
           }
-          this.bar.comments.push(this.tmpCom)
+          this.comments.push(this.tmpCom)
+          submitted.content = ''
         } catch (err) {
           this.$log.error(err)
           this.checkError(err.response.status)
@@ -168,7 +170,7 @@ export default {
               comment.id = commentId.data.id
             })
           await this.$api.deleteComment(comment.id, this.bar.id)
-          this.bar.comments.splice(this.bar.comments.findIndex(comment => comment.iduser === this.$store.state.user.id), 1)
+          this.comments.splice(this.comments.findIndex(comment => comment.iduser === this.$store.state.user.id), 1)
           Toaster.$emit('success', 'Avis supprimé avec succès.')
         } catch (err) {
           this.$log.error(err)
