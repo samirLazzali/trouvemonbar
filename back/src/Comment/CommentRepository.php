@@ -27,12 +27,31 @@ class CommentRepository
         return $stmt->execute();
     }
 
-    public function deleteComment($idUser, $idBar)
+
+    public function deleteComment($id)
     {
+        if(!(isset($id))){
+            return False;
+        }
+        $stmt = $this->connection->prepare('DELETE FROM "comment" where id=:id');
+        $stmt->bindParam(':id',$id, \PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+    public function updateComment($comment)
+    {
+        $idUser = $comment->getIdUser();
+        $idBar = $comment->getIdBar();
+        $content = $comment->getContent();
+        $dateCom = $comment->getDate();
+
         if(!(isset($idUser) && isset($idBar))){
             return False;
         }
-        $stmt = $this->connection->prepare('DELETE FROM "comment" where idUser=:idUser AND idBar=:idBar');
+
+        $stmt = $this->connection->prepare('UPDATE "comment" SET content=:content , dateCom=:dateCom where idUser=:idUser AND idBar=:idBar');
+        $stmt->bindParam(':content',$content, \PDO::PARAM_STR);
+        $stmt->bindParam(':dateCom',$dateCom, \PDO::PARAM_STR);
         $stmt->bindParam(':idUser',$idUser, \PDO::PARAM_INT);
         $stmt->bindParam(':idBar',$idBar, \PDO::PARAM_INT);
         return $stmt->execute();
@@ -40,7 +59,7 @@ class CommentRepository
 
     public function fetchByIdBar($idBar)
     {
-        $request = $this->connection->prepare('SELECT idBar,idUser,content,dateCom FROM comment WHERE idBar = :id');
+        $request = $this->connection->prepare('SELECT * FROM comment WHERE idBar = :id');
         $request->setFetchMode(\PDO::FETCH_CLASS, Comment::class);
         $request->bindParam(':id', $idBar, \PDO::PARAM_INT);
 

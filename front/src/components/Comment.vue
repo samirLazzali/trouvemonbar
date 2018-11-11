@@ -21,6 +21,7 @@
         >
           <v-card>
             <v-card-title class="headline">Confirmez-vous la supression de ce commentaire?</v-card-title>
+            <v-card-text>Toute suppression est définitive</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn

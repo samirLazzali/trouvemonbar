@@ -10,63 +10,20 @@
         <h1 class="display-3 font-weight-thin mb-5 pb-5">{{ bar.name }}</h1>
         </v-layout>
       </v-parallax>
-
       <v-card color="margin_test" class=" ml-5 mr-5 pt-5 mb-5 elevation-23" >
-        <v-layout>
-          <v-flex xs4>
-            <v-img
-              :src="`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${bar.photoreference}&key=AIzaSyBL5wwReFZULzsHE0wJSifX_g43OMWR2jo`"
-              height="200px"
-              contain
-            ></v-img>
-          </v-flex>
-
-          <v-flex xs7>
-            <v-card-title primary-title>
-              <v-card-actions class="display-1">
-                <v-spacer></v-spacer>
-              </v-card-actions>
-
-              <div class="headline">Mots clefs:</div>
-
-              <div>
-                <v-chip
-                  v-for="keyword in bar.keywords"
-                  :key="keyword.id"
-                  outline color="green darken-1"
-                >
-                  {{ keyword.name }}
-                </v-chip>
-                <v-rating
-                  v-model="bar.rating"
-                  color="yellow darken-3"
-                  background-color="grey darken-1"
-                  empty-icon="$vuetify.icons.ratingFull"
-                  half-increments
-                  hover
-                  readonly
-                ></v-rating>
-              </div>
-            </v-card-title>
-          </v-flex>
-        </v-layout>
-
+        <bar-info :photoReference="bar.photoreference" :keywords="bar.keywords" :rating="bar.rating"></bar-info>
         <v-divider class="mt-5 elevation-2 " light ></v-divider>
-
         <v-card color="" class=" pb-5">
           <v-card-title primary-title>
             <div class="display-1">Description</div>
           </v-card-title>
-
           <v-card-text>
             <div class="subheading">
-
               Nom : {{ bar.name }}
               <br>
               Addresse : {{ bar.address }}
             </div>
           </v-card-text>
-
           <v-container class="mapContainer">
             <v-card color="green lighten-5" class="pa-4 hidden-sm-and-down">
               <GmapMap
@@ -97,10 +54,9 @@
 </template>
 
 <script>
-import Bar from '@/components/Bar'
-import SearchBar from '@/components/SearchBar'
 import Comment from '@/components/Comment'
 import CommentForm from '@/components/CommentForm'
+import BarInfo from '@/components/BarInfo'
 import Toaster from '@/toaster.js'
 
 export default {
@@ -109,8 +65,7 @@ export default {
   components: {
     Comment,
     CommentForm,
-    Bar,
-    SearchBar
+    BarInfo
   },
 
   computed: {
@@ -191,6 +146,10 @@ export default {
             case 400:
               Toaster.$emit('error', 'Paramètres invalides.')
               break
+            case 401:
+              this.$store.dispatch('logout')
+              Toaster.$emit('info', 'Votre session a expiré')
+              break
             case 418:
               Toaster.$emit('error', 'Vous ne pouvez poster qu\'un seul avis sur ce bar')
               break
@@ -210,7 +169,7 @@ export default {
     async deleteComment (comment) {
       if (typeof comment !== 'undefined') {
         try {
-          await this.$api.deleteComment(this.$store.state.user.id, comment.idbar)
+          await this.$api.deleteComment(comment.id)
           this.bar.comments.splice(this.bar.comments.findIndex(comment => comment.iduser === this.$store.state.user.id), 1)
           Toaster.$emit('success', 'Avis supprimé avec succès.')
         } catch (err) {
@@ -218,6 +177,10 @@ export default {
           switch (err.response.status) {
             case 400:
               Toaster.$emit('error', 'Paramètres invalides.')
+              break
+            case 401:
+              this.$store.dispatch('logout')
+              Toaster.$emit('info', 'Votre session a expiré')
               break
             case 500:
               Toaster.$emit('error', 'Erreur interne.')

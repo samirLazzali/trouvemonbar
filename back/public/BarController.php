@@ -44,7 +44,7 @@ Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator)
     echo json_encode($barHydrator->extract($bar), JSON_UNESCAPED_UNICODE);
 });
 
-Router::post('/api/bars/{}', function($request) use($barRepository, $commentValidator, $commentRepository) {
+Router::post('/api/bars/{}/comments', function($request) use($barRepository, $commentValidator, $commentRepository) {
 
     if (!$commentValidator->validate($request->body)) {
         return http_response_code(400);
@@ -57,7 +57,7 @@ Router::post('/api/bars/{}', function($request) use($barRepository, $commentVali
         ->setDate($request->body->dateCom);
 
     if(!$commentRepository->isSoloCom($comment)) {
-        http_response_code(418);
+        http_response_code(403);
         echo json_encode(['error' => 'Vous avez déjà posté un avis sur ce bar']);
         return;
     }
@@ -69,7 +69,7 @@ Router::post('/api/bars/{}', function($request) use($barRepository, $commentVali
     }
 });
 
-Router::delete('/api/bars/{}/users/{}', function($request) use($userRepository, $commentRepository) {
+Router::delete('/api/comments/{}', function($request) use($userRepository, $commentRepository) {
     if (!array_key_exists('HTTP_AUTHORIZATION', $_SERVER)) {
         http_response_code(401);
         echo json_encode(['error' => 'You are not authorized without JWT']);
@@ -87,31 +87,15 @@ Router::delete('/api/bars/{}/users/{}', function($request) use($userRepository, 
         return;
     }
 
-    if(!(isset($request->params[0]) && isset($request->params[1]))) return http_response_code(400);
+    if(!(isset($request->params[0]))) return http_response_code(400);
 
-    // Get all the information from the body
-    $str_bar_id = $request->params[0];
-    $bar_id = ctype_digit($str_bar_id) ? intval($str_bar_id) : null;
-    if ($bar_id == null)
+    $str_comment_id = $request->params[0];
+    $comment_id = ctype_digit($str_comment_id) ? intval($str_comment_id) : null;
+    if ($comment_id == null)
     {
         return http_response_code(400);
     }
-
-    $str_user_id = $request->params[1];
-    $user_id = ctype_digit($str_user_id) ? intval($str_user_id) : null;
-    if ($user_id == null)
-    {
-        return http_response_code(400);
-    }
-
-
-    // Check if authorized or not
-    if($user_id != $user->getId()){
-        return http_response_code(401);
-    }
-
-    // Insert thoses keyword_ids inside the keyword inside the table keyuser
-    if($commentRepository->deleteComment($user_id,$bar_id))
+    if($commentRepository->deleteComment($comment_id))
         return http_response_code(200);
     else
         return http_response_code(500);
