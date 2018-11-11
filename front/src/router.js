@@ -70,6 +70,12 @@ export default new Router({
       beforeEnter: ifAuthenticated
     },
     {
+      path: '/feed',
+      name: 'feed',
+      component: () => import('./views/TheFeed.vue'),
+      beforeEnter: ifAuthenticated
+    },
+    {
       path: '/addbar',
       name: 'addbar',
       props: route => ({ query: route.query }),
