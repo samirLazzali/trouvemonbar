@@ -84,7 +84,7 @@
               </GmapMap>
             </v-card>
             <div class="comment-list">
-              <comment v-for="comment in bar.comments" :key="comment.idUser" :comment="comment"></comment>
+              <comment v-for="comment in bar.comments" :key="comment.idUser" :comment="comment" @deleteComment="deleteComment"></comment>
             </div>
             <template v-if="isAuthenticated">
               <comment-form :comment="comment" @submit="submit" v-model="submitted"></comment-form>
@@ -205,6 +205,29 @@ export default {
         }
       } else {
         Toaster.$emit('error', 'Votre commentaire ne peut être vide')
+      }
+    },
+    async deleteComment (comment) {
+      if (typeof comment !== 'undefined') {
+        try {
+          await this.$api.deleteComment(this.$store.state.user.id, comment.idbar)
+          this.bar.comments.splice(this.bar.comments.findIndex(comment => comment.iduser === this.$store.state.user.id), 1)
+          Toaster.$emit('success', 'Avis supprimé avec succès.')
+        } catch (err) {
+          this.$log.error(err)
+          switch (err.response.status) {
+            case 400:
+              Toaster.$emit('error', 'Paramètres invalides.')
+              break
+            case 500:
+              Toaster.$emit('error', 'Erreur interne.')
+              break
+            default:
+              Toaster.$emit('error', 'Une erreur s\'est produite')
+              break
+          }
+          this.snackbar = true
+        }
       }
     }
   }

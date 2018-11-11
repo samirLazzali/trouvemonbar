@@ -27,6 +27,17 @@ class CommentRepository
         return $stmt->execute();
     }
 
+    public function deleteComment($idUser, $idBar)
+    {
+        if(!(isset($idUser) && isset($idBar))){
+            return False;
+        }
+        $stmt = $this->connection->prepare('DELETE FROM "comment" where idUser=:idUser AND idBar=:idBar');
+        $stmt->bindParam(':idUser',$idUser, \PDO::PARAM_INT);
+        $stmt->bindParam(':idBar',$idBar, \PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
     public function fetchByIdBar($idBar)
     {
         $request = $this->connection->prepare('SELECT idBar,idUser,content,dateCom FROM comment WHERE idBar = :id');

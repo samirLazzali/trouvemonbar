@@ -1,11 +1,13 @@
 <?php
 
 use \Router\Router;
+use \Token\JwtHS256;
 
 $pdo = \Database\DatabaseSingleton::getInstance();
 $commentValidator = new \Comment\CommentValidator();
 $commentRepository = new \Comment\CommentRepository($pdo);
 $barHydrator = new \Bar\BarHydrator();
+$userRepository = new \User\UserRepository($pdo);
 $barRepository = new \Bar\BarRepository($pdo);
 
 Router::get('/api/bars\?keywords\=(.+)', function($request) use($barRepository, $barHydrator)
@@ -65,4 +67,53 @@ Router::post('/api/bars/{}', function($request) use($barRepository, $commentVali
     } else {
         return http_response_code(201);
     }
+});
+
+Router::delete('/api/bars/{}/users/{}', function($request) use($userRepository, $commentRepository) {
+    if (!array_key_exists('HTTP_AUTHORIZATION', $_SERVER)) {
+        http_response_code(401);
+        echo json_encode(['error' => 'You are not authorized without JWT']);
+        return;
+    }
+
+    [, $token] = explode(' ', $_SERVER['HTTP_AUTHORIZATION']);
+
+    try {
+        $userId = \Token\JwtHS256::validate($token, getenv('SECRET'));
+        $user = $userRepository->fetchFullById($userId);
+    } catch (Exception $e) {
+        http_response_code(401);
+        echo json_encode(['error' => $e->getMessage()]);
+        return;
+    }
+
+    if(!(isset($request->params[0]) && isset($request->params[1]))) return http_response_code(400);
+
+    // Get all the information from the body
+    $str_bar_id = $request->params[0];
+    $bar_id = ctype_digit($str_bar_id) ? intval($str_bar_id) : null;
+    if ($bar_id == null)
+    {
+        return http_response_code(400);
+    }
+
+    $str_user_id = $request->params[1];
+    $user_id = ctype_digit($str_user_id) ? intval($str_user_id) : null;
+    if ($user_id == null)
+    {
+        return http_response_code(400);
+    }
+
+
+    // Check if authorized or not
+    if($user_id != $user->getId()){
+        return http_response_code(401);
+    }
+
+    // Insert thoses keyword_ids inside the keyword inside the table keyuser
+    if($commentRepository->deleteComment($user_id,$bar_id))
+        return http_response_code(200);
+    else
+        return http_response_code(500);
+
 });

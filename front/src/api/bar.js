@@ -16,5 +16,8 @@ export const bar = {
   },
   addComment (idBar, comment) {
     return axios.post(`/api/bars/${idBar}`, comment)
+  },
+  deleteComment (idUser, idBar) {
+    return axios.delete(`/api/bars/${idBar}/users/${idUser}`)
   }
 }
