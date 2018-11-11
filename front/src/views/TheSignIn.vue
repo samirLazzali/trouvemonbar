@@ -1,15 +1,5 @@
 <template>
   <v-content>
-    <v-snackbar
-      v-model="snackbar"
-      bottom
-      left
-      color="error"
-      :timeout="3000"
-    >
-      Login ou Mot de passe incorrect
-    </v-snackbar>
-
     <v-container fluid>
       <v-layout align-center justify-center>
         <v-flex xs12 sm8 md6 lg4>
@@ -25,7 +15,7 @@
                   v-model="login"
                   prepend-icon="person"
                   name="login"
-                  label="Login"
+                  label="Pseudo ou adresse email"
                   type="text"
                   :rules="rules"
                   @keyup.enter="submit"
@@ -62,6 +52,8 @@
 </template>
 
 <script>
+import Toaster from '@/toaster.js'
+
 export default {
   name: 'TheSignIn',
 
@@ -79,8 +71,7 @@ export default {
         value => value.length >= 3 || 'Min 3 caractères.',
         value => value.length < 25 || 'Max 25 caractères.',
         value => !!value || 'Obligatoire.'
-      ],
-      snackbar: false
+      ]
     }
   },
 
@@ -93,10 +84,11 @@ export default {
           login: this.login,
           password: this.password
         })
-        this.$router.push('/')
+        this.$router.push('/feed')
       } catch (err) {
         this.$log.error(err)
-        this.snackbar = true
+
+        Toaster.$emit('error', 'Login ou Mot de passe incorrect')
       }
     }
   }

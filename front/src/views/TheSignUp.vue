@@ -1,15 +1,5 @@
 <template>
   <v-content>
-    <v-snackbar
-      v-model="snackbar"
-      bottom
-      left
-      :color="snackbarState"
-      :timeout="3000"
-    >
-      {{ snackbarText }}
-    </v-snackbar>
-
     <v-container fluid>
       <v-layout align-center justify-center>
         <v-flex xs12 sm8 md6 lg4>
@@ -75,14 +65,13 @@
 </template>
 
 <script>
+import Toaster from '@/toaster'
+
 export default {
   name: 'TheSignUp',
 
   data () {
     return {
-      snackbar: false,
-      snackbarText: '',
-      snackbarState: 'error',
       step: 1,
       isValid: false,
       pseudo: '',
@@ -111,31 +100,21 @@ export default {
           pseudo: this.pseudo,
           password: this.password
         })
-        this.snackbarText = 'Inscription réussie.'
-        this.snackbarState = 'success'
-        this.snackbar = true
-        setTimeout(() => this.$router.push('/signin'), 2000)
+
+        Toaster.$emit('success', 'Inscription réussie.')
+
+        this.$router.push('/signin')
       } catch (err) {
         this.$log.error(err)
+
         switch (err.response.status) {
           case 400:
-            this.snackbarText = 'Paramètres invalides.'
-            this.snackbarState = 'error'
-            break
-          case 418:
-            this.snackbarText = 'Email ou login déjà utilisé.'
-            this.snackbarState = 'error'
-            break
-          case 500:
-            this.snackbarText = 'Erreur interne.'
-            this.snackbarState = 'error'
+            Toaster.$emit('error', 'Paramètres invalides.')
             break
           default:
-            this.snackbarText = 'Une erreur s\'est produite'
-            this.snackbarState = 'error'
+            Toaster.$emit('error', 'Erreur interne.')
             break
         }
-        this.snackbar = true
       }
     }
   }

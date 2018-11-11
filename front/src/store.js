@@ -14,12 +14,20 @@ export default new Vuex.Store({
   },
 
   getters: {
-    isAuthenticated: state => !!state.user
+    isAuthenticated: state => !!state.user,
+
+    allowedUserKeywords ({ keywords, user }) {
+      const userKeywordsIds = (user.keywords || []).map(k => k.id)
+      return (keywords || []).filter(k => !userKeywordsIds.includes(k.id))
+    }
   },
 
   mutations: {
     user (state, user) {
       state.user = user
+    },
+    userKeywords (state, keywords) {
+      state.user.keywords = keywords
     },
     keywords (state, keywords) {
       state.keywords = keywords
@@ -67,6 +75,36 @@ export default new Vuex.Store({
             resolve()
           })
           .catch(reject)
+      })
+    },
+
+    addKeywordsToUser ({ commit, state: { user, keywords } }, keywordsIds) {
+      if (keywordsIds.length < 1) return
+
+      return new Promise((resolve, reject) => {
+        axios.post(`/api/users/${user.id}/keywords`, { keywordsIds })
+          .then(() => {
+            commit('userKeywords', [
+              ...user.keywords,
+              ...keywords.filter(k => keywordsIds.includes(k.id))
+            ])
+            resolve()
+          })
+          .catch(reject)
+      })
+    },
+
+    deleteKeywordsOfUser ({ commit, state: { user }, dispatch }, keywordId) {
+      return new Promise((resolve, reject) => {
+        axios.delete(`/api/users/${user.id}/keywords/${keywordId}`)
+          .then(() => {
+            commit('userKeywords', user.keywords.filter(k => k.id !== keywordId))
+            resolve()
+          })
+          .catch(err => {
+            if (err.response.status === 401) dispatch('logout')
+            reject(err)
+          })
       })
     }
   }
