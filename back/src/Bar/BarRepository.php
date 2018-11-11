@@ -70,7 +70,7 @@ class BarRepository
         return $idBar;
     }
 
-    public function creatBar($bar)
+    public function createBar($bar)
     {
         $name = $bar->getName();
         $address = $bar->getAddress();

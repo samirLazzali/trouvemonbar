@@ -95,7 +95,7 @@ Router::post('/api/addbar', function($request) use($barRepository, $barHydrator)
             ->setLat($bar->lat)
             ->setLng($bar->lng)
             ->setPlaceId($bar->placeId);
-        $barId = $barRepository->creatBar($tmpBar);
+        $barId = $barRepository->createBar($tmpBar);
     }
     // ajout du bar
     // TODO : verifier qu'il n'est pas deja liké
