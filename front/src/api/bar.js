@@ -22,5 +22,8 @@ export const bar = {
   },
   updateComment (id, idBar, comment) {
     return axios.put(`/api/bars/${idBar}/comments/${id}`, comment)
+  },
+  getComment (idUser, idBar) {
+    return axios.get(`/api/bars/${idBar}/users/${idUser}/comments`)
   }
 }

@@ -13,14 +13,12 @@ class CommentRepository
 
     public function createComment($comment)
     {
-        $id = $comment->getId();
         $idUser = $comment->getIdUser();
         $idBar = $comment->getIdBar();
         $content = $comment->getContent();
         $dateCom = $comment->getDate();
 
-        $stmt = $this->connection->prepare('INSERT INTO "comment"( id ,idUser, idBar, content, dateCom) VALUES (:id, :idUser, :idBar, :content, :dateCom)');
-        $stmt->bindParam(':id', $id, \PDO::PARAM_STR);
+        $stmt = $this->connection->prepare('INSERT INTO "comment"( idUser, idBar, content, dateCom) VALUES ( :idUser, :idBar, :content, :dateCom)');
         $stmt->bindParam(':idUser', $idUser, \PDO::PARAM_INT);
         $stmt->bindParam(':idBar', $idBar, \PDO::PARAM_INT);
         $stmt->bindParam(':content', $content, \PDO::PARAM_STR);
@@ -71,6 +69,19 @@ class CommentRepository
             $comment->pseudo = $this->userRepository->fetchById($comment->iduser)->getPseudo();
         }
         return $comments;
+    }
+
+    public function getByIdBarIdUser($idBar, $idUser)
+    {
+        $request = $this->connection->prepare('SELECT * FROM comment WHERE idBar = :id AND idUser = :idUser');
+        $request->setFetchMode(\PDO::FETCH_CLASS, Comment::class);
+        $request->bindParam(':id', $idBar, \PDO::PARAM_INT);
+        $request->bindParam(':idUser', $idUser, \PDO::PARAM_INT);
+
+        if (!$request->execute()) return null;
+
+        $comment = $request->fetch();
+        return $comment;
     }
 
     public function isSoloCom(Comment $comment)

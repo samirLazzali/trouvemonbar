@@ -62,7 +62,7 @@ CREATE TABLE blacklist (
 );
 
 CREATE TABLE comment (
-  id        VARCHAR PRIMARY KEY,
+  id        SERIAL PRIMARY KEY,
   idBar     INT REFERENCES bar (id),
   idUser    INT REFERENCES "user" (id),
   content   text,

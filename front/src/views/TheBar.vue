@@ -91,6 +91,7 @@ export default {
       arrayComm: [],
       comment: Comment,
       tmpCom: Object,
+      commentId: null,
       keywords: [],
       bar: null,
       loading: true,
@@ -135,7 +136,6 @@ export default {
       if (submitted.content !== undefined) {
         try {
           await this.$api.addComment(this.bar.id, {
-            id: this.bar.id + 'c' + this.$store.state.user.id,
             content: submitted.content,
             idUser: this.$store.state.user.id,
             idBar: this.bar.id,
@@ -162,7 +162,12 @@ export default {
     async deleteComment (comment) {
       if (comment) {
         try {
-          await this.$api.deleteComment(this.bar.id + 'c' + this.$store.state.user.id, this.bar.id)
+          await this.$api.getComment(this.$store.state.user.id, this.bar.id)
+            .then(commentId => {
+              this.$log.debug(commentId)
+              comment.id = commentId.data.id
+            })
+          await this.$api.deleteComment(comment.id, this.bar.id)
           this.bar.comments.splice(this.bar.comments.findIndex(comment => comment.iduser === this.$store.state.user.id), 1)
           Toaster.$emit('success', 'Avis supprimé avec succès.')
         } catch (err) {

@@ -24,9 +24,6 @@ class CommentHydrator
         if ($comment->getDate()) {
             $data['dateCom'] = $comment->getDate();
         }
-        if ($comment->getUserName()) {
-            $data['nameuser'] = $comment->getUserName();
-        }
         return $data;
     }
 

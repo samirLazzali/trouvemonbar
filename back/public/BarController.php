@@ -44,14 +44,13 @@ Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator)
     echo json_encode($barHydrator->extract($bar), JSON_UNESCAPED_UNICODE);
 });
 
+
 Router::post('/api/bars/{}/comments', function($request) use($barRepository, $commentValidator, $commentRepository) {
 
     if (!$commentValidator->validate($request->body)) {
         return http_response_code(400);
     }
-    $id = $request->body->idBar . "c" . $request->body->idUser;
     $comment = (new \Comment\Comment())
-        ->setId($id)
         ->setIdBar($request->body->idBar)
         ->setIdUser($request->body->idUser)
         ->setContent($request->body->content)
@@ -69,7 +68,7 @@ Router::post('/api/bars/{}/comments', function($request) use($barRepository, $co
     }
 });
 
-Router::delete('/api/bar/{}/comments/{}', function($request) use($userRepository, $commentRepository) {
+Router::delete('/api/bars/{}/comments/{}', function($request) use($userRepository, $commentRepository) {
     if (!array_key_exists('HTTP_AUTHORIZATION', $_SERVER)) {
         http_response_code(401);
         echo json_encode(['error' => 'You are not authorized without JWT']);
@@ -96,7 +95,8 @@ Router::delete('/api/bar/{}/comments/{}', function($request) use($userRepository
     {
         return http_response_code(400);
     }
-    $comment_id = $request->params[1];
+    $str_comment_id = $request->params[1];
+    $comment_id = ctype_digit($str_comment_id) ? intval($str_comment_id) : null;
     if ($comment_id == null)
     {
         return http_response_code(400);
@@ -156,3 +156,4 @@ Router::put('/api/bars/{}/comments/{}', function($request) use($userRepository, 
         return http_response_code(500);
 
 });
+
