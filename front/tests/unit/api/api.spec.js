@@ -7,16 +7,16 @@ describe('Api', () => {
     Api.install(MockVue)
   })
 
-  it('should call /api/users api', done => {
+  it('should call /api/keywords api', done => {
     const mockVue = new MockVue()
 
-    mockVue.$api.getUsers()
+    mockVue.$api.getBar(1)
       .then(msg => {
         expect(msg).toBe('awesome response')
         done()
       })
 
-    expect(mockAxios.get).toHaveBeenCalledWith('/api/users')
+    expect(mockAxios.get).toHaveBeenCalledWith('/api/bars/1')
 
     mockAxios.mockResponse({ data: 'awesome response' })
   })

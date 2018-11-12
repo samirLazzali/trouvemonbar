@@ -6,25 +6,6 @@ describe('UserHydrator', function() {
         $this->userHydrator = new UserHydrator();
     });
 
-    it('should extract a user', function() {
-        $user = (new User())
-            ->setId(1)
-            ->setEmail('bob.marley@gmail.com')
-            ->setHash('HASH')
-            ->setPseudo('boby')
-            ->setRole('USER');
-
-        $data = $this->userHydrator->extract($user);
-
-        expect($data)->toEqual([
-            'id' => 1,
-            'email' => 'bob.marley@gmail.com',
-            'hash' => 'HASH',
-            'pseudo' => 'boby',
-            'role' => 'USER'
-        ]);
-    });
-
     it('should extract a list of users', function() {
         $users = [
             (new User())
@@ -32,13 +13,15 @@ describe('UserHydrator', function() {
             ->setEmail('bob.marley@gmail.com')
             ->setHash('HASH')
             ->setPseudo('boby')
-            ->setRole('USER'),
+            ->setRole('USER')
+            ->addKeywords([(new \Keyword\Keyword())->setName('toto')->setId(1)]),
             (new User())
             ->setId(2)
             ->setEmail('test@gmail.com')
             ->setHash('HASH2')
             ->setPseudo('boby2')
             ->setRole('ADMIN')
+            ->addKeywords([(new \Keyword\Keyword())->setName('bobo')->setId(2)])
         ];
 
         $data = $this->userHydrator->extractAll($users);
@@ -49,14 +32,16 @@ describe('UserHydrator', function() {
                 'email' => 'bob.marley@gmail.com',
                 'hash' => 'HASH',
                 'pseudo' => 'boby',
-                'role' => 'USER'
+                'role' => 'USER',
+                'keywords' => [['id' => 1, 'name' => 'toto']],
             ],
             [
                 'id' => 2,
                 'email' => 'test@gmail.com',
                 'hash' => 'HASH2',
                 'pseudo' => 'boby2',
-                'role' => 'ADMIN'
+                'role' => 'ADMIN',
+                'keywords' => [['id' => 2, 'name' => 'bobo']],
             ]
         ]);
     });

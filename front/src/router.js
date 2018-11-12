@@ -12,6 +12,13 @@ const ifNotAuthenticated = (to, from, next) => {
   next('/')
 }
 
+const ifAuthenticated = (to, from, next) => {
+  if (store.getters.isAuthenticated) {
+    return next()
+  }
+  next('/signin')
+}
+
 export default new Router({
   mode: 'history',
   routes: [
@@ -50,6 +57,44 @@ export default new Router({
       name: 'signup',
       component: () => import('./views/TheSignUp.vue'),
       beforeEnter: ifNotAuthenticated
+    },
+    {
+      path: '/bars/:id',
+      name: 'bars',
+      component: () => import('./views/TheBar.vue')
+    },
+    {
+      path: '/me',
+      name: 'me',
+      component: () => import('./views/TheMe/TheMe.vue'),
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/feed',
+      name: 'feed',
+      component: () => import('./views/TheFeed.vue'),
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/addbar',
+      name: 'addbar',
+      props: route => ({ query: route.query }),
+      component: () => import('./views/TheAddHome.vue'),
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/addsearch',
+      name: 'addsearch',
+      props: route => ({ query: route.query }),
+      component: () => import('./views/TheAddSearch.vue'),
+      beforeEnter: (to, _, next) => {
+        const query = to.query.q
+        if (query && query.trim() && ifAuthenticated) {
+          next()
+        } else {
+          next('/')
+        }
+      }
     }
   ]
 })

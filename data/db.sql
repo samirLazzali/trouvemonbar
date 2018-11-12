@@ -1,9 +1,11 @@
 -- jdbc:postgresql://localhost:5432/ensiie
 
+DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS keyuser;
 DROP TABLE IF EXISTS keybar;
-DROP TABLE IF EXISTS blacklist;
+DROP TABLE IF EXISTS barlist;
 DROP TABLE IF EXISTS bar;
+DROP TABLE IF EXISTS list;
 DROP TABLE IF EXISTS keyword;
 DROP TABLE IF EXISTS keycategory;
 DROP TABLE IF EXISTS "user";
@@ -26,9 +28,9 @@ CREATE table bar (
   id             SERIAL PRIMARY KEY,
   name           VARCHAR,
   rating         FLOAT,
-  photoReference VARCHAR,
+  photoreference VARCHAR,
   placeId        VARCHAR,
-  adresse        VARCHAR,
+  address        VARCHAR,
   lat            FLOAT,
   lng            FLOAT
 );
@@ -42,9 +44,9 @@ CREATE TABLE keyword (
 
 
 CREATE TABLE keyuser (
-  id        SERIAL PRIMARY KEY,
   idKeyWord INT REFERENCES keyword (id),
-  idUser    INT REFERENCES "user" (id)
+  idUser    INT REFERENCES "user" (id),
+  PRIMARY KEY (idKeyWord, idUser)
 );
 
 CREATE TABLE keybar (
@@ -54,27 +56,42 @@ CREATE TABLE keybar (
   idBar       INT REFERENCES bar (id)
 );
 
-CREATE TABLE blacklist (
+CREATE TABLE list (
+  id     SERIAL PRIMARY KEY,
+  name   VARCHAR
+);
+
+CREATE TABLE barList (
   id     SERIAL PRIMARY KEY,
   idBar  INT REFERENCES bar (id),
-  idUser INT REFERENCES "user" (id)
+  idUser INT REFERENCES "user" (id),
+  idList INT REFERENCES list (id)
+);
+
+CREATE TABLE comment (
+  id        SERIAL PRIMARY KEY,
+  idBar     INT REFERENCES bar (id),
+  idUser    INT REFERENCES "user" (id),
+  content   text,
+  dateCom   VARCHAR
 );
 
 INSERT INTO "user" (pseudo, email, hash, role)
-VALUES ('John', 'Doe@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Yvette', 'Angel@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Amelia', 'Waters@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Manuel', 'Holloway@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Alonzo', 'Erickson@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Otis', 'Roberson@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Jaime', 'King@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Vicky', 'Pearson@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER)'),
-       ('Silvia', 'Mcguire@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Brendan', 'Pena@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Jackie', 'Cohen@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER'),
-       ('Delores', 'Williamson@gmail.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'USER');
+VALUES ('John', 'doe@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Yvette', 'angel@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Amelia', 'waters@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Manuel', 'holloway@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Alonzo', 'erickson@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Otis', 'roberson@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Jaime', 'king@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Vicky', 'pearson@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Silvia', 'mcguire@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Brendan', 'pena@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Jackie', 'cohen@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Admin', 'admin@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'ADMIN'),
+       ('Delores', 'williamson@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER');
 
-INSERT INTO bar(name,rating,photoReference,placeId,adresse,lat,lng) VALUES
+INSERT INTO bar(name,rating,photoReference,placeId,address,lat,lng) VALUES
 ('Le Balajo','3.4','CmRaAAAAClcr1Ao4hoiO3FY3iqfjwVyaVcYnNHuE_YSHrbgd1c83Q6g6h2s_vhDvlBPiAxIx-75cG-QuJIkTjgtfVxP3hwuWc8uxSb-W5thQO99ybDpKgIENiw7XlcCC7uoH6DUvEhCCx8f45PDpYSYqngJ1PWsJGhQ2G5t-x-ybOq6lABIYJQFODTmy_A','ChIJ_TtGzABy5kcRtodA2O-ARXI','9 Rue de Lappe, Paris','48.85406709999999','2.3722419'),
 ('Tribar (Bar de Nuit Paris)','3.3','CmRaAAAA8dGzWzYBXr0rKcGktxLgpsQsfHEemf9tpNSWF7TjC_epgLUDDzJ4MiJE8akaYO-52tzVoAyiED3LeaAVqtd-B4t9g6p-Y12Fm_b8aB-IajMZ75VtYhPThuDbuskSBo0gEhCbP-JHHK0vIwxVbBpkdXfzGhS3LEm7qnOjNuSPORVbITNk-eB2dQ','ChIJrx1wLQdy5kcR0LqCzSb0dTk','20 Rue de Lappe, Paris','48.853691','2.372602999999999'),
 ('La Chapelle des Lombards','3.7','CmRaAAAAiFb1MlF9sYhgwQntSdIzpG7sLHVvVcuKT-UBI0kYslVnWf73I9gl4RDS1D0JC_uaRCV_0t_TgVQSVc9qL7flXlbCmPcT4Rue9NFWp7jiq8rFBla7ypLNDrE6lOVDe5yJEhCViIGNwTdI6-MBeL3GxjwKGhTxrxUSZXb6OrYvOyp6z4yPcb9N2A','ChIJhZZ_Mgdy5kcRAKG4Z5rAQlU','17-19 Rue de Lappe, Paris','48.853877','2.372489'),
@@ -295,7 +312,6 @@ VALUES ('1', 'cinéma'),
        ('3', 'Casino'),
        ('3', 'Voyage dans le temps'),
        ('3', 'Woodstock'),
-       ('3', 'Cinéma'),
        ('3', 'Nouvel an chinois'),
        ('3', 'A l’envers'),
        ('3', 'Région natale'),
@@ -303,7 +319,6 @@ VALUES ('1', 'cinéma'),
        ('3', 'Destination'),
        ('3', 'Tendance'),
        ('3', 'Traditionel'),
-       ('3', 'Jeux'),
        ('3', 'Star'),
        ('3', 'Nostalgie'),
        ('3', 'Soirée à thème Magie'),
@@ -411,9 +426,7 @@ VALUES (1, 2),
        (95, 12),
        (96, 1),
        (97, 2),
-       (98, 3),
-       (99, 4),
-       (100, 5);
+       (98, 3);
 
 INSERT INTO keybar (idKeyWord, nbOccurence, idBar)
 VALUES (1, 1, 1),
@@ -516,23 +529,8 @@ VALUES (1, 1, 1),
        (95, 0, 7),
        (96, 0, 8),
        (97, 0, 9),
-       (98, 0, 10),
-       (99, 0, 11),
-       (100, 0, 1);
+       (98, 0, 10);
 
-INSERT INTO blacklist (idBar, idUser)
-VALUES (1, 1),
-       (2, 2),
-       (3, 3),
-       (4, 4),
-       (5, 5),
-       (6, 6),
-       (7, 7),
-       (8, 8),
-       (9, 9),
-       (10, 10),
-       (11, 11),
-       (1, 12);
 
 -- select * from keyuser;
 -- select * from keyword;

@@ -9,7 +9,7 @@
     <v-container fluid grid-list-xl>
       <v-progress-linear
         v-if="loading"
-        color="success"
+        color="secondary"
         height="4"
         indeterminate
       ></v-progress-linear>
@@ -24,15 +24,24 @@
 
       <v-layout row wrap>
         <bar
-          v-for="{ id, name, address, keywords } in bars"
-          :key="id"
+          v-for="({ id, name, address, keywords, photoreference, rating }, i) in bars"
+          :key="i"
           v-bind:id="id"
           :name="name"
           :address="address"
           :keywords="keywords"
+          :photo-reference="photoreference"
+          :rating="Number.parseFloat(rating)"
+          @clicked="barClicked"
         ></bar>
       </v-layout>
     </v-container>
+    <v-btn
+      color="secondary"
+      @click='addbar'
+    >
+      Un bar manque à la liste ?
+    </v-btn>
   </div>
 </template>
 
@@ -57,7 +66,6 @@ export default {
 
   data () {
     return {
-      keywords: [],
       selectedKeywords: [],
       bars: [],
       loading: true,
@@ -65,10 +73,14 @@ export default {
     }
   },
 
+  computed: {
+    keywords () {
+      return this.$store.state.keywords || []
+    }
+  },
+
   created () {
-    this.$api.getKeywords()
-      .then(keywords => (this.keywords = keywords))
-      .catch(this.$log.error)
+    this.$store.dispatch('keywords')
   },
 
   watch: {
@@ -96,6 +108,9 @@ export default {
   },
 
   methods: {
+    addbar () {
+      this.$router.push(`/addbar`)
+    },
     search () {
       if (this.selectedKeywords.join(',') === this.query.q) return
       if (this.selectedKeywords.length === 0) return
@@ -103,6 +118,12 @@ export default {
       this.bars = []
       this.loading = true
       this.$router.push(`/search?q=${this.selectedKeywords.join(',')}`)
+    },
+
+    barClicked (id) {
+      this.$log.debug('clicked', id)
+
+      this.$router.push(`/bars/${id}`)
     }
   }
 }

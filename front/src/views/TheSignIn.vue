@@ -1,20 +1,10 @@
 <template>
   <v-content>
-    <v-snackbar
-      v-model="snackbar"
-      bottom
-      left
-      color="error"
-      :timeout="3000"
-    >
-      Login ou Mot de passe incorrect
-    </v-snackbar>
-
     <v-container fluid>
       <v-layout align-center justify-center>
         <v-flex xs12 sm8 md6 lg4>
           <v-card class="elevation-12">
-            <v-toolbar dark color="success">
+            <v-toolbar dark color="primary">
               <v-toolbar-title>Formulaire de connexion</v-toolbar-title>
               <v-spacer></v-spacer>
             </v-toolbar>
@@ -25,9 +15,9 @@
                   v-model="login"
                   prepend-icon="person"
                   name="login"
-                  label="Login"
+                  label="Pseudo ou adresse email"
                   type="text"
-                  :rules="[rules.required,rules.email]"
+                  :rules="rules"
                   @keyup.enter="submit"
                 ></v-text-field>
 
@@ -38,7 +28,7 @@
                   name="password"
                   label="Mot de passe"
                   type="password"
-                  :rules="[rules.required,rules.minCounter,rules.maxCounter]"
+                  :rules="rules"
                   @keyup.enter="submit"
                 ></v-text-field>
               </v-form>
@@ -47,7 +37,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
-                color="success"
+                color="secondary"
                 @click="submit"
                 :disabled="!isValid"
               >
@@ -62,6 +52,8 @@
 </template>
 
 <script>
+import Toaster from '@/toaster.js'
+
 export default {
   name: 'TheSignIn',
 
@@ -75,16 +67,11 @@ export default {
       isValid: false,
       login: '',
       password: '',
-      rules: {
-        email: value => {
-          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-          return pattern.test(value) || 'Adresse email invalide.'
-        },
-        minCounter: value => value.length >= 3 || 'Min 3 caractères.',
-        maxCounter: value => value.length < 25 || 'Max 25 caractères.',
-        required: value => !!value || 'Obligatoire.'
-      },
-      snackbar: false
+      rules: [
+        value => value.length >= 3 || 'Min 3 caractères.',
+        value => value.length < 25 || 'Max 25 caractères.',
+        value => !!value || 'Obligatoire.'
+      ]
     }
   },
 
@@ -94,13 +81,14 @@ export default {
 
       try {
         await this.$store.dispatch('login', {
-          email: this.login,
+          login: this.login,
           password: this.password
         })
-        this.$router.push('/')
+        this.$router.push('/feed')
       } catch (err) {
         this.$log.error(err)
-        this.snackbar = true
+
+        Toaster.$emit('error', 'Login ou Mot de passe incorrect')
       }
     }
   }

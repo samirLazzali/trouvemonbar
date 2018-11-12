@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs12 sm6 md4>
+  <v-flex xs12 sm6 md4 xl3 @click="$emit('clicked', id)">
     <v-hover>
       <v-card
         slot-scope="{ hover }"
@@ -8,7 +8,7 @@
       >
         <v-img
           :aspect-ratio="16/9"
-          src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+          :src="`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=AIzaSyBL5wwReFZULzsHE0wJSifX_g43OMWR2jo`"
         ></v-img>
 
         <v-card-title>
@@ -19,18 +19,20 @@
               <v-chip
                 v-for="(keyword, i) in keywords"
                 :key="i"
-              >{{ keyword }}</v-chip>
+              >{{ keyword.name }}</v-chip>
             </div>
 
             <div class="d-flex">
               <v-rating
-                :value="name.length % 5"
-                color="amber"
-                dense
-                half-increments
-                readonly
-                size="14"
-              ></v-rating>
+                  v-model="rating"
+                  color="yellow darken-3"
+                  background-color="grey darken-1"
+                  empty-icon="$vuetify.icons.ratingFull"
+                  half-increments
+                  hover
+                  size="15"
+                  readonly
+                ></v-rating>
 
               <div class="ml-2 grey--text text--darken-2">
                 <span>1</span>
@@ -66,6 +68,16 @@ export default {
 
     keywords: {
       type: Array
+    },
+
+    photoReference: {
+      type: String,
+      required: true
+    },
+
+    rating: {
+      type: Number,
+      required: true
     }
   }
 }

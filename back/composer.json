@@ -1,4 +1,6 @@
 {
+    "name": "Backend rest api",
+    "description": "A simple backend rest api to provide endpoint for trouvemonbar",
     "require-dev": {
         "kahlan/kahlan": "^4.3"
     },
@@ -9,7 +11,8 @@
             "Router\\": "src/Router/",
             "Keyword\\": "src/Keyword/",
             "Database\\": "src/Database/",
-            "Token\\": "src/Token/"
+            "Token\\": "src/Token/",
+            "Comment\\": "src/Comment/"
         }
     }
 }

@@ -4,6 +4,7 @@
       :value="value"
       @input="$emit('input', $event)"
       :items="keywords"
+      item-text="name"
       label="Ce que j'aimerais"
       multiple
       hide-no-data
@@ -14,7 +15,7 @@
 
     <v-btn
       large
-      color="success"
+      color="secondary"
       @click="$emit('search', value)"
       v-text="'J\'ai soif !'"
     ></v-btn>
