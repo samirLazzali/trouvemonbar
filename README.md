@@ -47,3 +47,6 @@ This command starts the application without installing anything.
 
 ## Build frontend project
 `make npm.build`
+
+## Compte administrateur
+`login: Admin   mot de passe: 123`
