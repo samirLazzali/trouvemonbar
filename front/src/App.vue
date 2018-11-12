@@ -16,7 +16,7 @@
               <v-icon>account_circle</v-icon>
             </v-btn>
             <v-list>
-              <v-list-tile to="/admin">
+              <v-list-tile to="/admin" v-if="isAdmin">
                 <v-list-tile-title>Administration</v-list-tile-title>
               </v-list-tile>
               <v-list-tile to="/feed">
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapActions } from 'vuex'
 import Snackbar from './components/Snackbar'
 
 export default {
@@ -62,20 +63,11 @@ export default {
   },
 
   computed: {
-    isAuthenticated () {
-      return this.$store.getters.isAuthenticated
-    },
-    user () {
-      return this.$store.state.user
-    }
+    ...mapState(['user']),
+    ...mapGetters(['isAuthenticated', 'isAdmin'])
   },
 
-  methods: {
-    logout () {
-      this.$log.debug('logout', this.user)
-      this.$store.dispatch('logout')
-    }
-  }
+  methods: mapActions(['logout'])
 }
 </script>
 
