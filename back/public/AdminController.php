@@ -7,7 +7,9 @@ $pdo = \Database\DatabaseSingleton::getInstance();
 $commentHydrator = new \Comment\CommentHydrator();
 $commentRepository = new \Comment\CommentRepository($pdo);
 
-Router::get('/api/admin/comments', function($request) use($commentHydrator, $commentRepository)
+$userRepository = new \User\UserRepository($pdo);
+
+Router::get('/api/admin/comments', function($request) use($userRepository, $commentHydrator, $commentRepository)
 {
     if (!array_key_exists('HTTP_AUTHORIZATION', $_SERVER)) {
         http_response_code(401);
@@ -21,8 +23,8 @@ Router::get('/api/admin/comments', function($request) use($commentHydrator, $com
         $userId = \Token\JwtHS256::validate($token, getenv('SECRET'));
         $user = $userRepository->fetchFullById($userId);
         if($user->getRole() !== 'ADMIN'){
-            echo json_encode(['error' => 'Vous avez besoin de privilèges administrateur pour accèder cette information.']);
             http_response_code(401);
+            echo json_encode(['error' => 'Vous avez besoin de privilèges administrateur pour accèder cette information.']);
             return;
         }
         $comments = $commentRepository->fetchAll();
