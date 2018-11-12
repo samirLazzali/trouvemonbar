@@ -116,4 +116,20 @@ class BarRepository
         $stmt->bindParam(':idList', $idList, \PDO::PARAM_STR);
         return $stmt->execute();
     }
+
+    public function fetchAll()
+    {
+        $request = $this->connection->prepare('SELECT name, id FROM "bar"');
+        if (!$request->execute()) return null;
+        $bars = $request->fetchAll(\PDO::FETCH_CLASS, Bar::class);
+
+        foreach($bars as $bar)
+        {
+            $comments = $this->commentRepository->fetchByIdBar($bar->getId());
+            if (isset($comments) && sizeof($comments) > 0)
+                $bar->addComments($comments);
+        }
+
+        return $bars;
+    }
 }

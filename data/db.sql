@@ -88,6 +88,7 @@ VALUES ('John', 'doe@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKC
        ('Silvia', 'mcguire@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
        ('Brendan', 'pena@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
        ('Jackie', 'cohen@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER'),
+       ('Admin', 'admin@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'ADMIN'),
        ('Delores', 'williamson@gmail.com', '$2y$10$.hXTJakH4krFhxzv.ZVsUOqQOih8pcogVM9TDKCDTHPxmhFpVXGqi', 'USER');
 
 INSERT INTO bar(name,rating,photoReference,placeId,address,lat,lng) VALUES
