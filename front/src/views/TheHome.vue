@@ -13,6 +13,7 @@
 
           <v-flex xs12 lg8 xl6>
             <search-bar
+              class="search-bar"
               :keywords="keywords"
               v-model="selectedKeywords"
               @search="search"

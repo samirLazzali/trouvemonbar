@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TheSignup should render properly 1`] = `
+exports[`TheSignUp should render properly 1`] = `
 <vcontent-stub tag="main">
   <vcontainer-stub tag="div" fluid="">
     <vlayout-stub tag="div" align-center="" justify-center="">

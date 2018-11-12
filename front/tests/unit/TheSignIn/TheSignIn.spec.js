@@ -1,9 +1,9 @@
 import { shallowMount } from '@vue/test-utils'
-import TheSignUp from '@/views/TheSignUp'
+import TheSignIn from '@/views/TheSignIn'
 
-describe('TheSignUp', () => {
+describe('TheSignIn', () => {
   it('should render properly', () => {
-    const wrapper = shallowMount(TheSignUp)
+    const wrapper = shallowMount(TheSignIn)
 
     expect(wrapper.html()).toMatchSnapshot()
   })
