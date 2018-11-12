@@ -1,17 +1,21 @@
 <template>
- <v-data-table
+  <div>
+  <p class="display-2">
+    Modération des avis
+  </p>
+  <v-data-table
     :headers="headers"
-    :items="desserts"
+    :items="comments"
     class="elevation-1"
-    :total-items="desserts.length"
   >
     <template slot="items" slot-scope="props">
-      <td class="text-xs" > {{comments.pseudo }}</td>
-      <td class="text-xs-right">{{ comments.idBar }}</td>
-      <td class="text-xs-right">{{ props.item.fat }}</td>
-      <td class="text-xs-center"><v-icon medium @click="" >delete</v-icon></td>
+      <td class="text-xs" > {{ props.item.pseudo }}</td>
+      <td class="text-xs-left">{{ props.item.nameBar }}</td>
+      <td class="text-xs-left">{{ props.item.content }}</td>
+      <td class="text-xs-center"><v-icon medium @click="deleteComment(props.item.id)" >delete</v-icon></td>
     </template>
   </v-data-table>
+  </div>
 </template>
 
 <script>
@@ -27,11 +31,11 @@ export default {
           text: 'Pseudo utlisateur',
           align: 'left',
           sortable: false,
-          value: 'comment.pseudo'
+          value: 'comments.pseudo'
         },
-        { text: 'Nom du bar', value: 'comment.nameBar' },
-        { text: 'Commentaire', value: 'comment.content' },
-        { text: 'Supprimer', align: 'comment.id' }
+        { text: 'Nom du bar', value: 'comments.nameBar' },
+        { text: 'Commentaire', value: 'comments.content' },
+        { text: 'Supprimer', align: 'comments.id' }
       ]
     }
   },
@@ -54,15 +58,10 @@ export default {
   },
 
   methods: {
-    async deleteComment (comment) {
-      if (comment) {
+    async deleteComment (id) {
+      if (id) {
         try {
-          await this.$api.getComment(this.$store.state.user.id, this.bar.id)
-            .then(commentId => {
-              this.$log.debug(commentId)
-              comment.id = commentId.data.id
-            })
-          await this.$api.deleteComment(comment.id, this.bar.id)
+          await this.$api.deleteCommentAdmin(id)
           this.comments.splice(this.comments.findIndex(comment => comment.iduser === this.$store.state.user.id), 1)
           Toaster.$emit('success', 'Avis supprimé avec succès.')
         } catch (err) {

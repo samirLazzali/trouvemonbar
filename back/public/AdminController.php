@@ -34,3 +34,4 @@ Router::get('/api/admin/comments', function($request) use($commentHydrator, $com
         return;
     }
 });
+
