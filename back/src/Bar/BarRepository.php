@@ -57,7 +57,6 @@ class BarRepository
         foreach($bars as $bar)
         {
             $comments = $this->commentRepository->fetchByIdBar($id);
-            $bar->addKeywords($this->keywordRepository->getKeywordsByBarId($bar->getId()));
             if (isset($comments) && sizeof($comments) > 0)
                 $bar->addComments($comments);
         }
