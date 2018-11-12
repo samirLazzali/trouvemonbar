@@ -46,13 +46,28 @@ Router::get('/api/bars/{}', function($request) use($barRepository, $barHydrator)
 
 
 Router::post('/api/bars/{}/comments', function($request) use($barRepository, $commentValidator, $commentRepository) {
+    if (!array_key_exists('HTTP_AUTHORIZATION', $_SERVER)) {
+        http_response_code(401);
+        echo json_encode(['error' => 'You are not authorized without JWT']);
+        return;
+    }
+
+    [, $token] = explode(' ', $_SERVER['HTTP_AUTHORIZATION']);
+
+    try {
+        $jsonUser = \Token\JwtHS256::validate($token, getenv('SECRET'));
+    } catch (Exception $e) {
+        http_response_code(401);
+        echo json_encode(['error' => $e->getMessage()]);
+        return;
+    }
 
     if (!$commentValidator->validate($request->body)) {
         return http_response_code(400);
     }
     $comment = (new \Comment\Comment())
         ->setIdBar($request->body->idBar)
-        ->setIdUser($request->body->idUser)
+        ->setIdUser($jsonUser->id)
         ->setContent($request->body->content)
         ->setDate($request->body->dateCom);
 
@@ -74,10 +89,12 @@ Router::delete('/api/bars/{}/comments/{}', function($request) use($userRepositor
         echo json_encode(['error' => 'You are not authorized without JWT']);
         return;
     }
+
     [, $token] = explode(' ', $_SERVER['HTTP_AUTHORIZATION']);
+
     try {
-        $userId = \Token\JwtHS256::validate($token, getenv('SECRET'));
-        $user = $userRepository->fetchFullById($userId);
+        $jsonUser = \Token\JwtHS256::validate($token, getenv('SECRET'));
+        $user = $userRepository->fetchFullById($jsonUser->id);
     } catch (Exception $e) {
         http_response_code(401);
         echo json_encode(['error' => $e->getMessage()]);
@@ -110,10 +127,12 @@ Router::put('/api/bars/{}/comments/{}', function($request) use($userRepository, 
         echo json_encode(['error' => 'You are not authorized without JWT']);
         return;
     }
+
     [, $token] = explode(' ', $_SERVER['HTTP_AUTHORIZATION']);
+
     try {
-        $userId = \Token\JwtHS256::validate($token, getenv('SECRET'));
-        $user = $userRepository->fetchFullById($userId);
+        $jsonUser = \Token\JwtHS256::validate($token, getenv('SECRET'));
+        $user = $userRepository->fetchFullById($jsonUser->id);
     } catch (Exception $e) {
         http_response_code(401);
         echo json_encode(['error' => $e->getMessage()]);

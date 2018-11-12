@@ -31,3 +31,19 @@ Router::get('/api/bars/{}/users/{}/comments', function($request) use($userReposi
     }
     echo json_encode($commentHydrator->extract($comment), JSON_UNESCAPED_UNICODE);
 });
+
+
+Router::delete('/api/comments/{}', function($request) use($userRepository, $commentRepository, $commentHydrator) {
+
+    if(!(isset($request->params[0]))) return http_response_code(400);
+    $str_comment_id = $request->params[0];
+    $comment_id = ctype_digit($str_comment_id) ? intval($str_comment_id) : null;
+    if ($comment_id == null)
+    {
+        return http_response_code(400);
+    }
+    if($commentRepository->deleteComment($comment_id))
+        return http_response_code(200);
+    else
+        return http_response_code(500);
+});

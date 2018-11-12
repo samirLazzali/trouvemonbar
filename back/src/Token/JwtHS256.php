@@ -3,14 +3,17 @@ namespace Token;
 
 class JwtHS256
 {
-    public static function generate(int $userId, string $secret, int $exp)
+    public static function generate($user, string $secret, int $exp)
     {
         $header = Base64Url::encode(json_encode([
             'alg' => 'HS256',
             'typ' => 'JWT'
         ]));
         $payload = Base64Url::encode(json_encode([
-            'user_id' => strval($userId),
+            'user' => [
+                'id' => $user->getId(),
+                'role' => $user->getRole()
+            ],
             'exp' => $exp
         ]));
         $signature = Base64Url::encode(
@@ -36,6 +39,6 @@ class JwtHS256
             throw new \Exception('Token has expired');
         }
 
-        return intval($json->user_id);
+        return $json->user;
     }
 }

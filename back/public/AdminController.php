@@ -20,8 +20,8 @@ Router::get('/api/admin/comments', function($request) use($userRepository, $comm
     [, $token] = explode(' ', $_SERVER['HTTP_AUTHORIZATION']);
 
     try {
-        $userId = \Token\JwtHS256::validate($token, getenv('SECRET'));
-        $user = $userRepository->fetchFullById($userId);
+        $jsonUser = \Token\JwtHS256::validate($token, getenv('SECRET'));
+        $user = $userRepository->fetchFullById($jsonUser->id);
         if($user->getRole() !== 'ADMIN'){
             http_response_code(401);
             echo json_encode(['error' => 'Vous avez besoin de privilèges administrateur pour accèder cette information.']);
@@ -36,3 +36,4 @@ Router::get('/api/admin/comments', function($request) use($userRepository, $comm
         return;
     }
 });
+

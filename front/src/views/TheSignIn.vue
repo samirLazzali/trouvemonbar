@@ -53,6 +53,7 @@
 
 <script>
 import Toaster from '@/toaster.js'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'TheSignIn',
@@ -75,6 +76,8 @@ export default {
     }
   },
 
+  computed: mapGetters(['isAdmin']),
+
   methods: {
     async submit () {
       if (!this.$refs.login.validate()) return
@@ -84,6 +87,10 @@ export default {
           login: this.login,
           password: this.password
         })
+
+        if (this.isAdmin) {
+          return this.$router.push('/admin')
+        }
         this.$router.push('/feed')
       } catch (err) {
         this.$log.error(err)

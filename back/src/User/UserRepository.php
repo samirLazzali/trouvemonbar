@@ -65,7 +65,7 @@ class UserRepository
 
     public function fetchById(int $id)
     {
-        $stmt = $this->connection->prepare('SELECT id, email, pseudo FROM "user" WHERE id = :id');
+        $stmt = $this->connection->prepare('SELECT id, email, pseudo, role FROM "user" WHERE id = :id');
         $stmt->setFetchMode(\PDO::FETCH_CLASS, User::class);
         $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
 

@@ -3,11 +3,14 @@
 describe('JwtHS256', function() {
     beforeEach(function() {
         $this->secret = 'secret';
-        $this->token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImV4cCI6MTUyOTQ5NTk1Nn0.GwejAIAJ-XFFNhh_8Z2wVlAMbglHoimgGtG8LGc_Dvs';
+        $this->token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJyb2xlIjoiQURNSU4ifSwiZXhwIjoxNTI5NDk1OTU2fQ.2lsas1TCpa87MRPIQFz6cMbxp8rhUwjj9YfYS6zhVdM';
     });
 
     it('should generate a token with hmac sha256', function() {
-        $token = \Token\JwtHS256::generate(1, $this->secret, 1529495956);
+        $user = (new \User\User)
+            ->setId(1)
+            ->setRole('ADMIN');
+        $token = \Token\JwtHS256::generate($user, $this->secret, 1529495956);
 
         expect($token)->toBe($this->token);
     });
@@ -15,9 +18,10 @@ describe('JwtHS256', function() {
     it('should extract the user id', function() {
         allow('time')->toBeCalled()->andReturn(123);
 
-        $user_id = \Token\JwtHS256::validate($this->token, $this->secret);
+        $user = \Token\JwtHS256::validate($this->token, $this->secret);
 
-        expect($user_id)->toBe(1);
+        expect($user->id)->toBe(1);
+        expect($user->role)->toBe('ADMIN');
     });
 
 
