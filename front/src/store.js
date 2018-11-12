@@ -16,6 +16,8 @@ export default new Vuex.Store({
   getters: {
     isAuthenticated: state => !!state.user,
 
+    isAdmin: state => !!state.user && state.user.role === 'ADMIN',
+
     allowedUserKeywords ({ keywords, user }) {
       const userKeywordsIds = (user.keywords || []).map(k => k.id)
       return (keywords || []).filter(k => !userKeywordsIds.includes(k.id))
@@ -40,12 +42,11 @@ export default new Vuex.Store({
         axios.post('/api/login', user)
           .then(res => {
             const token = res.headers.authorization
+            const user = res.data
+
             localStorage.setItem('user-token', token)
-            localStorage.setItem('user', JSON.stringify({
-              id: res.data.id,
-              pseudo: res.data.pseudo
-            }))
-            commit('user', res.data)
+            localStorage.setItem('user', JSON.stringify(user))
+            commit('user', user)
             axios.defaults.headers.common['Authorization'] = token
             resolve()
           })

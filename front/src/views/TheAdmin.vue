@@ -7,6 +7,7 @@
     :headers="headers"
     :items="comments"
     class="elevation-1"
+    :loading="loading"
   >
     <template slot="items" slot-scope="props">
       <td class="text-xs" > {{ props.item.pseudo }}</td>
@@ -19,33 +20,37 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex'
 import Toaster from '@/toaster.js'
 
 export default {
   name: 'Admin',
   data () {
     return {
+      loading: true,
       comments: [],
       headers: [
         {
           text: 'Pseudo utlisateur',
           align: 'left',
           sortable: false,
-          value: 'comments.pseudo'
+          value: 'pseudo'
         },
-        { text: 'Nom du bar', value: 'comments.nameBar' },
-        { text: 'Commentaire', value: 'comments.content' },
-        { text: 'Supprimer', align: 'comments.id' }
+        { text: 'Nom du bar', value: 'nameBar' },
+        { text: 'Commentaire', value: 'content' },
+        { text: 'Supprimer', value: null }
       ]
     }
   },
 
   computed: {
-    user () {
-      return this.$store.state.user
-    },
-    keywords () {
-      return this.$store.state.keywords || []
+    ...mapState(['user']),
+    ...mapGetters(['isAdmin'])
+  },
+
+  watch: {
+    isAdmin () {
+      if (!this.isAdmin) this.$router.push('/')
     }
   },
 
@@ -55,6 +60,10 @@ export default {
         this.$log.debug(comments)
         this.comments = comments
       })
+      .catch(err => {
+        this.$log.error(err)
+      })
+      .finally(() => (this.loading = false))
   },
 
   methods: {
@@ -62,7 +71,9 @@ export default {
       if (id) {
         try {
           await this.$api.deleteCommentAdmin(id)
-          this.comments.splice(this.comments.findIndex(comment => comment.iduser === this.$store.state.user.id), 1)
+
+          this.comments = this.comments.filter(c => c.id !== id)
+
           Toaster.$emit('success', 'Avis supprimé avec succès.')
         } catch (err) {
           this.$log.error(err)
