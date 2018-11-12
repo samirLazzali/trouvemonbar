@@ -40,7 +40,9 @@
                 />
               </GmapMap>
             </v-card>
-            <div class="comment-list">
+          </v-container>
+           <v-flex xs12 sm6 offset-sm3>
+           <div class="comment-list">
               <comment
                 @change-modify-false="modify = false"
                 @change-modify="modify = true"
@@ -54,7 +56,7 @@
             <template v-if="isAuthenticated && !modify">
               <comment-form :comment="comment" @submit="submit" v-model="submitted"  ></comment-form>
             </template>
-          </v-container>
+          </v-flex>
         </v-card>
       </v-card>
     </v-flex>
@@ -155,7 +157,6 @@ export default {
         } catch (err) {
           this.$log.error(err)
           this.checkError(err.response.status)
-          this.snackbar = true
         }
       } else {
         Toaster.$emit('error', 'Votre commentaire ne peut être vide')
@@ -175,7 +176,6 @@ export default {
         } catch (err) {
           this.$log.error(err)
           this.checkError(err.response.status)
-          this.snackbar = true
         }
       }
     },
@@ -189,7 +189,6 @@ export default {
         } catch (err) {
           this.$log.error(err)
           this.checkError(err.response.status)
-          this.snackbar = true
         }
       }
     },

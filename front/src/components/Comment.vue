@@ -48,28 +48,31 @@
     </template>
     </template>
     <template v-else>
-      <v-textarea
-          class="mt-3"
-          box
-          v-model="comment.content"
-          label="Modifier votre avis:"
-          :value="comment.content"
-        ></v-textarea>
-         <v-layout justify-end>
-           <v-btn
-          medium
-          color="secondary"
-          @click="$emit('change-modify-false')"
-          v-text="'Annuler'"
-        ></v-btn>
-        <v-btn
-          medium
-          color="secondary"
-          @click="$emit('updateComment', comment)"
-          v-text="'Valider'"
-        ></v-btn>
-
-      </v-layout>
+      <v-form v-model="isValid" ref="comment" lazy-validation>
+        <v-textarea
+            :rules="test"
+            class="mt-3"
+            box
+            v-model="comment.content"
+            label="Modifier votre avis:"
+            :value="comment.content"
+          ></v-textarea>
+          <v-layout justify-end>
+            <v-btn
+            medium
+            color="secondary"
+            @click="$emit('change-modify-false')"
+            v-text="'Annuler'"
+          ></v-btn>
+          <v-btn
+            medium
+            color="secondary"
+            @click="$emit('updateComment', comment)"
+            v-text="'Valider'"
+            :disabled="!isValid"
+          ></v-btn>
+        </v-layout>
+      </v-form>
     </template>
   </v-card>
 </template>
@@ -80,6 +83,8 @@ export default {
 
   data () {
     return {
+      isValid: false,
+      test: [v => v.length >= 3 || 'Min 3 caractères.'],
       dialog: false
     }
   },
