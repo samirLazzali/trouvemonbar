@@ -25,7 +25,6 @@ Router::get('/api/admin/comments', function($request) use($barRepository, $barHy
             http_response_code(401);
             return;
         }
-
         $bars = $barRepository->fetchAll();
         echo json_encode($barHydrator->extractAll($bars), JSON_UNESCAPED_UNICODE);
     } catch (Exception $e) {
