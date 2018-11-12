@@ -2,7 +2,7 @@ import { shallowMount } from '@vue/test-utils'
 import TheHome from '@/views/TheHome'
 
 describe('TheHome', () => {
-  it('should', () => {
+  it('should render properly', () => {
     const wrapper = shallowMount(TheHome, {
       mocks: {
         $store: {
