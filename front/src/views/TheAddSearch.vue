@@ -30,7 +30,7 @@
           v-bind:id="id"
           :name="name"
           :photo-reference="photoreference"
-          :rating="rating"
+          :rating="Number.parseFloat(rating)"
           :address="address"
           :lng="lng"
           :lat="lat"
