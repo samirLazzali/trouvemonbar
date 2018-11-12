@@ -61,6 +61,8 @@ CREATE TABLE list (
   name   VARCHAR
 );
 
+INSERT INTO list (name) VALUES ('black'),('liked');
+
 CREATE TABLE barList (
   id     SERIAL PRIMARY KEY,
   idBar  INT REFERENCES bar (id),
