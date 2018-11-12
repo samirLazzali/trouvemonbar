@@ -80,7 +80,27 @@ export default new Router({
       name: 'admin',
       component: () => import('./views/TheAdmin.vue'),
       beforeEnter: ifAuthenticated
-
+    },
+    {
+      path: '/addbar',
+      name: 'addbar',
+      props: route => ({ query: route.query }),
+      component: () => import('./views/TheAddHome.vue'),
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/addsearch',
+      name: 'addsearch',
+      props: route => ({ query: route.query }),
+      component: () => import('./views/TheAddSearch.vue'),
+      beforeEnter: (to, _, next) => {
+        const query = to.query.q
+        if (query && query.trim() && ifAuthenticated) {
+          next()
+        } else {
+          next('/')
+        }
+      }
     }
   ]
 })

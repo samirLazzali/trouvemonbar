@@ -9,6 +9,7 @@ class Comment
     private $content;
     private $dateCom;
     private $pseudo;
+    private $nameBar;
 
     public function getId()
     {
@@ -38,6 +39,11 @@ class Comment
     public function getPseudo()
     {
         return $this->pseudo;
+    }
+
+    public function getNameBar()
+    {
+        return $this->nameBar;
     }
 
     public function setId(int $id)
@@ -73,6 +79,12 @@ class Comment
     public function setPseudo(string $pseudo)
     {
         $this->pseudo = $pseudo;
+        return $this;
+    }
+
+    public function setNameBar(string $nameBar)
+    {
+        $this->nameBar = $nameBar;
         return $this;
     }
 

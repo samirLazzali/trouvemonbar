@@ -3,31 +3,36 @@
     :headers="headers"
     :items="desserts"
     class="elevation-1"
+    :total-items="desserts.length"
   >
     <template slot="items" slot-scope="props">
-      <td>bla</td>
-      <td class="text-xs-right"> test </td>
-      <td class="text-xs-right"> test2 </td>
-      <td class="text-xs-right"> test3 </td>
-      <td class="text-xs-right"> test4 </td>
-      <td class="text-xs-right"> test5 </td>
+      <td class="text-xs" > {{comments.pseudo }}</td>
+      <td class="text-xs-right">{{ comments.idBar }}</td>
+      <td class="text-xs-right">{{ props.item.fat }}</td>
+      <td class="text-xs-center"><v-icon medium @click="" >delete</v-icon></td>
     </template>
   </v-data-table>
 </template>
 
 <script>
-import SearchBar from '@/components/SearchBar'
+import Toaster from '@/toaster.js'
 
 export default {
-  name: 'Home',
-
-  components: {
-    SearchBar
-  },
-
+  name: 'Admin',
   data () {
     return {
-      selectedKeywords: []
+      comments: [],
+      headers: [
+        {
+          text: 'Pseudo utlisateur',
+          align: 'left',
+          sortable: false,
+          value: 'comment.pseudo'
+        },
+        { text: 'Nom du bar', value: 'comment.nameBar' },
+        { text: 'Commentaire', value: 'comment.content' },
+        { text: 'Supprimer', align: 'comment.id' }
+      ]
     }
   },
 
@@ -41,14 +46,30 @@ export default {
   },
 
   created () {
-    this.$store.dispatch('keywords')
+    this.$api.getComments()
+      .then(comments => {
+        this.$log.debug(comments)
+        this.comments = comments
+      })
   },
 
   methods: {
-    search () {
-      if (this.selectedKeywords.length === 0) return
-
-      this.$router.push(`/search?q=${this.selectedKeywords.join(',')}`)
+    async deleteComment (comment) {
+      if (comment) {
+        try {
+          await this.$api.getComment(this.$store.state.user.id, this.bar.id)
+            .then(commentId => {
+              this.$log.debug(commentId)
+              comment.id = commentId.data.id
+            })
+          await this.$api.deleteComment(comment.id, this.bar.id)
+          this.comments.splice(this.comments.findIndex(comment => comment.iduser === this.$store.state.user.id), 1)
+          Toaster.$emit('success', 'Avis supprimé avec succès.')
+        } catch (err) {
+          this.$log.error(err)
+          this.checkError(err.response.status)
+        }
+      }
     }
   }
 }
