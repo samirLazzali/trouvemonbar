@@ -100,10 +100,11 @@ class CommentRepository
 
     public function fetchAll()
     {
-        $stmt = $this->connection->query('SELECT * FROM comment');
-        if (!$stmt) {
+        $stmt = $this->connection->prepare('SELECT c.id AS "id", c.content AS "content", c.dateCom AS "dateCom", b.name AS "nameBar", u.pseudo AS "pseudo",u.id AS "idUser", b.id AS "idBar" FROM "comment" c, "user" u, "bar" b where c.idBar = b.id AND c.idUser = u.id');
+        if (!$stmt->execute()) {
             return false;
         }
-        return $stmt->fetchAll(\PDO::FETCH_CLASS, Comment::class);
+        $comments = $stmt->fetchAll(\PDO::FETCH_CLASS, Comment::class);
+        return $comments;
     }
 }
