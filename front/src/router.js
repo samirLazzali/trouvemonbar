@@ -74,6 +74,13 @@ export default new Router({
       name: 'feed',
       component: () => import('./views/TheFeed.vue'),
       beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('./views/TheAdmin.vue'),
+      beforeEnter: ifAuthenticated
+
     }
   ]
 })
