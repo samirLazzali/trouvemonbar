@@ -6,7 +6,7 @@ import store from './store'
 Vue.use(Router)
 
 const ifNotAuthenticated = (to, from, next) => {
-  if (!store.getters.isAuthenticated) {
+  if (!store.getters.isAuthenticated && !store.getters.isAdmin) {
     return next()
   }
   next('/')
@@ -74,6 +74,17 @@ export default new Router({
       name: 'feed',
       component: () => import('./views/TheFeed.vue'),
       beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('./views/TheAdmin.vue'),
+      beforeEnter (to, from, next) {
+        if (store.getters.isAdmin) {
+          return next()
+        }
+        next('/')
+      }
     },
     {
       path: '/addbar',

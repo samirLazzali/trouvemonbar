@@ -99,17 +99,23 @@ class BarRepository
         $request = $this->connection->prepare('SELECT id from list where name = :list');
         $request->bindParam(':list', $listname, \PDO::PARAM_INT);
         if (!$request->execute()) return null;
-        $idList = strval($request->fetch()[0]);
+        $idList = strval($request->fetch()['id']);
         if (!$idList) return null;
 
         // 2 get id of user ;
         $request = $this->connection->prepare('SELECT id from "user" where pseudo = :pseudoUser');
         $request->bindParam(':pseudoUser', $pseudoUser, \PDO::PARAM_STR);
         if (!$request->execute()) return null;
-        $idUser = strval($request->fetch()[0]);
+        $idUser = strval($request->fetch()['id']);
         if (!$idUser) return null;
 
-        // 3 insert on barlist
+        // 3 insert keyword
+        $stmt = $this->connection->prepare('INSERT INTO keybar (idKeyWord, nbOccurence, idBar) SELECT idKeyWord, 1 as nbOccurence, :idBar as idBar from keyuser where idUser = :idUser;');
+        $stmt->bindParam(':idBar', $idBar, \PDO::PARAM_STR);
+        $stmt->bindParam(':idUser', $idUser, \PDO::PARAM_STR);
+        return $stmt->execute();
+
+        // 4 insert on barlist
         $stmt = $this->connection->prepare('INSERT INTO barList (idBar, idUser, idList) VALUES (:idBar, :idUser, :idList)');
         $stmt->bindParam(':idBar', $idBar, \PDO::PARAM_STR);
         $stmt->bindParam(':idUser', $idUser, \PDO::PARAM_STR);
@@ -122,7 +128,6 @@ class BarRepository
         $request = $this->connection->prepare('SELECT name, id FROM "bar"');
         if (!$request->execute()) return null;
         $bars = $request->fetchAll(\PDO::FETCH_CLASS, Bar::class);
-
         foreach($bars as $bar)
         {
             $comments = $this->commentRepository->fetchByIdBar($bar->getId());

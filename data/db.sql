@@ -61,6 +61,8 @@ CREATE TABLE list (
   name   VARCHAR
 );
 
+INSERT INTO list (name) VALUES ('black'),('liked');
+
 CREATE TABLE barList (
   id     SERIAL PRIMARY KEY,
   idBar  INT REFERENCES bar (id),
@@ -531,7 +533,9 @@ VALUES (1, 1, 1),
        (97, 0, 9),
        (98, 0, 10);
 
-
+insert into comment (idBar,idUser,content,dateCom)
+VALUES (1,2,'Super!','12/11/2018 à 23:52'),
+        (2,1,'DINGUE', '01/02/2018 à 20:00');
 -- select * from keyuser;
 -- select * from keyword;
 -- select * from bar;
