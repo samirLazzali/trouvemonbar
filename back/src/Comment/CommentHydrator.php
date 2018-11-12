@@ -21,8 +21,14 @@ class CommentHydrator
         if ($comment->getContent()) {
             $data['content'] = $comment->getContent();
         }
+        if ($comment->getNameBar()) {
+            $data['nameBar'] = $comment->getNameBar();
+        }
         if ($comment->getDate()) {
             $data['dateCom'] = $comment->getDate();
+        }
+        if ($comment->getPseudo()) {
+            $data['pseudo'] = $comment->getPseudo();
         }
         return $data;
     }
