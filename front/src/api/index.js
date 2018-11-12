@@ -1,9 +1,11 @@
 import { bar } from './bar'
 import { user } from './user'
+import { barList } from './barList'
 
 const api = {
   ...bar,
-  ...user
+  ...user,
+  ...barList
 }
 
 export default {
