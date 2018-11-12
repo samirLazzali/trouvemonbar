@@ -16,7 +16,7 @@ class CommentHydrator
         }
         if($comment->getIdUser())
         {
-            $data['idUser'] = $comment->getIdUser();
+            $data['iduser'] = $comment->getIdUser();
         }
         if ($comment->getContent()) {
             $data['content'] = $comment->getContent();

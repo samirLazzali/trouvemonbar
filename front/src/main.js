@@ -19,6 +19,7 @@ Vue.use(VueGoogleMaps, {
 })
 Vue.use(Api)
 Vue.use(Vuetify, {
+  iconfont: 'md', // 'md' || 'mdi' || 'fa' || 'fa4'
   theme: {
     primary: '#545463',
     secondary: '#fcac38'
