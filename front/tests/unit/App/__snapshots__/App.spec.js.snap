@@ -12,6 +12,9 @@ exports[`App.vue should render properly when authenticated 1`] = `
           <vicon-stub>account_circle</vicon-stub>
         </vbtn-stub>
         <vlist-stub>
+          <vlisttile-stub activeclass="primary--text" to="/admin">
+            <vlisttiletitle-stub>Administration</vlisttiletitle-stub>
+          </vlisttile-stub>
           <vlisttile-stub activeclass="primary--text" to="/feed">
             <vlisttiletitle-stub>Mon feed</vlisttiletitle-stub>
           </vlisttile-stub>
