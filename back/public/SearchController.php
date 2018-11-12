@@ -9,7 +9,6 @@ $barRepository = new \Bar\BarRepository($pdo);
 $keywordHydrator = new \Keyword\KeywordHydrator();
 $barHydrator = new \Bar\BarHydrator();
 
-
 Router::get('/api/addbar\?keywords\=(.+)', function($request) use($barHydrator) {
     // http://localhost:3000/api/addbar?keywords=%22o%22
     // query execution - get data
@@ -23,14 +22,12 @@ Router::get('/api/addbar\?keywords\=(.+)', function($request) use($barHydrator) 
     $key = 'AIzaSyBL5wwReFZULzsHE0wJSifX_g43OMWR2jo';
     $keyword= rawurlencode($keywords);
 
-
     $url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
     $url .= 'location='.$location.'&';
     $url .= 'radius='.$radius.'&';
     $url .= 'type='.$type.'&';
     $url .= 'keyword='.$keyword.'&';
     $url .= 'key='.$key;
-
 
     curl_setopt($ch, CURLOPT_URL, $url);
     // Set so curl_exec returns the result instead of outputting it.
@@ -40,7 +37,6 @@ Router::get('/api/addbar\?keywords\=(.+)', function($request) use($barHydrator) 
     $arrayResponse = json_decode($response,true);
 
     curl_close($ch);
-
 
     // récupération des bars
     $bars = [];
@@ -70,17 +66,11 @@ Router::get('/api/addbar\?keywords\=(.+)', function($request) use($barHydrator) 
     if (!$bars) return http_response_code(500);
 
     echo json_encode($barHydrator->extractAll($bars), JSON_UNESCAPED_UNICODE);
-
 });
 
 Router::post('/api/addbar', function($request) use($barRepository, $barHydrator) {
     if (is_null($request->body->data)) return http_response_code(400);
 
-    /*
-    if (!$userValidator->validate($request->body)) {
-        return http_response_code(400);
-    }
-    */
     $bar = $request->body->data->bar;
     $list = $request->body->data->list;
     $pseudo = $request->body->data->userPseudo;
@@ -100,5 +90,4 @@ Router::post('/api/addbar', function($request) use($barRepository, $barHydrator)
     // ajout du bar
     // TODO : verifier qu'il n'est pas deja liké
     $barRepository->addBarInList($pseudo,$barId,$list);
-
 });

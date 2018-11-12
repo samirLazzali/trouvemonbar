@@ -81,7 +81,6 @@ export default new Router({
       props: route => ({ query: route.query }),
       component: () => import('./views/TheAddHome.vue'),
       beforeEnter: ifAuthenticated
-
     },
     {
       path: '/addsearch',

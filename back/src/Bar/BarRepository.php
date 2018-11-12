@@ -93,7 +93,6 @@ class BarRepository
         return $this->connection->lastInsertId();
     }
 
-
     public function addBarInList($pseudoUser, $idBar, $listname)
     {
         // 1 get id of list - SELECT id from list where name = :black;
@@ -116,6 +115,5 @@ class BarRepository
         $stmt->bindParam(':idUser', $idUser, \PDO::PARAM_STR);
         $stmt->bindParam(':idList', $idList, \PDO::PARAM_STR);
         return $stmt->execute();
-
     }
 }
