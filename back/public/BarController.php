@@ -83,7 +83,7 @@ Router::delete('/api/bars/{}/comments/{}', function($request) use($userRepositor
         echo json_encode(['error' => $e->getMessage()]);
         return;
     }
-    if(!(isset($request->params[0]) && ($user->getId() === $request->body->iduser) && isset($request->params[1]))) return http_response_code(400);
+    if(!(isset($request->params[0]) && isset($request->params[1]))) return http_response_code(400);
 
     $str_bar_id = $request->params[0];
     $bar_id = ctype_digit($str_bar_id) ? intval($str_bar_id) : null;
