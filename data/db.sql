@@ -418,9 +418,7 @@ VALUES (1, 2),
        (95, 12),
        (96, 1),
        (97, 2),
-       (98, 3),
-       (99, 4),
-       (100, 5);
+       (98, 3);
 
 INSERT INTO keybar (idKeyWord, nbOccurence, idBar)
 VALUES (1, 1, 1),
@@ -523,9 +521,7 @@ VALUES (1, 1, 1),
        (95, 0, 7),
        (96, 0, 8),
        (97, 0, 9),
-       (98, 0, 10),
-       (99, 0, 11),
-       (100, 0, 1);
+       (98, 0, 10);
 
 INSERT INTO blacklist (idBar, idUser)
 VALUES (1, 1),
