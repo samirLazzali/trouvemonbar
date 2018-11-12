@@ -20,6 +20,7 @@ export const bar = {
       params: {
         keywords: kw.replace('"', '')
       }
+    }).then(res => res.data)
   },
   addComment (idBar, comment) {
     return axios.post(`/api/bars/${idBar}/comments`, comment)
@@ -32,9 +33,5 @@ export const bar = {
   },
   getComment (idUser, idBar) {
     return axios.get(`/api/bars/${idBar}/users/${idUser}/comments`)
-  }
-}
-
-    }).then(res => res.data)
   }
 }
