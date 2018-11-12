@@ -33,11 +33,6 @@
                   size="15"
                   readonly
                 ></v-rating>
-
-              <div class="ml-2 grey--text text--darken-2">
-                <span>1</span>
-                <span>({{ name.length }})</span>
-              </div>
             </div>
           </div>
         </v-card-title>

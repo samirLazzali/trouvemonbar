@@ -4,6 +4,7 @@
       :value="value"
       label="Un nom de bar"
       @input="$emit('input', $event)"
+      @keyup.enter="$emit('search', value)"
       clearable
       solo
     ></v-text-field>

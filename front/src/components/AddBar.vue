@@ -19,7 +19,7 @@
 
               <div class="d-flex">
                 <v-rating
-                  :value="rating % 5"
+                  :value="rating"
                   color="amber"
                   dense
                   half-increments
@@ -40,8 +40,9 @@
             <v-icon>block</v-icon>
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn icon @click="$emit('liked', bar)">
-            <v-icon>favorite_border</v-icon>
+          <v-btn icon @click="$emit('liked', bar);isFull=true">
+            <v-icon v-if="!isFull">favorite_border</v-icon>
+            <v-icon v-if="isFull">favorite</v-icon>
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -68,7 +69,7 @@ export default {
       required: true
     },
     rating: {
-      type: String,
+      type: Number,
       required: true
     },
     lat: {
@@ -86,6 +87,11 @@ export default {
     address: {
       type: String,
       required: true
+    }
+  },
+  data () {
+    return {
+      isFull: false
     }
   },
 
