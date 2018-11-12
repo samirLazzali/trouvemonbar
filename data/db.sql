@@ -73,7 +73,7 @@ CREATE TABLE comment (
   idBar     INT REFERENCES bar (id),
   idUser    INT REFERENCES "user" (id),
   content   text,
-  dateCom   timestamp
+  dateCom   VARCHAR
 );
 
 INSERT INTO "user" (pseudo, email, hash, role)
@@ -311,7 +311,6 @@ VALUES ('1', 'cinéma'),
        ('3', 'Casino'),
        ('3', 'Voyage dans le temps'),
        ('3', 'Woodstock'),
-       ('3', 'Cinéma'),
        ('3', 'Nouvel an chinois'),
        ('3', 'A l’envers'),
        ('3', 'Région natale'),
@@ -319,7 +318,6 @@ VALUES ('1', 'cinéma'),
        ('3', 'Destination'),
        ('3', 'Tendance'),
        ('3', 'Traditionel'),
-       ('3', 'Jeux'),
        ('3', 'Star'),
        ('3', 'Nostalgie'),
        ('3', 'Soirée à thème Magie'),
@@ -537,8 +535,6 @@ VALUES (1, 1, 1),
        (100, 0, 1);
 
 
-INSERT INTO comment(idBar, idUser, content,dateCom)
-VALUES (1,1,'un avis','2018-06-22');
 -- select * from keyuser;
 -- select * from keyword;
 -- select * from bar;
