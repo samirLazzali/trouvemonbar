@@ -22,7 +22,8 @@ describe('App.vue', () => {
       mocks: {
         $store: {
           getters: {
-            isAuthenticated: true
+            isAuthenticated: true,
+            isAdmin: true
           }
         }
       },
