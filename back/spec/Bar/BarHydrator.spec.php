@@ -16,7 +16,9 @@ describe('BarHydrator', function() {
             ->setRating('4.5')
             ->setLng('4.43')
             ->setLat('9.12')
-            ->setPhoto('photo'),
+            ->setPhoto('photo')
+            ->addComments(['comment'])
+            ->setPlaceId(1),
             (new Bar())
             ->setId(2)
             ->setName('Un bar à Grigny')
@@ -26,6 +28,8 @@ describe('BarHydrator', function() {
             ->setLng('1.298')
             ->setLat('5.285')
             ->setPhoto('otherPhoto')
+            ->addComments(['comment'])
+            ->setPlaceId(34)
         ];
 
         $data = $this->barHydrator->extractAll($bars);
@@ -39,7 +43,9 @@ describe('BarHydrator', function() {
                 'rating' => '4.5',
                 'photoreference' => 'photo',
                 'lat' => '9.12',
-                'lng' => '4.43'
+                'lng' => '4.43',
+                'comments' => ['comment'],
+                'placeId' => 1
             ],
             [
                 'id' => 2,
@@ -49,7 +55,9 @@ describe('BarHydrator', function() {
                 'rating' => '1.3',
                 'photoreference' => 'otherPhoto',
                 'lat' => '5.285',
-                'lng' => '1.298'
+                'lng' => '1.298',
+                'comments' => ['comment'],
+                'placeId' => 34
             ]
         ]);
     });
