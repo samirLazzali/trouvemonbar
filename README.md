@@ -6,8 +6,6 @@ Projet Web ENSIIE:
 * Emilio De sousa
 * Swann Castel
 
-## Site disponible ici <https://okeeffe.ovh>
-
 Installation de nginx, php-fpm et création d'un user ensiie.
 
 Génération du certificat SSL avec Certbot <https://certbot.eff.org/.>
